@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ function main(parent, releaseId, release) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection in which the `Release` should be created.
-   *  Format should be
+   *  Required. The parent collection in which the `Release` is created.
+   *  The format is
    *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    */
   // const parent = 'abc123'
@@ -61,6 +61,11 @@ function main(parent, releaseId, release) {
    *  with an expected result, but no actual change is made.
    */
   // const validateOnly = true
+  /**
+   *  Optional. Deploy policies to override. Format is
+   *  `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+   */
+  // const overrideDeployPolicy = ['abc','def']
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;

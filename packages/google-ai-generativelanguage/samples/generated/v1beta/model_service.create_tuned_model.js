@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ function main(tunedModel) {
    *  Optional. The unique id for the tuned model if specified.
    *  This value should be up to 40 characters, the first character must be a
    *  letter, the last could be a letter or a number. The id must match the
-   *  regular expression: [a-z]([a-z0-9-]{0,38}[a-z0-9])?.
+   *  regular expression: `[a-z]([a-z0-9-]{0,38}[a-z0-9])?`.
    */
   // const tunedModelId = 'abc123'
   /**

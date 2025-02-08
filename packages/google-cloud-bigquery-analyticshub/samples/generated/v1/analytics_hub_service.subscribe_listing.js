@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(name) {
+function main(destinationDataset, name) {
   // [START analyticshub_v1_generated_AnalyticsHubService_SubscribeListing_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  BigQuery destination dataset to create for the subscriber.
+   *  Input only. BigQuery destination dataset to create for the subscriber.
    */
   // const destinationDataset = {}
   /**
@@ -47,6 +47,7 @@ function main(name) {
   async function callSubscribeListing() {
     // Construct request
     const request = {
+      destinationDataset,
       name,
     };
 

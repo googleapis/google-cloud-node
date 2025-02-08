@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,15 +31,15 @@ function main(baseVersion, targetVersion) {
   /**
    *  Required. Name of the base flow version to compare with the target version.
    *  Use version ID `0` to indicate the draft version of the specified flow.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/
-   *  <Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    */
   // const baseVersion = 'abc123'
   /**
    *  Required. Name of the target flow version to compare with the
    *  base version. Use version ID `0` to indicate the draft version of the
-   *  specified flow. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+   *  specified flow. Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
    */
   // const targetVersion = 'abc123'
   /**

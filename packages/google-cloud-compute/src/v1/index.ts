@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,10 +36,13 @@ export {GlobalPublicDelegatedPrefixesClient} from './global_public_delegated_pre
 export {HealthChecksClient} from './health_checks_client';
 export {ImageFamilyViewsClient} from './image_family_views_client';
 export {ImagesClient} from './images_client';
+export {InstanceGroupManagerResizeRequestsClient} from './instance_group_manager_resize_requests_client';
 export {InstanceGroupManagersClient} from './instance_group_managers_client';
 export {InstanceGroupsClient} from './instance_groups_client';
 export {InstancesClient} from './instances_client';
+export {InstanceSettingsServiceClient} from './instance_settings_service_client';
 export {InstanceTemplatesClient} from './instance_templates_client';
+export {InstantSnapshotsClient} from './instant_snapshots_client';
 export {InterconnectAttachmentsClient} from './interconnect_attachments_client';
 export {InterconnectLocationsClient} from './interconnect_locations_client';
 export {InterconnectRemoteLocationsClient} from './interconnect_remote_locations_client';
@@ -52,6 +55,7 @@ export {NetworkAttachmentsClient} from './network_attachments_client';
 export {NetworkEdgeSecurityServicesClient} from './network_edge_security_services_client';
 export {NetworkEndpointGroupsClient} from './network_endpoint_groups_client';
 export {NetworkFirewallPoliciesClient} from './network_firewall_policies_client';
+export {NetworkProfilesClient} from './network_profiles_client';
 export {NetworksClient} from './networks_client';
 export {NodeGroupsClient} from './node_groups_client';
 export {NodeTemplatesClient} from './node_templates_client';
@@ -71,6 +75,7 @@ export {RegionInstanceGroupManagersClient} from './region_instance_group_manager
 export {RegionInstanceGroupsClient} from './region_instance_groups_client';
 export {RegionInstancesClient} from './region_instances_client';
 export {RegionInstanceTemplatesClient} from './region_instance_templates_client';
+export {RegionInstantSnapshotsClient} from './region_instant_snapshots_client';
 export {RegionNetworkEndpointGroupsClient} from './region_network_endpoint_groups_client';
 export {RegionNetworkFirewallPoliciesClient} from './region_network_firewall_policies_client';
 export {RegionNotificationEndpointsClient} from './region_notification_endpoints_client';
@@ -83,6 +88,7 @@ export {RegionTargetHttpProxiesClient} from './region_target_http_proxies_client
 export {RegionTargetHttpsProxiesClient} from './region_target_https_proxies_client';
 export {RegionTargetTcpProxiesClient} from './region_target_tcp_proxies_client';
 export {RegionUrlMapsClient} from './region_url_maps_client';
+export {RegionZonesClient} from './region_zones_client';
 export {ReservationsClient} from './reservations_client';
 export {ResourcePoliciesClient} from './resource_policies_client';
 export {RoutersClient} from './routers_client';
@@ -93,6 +99,8 @@ export {SnapshotsClient} from './snapshots_client';
 export {SnapshotSettingsServiceClient} from './snapshot_settings_service_client';
 export {SslCertificatesClient} from './ssl_certificates_client';
 export {SslPoliciesClient} from './ssl_policies_client';
+export {StoragePoolsClient} from './storage_pools_client';
+export {StoragePoolTypesClient} from './storage_pool_types_client';
 export {SubnetworksClient} from './subnetworks_client';
 export {TargetGrpcProxiesClient} from './target_grpc_proxies_client';
 export {TargetHttpProxiesClient} from './target_http_proxies_client';

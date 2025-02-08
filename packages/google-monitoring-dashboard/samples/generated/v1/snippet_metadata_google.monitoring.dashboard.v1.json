@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dashboard",
-        "version": "3.0.1",
+        "version": "3.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -70,7 +70,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],

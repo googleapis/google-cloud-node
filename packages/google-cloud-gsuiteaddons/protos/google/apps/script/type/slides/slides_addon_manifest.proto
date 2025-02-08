@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ option java_package = "com.google.apps.script.type.slides";
 option php_namespace = "Google\\Apps\\Script\\Type\\Slides";
 option ruby_package = "Google::Apps::Script::Type::Slides";
 
-// Manifest section specific to Slides Add-ons.
+// Manifest section specific to Slides add-ons.
 
 // Slides add-on manifest.
 message SlidesAddOnManifest {

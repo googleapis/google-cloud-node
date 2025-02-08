@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,20 +33,21 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of items to return.
+   *  Optional. The maximum number of items to return.
    */
   // const pageSize = 1234
   /**
-   *  The next_page_token value to use if there are additional
+   *  Optional. The next_page_token value to use if there are additional
    *  results to retrieve for this list request.
    */
   // const pageToken = 'abc123'
   /**
-   *  Sort results. Supported values are "name", "name desc" or "" (unsorted).
+   *  Optional. Sort results. Supported values are "name", "name desc" or ""
+   *  (unsorted).
    */
   // const orderBy = 'abc123'
   /**
-   *  List filter.
+   *  Optional. List filter.
    */
   // const filter = 'abc123'
 
@@ -63,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await netappClient.listStoragePoolsAsync(request);
+    const iterable = netappClient.listStoragePoolsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

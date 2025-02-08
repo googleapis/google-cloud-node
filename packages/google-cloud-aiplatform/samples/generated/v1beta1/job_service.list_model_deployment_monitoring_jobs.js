@@ -78,7 +78,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listModelDeploymentMonitoringJobsAsync(request);
+    const iterable = aiplatformClient.listModelDeploymentMonitoringJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

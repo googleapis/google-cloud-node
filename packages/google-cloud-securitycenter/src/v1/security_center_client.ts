@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/security_center_client_config.json`.
@@ -52,6 +53,8 @@ export class SecurityCenterClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -110,8 +113,27 @@ export class SecurityCenterClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SecurityCenterClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'securitycenter.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -126,7 +148,7 @@ export class SecurityCenterClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -151,16 +173,16 @@ export class SecurityCenterClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -180,14 +202,27 @@ export class SecurityCenterClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      attackPathPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}'
+      ),
       folderAssetPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/assets/{asset}'
       ),
       folderAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/assets/{asset}/securityMarks'
       ),
+      folderConstraintNamePathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/policies/{constraint_name}'
+      ),
+      folderEventThreatDetectionSettingsModulePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/eventThreatDetectionSettings/effectiveCustomModules/{module}'
+        ),
       folderExportPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/bigQueryExports/{export}'
+      ),
+      folderLocationMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/muteConfigs/{mute_config}'
       ),
       folderMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/muteConfigs/{mute_config}'
@@ -227,9 +262,24 @@ export class SecurityCenterClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/assets/{asset}/securityMarks'
         ),
+      organizationConstraintNamePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/policies/{constraint_name}'
+      ),
+      organizationEventThreatDetectionSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/eventThreatDetectionSettings'
+        ),
+      organizationEventThreatDetectionSettingsModulePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/eventThreatDetectionSettings/effectiveCustomModules/{module}'
+        ),
       organizationExportPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/bigQueryExports/{export}'
       ),
+      organizationLocationMuteConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/muteConfigs/{mute_config}'
+        ),
       organizationMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/muteConfigs/{mute_config}'
       ),
@@ -252,6 +302,9 @@ export class SecurityCenterClient {
       organizationSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/organizationSettings'
       ),
+      organizationSimulationPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/simulations/{simulation}'
+      ),
       organizationSourcePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}'
       ),
@@ -272,8 +325,18 @@ export class SecurityCenterClient {
       projectAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/assets/{asset}/securityMarks'
       ),
+      projectConstraintNamePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/policies/{constraint_name}'
+      ),
+      projectEventThreatDetectionSettingsModulePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/eventThreatDetectionSettings/effectiveCustomModules/{module}'
+        ),
       projectExportPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/bigQueryExports/{export}'
+      ),
+      projectLocationMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/muteConfigs/{mute_config}'
       ),
       projectMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/muteConfigs/{mute_config}'
@@ -303,6 +366,15 @@ export class SecurityCenterClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/sources/{source}/findings/{finding}/securityMarks'
         ),
+      resourceValueConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/resourceValueConfigs/{resource_value_config}'
+      ),
+      simulationPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/simulations/{simulation}'
+      ),
+      valuedResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -366,6 +438,38 @@ export class SecurityCenterClient {
         'pageToken',
         'nextPageToken',
         'bigQueryExports'
+      ),
+      listDescendantEventThreatDetectionCustomModules:
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'eventThreatDetectionCustomModules'
+        ),
+      listEventThreatDetectionCustomModules: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'eventThreatDetectionCustomModules'
+      ),
+      listEffectiveEventThreatDetectionCustomModules:
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'effectiveEventThreatDetectionCustomModules'
+        ),
+      listResourceValueConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'resourceValueConfigs'
+      ),
+      listValuedResources: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'valuedResources'
+      ),
+      listAttackPaths: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'attackPaths'
       ),
     };
 
@@ -486,6 +590,8 @@ export class SecurityCenterClient {
       'deleteMuteConfig',
       'deleteNotificationConfig',
       'deleteSecurityHealthAnalyticsCustomModule',
+      'getSimulation',
+      'getValuedResource',
       'getBigQueryExport',
       'getIamPolicy',
       'getMuteConfig',
@@ -522,6 +628,22 @@ export class SecurityCenterClient {
       'deleteBigQueryExport',
       'updateBigQueryExport',
       'listBigQueryExports',
+      'createEventThreatDetectionCustomModule',
+      'deleteEventThreatDetectionCustomModule',
+      'getEventThreatDetectionCustomModule',
+      'listDescendantEventThreatDetectionCustomModules',
+      'listEventThreatDetectionCustomModules',
+      'updateEventThreatDetectionCustomModule',
+      'validateEventThreatDetectionCustomModule',
+      'getEffectiveEventThreatDetectionCustomModule',
+      'listEffectiveEventThreatDetectionCustomModules',
+      'batchCreateResourceValueConfigs',
+      'deleteResourceValueConfig',
+      'getResourceValueConfig',
+      'listResourceValueConfigs',
+      'updateResourceValueConfig',
+      'listValuedResources',
+      'listAttackPaths',
     ];
     for (const methodName of securityCenterStubMethods) {
       const callPromise = this.securityCenterStub.then(
@@ -557,19 +679,50 @@ export class SecurityCenterClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'securitycenter.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'securitycenter.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -618,9 +771,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the new custom module's parent. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings",
-   *   "folders/{folder}/securityHealthAnalyticsSettings", or
-   *   "projects/{project}/securityHealthAnalyticsSettings"
+   *   `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *   `projects/{project}/securityHealthAnalyticsSettings`
    * @param {google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule} request.securityHealthAnalyticsCustomModule
    *   Required. SecurityHealthAnalytics custom module to create. The provided
    *   name is ignored and reset with provided parent information and
@@ -725,7 +878,7 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the new source's parent. Its format should be
-   *   "organizations/[organization_id]".
+   *   `organizations/[organization_id]`.
    * @param {google.cloud.securitycenter.v1.Source} request.source
    *   Required. The Source being created, only the display_name and description
    *   will be used. All other fields will be ignored.
@@ -820,7 +973,7 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the new finding's parent. Its format should be
-   *   "organizations/[organization_id]/sources/[source_id]".
+   *   `organizations/[organization_id]/sources/[source_id]`.
    * @param {string} request.findingId
    *   Required. Unique identifier provided by the client within the parent scope.
    *   It must be alphanumeric and less than or equal to 32 characters and
@@ -918,8 +1071,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the new mute configs's parent. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {google.cloud.securitycenter.v1.MuteConfig} request.muteConfig
    *   Required. The mute config being created.
    * @param {string} request.muteConfigId
@@ -1023,8 +1176,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the new notification config's parent. Its format
-   *   is "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   is `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.configId
    *   Required.
    *   Unique identifier provided by the client within the parent scope.
@@ -1134,9 +1287,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the mute config to delete. Its format is
-   *   organizations/{organization}/muteConfigs/{config_id},
-   *   folders/{folder}/muteConfigs/{config_id}, or
-   *   projects/{project}/muteConfigs/{config_id}
+   *   `organizations/{organization}/muteConfigs/{config_id}`,
+   *   `folders/{folder}/muteConfigs/{config_id}`,
+   *   `projects/{project}/muteConfigs/{config_id}`,
+   *   `organizations/{organization}/locations/global/muteConfigs/{config_id}`,
+   *   `folders/{folder}/locations/global/muteConfigs/{config_id}`, or
+   *   `projects/{project}/locations/global/muteConfigs/{config_id}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1233,9 +1389,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the notification config to delete. Its format is
-   *   "organizations/[organization_id]/notificationConfigs/[config_id]",
-   *   "folders/[folder_id]/notificationConfigs/[config_id]",
-   *   or "projects/[project_id]/notificationConfigs/[config_id]".
+   *   `organizations/[organization_id]/notificationConfigs/[config_id]`,
+   *   `folders/[folder_id]/notificationConfigs/[config_id]`,
+   *   or `projects/[project_id]/notificationConfigs/[config_id]`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1338,10 +1494,10 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the custom module to delete. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}",
-   *   "folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}",
+   *   `organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}`,
    *   or
-   *   "projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}"
+   *   `projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1436,15 +1592,209 @@ export class SecurityCenterClient {
     );
   }
   /**
+   * Get the simulation by name or the latest simulation for the given
+   * organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The organization name or simulation name of this simulation
+   *
+   *   Valid format:
+   *   `organizations/{organization}/simulations/latest`
+   *   `organizations/{organization}/simulations/{simulation}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1.Simulation|Simulation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.get_simulation.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_GetSimulation_async
+   */
+  getSimulation(
+    request?: protos.google.cloud.securitycenter.v1.IGetSimulationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISimulation,
+      protos.google.cloud.securitycenter.v1.IGetSimulationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getSimulation(
+    request: protos.google.cloud.securitycenter.v1.IGetSimulationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.ISimulation,
+      | protos.google.cloud.securitycenter.v1.IGetSimulationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSimulation(
+    request: protos.google.cloud.securitycenter.v1.IGetSimulationRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.ISimulation,
+      | protos.google.cloud.securitycenter.v1.IGetSimulationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSimulation(
+    request?: protos.google.cloud.securitycenter.v1.IGetSimulationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.ISimulation,
+          | protos.google.cloud.securitycenter.v1.IGetSimulationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.ISimulation,
+      | protos.google.cloud.securitycenter.v1.IGetSimulationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.ISimulation,
+      protos.google.cloud.securitycenter.v1.IGetSimulationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSimulation(request, options, callback);
+  }
+  /**
+   * Get the valued resource by name
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of this valued resource
+   *
+   *   Valid format:
+   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1.ValuedResource|ValuedResource}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.get_valued_resource.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_GetValuedResource_async
+   */
+  getValuedResource(
+    request?: protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IValuedResource,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getValuedResource(
+    request: protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IValuedResource,
+      | protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getValuedResource(
+    request: protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IValuedResource,
+      | protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getValuedResource(
+    request?: protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IValuedResource,
+          | protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IValuedResource,
+      | protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IValuedResource,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetValuedResourceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getValuedResource(request, options, callback);
+  }
+  /**
    * Gets a BigQuery export.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the BigQuery export to retrieve. Its format is
-   *   organizations/{organization}/bigQueryExports/{export_id},
-   *   folders/{folder}/bigQueryExports/{export_id}, or
-   *   projects/{project}/bigQueryExports/{export_id}
+   *   `organizations/{organization}/bigQueryExports/{export_id}`,
+   *   `folders/{folder}/bigQueryExports/{export_id}`, or
+   *   `projects/{project}/bigQueryExports/{export_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1627,9 +1977,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the mute config to retrieve. Its format is
-   *   organizations/{organization}/muteConfigs/{config_id},
-   *   folders/{folder}/muteConfigs/{config_id}, or
-   *   projects/{project}/muteConfigs/{config_id}
+   *   `organizations/{organization}/muteConfigs/{config_id}`,
+   *   `folders/{folder}/muteConfigs/{config_id}`,
+   *   `projects/{project}/muteConfigs/{config_id}`,
+   *   `organizations/{organization}/locations/global/muteConfigs/{config_id}`,
+   *   `folders/{folder}/locations/global/muteConfigs/{config_id}`, or
+   *   `projects/{project}/locations/global/muteConfigs/{config_id}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1720,9 +2073,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the notification config to get. Its format is
-   *   "organizations/[organization_id]/notificationConfigs/[config_id]",
-   *   "folders/[folder_id]/notificationConfigs/[config_id]",
-   *   or "projects/[project_id]/notificationConfigs/[config_id]".
+   *   `organizations/[organization_id]/notificationConfigs/[config_id]`,
+   *   `folders/[folder_id]/notificationConfigs/[config_id]`,
+   *   or `projects/[project_id]/notificationConfigs/[config_id]`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1819,7 +2172,7 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the organization to get organization settings for. Its
-   *   format is "organizations/[organization_id]/organizationSettings".
+   *   format is `organizations/[organization_id]/organizationSettings`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1920,10 +2273,10 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the effective custom module to get. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}",
-   *   "folders/{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}",
+   *   `organizations/{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}`,
    *   or
-   *   "projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}"
+   *   `projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2024,10 +2377,10 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the custom module to get. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}",
-   *   "folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}",
+   *   `organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}`,
    *   or
-   *   "projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}"
+   *   `projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2128,7 +2481,7 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Relative resource name of the source. Its format is
-   *   "organizations/[organization_id]/source/[source_id]".
+   *   `organizations/[organization_id]/source/[source_id]`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2221,9 +2574,9 @@ export class SecurityCenterClient {
    *   Required. The [relative resource
    *   name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
    *   of the finding. Example:
-   *   "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}",
-   *   "folders/{folder_id}/sources/{source_id}/findings/{finding_id}",
-   *   "projects/{project_id}/sources/{source_id}/findings/{finding_id}".
+   *   `organizations/{organization_id}/sources/{source_id}/findings/{finding_id}`,
+   *   `folders/{folder_id}/sources/{source_id}/findings/{finding_id}`,
+   *   `projects/{project_id}/sources/{source_id}/findings/{finding_id}`.
    * @param {google.cloud.securitycenter.v1.Finding.State} request.state
    *   Required. The desired State of the finding.
    * @param {google.protobuf.Timestamp} request.startTime
@@ -2320,9 +2673,9 @@ export class SecurityCenterClient {
    *   Required. The [relative resource
    *   name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
    *   of the finding. Example:
-   *   "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}",
-   *   "folders/{folder_id}/sources/{source_id}/findings/{finding_id}",
-   *   "projects/{project_id}/sources/{source_id}/findings/{finding_id}".
+   *   `organizations/{organization_id}/sources/{source_id}/findings/{finding_id}`,
+   *   `folders/{folder_id}/sources/{source_id}/findings/{finding_id}`,
+   *   `projects/{project_id}/sources/{source_id}/findings/{finding_id}`.
    * @param {google.cloud.securitycenter.v1.Finding.Mute} request.mute
    *   Required. The desired state of the Mute.
    * @param {object} [options]
@@ -3217,7 +3570,9 @@ export class SecurityCenterClient {
    * @param {google.cloud.securitycenter.v1.SecurityHealthAnalyticsCustomModule} request.securityHealthAnalyticsCustomModule
    *   Required. The SecurityHealthAnalytics custom module to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to update.
+   *   The list of fields to be updated. The only fields that can be updated are
+   *   `enablement_state` and `custom_config`. If empty or set to the wildcard
+   *   value `*`, both `enablement_state` and `custom_config` are updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3520,8 +3875,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent resource of the new BigQuery export. Its
-   *   format is "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   format is `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {google.cloud.securitycenter.v1.BigQueryExport} request.bigQueryExport
    *   Required. The BigQuery export being created.
    * @param {string} request.bigQueryExportId
@@ -3625,9 +3980,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the BigQuery export to delete. Its format is
-   *   organizations/{organization}/bigQueryExports/{export_id},
-   *   folders/{folder}/bigQueryExports/{export_id}, or
-   *   projects/{project}/bigQueryExports/{export_id}
+   *   `organizations/{organization}/bigQueryExports/{export_id}`,
+   *   `folders/{folder}/bigQueryExports/{export_id}`, or
+   *   `projects/{project}/bigQueryExports/{export_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3816,6 +4171,1069 @@ export class SecurityCenterClient {
     this.initialize();
     return this.innerApiCalls.updateBigQueryExport(request, options, callback);
   }
+  /**
+   * Creates a resident Event Threat Detection custom module at the scope of the
+   * given Resource Manager parent, and also creates inherited custom modules
+   * for all descendants of the given parent. These modules are enabled by
+   * default.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The new custom module's parent.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings`.
+   *     * `folders/{folder}/eventThreatDetectionSettings`.
+   *     * `projects/{project}/eventThreatDetectionSettings`.
+   * @param {google.cloud.securitycenter.v1.EventThreatDetectionCustomModule} request.eventThreatDetectionCustomModule
+   *   Required. The module to create. The
+   *   event_threat_detection_custom_module.name will be ignored and server
+   *   generated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.create_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_CreateEventThreatDetectionCustomModule_async
+   */
+  createEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.ICreateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createEventThreatDetectionCustomModule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes the specified Event Threat Detection custom module and all of its
+   * descendants in the Resource Manager hierarchy. This method is only
+   * supported for resident custom modules.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the custom module to delete.
+   *
+   *   Its format is:
+   *
+   *   * `organizations/{organization}/eventThreatDetectionSettings/customModules/{module}`.
+   *   * `folders/{folder}/eventThreatDetectionSettings/customModules/{module}`.
+   *   * `projects/{project}/eventThreatDetectionSettings/customModules/{module}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.delete_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_DeleteEventThreatDetectionCustomModule_async
+   */
+  deleteEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycenter.v1.IDeleteEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteEventThreatDetectionCustomModule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets an Event Threat Detection custom module.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the custom module to get.
+   *
+   *   Its format is:
+   *
+   *   * `organizations/{organization}/eventThreatDetectionSettings/customModules/{module}`.
+   *   * `folders/{folder}/eventThreatDetectionSettings/customModules/{module}`.
+   *   * `projects/{project}/eventThreatDetectionSettings/customModules/{module}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.get_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_GetEventThreatDetectionCustomModule_async
+   */
+  getEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEventThreatDetectionCustomModule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates the Event Threat Detection custom module with the given name based
+   * on the given update mask. Updating the enablement state is supported for
+   * both resident and inherited modules (though resident modules cannot have an
+   * enablement state of "inherited"). Updating the display name or
+   * configuration of a module is supported for resident modules only. The type
+   * of a module cannot be changed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securitycenter.v1.EventThreatDetectionCustomModule} request.eventThreatDetectionCustomModule
+   *   Required. The module being updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to be updated.
+   *   If empty all mutable fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.update_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_UpdateEventThreatDetectionCustomModule_async
+   */
+  updateEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'event_threat_detection_custom_module.name':
+          request.eventThreatDetectionCustomModule!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateEventThreatDetectionCustomModule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Validates the given Event Threat Detection custom module.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent to validate the Custom Module under.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings`.
+   *     * `folders/{folder}/eventThreatDetectionSettings`.
+   *     * `projects/{project}/eventThreatDetectionSettings`.
+   * @param {string} request.rawText
+   *   Required. The raw text of the module's contents. Used to generate error
+   *   messages.
+   * @param {string} request.type
+   *   Required. The type of the module (e.g. CONFIGURABLE_BAD_IP).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1.ValidateEventThreatDetectionCustomModuleResponse|ValidateEventThreatDetectionCustomModuleResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.validate_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ValidateEventThreatDetectionCustomModule_async
+   */
+  validateEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleResponse,
+      (
+        | protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  validateEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleResponse,
+      | protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  validateEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleResponse,
+      | protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  validateEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleResponse,
+          | protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleResponse,
+      | protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleResponse,
+      (
+        | protos.google.cloud.securitycenter.v1.IValidateEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.validateEventThreatDetectionCustomModule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets an effective Event Threat Detection custom module at the given level.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the effective Event Threat Detection custom
+   *   module.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings/effectiveCustomModules/{module}`.
+   *     * `folders/{folder}/eventThreatDetectionSettings/effectiveCustomModules/{module}`.
+   *     * `projects/{project}/eventThreatDetectionSettings/effectiveCustomModules/{module}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.get_effective_event_threat_detection_custom_module.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_GetEffectiveEventThreatDetectionCustomModule_async
+   */
+  getEffectiveEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getEffectiveEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEffectiveEventThreatDetectionCustomModule(
+    request: protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEffectiveEventThreatDetectionCustomModule(
+    request?: protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule,
+      | protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEffectiveEventThreatDetectionCustomModule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Creates a ResourceValueConfig for an organization. Maps user's tags to
+   * difference resource values for use by the attack path simulation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the new ResourceValueConfig's parent.
+   *   The parent field in the CreateResourceValueConfigRequest
+   *   messages must either be empty or match this field.
+   * @param {number[]} request.requests
+   *   Required. The resource value configs to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1.BatchCreateResourceValueConfigsResponse|BatchCreateResourceValueConfigsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.batch_create_resource_value_configs.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_BatchCreateResourceValueConfigs_async
+   */
+  batchCreateResourceValueConfigs(
+    request?: protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsResponse,
+      (
+        | protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchCreateResourceValueConfigs(
+    request: protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsResponse,
+      | protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCreateResourceValueConfigs(
+    request: protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsResponse,
+      | protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCreateResourceValueConfigs(
+    request?: protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsResponse,
+          | protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsResponse,
+      | protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsResponse,
+      (
+        | protos.google.cloud.securitycenter.v1.IBatchCreateResourceValueConfigsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchCreateResourceValueConfigs(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes a ResourceValueConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the ResourceValueConfig to delete
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.delete_resource_value_config.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_DeleteResourceValueConfig_async
+   */
+  deleteResourceValueConfig(
+    request?: protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteResourceValueConfig(
+    request: protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteResourceValueConfig(
+    request: protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteResourceValueConfig(
+    request?: protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.securitycenter.v1.IDeleteResourceValueConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteResourceValueConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets a ResourceValueConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource value config to retrieve. Its format is
+   *   `organizations/{organization}/resourceValueConfigs/{config_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1.ResourceValueConfig|ResourceValueConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.get_resource_value_config.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_GetResourceValueConfig_async
+   */
+  getResourceValueConfig(
+    request?: protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getResourceValueConfig(
+    request: protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+      | protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getResourceValueConfig(
+    request: protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+      | protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getResourceValueConfig(
+    request?: protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+          | protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+      | protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+      (
+        | protos.google.cloud.securitycenter.v1.IGetResourceValueConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getResourceValueConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates an existing ResourceValueConfigs with new rules.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securitycenter.v1.ResourceValueConfig} request.resourceValueConfig
+   *   Required. The resource value config being updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to be updated.
+   *   If empty all mutable fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securitycenter.v1.ResourceValueConfig|ResourceValueConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.update_resource_value_config.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_UpdateResourceValueConfig_async
+   */
+  updateResourceValueConfig(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateResourceValueConfig(
+    request: protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+      | protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateResourceValueConfig(
+    request: protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest,
+    callback: Callback<
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+      | protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateResourceValueConfig(
+    request?: protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+          | protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+      | protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig,
+      (
+        | protos.google.cloud.securitycenter.v1.IUpdateResourceValueConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'resource_value_config.name': request.resourceValueConfig!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateResourceValueConfig(
+      request,
+      options,
+      callback
+    );
+  }
 
   /**
    * Kicks off an LRO to bulk mute findings for a parent based on a filter. The
@@ -3826,8 +5244,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, at which bulk action needs to be applied. Its format
-   *   is "organizations/[organization_id]", "folders/[folder_id]",
-   *   "projects/[project_id]".
+   *   is `organizations/[organization_id]`, `folders/[folder_id]`,
+   *   `projects/[project_id]`.
    * @param {string} request.filter
    *   Expression that identifies findings that should be updated.
    *   The expression is a list of zero or more restrictions combined
@@ -3852,6 +5270,10 @@ export class SecurityCenterClient {
    * @param {string} request.muteAnnotation
    *   This can be a mute configuration name or any identifier for mute/unmute
    *   of findings based on the filter.
+   * @param {google.cloud.securitycenter.v1.BulkMuteFindingsRequest.MuteState} [request.muteState]
+   *   Optional. All findings matching the given filter will have their mute state
+   *   set to this value. The default value is `MUTED`. Setting this to
+   *   `UNDEFINED` will clear the mute state on all matching findings.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3993,7 +5415,7 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the organization to run asset discovery for. Its format
-   *   is "organizations/[organization_id]".
+   *   is `organizations/[organization_id]`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4143,8 +5565,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent to group the assets by. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -4361,13 +5783,13 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `groupAssets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent to group the assets by. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -4537,8 +5959,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent to group the assets by. Its format is
-   *   "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -4713,12 +6135,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source to groupBy. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]",
-   *   folders/[folder_id]/sources/[source_id], or
-   *   projects/[project_id]/sources/[source_id]. To groupBy across all sources
+   *   `organizations/[organization_id]/sources/[source_id]`,
+   *   `folders/[folder_id]/sources/[source_id]`, or
+   *   `projects/[project_id]/sources/[source_id]`. To groupBy across all sources
    *   provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-,
-   *   or projects/{project_id}/sources/-
+   *   `organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-`,
+   *   or `projects/{project_id}/sources/-`
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -4783,14 +6205,6 @@ export class SecurityCenterClient {
    *   Required. Expression that defines what assets fields to use for grouping
    *   (including `state_change`). The string value should follow SQL syntax:
    *   comma separated list of fields. For example: "parent,resource_name".
-   *
-   *   The following fields are supported:
-   *
-   *   * resource_name
-   *   * category
-   *   * state
-   *   * parent
-   *   * severity
    *
    *   The following fields are supported when compare_duration is set:
    *
@@ -4928,17 +6342,17 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `groupFindings`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source to groupBy. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]",
-   *   folders/[folder_id]/sources/[source_id], or
-   *   projects/[project_id]/sources/[source_id]. To groupBy across all sources
+   *   `organizations/[organization_id]/sources/[source_id]`,
+   *   `folders/[folder_id]/sources/[source_id]`, or
+   *   `projects/[project_id]/sources/[source_id]`. To groupBy across all sources
    *   provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-,
-   *   or projects/{project_id}/sources/-
+   *   `organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-`,
+   *   or `projects/{project_id}/sources/-`
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -5003,14 +6417,6 @@ export class SecurityCenterClient {
    *   Required. Expression that defines what assets fields to use for grouping
    *   (including `state_change`). The string value should follow SQL syntax:
    *   comma separated list of fields. For example: "parent,resource_name".
-   *
-   *   The following fields are supported:
-   *
-   *   * resource_name
-   *   * category
-   *   * state
-   *   * parent
-   *   * severity
    *
    *   The following fields are supported when compare_duration is set:
    *
@@ -5101,12 +6507,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source to groupBy. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]",
-   *   folders/[folder_id]/sources/[source_id], or
-   *   projects/[project_id]/sources/[source_id]. To groupBy across all sources
+   *   `organizations/[organization_id]/sources/[source_id]`,
+   *   `folders/[folder_id]/sources/[source_id]`, or
+   *   `projects/[project_id]/sources/[source_id]`. To groupBy across all sources
    *   provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-,
-   *   or projects/{project_id}/sources/-
+   *   `organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-`,
+   *   or `projects/{project_id}/sources/-`
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -5171,14 +6577,6 @@ export class SecurityCenterClient {
    *   Required. Expression that defines what assets fields to use for grouping
    *   (including `state_change`). The string value should follow SQL syntax:
    *   comma separated list of fields. For example: "parent,resource_name".
-   *
-   *   The following fields are supported:
-   *
-   *   * resource_name
-   *   * category
-   *   * state
-   *   * parent
-   *   * severity
    *
    *   The following fields are supported when compare_duration is set:
    *
@@ -5270,8 +6668,8 @@ export class SecurityCenterClient {
    *   Required. The name of the parent resource that contains the assets. The
    *   value that you can specify on parent depends on the method in which you
    *   specify parent. You can specify one of the following values:
-   *   "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -5492,15 +6890,15 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAssets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent resource that contains the assets. The
    *   value that you can specify on parent depends on the method in which you
    *   specify parent. You can specify one of the following values:
-   *   "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -5676,8 +7074,8 @@ export class SecurityCenterClient {
    *   Required. The name of the parent resource that contains the assets. The
    *   value that you can specify on parent depends on the method in which you
    *   specify parent. You can specify one of the following values:
-   *   "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -5851,9 +7249,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list descendant custom modules. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings",
-   *   "folders/{folder}/securityHealthAnalyticsSettings", or
-   *   "projects/{project}/securityHealthAnalyticsSettings"
+   *   `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *   `projects/{project}/securityHealthAnalyticsSettings`
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. Default is
    *   10, minimum is 1, maximum is 1000.
@@ -5951,14 +7349,14 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDescendantSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list descendant custom modules. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings",
-   *   "folders/{folder}/securityHealthAnalyticsSettings", or
-   *   "projects/{project}/securityHealthAnalyticsSettings"
+   *   `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *   `projects/{project}/securityHealthAnalyticsSettings`
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. Default is
    *   10, minimum is 1, maximum is 1000.
@@ -6007,9 +7405,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list descendant custom modules. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings",
-   *   "folders/{folder}/securityHealthAnalyticsSettings", or
-   *   "projects/{project}/securityHealthAnalyticsSettings"
+   *   `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *   `projects/{project}/securityHealthAnalyticsSettings`
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. Default is
    *   10, minimum is 1, maximum is 1000.
@@ -6061,12 +7459,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source the findings belong to. Its format is
-   *   "organizations/[organization_id]/sources/[source_id],
-   *   folders/[folder_id]/sources/[source_id], or
-   *   projects/[project_id]/sources/[source_id]". To list across all sources
+   *   `organizations/[organization_id]/sources/[source_id]`,
+   *   `folders/[folder_id]/sources/[source_id]`, or
+   *   `projects/[project_id]/sources/[source_id]`. To list across all sources
    *   provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/- or
-   *   projects/{projects_id}/sources/-
+   *   `organizations/{organization_id}/sources/-`,
+   *   `folders/{folder_id}/sources/-` or `projects/{projects_id}/sources/-`
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -6282,17 +7680,17 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listFindings`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source the findings belong to. Its format is
-   *   "organizations/[organization_id]/sources/[source_id],
-   *   folders/[folder_id]/sources/[source_id], or
-   *   projects/[project_id]/sources/[source_id]". To list across all sources
+   *   `organizations/[organization_id]/sources/[source_id]`,
+   *   `folders/[folder_id]/sources/[source_id]`, or
+   *   `projects/[project_id]/sources/[source_id]`. To list across all sources
    *   provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/- or
-   *   projects/{projects_id}/sources/-
+   *   `organizations/{organization_id}/sources/-`,
+   *   `folders/{folder_id}/sources/-` or `projects/{projects_id}/sources/-`
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -6461,12 +7859,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source the findings belong to. Its format is
-   *   "organizations/[organization_id]/sources/[source_id],
-   *   folders/[folder_id]/sources/[source_id], or
-   *   projects/[project_id]/sources/[source_id]". To list across all sources
+   *   `organizations/[organization_id]/sources/[source_id]`,
+   *   `folders/[folder_id]/sources/[source_id]`, or
+   *   `projects/[project_id]/sources/[source_id]`. To list across all sources
    *   provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/- or
-   *   projects/{projects_id}/sources/-
+   *   `organizations/{organization_id}/sources/-`,
+   *   `folders/{folder_id}/sources/-` or `projects/{projects_id}/sources/-`
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -6634,8 +8032,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of mute configs. Its format
-   *   is "organizations/[organization_id]", "folders/[folder_id]",
-   *   "projects/[project_id]".
+   *   is `organizations/[organization_id]`, `folders/[folder_id]`,
+   *   `projects/[project_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -6735,13 +8133,13 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMuteConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of mute configs. Its format
-   *   is "organizations/[organization_id]", "folders/[folder_id]",
-   *   "projects/[project_id]".
+   *   is `organizations/[organization_id]`, `folders/[folder_id]`,
+   *   `projects/[project_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -6794,8 +8192,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of mute configs. Its format
-   *   is "organizations/[organization_id]", "folders/[folder_id]",
-   *   "projects/[project_id]".
+   *   is `organizations/[organization_id]`, `folders/[folder_id]`,
+   *   `projects/[project_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -6948,7 +8346,7 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNotificationConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7054,9 +8452,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list effective custom modules. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings",
-   *   "folders/{folder}/securityHealthAnalyticsSettings", or
-   *   "projects/{project}/securityHealthAnalyticsSettings"
+   *   `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *   `projects/{project}/securityHealthAnalyticsSettings`
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. Default is
    *   10, minimum is 1, maximum is 1000.
@@ -7154,14 +8552,14 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEffectiveSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list effective custom modules. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings",
-   *   "folders/{folder}/securityHealthAnalyticsSettings", or
-   *   "projects/{project}/securityHealthAnalyticsSettings"
+   *   `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *   `projects/{project}/securityHealthAnalyticsSettings`
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. Default is
    *   10, minimum is 1, maximum is 1000.
@@ -7210,9 +8608,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list effective custom modules. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings",
-   *   "folders/{folder}/securityHealthAnalyticsSettings", or
-   *   "projects/{project}/securityHealthAnalyticsSettings"
+   *   `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *   `projects/{project}/securityHealthAnalyticsSettings`
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. Default is
    *   10, minimum is 1, maximum is 1000.
@@ -7263,9 +8661,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings",
-   *   "folders/{folder}/securityHealthAnalyticsSettings", or
-   *   "projects/{project}/securityHealthAnalyticsSettings"
+   *   `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *   `projects/{project}/securityHealthAnalyticsSettings`
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. Default is
    *   10, minimum is 1, maximum is 1000.
@@ -7363,14 +8761,14 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings",
-   *   "folders/{folder}/securityHealthAnalyticsSettings", or
-   *   "projects/{project}/securityHealthAnalyticsSettings"
+   *   `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *   `projects/{project}/securityHealthAnalyticsSettings`
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. Default is
    *   10, minimum is 1, maximum is 1000.
@@ -7418,9 +8816,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of parent to list custom modules. Its format is
-   *   "organizations/{organization}/securityHealthAnalyticsSettings",
-   *   "folders/{folder}/securityHealthAnalyticsSettings", or
-   *   "projects/{project}/securityHealthAnalyticsSettings"
+   *   `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *   `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *   `projects/{project}/securityHealthAnalyticsSettings`
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response. Default is
    *   10, minimum is 1, maximum is 1000.
@@ -7467,8 +8865,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -7564,13 +8962,13 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSources`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -7619,8 +9017,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -7672,8 +9070,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of BigQuery exports. Its
-   *   format is "organizations/[organization_id]", "folders/[folder_id]",
-   *   "projects/[project_id]".
+   *   format is `organizations/[organization_id]`, `folders/[folder_id]`,
+   *   `projects/[project_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -7772,13 +9170,13 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listBigQueryExports`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of BigQuery exports. Its
-   *   format is "organizations/[organization_id]", "folders/[folder_id]",
-   *   "projects/[project_id]".
+   *   format is `organizations/[organization_id]`, `folders/[folder_id]`,
+   *   `projects/[project_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -7830,8 +9228,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of BigQuery exports. Its
-   *   format is "organizations/[organization_id]", "folders/[folder_id]",
-   *   "projects/[project_id]".
+   *   format is `organizations/[organization_id]`, `folders/[folder_id]`,
+   *   `projects/[project_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -7876,6 +9274,1474 @@ export class SecurityCenterClient {
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IBigQueryExport>;
   }
   /**
+   * Lists all resident Event Threat Detection custom modules under the
+   * given Resource Manager parent and its descendants.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent to list custom modules under.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings`.
+   *     * `folders/{folder}/eventThreatDetectionSettings`.
+   *     * `projects/{project}/eventThreatDetectionSettings`.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListDescendantEventThreatDetectionCustomModules` call. Provide this to
+   *   retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListDescendantEventThreatDetectionCustomModules` must match the call that
+   *   provided the page token.
+   * @param {number} request.pageSize
+   *   The maximum number of modules to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDescendantEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDescendantEventThreatDetectionCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesResponse,
+    ]
+  >;
+  listDescendantEventThreatDetectionCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule
+    >
+  ): void;
+  listDescendantEventThreatDetectionCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule
+    >
+  ): void;
+  listDescendantEventThreatDetectionCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listDescendantEventThreatDetectionCustomModules(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `listDescendantEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent to list custom modules under.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings`.
+   *     * `folders/{folder}/eventThreatDetectionSettings`.
+   *     * `projects/{project}/eventThreatDetectionSettings`.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListDescendantEventThreatDetectionCustomModules` call. Provide this to
+   *   retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListDescendantEventThreatDetectionCustomModules` must match the call that
+   *   provided the page token.
+   * @param {number} request.pageSize
+   *   The maximum number of modules to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDescendantEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDescendantEventThreatDetectionCustomModulesStream(
+    request?: protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listDescendantEventThreatDetectionCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDescendantEventThreatDetectionCustomModules.createStream(
+      this.innerApiCalls
+        .listDescendantEventThreatDetectionCustomModules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listDescendantEventThreatDetectionCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent to list custom modules under.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings`.
+   *     * `folders/{folder}/eventThreatDetectionSettings`.
+   *     * `projects/{project}/eventThreatDetectionSettings`.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListDescendantEventThreatDetectionCustomModules` call. Provide this to
+   *   retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListDescendantEventThreatDetectionCustomModules` must match the call that
+   *   provided the page token.
+   * @param {number} request.pageSize
+   *   The maximum number of modules to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.list_descendant_event_threat_detection_custom_modules.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ListDescendantEventThreatDetectionCustomModules_async
+   */
+  listDescendantEventThreatDetectionCustomModulesAsync(
+    request?: protos.google.cloud.securitycenter.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listDescendantEventThreatDetectionCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDescendantEventThreatDetectionCustomModules.asyncIterate(
+      this.innerApiCalls[
+        'listDescendantEventThreatDetectionCustomModules'
+      ] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule>;
+  }
+  /**
+   * Lists all Event Threat Detection custom modules for the given
+   * Resource Manager parent. This includes resident modules defined at the
+   * scope of the parent along with modules inherited from ancestors.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent to list custom modules under.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings`.
+   *     * `folders/{folder}/eventThreatDetectionSettings`.
+   *     * `projects/{project}/eventThreatDetectionSettings`.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListEventThreatDetectionCustomModules` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListEventThreatDetectionCustomModules` must match the call that provided
+   *   the page token.
+   * @param {number} request.pageSize
+   *   The maximum number of modules to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listEventThreatDetectionCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesResponse,
+    ]
+  >;
+  listEventThreatDetectionCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule
+    >
+  ): void;
+  listEventThreatDetectionCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule
+    >
+  ): void;
+  listEventThreatDetectionCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listEventThreatDetectionCustomModules(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `listEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent to list custom modules under.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings`.
+   *     * `folders/{folder}/eventThreatDetectionSettings`.
+   *     * `projects/{project}/eventThreatDetectionSettings`.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListEventThreatDetectionCustomModules` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListEventThreatDetectionCustomModules` must match the call that provided
+   *   the page token.
+   * @param {number} request.pageSize
+   *   The maximum number of modules to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listEventThreatDetectionCustomModulesStream(
+    request?: protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEventThreatDetectionCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEventThreatDetectionCustomModules.createStream(
+      this.innerApiCalls.listEventThreatDetectionCustomModules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listEventThreatDetectionCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent to list custom modules under.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings`.
+   *     * `folders/{folder}/eventThreatDetectionSettings`.
+   *     * `projects/{project}/eventThreatDetectionSettings`.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListEventThreatDetectionCustomModules` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListEventThreatDetectionCustomModules` must match the call that provided
+   *   the page token.
+   * @param {number} request.pageSize
+   *   The maximum number of modules to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycenter.v1.EventThreatDetectionCustomModule|EventThreatDetectionCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.list_event_threat_detection_custom_modules.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ListEventThreatDetectionCustomModules_async
+   */
+  listEventThreatDetectionCustomModulesAsync(
+    request?: protos.google.cloud.securitycenter.v1.IListEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEventThreatDetectionCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEventThreatDetectionCustomModules.asyncIterate(
+      this.innerApiCalls['listEventThreatDetectionCustomModules'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IEventThreatDetectionCustomModule>;
+  }
+  /**
+   * Lists all effective Event Threat Detection custom modules for the
+   * given parent. This includes resident modules defined at the scope of the
+   * parent along with modules inherited from its ancestors.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent to list custom modules for.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings`.
+   *     * `folders/{folder}/eventThreatDetectionSettings`.
+   *     * `projects/{project}/eventThreatDetectionSettings`.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListEffectiveEventThreatDetectionCustomModules` call. Provide this to
+   *   retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListEffectiveEventThreatDetectionCustomModules` must match the call that
+   *   provided the page token.
+   * @param {number} request.pageSize
+   *   The maximum number of modules to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEffectiveEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listEffectiveEventThreatDetectionCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesResponse,
+    ]
+  >;
+  listEffectiveEventThreatDetectionCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule
+    >
+  ): void;
+  listEffectiveEventThreatDetectionCustomModules(
+    request: protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule
+    >
+  ): void;
+  listEffectiveEventThreatDetectionCustomModules(
+    request?: protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+      | protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule[],
+      protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listEffectiveEventThreatDetectionCustomModules(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `listEffectiveEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent to list custom modules for.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings`.
+   *     * `folders/{folder}/eventThreatDetectionSettings`.
+   *     * `projects/{project}/eventThreatDetectionSettings`.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListEffectiveEventThreatDetectionCustomModules` call. Provide this to
+   *   retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListEffectiveEventThreatDetectionCustomModules` must match the call that
+   *   provided the page token.
+   * @param {number} request.pageSize
+   *   The maximum number of modules to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEffectiveEventThreatDetectionCustomModulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listEffectiveEventThreatDetectionCustomModulesStream(
+    request?: protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEffectiveEventThreatDetectionCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEffectiveEventThreatDetectionCustomModules.createStream(
+      this.innerApiCalls
+        .listEffectiveEventThreatDetectionCustomModules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listEffectiveEventThreatDetectionCustomModules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent to list custom modules for.
+   *
+   *   Its format is:
+   *
+   *     * `organizations/{organization}/eventThreatDetectionSettings`.
+   *     * `folders/{folder}/eventThreatDetectionSettings`.
+   *     * `projects/{project}/eventThreatDetectionSettings`.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListEffectiveEventThreatDetectionCustomModules` call. Provide this to
+   *   retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListEffectiveEventThreatDetectionCustomModules` must match the call that
+   *   provided the page token.
+   * @param {number} request.pageSize
+   *   The maximum number of modules to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycenter.v1.EffectiveEventThreatDetectionCustomModule|EffectiveEventThreatDetectionCustomModule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.list_effective_event_threat_detection_custom_modules.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ListEffectiveEventThreatDetectionCustomModules_async
+   */
+  listEffectiveEventThreatDetectionCustomModulesAsync(
+    request?: protos.google.cloud.securitycenter.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listEffectiveEventThreatDetectionCustomModules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEffectiveEventThreatDetectionCustomModules.asyncIterate(
+      this.innerApiCalls[
+        'listEffectiveEventThreatDetectionCustomModules'
+      ] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IEffectiveEventThreatDetectionCustomModule>;
+  }
+  /**
+   * Lists all ResourceValueConfigs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns the collection of resource value configs.
+   *   Its format is
+   *   `organizations/[organization_id]`
+   * @param {number} request.pageSize
+   *   The number of results to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListResourceValueConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListResourceValueConfigs` must match the call that provided the
+   *   page token.
+   *
+   *   page_size can be specified, and the new page_size will be used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1.ResourceValueConfig|ResourceValueConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listResourceValueConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listResourceValueConfigs(
+    request?: protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig[],
+      protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest | null,
+      protos.google.cloud.securitycenter.v1.IListResourceValueConfigsResponse,
+    ]
+  >;
+  listResourceValueConfigs(
+    request: protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest,
+      | protos.google.cloud.securitycenter.v1.IListResourceValueConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig
+    >
+  ): void;
+  listResourceValueConfigs(
+    request: protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest,
+      | protos.google.cloud.securitycenter.v1.IListResourceValueConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig
+    >
+  ): void;
+  listResourceValueConfigs(
+    request?: protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest,
+          | protos.google.cloud.securitycenter.v1.IListResourceValueConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IResourceValueConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest,
+      | protos.google.cloud.securitycenter.v1.IListResourceValueConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IResourceValueConfig[],
+      protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest | null,
+      protos.google.cloud.securitycenter.v1.IListResourceValueConfigsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listResourceValueConfigs(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `listResourceValueConfigs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns the collection of resource value configs.
+   *   Its format is
+   *   `organizations/[organization_id]`
+   * @param {number} request.pageSize
+   *   The number of results to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListResourceValueConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListResourceValueConfigs` must match the call that provided the
+   *   page token.
+   *
+   *   page_size can be specified, and the new page_size will be used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1.ResourceValueConfig|ResourceValueConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listResourceValueConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listResourceValueConfigsStream(
+    request?: protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listResourceValueConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listResourceValueConfigs.createStream(
+      this.innerApiCalls.listResourceValueConfigs as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listResourceValueConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns the collection of resource value configs.
+   *   Its format is
+   *   `organizations/[organization_id]`
+   * @param {number} request.pageSize
+   *   The number of results to return. The service may return fewer than
+   *   this value.
+   *   If unspecified, at most 10 configs will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListResourceValueConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListResourceValueConfigs` must match the call that provided the
+   *   page token.
+   *
+   *   page_size can be specified, and the new page_size will be used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycenter.v1.ResourceValueConfig|ResourceValueConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.list_resource_value_configs.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ListResourceValueConfigs_async
+   */
+  listResourceValueConfigsAsync(
+    request?: protos.google.cloud.securitycenter.v1.IListResourceValueConfigsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1.IResourceValueConfig> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listResourceValueConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listResourceValueConfigs.asyncIterate(
+      this.innerApiCalls['listResourceValueConfigs'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IResourceValueConfig>;
+  }
+  /**
+   * Lists the valued resources for a set of simulation results and filter.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list valued resources.
+   *
+   *   Valid formats:
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+   * @param {string} request.filter
+   *   The filter expression that filters the valued resources in the response.
+   *   Supported fields:
+   *
+   *     * `resource_value` supports =
+   *     * `resource_type` supports =
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListValuedResourcesResponse`; indicates
+   *   that this is a continuation of a prior `ListValuedResources` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} [request.orderBy]
+   *   Optional. The fields by which to order the valued resources response.
+   *
+   *   Supported fields:
+   *
+   *     * `exposed_score`
+   *
+   *     * `resource_value`
+   *
+   *     * `resource_type`
+   *
+   *     * `resource`
+   *
+   *     * `display_name`
+   *
+   *   Values should be a comma separated list of fields. For example:
+   *   `exposed_score,resource_value`.
+   *
+   *   The default sorting order is descending. To specify ascending or descending
+   *   order for a field, append a ` ASC` or a ` DESC` suffix, respectively; for
+   *   example: `exposed_score DESC`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1.ValuedResource|ValuedResource}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listValuedResourcesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listValuedResources(
+    request?: protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IValuedResource[],
+      protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListValuedResourcesResponse,
+    ]
+  >;
+  listValuedResources(
+    request: protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest,
+      | protos.google.cloud.securitycenter.v1.IListValuedResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IValuedResource
+    >
+  ): void;
+  listValuedResources(
+    request: protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest,
+      | protos.google.cloud.securitycenter.v1.IListValuedResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IValuedResource
+    >
+  ): void;
+  listValuedResources(
+    request?: protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest,
+          | protos.google.cloud.securitycenter.v1.IListValuedResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IValuedResource
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest,
+      | protos.google.cloud.securitycenter.v1.IListValuedResourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IValuedResource
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IValuedResource[],
+      protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest | null,
+      protos.google.cloud.securitycenter.v1.IListValuedResourcesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listValuedResources(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listValuedResources`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list valued resources.
+   *
+   *   Valid formats:
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+   * @param {string} request.filter
+   *   The filter expression that filters the valued resources in the response.
+   *   Supported fields:
+   *
+   *     * `resource_value` supports =
+   *     * `resource_type` supports =
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListValuedResourcesResponse`; indicates
+   *   that this is a continuation of a prior `ListValuedResources` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} [request.orderBy]
+   *   Optional. The fields by which to order the valued resources response.
+   *
+   *   Supported fields:
+   *
+   *     * `exposed_score`
+   *
+   *     * `resource_value`
+   *
+   *     * `resource_type`
+   *
+   *     * `resource`
+   *
+   *     * `display_name`
+   *
+   *   Values should be a comma separated list of fields. For example:
+   *   `exposed_score,resource_value`.
+   *
+   *   The default sorting order is descending. To specify ascending or descending
+   *   order for a field, append a ` ASC` or a ` DESC` suffix, respectively; for
+   *   example: `exposed_score DESC`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1.ValuedResource|ValuedResource} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listValuedResourcesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listValuedResourcesStream(
+    request?: protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listValuedResources'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listValuedResources.createStream(
+      this.innerApiCalls.listValuedResources as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listValuedResources`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list valued resources.
+   *
+   *   Valid formats:
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+   * @param {string} request.filter
+   *   The filter expression that filters the valued resources in the response.
+   *   Supported fields:
+   *
+   *     * `resource_value` supports =
+   *     * `resource_type` supports =
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListValuedResourcesResponse`; indicates
+   *   that this is a continuation of a prior `ListValuedResources` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {string} [request.orderBy]
+   *   Optional. The fields by which to order the valued resources response.
+   *
+   *   Supported fields:
+   *
+   *     * `exposed_score`
+   *
+   *     * `resource_value`
+   *
+   *     * `resource_type`
+   *
+   *     * `resource`
+   *
+   *     * `display_name`
+   *
+   *   Values should be a comma separated list of fields. For example:
+   *   `exposed_score,resource_value`.
+   *
+   *   The default sorting order is descending. To specify ascending or descending
+   *   order for a field, append a ` ASC` or a ` DESC` suffix, respectively; for
+   *   example: `exposed_score DESC`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycenter.v1.ValuedResource|ValuedResource}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.list_valued_resources.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ListValuedResources_async
+   */
+  listValuedResourcesAsync(
+    request?: protos.google.cloud.securitycenter.v1.IListValuedResourcesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1.IValuedResource> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listValuedResources'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listValuedResources.asyncIterate(
+      this.innerApiCalls['listValuedResources'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IValuedResource>;
+  }
+  /**
+   * Lists the attack paths for a set of simulation results or valued resources
+   * and filter.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list attack paths.
+   *
+   *   Valid formats:
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+   * @param {string} request.filter
+   *   The filter expression that filters the attack path in the response.
+   *   Supported fields:
+   *
+   *     * `valued_resources` supports =
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListAttackPathsResponse`; indicates
+   *   that this is a continuation of a prior `ListAttackPaths` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securitycenter.v1.AttackPath|AttackPath}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAttackPathsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAttackPaths(
+    request?: protos.google.cloud.securitycenter.v1.IListAttackPathsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IAttackPath[],
+      protos.google.cloud.securitycenter.v1.IListAttackPathsRequest | null,
+      protos.google.cloud.securitycenter.v1.IListAttackPathsResponse,
+    ]
+  >;
+  listAttackPaths(
+    request: protos.google.cloud.securitycenter.v1.IListAttackPathsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListAttackPathsRequest,
+      | protos.google.cloud.securitycenter.v1.IListAttackPathsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IAttackPath
+    >
+  ): void;
+  listAttackPaths(
+    request: protos.google.cloud.securitycenter.v1.IListAttackPathsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListAttackPathsRequest,
+      | protos.google.cloud.securitycenter.v1.IListAttackPathsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IAttackPath
+    >
+  ): void;
+  listAttackPaths(
+    request?: protos.google.cloud.securitycenter.v1.IListAttackPathsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securitycenter.v1.IListAttackPathsRequest,
+          | protos.google.cloud.securitycenter.v1.IListAttackPathsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycenter.v1.IAttackPath
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securitycenter.v1.IListAttackPathsRequest,
+      | protos.google.cloud.securitycenter.v1.IListAttackPathsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securitycenter.v1.IAttackPath
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securitycenter.v1.IAttackPath[],
+      protos.google.cloud.securitycenter.v1.IListAttackPathsRequest | null,
+      protos.google.cloud.securitycenter.v1.IListAttackPathsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listAttackPaths(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listAttackPaths`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list attack paths.
+   *
+   *   Valid formats:
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+   * @param {string} request.filter
+   *   The filter expression that filters the attack path in the response.
+   *   Supported fields:
+   *
+   *     * `valued_resources` supports =
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListAttackPathsResponse`; indicates
+   *   that this is a continuation of a prior `ListAttackPaths` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securitycenter.v1.AttackPath|AttackPath} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAttackPathsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAttackPathsStream(
+    request?: protos.google.cloud.securitycenter.v1.IListAttackPathsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAttackPaths'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAttackPaths.createStream(
+      this.innerApiCalls.listAttackPaths as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAttackPaths`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of parent to list attack paths.
+   *
+   *   Valid formats:
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
+   * @param {string} request.filter
+   *   The filter expression that filters the attack path in the response.
+   *   Supported fields:
+   *
+   *     * `valued_resources` supports =
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListAttackPathsResponse`; indicates
+   *   that this is a continuation of a prior `ListAttackPaths` call, and
+   *   that the system should return the next page of data.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response. Default is
+   *   10, minimum is 1, maximum is 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securitycenter.v1.AttackPath|AttackPath}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_center.list_attack_paths.js</caption>
+   * region_tag:securitycenter_v1_generated_SecurityCenter_ListAttackPaths_async
+   */
+  listAttackPathsAsync(
+    request?: protos.google.cloud.securitycenter.v1.IListAttackPathsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securitycenter.v1.IAttackPath> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAttackPaths'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listAttackPaths.asyncIterate(
+      this.innerApiCalls['listAttackPaths'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securitycenter.v1.IAttackPath>;
+  }
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -7907,7 +10773,7 @@ export class SecurityCenterClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -7920,6 +10786,20 @@ export class SecurityCenterClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -7956,6 +10836,13 @@ export class SecurityCenterClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -7991,11 +10878,11 @@ export class SecurityCenterClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -8004,6 +10891,20 @@ export class SecurityCenterClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -8034,7 +10935,7 @@ export class SecurityCenterClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -8047,12 +10948,97 @@ export class SecurityCenterClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified attackPath resource name string.
+   *
+   * @param {string} organization
+   * @param {string} simulation
+   * @param {string} valued_resource
+   * @param {string} attack_path
+   * @returns {string} Resource name string.
+   */
+  attackPathPath(
+    organization: string,
+    simulation: string,
+    valuedResource: string,
+    attackPath: string
+  ) {
+    return this.pathTemplates.attackPathPathTemplate.render({
+      organization: organization,
+      simulation: simulation,
+      valued_resource: valuedResource,
+      attack_path: attackPath,
+    });
+  }
+
+  /**
+   * Parse the organization from AttackPath resource.
+   *
+   * @param {string} attackPathName
+   *   A fully-qualified path representing AttackPath resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromAttackPathName(attackPathName: string) {
+    return this.pathTemplates.attackPathPathTemplate.match(attackPathName)
+      .organization;
+  }
+
+  /**
+   * Parse the simulation from AttackPath resource.
+   *
+   * @param {string} attackPathName
+   *   A fully-qualified path representing AttackPath resource.
+   * @returns {string} A string representing the simulation.
+   */
+  matchSimulationFromAttackPathName(attackPathName: string) {
+    return this.pathTemplates.attackPathPathTemplate.match(attackPathName)
+      .simulation;
+  }
+
+  /**
+   * Parse the valued_resource from AttackPath resource.
+   *
+   * @param {string} attackPathName
+   *   A fully-qualified path representing AttackPath resource.
+   * @returns {string} A string representing the valued_resource.
+   */
+  matchValuedResourceFromAttackPathName(attackPathName: string) {
+    return this.pathTemplates.attackPathPathTemplate.match(attackPathName)
+      .valued_resource;
+  }
+
+  /**
+   * Parse the attack_path from AttackPath resource.
+   *
+   * @param {string} attackPathName
+   *   A fully-qualified path representing AttackPath resource.
+   * @returns {string} A string representing the attack_path.
+   */
+  matchAttackPathFromAttackPathName(attackPathName: string) {
+    return this.pathTemplates.attackPathPathTemplate.match(attackPathName)
+      .attack_path;
+  }
 
   /**
    * Return a fully-qualified folderAsset resource name string.
@@ -8137,6 +11123,94 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified folderConstraintName resource name string.
+   *
+   * @param {string} folder
+   * @param {string} constraint_name
+   * @returns {string} Resource name string.
+   */
+  folderConstraintNamePath(folder: string, constraintName: string) {
+    return this.pathTemplates.folderConstraintNamePathTemplate.render({
+      folder: folder,
+      constraint_name: constraintName,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderConstraintName resource.
+   *
+   * @param {string} folderConstraintNameName
+   *   A fully-qualified path representing folder_constraint_name resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderConstraintNameName(folderConstraintNameName: string) {
+    return this.pathTemplates.folderConstraintNamePathTemplate.match(
+      folderConstraintNameName
+    ).folder;
+  }
+
+  /**
+   * Parse the constraint_name from FolderConstraintName resource.
+   *
+   * @param {string} folderConstraintNameName
+   *   A fully-qualified path representing folder_constraint_name resource.
+   * @returns {string} A string representing the constraint_name.
+   */
+  matchConstraintNameFromFolderConstraintNameName(
+    folderConstraintNameName: string
+  ) {
+    return this.pathTemplates.folderConstraintNamePathTemplate.match(
+      folderConstraintNameName
+    ).constraint_name;
+  }
+
+  /**
+   * Return a fully-qualified folderEventThreatDetectionSettingsModule resource name string.
+   *
+   * @param {string} folder
+   * @param {string} module
+   * @returns {string} Resource name string.
+   */
+  folderEventThreatDetectionSettingsModulePath(folder: string, module: string) {
+    return this.pathTemplates.folderEventThreatDetectionSettingsModulePathTemplate.render(
+      {
+        folder: folder,
+        module: module,
+      }
+    );
+  }
+
+  /**
+   * Parse the folder from FolderEventThreatDetectionSettingsModule resource.
+   *
+   * @param {string} folderEventThreatDetectionSettingsModuleName
+   *   A fully-qualified path representing folder_eventThreatDetectionSettings_module resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderEventThreatDetectionSettingsModuleName(
+    folderEventThreatDetectionSettingsModuleName: string
+  ) {
+    return this.pathTemplates.folderEventThreatDetectionSettingsModulePathTemplate.match(
+      folderEventThreatDetectionSettingsModuleName
+    ).folder;
+  }
+
+  /**
+   * Parse the module from FolderEventThreatDetectionSettingsModule resource.
+   *
+   * @param {string} folderEventThreatDetectionSettingsModuleName
+   *   A fully-qualified path representing folder_eventThreatDetectionSettings_module resource.
+   * @returns {string} A string representing the module.
+   */
+  matchModuleFromFolderEventThreatDetectionSettingsModuleName(
+    folderEventThreatDetectionSettingsModuleName: string
+  ) {
+    return this.pathTemplates.folderEventThreatDetectionSettingsModulePathTemplate.match(
+      folderEventThreatDetectionSettingsModuleName
+    ).module;
+  }
+
+  /**
    * Return a fully-qualified folderExport resource name string.
    *
    * @param {string} folder
@@ -8172,6 +11246,71 @@ export class SecurityCenterClient {
   matchExportFromFolderExportName(folderExportName: string) {
     return this.pathTemplates.folderExportPathTemplate.match(folderExportName)
       .export;
+  }
+
+  /**
+   * Return a fully-qualified folderLocationMuteConfig resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} mute_config
+   * @returns {string} Resource name string.
+   */
+  folderLocationMuteConfigPath(
+    folder: string,
+    location: string,
+    muteConfig: string
+  ) {
+    return this.pathTemplates.folderLocationMuteConfigPathTemplate.render({
+      folder: folder,
+      location: location,
+      mute_config: muteConfig,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationMuteConfig resource.
+   *
+   * @param {string} folderLocationMuteConfigName
+   *   A fully-qualified path representing folder_location_mute_config resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationMuteConfigName(
+    folderLocationMuteConfigName: string
+  ) {
+    return this.pathTemplates.folderLocationMuteConfigPathTemplate.match(
+      folderLocationMuteConfigName
+    ).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationMuteConfig resource.
+   *
+   * @param {string} folderLocationMuteConfigName
+   *   A fully-qualified path representing folder_location_mute_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationMuteConfigName(
+    folderLocationMuteConfigName: string
+  ) {
+    return this.pathTemplates.folderLocationMuteConfigPathTemplate.match(
+      folderLocationMuteConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the mute_config from FolderLocationMuteConfig resource.
+   *
+   * @param {string} folderLocationMuteConfigName
+   *   A fully-qualified path representing folder_location_mute_config resource.
+   * @returns {string} A string representing the mute_config.
+   */
+  matchMuteConfigFromFolderLocationMuteConfigName(
+    folderLocationMuteConfigName: string
+  ) {
+    return this.pathTemplates.folderLocationMuteConfigPathTemplate.match(
+      folderLocationMuteConfigName
+    ).mute_config;
   }
 
   /**
@@ -8712,6 +11851,128 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified organizationConstraintName resource name string.
+   *
+   * @param {string} organization
+   * @param {string} constraint_name
+   * @returns {string} Resource name string.
+   */
+  organizationConstraintNamePath(organization: string, constraintName: string) {
+    return this.pathTemplates.organizationConstraintNamePathTemplate.render({
+      organization: organization,
+      constraint_name: constraintName,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationConstraintName resource.
+   *
+   * @param {string} organizationConstraintNameName
+   *   A fully-qualified path representing organization_constraint_name resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationConstraintNameName(
+    organizationConstraintNameName: string
+  ) {
+    return this.pathTemplates.organizationConstraintNamePathTemplate.match(
+      organizationConstraintNameName
+    ).organization;
+  }
+
+  /**
+   * Parse the constraint_name from OrganizationConstraintName resource.
+   *
+   * @param {string} organizationConstraintNameName
+   *   A fully-qualified path representing organization_constraint_name resource.
+   * @returns {string} A string representing the constraint_name.
+   */
+  matchConstraintNameFromOrganizationConstraintNameName(
+    organizationConstraintNameName: string
+  ) {
+    return this.pathTemplates.organizationConstraintNamePathTemplate.match(
+      organizationConstraintNameName
+    ).constraint_name;
+  }
+
+  /**
+   * Return a fully-qualified organizationEventThreatDetectionSettings resource name string.
+   *
+   * @param {string} organization
+   * @returns {string} Resource name string.
+   */
+  organizationEventThreatDetectionSettingsPath(organization: string) {
+    return this.pathTemplates.organizationEventThreatDetectionSettingsPathTemplate.render(
+      {
+        organization: organization,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationEventThreatDetectionSettings resource.
+   *
+   * @param {string} organizationEventThreatDetectionSettingsName
+   *   A fully-qualified path representing organization_eventThreatDetectionSettings resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationEventThreatDetectionSettingsName(
+    organizationEventThreatDetectionSettingsName: string
+  ) {
+    return this.pathTemplates.organizationEventThreatDetectionSettingsPathTemplate.match(
+      organizationEventThreatDetectionSettingsName
+    ).organization;
+  }
+
+  /**
+   * Return a fully-qualified organizationEventThreatDetectionSettingsModule resource name string.
+   *
+   * @param {string} organization
+   * @param {string} module
+   * @returns {string} Resource name string.
+   */
+  organizationEventThreatDetectionSettingsModulePath(
+    organization: string,
+    module: string
+  ) {
+    return this.pathTemplates.organizationEventThreatDetectionSettingsModulePathTemplate.render(
+      {
+        organization: organization,
+        module: module,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationEventThreatDetectionSettingsModule resource.
+   *
+   * @param {string} organizationEventThreatDetectionSettingsModuleName
+   *   A fully-qualified path representing organization_eventThreatDetectionSettings_module resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationEventThreatDetectionSettingsModuleName(
+    organizationEventThreatDetectionSettingsModuleName: string
+  ) {
+    return this.pathTemplates.organizationEventThreatDetectionSettingsModulePathTemplate.match(
+      organizationEventThreatDetectionSettingsModuleName
+    ).organization;
+  }
+
+  /**
+   * Parse the module from OrganizationEventThreatDetectionSettingsModule resource.
+   *
+   * @param {string} organizationEventThreatDetectionSettingsModuleName
+   *   A fully-qualified path representing organization_eventThreatDetectionSettings_module resource.
+   * @returns {string} A string representing the module.
+   */
+  matchModuleFromOrganizationEventThreatDetectionSettingsModuleName(
+    organizationEventThreatDetectionSettingsModuleName: string
+  ) {
+    return this.pathTemplates.organizationEventThreatDetectionSettingsModulePathTemplate.match(
+      organizationEventThreatDetectionSettingsModuleName
+    ).module;
+  }
+
+  /**
    * Return a fully-qualified organizationExport resource name string.
    *
    * @param {string} organization
@@ -8749,6 +12010,73 @@ export class SecurityCenterClient {
     return this.pathTemplates.organizationExportPathTemplate.match(
       organizationExportName
     ).export;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationMuteConfig resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} mute_config
+   * @returns {string} Resource name string.
+   */
+  organizationLocationMuteConfigPath(
+    organization: string,
+    location: string,
+    muteConfig: string
+  ) {
+    return this.pathTemplates.organizationLocationMuteConfigPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        mute_config: muteConfig,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationMuteConfig resource.
+   *
+   * @param {string} organizationLocationMuteConfigName
+   *   A fully-qualified path representing organization_location_mute_config resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationMuteConfigName(
+    organizationLocationMuteConfigName: string
+  ) {
+    return this.pathTemplates.organizationLocationMuteConfigPathTemplate.match(
+      organizationLocationMuteConfigName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationMuteConfig resource.
+   *
+   * @param {string} organizationLocationMuteConfigName
+   *   A fully-qualified path representing organization_location_mute_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationMuteConfigName(
+    organizationLocationMuteConfigName: string
+  ) {
+    return this.pathTemplates.organizationLocationMuteConfigPathTemplate.match(
+      organizationLocationMuteConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the mute_config from OrganizationLocationMuteConfig resource.
+   *
+   * @param {string} organizationLocationMuteConfigName
+   *   A fully-qualified path representing organization_location_mute_config resource.
+   * @returns {string} A string representing the mute_config.
+   */
+  matchMuteConfigFromOrganizationLocationMuteConfigName(
+    organizationLocationMuteConfigName: string
+  ) {
+    return this.pathTemplates.organizationLocationMuteConfigPathTemplate.match(
+      organizationLocationMuteConfigName
+    ).mute_config;
   }
 
   /**
@@ -8996,6 +12324,50 @@ export class SecurityCenterClient {
     return this.pathTemplates.organizationSettingsPathTemplate.match(
       organizationSettingsName
     ).organization;
+  }
+
+  /**
+   * Return a fully-qualified organizationSimulation resource name string.
+   *
+   * @param {string} organization
+   * @param {string} simulation
+   * @returns {string} Resource name string.
+   */
+  organizationSimulationPath(organization: string, simulation: string) {
+    return this.pathTemplates.organizationSimulationPathTemplate.render({
+      organization: organization,
+      simulation: simulation,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationSimulation resource.
+   *
+   * @param {string} organizationSimulationName
+   *   A fully-qualified path representing OrganizationSimulation resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSimulationName(
+    organizationSimulationName: string
+  ) {
+    return this.pathTemplates.organizationSimulationPathTemplate.match(
+      organizationSimulationName
+    ).organization;
+  }
+
+  /**
+   * Parse the simulation from OrganizationSimulation resource.
+   *
+   * @param {string} organizationSimulationName
+   *   A fully-qualified path representing OrganizationSimulation resource.
+   * @returns {string} A string representing the simulation.
+   */
+  matchSimulationFromOrganizationSimulationName(
+    organizationSimulationName: string
+  ) {
+    return this.pathTemplates.organizationSimulationPathTemplate.match(
+      organizationSimulationName
+    ).simulation;
   }
 
   /**
@@ -9338,6 +12710,97 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified projectConstraintName resource name string.
+   *
+   * @param {string} project
+   * @param {string} constraint_name
+   * @returns {string} Resource name string.
+   */
+  projectConstraintNamePath(project: string, constraintName: string) {
+    return this.pathTemplates.projectConstraintNamePathTemplate.render({
+      project: project,
+      constraint_name: constraintName,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConstraintName resource.
+   *
+   * @param {string} projectConstraintNameName
+   *   A fully-qualified path representing project_constraint_name resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConstraintNameName(projectConstraintNameName: string) {
+    return this.pathTemplates.projectConstraintNamePathTemplate.match(
+      projectConstraintNameName
+    ).project;
+  }
+
+  /**
+   * Parse the constraint_name from ProjectConstraintName resource.
+   *
+   * @param {string} projectConstraintNameName
+   *   A fully-qualified path representing project_constraint_name resource.
+   * @returns {string} A string representing the constraint_name.
+   */
+  matchConstraintNameFromProjectConstraintNameName(
+    projectConstraintNameName: string
+  ) {
+    return this.pathTemplates.projectConstraintNamePathTemplate.match(
+      projectConstraintNameName
+    ).constraint_name;
+  }
+
+  /**
+   * Return a fully-qualified projectEventThreatDetectionSettingsModule resource name string.
+   *
+   * @param {string} project
+   * @param {string} module
+   * @returns {string} Resource name string.
+   */
+  projectEventThreatDetectionSettingsModulePath(
+    project: string,
+    module: string
+  ) {
+    return this.pathTemplates.projectEventThreatDetectionSettingsModulePathTemplate.render(
+      {
+        project: project,
+        module: module,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectEventThreatDetectionSettingsModule resource.
+   *
+   * @param {string} projectEventThreatDetectionSettingsModuleName
+   *   A fully-qualified path representing project_eventThreatDetectionSettings_module resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectEventThreatDetectionSettingsModuleName(
+    projectEventThreatDetectionSettingsModuleName: string
+  ) {
+    return this.pathTemplates.projectEventThreatDetectionSettingsModulePathTemplate.match(
+      projectEventThreatDetectionSettingsModuleName
+    ).project;
+  }
+
+  /**
+   * Parse the module from ProjectEventThreatDetectionSettingsModule resource.
+   *
+   * @param {string} projectEventThreatDetectionSettingsModuleName
+   *   A fully-qualified path representing project_eventThreatDetectionSettings_module resource.
+   * @returns {string} A string representing the module.
+   */
+  matchModuleFromProjectEventThreatDetectionSettingsModuleName(
+    projectEventThreatDetectionSettingsModuleName: string
+  ) {
+    return this.pathTemplates.projectEventThreatDetectionSettingsModulePathTemplate.match(
+      projectEventThreatDetectionSettingsModuleName
+    ).module;
+  }
+
+  /**
    * Return a fully-qualified projectExport resource name string.
    *
    * @param {string} project
@@ -9373,6 +12836,71 @@ export class SecurityCenterClient {
   matchExportFromProjectExportName(projectExportName: string) {
     return this.pathTemplates.projectExportPathTemplate.match(projectExportName)
       .export;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationMuteConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} mute_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationMuteConfigPath(
+    project: string,
+    location: string,
+    muteConfig: string
+  ) {
+    return this.pathTemplates.projectLocationMuteConfigPathTemplate.render({
+      project: project,
+      location: location,
+      mute_config: muteConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationMuteConfig resource.
+   *
+   * @param {string} projectLocationMuteConfigName
+   *   A fully-qualified path representing project_location_mute_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationMuteConfigName(
+    projectLocationMuteConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationMuteConfigPathTemplate.match(
+      projectLocationMuteConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationMuteConfig resource.
+   *
+   * @param {string} projectLocationMuteConfigName
+   *   A fully-qualified path representing project_location_mute_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationMuteConfigName(
+    projectLocationMuteConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationMuteConfigPathTemplate.match(
+      projectLocationMuteConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the mute_config from ProjectLocationMuteConfig resource.
+   *
+   * @param {string} projectLocationMuteConfigName
+   *   A fully-qualified path representing project_location_mute_config resource.
+   * @returns {string} A string representing the mute_config.
+   */
+  matchMuteConfigFromProjectLocationMuteConfigName(
+    projectLocationMuteConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationMuteConfigPathTemplate.match(
+      projectLocationMuteConfigName
+    ).mute_config;
   }
 
   /**
@@ -9800,6 +13328,147 @@ export class SecurityCenterClient {
     return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match(
       projectSourceFindingSecurityMarksName
     ).finding;
+  }
+
+  /**
+   * Return a fully-qualified resourceValueConfig resource name string.
+   *
+   * @param {string} organization
+   * @param {string} resource_value_config
+   * @returns {string} Resource name string.
+   */
+  resourceValueConfigPath(organization: string, resourceValueConfig: string) {
+    return this.pathTemplates.resourceValueConfigPathTemplate.render({
+      organization: organization,
+      resource_value_config: resourceValueConfig,
+    });
+  }
+
+  /**
+   * Parse the organization from ResourceValueConfig resource.
+   *
+   * @param {string} resourceValueConfigName
+   *   A fully-qualified path representing ResourceValueConfig resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromResourceValueConfigName(
+    resourceValueConfigName: string
+  ) {
+    return this.pathTemplates.resourceValueConfigPathTemplate.match(
+      resourceValueConfigName
+    ).organization;
+  }
+
+  /**
+   * Parse the resource_value_config from ResourceValueConfig resource.
+   *
+   * @param {string} resourceValueConfigName
+   *   A fully-qualified path representing ResourceValueConfig resource.
+   * @returns {string} A string representing the resource_value_config.
+   */
+  matchResourceValueConfigFromResourceValueConfigName(
+    resourceValueConfigName: string
+  ) {
+    return this.pathTemplates.resourceValueConfigPathTemplate.match(
+      resourceValueConfigName
+    ).resource_value_config;
+  }
+
+  /**
+   * Return a fully-qualified simulation resource name string.
+   *
+   * @param {string} organization
+   * @param {string} simulation
+   * @returns {string} Resource name string.
+   */
+  simulationPath(organization: string, simulation: string) {
+    return this.pathTemplates.simulationPathTemplate.render({
+      organization: organization,
+      simulation: simulation,
+    });
+  }
+
+  /**
+   * Parse the organization from Simulation resource.
+   *
+   * @param {string} simulationName
+   *   A fully-qualified path representing Simulation resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromSimulationName(simulationName: string) {
+    return this.pathTemplates.simulationPathTemplate.match(simulationName)
+      .organization;
+  }
+
+  /**
+   * Parse the simulation from Simulation resource.
+   *
+   * @param {string} simulationName
+   *   A fully-qualified path representing Simulation resource.
+   * @returns {string} A string representing the simulation.
+   */
+  matchSimulationFromSimulationName(simulationName: string) {
+    return this.pathTemplates.simulationPathTemplate.match(simulationName)
+      .simulation;
+  }
+
+  /**
+   * Return a fully-qualified valuedResource resource name string.
+   *
+   * @param {string} organization
+   * @param {string} simulation
+   * @param {string} valued_resource
+   * @returns {string} Resource name string.
+   */
+  valuedResourcePath(
+    organization: string,
+    simulation: string,
+    valuedResource: string
+  ) {
+    return this.pathTemplates.valuedResourcePathTemplate.render({
+      organization: organization,
+      simulation: simulation,
+      valued_resource: valuedResource,
+    });
+  }
+
+  /**
+   * Parse the organization from ValuedResource resource.
+   *
+   * @param {string} valuedResourceName
+   *   A fully-qualified path representing ValuedResource resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromValuedResourceName(valuedResourceName: string) {
+    return this.pathTemplates.valuedResourcePathTemplate.match(
+      valuedResourceName
+    ).organization;
+  }
+
+  /**
+   * Parse the simulation from ValuedResource resource.
+   *
+   * @param {string} valuedResourceName
+   *   A fully-qualified path representing ValuedResource resource.
+   * @returns {string} A string representing the simulation.
+   */
+  matchSimulationFromValuedResourceName(valuedResourceName: string) {
+    return this.pathTemplates.valuedResourcePathTemplate.match(
+      valuedResourceName
+    ).simulation;
+  }
+
+  /**
+   * Parse the valued_resource from ValuedResource resource.
+   *
+   * @param {string} valuedResourceName
+   *   A fully-qualified path representing ValuedResource resource.
+   * @returns {string} A string representing the valued_resource.
+   */
+  matchValuedResourceFromValuedResourceName(valuedResourceName: string) {
+    return this.pathTemplates.valuedResourcePathTemplate.match(
+      valuedResourceName
+    ).valued_resource;
   }
 
   /**

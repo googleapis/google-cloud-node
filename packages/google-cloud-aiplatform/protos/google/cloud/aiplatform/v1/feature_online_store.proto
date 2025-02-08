@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package google.cloud.aiplatform.v1;
 
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
+import "google/cloud/aiplatform/v1/encryption_spec.proto";
+import "google/cloud/aiplatform/v1/service_networking.proto";
 import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Cloud.AIPlatform.V1";
@@ -60,6 +62,32 @@ message FeatureOnlineStore {
     AutoScaling auto_scaling = 1 [(google.api.field_behavior) = REQUIRED];
   }
 
+  // Optimized storage type
+  message Optimized {}
+
+  // The dedicated serving endpoint for this FeatureOnlineStore. Only need to
+  // set when you choose Optimized storage type. Public endpoint is provisioned
+  // by default.
+  message DedicatedServingEndpoint {
+    // Output only. This field will be populated with the domain name to use for
+    // this FeatureOnlineStore
+    string public_endpoint_domain_name = 2
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Optional. Private service connect config. The private service connection
+    // is available only for Optimized storage type, not for embedding
+    // management now. If
+    // [PrivateServiceConnectConfig.enable_private_service_connect][google.cloud.aiplatform.v1.PrivateServiceConnectConfig.enable_private_service_connect]
+    // set to true, customers will use private service connection to send
+    // request. Otherwise, the connection will set to public endpoint.
+    PrivateServiceConnectConfig private_service_connect_config = 3
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Output only. The name of the service attachment resource. Populated if
+    // private service connect is enabled and after FeatureViewSync is created.
+    string service_attachment = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
   // Possible states a featureOnlineStore can have.
   enum State {
     // Default value. This value is unused.
@@ -82,6 +110,13 @@ message FeatureOnlineStore {
     // to serve featureValues for all FeatureViews under this
     // FeatureOnlineStore.
     Bigtable bigtable = 8;
+
+    // Contains settings for the Optimized store that will be created
+    // to serve featureValues for all FeatureViews under this
+    // FeatureOnlineStore. When choose Optimized storage type, need to set
+    // [PrivateServiceConnectConfig.enable_private_service_connect][google.cloud.aiplatform.v1.PrivateServiceConnectConfig.enable_private_service_connect]
+    // to use private endpoint. Otherwise will use public endpoint by default.
+    Optimized optimized = 12;
   }
 
   // Identifier. Name of the FeatureOnlineStore. Format:
@@ -115,4 +150,19 @@ message FeatureOnlineStore {
 
   // Output only. State of the featureOnlineStore.
   State state = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. The dedicated serving endpoint for this FeatureOnlineStore, which
+  // is different from common Vertex service endpoint.
+  DedicatedServingEndpoint dedicated_serving_endpoint = 10
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Customer-managed encryption key spec for data storage. If set,
+  // online store will be secured by this key.
+  EncryptionSpec encryption_spec = 13 [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. Reserved for future use.
+  bool satisfies_pzs = 15 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Reserved for future use.
+  bool satisfies_pzi = 16 [(google.api.field_behavior) = OUTPUT_ONLY];
 }

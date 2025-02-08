@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,15 +18,18 @@ package google.maps.places.v1;
 
 import "google/api/resource.proto";
 import "google/geo/type/viewport.proto";
+import "google/maps/places/v1/content_block.proto";
 import "google/maps/places/v1/ev_charging.proto";
 import "google/maps/places/v1/fuel_options.proto";
 import "google/maps/places/v1/photo.proto";
+import "google/maps/places/v1/price_range.proto";
+import "google/maps/places/v1/reference.proto";
 import "google/maps/places/v1/review.proto";
+import "google/protobuf/timestamp.proto";
 import "google/type/date.proto";
 import "google/type/latlng.proto";
 import "google/type/localized_text.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Maps.Places.V1";
 option go_package = "cloud.google.com/go/maps/places/apiv1/placespb;placespb";
 option java_multiple_files = true;
@@ -165,8 +168,10 @@ message Place {
       google.type.Date date = 1;
     }
 
-    // Is this place open right now?  Always present unless we lack time-of-day
-    // or timezone data for these opening hours.
+    // Whether the opening hours period is currently active. For regular opening
+    // hours and current opening hours, this field means whether the place is
+    // open. For secondary opening hours and current secondary opening hours,
+    // this field means whether the secondary hours of this place is active.
     optional bool open_now = 1;
 
     // The periods that this place is open during the week. The periods are in
@@ -189,6 +194,16 @@ message Place {
     // current_opening_hours and current_secondary_opening_hours if there are
     // exceptional hours.
     repeated SpecialDay special_days = 5;
+
+    // The next time the current opening hours period starts up to 7 days in the
+    // future. This field is only populated if the opening hours period is not
+    // active at the time of serving the request.
+    google.protobuf.Timestamp next_open_time = 6;
+
+    // The next time the current opening hours period ends up to 7 days in the
+    // future. This field is only populated if the opening hours period is
+    // active at the time of serving the request.
+    google.protobuf.Timestamp next_close_time = 7;
   }
 
   // Business status for the place.
@@ -283,8 +298,46 @@ message Place {
     optional bool wheelchair_accessible_seating = 4;
   }
 
-  // An ID representing this place which may be used to look up this place
-  // again (a.k.a. the API "resource" name: places/place_id).
+  // Experimental: See
+  // https://developers.google.com/maps/documentation/places/web-service/experimental/places-generative
+  // for more details.
+  //
+  // AI-generated summary of the place.
+  message GenerativeSummary {
+    // The overview of the place.
+    google.type.LocalizedText overview = 1;
+
+    // The detailed description of the place.
+    google.type.LocalizedText description = 2;
+
+    // References that are used to generate the summary description.
+    References references = 3;
+  }
+
+  // Experimental: See
+  // https://developers.google.com/maps/documentation/places/web-service/experimental/places-generative
+  // for more details.
+  //
+  // AI-generated summary of the area that the place is in.
+  message AreaSummary {
+    // Content blocks that compose the area summary. Each block has a separate
+    // topic about the area.
+    repeated ContentBlock content_blocks = 4;
+  }
+
+  // Info about the place in which this place is located.
+  message ContainingPlace {
+    // The resource name of the place in which this place is located.
+    string name = 1 [
+      (google.api.resource_reference) = { type: "places.googleapis.com/Place" }
+    ];
+
+    // The place id of the place in which this place is located.
+    string id = 2;
+  }
+
+  // This Place's resource name, in `places/{place_id}` format.  Can be used to
+  // look up the Place.
   string name = 1;
 
   // The unique identifier of a place.
@@ -295,8 +348,8 @@ message Place {
   google.type.LocalizedText display_name = 31;
 
   // A set of type tags for this result. For example, "political" and
-  // "locality".  For the complete list of possible values, see Table A and
-  // Table B at
+  // "locality". For the complete list of possible values, see Table A and Table
+  // B at
   // https://developers.google.com/maps/documentation/places/web-service/place-types
   repeated string types = 5;
 
@@ -308,8 +361,8 @@ message Place {
   string primary_type = 50;
 
   // The display name of the primary type, localized to the request language if
-  // applicable.  For the complete list of possible values, see Table A and
-  // Table B at
+  // applicable. For the complete list of possible values, see Table A and Table
+  // B at
   // https://developers.google.com/maps/documentation/places/web-service/place-types
   google.type.LocalizedText primary_type_display_name = 32;
 
@@ -347,7 +400,9 @@ message Place {
   // The position of this place.
   google.type.LatLng location = 12;
 
-  // A viewport suitable for displaying the place on an average-sized map.
+  // A viewport suitable for displaying the place on an average-sized map. This
+  // viewport should not be used as the physical boundary or the service area of
+  // the business.
   google.geo.type.Viewport viewport = 13;
 
   // A rating between 1.0 and 5.0, based on user reviews of this place.
@@ -362,7 +417,8 @@ message Place {
   // chain.
   string website_uri = 16;
 
-  // List of reviews about this place, sorted by relevance.
+  // List of reviews about this place, sorted by relevance. A maximum of 5
+  // reviews can be returned.
   repeated Review reviews = 53;
 
   // The regular hours of operation.
@@ -373,13 +429,13 @@ message Place {
   // fractions of an hour, e.g. X hours and 15 minutes.
   optional int32 utc_offset_minutes = 22;
 
-  // Information (including references) about photos of this place.
+  // Information (including references) about photos of this place. A maximum of
+  // 10 photos can be returned.
   repeated Photo photos = 54;
 
   // The place's address in adr microformat: http://microformats.org/wiki/adr.
   string adr_format_address = 24;
 
-  // The business status for the place.
   BusinessStatus business_status = 25;
 
   // Price level of the place.
@@ -515,6 +571,33 @@ message Place {
 
   // Information of ev charging options.
   EVChargeOptions ev_charge_options = 79;
+
+  // Experimental: See
+  // https://developers.google.com/maps/documentation/places/web-service/experimental/places-generative
+  // for more details.
+  //
+  // AI-generated summary of the place.
+  GenerativeSummary generative_summary = 80;
+
+  // Experimental: See
+  // https://developers.google.com/maps/documentation/places/web-service/experimental/places-generative
+  // for more details.
+  //
+  // AI-generated summary of the area that the place is in.
+  AreaSummary area_summary = 81;
+
+  // List of places in which the current place is located.
+  repeated ContainingPlace containing_places = 82;
+
+  // Indicates whether the place is a pure service area business. Pure service
+  // area business is a business that visits or delivers to customers directly
+  // but does not serve customers at their business address. For example,
+  // businesses like cleaning services or plumbers. Those businesses may not
+  // have a physical address or location on Google Maps.
+  optional bool pure_service_area_business = 83;
+
+  // The price range associated with a Place.
+  PriceRange price_range = 86;
 }
 
 // Price level of the place.
@@ -534,6 +617,6 @@ enum PriceLevel {
   // Place provides expensive services.
   PRICE_LEVEL_EXPENSIVE = 4;
 
-  // Place provides very expensive service s.
+  // Place provides very expensive services.
   PRICE_LEVEL_VERY_EXPENSIVE = 5;
 }

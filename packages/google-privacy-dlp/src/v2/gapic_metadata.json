@@ -165,6 +165,36 @@
                 "deleteStoredInfoType"
               ]
             },
+            "GetProjectDataProfile": {
+              "methods": [
+                "getProjectDataProfile"
+              ]
+            },
+            "GetFileStoreDataProfile": {
+              "methods": [
+                "getFileStoreDataProfile"
+              ]
+            },
+            "DeleteFileStoreDataProfile": {
+              "methods": [
+                "deleteFileStoreDataProfile"
+              ]
+            },
+            "GetTableDataProfile": {
+              "methods": [
+                "getTableDataProfile"
+              ]
+            },
+            "GetColumnDataProfile": {
+              "methods": [
+                "getColumnDataProfile"
+              ]
+            },
+            "DeleteTableDataProfile": {
+              "methods": [
+                "deleteTableDataProfile"
+              ]
+            },
             "HybridInspectDlpJob": {
               "methods": [
                 "hybridInspectDlpJob"
@@ -173,6 +203,26 @@
             "FinishDlpJob": {
               "methods": [
                 "finishDlpJob"
+              ]
+            },
+            "CreateConnection": {
+              "methods": [
+                "createConnection"
+              ]
+            },
+            "GetConnection": {
+              "methods": [
+                "getConnection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "deleteConnection"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "updateConnection"
               ]
             },
             "ListInspectTemplates": {
@@ -215,6 +265,48 @@
                 "listStoredInfoTypes",
                 "listStoredInfoTypesStream",
                 "listStoredInfoTypesAsync"
+              ]
+            },
+            "ListProjectDataProfiles": {
+              "methods": [
+                "listProjectDataProfiles",
+                "listProjectDataProfilesStream",
+                "listProjectDataProfilesAsync"
+              ]
+            },
+            "ListTableDataProfiles": {
+              "methods": [
+                "listTableDataProfiles",
+                "listTableDataProfilesStream",
+                "listTableDataProfilesAsync"
+              ]
+            },
+            "ListColumnDataProfiles": {
+              "methods": [
+                "listColumnDataProfiles",
+                "listColumnDataProfilesStream",
+                "listColumnDataProfilesAsync"
+              ]
+            },
+            "ListFileStoreDataProfiles": {
+              "methods": [
+                "listFileStoreDataProfiles",
+                "listFileStoreDataProfilesStream",
+                "listFileStoreDataProfilesAsync"
+              ]
+            },
+            "ListConnections": {
+              "methods": [
+                "listConnections",
+                "listConnectionsStream",
+                "listConnectionsAsync"
+              ]
+            },
+            "SearchConnections": {
+              "methods": [
+                "searchConnections",
+                "searchConnectionsStream",
+                "searchConnectionsAsync"
               ]
             }
           }
@@ -377,6 +469,36 @@
                 "deleteStoredInfoType"
               ]
             },
+            "GetProjectDataProfile": {
+              "methods": [
+                "getProjectDataProfile"
+              ]
+            },
+            "GetFileStoreDataProfile": {
+              "methods": [
+                "getFileStoreDataProfile"
+              ]
+            },
+            "DeleteFileStoreDataProfile": {
+              "methods": [
+                "deleteFileStoreDataProfile"
+              ]
+            },
+            "GetTableDataProfile": {
+              "methods": [
+                "getTableDataProfile"
+              ]
+            },
+            "GetColumnDataProfile": {
+              "methods": [
+                "getColumnDataProfile"
+              ]
+            },
+            "DeleteTableDataProfile": {
+              "methods": [
+                "deleteTableDataProfile"
+              ]
+            },
             "HybridInspectDlpJob": {
               "methods": [
                 "hybridInspectDlpJob"
@@ -385,6 +507,26 @@
             "FinishDlpJob": {
               "methods": [
                 "finishDlpJob"
+              ]
+            },
+            "CreateConnection": {
+              "methods": [
+                "createConnection"
+              ]
+            },
+            "GetConnection": {
+              "methods": [
+                "getConnection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "deleteConnection"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "updateConnection"
               ]
             },
             "ListInspectTemplates": {
@@ -427,6 +569,48 @@
                 "listStoredInfoTypes",
                 "listStoredInfoTypesStream",
                 "listStoredInfoTypesAsync"
+              ]
+            },
+            "ListProjectDataProfiles": {
+              "methods": [
+                "listProjectDataProfiles",
+                "listProjectDataProfilesStream",
+                "listProjectDataProfilesAsync"
+              ]
+            },
+            "ListTableDataProfiles": {
+              "methods": [
+                "listTableDataProfiles",
+                "listTableDataProfilesStream",
+                "listTableDataProfilesAsync"
+              ]
+            },
+            "ListColumnDataProfiles": {
+              "methods": [
+                "listColumnDataProfiles",
+                "listColumnDataProfilesStream",
+                "listColumnDataProfilesAsync"
+              ]
+            },
+            "ListFileStoreDataProfiles": {
+              "methods": [
+                "listFileStoreDataProfiles",
+                "listFileStoreDataProfilesStream",
+                "listFileStoreDataProfilesAsync"
+              ]
+            },
+            "ListConnections": {
+              "methods": [
+                "listConnections",
+                "listConnectionsStream",
+                "listConnectionsAsync"
+              ]
+            },
+            "SearchConnections": {
+              "methods": [
+                "searchConnections",
+                "searchConnectionsStream",
+                "searchConnectionsAsync"
               ]
             }
           }

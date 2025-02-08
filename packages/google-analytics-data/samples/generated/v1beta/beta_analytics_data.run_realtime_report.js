@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  A Google Analytics GA4 property identifier whose events are tracked.
+   *  A Google Analytics property identifier whose events are tracked.
    *  Specified in the URL path and not the body. To learn more, see where to
    *  find your Property
    *  ID (https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -74,8 +74,9 @@ function main() {
    */
   // const orderBys = [1,2,3,4]
   /**
-   *  Toggles whether to return the current state of this Analytics Property's
-   *  Realtime quota. Quota is returned in PropertyQuota (#PropertyQuota).
+   *  Toggles whether to return the current state of this Google Analytics
+   *  property's Realtime quota. Quota is returned in
+   *  PropertyQuota (#PropertyQuota).
    */
   // const returnPropertyQuota = true
   /**

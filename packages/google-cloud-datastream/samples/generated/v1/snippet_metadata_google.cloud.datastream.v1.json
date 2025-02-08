@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-datastream",
-        "version": "3.0.1",
+        "version": "3.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -278,7 +278,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 83,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
@@ -318,6 +318,10 @@
                     {
                         "name": "postgresql_rdbms",
                         "type": ".google.cloud.datastream.v1.PostgresqlRdbms"
+                    },
+                    {
+                        "name": "sql_server_rdbms",
+                        "type": ".google.cloud.datastream.v1.SqlServerRdbms"
                     }
                 ],
                 "resultType": ".google.cloud.datastream.v1.DiscoverConnectionProfileResponse",
@@ -584,6 +588,54 @@
                 "method": {
                     "shortName": "DeleteStream",
                     "fullName": "google.cloud.datastream.v1.Datastream.DeleteStream",
+                    "service": {
+                        "shortName": "Datastream",
+                        "fullName": "google.cloud.datastream.v1.Datastream"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "datastream_v1_generated_Datastream_RunStream_async",
+            "title": "Datastream runStream Sample",
+            "origin": "API_DEFINITION",
+            "description": " Use this method to start, resume or recover a stream with a non default CDC strategy.",
+            "canonical": true,
+            "file": "datastream.run_stream.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RunStream",
+                "fullName": "google.cloud.datastream.v1.Datastream.RunStream",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "cdc_strategy",
+                        "type": ".google.cloud.datastream.v1.CdcStrategy"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DatastreamClient",
+                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
+                },
+                "method": {
+                    "shortName": "RunStream",
+                    "fullName": "google.cloud.datastream.v1.Datastream.RunStream",
                     "service": {
                         "shortName": "Datastream",
                         "fullName": "google.cloud.datastream.v1.Datastream"

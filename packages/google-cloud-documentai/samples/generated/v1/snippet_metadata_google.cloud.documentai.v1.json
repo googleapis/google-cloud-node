@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-documentai",
-        "version": "8.1.2",
+        "version": "8.12.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 102,
                     "type": "FULL"
                 }
             ],
@@ -58,6 +58,14 @@
                     {
                         "name": "process_options",
                         "type": ".google.cloud.documentai.v1.ProcessOptions"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "imageless_mode",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.documentai.v1.ProcessResponse",
@@ -86,7 +94,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 88,
                     "type": "FULL"
                 }
             ],
@@ -114,6 +122,10 @@
                     {
                         "name": "process_options",
                         "type": ".google.cloud.documentai.v1.ProcessOptions"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -358,7 +370,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -370,6 +382,10 @@
                     {
                         "name": "custom_document_extraction_options",
                         "type": ".google.cloud.documentai.v1.TrainProcessorVersionRequest.CustomDocumentExtractionOptions"
+                    },
+                    {
+                        "name": "foundation_model_tuning_options",
+                        "type": ".google.cloud.documentai.v1.TrainProcessorVersionRequest.FoundationModelTuningOptions"
                     },
                     {
                         "name": "parent",
@@ -619,14 +635,14 @@
             "regionTag": "documentai_v1_generated_DocumentProcessorService_CreateProcessor_async",
             "title": "DocumentProcessorService createProcessor Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a processor from the [ProcessorType][google.cloud.documentai.v1.ProcessorType] provided. The processor will be at `ENABLED` state by default after its creation.",
+            "description": " Creates a processor from the [ProcessorType][google.cloud.documentai.v1.ProcessorType] provided. The processor will be at `ENABLED` state by default after its creation. Note that this method requires the `documentai.processors.create` permission on the project, which is highly privileged. A user or service account with this permission can create new processors that can interact with any gcs bucket in your project.",
             "canonical": true,
             "file": "document_processor_service.create_processor.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],

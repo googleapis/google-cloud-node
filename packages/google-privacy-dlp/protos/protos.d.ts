@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -565,6 +565,146 @@ export namespace google {
                     public deleteStoredInfoType(request: google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest): Promise<google.protobuf.Empty>;
 
                     /**
+                     * Calls ListProjectDataProfiles.
+                     * @param request ListProjectDataProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListProjectDataProfilesResponse
+                     */
+                    public listProjectDataProfiles(request: google.privacy.dlp.v2.IListProjectDataProfilesRequest, callback: google.privacy.dlp.v2.DlpService.ListProjectDataProfilesCallback): void;
+
+                    /**
+                     * Calls ListProjectDataProfiles.
+                     * @param request ListProjectDataProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listProjectDataProfiles(request: google.privacy.dlp.v2.IListProjectDataProfilesRequest): Promise<google.privacy.dlp.v2.ListProjectDataProfilesResponse>;
+
+                    /**
+                     * Calls ListTableDataProfiles.
+                     * @param request ListTableDataProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListTableDataProfilesResponse
+                     */
+                    public listTableDataProfiles(request: google.privacy.dlp.v2.IListTableDataProfilesRequest, callback: google.privacy.dlp.v2.DlpService.ListTableDataProfilesCallback): void;
+
+                    /**
+                     * Calls ListTableDataProfiles.
+                     * @param request ListTableDataProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listTableDataProfiles(request: google.privacy.dlp.v2.IListTableDataProfilesRequest): Promise<google.privacy.dlp.v2.ListTableDataProfilesResponse>;
+
+                    /**
+                     * Calls ListColumnDataProfiles.
+                     * @param request ListColumnDataProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListColumnDataProfilesResponse
+                     */
+                    public listColumnDataProfiles(request: google.privacy.dlp.v2.IListColumnDataProfilesRequest, callback: google.privacy.dlp.v2.DlpService.ListColumnDataProfilesCallback): void;
+
+                    /**
+                     * Calls ListColumnDataProfiles.
+                     * @param request ListColumnDataProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listColumnDataProfiles(request: google.privacy.dlp.v2.IListColumnDataProfilesRequest): Promise<google.privacy.dlp.v2.ListColumnDataProfilesResponse>;
+
+                    /**
+                     * Calls GetProjectDataProfile.
+                     * @param request GetProjectDataProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ProjectDataProfile
+                     */
+                    public getProjectDataProfile(request: google.privacy.dlp.v2.IGetProjectDataProfileRequest, callback: google.privacy.dlp.v2.DlpService.GetProjectDataProfileCallback): void;
+
+                    /**
+                     * Calls GetProjectDataProfile.
+                     * @param request GetProjectDataProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getProjectDataProfile(request: google.privacy.dlp.v2.IGetProjectDataProfileRequest): Promise<google.privacy.dlp.v2.ProjectDataProfile>;
+
+                    /**
+                     * Calls ListFileStoreDataProfiles.
+                     * @param request ListFileStoreDataProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFileStoreDataProfilesResponse
+                     */
+                    public listFileStoreDataProfiles(request: google.privacy.dlp.v2.IListFileStoreDataProfilesRequest, callback: google.privacy.dlp.v2.DlpService.ListFileStoreDataProfilesCallback): void;
+
+                    /**
+                     * Calls ListFileStoreDataProfiles.
+                     * @param request ListFileStoreDataProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFileStoreDataProfiles(request: google.privacy.dlp.v2.IListFileStoreDataProfilesRequest): Promise<google.privacy.dlp.v2.ListFileStoreDataProfilesResponse>;
+
+                    /**
+                     * Calls GetFileStoreDataProfile.
+                     * @param request GetFileStoreDataProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FileStoreDataProfile
+                     */
+                    public getFileStoreDataProfile(request: google.privacy.dlp.v2.IGetFileStoreDataProfileRequest, callback: google.privacy.dlp.v2.DlpService.GetFileStoreDataProfileCallback): void;
+
+                    /**
+                     * Calls GetFileStoreDataProfile.
+                     * @param request GetFileStoreDataProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFileStoreDataProfile(request: google.privacy.dlp.v2.IGetFileStoreDataProfileRequest): Promise<google.privacy.dlp.v2.FileStoreDataProfile>;
+
+                    /**
+                     * Calls DeleteFileStoreDataProfile.
+                     * @param request DeleteFileStoreDataProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteFileStoreDataProfile(request: google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest, callback: google.privacy.dlp.v2.DlpService.DeleteFileStoreDataProfileCallback): void;
+
+                    /**
+                     * Calls DeleteFileStoreDataProfile.
+                     * @param request DeleteFileStoreDataProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteFileStoreDataProfile(request: google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetTableDataProfile.
+                     * @param request GetTableDataProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TableDataProfile
+                     */
+                    public getTableDataProfile(request: google.privacy.dlp.v2.IGetTableDataProfileRequest, callback: google.privacy.dlp.v2.DlpService.GetTableDataProfileCallback): void;
+
+                    /**
+                     * Calls GetTableDataProfile.
+                     * @param request GetTableDataProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getTableDataProfile(request: google.privacy.dlp.v2.IGetTableDataProfileRequest): Promise<google.privacy.dlp.v2.TableDataProfile>;
+
+                    /**
+                     * Calls GetColumnDataProfile.
+                     * @param request GetColumnDataProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ColumnDataProfile
+                     */
+                    public getColumnDataProfile(request: google.privacy.dlp.v2.IGetColumnDataProfileRequest, callback: google.privacy.dlp.v2.DlpService.GetColumnDataProfileCallback): void;
+
+                    /**
+                     * Calls GetColumnDataProfile.
+                     * @param request GetColumnDataProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getColumnDataProfile(request: google.privacy.dlp.v2.IGetColumnDataProfileRequest): Promise<google.privacy.dlp.v2.ColumnDataProfile>;
+
+                    /**
+                     * Calls DeleteTableDataProfile.
+                     * @param request DeleteTableDataProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteTableDataProfile(request: google.privacy.dlp.v2.IDeleteTableDataProfileRequest, callback: google.privacy.dlp.v2.DlpService.DeleteTableDataProfileCallback): void;
+
+                    /**
+                     * Calls DeleteTableDataProfile.
+                     * @param request DeleteTableDataProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteTableDataProfile(request: google.privacy.dlp.v2.IDeleteTableDataProfileRequest): Promise<google.protobuf.Empty>;
+
+                    /**
                      * Calls HybridInspectDlpJob.
                      * @param request HybridInspectDlpJobRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and HybridInspectResponse
@@ -591,6 +731,90 @@ export namespace google {
                      * @returns Promise
                      */
                     public finishDlpJob(request: google.privacy.dlp.v2.IFinishDlpJobRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateConnection.
+                     * @param request CreateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Connection
+                     */
+                    public createConnection(request: google.privacy.dlp.v2.ICreateConnectionRequest, callback: google.privacy.dlp.v2.DlpService.CreateConnectionCallback): void;
+
+                    /**
+                     * Calls CreateConnection.
+                     * @param request CreateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createConnection(request: google.privacy.dlp.v2.ICreateConnectionRequest): Promise<google.privacy.dlp.v2.Connection>;
+
+                    /**
+                     * Calls GetConnection.
+                     * @param request GetConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Connection
+                     */
+                    public getConnection(request: google.privacy.dlp.v2.IGetConnectionRequest, callback: google.privacy.dlp.v2.DlpService.GetConnectionCallback): void;
+
+                    /**
+                     * Calls GetConnection.
+                     * @param request GetConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getConnection(request: google.privacy.dlp.v2.IGetConnectionRequest): Promise<google.privacy.dlp.v2.Connection>;
+
+                    /**
+                     * Calls ListConnections.
+                     * @param request ListConnectionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListConnectionsResponse
+                     */
+                    public listConnections(request: google.privacy.dlp.v2.IListConnectionsRequest, callback: google.privacy.dlp.v2.DlpService.ListConnectionsCallback): void;
+
+                    /**
+                     * Calls ListConnections.
+                     * @param request ListConnectionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listConnections(request: google.privacy.dlp.v2.IListConnectionsRequest): Promise<google.privacy.dlp.v2.ListConnectionsResponse>;
+
+                    /**
+                     * Calls SearchConnections.
+                     * @param request SearchConnectionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchConnectionsResponse
+                     */
+                    public searchConnections(request: google.privacy.dlp.v2.ISearchConnectionsRequest, callback: google.privacy.dlp.v2.DlpService.SearchConnectionsCallback): void;
+
+                    /**
+                     * Calls SearchConnections.
+                     * @param request SearchConnectionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public searchConnections(request: google.privacy.dlp.v2.ISearchConnectionsRequest): Promise<google.privacy.dlp.v2.SearchConnectionsResponse>;
+
+                    /**
+                     * Calls DeleteConnection.
+                     * @param request DeleteConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteConnection(request: google.privacy.dlp.v2.IDeleteConnectionRequest, callback: google.privacy.dlp.v2.DlpService.DeleteConnectionCallback): void;
+
+                    /**
+                     * Calls DeleteConnection.
+                     * @param request DeleteConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteConnection(request: google.privacy.dlp.v2.IDeleteConnectionRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateConnection.
+                     * @param request UpdateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Connection
+                     */
+                    public updateConnection(request: google.privacy.dlp.v2.IUpdateConnectionRequest, callback: google.privacy.dlp.v2.DlpService.UpdateConnectionCallback): void;
+
+                    /**
+                     * Calls UpdateConnection.
+                     * @param request UpdateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateConnection(request: google.privacy.dlp.v2.IUpdateConnectionRequest): Promise<google.privacy.dlp.v2.Connection>;
                 }
 
                 namespace DlpService {
@@ -855,6 +1079,76 @@ export namespace google {
                     type DeleteStoredInfoTypeCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|listProjectDataProfiles}.
+                     * @param error Error, if any
+                     * @param [response] ListProjectDataProfilesResponse
+                     */
+                    type ListProjectDataProfilesCallback = (error: (Error|null), response?: google.privacy.dlp.v2.ListProjectDataProfilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|listTableDataProfiles}.
+                     * @param error Error, if any
+                     * @param [response] ListTableDataProfilesResponse
+                     */
+                    type ListTableDataProfilesCallback = (error: (Error|null), response?: google.privacy.dlp.v2.ListTableDataProfilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|listColumnDataProfiles}.
+                     * @param error Error, if any
+                     * @param [response] ListColumnDataProfilesResponse
+                     */
+                    type ListColumnDataProfilesCallback = (error: (Error|null), response?: google.privacy.dlp.v2.ListColumnDataProfilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|getProjectDataProfile}.
+                     * @param error Error, if any
+                     * @param [response] ProjectDataProfile
+                     */
+                    type GetProjectDataProfileCallback = (error: (Error|null), response?: google.privacy.dlp.v2.ProjectDataProfile) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|listFileStoreDataProfiles}.
+                     * @param error Error, if any
+                     * @param [response] ListFileStoreDataProfilesResponse
+                     */
+                    type ListFileStoreDataProfilesCallback = (error: (Error|null), response?: google.privacy.dlp.v2.ListFileStoreDataProfilesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|getFileStoreDataProfile}.
+                     * @param error Error, if any
+                     * @param [response] FileStoreDataProfile
+                     */
+                    type GetFileStoreDataProfileCallback = (error: (Error|null), response?: google.privacy.dlp.v2.FileStoreDataProfile) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|deleteFileStoreDataProfile}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteFileStoreDataProfileCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|getTableDataProfile}.
+                     * @param error Error, if any
+                     * @param [response] TableDataProfile
+                     */
+                    type GetTableDataProfileCallback = (error: (Error|null), response?: google.privacy.dlp.v2.TableDataProfile) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|getColumnDataProfile}.
+                     * @param error Error, if any
+                     * @param [response] ColumnDataProfile
+                     */
+                    type GetColumnDataProfileCallback = (error: (Error|null), response?: google.privacy.dlp.v2.ColumnDataProfile) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|deleteTableDataProfile}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteTableDataProfileCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
                      * Callback as used by {@link google.privacy.dlp.v2.DlpService|hybridInspectDlpJob}.
                      * @param error Error, if any
                      * @param [response] HybridInspectResponse
@@ -867,6 +1161,48 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type FinishDlpJobCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|createConnection}.
+                     * @param error Error, if any
+                     * @param [response] Connection
+                     */
+                    type CreateConnectionCallback = (error: (Error|null), response?: google.privacy.dlp.v2.Connection) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|getConnection}.
+                     * @param error Error, if any
+                     * @param [response] Connection
+                     */
+                    type GetConnectionCallback = (error: (Error|null), response?: google.privacy.dlp.v2.Connection) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|listConnections}.
+                     * @param error Error, if any
+                     * @param [response] ListConnectionsResponse
+                     */
+                    type ListConnectionsCallback = (error: (Error|null), response?: google.privacy.dlp.v2.ListConnectionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|searchConnections}.
+                     * @param error Error, if any
+                     * @param [response] SearchConnectionsResponse
+                     */
+                    type SearchConnectionsCallback = (error: (Error|null), response?: google.privacy.dlp.v2.SearchConnectionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|deleteConnection}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteConnectionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.privacy.dlp.v2.DlpService|updateConnection}.
+                     * @param error Error, if any
+                     * @param [response] Connection
+                     */
+                    type UpdateConnectionCallback = (error: (Error|null), response?: google.privacy.dlp.v2.Connection) => void;
                 }
 
                 /** Properties of an ExcludeInfoTypes. */
@@ -1988,7 +2324,10 @@ export namespace google {
                         EXCEL_DOCUMENT = 10,
                         AVRO = 11,
                         CSV = 12,
-                        TSV = 13
+                        TSV = 13,
+                        AUDIO = 15,
+                        VIDEO = 16,
+                        EXECUTABLE = 17
                     }
                 }
 
@@ -5376,6 +5715,9 @@ export namespace google {
                         /** Result infoTypeStats */
                         infoTypeStats?: (google.privacy.dlp.v2.IInfoTypeStats[]|null);
 
+                        /** Result numRowsProcessed */
+                        numRowsProcessed?: (number|Long|string|null);
+
                         /** Result hybridStats */
                         hybridStats?: (google.privacy.dlp.v2.IHybridInspectStatistics|null);
                     }
@@ -5397,6 +5739,9 @@ export namespace google {
 
                         /** Result infoTypeStats. */
                         public infoTypeStats: google.privacy.dlp.v2.IInfoTypeStats[];
+
+                        /** Result numRowsProcessed. */
+                        public numRowsProcessed: (number|Long|string);
 
                         /** Result hybridStats. */
                         public hybridStats?: (google.privacy.dlp.v2.IHybridInspectStatistics|null);
@@ -5488,6 +5833,9 @@ export namespace google {
 
                     /** DataProfileBigQueryRowSchema columnProfile */
                     columnProfile?: (google.privacy.dlp.v2.IColumnDataProfile|null);
+
+                    /** DataProfileBigQueryRowSchema fileStoreProfile */
+                    fileStoreProfile?: (google.privacy.dlp.v2.IFileStoreDataProfile|null);
                 }
 
                 /** Represents a DataProfileBigQueryRowSchema. */
@@ -5505,8 +5853,11 @@ export namespace google {
                     /** DataProfileBigQueryRowSchema columnProfile. */
                     public columnProfile?: (google.privacy.dlp.v2.IColumnDataProfile|null);
 
+                    /** DataProfileBigQueryRowSchema fileStoreProfile. */
+                    public fileStoreProfile?: (google.privacy.dlp.v2.IFileStoreDataProfile|null);
+
                     /** DataProfileBigQueryRowSchema dataProfile. */
-                    public dataProfile?: ("tableProfile"|"columnProfile");
+                    public dataProfile?: ("tableProfile"|"columnProfile"|"fileStoreProfile");
 
                     /**
                      * Creates a new DataProfileBigQueryRowSchema instance using the specified properties.
@@ -6371,7 +6722,10 @@ export namespace google {
                         LOCATION_UNSPECIFIED = 0,
                         GLOBAL = 1,
                         ARGENTINA = 2,
+                        ARMENIA = 51,
                         AUSTRALIA = 3,
+                        AZERBAIJAN = 48,
+                        BELARUS = 50,
                         BELGIUM = 4,
                         BRAZIL = 5,
                         CANADA = 6,
@@ -6390,6 +6744,7 @@ export namespace google {
                         ISRAEL = 18,
                         ITALY = 19,
                         JAPAN = 20,
+                        KAZAKHSTAN = 47,
                         KOREA = 21,
                         MEXICO = 22,
                         THE_NETHERLANDS = 23,
@@ -6399,6 +6754,7 @@ export namespace google {
                         PERU = 26,
                         POLAND = 27,
                         PORTUGAL = 28,
+                        RUSSIA = 44,
                         SINGAPORE = 29,
                         SOUTH_AFRICA = 30,
                         SPAIN = 31,
@@ -6407,9 +6763,11 @@ export namespace google {
                         TAIWAN = 33,
                         THAILAND = 34,
                         TURKEY = 35,
+                        UKRAINE = 45,
                         UNITED_KINGDOM = 36,
                         UNITED_STATES = 37,
                         URUGUAY = 38,
+                        UZBEKISTAN = 46,
                         VENEZUELA = 39,
                         INTERNAL = 40
                     }
@@ -16169,6 +16527,9 @@ export namespace google {
 
                     /** Error timestamps */
                     timestamps?: (google.protobuf.ITimestamp[]|null);
+
+                    /** Error extraInfo */
+                    extraInfo?: (google.privacy.dlp.v2.Error.ErrorExtraInfo|keyof typeof google.privacy.dlp.v2.Error.ErrorExtraInfo|null);
                 }
 
                 /** Represents an Error. */
@@ -16185,6 +16546,9 @@ export namespace google {
 
                     /** Error timestamps. */
                     public timestamps: google.protobuf.ITimestamp[];
+
+                    /** Error extraInfo. */
+                    public extraInfo: (google.privacy.dlp.v2.Error.ErrorExtraInfo|keyof typeof google.privacy.dlp.v2.Error.ErrorExtraInfo);
 
                     /**
                      * Creates a new Error instance using the specified properties.
@@ -16262,6 +16626,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Error {
+
+                    /** ErrorExtraInfo enum. */
+                    enum ErrorExtraInfo {
+                        ERROR_INFO_UNSPECIFIED = 0,
+                        IMAGE_SCAN_UNAVAILABLE_IN_REGION = 1,
+                        FILE_STORE_CLUSTER_UNSUPPORTED = 2
+                    }
                 }
 
                 /** Properties of a JobTrigger. */
@@ -19721,6 +20095,13 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** ProfileGeneration enum. */
+                enum ProfileGeneration {
+                    PROFILE_GENERATION_UNSPECIFIED = 0,
+                    PROFILE_GENERATION_NEW = 1,
+                    PROFILE_GENERATION_UPDATE = 2
+                }
+
                 /** Properties of a DataProfileAction. */
                 interface IDataProfileAction {
 
@@ -19729,6 +20110,15 @@ export namespace google {
 
                     /** DataProfileAction pubSubNotification */
                     pubSubNotification?: (google.privacy.dlp.v2.DataProfileAction.IPubSubNotification|null);
+
+                    /** DataProfileAction publishToChronicle */
+                    publishToChronicle?: (google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle|null);
+
+                    /** DataProfileAction publishToScc */
+                    publishToScc?: (google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter|null);
+
+                    /** DataProfileAction tagResources */
+                    tagResources?: (google.privacy.dlp.v2.DataProfileAction.ITagResources|null);
                 }
 
                 /** Represents a DataProfileAction. */
@@ -19746,8 +20136,17 @@ export namespace google {
                     /** DataProfileAction pubSubNotification. */
                     public pubSubNotification?: (google.privacy.dlp.v2.DataProfileAction.IPubSubNotification|null);
 
+                    /** DataProfileAction publishToChronicle. */
+                    public publishToChronicle?: (google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle|null);
+
+                    /** DataProfileAction publishToScc. */
+                    public publishToScc?: (google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter|null);
+
+                    /** DataProfileAction tagResources. */
+                    public tagResources?: (google.privacy.dlp.v2.DataProfileAction.ITagResources|null);
+
                     /** DataProfileAction action. */
-                    public action?: ("exportData"|"pubSubNotification");
+                    public action?: ("exportData"|"pubSubNotification"|"publishToChronicle"|"publishToScc"|"tagResources");
 
                     /**
                      * Creates a new DataProfileAction instance using the specified properties.
@@ -20047,7 +20446,8 @@ export namespace google {
                         enum DetailLevel {
                             DETAIL_LEVEL_UNSPECIFIED = 0,
                             TABLE_PROFILE = 1,
-                            RESOURCE_NAME = 2
+                            RESOURCE_NAME = 2,
+                            FILE_STORE_PROFILE = 3
                         }
                     }
 
@@ -20059,6 +20459,506 @@ export namespace google {
                         SCORE_INCREASED = 3,
                         ERROR_CHANGED = 4
                     }
+
+                    /** Properties of a PublishToChronicle. */
+                    interface IPublishToChronicle {
+                    }
+
+                    /** Represents a PublishToChronicle. */
+                    class PublishToChronicle implements IPublishToChronicle {
+
+                        /**
+                         * Constructs a new PublishToChronicle.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle);
+
+                        /**
+                         * Creates a new PublishToChronicle instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublishToChronicle instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle): google.privacy.dlp.v2.DataProfileAction.PublishToChronicle;
+
+                        /**
+                         * Encodes the specified PublishToChronicle message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToChronicle.verify|verify} messages.
+                         * @param message PublishToChronicle message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublishToChronicle message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToChronicle.verify|verify} messages.
+                         * @param message PublishToChronicle message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublishToChronicle message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublishToChronicle
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.PublishToChronicle;
+
+                        /**
+                         * Decodes a PublishToChronicle message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublishToChronicle
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.PublishToChronicle;
+
+                        /**
+                         * Verifies a PublishToChronicle message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublishToChronicle message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublishToChronicle
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.PublishToChronicle;
+
+                        /**
+                         * Creates a plain object from a PublishToChronicle message. Also converts values to other types if specified.
+                         * @param message PublishToChronicle
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DataProfileAction.PublishToChronicle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublishToChronicle to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PublishToChronicle
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PublishToSecurityCommandCenter. */
+                    interface IPublishToSecurityCommandCenter {
+                    }
+
+                    /** Represents a PublishToSecurityCommandCenter. */
+                    class PublishToSecurityCommandCenter implements IPublishToSecurityCommandCenter {
+
+                        /**
+                         * Constructs a new PublishToSecurityCommandCenter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter);
+
+                        /**
+                         * Creates a new PublishToSecurityCommandCenter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublishToSecurityCommandCenter instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter): google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter;
+
+                        /**
+                         * Encodes the specified PublishToSecurityCommandCenter message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter.verify|verify} messages.
+                         * @param message PublishToSecurityCommandCenter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublishToSecurityCommandCenter message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter.verify|verify} messages.
+                         * @param message PublishToSecurityCommandCenter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublishToSecurityCommandCenter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublishToSecurityCommandCenter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter;
+
+                        /**
+                         * Decodes a PublishToSecurityCommandCenter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublishToSecurityCommandCenter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter;
+
+                        /**
+                         * Verifies a PublishToSecurityCommandCenter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublishToSecurityCommandCenter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublishToSecurityCommandCenter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter;
+
+                        /**
+                         * Creates a plain object from a PublishToSecurityCommandCenter message. Also converts values to other types if specified.
+                         * @param message PublishToSecurityCommandCenter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublishToSecurityCommandCenter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PublishToSecurityCommandCenter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TagResources. */
+                    interface ITagResources {
+
+                        /** TagResources tagConditions */
+                        tagConditions?: (google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition[]|null);
+
+                        /** TagResources profileGenerationsToTag */
+                        profileGenerationsToTag?: (google.privacy.dlp.v2.ProfileGeneration[]|null);
+
+                        /** TagResources lowerDataRiskToLow */
+                        lowerDataRiskToLow?: (boolean|null);
+                    }
+
+                    /** Represents a TagResources. */
+                    class TagResources implements ITagResources {
+
+                        /**
+                         * Constructs a new TagResources.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DataProfileAction.ITagResources);
+
+                        /** TagResources tagConditions. */
+                        public tagConditions: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition[];
+
+                        /** TagResources profileGenerationsToTag. */
+                        public profileGenerationsToTag: google.privacy.dlp.v2.ProfileGeneration[];
+
+                        /** TagResources lowerDataRiskToLow. */
+                        public lowerDataRiskToLow: boolean;
+
+                        /**
+                         * Creates a new TagResources instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TagResources instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DataProfileAction.ITagResources): google.privacy.dlp.v2.DataProfileAction.TagResources;
+
+                        /**
+                         * Encodes the specified TagResources message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.verify|verify} messages.
+                         * @param message TagResources message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DataProfileAction.ITagResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TagResources message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.verify|verify} messages.
+                         * @param message TagResources message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.ITagResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TagResources message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TagResources
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.TagResources;
+
+                        /**
+                         * Decodes a TagResources message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TagResources
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.TagResources;
+
+                        /**
+                         * Verifies a TagResources message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TagResources message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TagResources
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.TagResources;
+
+                        /**
+                         * Creates a plain object from a TagResources message. Also converts values to other types if specified.
+                         * @param message TagResources
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DataProfileAction.TagResources, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TagResources to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TagResources
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TagResources {
+
+                        /** Properties of a TagCondition. */
+                        interface ITagCondition {
+
+                            /** TagCondition tag */
+                            tag?: (google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue|null);
+
+                            /** TagCondition sensitivityScore */
+                            sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+                        }
+
+                        /** Represents a TagCondition. */
+                        class TagCondition implements ITagCondition {
+
+                            /**
+                             * Constructs a new TagCondition.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition);
+
+                            /** TagCondition tag. */
+                            public tag?: (google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue|null);
+
+                            /** TagCondition sensitivityScore. */
+                            public sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                            /** TagCondition type. */
+                            public type?: "sensitivityScore";
+
+                            /**
+                             * Creates a new TagCondition instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TagCondition instance
+                             */
+                            public static create(properties?: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition): google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition;
+
+                            /**
+                             * Encodes the specified TagCondition message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition.verify|verify} messages.
+                             * @param message TagCondition message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TagCondition message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition.verify|verify} messages.
+                             * @param message TagCondition message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TagCondition message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TagCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition;
+
+                            /**
+                             * Decodes a TagCondition message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TagCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition;
+
+                            /**
+                             * Verifies a TagCondition message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TagCondition message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TagCondition
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition;
+
+                            /**
+                             * Creates a plain object from a TagCondition message. Also converts values to other types if specified.
+                             * @param message TagCondition
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TagCondition to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TagCondition
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a TagValue. */
+                        interface ITagValue {
+
+                            /** TagValue namespacedValue */
+                            namespacedValue?: (string|null);
+                        }
+
+                        /** Represents a TagValue. */
+                        class TagValue implements ITagValue {
+
+                            /**
+                             * Constructs a new TagValue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue);
+
+                            /** TagValue namespacedValue. */
+                            public namespacedValue?: (string|null);
+
+                            /** TagValue format. */
+                            public format?: "namespacedValue";
+
+                            /**
+                             * Creates a new TagValue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TagValue instance
+                             */
+                            public static create(properties?: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue): google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue;
+
+                            /**
+                             * Encodes the specified TagValue message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue.verify|verify} messages.
+                             * @param message TagValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TagValue message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue.verify|verify} messages.
+                             * @param message TagValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TagValue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TagValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue;
+
+                            /**
+                             * Decodes a TagValue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TagValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue;
+
+                            /**
+                             * Verifies a TagValue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TagValue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TagValue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue;
+
+                            /**
+                             * Creates a plain object from a TagValue message. Also converts values to other types if specified.
+                             * @param message TagValue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TagValue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TagValue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
                 }
 
                 /** Properties of a DataProfileJobConfig. */
@@ -20069,6 +20969,9 @@ export namespace google {
 
                     /** DataProfileJobConfig projectId */
                     projectId?: (string|null);
+
+                    /** DataProfileJobConfig otherCloudStartingLocation */
+                    otherCloudStartingLocation?: (google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation|null);
 
                     /** DataProfileJobConfig inspectTemplates */
                     inspectTemplates?: (string[]|null);
@@ -20091,6 +20994,9 @@ export namespace google {
 
                     /** DataProfileJobConfig projectId. */
                     public projectId: string;
+
+                    /** DataProfileJobConfig otherCloudStartingLocation. */
+                    public otherCloudStartingLocation?: (google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation|null);
 
                     /** DataProfileJobConfig inspectTemplates. */
                     public inspectTemplates: string[];
@@ -20490,7 +21396,8 @@ export namespace google {
                 enum BigQueryTableType {
                     BIG_QUERY_TABLE_TYPE_UNSPECIFIED = 0,
                     BIG_QUERY_TABLE_TYPE_TABLE = 1,
-                    BIG_QUERY_TABLE_TYPE_EXTERNAL_BIG_LAKE = 2
+                    BIG_QUERY_TABLE_TYPE_EXTERNAL_BIG_LAKE = 2,
+                    BIG_QUERY_TABLE_TYPE_SNAPSHOT = 3
                 }
 
                 /** DataProfileUpdateFrequency enum. */
@@ -20710,6 +21617,9 @@ export namespace google {
                     /** DiscoveryConfig orgConfig */
                     orgConfig?: (google.privacy.dlp.v2.DiscoveryConfig.IOrgConfig|null);
 
+                    /** DiscoveryConfig otherCloudStartingLocation */
+                    otherCloudStartingLocation?: (google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation|null);
+
                     /** DiscoveryConfig inspectTemplates */
                     inspectTemplates?: (string[]|null);
 
@@ -20752,6 +21662,9 @@ export namespace google {
 
                     /** DiscoveryConfig orgConfig. */
                     public orgConfig?: (google.privacy.dlp.v2.DiscoveryConfig.IOrgConfig|null);
+
+                    /** DiscoveryConfig otherCloudStartingLocation. */
+                    public otherCloudStartingLocation?: (google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation|null);
 
                     /** DiscoveryConfig inspectTemplates. */
                     public inspectTemplates: string[];
@@ -20973,6 +21886,18 @@ export namespace google {
 
                     /** DiscoveryTarget bigQueryTarget */
                     bigQueryTarget?: (google.privacy.dlp.v2.IBigQueryDiscoveryTarget|null);
+
+                    /** DiscoveryTarget cloudSqlTarget */
+                    cloudSqlTarget?: (google.privacy.dlp.v2.ICloudSqlDiscoveryTarget|null);
+
+                    /** DiscoveryTarget secretsTarget */
+                    secretsTarget?: (google.privacy.dlp.v2.ISecretsDiscoveryTarget|null);
+
+                    /** DiscoveryTarget cloudStorageTarget */
+                    cloudStorageTarget?: (google.privacy.dlp.v2.ICloudStorageDiscoveryTarget|null);
+
+                    /** DiscoveryTarget otherCloudTarget */
+                    otherCloudTarget?: (google.privacy.dlp.v2.IOtherCloudDiscoveryTarget|null);
                 }
 
                 /** Represents a DiscoveryTarget. */
@@ -20987,8 +21912,20 @@ export namespace google {
                     /** DiscoveryTarget bigQueryTarget. */
                     public bigQueryTarget?: (google.privacy.dlp.v2.IBigQueryDiscoveryTarget|null);
 
+                    /** DiscoveryTarget cloudSqlTarget. */
+                    public cloudSqlTarget?: (google.privacy.dlp.v2.ICloudSqlDiscoveryTarget|null);
+
+                    /** DiscoveryTarget secretsTarget. */
+                    public secretsTarget?: (google.privacy.dlp.v2.ISecretsDiscoveryTarget|null);
+
+                    /** DiscoveryTarget cloudStorageTarget. */
+                    public cloudStorageTarget?: (google.privacy.dlp.v2.ICloudStorageDiscoveryTarget|null);
+
+                    /** DiscoveryTarget otherCloudTarget. */
+                    public otherCloudTarget?: (google.privacy.dlp.v2.IOtherCloudDiscoveryTarget|null);
+
                     /** DiscoveryTarget target. */
-                    public target?: "bigQueryTarget";
+                    public target?: ("bigQueryTarget"|"cloudSqlTarget"|"secretsTarget"|"cloudStorageTarget"|"otherCloudTarget");
 
                     /**
                      * Creates a new DiscoveryTarget instance using the specified properties.
@@ -21194,6 +22131,9 @@ export namespace google {
 
                     /** DiscoveryBigQueryFilter otherTables */
                     otherTables?: (google.privacy.dlp.v2.DiscoveryBigQueryFilter.IAllOtherBigQueryTables|null);
+
+                    /** DiscoveryBigQueryFilter tableReference */
+                    tableReference?: (google.privacy.dlp.v2.ITableReference|null);
                 }
 
                 /** Represents a DiscoveryBigQueryFilter. */
@@ -21211,8 +22151,11 @@ export namespace google {
                     /** DiscoveryBigQueryFilter otherTables. */
                     public otherTables?: (google.privacy.dlp.v2.DiscoveryBigQueryFilter.IAllOtherBigQueryTables|null);
 
+                    /** DiscoveryBigQueryFilter tableReference. */
+                    public tableReference?: (google.privacy.dlp.v2.ITableReference|null);
+
                     /** DiscoveryBigQueryFilter filter. */
-                    public filter?: ("tables"|"otherTables");
+                    public filter?: ("tables"|"otherTables"|"tableReference");
 
                     /**
                      * Creates a new DiscoveryBigQueryFilter instance using the specified properties.
@@ -21718,6 +22661,12 @@ export namespace google {
 
                     /** DiscoveryGenerationCadence tableModifiedCadence */
                     tableModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryTableModifiedCadence|null);
+
+                    /** DiscoveryGenerationCadence inspectTemplateModifiedCadence */
+                    inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+
+                    /** DiscoveryGenerationCadence refreshFrequency */
+                    refreshFrequency?: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency|null);
                 }
 
                 /** Represents a DiscoveryGenerationCadence. */
@@ -21734,6 +22683,12 @@ export namespace google {
 
                     /** DiscoveryGenerationCadence tableModifiedCadence. */
                     public tableModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryTableModifiedCadence|null);
+
+                    /** DiscoveryGenerationCadence inspectTemplateModifiedCadence. */
+                    public inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+
+                    /** DiscoveryGenerationCadence refreshFrequency. */
+                    public refreshFrequency: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency);
 
                     /**
                      * Creates a new DiscoveryGenerationCadence instance using the specified properties.
@@ -22032,6 +22987,3728 @@ export namespace google {
                     SCHEMA_REMOVED_COLUMNS = 2
                 }
 
+                /** Properties of a DiscoveryInspectTemplateModifiedCadence. */
+                interface IDiscoveryInspectTemplateModifiedCadence {
+
+                    /** DiscoveryInspectTemplateModifiedCadence frequency */
+                    frequency?: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency|null);
+                }
+
+                /** Represents a DiscoveryInspectTemplateModifiedCadence. */
+                class DiscoveryInspectTemplateModifiedCadence implements IDiscoveryInspectTemplateModifiedCadence {
+
+                    /**
+                     * Constructs a new DiscoveryInspectTemplateModifiedCadence.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence);
+
+                    /** DiscoveryInspectTemplateModifiedCadence frequency. */
+                    public frequency: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency);
+
+                    /**
+                     * Creates a new DiscoveryInspectTemplateModifiedCadence instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryInspectTemplateModifiedCadence instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence): google.privacy.dlp.v2.DiscoveryInspectTemplateModifiedCadence;
+
+                    /**
+                     * Encodes the specified DiscoveryInspectTemplateModifiedCadence message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryInspectTemplateModifiedCadence.verify|verify} messages.
+                     * @param message DiscoveryInspectTemplateModifiedCadence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryInspectTemplateModifiedCadence message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryInspectTemplateModifiedCadence.verify|verify} messages.
+                     * @param message DiscoveryInspectTemplateModifiedCadence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryInspectTemplateModifiedCadence message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryInspectTemplateModifiedCadence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryInspectTemplateModifiedCadence;
+
+                    /**
+                     * Decodes a DiscoveryInspectTemplateModifiedCadence message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryInspectTemplateModifiedCadence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryInspectTemplateModifiedCadence;
+
+                    /**
+                     * Verifies a DiscoveryInspectTemplateModifiedCadence message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryInspectTemplateModifiedCadence message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryInspectTemplateModifiedCadence
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryInspectTemplateModifiedCadence;
+
+                    /**
+                     * Creates a plain object from a DiscoveryInspectTemplateModifiedCadence message. Also converts values to other types if specified.
+                     * @param message DiscoveryInspectTemplateModifiedCadence
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryInspectTemplateModifiedCadence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryInspectTemplateModifiedCadence to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryInspectTemplateModifiedCadence
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudSqlDiscoveryTarget. */
+                interface ICloudSqlDiscoveryTarget {
+
+                    /** CloudSqlDiscoveryTarget filter */
+                    filter?: (google.privacy.dlp.v2.IDiscoveryCloudSqlFilter|null);
+
+                    /** CloudSqlDiscoveryTarget conditions */
+                    conditions?: (google.privacy.dlp.v2.IDiscoveryCloudSqlConditions|null);
+
+                    /** CloudSqlDiscoveryTarget generationCadence */
+                    generationCadence?: (google.privacy.dlp.v2.IDiscoveryCloudSqlGenerationCadence|null);
+
+                    /** CloudSqlDiscoveryTarget disabled */
+                    disabled?: (google.privacy.dlp.v2.IDisabled|null);
+                }
+
+                /** Represents a CloudSqlDiscoveryTarget. */
+                class CloudSqlDiscoveryTarget implements ICloudSqlDiscoveryTarget {
+
+                    /**
+                     * Constructs a new CloudSqlDiscoveryTarget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ICloudSqlDiscoveryTarget);
+
+                    /** CloudSqlDiscoveryTarget filter. */
+                    public filter?: (google.privacy.dlp.v2.IDiscoveryCloudSqlFilter|null);
+
+                    /** CloudSqlDiscoveryTarget conditions. */
+                    public conditions?: (google.privacy.dlp.v2.IDiscoveryCloudSqlConditions|null);
+
+                    /** CloudSqlDiscoveryTarget generationCadence. */
+                    public generationCadence?: (google.privacy.dlp.v2.IDiscoveryCloudSqlGenerationCadence|null);
+
+                    /** CloudSqlDiscoveryTarget disabled. */
+                    public disabled?: (google.privacy.dlp.v2.IDisabled|null);
+
+                    /** CloudSqlDiscoveryTarget cadence. */
+                    public cadence?: ("generationCadence"|"disabled");
+
+                    /**
+                     * Creates a new CloudSqlDiscoveryTarget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudSqlDiscoveryTarget instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ICloudSqlDiscoveryTarget): google.privacy.dlp.v2.CloudSqlDiscoveryTarget;
+
+                    /**
+                     * Encodes the specified CloudSqlDiscoveryTarget message. Does not implicitly {@link google.privacy.dlp.v2.CloudSqlDiscoveryTarget.verify|verify} messages.
+                     * @param message CloudSqlDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ICloudSqlDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudSqlDiscoveryTarget message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.CloudSqlDiscoveryTarget.verify|verify} messages.
+                     * @param message CloudSqlDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ICloudSqlDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudSqlDiscoveryTarget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudSqlDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.CloudSqlDiscoveryTarget;
+
+                    /**
+                     * Decodes a CloudSqlDiscoveryTarget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudSqlDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.CloudSqlDiscoveryTarget;
+
+                    /**
+                     * Verifies a CloudSqlDiscoveryTarget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudSqlDiscoveryTarget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudSqlDiscoveryTarget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.CloudSqlDiscoveryTarget;
+
+                    /**
+                     * Creates a plain object from a CloudSqlDiscoveryTarget message. Also converts values to other types if specified.
+                     * @param message CloudSqlDiscoveryTarget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.CloudSqlDiscoveryTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudSqlDiscoveryTarget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudSqlDiscoveryTarget
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiscoveryCloudSqlFilter. */
+                interface IDiscoveryCloudSqlFilter {
+
+                    /** DiscoveryCloudSqlFilter collection */
+                    collection?: (google.privacy.dlp.v2.IDatabaseResourceCollection|null);
+
+                    /** DiscoveryCloudSqlFilter others */
+                    others?: (google.privacy.dlp.v2.IAllOtherDatabaseResources|null);
+
+                    /** DiscoveryCloudSqlFilter databaseResourceReference */
+                    databaseResourceReference?: (google.privacy.dlp.v2.IDatabaseResourceReference|null);
+                }
+
+                /** Represents a DiscoveryCloudSqlFilter. */
+                class DiscoveryCloudSqlFilter implements IDiscoveryCloudSqlFilter {
+
+                    /**
+                     * Constructs a new DiscoveryCloudSqlFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryCloudSqlFilter);
+
+                    /** DiscoveryCloudSqlFilter collection. */
+                    public collection?: (google.privacy.dlp.v2.IDatabaseResourceCollection|null);
+
+                    /** DiscoveryCloudSqlFilter others. */
+                    public others?: (google.privacy.dlp.v2.IAllOtherDatabaseResources|null);
+
+                    /** DiscoveryCloudSqlFilter databaseResourceReference. */
+                    public databaseResourceReference?: (google.privacy.dlp.v2.IDatabaseResourceReference|null);
+
+                    /** DiscoveryCloudSqlFilter filter. */
+                    public filter?: ("collection"|"others"|"databaseResourceReference");
+
+                    /**
+                     * Creates a new DiscoveryCloudSqlFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryCloudSqlFilter instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryCloudSqlFilter): google.privacy.dlp.v2.DiscoveryCloudSqlFilter;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudSqlFilter message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudSqlFilter.verify|verify} messages.
+                     * @param message DiscoveryCloudSqlFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryCloudSqlFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudSqlFilter message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudSqlFilter.verify|verify} messages.
+                     * @param message DiscoveryCloudSqlFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryCloudSqlFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryCloudSqlFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryCloudSqlFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryCloudSqlFilter;
+
+                    /**
+                     * Decodes a DiscoveryCloudSqlFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryCloudSqlFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryCloudSqlFilter;
+
+                    /**
+                     * Verifies a DiscoveryCloudSqlFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryCloudSqlFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryCloudSqlFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryCloudSqlFilter;
+
+                    /**
+                     * Creates a plain object from a DiscoveryCloudSqlFilter message. Also converts values to other types if specified.
+                     * @param message DiscoveryCloudSqlFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryCloudSqlFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryCloudSqlFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryCloudSqlFilter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DatabaseResourceCollection. */
+                interface IDatabaseResourceCollection {
+
+                    /** DatabaseResourceCollection includeRegexes */
+                    includeRegexes?: (google.privacy.dlp.v2.IDatabaseResourceRegexes|null);
+                }
+
+                /** Represents a DatabaseResourceCollection. */
+                class DatabaseResourceCollection implements IDatabaseResourceCollection {
+
+                    /**
+                     * Constructs a new DatabaseResourceCollection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDatabaseResourceCollection);
+
+                    /** DatabaseResourceCollection includeRegexes. */
+                    public includeRegexes?: (google.privacy.dlp.v2.IDatabaseResourceRegexes|null);
+
+                    /** DatabaseResourceCollection pattern. */
+                    public pattern?: "includeRegexes";
+
+                    /**
+                     * Creates a new DatabaseResourceCollection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatabaseResourceCollection instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDatabaseResourceCollection): google.privacy.dlp.v2.DatabaseResourceCollection;
+
+                    /**
+                     * Encodes the specified DatabaseResourceCollection message. Does not implicitly {@link google.privacy.dlp.v2.DatabaseResourceCollection.verify|verify} messages.
+                     * @param message DatabaseResourceCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDatabaseResourceCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatabaseResourceCollection message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DatabaseResourceCollection.verify|verify} messages.
+                     * @param message DatabaseResourceCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDatabaseResourceCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatabaseResourceCollection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatabaseResourceCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DatabaseResourceCollection;
+
+                    /**
+                     * Decodes a DatabaseResourceCollection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatabaseResourceCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DatabaseResourceCollection;
+
+                    /**
+                     * Verifies a DatabaseResourceCollection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatabaseResourceCollection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatabaseResourceCollection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DatabaseResourceCollection;
+
+                    /**
+                     * Creates a plain object from a DatabaseResourceCollection message. Also converts values to other types if specified.
+                     * @param message DatabaseResourceCollection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DatabaseResourceCollection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatabaseResourceCollection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatabaseResourceCollection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DatabaseResourceRegexes. */
+                interface IDatabaseResourceRegexes {
+
+                    /** DatabaseResourceRegexes patterns */
+                    patterns?: (google.privacy.dlp.v2.IDatabaseResourceRegex[]|null);
+                }
+
+                /** Represents a DatabaseResourceRegexes. */
+                class DatabaseResourceRegexes implements IDatabaseResourceRegexes {
+
+                    /**
+                     * Constructs a new DatabaseResourceRegexes.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDatabaseResourceRegexes);
+
+                    /** DatabaseResourceRegexes patterns. */
+                    public patterns: google.privacy.dlp.v2.IDatabaseResourceRegex[];
+
+                    /**
+                     * Creates a new DatabaseResourceRegexes instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatabaseResourceRegexes instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDatabaseResourceRegexes): google.privacy.dlp.v2.DatabaseResourceRegexes;
+
+                    /**
+                     * Encodes the specified DatabaseResourceRegexes message. Does not implicitly {@link google.privacy.dlp.v2.DatabaseResourceRegexes.verify|verify} messages.
+                     * @param message DatabaseResourceRegexes message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDatabaseResourceRegexes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatabaseResourceRegexes message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DatabaseResourceRegexes.verify|verify} messages.
+                     * @param message DatabaseResourceRegexes message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDatabaseResourceRegexes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatabaseResourceRegexes message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatabaseResourceRegexes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DatabaseResourceRegexes;
+
+                    /**
+                     * Decodes a DatabaseResourceRegexes message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatabaseResourceRegexes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DatabaseResourceRegexes;
+
+                    /**
+                     * Verifies a DatabaseResourceRegexes message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatabaseResourceRegexes message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatabaseResourceRegexes
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DatabaseResourceRegexes;
+
+                    /**
+                     * Creates a plain object from a DatabaseResourceRegexes message. Also converts values to other types if specified.
+                     * @param message DatabaseResourceRegexes
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DatabaseResourceRegexes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatabaseResourceRegexes to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatabaseResourceRegexes
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DatabaseResourceRegex. */
+                interface IDatabaseResourceRegex {
+
+                    /** DatabaseResourceRegex projectIdRegex */
+                    projectIdRegex?: (string|null);
+
+                    /** DatabaseResourceRegex instanceRegex */
+                    instanceRegex?: (string|null);
+
+                    /** DatabaseResourceRegex databaseRegex */
+                    databaseRegex?: (string|null);
+
+                    /** DatabaseResourceRegex databaseResourceNameRegex */
+                    databaseResourceNameRegex?: (string|null);
+                }
+
+                /** Represents a DatabaseResourceRegex. */
+                class DatabaseResourceRegex implements IDatabaseResourceRegex {
+
+                    /**
+                     * Constructs a new DatabaseResourceRegex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDatabaseResourceRegex);
+
+                    /** DatabaseResourceRegex projectIdRegex. */
+                    public projectIdRegex: string;
+
+                    /** DatabaseResourceRegex instanceRegex. */
+                    public instanceRegex: string;
+
+                    /** DatabaseResourceRegex databaseRegex. */
+                    public databaseRegex: string;
+
+                    /** DatabaseResourceRegex databaseResourceNameRegex. */
+                    public databaseResourceNameRegex: string;
+
+                    /**
+                     * Creates a new DatabaseResourceRegex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatabaseResourceRegex instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDatabaseResourceRegex): google.privacy.dlp.v2.DatabaseResourceRegex;
+
+                    /**
+                     * Encodes the specified DatabaseResourceRegex message. Does not implicitly {@link google.privacy.dlp.v2.DatabaseResourceRegex.verify|verify} messages.
+                     * @param message DatabaseResourceRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDatabaseResourceRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatabaseResourceRegex message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DatabaseResourceRegex.verify|verify} messages.
+                     * @param message DatabaseResourceRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDatabaseResourceRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatabaseResourceRegex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatabaseResourceRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DatabaseResourceRegex;
+
+                    /**
+                     * Decodes a DatabaseResourceRegex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatabaseResourceRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DatabaseResourceRegex;
+
+                    /**
+                     * Verifies a DatabaseResourceRegex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatabaseResourceRegex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatabaseResourceRegex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DatabaseResourceRegex;
+
+                    /**
+                     * Creates a plain object from a DatabaseResourceRegex message. Also converts values to other types if specified.
+                     * @param message DatabaseResourceRegex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DatabaseResourceRegex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatabaseResourceRegex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatabaseResourceRegex
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AllOtherDatabaseResources. */
+                interface IAllOtherDatabaseResources {
+                }
+
+                /** Represents an AllOtherDatabaseResources. */
+                class AllOtherDatabaseResources implements IAllOtherDatabaseResources {
+
+                    /**
+                     * Constructs a new AllOtherDatabaseResources.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAllOtherDatabaseResources);
+
+                    /**
+                     * Creates a new AllOtherDatabaseResources instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AllOtherDatabaseResources instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAllOtherDatabaseResources): google.privacy.dlp.v2.AllOtherDatabaseResources;
+
+                    /**
+                     * Encodes the specified AllOtherDatabaseResources message. Does not implicitly {@link google.privacy.dlp.v2.AllOtherDatabaseResources.verify|verify} messages.
+                     * @param message AllOtherDatabaseResources message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAllOtherDatabaseResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AllOtherDatabaseResources message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AllOtherDatabaseResources.verify|verify} messages.
+                     * @param message AllOtherDatabaseResources message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAllOtherDatabaseResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AllOtherDatabaseResources message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AllOtherDatabaseResources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AllOtherDatabaseResources;
+
+                    /**
+                     * Decodes an AllOtherDatabaseResources message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AllOtherDatabaseResources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AllOtherDatabaseResources;
+
+                    /**
+                     * Verifies an AllOtherDatabaseResources message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AllOtherDatabaseResources message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AllOtherDatabaseResources
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AllOtherDatabaseResources;
+
+                    /**
+                     * Creates a plain object from an AllOtherDatabaseResources message. Also converts values to other types if specified.
+                     * @param message AllOtherDatabaseResources
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AllOtherDatabaseResources, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AllOtherDatabaseResources to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AllOtherDatabaseResources
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DatabaseResourceReference. */
+                interface IDatabaseResourceReference {
+
+                    /** DatabaseResourceReference projectId */
+                    projectId?: (string|null);
+
+                    /** DatabaseResourceReference instance */
+                    instance?: (string|null);
+
+                    /** DatabaseResourceReference database */
+                    database?: (string|null);
+
+                    /** DatabaseResourceReference databaseResource */
+                    databaseResource?: (string|null);
+                }
+
+                /** Represents a DatabaseResourceReference. */
+                class DatabaseResourceReference implements IDatabaseResourceReference {
+
+                    /**
+                     * Constructs a new DatabaseResourceReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDatabaseResourceReference);
+
+                    /** DatabaseResourceReference projectId. */
+                    public projectId: string;
+
+                    /** DatabaseResourceReference instance. */
+                    public instance: string;
+
+                    /** DatabaseResourceReference database. */
+                    public database: string;
+
+                    /** DatabaseResourceReference databaseResource. */
+                    public databaseResource: string;
+
+                    /**
+                     * Creates a new DatabaseResourceReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatabaseResourceReference instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDatabaseResourceReference): google.privacy.dlp.v2.DatabaseResourceReference;
+
+                    /**
+                     * Encodes the specified DatabaseResourceReference message. Does not implicitly {@link google.privacy.dlp.v2.DatabaseResourceReference.verify|verify} messages.
+                     * @param message DatabaseResourceReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDatabaseResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatabaseResourceReference message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DatabaseResourceReference.verify|verify} messages.
+                     * @param message DatabaseResourceReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDatabaseResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatabaseResourceReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatabaseResourceReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DatabaseResourceReference;
+
+                    /**
+                     * Decodes a DatabaseResourceReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatabaseResourceReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DatabaseResourceReference;
+
+                    /**
+                     * Verifies a DatabaseResourceReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatabaseResourceReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatabaseResourceReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DatabaseResourceReference;
+
+                    /**
+                     * Creates a plain object from a DatabaseResourceReference message. Also converts values to other types if specified.
+                     * @param message DatabaseResourceReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DatabaseResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatabaseResourceReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatabaseResourceReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiscoveryCloudSqlConditions. */
+                interface IDiscoveryCloudSqlConditions {
+
+                    /** DiscoveryCloudSqlConditions databaseEngines */
+                    databaseEngines?: (google.privacy.dlp.v2.DiscoveryCloudSqlConditions.DatabaseEngine[]|null);
+
+                    /** DiscoveryCloudSqlConditions types */
+                    types?: (google.privacy.dlp.v2.DiscoveryCloudSqlConditions.DatabaseResourceType[]|null);
+                }
+
+                /** Represents a DiscoveryCloudSqlConditions. */
+                class DiscoveryCloudSqlConditions implements IDiscoveryCloudSqlConditions {
+
+                    /**
+                     * Constructs a new DiscoveryCloudSqlConditions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryCloudSqlConditions);
+
+                    /** DiscoveryCloudSqlConditions databaseEngines. */
+                    public databaseEngines: google.privacy.dlp.v2.DiscoveryCloudSqlConditions.DatabaseEngine[];
+
+                    /** DiscoveryCloudSqlConditions types. */
+                    public types: google.privacy.dlp.v2.DiscoveryCloudSqlConditions.DatabaseResourceType[];
+
+                    /**
+                     * Creates a new DiscoveryCloudSqlConditions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryCloudSqlConditions instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryCloudSqlConditions): google.privacy.dlp.v2.DiscoveryCloudSqlConditions;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudSqlConditions message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudSqlConditions.verify|verify} messages.
+                     * @param message DiscoveryCloudSqlConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryCloudSqlConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudSqlConditions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudSqlConditions.verify|verify} messages.
+                     * @param message DiscoveryCloudSqlConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryCloudSqlConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryCloudSqlConditions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryCloudSqlConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryCloudSqlConditions;
+
+                    /**
+                     * Decodes a DiscoveryCloudSqlConditions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryCloudSqlConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryCloudSqlConditions;
+
+                    /**
+                     * Verifies a DiscoveryCloudSqlConditions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryCloudSqlConditions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryCloudSqlConditions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryCloudSqlConditions;
+
+                    /**
+                     * Creates a plain object from a DiscoveryCloudSqlConditions message. Also converts values to other types if specified.
+                     * @param message DiscoveryCloudSqlConditions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryCloudSqlConditions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryCloudSqlConditions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryCloudSqlConditions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DiscoveryCloudSqlConditions {
+
+                    /** DatabaseEngine enum. */
+                    enum DatabaseEngine {
+                        DATABASE_ENGINE_UNSPECIFIED = 0,
+                        ALL_SUPPORTED_DATABASE_ENGINES = 1,
+                        MYSQL = 2,
+                        POSTGRES = 3
+                    }
+
+                    /** DatabaseResourceType enum. */
+                    enum DatabaseResourceType {
+                        DATABASE_RESOURCE_TYPE_UNSPECIFIED = 0,
+                        DATABASE_RESOURCE_TYPE_ALL_SUPPORTED_TYPES = 1,
+                        DATABASE_RESOURCE_TYPE_TABLE = 2
+                    }
+                }
+
+                /** Properties of a DiscoveryCloudSqlGenerationCadence. */
+                interface IDiscoveryCloudSqlGenerationCadence {
+
+                    /** DiscoveryCloudSqlGenerationCadence schemaModifiedCadence */
+                    schemaModifiedCadence?: (google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.ISchemaModifiedCadence|null);
+
+                    /** DiscoveryCloudSqlGenerationCadence refreshFrequency */
+                    refreshFrequency?: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency|null);
+
+                    /** DiscoveryCloudSqlGenerationCadence inspectTemplateModifiedCadence */
+                    inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+                }
+
+                /** Represents a DiscoveryCloudSqlGenerationCadence. */
+                class DiscoveryCloudSqlGenerationCadence implements IDiscoveryCloudSqlGenerationCadence {
+
+                    /**
+                     * Constructs a new DiscoveryCloudSqlGenerationCadence.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryCloudSqlGenerationCadence);
+
+                    /** DiscoveryCloudSqlGenerationCadence schemaModifiedCadence. */
+                    public schemaModifiedCadence?: (google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.ISchemaModifiedCadence|null);
+
+                    /** DiscoveryCloudSqlGenerationCadence refreshFrequency. */
+                    public refreshFrequency: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency);
+
+                    /** DiscoveryCloudSqlGenerationCadence inspectTemplateModifiedCadence. */
+                    public inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+
+                    /**
+                     * Creates a new DiscoveryCloudSqlGenerationCadence instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryCloudSqlGenerationCadence instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryCloudSqlGenerationCadence): google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudSqlGenerationCadence message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.verify|verify} messages.
+                     * @param message DiscoveryCloudSqlGenerationCadence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryCloudSqlGenerationCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudSqlGenerationCadence message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.verify|verify} messages.
+                     * @param message DiscoveryCloudSqlGenerationCadence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryCloudSqlGenerationCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryCloudSqlGenerationCadence message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryCloudSqlGenerationCadence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence;
+
+                    /**
+                     * Decodes a DiscoveryCloudSqlGenerationCadence message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryCloudSqlGenerationCadence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence;
+
+                    /**
+                     * Verifies a DiscoveryCloudSqlGenerationCadence message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryCloudSqlGenerationCadence message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryCloudSqlGenerationCadence
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence;
+
+                    /**
+                     * Creates a plain object from a DiscoveryCloudSqlGenerationCadence message. Also converts values to other types if specified.
+                     * @param message DiscoveryCloudSqlGenerationCadence
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryCloudSqlGenerationCadence to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryCloudSqlGenerationCadence
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DiscoveryCloudSqlGenerationCadence {
+
+                    /** Properties of a SchemaModifiedCadence. */
+                    interface ISchemaModifiedCadence {
+
+                        /** SchemaModifiedCadence types */
+                        types?: (google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence.CloudSqlSchemaModification[]|null);
+
+                        /** SchemaModifiedCadence frequency */
+                        frequency?: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency|null);
+                    }
+
+                    /** Represents a SchemaModifiedCadence. */
+                    class SchemaModifiedCadence implements ISchemaModifiedCadence {
+
+                        /**
+                         * Constructs a new SchemaModifiedCadence.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.ISchemaModifiedCadence);
+
+                        /** SchemaModifiedCadence types. */
+                        public types: google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence.CloudSqlSchemaModification[];
+
+                        /** SchemaModifiedCadence frequency. */
+                        public frequency: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency);
+
+                        /**
+                         * Creates a new SchemaModifiedCadence instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SchemaModifiedCadence instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.ISchemaModifiedCadence): google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence;
+
+                        /**
+                         * Encodes the specified SchemaModifiedCadence message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence.verify|verify} messages.
+                         * @param message SchemaModifiedCadence message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.ISchemaModifiedCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SchemaModifiedCadence message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence.verify|verify} messages.
+                         * @param message SchemaModifiedCadence message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.ISchemaModifiedCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SchemaModifiedCadence message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SchemaModifiedCadence
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence;
+
+                        /**
+                         * Decodes a SchemaModifiedCadence message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SchemaModifiedCadence
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence;
+
+                        /**
+                         * Verifies a SchemaModifiedCadence message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SchemaModifiedCadence message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SchemaModifiedCadence
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence;
+
+                        /**
+                         * Creates a plain object from a SchemaModifiedCadence message. Also converts values to other types if specified.
+                         * @param message SchemaModifiedCadence
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SchemaModifiedCadence to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SchemaModifiedCadence
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SchemaModifiedCadence {
+
+                        /** CloudSqlSchemaModification enum. */
+                        enum CloudSqlSchemaModification {
+                            SQL_SCHEMA_MODIFICATION_UNSPECIFIED = 0,
+                            NEW_COLUMNS = 1,
+                            REMOVED_COLUMNS = 2
+                        }
+                    }
+                }
+
+                /** Properties of a SecretsDiscoveryTarget. */
+                interface ISecretsDiscoveryTarget {
+                }
+
+                /** Represents a SecretsDiscoveryTarget. */
+                class SecretsDiscoveryTarget implements ISecretsDiscoveryTarget {
+
+                    /**
+                     * Constructs a new SecretsDiscoveryTarget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ISecretsDiscoveryTarget);
+
+                    /**
+                     * Creates a new SecretsDiscoveryTarget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretsDiscoveryTarget instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ISecretsDiscoveryTarget): google.privacy.dlp.v2.SecretsDiscoveryTarget;
+
+                    /**
+                     * Encodes the specified SecretsDiscoveryTarget message. Does not implicitly {@link google.privacy.dlp.v2.SecretsDiscoveryTarget.verify|verify} messages.
+                     * @param message SecretsDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ISecretsDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretsDiscoveryTarget message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.SecretsDiscoveryTarget.verify|verify} messages.
+                     * @param message SecretsDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ISecretsDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretsDiscoveryTarget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretsDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.SecretsDiscoveryTarget;
+
+                    /**
+                     * Decodes a SecretsDiscoveryTarget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretsDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.SecretsDiscoveryTarget;
+
+                    /**
+                     * Verifies a SecretsDiscoveryTarget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretsDiscoveryTarget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretsDiscoveryTarget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.SecretsDiscoveryTarget;
+
+                    /**
+                     * Creates a plain object from a SecretsDiscoveryTarget message. Also converts values to other types if specified.
+                     * @param message SecretsDiscoveryTarget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.SecretsDiscoveryTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretsDiscoveryTarget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecretsDiscoveryTarget
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudStorageDiscoveryTarget. */
+                interface ICloudStorageDiscoveryTarget {
+
+                    /** CloudStorageDiscoveryTarget filter */
+                    filter?: (google.privacy.dlp.v2.IDiscoveryCloudStorageFilter|null);
+
+                    /** CloudStorageDiscoveryTarget conditions */
+                    conditions?: (google.privacy.dlp.v2.IDiscoveryFileStoreConditions|null);
+
+                    /** CloudStorageDiscoveryTarget generationCadence */
+                    generationCadence?: (google.privacy.dlp.v2.IDiscoveryCloudStorageGenerationCadence|null);
+
+                    /** CloudStorageDiscoveryTarget disabled */
+                    disabled?: (google.privacy.dlp.v2.IDisabled|null);
+                }
+
+                /** Represents a CloudStorageDiscoveryTarget. */
+                class CloudStorageDiscoveryTarget implements ICloudStorageDiscoveryTarget {
+
+                    /**
+                     * Constructs a new CloudStorageDiscoveryTarget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ICloudStorageDiscoveryTarget);
+
+                    /** CloudStorageDiscoveryTarget filter. */
+                    public filter?: (google.privacy.dlp.v2.IDiscoveryCloudStorageFilter|null);
+
+                    /** CloudStorageDiscoveryTarget conditions. */
+                    public conditions?: (google.privacy.dlp.v2.IDiscoveryFileStoreConditions|null);
+
+                    /** CloudStorageDiscoveryTarget generationCadence. */
+                    public generationCadence?: (google.privacy.dlp.v2.IDiscoveryCloudStorageGenerationCadence|null);
+
+                    /** CloudStorageDiscoveryTarget disabled. */
+                    public disabled?: (google.privacy.dlp.v2.IDisabled|null);
+
+                    /** CloudStorageDiscoveryTarget cadence. */
+                    public cadence?: ("generationCadence"|"disabled");
+
+                    /**
+                     * Creates a new CloudStorageDiscoveryTarget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudStorageDiscoveryTarget instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ICloudStorageDiscoveryTarget): google.privacy.dlp.v2.CloudStorageDiscoveryTarget;
+
+                    /**
+                     * Encodes the specified CloudStorageDiscoveryTarget message. Does not implicitly {@link google.privacy.dlp.v2.CloudStorageDiscoveryTarget.verify|verify} messages.
+                     * @param message CloudStorageDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ICloudStorageDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudStorageDiscoveryTarget message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.CloudStorageDiscoveryTarget.verify|verify} messages.
+                     * @param message CloudStorageDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ICloudStorageDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudStorageDiscoveryTarget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudStorageDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.CloudStorageDiscoveryTarget;
+
+                    /**
+                     * Decodes a CloudStorageDiscoveryTarget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudStorageDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.CloudStorageDiscoveryTarget;
+
+                    /**
+                     * Verifies a CloudStorageDiscoveryTarget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudStorageDiscoveryTarget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudStorageDiscoveryTarget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.CloudStorageDiscoveryTarget;
+
+                    /**
+                     * Creates a plain object from a CloudStorageDiscoveryTarget message. Also converts values to other types if specified.
+                     * @param message CloudStorageDiscoveryTarget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.CloudStorageDiscoveryTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudStorageDiscoveryTarget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudStorageDiscoveryTarget
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiscoveryCloudStorageFilter. */
+                interface IDiscoveryCloudStorageFilter {
+
+                    /** DiscoveryCloudStorageFilter collection */
+                    collection?: (google.privacy.dlp.v2.IFileStoreCollection|null);
+
+                    /** DiscoveryCloudStorageFilter cloudStorageResourceReference */
+                    cloudStorageResourceReference?: (google.privacy.dlp.v2.ICloudStorageResourceReference|null);
+
+                    /** DiscoveryCloudStorageFilter others */
+                    others?: (google.privacy.dlp.v2.IAllOtherResources|null);
+                }
+
+                /** Represents a DiscoveryCloudStorageFilter. */
+                class DiscoveryCloudStorageFilter implements IDiscoveryCloudStorageFilter {
+
+                    /**
+                     * Constructs a new DiscoveryCloudStorageFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryCloudStorageFilter);
+
+                    /** DiscoveryCloudStorageFilter collection. */
+                    public collection?: (google.privacy.dlp.v2.IFileStoreCollection|null);
+
+                    /** DiscoveryCloudStorageFilter cloudStorageResourceReference. */
+                    public cloudStorageResourceReference?: (google.privacy.dlp.v2.ICloudStorageResourceReference|null);
+
+                    /** DiscoveryCloudStorageFilter others. */
+                    public others?: (google.privacy.dlp.v2.IAllOtherResources|null);
+
+                    /** DiscoveryCloudStorageFilter filter. */
+                    public filter?: ("collection"|"cloudStorageResourceReference"|"others");
+
+                    /**
+                     * Creates a new DiscoveryCloudStorageFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryCloudStorageFilter instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryCloudStorageFilter): google.privacy.dlp.v2.DiscoveryCloudStorageFilter;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudStorageFilter message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudStorageFilter.verify|verify} messages.
+                     * @param message DiscoveryCloudStorageFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryCloudStorageFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudStorageFilter message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudStorageFilter.verify|verify} messages.
+                     * @param message DiscoveryCloudStorageFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryCloudStorageFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryCloudStorageFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryCloudStorageFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryCloudStorageFilter;
+
+                    /**
+                     * Decodes a DiscoveryCloudStorageFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryCloudStorageFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryCloudStorageFilter;
+
+                    /**
+                     * Verifies a DiscoveryCloudStorageFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryCloudStorageFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryCloudStorageFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryCloudStorageFilter;
+
+                    /**
+                     * Creates a plain object from a DiscoveryCloudStorageFilter message. Also converts values to other types if specified.
+                     * @param message DiscoveryCloudStorageFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryCloudStorageFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryCloudStorageFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryCloudStorageFilter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileStoreCollection. */
+                interface IFileStoreCollection {
+
+                    /** FileStoreCollection includeRegexes */
+                    includeRegexes?: (google.privacy.dlp.v2.IFileStoreRegexes|null);
+                }
+
+                /** Represents a FileStoreCollection. */
+                class FileStoreCollection implements IFileStoreCollection {
+
+                    /**
+                     * Constructs a new FileStoreCollection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IFileStoreCollection);
+
+                    /** FileStoreCollection includeRegexes. */
+                    public includeRegexes?: (google.privacy.dlp.v2.IFileStoreRegexes|null);
+
+                    /** FileStoreCollection pattern. */
+                    public pattern?: "includeRegexes";
+
+                    /**
+                     * Creates a new FileStoreCollection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileStoreCollection instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IFileStoreCollection): google.privacy.dlp.v2.FileStoreCollection;
+
+                    /**
+                     * Encodes the specified FileStoreCollection message. Does not implicitly {@link google.privacy.dlp.v2.FileStoreCollection.verify|verify} messages.
+                     * @param message FileStoreCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IFileStoreCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileStoreCollection message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FileStoreCollection.verify|verify} messages.
+                     * @param message FileStoreCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IFileStoreCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileStoreCollection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileStoreCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.FileStoreCollection;
+
+                    /**
+                     * Decodes a FileStoreCollection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileStoreCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.FileStoreCollection;
+
+                    /**
+                     * Verifies a FileStoreCollection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileStoreCollection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileStoreCollection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.FileStoreCollection;
+
+                    /**
+                     * Creates a plain object from a FileStoreCollection message. Also converts values to other types if specified.
+                     * @param message FileStoreCollection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.FileStoreCollection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileStoreCollection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileStoreCollection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileStoreRegexes. */
+                interface IFileStoreRegexes {
+
+                    /** FileStoreRegexes patterns */
+                    patterns?: (google.privacy.dlp.v2.IFileStoreRegex[]|null);
+                }
+
+                /** Represents a FileStoreRegexes. */
+                class FileStoreRegexes implements IFileStoreRegexes {
+
+                    /**
+                     * Constructs a new FileStoreRegexes.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IFileStoreRegexes);
+
+                    /** FileStoreRegexes patterns. */
+                    public patterns: google.privacy.dlp.v2.IFileStoreRegex[];
+
+                    /**
+                     * Creates a new FileStoreRegexes instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileStoreRegexes instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IFileStoreRegexes): google.privacy.dlp.v2.FileStoreRegexes;
+
+                    /**
+                     * Encodes the specified FileStoreRegexes message. Does not implicitly {@link google.privacy.dlp.v2.FileStoreRegexes.verify|verify} messages.
+                     * @param message FileStoreRegexes message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IFileStoreRegexes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileStoreRegexes message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FileStoreRegexes.verify|verify} messages.
+                     * @param message FileStoreRegexes message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IFileStoreRegexes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileStoreRegexes message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileStoreRegexes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.FileStoreRegexes;
+
+                    /**
+                     * Decodes a FileStoreRegexes message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileStoreRegexes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.FileStoreRegexes;
+
+                    /**
+                     * Verifies a FileStoreRegexes message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileStoreRegexes message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileStoreRegexes
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.FileStoreRegexes;
+
+                    /**
+                     * Creates a plain object from a FileStoreRegexes message. Also converts values to other types if specified.
+                     * @param message FileStoreRegexes
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.FileStoreRegexes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileStoreRegexes to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileStoreRegexes
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileStoreRegex. */
+                interface IFileStoreRegex {
+
+                    /** FileStoreRegex cloudStorageRegex */
+                    cloudStorageRegex?: (google.privacy.dlp.v2.ICloudStorageRegex|null);
+                }
+
+                /** Represents a FileStoreRegex. */
+                class FileStoreRegex implements IFileStoreRegex {
+
+                    /**
+                     * Constructs a new FileStoreRegex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IFileStoreRegex);
+
+                    /** FileStoreRegex cloudStorageRegex. */
+                    public cloudStorageRegex?: (google.privacy.dlp.v2.ICloudStorageRegex|null);
+
+                    /** FileStoreRegex resourceRegex. */
+                    public resourceRegex?: "cloudStorageRegex";
+
+                    /**
+                     * Creates a new FileStoreRegex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileStoreRegex instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IFileStoreRegex): google.privacy.dlp.v2.FileStoreRegex;
+
+                    /**
+                     * Encodes the specified FileStoreRegex message. Does not implicitly {@link google.privacy.dlp.v2.FileStoreRegex.verify|verify} messages.
+                     * @param message FileStoreRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IFileStoreRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileStoreRegex message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FileStoreRegex.verify|verify} messages.
+                     * @param message FileStoreRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IFileStoreRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileStoreRegex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileStoreRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.FileStoreRegex;
+
+                    /**
+                     * Decodes a FileStoreRegex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileStoreRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.FileStoreRegex;
+
+                    /**
+                     * Verifies a FileStoreRegex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileStoreRegex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileStoreRegex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.FileStoreRegex;
+
+                    /**
+                     * Creates a plain object from a FileStoreRegex message. Also converts values to other types if specified.
+                     * @param message FileStoreRegex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.FileStoreRegex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileStoreRegex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileStoreRegex
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudStorageRegex. */
+                interface ICloudStorageRegex {
+
+                    /** CloudStorageRegex projectIdRegex */
+                    projectIdRegex?: (string|null);
+
+                    /** CloudStorageRegex bucketNameRegex */
+                    bucketNameRegex?: (string|null);
+                }
+
+                /** Represents a CloudStorageRegex. */
+                class CloudStorageRegex implements ICloudStorageRegex {
+
+                    /**
+                     * Constructs a new CloudStorageRegex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ICloudStorageRegex);
+
+                    /** CloudStorageRegex projectIdRegex. */
+                    public projectIdRegex: string;
+
+                    /** CloudStorageRegex bucketNameRegex. */
+                    public bucketNameRegex: string;
+
+                    /**
+                     * Creates a new CloudStorageRegex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudStorageRegex instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ICloudStorageRegex): google.privacy.dlp.v2.CloudStorageRegex;
+
+                    /**
+                     * Encodes the specified CloudStorageRegex message. Does not implicitly {@link google.privacy.dlp.v2.CloudStorageRegex.verify|verify} messages.
+                     * @param message CloudStorageRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ICloudStorageRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudStorageRegex message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.CloudStorageRegex.verify|verify} messages.
+                     * @param message CloudStorageRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ICloudStorageRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudStorageRegex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudStorageRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.CloudStorageRegex;
+
+                    /**
+                     * Decodes a CloudStorageRegex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudStorageRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.CloudStorageRegex;
+
+                    /**
+                     * Verifies a CloudStorageRegex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudStorageRegex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudStorageRegex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.CloudStorageRegex;
+
+                    /**
+                     * Creates a plain object from a CloudStorageRegex message. Also converts values to other types if specified.
+                     * @param message CloudStorageRegex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.CloudStorageRegex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudStorageRegex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudStorageRegex
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudStorageResourceReference. */
+                interface ICloudStorageResourceReference {
+
+                    /** CloudStorageResourceReference bucketName */
+                    bucketName?: (string|null);
+
+                    /** CloudStorageResourceReference projectId */
+                    projectId?: (string|null);
+                }
+
+                /** Represents a CloudStorageResourceReference. */
+                class CloudStorageResourceReference implements ICloudStorageResourceReference {
+
+                    /**
+                     * Constructs a new CloudStorageResourceReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ICloudStorageResourceReference);
+
+                    /** CloudStorageResourceReference bucketName. */
+                    public bucketName: string;
+
+                    /** CloudStorageResourceReference projectId. */
+                    public projectId: string;
+
+                    /**
+                     * Creates a new CloudStorageResourceReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudStorageResourceReference instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ICloudStorageResourceReference): google.privacy.dlp.v2.CloudStorageResourceReference;
+
+                    /**
+                     * Encodes the specified CloudStorageResourceReference message. Does not implicitly {@link google.privacy.dlp.v2.CloudStorageResourceReference.verify|verify} messages.
+                     * @param message CloudStorageResourceReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ICloudStorageResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudStorageResourceReference message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.CloudStorageResourceReference.verify|verify} messages.
+                     * @param message CloudStorageResourceReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ICloudStorageResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudStorageResourceReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudStorageResourceReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.CloudStorageResourceReference;
+
+                    /**
+                     * Decodes a CloudStorageResourceReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudStorageResourceReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.CloudStorageResourceReference;
+
+                    /**
+                     * Verifies a CloudStorageResourceReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudStorageResourceReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudStorageResourceReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.CloudStorageResourceReference;
+
+                    /**
+                     * Creates a plain object from a CloudStorageResourceReference message. Also converts values to other types if specified.
+                     * @param message CloudStorageResourceReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.CloudStorageResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudStorageResourceReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudStorageResourceReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiscoveryCloudStorageGenerationCadence. */
+                interface IDiscoveryCloudStorageGenerationCadence {
+
+                    /** DiscoveryCloudStorageGenerationCadence refreshFrequency */
+                    refreshFrequency?: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency|null);
+
+                    /** DiscoveryCloudStorageGenerationCadence inspectTemplateModifiedCadence */
+                    inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+                }
+
+                /** Represents a DiscoveryCloudStorageGenerationCadence. */
+                class DiscoveryCloudStorageGenerationCadence implements IDiscoveryCloudStorageGenerationCadence {
+
+                    /**
+                     * Constructs a new DiscoveryCloudStorageGenerationCadence.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryCloudStorageGenerationCadence);
+
+                    /** DiscoveryCloudStorageGenerationCadence refreshFrequency. */
+                    public refreshFrequency: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency);
+
+                    /** DiscoveryCloudStorageGenerationCadence inspectTemplateModifiedCadence. */
+                    public inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+
+                    /**
+                     * Creates a new DiscoveryCloudStorageGenerationCadence instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryCloudStorageGenerationCadence instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryCloudStorageGenerationCadence): google.privacy.dlp.v2.DiscoveryCloudStorageGenerationCadence;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudStorageGenerationCadence message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudStorageGenerationCadence.verify|verify} messages.
+                     * @param message DiscoveryCloudStorageGenerationCadence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryCloudStorageGenerationCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudStorageGenerationCadence message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudStorageGenerationCadence.verify|verify} messages.
+                     * @param message DiscoveryCloudStorageGenerationCadence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryCloudStorageGenerationCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryCloudStorageGenerationCadence message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryCloudStorageGenerationCadence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryCloudStorageGenerationCadence;
+
+                    /**
+                     * Decodes a DiscoveryCloudStorageGenerationCadence message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryCloudStorageGenerationCadence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryCloudStorageGenerationCadence;
+
+                    /**
+                     * Verifies a DiscoveryCloudStorageGenerationCadence message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryCloudStorageGenerationCadence message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryCloudStorageGenerationCadence
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryCloudStorageGenerationCadence;
+
+                    /**
+                     * Creates a plain object from a DiscoveryCloudStorageGenerationCadence message. Also converts values to other types if specified.
+                     * @param message DiscoveryCloudStorageGenerationCadence
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryCloudStorageGenerationCadence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryCloudStorageGenerationCadence to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryCloudStorageGenerationCadence
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiscoveryCloudStorageConditions. */
+                interface IDiscoveryCloudStorageConditions {
+
+                    /** DiscoveryCloudStorageConditions includedObjectAttributes */
+                    includedObjectAttributes?: (google.privacy.dlp.v2.DiscoveryCloudStorageConditions.CloudStorageObjectAttribute[]|null);
+
+                    /** DiscoveryCloudStorageConditions includedBucketAttributes */
+                    includedBucketAttributes?: (google.privacy.dlp.v2.DiscoveryCloudStorageConditions.CloudStorageBucketAttribute[]|null);
+                }
+
+                /** Represents a DiscoveryCloudStorageConditions. */
+                class DiscoveryCloudStorageConditions implements IDiscoveryCloudStorageConditions {
+
+                    /**
+                     * Constructs a new DiscoveryCloudStorageConditions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryCloudStorageConditions);
+
+                    /** DiscoveryCloudStorageConditions includedObjectAttributes. */
+                    public includedObjectAttributes: google.privacy.dlp.v2.DiscoveryCloudStorageConditions.CloudStorageObjectAttribute[];
+
+                    /** DiscoveryCloudStorageConditions includedBucketAttributes. */
+                    public includedBucketAttributes: google.privacy.dlp.v2.DiscoveryCloudStorageConditions.CloudStorageBucketAttribute[];
+
+                    /**
+                     * Creates a new DiscoveryCloudStorageConditions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryCloudStorageConditions instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryCloudStorageConditions): google.privacy.dlp.v2.DiscoveryCloudStorageConditions;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudStorageConditions message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudStorageConditions.verify|verify} messages.
+                     * @param message DiscoveryCloudStorageConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryCloudStorageConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryCloudStorageConditions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryCloudStorageConditions.verify|verify} messages.
+                     * @param message DiscoveryCloudStorageConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryCloudStorageConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryCloudStorageConditions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryCloudStorageConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryCloudStorageConditions;
+
+                    /**
+                     * Decodes a DiscoveryCloudStorageConditions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryCloudStorageConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryCloudStorageConditions;
+
+                    /**
+                     * Verifies a DiscoveryCloudStorageConditions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryCloudStorageConditions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryCloudStorageConditions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryCloudStorageConditions;
+
+                    /**
+                     * Creates a plain object from a DiscoveryCloudStorageConditions message. Also converts values to other types if specified.
+                     * @param message DiscoveryCloudStorageConditions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryCloudStorageConditions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryCloudStorageConditions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryCloudStorageConditions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DiscoveryCloudStorageConditions {
+
+                    /** CloudStorageObjectAttribute enum. */
+                    enum CloudStorageObjectAttribute {
+                        CLOUD_STORAGE_OBJECT_ATTRIBUTE_UNSPECIFIED = 0,
+                        ALL_SUPPORTED_OBJECTS = 1,
+                        STANDARD = 2,
+                        NEARLINE = 3,
+                        COLDLINE = 4,
+                        ARCHIVE = 5,
+                        REGIONAL = 6,
+                        MULTI_REGIONAL = 7,
+                        DURABLE_REDUCED_AVAILABILITY = 8
+                    }
+
+                    /** CloudStorageBucketAttribute enum. */
+                    enum CloudStorageBucketAttribute {
+                        CLOUD_STORAGE_BUCKET_ATTRIBUTE_UNSPECIFIED = 0,
+                        ALL_SUPPORTED_BUCKETS = 1,
+                        AUTOCLASS_DISABLED = 2,
+                        AUTOCLASS_ENABLED = 3
+                    }
+                }
+
+                /** Properties of a DiscoveryFileStoreConditions. */
+                interface IDiscoveryFileStoreConditions {
+
+                    /** DiscoveryFileStoreConditions createdAfter */
+                    createdAfter?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveryFileStoreConditions minAge */
+                    minAge?: (google.protobuf.IDuration|null);
+
+                    /** DiscoveryFileStoreConditions cloudStorageConditions */
+                    cloudStorageConditions?: (google.privacy.dlp.v2.IDiscoveryCloudStorageConditions|null);
+                }
+
+                /** Represents a DiscoveryFileStoreConditions. */
+                class DiscoveryFileStoreConditions implements IDiscoveryFileStoreConditions {
+
+                    /**
+                     * Constructs a new DiscoveryFileStoreConditions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryFileStoreConditions);
+
+                    /** DiscoveryFileStoreConditions createdAfter. */
+                    public createdAfter?: (google.protobuf.ITimestamp|null);
+
+                    /** DiscoveryFileStoreConditions minAge. */
+                    public minAge?: (google.protobuf.IDuration|null);
+
+                    /** DiscoveryFileStoreConditions cloudStorageConditions. */
+                    public cloudStorageConditions?: (google.privacy.dlp.v2.IDiscoveryCloudStorageConditions|null);
+
+                    /** DiscoveryFileStoreConditions conditions. */
+                    public conditions?: "cloudStorageConditions";
+
+                    /**
+                     * Creates a new DiscoveryFileStoreConditions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryFileStoreConditions instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryFileStoreConditions): google.privacy.dlp.v2.DiscoveryFileStoreConditions;
+
+                    /**
+                     * Encodes the specified DiscoveryFileStoreConditions message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryFileStoreConditions.verify|verify} messages.
+                     * @param message DiscoveryFileStoreConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryFileStoreConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryFileStoreConditions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryFileStoreConditions.verify|verify} messages.
+                     * @param message DiscoveryFileStoreConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryFileStoreConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryFileStoreConditions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryFileStoreConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryFileStoreConditions;
+
+                    /**
+                     * Decodes a DiscoveryFileStoreConditions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryFileStoreConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryFileStoreConditions;
+
+                    /**
+                     * Verifies a DiscoveryFileStoreConditions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryFileStoreConditions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryFileStoreConditions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryFileStoreConditions;
+
+                    /**
+                     * Creates a plain object from a DiscoveryFileStoreConditions message. Also converts values to other types if specified.
+                     * @param message DiscoveryFileStoreConditions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryFileStoreConditions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryFileStoreConditions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryFileStoreConditions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OtherCloudDiscoveryTarget. */
+                interface IOtherCloudDiscoveryTarget {
+
+                    /** OtherCloudDiscoveryTarget dataSourceType */
+                    dataSourceType?: (google.privacy.dlp.v2.IDataSourceType|null);
+
+                    /** OtherCloudDiscoveryTarget filter */
+                    filter?: (google.privacy.dlp.v2.IDiscoveryOtherCloudFilter|null);
+
+                    /** OtherCloudDiscoveryTarget conditions */
+                    conditions?: (google.privacy.dlp.v2.IDiscoveryOtherCloudConditions|null);
+
+                    /** OtherCloudDiscoveryTarget generationCadence */
+                    generationCadence?: (google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence|null);
+
+                    /** OtherCloudDiscoveryTarget disabled */
+                    disabled?: (google.privacy.dlp.v2.IDisabled|null);
+                }
+
+                /** Represents an OtherCloudDiscoveryTarget. */
+                class OtherCloudDiscoveryTarget implements IOtherCloudDiscoveryTarget {
+
+                    /**
+                     * Constructs a new OtherCloudDiscoveryTarget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudDiscoveryTarget);
+
+                    /** OtherCloudDiscoveryTarget dataSourceType. */
+                    public dataSourceType?: (google.privacy.dlp.v2.IDataSourceType|null);
+
+                    /** OtherCloudDiscoveryTarget filter. */
+                    public filter?: (google.privacy.dlp.v2.IDiscoveryOtherCloudFilter|null);
+
+                    /** OtherCloudDiscoveryTarget conditions. */
+                    public conditions?: (google.privacy.dlp.v2.IDiscoveryOtherCloudConditions|null);
+
+                    /** OtherCloudDiscoveryTarget generationCadence. */
+                    public generationCadence?: (google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence|null);
+
+                    /** OtherCloudDiscoveryTarget disabled. */
+                    public disabled?: (google.privacy.dlp.v2.IDisabled|null);
+
+                    /** OtherCloudDiscoveryTarget cadence. */
+                    public cadence?: ("generationCadence"|"disabled");
+
+                    /**
+                     * Creates a new OtherCloudDiscoveryTarget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudDiscoveryTarget instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudDiscoveryTarget): google.privacy.dlp.v2.OtherCloudDiscoveryTarget;
+
+                    /**
+                     * Encodes the specified OtherCloudDiscoveryTarget message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryTarget.verify|verify} messages.
+                     * @param message OtherCloudDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudDiscoveryTarget message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryTarget.verify|verify} messages.
+                     * @param message OtherCloudDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudDiscoveryTarget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudDiscoveryTarget;
+
+                    /**
+                     * Decodes an OtherCloudDiscoveryTarget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudDiscoveryTarget;
+
+                    /**
+                     * Verifies an OtherCloudDiscoveryTarget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudDiscoveryTarget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudDiscoveryTarget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudDiscoveryTarget;
+
+                    /**
+                     * Creates a plain object from an OtherCloudDiscoveryTarget message. Also converts values to other types if specified.
+                     * @param message OtherCloudDiscoveryTarget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudDiscoveryTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudDiscoveryTarget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudDiscoveryTarget
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiscoveryOtherCloudFilter. */
+                interface IDiscoveryOtherCloudFilter {
+
+                    /** DiscoveryOtherCloudFilter collection */
+                    collection?: (google.privacy.dlp.v2.IOtherCloudResourceCollection|null);
+
+                    /** DiscoveryOtherCloudFilter singleResource */
+                    singleResource?: (google.privacy.dlp.v2.IOtherCloudSingleResourceReference|null);
+
+                    /** DiscoveryOtherCloudFilter others */
+                    others?: (google.privacy.dlp.v2.IAllOtherResources|null);
+                }
+
+                /** Represents a DiscoveryOtherCloudFilter. */
+                class DiscoveryOtherCloudFilter implements IDiscoveryOtherCloudFilter {
+
+                    /**
+                     * Constructs a new DiscoveryOtherCloudFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudFilter);
+
+                    /** DiscoveryOtherCloudFilter collection. */
+                    public collection?: (google.privacy.dlp.v2.IOtherCloudResourceCollection|null);
+
+                    /** DiscoveryOtherCloudFilter singleResource. */
+                    public singleResource?: (google.privacy.dlp.v2.IOtherCloudSingleResourceReference|null);
+
+                    /** DiscoveryOtherCloudFilter others. */
+                    public others?: (google.privacy.dlp.v2.IAllOtherResources|null);
+
+                    /** DiscoveryOtherCloudFilter filter. */
+                    public filter?: ("collection"|"singleResource"|"others");
+
+                    /**
+                     * Creates a new DiscoveryOtherCloudFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryOtherCloudFilter instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudFilter): google.privacy.dlp.v2.DiscoveryOtherCloudFilter;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudFilter message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudFilter.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryOtherCloudFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudFilter message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudFilter.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryOtherCloudFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryOtherCloudFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryOtherCloudFilter;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryOtherCloudFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryOtherCloudFilter;
+
+                    /**
+                     * Verifies a DiscoveryOtherCloudFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryOtherCloudFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryOtherCloudFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryOtherCloudFilter;
+
+                    /**
+                     * Creates a plain object from a DiscoveryOtherCloudFilter message. Also converts values to other types if specified.
+                     * @param message DiscoveryOtherCloudFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryOtherCloudFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryOtherCloudFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryOtherCloudFilter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OtherCloudResourceCollection. */
+                interface IOtherCloudResourceCollection {
+
+                    /** OtherCloudResourceCollection includeRegexes */
+                    includeRegexes?: (google.privacy.dlp.v2.IOtherCloudResourceRegexes|null);
+                }
+
+                /** Represents an OtherCloudResourceCollection. */
+                class OtherCloudResourceCollection implements IOtherCloudResourceCollection {
+
+                    /**
+                     * Constructs a new OtherCloudResourceCollection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudResourceCollection);
+
+                    /** OtherCloudResourceCollection includeRegexes. */
+                    public includeRegexes?: (google.privacy.dlp.v2.IOtherCloudResourceRegexes|null);
+
+                    /** OtherCloudResourceCollection pattern. */
+                    public pattern?: "includeRegexes";
+
+                    /**
+                     * Creates a new OtherCloudResourceCollection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudResourceCollection instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudResourceCollection): google.privacy.dlp.v2.OtherCloudResourceCollection;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceCollection message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceCollection.verify|verify} messages.
+                     * @param message OtherCloudResourceCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudResourceCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceCollection message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceCollection.verify|verify} messages.
+                     * @param message OtherCloudResourceCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudResourceCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudResourceCollection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudResourceCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudResourceCollection;
+
+                    /**
+                     * Decodes an OtherCloudResourceCollection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudResourceCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudResourceCollection;
+
+                    /**
+                     * Verifies an OtherCloudResourceCollection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudResourceCollection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudResourceCollection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudResourceCollection;
+
+                    /**
+                     * Creates a plain object from an OtherCloudResourceCollection message. Also converts values to other types if specified.
+                     * @param message OtherCloudResourceCollection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudResourceCollection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudResourceCollection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudResourceCollection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OtherCloudResourceRegexes. */
+                interface IOtherCloudResourceRegexes {
+
+                    /** OtherCloudResourceRegexes patterns */
+                    patterns?: (google.privacy.dlp.v2.IOtherCloudResourceRegex[]|null);
+                }
+
+                /** Represents an OtherCloudResourceRegexes. */
+                class OtherCloudResourceRegexes implements IOtherCloudResourceRegexes {
+
+                    /**
+                     * Constructs a new OtherCloudResourceRegexes.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudResourceRegexes);
+
+                    /** OtherCloudResourceRegexes patterns. */
+                    public patterns: google.privacy.dlp.v2.IOtherCloudResourceRegex[];
+
+                    /**
+                     * Creates a new OtherCloudResourceRegexes instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudResourceRegexes instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudResourceRegexes): google.privacy.dlp.v2.OtherCloudResourceRegexes;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceRegexes message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceRegexes.verify|verify} messages.
+                     * @param message OtherCloudResourceRegexes message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudResourceRegexes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceRegexes message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceRegexes.verify|verify} messages.
+                     * @param message OtherCloudResourceRegexes message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudResourceRegexes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudResourceRegexes message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudResourceRegexes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudResourceRegexes;
+
+                    /**
+                     * Decodes an OtherCloudResourceRegexes message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudResourceRegexes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudResourceRegexes;
+
+                    /**
+                     * Verifies an OtherCloudResourceRegexes message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudResourceRegexes message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudResourceRegexes
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudResourceRegexes;
+
+                    /**
+                     * Creates a plain object from an OtherCloudResourceRegexes message. Also converts values to other types if specified.
+                     * @param message OtherCloudResourceRegexes
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudResourceRegexes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudResourceRegexes to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudResourceRegexes
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OtherCloudResourceRegex. */
+                interface IOtherCloudResourceRegex {
+
+                    /** OtherCloudResourceRegex amazonS3BucketRegex */
+                    amazonS3BucketRegex?: (google.privacy.dlp.v2.IAmazonS3BucketRegex|null);
+                }
+
+                /** Represents an OtherCloudResourceRegex. */
+                class OtherCloudResourceRegex implements IOtherCloudResourceRegex {
+
+                    /**
+                     * Constructs a new OtherCloudResourceRegex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudResourceRegex);
+
+                    /** OtherCloudResourceRegex amazonS3BucketRegex. */
+                    public amazonS3BucketRegex?: (google.privacy.dlp.v2.IAmazonS3BucketRegex|null);
+
+                    /** OtherCloudResourceRegex resourceRegex. */
+                    public resourceRegex?: "amazonS3BucketRegex";
+
+                    /**
+                     * Creates a new OtherCloudResourceRegex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudResourceRegex instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudResourceRegex): google.privacy.dlp.v2.OtherCloudResourceRegex;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceRegex message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceRegex.verify|verify} messages.
+                     * @param message OtherCloudResourceRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudResourceRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceRegex message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceRegex.verify|verify} messages.
+                     * @param message OtherCloudResourceRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudResourceRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudResourceRegex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudResourceRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudResourceRegex;
+
+                    /**
+                     * Decodes an OtherCloudResourceRegex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudResourceRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudResourceRegex;
+
+                    /**
+                     * Verifies an OtherCloudResourceRegex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudResourceRegex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudResourceRegex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudResourceRegex;
+
+                    /**
+                     * Creates a plain object from an OtherCloudResourceRegex message. Also converts values to other types if specified.
+                     * @param message OtherCloudResourceRegex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudResourceRegex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudResourceRegex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudResourceRegex
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AwsAccountRegex. */
+                interface IAwsAccountRegex {
+
+                    /** AwsAccountRegex accountIdRegex */
+                    accountIdRegex?: (string|null);
+                }
+
+                /** Represents an AwsAccountRegex. */
+                class AwsAccountRegex implements IAwsAccountRegex {
+
+                    /**
+                     * Constructs a new AwsAccountRegex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAwsAccountRegex);
+
+                    /** AwsAccountRegex accountIdRegex. */
+                    public accountIdRegex: string;
+
+                    /**
+                     * Creates a new AwsAccountRegex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AwsAccountRegex instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAwsAccountRegex): google.privacy.dlp.v2.AwsAccountRegex;
+
+                    /**
+                     * Encodes the specified AwsAccountRegex message. Does not implicitly {@link google.privacy.dlp.v2.AwsAccountRegex.verify|verify} messages.
+                     * @param message AwsAccountRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAwsAccountRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AwsAccountRegex message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AwsAccountRegex.verify|verify} messages.
+                     * @param message AwsAccountRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAwsAccountRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AwsAccountRegex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AwsAccountRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AwsAccountRegex;
+
+                    /**
+                     * Decodes an AwsAccountRegex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AwsAccountRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AwsAccountRegex;
+
+                    /**
+                     * Verifies an AwsAccountRegex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AwsAccountRegex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AwsAccountRegex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AwsAccountRegex;
+
+                    /**
+                     * Creates a plain object from an AwsAccountRegex message. Also converts values to other types if specified.
+                     * @param message AwsAccountRegex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AwsAccountRegex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AwsAccountRegex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AwsAccountRegex
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AmazonS3BucketRegex. */
+                interface IAmazonS3BucketRegex {
+
+                    /** AmazonS3BucketRegex awsAccountRegex */
+                    awsAccountRegex?: (google.privacy.dlp.v2.IAwsAccountRegex|null);
+
+                    /** AmazonS3BucketRegex bucketNameRegex */
+                    bucketNameRegex?: (string|null);
+                }
+
+                /** Represents an AmazonS3BucketRegex. */
+                class AmazonS3BucketRegex implements IAmazonS3BucketRegex {
+
+                    /**
+                     * Constructs a new AmazonS3BucketRegex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAmazonS3BucketRegex);
+
+                    /** AmazonS3BucketRegex awsAccountRegex. */
+                    public awsAccountRegex?: (google.privacy.dlp.v2.IAwsAccountRegex|null);
+
+                    /** AmazonS3BucketRegex bucketNameRegex. */
+                    public bucketNameRegex: string;
+
+                    /**
+                     * Creates a new AmazonS3BucketRegex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AmazonS3BucketRegex instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAmazonS3BucketRegex): google.privacy.dlp.v2.AmazonS3BucketRegex;
+
+                    /**
+                     * Encodes the specified AmazonS3BucketRegex message. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3BucketRegex.verify|verify} messages.
+                     * @param message AmazonS3BucketRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAmazonS3BucketRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AmazonS3BucketRegex message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3BucketRegex.verify|verify} messages.
+                     * @param message AmazonS3BucketRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAmazonS3BucketRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AmazonS3BucketRegex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AmazonS3BucketRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AmazonS3BucketRegex;
+
+                    /**
+                     * Decodes an AmazonS3BucketRegex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AmazonS3BucketRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AmazonS3BucketRegex;
+
+                    /**
+                     * Verifies an AmazonS3BucketRegex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AmazonS3BucketRegex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AmazonS3BucketRegex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AmazonS3BucketRegex;
+
+                    /**
+                     * Creates a plain object from an AmazonS3BucketRegex message. Also converts values to other types if specified.
+                     * @param message AmazonS3BucketRegex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AmazonS3BucketRegex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AmazonS3BucketRegex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AmazonS3BucketRegex
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OtherCloudSingleResourceReference. */
+                interface IOtherCloudSingleResourceReference {
+
+                    /** OtherCloudSingleResourceReference amazonS3Bucket */
+                    amazonS3Bucket?: (google.privacy.dlp.v2.IAmazonS3Bucket|null);
+                }
+
+                /** Represents an OtherCloudSingleResourceReference. */
+                class OtherCloudSingleResourceReference implements IOtherCloudSingleResourceReference {
+
+                    /**
+                     * Constructs a new OtherCloudSingleResourceReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudSingleResourceReference);
+
+                    /** OtherCloudSingleResourceReference amazonS3Bucket. */
+                    public amazonS3Bucket?: (google.privacy.dlp.v2.IAmazonS3Bucket|null);
+
+                    /** OtherCloudSingleResourceReference resource. */
+                    public resource?: "amazonS3Bucket";
+
+                    /**
+                     * Creates a new OtherCloudSingleResourceReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudSingleResourceReference instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudSingleResourceReference): google.privacy.dlp.v2.OtherCloudSingleResourceReference;
+
+                    /**
+                     * Encodes the specified OtherCloudSingleResourceReference message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudSingleResourceReference.verify|verify} messages.
+                     * @param message OtherCloudSingleResourceReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudSingleResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudSingleResourceReference message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudSingleResourceReference.verify|verify} messages.
+                     * @param message OtherCloudSingleResourceReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudSingleResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudSingleResourceReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudSingleResourceReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudSingleResourceReference;
+
+                    /**
+                     * Decodes an OtherCloudSingleResourceReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudSingleResourceReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudSingleResourceReference;
+
+                    /**
+                     * Verifies an OtherCloudSingleResourceReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudSingleResourceReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudSingleResourceReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudSingleResourceReference;
+
+                    /**
+                     * Creates a plain object from an OtherCloudSingleResourceReference message. Also converts values to other types if specified.
+                     * @param message OtherCloudSingleResourceReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudSingleResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudSingleResourceReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudSingleResourceReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AwsAccount. */
+                interface IAwsAccount {
+
+                    /** AwsAccount accountId */
+                    accountId?: (string|null);
+                }
+
+                /** Represents an AwsAccount. */
+                class AwsAccount implements IAwsAccount {
+
+                    /**
+                     * Constructs a new AwsAccount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAwsAccount);
+
+                    /** AwsAccount accountId. */
+                    public accountId: string;
+
+                    /**
+                     * Creates a new AwsAccount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AwsAccount instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAwsAccount): google.privacy.dlp.v2.AwsAccount;
+
+                    /**
+                     * Encodes the specified AwsAccount message. Does not implicitly {@link google.privacy.dlp.v2.AwsAccount.verify|verify} messages.
+                     * @param message AwsAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAwsAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AwsAccount message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AwsAccount.verify|verify} messages.
+                     * @param message AwsAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAwsAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AwsAccount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AwsAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AwsAccount;
+
+                    /**
+                     * Decodes an AwsAccount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AwsAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AwsAccount;
+
+                    /**
+                     * Verifies an AwsAccount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AwsAccount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AwsAccount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AwsAccount;
+
+                    /**
+                     * Creates a plain object from an AwsAccount message. Also converts values to other types if specified.
+                     * @param message AwsAccount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AwsAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AwsAccount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AwsAccount
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AmazonS3Bucket. */
+                interface IAmazonS3Bucket {
+
+                    /** AmazonS3Bucket awsAccount */
+                    awsAccount?: (google.privacy.dlp.v2.IAwsAccount|null);
+
+                    /** AmazonS3Bucket bucketName */
+                    bucketName?: (string|null);
+                }
+
+                /** Represents an AmazonS3Bucket. */
+                class AmazonS3Bucket implements IAmazonS3Bucket {
+
+                    /**
+                     * Constructs a new AmazonS3Bucket.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAmazonS3Bucket);
+
+                    /** AmazonS3Bucket awsAccount. */
+                    public awsAccount?: (google.privacy.dlp.v2.IAwsAccount|null);
+
+                    /** AmazonS3Bucket bucketName. */
+                    public bucketName: string;
+
+                    /**
+                     * Creates a new AmazonS3Bucket instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AmazonS3Bucket instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAmazonS3Bucket): google.privacy.dlp.v2.AmazonS3Bucket;
+
+                    /**
+                     * Encodes the specified AmazonS3Bucket message. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3Bucket.verify|verify} messages.
+                     * @param message AmazonS3Bucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAmazonS3Bucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AmazonS3Bucket message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3Bucket.verify|verify} messages.
+                     * @param message AmazonS3Bucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAmazonS3Bucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AmazonS3Bucket message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AmazonS3Bucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AmazonS3Bucket;
+
+                    /**
+                     * Decodes an AmazonS3Bucket message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AmazonS3Bucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AmazonS3Bucket;
+
+                    /**
+                     * Verifies an AmazonS3Bucket message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AmazonS3Bucket message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AmazonS3Bucket
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AmazonS3Bucket;
+
+                    /**
+                     * Creates a plain object from an AmazonS3Bucket message. Also converts values to other types if specified.
+                     * @param message AmazonS3Bucket
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AmazonS3Bucket, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AmazonS3Bucket to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AmazonS3Bucket
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiscoveryOtherCloudConditions. */
+                interface IDiscoveryOtherCloudConditions {
+
+                    /** DiscoveryOtherCloudConditions minAge */
+                    minAge?: (google.protobuf.IDuration|null);
+
+                    /** DiscoveryOtherCloudConditions amazonS3BucketConditions */
+                    amazonS3BucketConditions?: (google.privacy.dlp.v2.IAmazonS3BucketConditions|null);
+                }
+
+                /** Represents a DiscoveryOtherCloudConditions. */
+                class DiscoveryOtherCloudConditions implements IDiscoveryOtherCloudConditions {
+
+                    /**
+                     * Constructs a new DiscoveryOtherCloudConditions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudConditions);
+
+                    /** DiscoveryOtherCloudConditions minAge. */
+                    public minAge?: (google.protobuf.IDuration|null);
+
+                    /** DiscoveryOtherCloudConditions amazonS3BucketConditions. */
+                    public amazonS3BucketConditions?: (google.privacy.dlp.v2.IAmazonS3BucketConditions|null);
+
+                    /** DiscoveryOtherCloudConditions conditions. */
+                    public conditions?: "amazonS3BucketConditions";
+
+                    /**
+                     * Creates a new DiscoveryOtherCloudConditions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryOtherCloudConditions instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudConditions): google.privacy.dlp.v2.DiscoveryOtherCloudConditions;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudConditions message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudConditions.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryOtherCloudConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudConditions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudConditions.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryOtherCloudConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudConditions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryOtherCloudConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryOtherCloudConditions;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudConditions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryOtherCloudConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryOtherCloudConditions;
+
+                    /**
+                     * Verifies a DiscoveryOtherCloudConditions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryOtherCloudConditions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryOtherCloudConditions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryOtherCloudConditions;
+
+                    /**
+                     * Creates a plain object from a DiscoveryOtherCloudConditions message. Also converts values to other types if specified.
+                     * @param message DiscoveryOtherCloudConditions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryOtherCloudConditions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryOtherCloudConditions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryOtherCloudConditions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AmazonS3BucketConditions. */
+                interface IAmazonS3BucketConditions {
+
+                    /** AmazonS3BucketConditions bucketTypes */
+                    bucketTypes?: (google.privacy.dlp.v2.AmazonS3BucketConditions.BucketType[]|null);
+
+                    /** AmazonS3BucketConditions objectStorageClasses */
+                    objectStorageClasses?: (google.privacy.dlp.v2.AmazonS3BucketConditions.ObjectStorageClass[]|null);
+                }
+
+                /** Represents an AmazonS3BucketConditions. */
+                class AmazonS3BucketConditions implements IAmazonS3BucketConditions {
+
+                    /**
+                     * Constructs a new AmazonS3BucketConditions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAmazonS3BucketConditions);
+
+                    /** AmazonS3BucketConditions bucketTypes. */
+                    public bucketTypes: google.privacy.dlp.v2.AmazonS3BucketConditions.BucketType[];
+
+                    /** AmazonS3BucketConditions objectStorageClasses. */
+                    public objectStorageClasses: google.privacy.dlp.v2.AmazonS3BucketConditions.ObjectStorageClass[];
+
+                    /**
+                     * Creates a new AmazonS3BucketConditions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AmazonS3BucketConditions instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAmazonS3BucketConditions): google.privacy.dlp.v2.AmazonS3BucketConditions;
+
+                    /**
+                     * Encodes the specified AmazonS3BucketConditions message. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3BucketConditions.verify|verify} messages.
+                     * @param message AmazonS3BucketConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAmazonS3BucketConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AmazonS3BucketConditions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3BucketConditions.verify|verify} messages.
+                     * @param message AmazonS3BucketConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAmazonS3BucketConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AmazonS3BucketConditions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AmazonS3BucketConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AmazonS3BucketConditions;
+
+                    /**
+                     * Decodes an AmazonS3BucketConditions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AmazonS3BucketConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AmazonS3BucketConditions;
+
+                    /**
+                     * Verifies an AmazonS3BucketConditions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AmazonS3BucketConditions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AmazonS3BucketConditions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AmazonS3BucketConditions;
+
+                    /**
+                     * Creates a plain object from an AmazonS3BucketConditions message. Also converts values to other types if specified.
+                     * @param message AmazonS3BucketConditions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AmazonS3BucketConditions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AmazonS3BucketConditions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AmazonS3BucketConditions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AmazonS3BucketConditions {
+
+                    /** BucketType enum. */
+                    enum BucketType {
+                        TYPE_UNSPECIFIED = 0,
+                        TYPE_ALL_SUPPORTED = 1,
+                        TYPE_GENERAL_PURPOSE = 2
+                    }
+
+                    /** ObjectStorageClass enum. */
+                    enum ObjectStorageClass {
+                        UNSPECIFIED = 0,
+                        ALL_SUPPORTED_CLASSES = 1,
+                        STANDARD = 2,
+                        STANDARD_INFREQUENT_ACCESS = 4,
+                        GLACIER_INSTANT_RETRIEVAL = 6,
+                        INTELLIGENT_TIERING = 7
+                    }
+                }
+
+                /** Properties of a DiscoveryOtherCloudGenerationCadence. */
+                interface IDiscoveryOtherCloudGenerationCadence {
+
+                    /** DiscoveryOtherCloudGenerationCadence refreshFrequency */
+                    refreshFrequency?: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency|null);
+
+                    /** DiscoveryOtherCloudGenerationCadence inspectTemplateModifiedCadence */
+                    inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+                }
+
+                /** Represents a DiscoveryOtherCloudGenerationCadence. */
+                class DiscoveryOtherCloudGenerationCadence implements IDiscoveryOtherCloudGenerationCadence {
+
+                    /**
+                     * Constructs a new DiscoveryOtherCloudGenerationCadence.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence);
+
+                    /** DiscoveryOtherCloudGenerationCadence refreshFrequency. */
+                    public refreshFrequency: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency);
+
+                    /** DiscoveryOtherCloudGenerationCadence inspectTemplateModifiedCadence. */
+                    public inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+
+                    /**
+                     * Creates a new DiscoveryOtherCloudGenerationCadence instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryOtherCloudGenerationCadence instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence): google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudGenerationCadence message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudGenerationCadence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudGenerationCadence message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudGenerationCadence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudGenerationCadence message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryOtherCloudGenerationCadence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudGenerationCadence message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryOtherCloudGenerationCadence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence;
+
+                    /**
+                     * Verifies a DiscoveryOtherCloudGenerationCadence message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryOtherCloudGenerationCadence message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryOtherCloudGenerationCadence
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence;
+
+                    /**
+                     * Creates a plain object from a DiscoveryOtherCloudGenerationCadence message. Also converts values to other types if specified.
+                     * @param message DiscoveryOtherCloudGenerationCadence
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryOtherCloudGenerationCadence to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryOtherCloudGenerationCadence
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DiscoveryStartingLocation. */
                 interface IDiscoveryStartingLocation {
 
@@ -22132,6 +26809,306 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DiscoveryStartingLocation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OtherCloudDiscoveryStartingLocation. */
+                interface IOtherCloudDiscoveryStartingLocation {
+
+                    /** OtherCloudDiscoveryStartingLocation awsLocation */
+                    awsLocation?: (google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation|null);
+                }
+
+                /** Represents an OtherCloudDiscoveryStartingLocation. */
+                class OtherCloudDiscoveryStartingLocation implements IOtherCloudDiscoveryStartingLocation {
+
+                    /**
+                     * Constructs a new OtherCloudDiscoveryStartingLocation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation);
+
+                    /** OtherCloudDiscoveryStartingLocation awsLocation. */
+                    public awsLocation?: (google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation|null);
+
+                    /** OtherCloudDiscoveryStartingLocation location. */
+                    public location?: "awsLocation";
+
+                    /**
+                     * Creates a new OtherCloudDiscoveryStartingLocation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudDiscoveryStartingLocation instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation;
+
+                    /**
+                     * Encodes the specified OtherCloudDiscoveryStartingLocation message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.verify|verify} messages.
+                     * @param message OtherCloudDiscoveryStartingLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudDiscoveryStartingLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.verify|verify} messages.
+                     * @param message OtherCloudDiscoveryStartingLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudDiscoveryStartingLocation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudDiscoveryStartingLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation;
+
+                    /**
+                     * Decodes an OtherCloudDiscoveryStartingLocation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudDiscoveryStartingLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation;
+
+                    /**
+                     * Verifies an OtherCloudDiscoveryStartingLocation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudDiscoveryStartingLocation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudDiscoveryStartingLocation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation;
+
+                    /**
+                     * Creates a plain object from an OtherCloudDiscoveryStartingLocation message. Also converts values to other types if specified.
+                     * @param message OtherCloudDiscoveryStartingLocation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudDiscoveryStartingLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudDiscoveryStartingLocation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OtherCloudDiscoveryStartingLocation {
+
+                    /** Properties of an AwsDiscoveryStartingLocation. */
+                    interface IAwsDiscoveryStartingLocation {
+
+                        /** AwsDiscoveryStartingLocation accountId */
+                        accountId?: (string|null);
+
+                        /** AwsDiscoveryStartingLocation allAssetInventoryAssets */
+                        allAssetInventoryAssets?: (boolean|null);
+                    }
+
+                    /** Represents an AwsDiscoveryStartingLocation. */
+                    class AwsDiscoveryStartingLocation implements IAwsDiscoveryStartingLocation {
+
+                        /**
+                         * Constructs a new AwsDiscoveryStartingLocation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation);
+
+                        /** AwsDiscoveryStartingLocation accountId. */
+                        public accountId?: (string|null);
+
+                        /** AwsDiscoveryStartingLocation allAssetInventoryAssets. */
+                        public allAssetInventoryAssets?: (boolean|null);
+
+                        /** AwsDiscoveryStartingLocation scope. */
+                        public scope?: ("accountId"|"allAssetInventoryAssets");
+
+                        /**
+                         * Creates a new AwsDiscoveryStartingLocation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AwsDiscoveryStartingLocation instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation;
+
+                        /**
+                         * Encodes the specified AwsDiscoveryStartingLocation message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation.verify|verify} messages.
+                         * @param message AwsDiscoveryStartingLocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AwsDiscoveryStartingLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation.verify|verify} messages.
+                         * @param message AwsDiscoveryStartingLocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AwsDiscoveryStartingLocation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AwsDiscoveryStartingLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation;
+
+                        /**
+                         * Decodes an AwsDiscoveryStartingLocation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AwsDiscoveryStartingLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation;
+
+                        /**
+                         * Verifies an AwsDiscoveryStartingLocation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AwsDiscoveryStartingLocation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AwsDiscoveryStartingLocation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation;
+
+                        /**
+                         * Creates a plain object from an AwsDiscoveryStartingLocation message. Also converts values to other types if specified.
+                         * @param message AwsDiscoveryStartingLocation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AwsDiscoveryStartingLocation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AwsDiscoveryStartingLocation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an AllOtherResources. */
+                interface IAllOtherResources {
+                }
+
+                /** Represents an AllOtherResources. */
+                class AllOtherResources implements IAllOtherResources {
+
+                    /**
+                     * Constructs a new AllOtherResources.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAllOtherResources);
+
+                    /**
+                     * Creates a new AllOtherResources instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AllOtherResources instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAllOtherResources): google.privacy.dlp.v2.AllOtherResources;
+
+                    /**
+                     * Encodes the specified AllOtherResources message. Does not implicitly {@link google.privacy.dlp.v2.AllOtherResources.verify|verify} messages.
+                     * @param message AllOtherResources message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAllOtherResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AllOtherResources message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AllOtherResources.verify|verify} messages.
+                     * @param message AllOtherResources message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAllOtherResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AllOtherResources message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AllOtherResources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AllOtherResources;
+
+                    /**
+                     * Decodes an AllOtherResources message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AllOtherResources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AllOtherResources;
+
+                    /**
+                     * Verifies an AllOtherResources message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AllOtherResources message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AllOtherResources
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AllOtherResources;
+
+                    /**
+                     * Creates a plain object from an AllOtherResources message. Also converts values to other types if specified.
+                     * @param message AllOtherResources
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AllOtherResources, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AllOtherResources to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AllOtherResources
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -25466,6 +30443,678 @@ export namespace google {
                     INVALID = 4
                 }
 
+                /** Properties of a ListProjectDataProfilesRequest. */
+                interface IListProjectDataProfilesRequest {
+
+                    /** ListProjectDataProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListProjectDataProfilesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListProjectDataProfilesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListProjectDataProfilesRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListProjectDataProfilesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListProjectDataProfilesRequest. */
+                class ListProjectDataProfilesRequest implements IListProjectDataProfilesRequest {
+
+                    /**
+                     * Constructs a new ListProjectDataProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IListProjectDataProfilesRequest);
+
+                    /** ListProjectDataProfilesRequest parent. */
+                    public parent: string;
+
+                    /** ListProjectDataProfilesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListProjectDataProfilesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListProjectDataProfilesRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListProjectDataProfilesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListProjectDataProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProjectDataProfilesRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IListProjectDataProfilesRequest): google.privacy.dlp.v2.ListProjectDataProfilesRequest;
+
+                    /**
+                     * Encodes the specified ListProjectDataProfilesRequest message. Does not implicitly {@link google.privacy.dlp.v2.ListProjectDataProfilesRequest.verify|verify} messages.
+                     * @param message ListProjectDataProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IListProjectDataProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProjectDataProfilesRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ListProjectDataProfilesRequest.verify|verify} messages.
+                     * @param message ListProjectDataProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IListProjectDataProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProjectDataProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProjectDataProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ListProjectDataProfilesRequest;
+
+                    /**
+                     * Decodes a ListProjectDataProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProjectDataProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ListProjectDataProfilesRequest;
+
+                    /**
+                     * Verifies a ListProjectDataProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProjectDataProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProjectDataProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ListProjectDataProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a ListProjectDataProfilesRequest message. Also converts values to other types if specified.
+                     * @param message ListProjectDataProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ListProjectDataProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProjectDataProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListProjectDataProfilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListProjectDataProfilesResponse. */
+                interface IListProjectDataProfilesResponse {
+
+                    /** ListProjectDataProfilesResponse projectDataProfiles */
+                    projectDataProfiles?: (google.privacy.dlp.v2.IProjectDataProfile[]|null);
+
+                    /** ListProjectDataProfilesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListProjectDataProfilesResponse. */
+                class ListProjectDataProfilesResponse implements IListProjectDataProfilesResponse {
+
+                    /**
+                     * Constructs a new ListProjectDataProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IListProjectDataProfilesResponse);
+
+                    /** ListProjectDataProfilesResponse projectDataProfiles. */
+                    public projectDataProfiles: google.privacy.dlp.v2.IProjectDataProfile[];
+
+                    /** ListProjectDataProfilesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListProjectDataProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProjectDataProfilesResponse instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IListProjectDataProfilesResponse): google.privacy.dlp.v2.ListProjectDataProfilesResponse;
+
+                    /**
+                     * Encodes the specified ListProjectDataProfilesResponse message. Does not implicitly {@link google.privacy.dlp.v2.ListProjectDataProfilesResponse.verify|verify} messages.
+                     * @param message ListProjectDataProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IListProjectDataProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProjectDataProfilesResponse message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ListProjectDataProfilesResponse.verify|verify} messages.
+                     * @param message ListProjectDataProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IListProjectDataProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProjectDataProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProjectDataProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ListProjectDataProfilesResponse;
+
+                    /**
+                     * Decodes a ListProjectDataProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProjectDataProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ListProjectDataProfilesResponse;
+
+                    /**
+                     * Verifies a ListProjectDataProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProjectDataProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProjectDataProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ListProjectDataProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a ListProjectDataProfilesResponse message. Also converts values to other types if specified.
+                     * @param message ListProjectDataProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ListProjectDataProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProjectDataProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListProjectDataProfilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTableDataProfilesRequest. */
+                interface IListTableDataProfilesRequest {
+
+                    /** ListTableDataProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListTableDataProfilesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListTableDataProfilesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListTableDataProfilesRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListTableDataProfilesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListTableDataProfilesRequest. */
+                class ListTableDataProfilesRequest implements IListTableDataProfilesRequest {
+
+                    /**
+                     * Constructs a new ListTableDataProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IListTableDataProfilesRequest);
+
+                    /** ListTableDataProfilesRequest parent. */
+                    public parent: string;
+
+                    /** ListTableDataProfilesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListTableDataProfilesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListTableDataProfilesRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListTableDataProfilesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListTableDataProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTableDataProfilesRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IListTableDataProfilesRequest): google.privacy.dlp.v2.ListTableDataProfilesRequest;
+
+                    /**
+                     * Encodes the specified ListTableDataProfilesRequest message. Does not implicitly {@link google.privacy.dlp.v2.ListTableDataProfilesRequest.verify|verify} messages.
+                     * @param message ListTableDataProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IListTableDataProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTableDataProfilesRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ListTableDataProfilesRequest.verify|verify} messages.
+                     * @param message ListTableDataProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IListTableDataProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTableDataProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTableDataProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ListTableDataProfilesRequest;
+
+                    /**
+                     * Decodes a ListTableDataProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTableDataProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ListTableDataProfilesRequest;
+
+                    /**
+                     * Verifies a ListTableDataProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTableDataProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTableDataProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ListTableDataProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a ListTableDataProfilesRequest message. Also converts values to other types if specified.
+                     * @param message ListTableDataProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ListTableDataProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTableDataProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTableDataProfilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTableDataProfilesResponse. */
+                interface IListTableDataProfilesResponse {
+
+                    /** ListTableDataProfilesResponse tableDataProfiles */
+                    tableDataProfiles?: (google.privacy.dlp.v2.ITableDataProfile[]|null);
+
+                    /** ListTableDataProfilesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListTableDataProfilesResponse. */
+                class ListTableDataProfilesResponse implements IListTableDataProfilesResponse {
+
+                    /**
+                     * Constructs a new ListTableDataProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IListTableDataProfilesResponse);
+
+                    /** ListTableDataProfilesResponse tableDataProfiles. */
+                    public tableDataProfiles: google.privacy.dlp.v2.ITableDataProfile[];
+
+                    /** ListTableDataProfilesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListTableDataProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTableDataProfilesResponse instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IListTableDataProfilesResponse): google.privacy.dlp.v2.ListTableDataProfilesResponse;
+
+                    /**
+                     * Encodes the specified ListTableDataProfilesResponse message. Does not implicitly {@link google.privacy.dlp.v2.ListTableDataProfilesResponse.verify|verify} messages.
+                     * @param message ListTableDataProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IListTableDataProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTableDataProfilesResponse message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ListTableDataProfilesResponse.verify|verify} messages.
+                     * @param message ListTableDataProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IListTableDataProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTableDataProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTableDataProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ListTableDataProfilesResponse;
+
+                    /**
+                     * Decodes a ListTableDataProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTableDataProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ListTableDataProfilesResponse;
+
+                    /**
+                     * Verifies a ListTableDataProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTableDataProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTableDataProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ListTableDataProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a ListTableDataProfilesResponse message. Also converts values to other types if specified.
+                     * @param message ListTableDataProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ListTableDataProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTableDataProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTableDataProfilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListColumnDataProfilesRequest. */
+                interface IListColumnDataProfilesRequest {
+
+                    /** ListColumnDataProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListColumnDataProfilesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListColumnDataProfilesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListColumnDataProfilesRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListColumnDataProfilesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListColumnDataProfilesRequest. */
+                class ListColumnDataProfilesRequest implements IListColumnDataProfilesRequest {
+
+                    /**
+                     * Constructs a new ListColumnDataProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IListColumnDataProfilesRequest);
+
+                    /** ListColumnDataProfilesRequest parent. */
+                    public parent: string;
+
+                    /** ListColumnDataProfilesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListColumnDataProfilesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListColumnDataProfilesRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListColumnDataProfilesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListColumnDataProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListColumnDataProfilesRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IListColumnDataProfilesRequest): google.privacy.dlp.v2.ListColumnDataProfilesRequest;
+
+                    /**
+                     * Encodes the specified ListColumnDataProfilesRequest message. Does not implicitly {@link google.privacy.dlp.v2.ListColumnDataProfilesRequest.verify|verify} messages.
+                     * @param message ListColumnDataProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IListColumnDataProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListColumnDataProfilesRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ListColumnDataProfilesRequest.verify|verify} messages.
+                     * @param message ListColumnDataProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IListColumnDataProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListColumnDataProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListColumnDataProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ListColumnDataProfilesRequest;
+
+                    /**
+                     * Decodes a ListColumnDataProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListColumnDataProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ListColumnDataProfilesRequest;
+
+                    /**
+                     * Verifies a ListColumnDataProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListColumnDataProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListColumnDataProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ListColumnDataProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a ListColumnDataProfilesRequest message. Also converts values to other types if specified.
+                     * @param message ListColumnDataProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ListColumnDataProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListColumnDataProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListColumnDataProfilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListColumnDataProfilesResponse. */
+                interface IListColumnDataProfilesResponse {
+
+                    /** ListColumnDataProfilesResponse columnDataProfiles */
+                    columnDataProfiles?: (google.privacy.dlp.v2.IColumnDataProfile[]|null);
+
+                    /** ListColumnDataProfilesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListColumnDataProfilesResponse. */
+                class ListColumnDataProfilesResponse implements IListColumnDataProfilesResponse {
+
+                    /**
+                     * Constructs a new ListColumnDataProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IListColumnDataProfilesResponse);
+
+                    /** ListColumnDataProfilesResponse columnDataProfiles. */
+                    public columnDataProfiles: google.privacy.dlp.v2.IColumnDataProfile[];
+
+                    /** ListColumnDataProfilesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListColumnDataProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListColumnDataProfilesResponse instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IListColumnDataProfilesResponse): google.privacy.dlp.v2.ListColumnDataProfilesResponse;
+
+                    /**
+                     * Encodes the specified ListColumnDataProfilesResponse message. Does not implicitly {@link google.privacy.dlp.v2.ListColumnDataProfilesResponse.verify|verify} messages.
+                     * @param message ListColumnDataProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IListColumnDataProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListColumnDataProfilesResponse message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ListColumnDataProfilesResponse.verify|verify} messages.
+                     * @param message ListColumnDataProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IListColumnDataProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListColumnDataProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListColumnDataProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ListColumnDataProfilesResponse;
+
+                    /**
+                     * Decodes a ListColumnDataProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListColumnDataProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ListColumnDataProfilesResponse;
+
+                    /**
+                     * Verifies a ListColumnDataProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListColumnDataProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListColumnDataProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ListColumnDataProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a ListColumnDataProfilesResponse message. Also converts values to other types if specified.
+                     * @param message ListColumnDataProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ListColumnDataProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListColumnDataProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListColumnDataProfilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DataRiskLevel. */
                 interface IDataRiskLevel {
 
@@ -25569,15 +31218,156 @@ export namespace google {
                     enum DataRiskLevelScore {
                         RISK_SCORE_UNSPECIFIED = 0,
                         RISK_LOW = 10,
+                        RISK_UNKNOWN = 12,
                         RISK_MODERATE = 20,
                         RISK_HIGH = 30
                     }
+                }
+
+                /** Properties of a ProjectDataProfile. */
+                interface IProjectDataProfile {
+
+                    /** ProjectDataProfile name */
+                    name?: (string|null);
+
+                    /** ProjectDataProfile projectId */
+                    projectId?: (string|null);
+
+                    /** ProjectDataProfile profileLastGenerated */
+                    profileLastGenerated?: (google.protobuf.ITimestamp|null);
+
+                    /** ProjectDataProfile sensitivityScore */
+                    sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                    /** ProjectDataProfile dataRiskLevel */
+                    dataRiskLevel?: (google.privacy.dlp.v2.IDataRiskLevel|null);
+
+                    /** ProjectDataProfile profileStatus */
+                    profileStatus?: (google.privacy.dlp.v2.IProfileStatus|null);
+
+                    /** ProjectDataProfile tableDataProfileCount */
+                    tableDataProfileCount?: (number|Long|string|null);
+
+                    /** ProjectDataProfile fileStoreDataProfileCount */
+                    fileStoreDataProfileCount?: (number|Long|string|null);
+                }
+
+                /** Represents a ProjectDataProfile. */
+                class ProjectDataProfile implements IProjectDataProfile {
+
+                    /**
+                     * Constructs a new ProjectDataProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IProjectDataProfile);
+
+                    /** ProjectDataProfile name. */
+                    public name: string;
+
+                    /** ProjectDataProfile projectId. */
+                    public projectId: string;
+
+                    /** ProjectDataProfile profileLastGenerated. */
+                    public profileLastGenerated?: (google.protobuf.ITimestamp|null);
+
+                    /** ProjectDataProfile sensitivityScore. */
+                    public sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                    /** ProjectDataProfile dataRiskLevel. */
+                    public dataRiskLevel?: (google.privacy.dlp.v2.IDataRiskLevel|null);
+
+                    /** ProjectDataProfile profileStatus. */
+                    public profileStatus?: (google.privacy.dlp.v2.IProfileStatus|null);
+
+                    /** ProjectDataProfile tableDataProfileCount. */
+                    public tableDataProfileCount: (number|Long|string);
+
+                    /** ProjectDataProfile fileStoreDataProfileCount. */
+                    public fileStoreDataProfileCount: (number|Long|string);
+
+                    /**
+                     * Creates a new ProjectDataProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProjectDataProfile instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IProjectDataProfile): google.privacy.dlp.v2.ProjectDataProfile;
+
+                    /**
+                     * Encodes the specified ProjectDataProfile message. Does not implicitly {@link google.privacy.dlp.v2.ProjectDataProfile.verify|verify} messages.
+                     * @param message ProjectDataProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IProjectDataProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProjectDataProfile message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ProjectDataProfile.verify|verify} messages.
+                     * @param message ProjectDataProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IProjectDataProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProjectDataProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProjectDataProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ProjectDataProfile;
+
+                    /**
+                     * Decodes a ProjectDataProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProjectDataProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ProjectDataProfile;
+
+                    /**
+                     * Verifies a ProjectDataProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProjectDataProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProjectDataProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ProjectDataProfile;
+
+                    /**
+                     * Creates a plain object from a ProjectDataProfile message. Also converts values to other types if specified.
+                     * @param message ProjectDataProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ProjectDataProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProjectDataProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProjectDataProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** ResourceVisibility enum. */
                 enum ResourceVisibility {
                     RESOURCE_VISIBILITY_UNSPECIFIED = 0,
                     RESOURCE_VISIBILITY_PUBLIC = 10,
+                    RESOURCE_VISIBILITY_INCONCLUSIVE = 15,
                     RESOURCE_VISIBILITY_RESTRICTED = 20
                 }
 
@@ -25589,6 +31379,15 @@ export namespace google {
 
                     /** DataProfileConfigSnapshot dataProfileJob */
                     dataProfileJob?: (google.privacy.dlp.v2.IDataProfileJobConfig|null);
+
+                    /** DataProfileConfigSnapshot discoveryConfig */
+                    discoveryConfig?: (google.privacy.dlp.v2.IDiscoveryConfig|null);
+
+                    /** DataProfileConfigSnapshot inspectTemplateName */
+                    inspectTemplateName?: (string|null);
+
+                    /** DataProfileConfigSnapshot inspectTemplateModifiedTime */
+                    inspectTemplateModifiedTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a DataProfileConfigSnapshot. */
@@ -25605,6 +31404,15 @@ export namespace google {
 
                     /** DataProfileConfigSnapshot dataProfileJob. */
                     public dataProfileJob?: (google.privacy.dlp.v2.IDataProfileJobConfig|null);
+
+                    /** DataProfileConfigSnapshot discoveryConfig. */
+                    public discoveryConfig?: (google.privacy.dlp.v2.IDiscoveryConfig|null);
+
+                    /** DataProfileConfigSnapshot inspectTemplateName. */
+                    public inspectTemplateName: string;
+
+                    /** DataProfileConfigSnapshot inspectTemplateModifiedTime. */
+                    public inspectTemplateModifiedTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new DataProfileConfigSnapshot instance using the specified properties.
@@ -25690,6 +31498,9 @@ export namespace google {
                     /** TableDataProfile name */
                     name?: (string|null);
 
+                    /** TableDataProfile dataSourceType */
+                    dataSourceType?: (google.privacy.dlp.v2.IDataSourceType|null);
+
                     /** TableDataProfile projectDataProfile */
                     projectDataProfile?: (string|null);
 
@@ -25774,6 +31585,9 @@ export namespace google {
 
                     /** TableDataProfile name. */
                     public name: string;
+
+                    /** TableDataProfile dataSourceType. */
+                    public dataSourceType?: (google.privacy.dlp.v2.IDataSourceType|null);
 
                     /** TableDataProfile projectDataProfile. */
                     public projectDataProfile: string;
@@ -26510,7 +32324,11 @@ export namespace google {
                         TYPE_NUMERIC = 11,
                         TYPE_RECORD = 12,
                         TYPE_BIGNUMERIC = 13,
-                        TYPE_JSON = 14
+                        TYPE_JSON = 14,
+                        TYPE_INTERVAL = 15,
+                        TYPE_RANGE_DATE = 16,
+                        TYPE_RANGE_DATETIME = 17,
+                        TYPE_RANGE_TIMESTAMP = 18
                     }
 
                     /** ColumnPolicyState enum. */
@@ -26518,6 +32336,1287 @@ export namespace google {
                         COLUMN_POLICY_STATE_UNSPECIFIED = 0,
                         COLUMN_POLICY_TAGGED = 1
                     }
+                }
+
+                /** Properties of a FileStoreDataProfile. */
+                interface IFileStoreDataProfile {
+
+                    /** FileStoreDataProfile name */
+                    name?: (string|null);
+
+                    /** FileStoreDataProfile dataSourceType */
+                    dataSourceType?: (google.privacy.dlp.v2.IDataSourceType|null);
+
+                    /** FileStoreDataProfile projectDataProfile */
+                    projectDataProfile?: (string|null);
+
+                    /** FileStoreDataProfile projectId */
+                    projectId?: (string|null);
+
+                    /** FileStoreDataProfile fileStoreLocation */
+                    fileStoreLocation?: (string|null);
+
+                    /** FileStoreDataProfile dataStorageLocations */
+                    dataStorageLocations?: (string[]|null);
+
+                    /** FileStoreDataProfile locationType */
+                    locationType?: (string|null);
+
+                    /** FileStoreDataProfile fileStorePath */
+                    fileStorePath?: (string|null);
+
+                    /** FileStoreDataProfile fullResource */
+                    fullResource?: (string|null);
+
+                    /** FileStoreDataProfile configSnapshot */
+                    configSnapshot?: (google.privacy.dlp.v2.IDataProfileConfigSnapshot|null);
+
+                    /** FileStoreDataProfile profileStatus */
+                    profileStatus?: (google.privacy.dlp.v2.IProfileStatus|null);
+
+                    /** FileStoreDataProfile state */
+                    state?: (google.privacy.dlp.v2.FileStoreDataProfile.State|keyof typeof google.privacy.dlp.v2.FileStoreDataProfile.State|null);
+
+                    /** FileStoreDataProfile profileLastGenerated */
+                    profileLastGenerated?: (google.protobuf.ITimestamp|null);
+
+                    /** FileStoreDataProfile resourceVisibility */
+                    resourceVisibility?: (google.privacy.dlp.v2.ResourceVisibility|keyof typeof google.privacy.dlp.v2.ResourceVisibility|null);
+
+                    /** FileStoreDataProfile sensitivityScore */
+                    sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                    /** FileStoreDataProfile dataRiskLevel */
+                    dataRiskLevel?: (google.privacy.dlp.v2.IDataRiskLevel|null);
+
+                    /** FileStoreDataProfile createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FileStoreDataProfile lastModifiedTime */
+                    lastModifiedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FileStoreDataProfile fileClusterSummaries */
+                    fileClusterSummaries?: (google.privacy.dlp.v2.IFileClusterSummary[]|null);
+
+                    /** FileStoreDataProfile resourceAttributes */
+                    resourceAttributes?: ({ [k: string]: google.privacy.dlp.v2.IValue }|null);
+
+                    /** FileStoreDataProfile resourceLabels */
+                    resourceLabels?: ({ [k: string]: string }|null);
+
+                    /** FileStoreDataProfile fileStoreInfoTypeSummaries */
+                    fileStoreInfoTypeSummaries?: (google.privacy.dlp.v2.IFileStoreInfoTypeSummary[]|null);
+
+                    /** FileStoreDataProfile fileStoreIsEmpty */
+                    fileStoreIsEmpty?: (boolean|null);
+                }
+
+                /** Represents a FileStoreDataProfile. */
+                class FileStoreDataProfile implements IFileStoreDataProfile {
+
+                    /**
+                     * Constructs a new FileStoreDataProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IFileStoreDataProfile);
+
+                    /** FileStoreDataProfile name. */
+                    public name: string;
+
+                    /** FileStoreDataProfile dataSourceType. */
+                    public dataSourceType?: (google.privacy.dlp.v2.IDataSourceType|null);
+
+                    /** FileStoreDataProfile projectDataProfile. */
+                    public projectDataProfile: string;
+
+                    /** FileStoreDataProfile projectId. */
+                    public projectId: string;
+
+                    /** FileStoreDataProfile fileStoreLocation. */
+                    public fileStoreLocation: string;
+
+                    /** FileStoreDataProfile dataStorageLocations. */
+                    public dataStorageLocations: string[];
+
+                    /** FileStoreDataProfile locationType. */
+                    public locationType: string;
+
+                    /** FileStoreDataProfile fileStorePath. */
+                    public fileStorePath: string;
+
+                    /** FileStoreDataProfile fullResource. */
+                    public fullResource: string;
+
+                    /** FileStoreDataProfile configSnapshot. */
+                    public configSnapshot?: (google.privacy.dlp.v2.IDataProfileConfigSnapshot|null);
+
+                    /** FileStoreDataProfile profileStatus. */
+                    public profileStatus?: (google.privacy.dlp.v2.IProfileStatus|null);
+
+                    /** FileStoreDataProfile state. */
+                    public state: (google.privacy.dlp.v2.FileStoreDataProfile.State|keyof typeof google.privacy.dlp.v2.FileStoreDataProfile.State);
+
+                    /** FileStoreDataProfile profileLastGenerated. */
+                    public profileLastGenerated?: (google.protobuf.ITimestamp|null);
+
+                    /** FileStoreDataProfile resourceVisibility. */
+                    public resourceVisibility: (google.privacy.dlp.v2.ResourceVisibility|keyof typeof google.privacy.dlp.v2.ResourceVisibility);
+
+                    /** FileStoreDataProfile sensitivityScore. */
+                    public sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                    /** FileStoreDataProfile dataRiskLevel. */
+                    public dataRiskLevel?: (google.privacy.dlp.v2.IDataRiskLevel|null);
+
+                    /** FileStoreDataProfile createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FileStoreDataProfile lastModifiedTime. */
+                    public lastModifiedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FileStoreDataProfile fileClusterSummaries. */
+                    public fileClusterSummaries: google.privacy.dlp.v2.IFileClusterSummary[];
+
+                    /** FileStoreDataProfile resourceAttributes. */
+                    public resourceAttributes: { [k: string]: google.privacy.dlp.v2.IValue };
+
+                    /** FileStoreDataProfile resourceLabels. */
+                    public resourceLabels: { [k: string]: string };
+
+                    /** FileStoreDataProfile fileStoreInfoTypeSummaries. */
+                    public fileStoreInfoTypeSummaries: google.privacy.dlp.v2.IFileStoreInfoTypeSummary[];
+
+                    /** FileStoreDataProfile fileStoreIsEmpty. */
+                    public fileStoreIsEmpty: boolean;
+
+                    /**
+                     * Creates a new FileStoreDataProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileStoreDataProfile instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IFileStoreDataProfile): google.privacy.dlp.v2.FileStoreDataProfile;
+
+                    /**
+                     * Encodes the specified FileStoreDataProfile message. Does not implicitly {@link google.privacy.dlp.v2.FileStoreDataProfile.verify|verify} messages.
+                     * @param message FileStoreDataProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IFileStoreDataProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileStoreDataProfile message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FileStoreDataProfile.verify|verify} messages.
+                     * @param message FileStoreDataProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IFileStoreDataProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileStoreDataProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileStoreDataProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.FileStoreDataProfile;
+
+                    /**
+                     * Decodes a FileStoreDataProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileStoreDataProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.FileStoreDataProfile;
+
+                    /**
+                     * Verifies a FileStoreDataProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileStoreDataProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileStoreDataProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.FileStoreDataProfile;
+
+                    /**
+                     * Creates a plain object from a FileStoreDataProfile message. Also converts values to other types if specified.
+                     * @param message FileStoreDataProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.FileStoreDataProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileStoreDataProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileStoreDataProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FileStoreDataProfile {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        DONE = 2
+                    }
+                }
+
+                /** Properties of a FileStoreInfoTypeSummary. */
+                interface IFileStoreInfoTypeSummary {
+
+                    /** FileStoreInfoTypeSummary infoType */
+                    infoType?: (google.privacy.dlp.v2.IInfoType|null);
+                }
+
+                /** Represents a FileStoreInfoTypeSummary. */
+                class FileStoreInfoTypeSummary implements IFileStoreInfoTypeSummary {
+
+                    /**
+                     * Constructs a new FileStoreInfoTypeSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IFileStoreInfoTypeSummary);
+
+                    /** FileStoreInfoTypeSummary infoType. */
+                    public infoType?: (google.privacy.dlp.v2.IInfoType|null);
+
+                    /**
+                     * Creates a new FileStoreInfoTypeSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileStoreInfoTypeSummary instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IFileStoreInfoTypeSummary): google.privacy.dlp.v2.FileStoreInfoTypeSummary;
+
+                    /**
+                     * Encodes the specified FileStoreInfoTypeSummary message. Does not implicitly {@link google.privacy.dlp.v2.FileStoreInfoTypeSummary.verify|verify} messages.
+                     * @param message FileStoreInfoTypeSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IFileStoreInfoTypeSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileStoreInfoTypeSummary message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FileStoreInfoTypeSummary.verify|verify} messages.
+                     * @param message FileStoreInfoTypeSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IFileStoreInfoTypeSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileStoreInfoTypeSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileStoreInfoTypeSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.FileStoreInfoTypeSummary;
+
+                    /**
+                     * Decodes a FileStoreInfoTypeSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileStoreInfoTypeSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.FileStoreInfoTypeSummary;
+
+                    /**
+                     * Verifies a FileStoreInfoTypeSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileStoreInfoTypeSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileStoreInfoTypeSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.FileStoreInfoTypeSummary;
+
+                    /**
+                     * Creates a plain object from a FileStoreInfoTypeSummary message. Also converts values to other types if specified.
+                     * @param message FileStoreInfoTypeSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.FileStoreInfoTypeSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileStoreInfoTypeSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileStoreInfoTypeSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileExtensionInfo. */
+                interface IFileExtensionInfo {
+
+                    /** FileExtensionInfo fileExtension */
+                    fileExtension?: (string|null);
+                }
+
+                /** Represents a FileExtensionInfo. */
+                class FileExtensionInfo implements IFileExtensionInfo {
+
+                    /**
+                     * Constructs a new FileExtensionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IFileExtensionInfo);
+
+                    /** FileExtensionInfo fileExtension. */
+                    public fileExtension: string;
+
+                    /**
+                     * Creates a new FileExtensionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileExtensionInfo instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IFileExtensionInfo): google.privacy.dlp.v2.FileExtensionInfo;
+
+                    /**
+                     * Encodes the specified FileExtensionInfo message. Does not implicitly {@link google.privacy.dlp.v2.FileExtensionInfo.verify|verify} messages.
+                     * @param message FileExtensionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IFileExtensionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileExtensionInfo message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FileExtensionInfo.verify|verify} messages.
+                     * @param message FileExtensionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IFileExtensionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileExtensionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileExtensionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.FileExtensionInfo;
+
+                    /**
+                     * Decodes a FileExtensionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileExtensionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.FileExtensionInfo;
+
+                    /**
+                     * Verifies a FileExtensionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileExtensionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileExtensionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.FileExtensionInfo;
+
+                    /**
+                     * Creates a plain object from a FileExtensionInfo message. Also converts values to other types if specified.
+                     * @param message FileExtensionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.FileExtensionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileExtensionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileExtensionInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileClusterSummary. */
+                interface IFileClusterSummary {
+
+                    /** FileClusterSummary fileClusterType */
+                    fileClusterType?: (google.privacy.dlp.v2.IFileClusterType|null);
+
+                    /** FileClusterSummary fileStoreInfoTypeSummaries */
+                    fileStoreInfoTypeSummaries?: (google.privacy.dlp.v2.IFileStoreInfoTypeSummary[]|null);
+
+                    /** FileClusterSummary sensitivityScore */
+                    sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                    /** FileClusterSummary dataRiskLevel */
+                    dataRiskLevel?: (google.privacy.dlp.v2.IDataRiskLevel|null);
+
+                    /** FileClusterSummary errors */
+                    errors?: (google.privacy.dlp.v2.IError[]|null);
+
+                    /** FileClusterSummary fileExtensionsScanned */
+                    fileExtensionsScanned?: (google.privacy.dlp.v2.IFileExtensionInfo[]|null);
+
+                    /** FileClusterSummary fileExtensionsSeen */
+                    fileExtensionsSeen?: (google.privacy.dlp.v2.IFileExtensionInfo[]|null);
+
+                    /** FileClusterSummary noFilesExist */
+                    noFilesExist?: (boolean|null);
+                }
+
+                /** Represents a FileClusterSummary. */
+                class FileClusterSummary implements IFileClusterSummary {
+
+                    /**
+                     * Constructs a new FileClusterSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IFileClusterSummary);
+
+                    /** FileClusterSummary fileClusterType. */
+                    public fileClusterType?: (google.privacy.dlp.v2.IFileClusterType|null);
+
+                    /** FileClusterSummary fileStoreInfoTypeSummaries. */
+                    public fileStoreInfoTypeSummaries: google.privacy.dlp.v2.IFileStoreInfoTypeSummary[];
+
+                    /** FileClusterSummary sensitivityScore. */
+                    public sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                    /** FileClusterSummary dataRiskLevel. */
+                    public dataRiskLevel?: (google.privacy.dlp.v2.IDataRiskLevel|null);
+
+                    /** FileClusterSummary errors. */
+                    public errors: google.privacy.dlp.v2.IError[];
+
+                    /** FileClusterSummary fileExtensionsScanned. */
+                    public fileExtensionsScanned: google.privacy.dlp.v2.IFileExtensionInfo[];
+
+                    /** FileClusterSummary fileExtensionsSeen. */
+                    public fileExtensionsSeen: google.privacy.dlp.v2.IFileExtensionInfo[];
+
+                    /** FileClusterSummary noFilesExist. */
+                    public noFilesExist: boolean;
+
+                    /**
+                     * Creates a new FileClusterSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileClusterSummary instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IFileClusterSummary): google.privacy.dlp.v2.FileClusterSummary;
+
+                    /**
+                     * Encodes the specified FileClusterSummary message. Does not implicitly {@link google.privacy.dlp.v2.FileClusterSummary.verify|verify} messages.
+                     * @param message FileClusterSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IFileClusterSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileClusterSummary message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FileClusterSummary.verify|verify} messages.
+                     * @param message FileClusterSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IFileClusterSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileClusterSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileClusterSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.FileClusterSummary;
+
+                    /**
+                     * Decodes a FileClusterSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileClusterSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.FileClusterSummary;
+
+                    /**
+                     * Verifies a FileClusterSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileClusterSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileClusterSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.FileClusterSummary;
+
+                    /**
+                     * Creates a plain object from a FileClusterSummary message. Also converts values to other types if specified.
+                     * @param message FileClusterSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.FileClusterSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileClusterSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileClusterSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetProjectDataProfileRequest. */
+                interface IGetProjectDataProfileRequest {
+
+                    /** GetProjectDataProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetProjectDataProfileRequest. */
+                class GetProjectDataProfileRequest implements IGetProjectDataProfileRequest {
+
+                    /**
+                     * Constructs a new GetProjectDataProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IGetProjectDataProfileRequest);
+
+                    /** GetProjectDataProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetProjectDataProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetProjectDataProfileRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IGetProjectDataProfileRequest): google.privacy.dlp.v2.GetProjectDataProfileRequest;
+
+                    /**
+                     * Encodes the specified GetProjectDataProfileRequest message. Does not implicitly {@link google.privacy.dlp.v2.GetProjectDataProfileRequest.verify|verify} messages.
+                     * @param message GetProjectDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IGetProjectDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetProjectDataProfileRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.GetProjectDataProfileRequest.verify|verify} messages.
+                     * @param message GetProjectDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IGetProjectDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetProjectDataProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetProjectDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.GetProjectDataProfileRequest;
+
+                    /**
+                     * Decodes a GetProjectDataProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetProjectDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.GetProjectDataProfileRequest;
+
+                    /**
+                     * Verifies a GetProjectDataProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetProjectDataProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetProjectDataProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.GetProjectDataProfileRequest;
+
+                    /**
+                     * Creates a plain object from a GetProjectDataProfileRequest message. Also converts values to other types if specified.
+                     * @param message GetProjectDataProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.GetProjectDataProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetProjectDataProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetProjectDataProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetFileStoreDataProfileRequest. */
+                interface IGetFileStoreDataProfileRequest {
+
+                    /** GetFileStoreDataProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFileStoreDataProfileRequest. */
+                class GetFileStoreDataProfileRequest implements IGetFileStoreDataProfileRequest {
+
+                    /**
+                     * Constructs a new GetFileStoreDataProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IGetFileStoreDataProfileRequest);
+
+                    /** GetFileStoreDataProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFileStoreDataProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFileStoreDataProfileRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IGetFileStoreDataProfileRequest): google.privacy.dlp.v2.GetFileStoreDataProfileRequest;
+
+                    /**
+                     * Encodes the specified GetFileStoreDataProfileRequest message. Does not implicitly {@link google.privacy.dlp.v2.GetFileStoreDataProfileRequest.verify|verify} messages.
+                     * @param message GetFileStoreDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IGetFileStoreDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFileStoreDataProfileRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.GetFileStoreDataProfileRequest.verify|verify} messages.
+                     * @param message GetFileStoreDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IGetFileStoreDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFileStoreDataProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFileStoreDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.GetFileStoreDataProfileRequest;
+
+                    /**
+                     * Decodes a GetFileStoreDataProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFileStoreDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.GetFileStoreDataProfileRequest;
+
+                    /**
+                     * Verifies a GetFileStoreDataProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFileStoreDataProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFileStoreDataProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.GetFileStoreDataProfileRequest;
+
+                    /**
+                     * Creates a plain object from a GetFileStoreDataProfileRequest message. Also converts values to other types if specified.
+                     * @param message GetFileStoreDataProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.GetFileStoreDataProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFileStoreDataProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFileStoreDataProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFileStoreDataProfilesRequest. */
+                interface IListFileStoreDataProfilesRequest {
+
+                    /** ListFileStoreDataProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFileStoreDataProfilesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListFileStoreDataProfilesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFileStoreDataProfilesRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListFileStoreDataProfilesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListFileStoreDataProfilesRequest. */
+                class ListFileStoreDataProfilesRequest implements IListFileStoreDataProfilesRequest {
+
+                    /**
+                     * Constructs a new ListFileStoreDataProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IListFileStoreDataProfilesRequest);
+
+                    /** ListFileStoreDataProfilesRequest parent. */
+                    public parent: string;
+
+                    /** ListFileStoreDataProfilesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListFileStoreDataProfilesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFileStoreDataProfilesRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListFileStoreDataProfilesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListFileStoreDataProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFileStoreDataProfilesRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IListFileStoreDataProfilesRequest): google.privacy.dlp.v2.ListFileStoreDataProfilesRequest;
+
+                    /**
+                     * Encodes the specified ListFileStoreDataProfilesRequest message. Does not implicitly {@link google.privacy.dlp.v2.ListFileStoreDataProfilesRequest.verify|verify} messages.
+                     * @param message ListFileStoreDataProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IListFileStoreDataProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFileStoreDataProfilesRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ListFileStoreDataProfilesRequest.verify|verify} messages.
+                     * @param message ListFileStoreDataProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IListFileStoreDataProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFileStoreDataProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFileStoreDataProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ListFileStoreDataProfilesRequest;
+
+                    /**
+                     * Decodes a ListFileStoreDataProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFileStoreDataProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ListFileStoreDataProfilesRequest;
+
+                    /**
+                     * Verifies a ListFileStoreDataProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFileStoreDataProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFileStoreDataProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ListFileStoreDataProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a ListFileStoreDataProfilesRequest message. Also converts values to other types if specified.
+                     * @param message ListFileStoreDataProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ListFileStoreDataProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFileStoreDataProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFileStoreDataProfilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFileStoreDataProfilesResponse. */
+                interface IListFileStoreDataProfilesResponse {
+
+                    /** ListFileStoreDataProfilesResponse fileStoreDataProfiles */
+                    fileStoreDataProfiles?: (google.privacy.dlp.v2.IFileStoreDataProfile[]|null);
+
+                    /** ListFileStoreDataProfilesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListFileStoreDataProfilesResponse. */
+                class ListFileStoreDataProfilesResponse implements IListFileStoreDataProfilesResponse {
+
+                    /**
+                     * Constructs a new ListFileStoreDataProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IListFileStoreDataProfilesResponse);
+
+                    /** ListFileStoreDataProfilesResponse fileStoreDataProfiles. */
+                    public fileStoreDataProfiles: google.privacy.dlp.v2.IFileStoreDataProfile[];
+
+                    /** ListFileStoreDataProfilesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListFileStoreDataProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFileStoreDataProfilesResponse instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IListFileStoreDataProfilesResponse): google.privacy.dlp.v2.ListFileStoreDataProfilesResponse;
+
+                    /**
+                     * Encodes the specified ListFileStoreDataProfilesResponse message. Does not implicitly {@link google.privacy.dlp.v2.ListFileStoreDataProfilesResponse.verify|verify} messages.
+                     * @param message ListFileStoreDataProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IListFileStoreDataProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFileStoreDataProfilesResponse message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ListFileStoreDataProfilesResponse.verify|verify} messages.
+                     * @param message ListFileStoreDataProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IListFileStoreDataProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFileStoreDataProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFileStoreDataProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ListFileStoreDataProfilesResponse;
+
+                    /**
+                     * Decodes a ListFileStoreDataProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFileStoreDataProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ListFileStoreDataProfilesResponse;
+
+                    /**
+                     * Verifies a ListFileStoreDataProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFileStoreDataProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFileStoreDataProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ListFileStoreDataProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a ListFileStoreDataProfilesResponse message. Also converts values to other types if specified.
+                     * @param message ListFileStoreDataProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ListFileStoreDataProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFileStoreDataProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFileStoreDataProfilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteFileStoreDataProfileRequest. */
+                interface IDeleteFileStoreDataProfileRequest {
+
+                    /** DeleteFileStoreDataProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteFileStoreDataProfileRequest. */
+                class DeleteFileStoreDataProfileRequest implements IDeleteFileStoreDataProfileRequest {
+
+                    /**
+                     * Constructs a new DeleteFileStoreDataProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest);
+
+                    /** DeleteFileStoreDataProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteFileStoreDataProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteFileStoreDataProfileRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest): google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest;
+
+                    /**
+                     * Encodes the specified DeleteFileStoreDataProfileRequest message. Does not implicitly {@link google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest.verify|verify} messages.
+                     * @param message DeleteFileStoreDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteFileStoreDataProfileRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest.verify|verify} messages.
+                     * @param message DeleteFileStoreDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteFileStoreDataProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteFileStoreDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest;
+
+                    /**
+                     * Decodes a DeleteFileStoreDataProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteFileStoreDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest;
+
+                    /**
+                     * Verifies a DeleteFileStoreDataProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteFileStoreDataProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteFileStoreDataProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteFileStoreDataProfileRequest message. Also converts values to other types if specified.
+                     * @param message DeleteFileStoreDataProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteFileStoreDataProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteFileStoreDataProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetTableDataProfileRequest. */
+                interface IGetTableDataProfileRequest {
+
+                    /** GetTableDataProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetTableDataProfileRequest. */
+                class GetTableDataProfileRequest implements IGetTableDataProfileRequest {
+
+                    /**
+                     * Constructs a new GetTableDataProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IGetTableDataProfileRequest);
+
+                    /** GetTableDataProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetTableDataProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetTableDataProfileRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IGetTableDataProfileRequest): google.privacy.dlp.v2.GetTableDataProfileRequest;
+
+                    /**
+                     * Encodes the specified GetTableDataProfileRequest message. Does not implicitly {@link google.privacy.dlp.v2.GetTableDataProfileRequest.verify|verify} messages.
+                     * @param message GetTableDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IGetTableDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetTableDataProfileRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.GetTableDataProfileRequest.verify|verify} messages.
+                     * @param message GetTableDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IGetTableDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetTableDataProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetTableDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.GetTableDataProfileRequest;
+
+                    /**
+                     * Decodes a GetTableDataProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetTableDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.GetTableDataProfileRequest;
+
+                    /**
+                     * Verifies a GetTableDataProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetTableDataProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetTableDataProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.GetTableDataProfileRequest;
+
+                    /**
+                     * Creates a plain object from a GetTableDataProfileRequest message. Also converts values to other types if specified.
+                     * @param message GetTableDataProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.GetTableDataProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetTableDataProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetTableDataProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetColumnDataProfileRequest. */
+                interface IGetColumnDataProfileRequest {
+
+                    /** GetColumnDataProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetColumnDataProfileRequest. */
+                class GetColumnDataProfileRequest implements IGetColumnDataProfileRequest {
+
+                    /**
+                     * Constructs a new GetColumnDataProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IGetColumnDataProfileRequest);
+
+                    /** GetColumnDataProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetColumnDataProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetColumnDataProfileRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IGetColumnDataProfileRequest): google.privacy.dlp.v2.GetColumnDataProfileRequest;
+
+                    /**
+                     * Encodes the specified GetColumnDataProfileRequest message. Does not implicitly {@link google.privacy.dlp.v2.GetColumnDataProfileRequest.verify|verify} messages.
+                     * @param message GetColumnDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IGetColumnDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetColumnDataProfileRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.GetColumnDataProfileRequest.verify|verify} messages.
+                     * @param message GetColumnDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IGetColumnDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetColumnDataProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetColumnDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.GetColumnDataProfileRequest;
+
+                    /**
+                     * Decodes a GetColumnDataProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetColumnDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.GetColumnDataProfileRequest;
+
+                    /**
+                     * Verifies a GetColumnDataProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetColumnDataProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetColumnDataProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.GetColumnDataProfileRequest;
+
+                    /**
+                     * Creates a plain object from a GetColumnDataProfileRequest message. Also converts values to other types if specified.
+                     * @param message GetColumnDataProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.GetColumnDataProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetColumnDataProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetColumnDataProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DataProfilePubSubCondition. */
@@ -26852,6 +33951,9 @@ export namespace google {
                     /** DataProfilePubSubMessage profile */
                     profile?: (google.privacy.dlp.v2.ITableDataProfile|null);
 
+                    /** DataProfilePubSubMessage fileStoreProfile */
+                    fileStoreProfile?: (google.privacy.dlp.v2.IFileStoreDataProfile|null);
+
                     /** DataProfilePubSubMessage event */
                     event?: (google.privacy.dlp.v2.DataProfileAction.EventType|keyof typeof google.privacy.dlp.v2.DataProfileAction.EventType|null);
                 }
@@ -26867,6 +33969,9 @@ export namespace google {
 
                     /** DataProfilePubSubMessage profile. */
                     public profile?: (google.privacy.dlp.v2.ITableDataProfile|null);
+
+                    /** DataProfilePubSubMessage fileStoreProfile. */
+                    public fileStoreProfile?: (google.privacy.dlp.v2.IFileStoreDataProfile|null);
 
                     /** DataProfilePubSubMessage event. */
                     public event: (google.privacy.dlp.v2.DataProfileAction.EventType|keyof typeof google.privacy.dlp.v2.DataProfileAction.EventType);
@@ -26947,6 +34052,1613 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateConnectionRequest. */
+                interface ICreateConnectionRequest {
+
+                    /** CreateConnectionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateConnectionRequest connection */
+                    connection?: (google.privacy.dlp.v2.IConnection|null);
+                }
+
+                /** Represents a CreateConnectionRequest. */
+                class CreateConnectionRequest implements ICreateConnectionRequest {
+
+                    /**
+                     * Constructs a new CreateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ICreateConnectionRequest);
+
+                    /** CreateConnectionRequest parent. */
+                    public parent: string;
+
+                    /** CreateConnectionRequest connection. */
+                    public connection?: (google.privacy.dlp.v2.IConnection|null);
+
+                    /**
+                     * Creates a new CreateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConnectionRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ICreateConnectionRequest): google.privacy.dlp.v2.CreateConnectionRequest;
+
+                    /**
+                     * Encodes the specified CreateConnectionRequest message. Does not implicitly {@link google.privacy.dlp.v2.CreateConnectionRequest.verify|verify} messages.
+                     * @param message CreateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ICreateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConnectionRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.CreateConnectionRequest.verify|verify} messages.
+                     * @param message CreateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ICreateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.CreateConnectionRequest;
+
+                    /**
+                     * Decodes a CreateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.CreateConnectionRequest;
+
+                    /**
+                     * Verifies a CreateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.CreateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message CreateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.CreateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetConnectionRequest. */
+                interface IGetConnectionRequest {
+
+                    /** GetConnectionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetConnectionRequest. */
+                class GetConnectionRequest implements IGetConnectionRequest {
+
+                    /**
+                     * Constructs a new GetConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IGetConnectionRequest);
+
+                    /** GetConnectionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetConnectionRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IGetConnectionRequest): google.privacy.dlp.v2.GetConnectionRequest;
+
+                    /**
+                     * Encodes the specified GetConnectionRequest message. Does not implicitly {@link google.privacy.dlp.v2.GetConnectionRequest.verify|verify} messages.
+                     * @param message GetConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IGetConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetConnectionRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.GetConnectionRequest.verify|verify} messages.
+                     * @param message GetConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IGetConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.GetConnectionRequest;
+
+                    /**
+                     * Decodes a GetConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.GetConnectionRequest;
+
+                    /**
+                     * Verifies a GetConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.GetConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a GetConnectionRequest message. Also converts values to other types if specified.
+                     * @param message GetConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.GetConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConnectionsRequest. */
+                interface IListConnectionsRequest {
+
+                    /** ListConnectionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListConnectionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListConnectionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListConnectionsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListConnectionsRequest. */
+                class ListConnectionsRequest implements IListConnectionsRequest {
+
+                    /**
+                     * Constructs a new ListConnectionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IListConnectionsRequest);
+
+                    /** ListConnectionsRequest parent. */
+                    public parent: string;
+
+                    /** ListConnectionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListConnectionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListConnectionsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListConnectionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConnectionsRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IListConnectionsRequest): google.privacy.dlp.v2.ListConnectionsRequest;
+
+                    /**
+                     * Encodes the specified ListConnectionsRequest message. Does not implicitly {@link google.privacy.dlp.v2.ListConnectionsRequest.verify|verify} messages.
+                     * @param message ListConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IListConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConnectionsRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ListConnectionsRequest.verify|verify} messages.
+                     * @param message ListConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IListConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConnectionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ListConnectionsRequest;
+
+                    /**
+                     * Decodes a ListConnectionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ListConnectionsRequest;
+
+                    /**
+                     * Verifies a ListConnectionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConnectionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ListConnectionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListConnectionsRequest message. Also converts values to other types if specified.
+                     * @param message ListConnectionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ListConnectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConnectionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConnectionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchConnectionsRequest. */
+                interface ISearchConnectionsRequest {
+
+                    /** SearchConnectionsRequest parent */
+                    parent?: (string|null);
+
+                    /** SearchConnectionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** SearchConnectionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** SearchConnectionsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a SearchConnectionsRequest. */
+                class SearchConnectionsRequest implements ISearchConnectionsRequest {
+
+                    /**
+                     * Constructs a new SearchConnectionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ISearchConnectionsRequest);
+
+                    /** SearchConnectionsRequest parent. */
+                    public parent: string;
+
+                    /** SearchConnectionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** SearchConnectionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** SearchConnectionsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new SearchConnectionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchConnectionsRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ISearchConnectionsRequest): google.privacy.dlp.v2.SearchConnectionsRequest;
+
+                    /**
+                     * Encodes the specified SearchConnectionsRequest message. Does not implicitly {@link google.privacy.dlp.v2.SearchConnectionsRequest.verify|verify} messages.
+                     * @param message SearchConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ISearchConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchConnectionsRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.SearchConnectionsRequest.verify|verify} messages.
+                     * @param message SearchConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ISearchConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchConnectionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.SearchConnectionsRequest;
+
+                    /**
+                     * Decodes a SearchConnectionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.SearchConnectionsRequest;
+
+                    /**
+                     * Verifies a SearchConnectionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchConnectionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.SearchConnectionsRequest;
+
+                    /**
+                     * Creates a plain object from a SearchConnectionsRequest message. Also converts values to other types if specified.
+                     * @param message SearchConnectionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.SearchConnectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchConnectionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchConnectionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConnectionsResponse. */
+                interface IListConnectionsResponse {
+
+                    /** ListConnectionsResponse connections */
+                    connections?: (google.privacy.dlp.v2.IConnection[]|null);
+
+                    /** ListConnectionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListConnectionsResponse. */
+                class ListConnectionsResponse implements IListConnectionsResponse {
+
+                    /**
+                     * Constructs a new ListConnectionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IListConnectionsResponse);
+
+                    /** ListConnectionsResponse connections. */
+                    public connections: google.privacy.dlp.v2.IConnection[];
+
+                    /** ListConnectionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListConnectionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConnectionsResponse instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IListConnectionsResponse): google.privacy.dlp.v2.ListConnectionsResponse;
+
+                    /**
+                     * Encodes the specified ListConnectionsResponse message. Does not implicitly {@link google.privacy.dlp.v2.ListConnectionsResponse.verify|verify} messages.
+                     * @param message ListConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IListConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConnectionsResponse message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ListConnectionsResponse.verify|verify} messages.
+                     * @param message ListConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IListConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConnectionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.ListConnectionsResponse;
+
+                    /**
+                     * Decodes a ListConnectionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.ListConnectionsResponse;
+
+                    /**
+                     * Verifies a ListConnectionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConnectionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConnectionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.ListConnectionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListConnectionsResponse message. Also converts values to other types if specified.
+                     * @param message ListConnectionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.ListConnectionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConnectionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConnectionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchConnectionsResponse. */
+                interface ISearchConnectionsResponse {
+
+                    /** SearchConnectionsResponse connections */
+                    connections?: (google.privacy.dlp.v2.IConnection[]|null);
+
+                    /** SearchConnectionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a SearchConnectionsResponse. */
+                class SearchConnectionsResponse implements ISearchConnectionsResponse {
+
+                    /**
+                     * Constructs a new SearchConnectionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ISearchConnectionsResponse);
+
+                    /** SearchConnectionsResponse connections. */
+                    public connections: google.privacy.dlp.v2.IConnection[];
+
+                    /** SearchConnectionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new SearchConnectionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchConnectionsResponse instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ISearchConnectionsResponse): google.privacy.dlp.v2.SearchConnectionsResponse;
+
+                    /**
+                     * Encodes the specified SearchConnectionsResponse message. Does not implicitly {@link google.privacy.dlp.v2.SearchConnectionsResponse.verify|verify} messages.
+                     * @param message SearchConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ISearchConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchConnectionsResponse message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.SearchConnectionsResponse.verify|verify} messages.
+                     * @param message SearchConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ISearchConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchConnectionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.SearchConnectionsResponse;
+
+                    /**
+                     * Decodes a SearchConnectionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.SearchConnectionsResponse;
+
+                    /**
+                     * Verifies a SearchConnectionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchConnectionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchConnectionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.SearchConnectionsResponse;
+
+                    /**
+                     * Creates a plain object from a SearchConnectionsResponse message. Also converts values to other types if specified.
+                     * @param message SearchConnectionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.SearchConnectionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchConnectionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchConnectionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateConnectionRequest. */
+                interface IUpdateConnectionRequest {
+
+                    /** UpdateConnectionRequest name */
+                    name?: (string|null);
+
+                    /** UpdateConnectionRequest connection */
+                    connection?: (google.privacy.dlp.v2.IConnection|null);
+
+                    /** UpdateConnectionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateConnectionRequest. */
+                class UpdateConnectionRequest implements IUpdateConnectionRequest {
+
+                    /**
+                     * Constructs a new UpdateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IUpdateConnectionRequest);
+
+                    /** UpdateConnectionRequest name. */
+                    public name: string;
+
+                    /** UpdateConnectionRequest connection. */
+                    public connection?: (google.privacy.dlp.v2.IConnection|null);
+
+                    /** UpdateConnectionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateConnectionRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IUpdateConnectionRequest): google.privacy.dlp.v2.UpdateConnectionRequest;
+
+                    /**
+                     * Encodes the specified UpdateConnectionRequest message. Does not implicitly {@link google.privacy.dlp.v2.UpdateConnectionRequest.verify|verify} messages.
+                     * @param message UpdateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IUpdateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateConnectionRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.UpdateConnectionRequest.verify|verify} messages.
+                     * @param message UpdateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IUpdateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.UpdateConnectionRequest;
+
+                    /**
+                     * Decodes an UpdateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.UpdateConnectionRequest;
+
+                    /**
+                     * Verifies an UpdateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.UpdateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.UpdateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteConnectionRequest. */
+                interface IDeleteConnectionRequest {
+
+                    /** DeleteConnectionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteConnectionRequest. */
+                class DeleteConnectionRequest implements IDeleteConnectionRequest {
+
+                    /**
+                     * Constructs a new DeleteConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDeleteConnectionRequest);
+
+                    /** DeleteConnectionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteConnectionRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDeleteConnectionRequest): google.privacy.dlp.v2.DeleteConnectionRequest;
+
+                    /**
+                     * Encodes the specified DeleteConnectionRequest message. Does not implicitly {@link google.privacy.dlp.v2.DeleteConnectionRequest.verify|verify} messages.
+                     * @param message DeleteConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDeleteConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteConnectionRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DeleteConnectionRequest.verify|verify} messages.
+                     * @param message DeleteConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDeleteConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DeleteConnectionRequest;
+
+                    /**
+                     * Decodes a DeleteConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DeleteConnectionRequest;
+
+                    /**
+                     * Verifies a DeleteConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DeleteConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteConnectionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DeleteConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Connection. */
+                interface IConnection {
+
+                    /** Connection name */
+                    name?: (string|null);
+
+                    /** Connection state */
+                    state?: (google.privacy.dlp.v2.ConnectionState|keyof typeof google.privacy.dlp.v2.ConnectionState|null);
+
+                    /** Connection errors */
+                    errors?: (google.privacy.dlp.v2.IError[]|null);
+
+                    /** Connection cloudSql */
+                    cloudSql?: (google.privacy.dlp.v2.ICloudSqlProperties|null);
+                }
+
+                /** Represents a Connection. */
+                class Connection implements IConnection {
+
+                    /**
+                     * Constructs a new Connection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IConnection);
+
+                    /** Connection name. */
+                    public name: string;
+
+                    /** Connection state. */
+                    public state: (google.privacy.dlp.v2.ConnectionState|keyof typeof google.privacy.dlp.v2.ConnectionState);
+
+                    /** Connection errors. */
+                    public errors: google.privacy.dlp.v2.IError[];
+
+                    /** Connection cloudSql. */
+                    public cloudSql?: (google.privacy.dlp.v2.ICloudSqlProperties|null);
+
+                    /** Connection properties. */
+                    public properties?: "cloudSql";
+
+                    /**
+                     * Creates a new Connection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Connection instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IConnection): google.privacy.dlp.v2.Connection;
+
+                    /**
+                     * Encodes the specified Connection message. Does not implicitly {@link google.privacy.dlp.v2.Connection.verify|verify} messages.
+                     * @param message Connection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Connection message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Connection.verify|verify} messages.
+                     * @param message Connection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Connection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Connection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.Connection;
+
+                    /**
+                     * Decodes a Connection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Connection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.Connection;
+
+                    /**
+                     * Verifies a Connection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Connection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Connection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.Connection;
+
+                    /**
+                     * Creates a plain object from a Connection message. Also converts values to other types if specified.
+                     * @param message Connection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.Connection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Connection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Connection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** ConnectionState enum. */
+                enum ConnectionState {
+                    CONNECTION_STATE_UNSPECIFIED = 0,
+                    MISSING_CREDENTIALS = 1,
+                    AVAILABLE = 2,
+                    ERROR = 3
+                }
+
+                /** Properties of a SecretManagerCredential. */
+                interface ISecretManagerCredential {
+
+                    /** SecretManagerCredential username */
+                    username?: (string|null);
+
+                    /** SecretManagerCredential passwordSecretVersionName */
+                    passwordSecretVersionName?: (string|null);
+                }
+
+                /** Represents a SecretManagerCredential. */
+                class SecretManagerCredential implements ISecretManagerCredential {
+
+                    /**
+                     * Constructs a new SecretManagerCredential.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ISecretManagerCredential);
+
+                    /** SecretManagerCredential username. */
+                    public username: string;
+
+                    /** SecretManagerCredential passwordSecretVersionName. */
+                    public passwordSecretVersionName: string;
+
+                    /**
+                     * Creates a new SecretManagerCredential instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretManagerCredential instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ISecretManagerCredential): google.privacy.dlp.v2.SecretManagerCredential;
+
+                    /**
+                     * Encodes the specified SecretManagerCredential message. Does not implicitly {@link google.privacy.dlp.v2.SecretManagerCredential.verify|verify} messages.
+                     * @param message SecretManagerCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ISecretManagerCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretManagerCredential message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.SecretManagerCredential.verify|verify} messages.
+                     * @param message SecretManagerCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ISecretManagerCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretManagerCredential message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretManagerCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.SecretManagerCredential;
+
+                    /**
+                     * Decodes a SecretManagerCredential message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretManagerCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.SecretManagerCredential;
+
+                    /**
+                     * Verifies a SecretManagerCredential message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretManagerCredential message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretManagerCredential
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.SecretManagerCredential;
+
+                    /**
+                     * Creates a plain object from a SecretManagerCredential message. Also converts values to other types if specified.
+                     * @param message SecretManagerCredential
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.SecretManagerCredential, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretManagerCredential to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecretManagerCredential
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudSqlIamCredential. */
+                interface ICloudSqlIamCredential {
+                }
+
+                /** Represents a CloudSqlIamCredential. */
+                class CloudSqlIamCredential implements ICloudSqlIamCredential {
+
+                    /**
+                     * Constructs a new CloudSqlIamCredential.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ICloudSqlIamCredential);
+
+                    /**
+                     * Creates a new CloudSqlIamCredential instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudSqlIamCredential instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ICloudSqlIamCredential): google.privacy.dlp.v2.CloudSqlIamCredential;
+
+                    /**
+                     * Encodes the specified CloudSqlIamCredential message. Does not implicitly {@link google.privacy.dlp.v2.CloudSqlIamCredential.verify|verify} messages.
+                     * @param message CloudSqlIamCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ICloudSqlIamCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudSqlIamCredential message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.CloudSqlIamCredential.verify|verify} messages.
+                     * @param message CloudSqlIamCredential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ICloudSqlIamCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudSqlIamCredential message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudSqlIamCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.CloudSqlIamCredential;
+
+                    /**
+                     * Decodes a CloudSqlIamCredential message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudSqlIamCredential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.CloudSqlIamCredential;
+
+                    /**
+                     * Verifies a CloudSqlIamCredential message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudSqlIamCredential message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudSqlIamCredential
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.CloudSqlIamCredential;
+
+                    /**
+                     * Creates a plain object from a CloudSqlIamCredential message. Also converts values to other types if specified.
+                     * @param message CloudSqlIamCredential
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.CloudSqlIamCredential, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudSqlIamCredential to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudSqlIamCredential
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudSqlProperties. */
+                interface ICloudSqlProperties {
+
+                    /** CloudSqlProperties connectionName */
+                    connectionName?: (string|null);
+
+                    /** CloudSqlProperties usernamePassword */
+                    usernamePassword?: (google.privacy.dlp.v2.ISecretManagerCredential|null);
+
+                    /** CloudSqlProperties cloudSqlIam */
+                    cloudSqlIam?: (google.privacy.dlp.v2.ICloudSqlIamCredential|null);
+
+                    /** CloudSqlProperties maxConnections */
+                    maxConnections?: (number|null);
+
+                    /** CloudSqlProperties databaseEngine */
+                    databaseEngine?: (google.privacy.dlp.v2.CloudSqlProperties.DatabaseEngine|keyof typeof google.privacy.dlp.v2.CloudSqlProperties.DatabaseEngine|null);
+                }
+
+                /** Represents a CloudSqlProperties. */
+                class CloudSqlProperties implements ICloudSqlProperties {
+
+                    /**
+                     * Constructs a new CloudSqlProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ICloudSqlProperties);
+
+                    /** CloudSqlProperties connectionName. */
+                    public connectionName: string;
+
+                    /** CloudSqlProperties usernamePassword. */
+                    public usernamePassword?: (google.privacy.dlp.v2.ISecretManagerCredential|null);
+
+                    /** CloudSqlProperties cloudSqlIam. */
+                    public cloudSqlIam?: (google.privacy.dlp.v2.ICloudSqlIamCredential|null);
+
+                    /** CloudSqlProperties maxConnections. */
+                    public maxConnections: number;
+
+                    /** CloudSqlProperties databaseEngine. */
+                    public databaseEngine: (google.privacy.dlp.v2.CloudSqlProperties.DatabaseEngine|keyof typeof google.privacy.dlp.v2.CloudSqlProperties.DatabaseEngine);
+
+                    /** CloudSqlProperties credential. */
+                    public credential?: ("usernamePassword"|"cloudSqlIam");
+
+                    /**
+                     * Creates a new CloudSqlProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudSqlProperties instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ICloudSqlProperties): google.privacy.dlp.v2.CloudSqlProperties;
+
+                    /**
+                     * Encodes the specified CloudSqlProperties message. Does not implicitly {@link google.privacy.dlp.v2.CloudSqlProperties.verify|verify} messages.
+                     * @param message CloudSqlProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ICloudSqlProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudSqlProperties message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.CloudSqlProperties.verify|verify} messages.
+                     * @param message CloudSqlProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ICloudSqlProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudSqlProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudSqlProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.CloudSqlProperties;
+
+                    /**
+                     * Decodes a CloudSqlProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudSqlProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.CloudSqlProperties;
+
+                    /**
+                     * Verifies a CloudSqlProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudSqlProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudSqlProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.CloudSqlProperties;
+
+                    /**
+                     * Creates a plain object from a CloudSqlProperties message. Also converts values to other types if specified.
+                     * @param message CloudSqlProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.CloudSqlProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudSqlProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudSqlProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CloudSqlProperties {
+
+                    /** DatabaseEngine enum. */
+                    enum DatabaseEngine {
+                        DATABASE_ENGINE_UNKNOWN = 0,
+                        DATABASE_ENGINE_MYSQL = 1,
+                        DATABASE_ENGINE_POSTGRES = 2
+                    }
+                }
+
+                /** Properties of a DeleteTableDataProfileRequest. */
+                interface IDeleteTableDataProfileRequest {
+
+                    /** DeleteTableDataProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteTableDataProfileRequest. */
+                class DeleteTableDataProfileRequest implements IDeleteTableDataProfileRequest {
+
+                    /**
+                     * Constructs a new DeleteTableDataProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDeleteTableDataProfileRequest);
+
+                    /** DeleteTableDataProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteTableDataProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteTableDataProfileRequest instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDeleteTableDataProfileRequest): google.privacy.dlp.v2.DeleteTableDataProfileRequest;
+
+                    /**
+                     * Encodes the specified DeleteTableDataProfileRequest message. Does not implicitly {@link google.privacy.dlp.v2.DeleteTableDataProfileRequest.verify|verify} messages.
+                     * @param message DeleteTableDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDeleteTableDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteTableDataProfileRequest message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DeleteTableDataProfileRequest.verify|verify} messages.
+                     * @param message DeleteTableDataProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDeleteTableDataProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteTableDataProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteTableDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DeleteTableDataProfileRequest;
+
+                    /**
+                     * Decodes a DeleteTableDataProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteTableDataProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DeleteTableDataProfileRequest;
+
+                    /**
+                     * Verifies a DeleteTableDataProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteTableDataProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteTableDataProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DeleteTableDataProfileRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteTableDataProfileRequest message. Also converts values to other types if specified.
+                     * @param message DeleteTableDataProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DeleteTableDataProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteTableDataProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteTableDataProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataSourceType. */
+                interface IDataSourceType {
+
+                    /** DataSourceType dataSource */
+                    dataSource?: (string|null);
+                }
+
+                /** Represents a DataSourceType. */
+                class DataSourceType implements IDataSourceType {
+
+                    /**
+                     * Constructs a new DataSourceType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDataSourceType);
+
+                    /** DataSourceType dataSource. */
+                    public dataSource: string;
+
+                    /**
+                     * Creates a new DataSourceType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataSourceType instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDataSourceType): google.privacy.dlp.v2.DataSourceType;
+
+                    /**
+                     * Encodes the specified DataSourceType message. Does not implicitly {@link google.privacy.dlp.v2.DataSourceType.verify|verify} messages.
+                     * @param message DataSourceType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDataSourceType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataSourceType message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataSourceType.verify|verify} messages.
+                     * @param message DataSourceType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDataSourceType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataSourceType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataSourceType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataSourceType;
+
+                    /**
+                     * Decodes a DataSourceType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataSourceType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataSourceType;
+
+                    /**
+                     * Verifies a DataSourceType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataSourceType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataSourceType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataSourceType;
+
+                    /**
+                     * Creates a plain object from a DataSourceType message. Also converts values to other types if specified.
+                     * @param message DataSourceType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DataSourceType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataSourceType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataSourceType
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FileClusterType. */
+                interface IFileClusterType {
+
+                    /** FileClusterType cluster */
+                    cluster?: (google.privacy.dlp.v2.FileClusterType.Cluster|keyof typeof google.privacy.dlp.v2.FileClusterType.Cluster|null);
+                }
+
+                /** Represents a FileClusterType. */
+                class FileClusterType implements IFileClusterType {
+
+                    /**
+                     * Constructs a new FileClusterType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IFileClusterType);
+
+                    /** FileClusterType cluster. */
+                    public cluster?: (google.privacy.dlp.v2.FileClusterType.Cluster|keyof typeof google.privacy.dlp.v2.FileClusterType.Cluster|null);
+
+                    /** FileClusterType fileClusterType. */
+                    public fileClusterType?: "cluster";
+
+                    /**
+                     * Creates a new FileClusterType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FileClusterType instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IFileClusterType): google.privacy.dlp.v2.FileClusterType;
+
+                    /**
+                     * Encodes the specified FileClusterType message. Does not implicitly {@link google.privacy.dlp.v2.FileClusterType.verify|verify} messages.
+                     * @param message FileClusterType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IFileClusterType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FileClusterType message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FileClusterType.verify|verify} messages.
+                     * @param message FileClusterType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IFileClusterType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FileClusterType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FileClusterType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.FileClusterType;
+
+                    /**
+                     * Decodes a FileClusterType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FileClusterType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.FileClusterType;
+
+                    /**
+                     * Verifies a FileClusterType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FileClusterType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FileClusterType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.FileClusterType;
+
+                    /**
+                     * Creates a plain object from a FileClusterType message. Also converts values to other types if specified.
+                     * @param message FileClusterType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.FileClusterType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FileClusterType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FileClusterType
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FileClusterType {
+
+                    /** Cluster enum. */
+                    enum Cluster {
+                        CLUSTER_UNSPECIFIED = 0,
+                        CLUSTER_UNKNOWN = 1,
+                        CLUSTER_TEXT = 2,
+                        CLUSTER_STRUCTURED_DATA = 3,
+                        CLUSTER_SOURCE_CODE = 4,
+                        CLUSTER_RICH_DOCUMENT = 5,
+                        CLUSTER_IMAGE = 6,
+                        CLUSTER_ARCHIVE = 7,
+                        CLUSTER_MULTIMEDIA = 8,
+                        CLUSTER_EXECUTABLE = 9
+                    }
                 }
 
                 /** Properties of an InfoType. */
@@ -27161,6 +35873,7 @@ export namespace google {
                     enum SensitivityScoreLevel {
                         SENSITIVITY_SCORE_UNSPECIFIED = 0,
                         SENSITIVITY_LOW = 10,
+                        SENSITIVITY_UNKNOWN = 12,
                         SENSITIVITY_MODERATE = 20,
                         SENSITIVITY_HIGH = 30
                     }
@@ -30354,6 +39067,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a TableReference. */
+                interface ITableReference {
+
+                    /** TableReference datasetId */
+                    datasetId?: (string|null);
+
+                    /** TableReference tableId */
+                    tableId?: (string|null);
+                }
+
+                /** Represents a TableReference. */
+                class TableReference implements ITableReference {
+
+                    /**
+                     * Constructs a new TableReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ITableReference);
+
+                    /** TableReference datasetId. */
+                    public datasetId: string;
+
+                    /** TableReference tableId. */
+                    public tableId: string;
+
+                    /**
+                     * Creates a new TableReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TableReference instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ITableReference): google.privacy.dlp.v2.TableReference;
+
+                    /**
+                     * Encodes the specified TableReference message. Does not implicitly {@link google.privacy.dlp.v2.TableReference.verify|verify} messages.
+                     * @param message TableReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ITableReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TableReference message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TableReference.verify|verify} messages.
+                     * @param message TableReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ITableReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TableReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TableReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.TableReference;
+
+                    /**
+                     * Decodes a TableReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TableReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.TableReference;
+
+                    /**
+                     * Verifies a TableReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TableReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TableReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.TableReference;
+
+                    /**
+                     * Creates a plain object from a TableReference message. Also converts values to other types if specified.
+                     * @param message TableReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.TableReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TableReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TableReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a BigQueryField. */
                 interface IBigQueryField {
 
@@ -31306,6 +40122,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -31343,6 +40162,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -31924,6 +40746,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -31937,6 +40774,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -32218,6 +41070,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -32234,6 +41089,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -32437,7 +41295,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */
@@ -32468,7 +41329,8 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -32824,6 +41686,21 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
         /** Properties of a FileDescriptorProto. */
         interface IFileDescriptorProto {
 
@@ -32864,7 +41741,7 @@ export namespace google {
             syntax?: (string|null);
 
             /** FileDescriptorProto edition */
-            edition?: (string|null);
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -32913,7 +41790,7 @@ export namespace google {
             public syntax: string;
 
             /** FileDescriptorProto edition. */
-            public edition: string;
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -33364,6 +42241,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -33377,6 +42263,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -33454,6 +42349,136 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -33640,8 +42665,8 @@ export namespace google {
             /** Label enum. */
             enum Label {
                 LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
             }
         }
 
@@ -34353,9 +43378,6 @@ export namespace google {
             /** FileOptions pyGenericServices */
             pyGenericServices?: (boolean|null);
 
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
             /** FileOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -34382,6 +43404,9 @@ export namespace google {
 
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -34429,9 +43454,6 @@ export namespace google {
             /** FileOptions pyGenericServices. */
             public pyGenericServices: boolean;
 
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
             /** FileOptions deprecated. */
             public deprecated: boolean;
 
@@ -34458,6 +43480,9 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -34568,6 +43593,9 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -34598,6 +43626,9 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -34710,8 +43741,14 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -34759,8 +43796,14 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -34879,10 +43922,116 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -34896,6 +44045,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -34990,6 +44142,9 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -35011,6 +44166,9 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -35099,6 +44257,12 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -35114,6 +44278,12 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -35199,6 +44369,9 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -35220,6 +44393,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -35314,6 +44490,9 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -35338,6 +44517,9 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -35662,6 +44844,394 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

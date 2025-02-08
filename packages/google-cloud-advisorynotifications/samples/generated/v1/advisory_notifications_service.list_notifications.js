@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ function main(parent) {
   /**
    *  Required. The parent, which owns this collection of notifications.
    *  Must be of the form "organizations/{organization}/locations/{location}"
-   *  or "projects/{project}/locations/{location}"
+   *  or "projects/{project}/locations/{location}".
    */
   // const parent = 'abc123'
   /**
@@ -74,7 +74,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await advisorynotificationsClient.listNotificationsAsync(request);
+    const iterable = advisorynotificationsClient.listNotificationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

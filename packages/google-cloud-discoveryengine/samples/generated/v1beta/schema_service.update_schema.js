@@ -36,8 +36,8 @@ function main(schema) {
   /**
    *  If set to true, and the
    *  Schema google.cloud.discoveryengine.v1beta.Schema  is not found, a new
-   *  Schema google.cloud.discoveryengine.v1beta.Schema  will be created. In
-   *  this situation, `update_mask` is ignored.
+   *  Schema google.cloud.discoveryengine.v1beta.Schema  is created. In this
+   *  situation, `update_mask` is ignored.
    */
   // const allowMissing = true
 

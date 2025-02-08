@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -86,9 +86,10 @@ message CreateKmsConfigRequest {
     }
   ];
 
-  // Required. Id of the requesting KmsConfig
-  // If auto-generating Id server-side, remove this field and
-  // id from the method_signature of Create RPC
+  // Required. Id of the requesting KmsConfig. Must be unique within the parent
+  // resource. Must contain only letters, numbers and hyphen, with the first
+  // character a letter, the last a letter or a
+  // number, and a 63 character maximum.
   string kms_config_id = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The required parameters to create a new KmsConfig.

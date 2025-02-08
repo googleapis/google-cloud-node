@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. Resource name of the parent of sources to list. Its format should
-   *  be "organizations/[organization_id]", "folders/[folder_id]", or
-   *  "projects/[project_id]".
+   *  be `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *  `projects/[project_id]`.
    */
   // const parent = 'abc123'
   /**
@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.listSourcesAsync(request);
+    const iterable = securitycenterClient.listSourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -84,7 +84,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listHyperparameterTuningJobsAsync(request);
+    const iterable = aiplatformClient.listHyperparameterTuningJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

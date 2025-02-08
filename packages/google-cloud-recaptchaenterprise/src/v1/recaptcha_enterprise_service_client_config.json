@@ -63,6 +63,18 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "AddIpOverride": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RemoveIpOverride": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListIpOverrides": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetMetrics": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -84,6 +96,10 @@
           "retry_params_name": "default"
         },
         "DeleteFirewallPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ReorderFirewallPolicies": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

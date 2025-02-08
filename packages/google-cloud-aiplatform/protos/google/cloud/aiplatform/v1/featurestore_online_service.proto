@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -206,7 +206,7 @@ message ReadFeatureValuesResponse {
 }
 
 // Request message for
-// [FeaturestoreOnlineServingService.StreamingFeatureValuesRead][].
+// [FeaturestoreOnlineServingService.StreamingReadFeatureValues][google.cloud.aiplatform.v1.FeaturestoreOnlineServingService.StreamingReadFeatureValues].
 message StreamingReadFeatureValuesRequest {
   // Required. The resource name of the entities' type.
   // Value format:
@@ -272,10 +272,28 @@ message FeatureValue {
 
     // Bytes feature value.
     bytes bytes_value = 13;
+
+    // A struct type feature value.
+    StructValue struct_value = 15;
   }
 
   // Metadata of feature value.
   Metadata metadata = 14;
+}
+
+// Struct (or object) type feature value.
+message StructValue {
+  // A list of field values.
+  repeated StructFieldValue values = 1;
+}
+
+// One field of a Struct (or object) type feature value.
+message StructFieldValue {
+  // Name of the field in the struct feature.
+  string name = 1;
+
+  // The value for this field.
+  FeatureValue value = 2;
 }
 
 // Container for list of values.

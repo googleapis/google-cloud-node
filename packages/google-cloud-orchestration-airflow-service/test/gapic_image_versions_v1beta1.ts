@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -129,16 +129,94 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1beta1.ImageVersionsClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        imageversionsModule.v1beta1.ImageVersionsClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        imageversionsModule.v1beta1.ImageVersionsClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          imageversionsModule.v1beta1.ImageVersionsClient.servicePath;
+        assert.strictEqual(servicePath, 'composer.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          imageversionsModule.v1beta1.ImageVersionsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'composer.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'composer.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new imageversionsModule.v1beta1.ImageVersionsClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'composer.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new imageversionsModule.v1beta1.ImageVersionsClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'composer.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new imageversionsModule.v1beta1.ImageVersionsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -242,7 +320,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orchestration.airflow.service.v1beta1.ImageVersion()
@@ -281,7 +359,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orchestration.airflow.service.v1beta1.ImageVersion()
@@ -338,7 +416,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listImageVersions = stubSimpleCall(
         undefined,
@@ -369,7 +447,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orchestration.airflow.service.v1beta1.ImageVersion()
@@ -412,9 +490,9 @@ describe('v1beta1.ImageVersionsClient', () => {
       assert(
         (client.descriptors.page.listImageVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -432,7 +510,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listImageVersions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -464,9 +542,9 @@ describe('v1beta1.ImageVersionsClient', () => {
       assert(
         (client.descriptors.page.listImageVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -484,7 +562,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orchestration.airflow.service.v1beta1.ImageVersion()
@@ -514,9 +592,9 @@ describe('v1beta1.ImageVersionsClient', () => {
       assert(
         (client.descriptors.page.listImageVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -534,7 +612,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listImageVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -555,9 +633,9 @@ describe('v1beta1.ImageVersionsClient', () => {
       assert(
         (client.descriptors.page.listImageVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -621,6 +699,197 @@ describe('v1beta1.ImageVersionsClient', () => {
         assert.strictEqual(result, 'environmentValue');
         assert(
           (client.pathTemplates.environmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('userWorkloadsConfigMap', () => {
+      const fakePath = '/rendered/path/userWorkloadsConfigMap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        environment: 'environmentValue',
+        user_workloads_config_map: 'userWorkloadsConfigMapValue',
+      };
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.userWorkloadsConfigMapPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userWorkloadsConfigMapPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userWorkloadsConfigMapPath', () => {
+        const result = client.userWorkloadsConfigMapPath(
+          'projectValue',
+          'locationValue',
+          'environmentValue',
+          'userWorkloadsConfigMapValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchProjectFromUserWorkloadsConfigMapName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchLocationFromUserWorkloadsConfigMapName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchEnvironmentFromUserWorkloadsConfigMapName(fakePath);
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'userWorkloadsConfigMapValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('userWorkloadsSecret', () => {
+      const fakePath = '/rendered/path/userWorkloadsSecret';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        environment: 'environmentValue',
+        user_workloads_secret: 'userWorkloadsSecretValue',
+      };
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.userWorkloadsSecretPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userWorkloadsSecretPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userWorkloadsSecretPath', () => {
+        const result = client.userWorkloadsSecretPath(
+          'projectValue',
+          'locationValue',
+          'environmentValue',
+          'userWorkloadsSecretValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromUserWorkloadsSecretName', () => {
+        const result = client.matchProjectFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromUserWorkloadsSecretName', () => {
+        const result =
+          client.matchLocationFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromUserWorkloadsSecretName', () => {
+        const result =
+          client.matchEnvironmentFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchUserWorkloadsSecretFromUserWorkloadsSecretName', () => {
+        const result =
+          client.matchUserWorkloadsSecretFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'userWorkloadsSecretValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

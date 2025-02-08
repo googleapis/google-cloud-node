@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await discoveryengineClient.listTargetSitesAsync(request);
+    const iterable = discoveryengineClient.listTargetSitesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

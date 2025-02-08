@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ syntax = "proto3";
 
 package google.maps.routing.v2;
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Maps.Routing.V2";
 option go_package = "cloud.google.com/go/maps/routing/apiv2/routingpb;routingpb";
 option java_multiple_files = true;
@@ -27,7 +26,7 @@ option php_namespace = "Google\\Maps\\Routing\\V2";
 option ruby_package = "Google::Maps::Routing::V2";
 
 // A set of values that specify the navigation action to take for the current
-// step (e.g., turn left, merge, straight, etc.).
+// step (for example, turn left, merge, or straight).
 enum Maneuver {
   // Not used.
   MANEUVER_UNSPECIFIED = 0;

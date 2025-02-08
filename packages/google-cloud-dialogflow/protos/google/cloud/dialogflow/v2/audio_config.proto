@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/protobuf/duration.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
 option go_package = "cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb";
 option java_multiple_files = true;
@@ -167,6 +166,17 @@ message InputAudioConfig {
 
   // Enable automatic punctuation option at the speech backend.
   bool enable_automatic_punctuation = 17;
+
+  // A collection of phrase set resources to use for speech adaptation.
+  repeated string phrase_sets = 20 [(google.api.resource_reference) = {
+    type: "speech.googleapis.com/PhraseSet"
+  }];
+
+  // If `true`, the request will opt out for STT conformer model migration.
+  // This field will be deprecated once force migration takes place in June
+  // 2024. Please refer to [Dialogflow ES Speech model
+  // migration](https://cloud.google.com/dialogflow/es/docs/speech-model-migration).
+  bool opt_out_conformer_model_migration = 26;
 }
 
 // Description of which voice to use for speech synthesis.
@@ -281,6 +291,35 @@ message SpeechToTextConfig {
   // for model selection.
   string model = 2;
 
+  // List of names of Cloud Speech phrase sets that are used for transcription.
+  repeated string phrase_sets = 4 [(google.api.resource_reference) = {
+    type: "speech.googleapis.com/PhraseSet"
+  }];
+
+  // Audio encoding of the audio content to process.
+  AudioEncoding audio_encoding = 6;
+
+  // Sample rate (in Hertz) of the audio content sent in the query.
+  // Refer to [Cloud Speech API
+  // documentation](https://cloud.google.com/speech-to-text/docs/basics) for
+  // more details.
+  int32 sample_rate_hertz = 7;
+
+  // The language of the supplied audio. Dialogflow does not do
+  // translations. See [Language
+  // Support](https://cloud.google.com/dialogflow/docs/reference/language)
+  // for a list of the currently supported language codes. Note that queries in
+  // the same session do not necessarily need to specify the same language.
+  string language_code = 8;
+
+  // If `true`, Dialogflow returns
+  // [SpeechWordInfo][google.cloud.dialogflow.v2.SpeechWordInfo] in
+  // [StreamingRecognitionResult][google.cloud.dialogflow.v2.StreamingRecognitionResult]
+  // with information about the recognized speech words, e.g. start and end time
+  // offsets. If false or unspecified, Speech doesn't return any word-level
+  // information.
+  bool enable_word_info = 9;
+
   // Use timeout based endpointing, interpreting endpointer sensitivy as
   // seconds of timeout value.
   bool use_timeout_based_endpointing = 11;
@@ -388,6 +427,9 @@ enum AudioEncoding {
   // is replaced with a single byte containing the block length. Only Speex
   // wideband is supported. `sample_rate_hertz` must be 16000.
   AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7;
+
+  // 8-bit samples that compand 13-bit audio samples using G.711 PCMU/a-law.
+  AUDIO_ENCODING_ALAW = 8;
 }
 
 // Variant of the specified [Speech
@@ -403,8 +445,8 @@ enum SpeechModelVariant {
   // USE_BEST_AVAILABLE.
   SPEECH_MODEL_VARIANT_UNSPECIFIED = 0;
 
-  // Use the best available variant of the [Speech
-  // model][InputAudioConfig.model] that the caller is eligible for.
+  // Use the best available variant of the [Speech model][model] that the caller
+  // is eligible for.
   //
   // Please see the [Dialogflow
   // docs](https://cloud.google.com/dialogflow/docs/data-logging) for
@@ -474,4 +516,7 @@ enum OutputAudioEncoding {
 
   // 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
   OUTPUT_AUDIO_ENCODING_MULAW = 5;
+
+  // 8-bit samples that compand 13-bit audio samples using G.711 PCMU/a-law.
+  OUTPUT_AUDIO_ENCODING_ALAW = 6;
 }

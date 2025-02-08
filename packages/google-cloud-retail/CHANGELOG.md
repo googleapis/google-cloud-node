@@ -1,5 +1,49 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.5.0...retail-v3.6.0) (2024-10-10)
+
+
+### Features
+
+* [retail] add conversational search ([#5740](https://github.com/googleapis/google-cloud-node/issues/5740)) ([1a182cc](https://github.com/googleapis/google-cloud-node/commit/1a182cc261b9df04154dfeb123196a539fd25129))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.4.0...retail-v3.5.0) (2024-06-21)
+
+
+### Features
+
+* [retail] support merged facets ([#5446](https://github.com/googleapis/google-cloud-node/issues/5446)) ([140597e](https://github.com/googleapis/google-cloud-node/commit/140597eac392a4b777c3e0fda197544b0f2912ba))
+
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.3.0...retail-v3.4.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.2.0...retail-v3.3.0) (2024-04-05)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5190](https://github.com/googleapis/google-cloud-node/issues/5190)) ([b569fbe](https://github.com/googleapis/google-cloud-node/commit/b569fbe1472d0fd71c1bfb58d0b1661814ac5727))
+
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.1.0...retail-v3.2.0) (2024-02-09)
+
+
+### Features
+
+* [retail] add analytics service ([#5033](https://github.com/googleapis/google-cloud-node/issues/5033)) ([76548b0](https://github.com/googleapis/google-cloud-node/commit/76548b0c0715dbb505ba14ed30b75fab6a36d081))
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5027](https://github.com/googleapis/google-cloud-node/issues/5027)) ([88763bb](https://github.com/googleapis/google-cloud-node/commit/88763bb1b7ce9ff884b9e3f476230d38985b2ff2))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.0.1...retail-v3.1.0) (2024-02-07)
+
+
+### Features
+
+* [retail] add analytics service ([#4975](https://github.com/googleapis/google-cloud-node/issues/4975)) ([785c08b](https://github.com/googleapis/google-cloud-node/commit/785c08bca3e13b39cb9a2448aec758bb64473ec2))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/retail-v3.0.0...retail-v3.0.1) (2023-09-06)
 
 

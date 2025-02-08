@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,12 +36,39 @@ message MuteConfig {
     pattern: "organizations/{organization}/muteConfigs/{mute_config}"
     pattern: "folders/{folder}/muteConfigs/{mute_config}"
     pattern: "projects/{project}/muteConfigs/{mute_config}"
+    pattern: "organizations/{organization}/locations/{location}/muteConfigs/{mute_config}"
+    pattern: "folders/{folder}/locations/{location}/muteConfigs/{mute_config}"
+    pattern: "projects/{project}/locations/{location}/muteConfigs/{mute_config}"
+    plural: "muteConfigs"
+    singular: "muteConfig"
   };
 
+  // The type of MuteConfig.
+  enum MuteConfigType {
+    // Unused.
+    MUTE_CONFIG_TYPE_UNSPECIFIED = 0;
+
+    // A static mute config, which sets the static mute state of future matching
+    // findings to muted. Once the static mute state has been set, finding or
+    // config modifications will not affect the state.
+    STATIC = 1;
+
+    // A dynamic mute config, which is applied to existing and future matching
+    // findings, setting their dynamic mute state to "muted". If the config is
+    // updated or deleted, or a matching finding is updated, such that the
+    // finding doesn't match the config, the config will be removed from the
+    // finding, and the finding's dynamic mute state may become "unmuted"
+    // (unless other configs still match).
+    DYNAMIC = 2;
+  }
+
   // This field will be ignored if provided on config creation. Format
-  // "organizations/{organization}/muteConfigs/{mute_config}"
-  // "folders/{folder}/muteConfigs/{mute_config}"
-  // "projects/{project}/muteConfigs/{mute_config}"
+  // `organizations/{organization}/muteConfigs/{mute_config}`
+  // `folders/{folder}/muteConfigs/{mute_config}`
+  // `projects/{project}/muteConfigs/{mute_config}`
+  // `organizations/{organization}/locations/global/muteConfigs/{mute_config}`
+  // `folders/{folder}/locations/global/muteConfigs/{mute_config}`
+  // `projects/{project}/locations/global/muteConfigs/{mute_config}`
   string name = 1;
 
   // The human readable name to be displayed for the mute config.
@@ -88,4 +115,16 @@ message MuteConfig {
   // This field is set by the server and will be ignored if provided on config
   // creation or update.
   string most_recent_editor = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. The type of the mute config, which determines what type of mute
+  // state the config affects. The static mute state takes precedence over the
+  // dynamic mute state. Immutable after creation. STATIC by default if not set
+  // during creation.
+  MuteConfigType type = 8 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The expiry of the mute config. Only applicable for dynamic
+  // configs. If the expiry is set, when the config expires, it is removed from
+  // all findings.
+  google.protobuf.Timestamp expiry_time = 9
+      [(google.api.field_behavior) = OPTIONAL];
 }

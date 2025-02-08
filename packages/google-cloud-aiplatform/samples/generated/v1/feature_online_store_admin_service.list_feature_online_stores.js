@@ -89,7 +89,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listFeatureOnlineStoresAsync(request);
+    const iterable = aiplatformClient.listFeatureOnlineStoresAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

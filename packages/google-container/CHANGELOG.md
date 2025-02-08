@@ -4,6 +4,125 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.19.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.18.0...container-v5.19.0) (2024-11-14)
+
+
+### Features
+
+* [container] add LocalSsdEncryptionMode in NodeConfig ([#5796](https://github.com/googleapis/google-cloud-node/issues/5796)) ([35f689a](https://github.com/googleapis/google-cloud-node/commit/35f689a7c3e74135e3f5c1bae77e3e4fa07c17fc))
+
+## [5.18.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.17.0...container-v5.18.0) (2024-10-10)
+
+
+### Features
+
+* [container] add an effective_cgroup_mode field in node config ([#5741](https://github.com/googleapis/google-cloud-node/issues/5741)) ([88083e4](https://github.com/googleapis/google-cloud-node/commit/88083e4a879ef6963eca9183c037ef84b861efed))
+
+## [5.17.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.16.0...container-v5.17.0) (2024-08-29)
+
+
+### Features
+
+* [container] add `EXTENDED` enum value for `ReleaseChannel.Channel` ([#5641](https://github.com/googleapis/google-cloud-node/issues/5641)) ([b03f419](https://github.com/googleapis/google-cloud-node/commit/b03f419cab2ebf8385d2df7bf018863e63295624))
+
+## [5.16.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.15.1...container-v5.16.0) (2024-07-22)
+
+
+### Features
+
+* [container] A new field `ray_operator_config` is added to message `.google.container.v1beta1.AddonsConfig` ([#5553](https://github.com/googleapis/google-cloud-node/issues/5553)) ([a884c76](https://github.com/googleapis/google-cloud-node/commit/a884c766ff86127abe6a8159f23158de4badf09f))
+
+
+### Bug Fixes
+
+* [container] Deprecate "EXPERIMENTAL" option for Gateway API (this value has never been supported) ([#5535](https://github.com/googleapis/google-cloud-node/issues/5535)) ([c06cdc7](https://github.com/googleapis/google-cloud-node/commit/c06cdc758d01ae296455757fba12eed47a8d5c06))
+
+## [5.15.1](https://github.com/googleapis/google-cloud-node/compare/container-v5.15.0...container-v5.15.1) (2024-07-10)
+
+
+### Bug Fixes
+
+* [container] Deprecate "EXPERIMENTAL" option for Gateway API (this value has never been supported) ([#5519](https://github.com/googleapis/google-cloud-node/issues/5519)) ([8838289](https://github.com/googleapis/google-cloud-node/commit/88382897c1c0ba6f5f80ba72ab775808de301962))
+
+## [5.15.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.14.0...container-v5.15.0) (2024-06-12)
+
+
+### Features
+
+* [container] A new message `HugepagesConfig` is added ([#5447](https://github.com/googleapis/google-cloud-node/issues/5447)) ([e62ec4d](https://github.com/googleapis/google-cloud-node/commit/e62ec4df1773c683cc60cbb1adafeffc98970a61))
+
+## [5.14.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.13.0...container-v5.14.0) (2024-06-03)
+
+
+### Features
+
+* [container] A new message `HugepagesConfig` is added ([#5391](https://github.com/googleapis/google-cloud-node/issues/5391)) ([2c879f6](https://github.com/googleapis/google-cloud-node/commit/2c879f6acf259e280043a9e845b5e9af1435f188))
+
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.12.0...container-v5.13.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.11.0...container-v5.12.0) (2024-04-05)
+
+
+### Features
+
+* [container] add several fields to manage state of database encryption update ([#5184](https://github.com/googleapis/google-cloud-node/issues/5184)) ([632f7f4](https://github.com/googleapis/google-cloud-node/commit/632f7f4789bc8b05587b42ee986f5101ef003614))
+
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.10.0...container-v5.11.0) (2024-03-26)
+
+
+### Features
+
+* [container] add optional secondary_boot_disk_update_strategy field to NodePool API ([#5162](https://github.com/googleapis/google-cloud-node/issues/5162)) ([5e76444](https://github.com/googleapis/google-cloud-node/commit/5e7644431ce558ea6ce3be42a4038bd25cd224c3))
+
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.9.0...container-v5.10.0) (2024-03-07)
+
+
+### Features
+
+* [container] add API to enable/disable secret manager csi component on GKE clusters ([#5111](https://github.com/googleapis/google-cloud-node/issues/5111)) ([d7a3bb1](https://github.com/googleapis/google-cloud-node/commit/d7a3bb1217b5c22651c6f3af4e990a8c0cbca6e9))
+* [container] add API to enable/disable secret manager csi component on GKE clusters ([#5113](https://github.com/googleapis/google-cloud-node/issues/5113)) ([f52aa85](https://github.com/googleapis/google-cloud-node/commit/f52aa85e5aaf2303e7fda468eeb280fd441884a7))
+
+## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.8.1...container-v5.9.0) (2024-02-28)
+
+
+### Features
+
+* [container] add secondary boot disks field to NodePool API ([#5094](https://github.com/googleapis/google-cloud-node/issues/5094)) ([208250e](https://github.com/googleapis/google-cloud-node/commit/208250ebe1508e4f2190e7233d8fb5ea5bfc7911))
+
+## [5.8.1](https://github.com/googleapis/google-cloud-node/compare/container-v5.8.0...container-v5.8.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* [container] Add client library version to headers ([#5076](https://github.com/googleapis/google-cloud-node/issues/5076)) ([a1b39d3](https://github.com/googleapis/google-cloud-node/commit/a1b39d399119d815282239638cde4903de4b2a76))
+
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.7.0...container-v5.8.0) (2024-02-22)
+
+
+### Features
+
+* [container] add API to enable Provisioning Request API on existing nodepools ([#5065](https://github.com/googleapis/google-cloud-node/issues/5065)) ([af0e580](https://github.com/googleapis/google-cloud-node/commit/af0e580dbdca83f5e9cebe0df1d9e752c88f4357))
+
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.6.0...container-v5.7.0) (2024-02-09)
+
+
+### Features
+
+* [container] Trusted Private Cloud support, use the universeDomain parameter  ([#5020](https://github.com/googleapis/google-cloud-node/issues/5020)) ([423e385](https://github.com/googleapis/google-cloud-node/commit/423e385e3b62077bc381c698e320769ccf6045b1))
+
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.5.0...container-v5.6.0) (2024-02-07)
+
+
+### Features
+
+* [container] new AddonsConfig field stateful_ha_config ([#5002](https://github.com/googleapis/google-cloud-node/issues/5002)) ([1bff942](https://github.com/googleapis/google-cloud-node/commit/1bff942214baba585f7adce35f948b71ece1673a))
+
 ## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.4.1...container-v5.5.0) (2024-01-23)
 
 

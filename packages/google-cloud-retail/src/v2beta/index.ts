@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,9 +20,11 @@ export {AnalyticsServiceClient} from './analytics_service_client';
 export {CatalogServiceClient} from './catalog_service_client';
 export {CompletionServiceClient} from './completion_service_client';
 export {ControlServiceClient} from './control_service_client';
+export {GenerativeQuestionServiceClient} from './generative_question_service_client';
 export {ModelServiceClient} from './model_service_client';
 export {PredictionServiceClient} from './prediction_service_client';
 export {ProductServiceClient} from './product_service_client';
+export {ProjectServiceClient} from './project_service_client';
 export {SearchServiceClient} from './search_service_client';
 export {ServingConfigServiceClient} from './serving_config_service_client';
 export {UserEventServiceClient} from './user_event_service_client';

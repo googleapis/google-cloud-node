@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ function main(parent) {
   /**
    *  The maximum number of items to return.
    *  Default page_size is 1000.
-   *  Max limit is 10000.
+   *  Max limit is 1000.
    */
   // const pageSize = 1234
   /**
@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cloudprofilerClient.listProfilesAsync(request);
+    const iterable = cloudprofilerClient.listProfilesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

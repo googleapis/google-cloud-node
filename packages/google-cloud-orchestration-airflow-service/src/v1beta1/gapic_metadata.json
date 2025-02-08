@@ -30,6 +30,46 @@
                 "pollAirflowCommand"
               ]
             },
+            "CreateUserWorkloadsSecret": {
+              "methods": [
+                "createUserWorkloadsSecret"
+              ]
+            },
+            "GetUserWorkloadsSecret": {
+              "methods": [
+                "getUserWorkloadsSecret"
+              ]
+            },
+            "UpdateUserWorkloadsSecret": {
+              "methods": [
+                "updateUserWorkloadsSecret"
+              ]
+            },
+            "DeleteUserWorkloadsSecret": {
+              "methods": [
+                "deleteUserWorkloadsSecret"
+              ]
+            },
+            "CreateUserWorkloadsConfigMap": {
+              "methods": [
+                "createUserWorkloadsConfigMap"
+              ]
+            },
+            "GetUserWorkloadsConfigMap": {
+              "methods": [
+                "getUserWorkloadsConfigMap"
+              ]
+            },
+            "UpdateUserWorkloadsConfigMap": {
+              "methods": [
+                "updateUserWorkloadsConfigMap"
+              ]
+            },
+            "DeleteUserWorkloadsConfigMap": {
+              "methods": [
+                "deleteUserWorkloadsConfigMap"
+              ]
+            },
             "FetchDatabaseProperties": {
               "methods": [
                 "fetchDatabaseProperties"
@@ -80,6 +120,27 @@
                 "listEnvironments",
                 "listEnvironmentsStream",
                 "listEnvironmentsAsync"
+              ]
+            },
+            "ListWorkloads": {
+              "methods": [
+                "listWorkloads",
+                "listWorkloadsStream",
+                "listWorkloadsAsync"
+              ]
+            },
+            "ListUserWorkloadsSecrets": {
+              "methods": [
+                "listUserWorkloadsSecrets",
+                "listUserWorkloadsSecretsStream",
+                "listUserWorkloadsSecretsAsync"
+              ]
+            },
+            "ListUserWorkloadsConfigMaps": {
+              "methods": [
+                "listUserWorkloadsConfigMaps",
+                "listUserWorkloadsConfigMapsStream",
+                "listUserWorkloadsConfigMapsAsync"
               ]
             }
           }
@@ -107,6 +168,46 @@
                 "pollAirflowCommand"
               ]
             },
+            "CreateUserWorkloadsSecret": {
+              "methods": [
+                "createUserWorkloadsSecret"
+              ]
+            },
+            "GetUserWorkloadsSecret": {
+              "methods": [
+                "getUserWorkloadsSecret"
+              ]
+            },
+            "UpdateUserWorkloadsSecret": {
+              "methods": [
+                "updateUserWorkloadsSecret"
+              ]
+            },
+            "DeleteUserWorkloadsSecret": {
+              "methods": [
+                "deleteUserWorkloadsSecret"
+              ]
+            },
+            "CreateUserWorkloadsConfigMap": {
+              "methods": [
+                "createUserWorkloadsConfigMap"
+              ]
+            },
+            "GetUserWorkloadsConfigMap": {
+              "methods": [
+                "getUserWorkloadsConfigMap"
+              ]
+            },
+            "UpdateUserWorkloadsConfigMap": {
+              "methods": [
+                "updateUserWorkloadsConfigMap"
+              ]
+            },
+            "DeleteUserWorkloadsConfigMap": {
+              "methods": [
+                "deleteUserWorkloadsConfigMap"
+              ]
+            },
             "FetchDatabaseProperties": {
               "methods": [
                 "fetchDatabaseProperties"
@@ -157,6 +258,27 @@
                 "listEnvironments",
                 "listEnvironmentsStream",
                 "listEnvironmentsAsync"
+              ]
+            },
+            "ListWorkloads": {
+              "methods": [
+                "listWorkloads",
+                "listWorkloadsStream",
+                "listWorkloadsAsync"
+              ]
+            },
+            "ListUserWorkloadsSecrets": {
+              "methods": [
+                "listUserWorkloadsSecrets",
+                "listUserWorkloadsSecretsStream",
+                "listUserWorkloadsSecretsAsync"
+              ]
+            },
+            "ListUserWorkloadsConfigMaps": {
+              "methods": [
+                "listUserWorkloadsConfigMaps",
+                "listUserWorkloadsConfigMapsStream",
+                "listUserWorkloadsConfigMapsAsync"
               ]
             }
           }

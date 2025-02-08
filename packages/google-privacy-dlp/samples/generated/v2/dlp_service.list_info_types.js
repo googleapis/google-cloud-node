@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ function main() {
   /**
    *  The parent resource name.
    *  The format of this value is as follows:
-   *      locations/<var>LOCATION_ID</var>
+   *      `locations/{location_id}`
    */
   // const parent = 'abc123'
   /**

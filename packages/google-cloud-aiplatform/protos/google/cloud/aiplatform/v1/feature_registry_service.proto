@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -116,6 +116,20 @@ service FeatureRegistryService {
     };
   }
 
+  // Creates a batch of Features in a given FeatureGroup.
+  rpc BatchCreateFeatures(BatchCreateFeaturesRequest)
+      returns (google.longrunning.Operation) {
+    option (google.api.http) = {
+      post: "/v1/{parent=projects/*/locations/*/featureGroups/*}/features:batchCreate"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,requests";
+    option (google.longrunning.operation_info) = {
+      response_type: "BatchCreateFeaturesResponse"
+      metadata_type: "BatchCreateFeaturesOperationMetadata"
+    };
+  }
+
   // Gets details of a single Feature.
   rpc GetFeature(GetFeatureRequest) returns (Feature) {
     option (google.api.http) = {
@@ -165,7 +179,7 @@ service FeatureRegistryService {
 message CreateFeatureGroupRequest {
   // Required. The resource name of the Location to create FeatureGroups.
   // Format:
-  // `projects/{project}/locations/{location}'`
+  // `projects/{project}/locations/{location}`
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -179,7 +193,7 @@ message CreateFeatureGroupRequest {
   // Required. The ID to use for this FeatureGroup, which will become the final
   // component of the FeatureGroup's resource name.
   //
-  // This value may be up to 60 characters, and valid characters are
+  // This value may be up to 128 characters, and valid characters are
   // `[a-z0-9_]`. The first character cannot be a number.
   //
   // The value must be unique within the project and location.
@@ -237,12 +251,12 @@ message ListFeatureGroupsRequest {
   int32 page_size = 3;
 
   // A page token, received from a previous
-  // [FeatureGroupAdminService.ListFeatureGroups][] call.
-  // Provide this to retrieve the subsequent page.
+  // [FeatureRegistryService.ListFeatureGroups][google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatureGroups]
+  // call. Provide this to retrieve the subsequent page.
   //
   // When paginating, all other parameters provided to
-  // [FeatureGroupAdminService.ListFeatureGroups][] must
-  // match the call that provided the page token.
+  // [FeatureRegistryService.ListFeatureGroups][google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatureGroups]
+  // must match the call that provided the page token.
   string page_token = 4;
 
   // A comma-separated list of fields to order by, sorted in ascending order.
@@ -286,6 +300,9 @@ message UpdateFeatureGroupRequest {
   // Updatable fields:
   //
   //   * `labels`
+  //   * `description`
+  //   * `big_query`
+  //   * `big_query.entity_id_columns`
   google.protobuf.FieldMask update_mask = 2;
 }
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ function main(backup) {
    */
   // const backup = {}
   /**
-   *  This is used to specify the fields to be overwritten in the
+   *  Optional. This is used to specify the fields to be overwritten in the
    *  Backup targeted for update. The values for each of these
    *  updated fields will be taken from the `backup_plan` provided
    *  with this request. Field names are relative to the root of the resource.

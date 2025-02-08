@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listMetadataSchemasAsync(request);
+    const iterable = aiplatformClient.listMetadataSchemasAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

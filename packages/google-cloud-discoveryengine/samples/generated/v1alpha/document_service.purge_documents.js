@@ -29,6 +29,17 @@ function main(parent, filter) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  Cloud Storage location for the input content.
+   *  Supported `data_schema`:
+   *  * `document_id`: One valid
+   *  Document.id google.cloud.discoveryengine.v1alpha.Document.id  per line.
+   */
+  // const gcsSource = {}
+  /**
+   *  Inline source for the input content for purge.
+   */
+  // const inlineSource = {}
+  /**
    *  Required. The parent resource name, such as
    *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
    */
@@ -39,6 +50,10 @@ function main(parent, filter) {
    *  `*` (all items).
    */
   // const filter = 'abc123'
+  /**
+   *  The desired location of errors incurred during the purge.
+   */
+  // const errorConfig = {}
   /**
    *  Actually performs the purge. If `force` is set to false, return the
    *  expected purge count without deleting any documents.

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -93,8 +93,9 @@ service AnswerRecords {
 //    returned to the customers.
 // 2. The customer uses the
 // [AnswerRecord.name][google.cloud.dialogflow.v2.AnswerRecord.name] to call the
-//    [UpdateAnswerRecord][] method to send feedback about a specific answer
-//    that they believe is wrong.
+//    [AnswerRecords.UpdateAnswerRecord][google.cloud.dialogflow.v2.AnswerRecords.UpdateAnswerRecord]
+//    method to send feedback about a specific answer that they believe is
+//    wrong.
 message AnswerRecord {
   option (google.api.resource) = {
     type: "dialogflow.googleapis.com/AnswerRecord"
@@ -271,6 +272,10 @@ message AgentAssistantFeedback {
 
     // Text of actual submitted summary.
     string summary_text = 3;
+
+    // Optional. Actual text sections of submitted summary.
+    map<string, string> text_sections = 4
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Feedback for knowledge search.
@@ -283,6 +288,22 @@ message AgentAssistantFeedback {
 
     // The URIs clicked by the human agent. The value is appended for each
     // [UpdateAnswerRecordRequest][google.cloud.dialogflow.v2.UpdateAnswerRecordRequest].
+    // If the value is not empty,
+    // [AnswerFeedback.clicked][google.cloud.dialogflow.v2.AnswerFeedback.clicked]
+    // will be updated to be true.
+    repeated string clicked_uris = 2;
+  }
+
+  // Feedback for knowledge assist.
+  message KnowledgeAssistFeedback {
+    // Whether the suggested answer was copied by the human agent.
+    // If the value is set to be true,
+    // [AnswerFeedback.clicked][google.cloud.dialogflow.v2.AnswerFeedback.clicked]
+    // will be updated to be true.
+    bool answer_copied = 1;
+
+    // The URIs clicked by the human agent. The value is appended for each
+    // UpdateAnswerRecordRequest.
     // If the value is not empty,
     // [AnswerFeedback.clicked][google.cloud.dialogflow.v2.AnswerFeedback.clicked]
     // will be updated to be true.
@@ -326,6 +347,10 @@ message AgentAssistantFeedback {
 
   // Optional. Feedback for knowledge search.
   KnowledgeSearchFeedback knowledge_search_feedback = 5
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Feedback for knowledge assist.
+  KnowledgeAssistFeedback knowledge_assist_feedback = 6
       [(google.api.field_behavior) = OPTIONAL];
 }
 

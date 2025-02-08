@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1362,6 +1362,8 @@ export namespace google {
                     enum IneligibilityReason {
                         INELIGIBILITY_REASON_UNSPECIFIED = 0,
                         NO_VALID_BILLING_ACCOUNT = 1,
+                        NOT_SUPPORTED = 3,
+                        NOT_ENOUGH_USAGE_HISTORY = 4,
                         OTHER = 2
                     }
                 }
@@ -1774,6 +1776,9 @@ export namespace google {
 
                     /** QuotaDetails value */
                     value?: (number|Long|string|null);
+
+                    /** QuotaDetails rolloutInfo */
+                    rolloutInfo?: (google.api.cloudquotas.v1.IRolloutInfo|null);
                 }
 
                 /** Represents a QuotaDetails. */
@@ -1787,6 +1792,9 @@ export namespace google {
 
                     /** QuotaDetails value. */
                     public value: (number|Long|string);
+
+                    /** QuotaDetails rolloutInfo. */
+                    public rolloutInfo?: (google.api.cloudquotas.v1.IRolloutInfo|null);
 
                     /**
                      * Creates a new QuotaDetails instance using the specified properties.
@@ -1864,6 +1872,2449 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RolloutInfo. */
+                interface IRolloutInfo {
+
+                    /** RolloutInfo ongoingRollout */
+                    ongoingRollout?: (boolean|null);
+                }
+
+                /** Represents a RolloutInfo. */
+                class RolloutInfo implements IRolloutInfo {
+
+                    /**
+                     * Constructs a new RolloutInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1.IRolloutInfo);
+
+                    /** RolloutInfo ongoingRollout. */
+                    public ongoingRollout: boolean;
+
+                    /**
+                     * Creates a new RolloutInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RolloutInfo instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1.IRolloutInfo): google.api.cloudquotas.v1.RolloutInfo;
+
+                    /**
+                     * Encodes the specified RolloutInfo message. Does not implicitly {@link google.api.cloudquotas.v1.RolloutInfo.verify|verify} messages.
+                     * @param message RolloutInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1.IRolloutInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RolloutInfo message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1.RolloutInfo.verify|verify} messages.
+                     * @param message RolloutInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1.IRolloutInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RolloutInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RolloutInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1.RolloutInfo;
+
+                    /**
+                     * Decodes a RolloutInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RolloutInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1.RolloutInfo;
+
+                    /**
+                     * Verifies a RolloutInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RolloutInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RolloutInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1.RolloutInfo;
+
+                    /**
+                     * Creates a plain object from a RolloutInfo message. Also converts values to other types if specified.
+                     * @param message RolloutInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1.RolloutInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RolloutInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RolloutInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
+            /** Namespace v1beta. */
+            namespace v1beta {
+
+                /** Represents a CloudQuotas */
+                class CloudQuotas extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CloudQuotas service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CloudQuotas service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CloudQuotas;
+
+                    /**
+                     * Calls ListQuotaInfos.
+                     * @param request ListQuotaInfosRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListQuotaInfosResponse
+                     */
+                    public listQuotaInfos(request: google.api.cloudquotas.v1beta.IListQuotaInfosRequest, callback: google.api.cloudquotas.v1beta.CloudQuotas.ListQuotaInfosCallback): void;
+
+                    /**
+                     * Calls ListQuotaInfos.
+                     * @param request ListQuotaInfosRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listQuotaInfos(request: google.api.cloudquotas.v1beta.IListQuotaInfosRequest): Promise<google.api.cloudquotas.v1beta.ListQuotaInfosResponse>;
+
+                    /**
+                     * Calls GetQuotaInfo.
+                     * @param request GetQuotaInfoRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QuotaInfo
+                     */
+                    public getQuotaInfo(request: google.api.cloudquotas.v1beta.IGetQuotaInfoRequest, callback: google.api.cloudquotas.v1beta.CloudQuotas.GetQuotaInfoCallback): void;
+
+                    /**
+                     * Calls GetQuotaInfo.
+                     * @param request GetQuotaInfoRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getQuotaInfo(request: google.api.cloudquotas.v1beta.IGetQuotaInfoRequest): Promise<google.api.cloudquotas.v1beta.QuotaInfo>;
+
+                    /**
+                     * Calls ListQuotaPreferences.
+                     * @param request ListQuotaPreferencesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListQuotaPreferencesResponse
+                     */
+                    public listQuotaPreferences(request: google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest, callback: google.api.cloudquotas.v1beta.CloudQuotas.ListQuotaPreferencesCallback): void;
+
+                    /**
+                     * Calls ListQuotaPreferences.
+                     * @param request ListQuotaPreferencesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listQuotaPreferences(request: google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest): Promise<google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse>;
+
+                    /**
+                     * Calls GetQuotaPreference.
+                     * @param request GetQuotaPreferenceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QuotaPreference
+                     */
+                    public getQuotaPreference(request: google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest, callback: google.api.cloudquotas.v1beta.CloudQuotas.GetQuotaPreferenceCallback): void;
+
+                    /**
+                     * Calls GetQuotaPreference.
+                     * @param request GetQuotaPreferenceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getQuotaPreference(request: google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest): Promise<google.api.cloudquotas.v1beta.QuotaPreference>;
+
+                    /**
+                     * Calls CreateQuotaPreference.
+                     * @param request CreateQuotaPreferenceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QuotaPreference
+                     */
+                    public createQuotaPreference(request: google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest, callback: google.api.cloudquotas.v1beta.CloudQuotas.CreateQuotaPreferenceCallback): void;
+
+                    /**
+                     * Calls CreateQuotaPreference.
+                     * @param request CreateQuotaPreferenceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createQuotaPreference(request: google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest): Promise<google.api.cloudquotas.v1beta.QuotaPreference>;
+
+                    /**
+                     * Calls UpdateQuotaPreference.
+                     * @param request UpdateQuotaPreferenceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QuotaPreference
+                     */
+                    public updateQuotaPreference(request: google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest, callback: google.api.cloudquotas.v1beta.CloudQuotas.UpdateQuotaPreferenceCallback): void;
+
+                    /**
+                     * Calls UpdateQuotaPreference.
+                     * @param request UpdateQuotaPreferenceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateQuotaPreference(request: google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest): Promise<google.api.cloudquotas.v1beta.QuotaPreference>;
+                }
+
+                namespace CloudQuotas {
+
+                    /**
+                     * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|listQuotaInfos}.
+                     * @param error Error, if any
+                     * @param [response] ListQuotaInfosResponse
+                     */
+                    type ListQuotaInfosCallback = (error: (Error|null), response?: google.api.cloudquotas.v1beta.ListQuotaInfosResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|getQuotaInfo}.
+                     * @param error Error, if any
+                     * @param [response] QuotaInfo
+                     */
+                    type GetQuotaInfoCallback = (error: (Error|null), response?: google.api.cloudquotas.v1beta.QuotaInfo) => void;
+
+                    /**
+                     * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|listQuotaPreferences}.
+                     * @param error Error, if any
+                     * @param [response] ListQuotaPreferencesResponse
+                     */
+                    type ListQuotaPreferencesCallback = (error: (Error|null), response?: google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|getQuotaPreference}.
+                     * @param error Error, if any
+                     * @param [response] QuotaPreference
+                     */
+                    type GetQuotaPreferenceCallback = (error: (Error|null), response?: google.api.cloudquotas.v1beta.QuotaPreference) => void;
+
+                    /**
+                     * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|createQuotaPreference}.
+                     * @param error Error, if any
+                     * @param [response] QuotaPreference
+                     */
+                    type CreateQuotaPreferenceCallback = (error: (Error|null), response?: google.api.cloudquotas.v1beta.QuotaPreference) => void;
+
+                    /**
+                     * Callback as used by {@link google.api.cloudquotas.v1beta.CloudQuotas|updateQuotaPreference}.
+                     * @param error Error, if any
+                     * @param [response] QuotaPreference
+                     */
+                    type UpdateQuotaPreferenceCallback = (error: (Error|null), response?: google.api.cloudquotas.v1beta.QuotaPreference) => void;
+                }
+
+                /** Properties of a ListQuotaInfosRequest. */
+                interface IListQuotaInfosRequest {
+
+                    /** ListQuotaInfosRequest parent */
+                    parent?: (string|null);
+
+                    /** ListQuotaInfosRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListQuotaInfosRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListQuotaInfosRequest. */
+                class ListQuotaInfosRequest implements IListQuotaInfosRequest {
+
+                    /**
+                     * Constructs a new ListQuotaInfosRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IListQuotaInfosRequest);
+
+                    /** ListQuotaInfosRequest parent. */
+                    public parent: string;
+
+                    /** ListQuotaInfosRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListQuotaInfosRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListQuotaInfosRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQuotaInfosRequest instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IListQuotaInfosRequest): google.api.cloudquotas.v1beta.ListQuotaInfosRequest;
+
+                    /**
+                     * Encodes the specified ListQuotaInfosRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaInfosRequest.verify|verify} messages.
+                     * @param message ListQuotaInfosRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IListQuotaInfosRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQuotaInfosRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaInfosRequest.verify|verify} messages.
+                     * @param message ListQuotaInfosRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IListQuotaInfosRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQuotaInfosRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQuotaInfosRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.ListQuotaInfosRequest;
+
+                    /**
+                     * Decodes a ListQuotaInfosRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQuotaInfosRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.ListQuotaInfosRequest;
+
+                    /**
+                     * Verifies a ListQuotaInfosRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQuotaInfosRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQuotaInfosRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.ListQuotaInfosRequest;
+
+                    /**
+                     * Creates a plain object from a ListQuotaInfosRequest message. Also converts values to other types if specified.
+                     * @param message ListQuotaInfosRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.ListQuotaInfosRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQuotaInfosRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQuotaInfosRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQuotaInfosResponse. */
+                interface IListQuotaInfosResponse {
+
+                    /** ListQuotaInfosResponse quotaInfos */
+                    quotaInfos?: (google.api.cloudquotas.v1beta.IQuotaInfo[]|null);
+
+                    /** ListQuotaInfosResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListQuotaInfosResponse. */
+                class ListQuotaInfosResponse implements IListQuotaInfosResponse {
+
+                    /**
+                     * Constructs a new ListQuotaInfosResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IListQuotaInfosResponse);
+
+                    /** ListQuotaInfosResponse quotaInfos. */
+                    public quotaInfos: google.api.cloudquotas.v1beta.IQuotaInfo[];
+
+                    /** ListQuotaInfosResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListQuotaInfosResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQuotaInfosResponse instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IListQuotaInfosResponse): google.api.cloudquotas.v1beta.ListQuotaInfosResponse;
+
+                    /**
+                     * Encodes the specified ListQuotaInfosResponse message. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaInfosResponse.verify|verify} messages.
+                     * @param message ListQuotaInfosResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IListQuotaInfosResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQuotaInfosResponse message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaInfosResponse.verify|verify} messages.
+                     * @param message ListQuotaInfosResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IListQuotaInfosResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQuotaInfosResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQuotaInfosResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.ListQuotaInfosResponse;
+
+                    /**
+                     * Decodes a ListQuotaInfosResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQuotaInfosResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.ListQuotaInfosResponse;
+
+                    /**
+                     * Verifies a ListQuotaInfosResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQuotaInfosResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQuotaInfosResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.ListQuotaInfosResponse;
+
+                    /**
+                     * Creates a plain object from a ListQuotaInfosResponse message. Also converts values to other types if specified.
+                     * @param message ListQuotaInfosResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.ListQuotaInfosResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQuotaInfosResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQuotaInfosResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetQuotaInfoRequest. */
+                interface IGetQuotaInfoRequest {
+
+                    /** GetQuotaInfoRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetQuotaInfoRequest. */
+                class GetQuotaInfoRequest implements IGetQuotaInfoRequest {
+
+                    /**
+                     * Constructs a new GetQuotaInfoRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IGetQuotaInfoRequest);
+
+                    /** GetQuotaInfoRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetQuotaInfoRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetQuotaInfoRequest instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IGetQuotaInfoRequest): google.api.cloudquotas.v1beta.GetQuotaInfoRequest;
+
+                    /**
+                     * Encodes the specified GetQuotaInfoRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaInfoRequest.verify|verify} messages.
+                     * @param message GetQuotaInfoRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IGetQuotaInfoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetQuotaInfoRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaInfoRequest.verify|verify} messages.
+                     * @param message GetQuotaInfoRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IGetQuotaInfoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetQuotaInfoRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetQuotaInfoRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.GetQuotaInfoRequest;
+
+                    /**
+                     * Decodes a GetQuotaInfoRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetQuotaInfoRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.GetQuotaInfoRequest;
+
+                    /**
+                     * Verifies a GetQuotaInfoRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetQuotaInfoRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetQuotaInfoRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.GetQuotaInfoRequest;
+
+                    /**
+                     * Creates a plain object from a GetQuotaInfoRequest message. Also converts values to other types if specified.
+                     * @param message GetQuotaInfoRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.GetQuotaInfoRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetQuotaInfoRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetQuotaInfoRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQuotaPreferencesRequest. */
+                interface IListQuotaPreferencesRequest {
+
+                    /** ListQuotaPreferencesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListQuotaPreferencesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListQuotaPreferencesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListQuotaPreferencesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListQuotaPreferencesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListQuotaPreferencesRequest. */
+                class ListQuotaPreferencesRequest implements IListQuotaPreferencesRequest {
+
+                    /**
+                     * Constructs a new ListQuotaPreferencesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest);
+
+                    /** ListQuotaPreferencesRequest parent. */
+                    public parent: string;
+
+                    /** ListQuotaPreferencesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListQuotaPreferencesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListQuotaPreferencesRequest filter. */
+                    public filter: string;
+
+                    /** ListQuotaPreferencesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListQuotaPreferencesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQuotaPreferencesRequest instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest): google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest;
+
+                    /**
+                     * Encodes the specified ListQuotaPreferencesRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest.verify|verify} messages.
+                     * @param message ListQuotaPreferencesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQuotaPreferencesRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest.verify|verify} messages.
+                     * @param message ListQuotaPreferencesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQuotaPreferencesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQuotaPreferencesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest;
+
+                    /**
+                     * Decodes a ListQuotaPreferencesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQuotaPreferencesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest;
+
+                    /**
+                     * Verifies a ListQuotaPreferencesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQuotaPreferencesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQuotaPreferencesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest;
+
+                    /**
+                     * Creates a plain object from a ListQuotaPreferencesRequest message. Also converts values to other types if specified.
+                     * @param message ListQuotaPreferencesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.ListQuotaPreferencesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQuotaPreferencesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQuotaPreferencesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQuotaPreferencesResponse. */
+                interface IListQuotaPreferencesResponse {
+
+                    /** ListQuotaPreferencesResponse quotaPreferences */
+                    quotaPreferences?: (google.api.cloudquotas.v1beta.IQuotaPreference[]|null);
+
+                    /** ListQuotaPreferencesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListQuotaPreferencesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListQuotaPreferencesResponse. */
+                class ListQuotaPreferencesResponse implements IListQuotaPreferencesResponse {
+
+                    /**
+                     * Constructs a new ListQuotaPreferencesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse);
+
+                    /** ListQuotaPreferencesResponse quotaPreferences. */
+                    public quotaPreferences: google.api.cloudquotas.v1beta.IQuotaPreference[];
+
+                    /** ListQuotaPreferencesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListQuotaPreferencesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListQuotaPreferencesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQuotaPreferencesResponse instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse): google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse;
+
+                    /**
+                     * Encodes the specified ListQuotaPreferencesResponse message. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse.verify|verify} messages.
+                     * @param message ListQuotaPreferencesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQuotaPreferencesResponse message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse.verify|verify} messages.
+                     * @param message ListQuotaPreferencesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IListQuotaPreferencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQuotaPreferencesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQuotaPreferencesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse;
+
+                    /**
+                     * Decodes a ListQuotaPreferencesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQuotaPreferencesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse;
+
+                    /**
+                     * Verifies a ListQuotaPreferencesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQuotaPreferencesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQuotaPreferencesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse;
+
+                    /**
+                     * Creates a plain object from a ListQuotaPreferencesResponse message. Also converts values to other types if specified.
+                     * @param message ListQuotaPreferencesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.ListQuotaPreferencesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQuotaPreferencesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQuotaPreferencesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetQuotaPreferenceRequest. */
+                interface IGetQuotaPreferenceRequest {
+
+                    /** GetQuotaPreferenceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetQuotaPreferenceRequest. */
+                class GetQuotaPreferenceRequest implements IGetQuotaPreferenceRequest {
+
+                    /**
+                     * Constructs a new GetQuotaPreferenceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest);
+
+                    /** GetQuotaPreferenceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetQuotaPreferenceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetQuotaPreferenceRequest instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest): google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest;
+
+                    /**
+                     * Encodes the specified GetQuotaPreferenceRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest.verify|verify} messages.
+                     * @param message GetQuotaPreferenceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetQuotaPreferenceRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest.verify|verify} messages.
+                     * @param message GetQuotaPreferenceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IGetQuotaPreferenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetQuotaPreferenceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetQuotaPreferenceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest;
+
+                    /**
+                     * Decodes a GetQuotaPreferenceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetQuotaPreferenceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest;
+
+                    /**
+                     * Verifies a GetQuotaPreferenceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetQuotaPreferenceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetQuotaPreferenceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest;
+
+                    /**
+                     * Creates a plain object from a GetQuotaPreferenceRequest message. Also converts values to other types if specified.
+                     * @param message GetQuotaPreferenceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.GetQuotaPreferenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetQuotaPreferenceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetQuotaPreferenceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateQuotaPreferenceRequest. */
+                interface ICreateQuotaPreferenceRequest {
+
+                    /** CreateQuotaPreferenceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateQuotaPreferenceRequest quotaPreferenceId */
+                    quotaPreferenceId?: (string|null);
+
+                    /** CreateQuotaPreferenceRequest quotaPreference */
+                    quotaPreference?: (google.api.cloudquotas.v1beta.IQuotaPreference|null);
+
+                    /** CreateQuotaPreferenceRequest ignoreSafetyChecks */
+                    ignoreSafetyChecks?: (google.api.cloudquotas.v1beta.QuotaSafetyCheck[]|null);
+                }
+
+                /** Represents a CreateQuotaPreferenceRequest. */
+                class CreateQuotaPreferenceRequest implements ICreateQuotaPreferenceRequest {
+
+                    /**
+                     * Constructs a new CreateQuotaPreferenceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest);
+
+                    /** CreateQuotaPreferenceRequest parent. */
+                    public parent: string;
+
+                    /** CreateQuotaPreferenceRequest quotaPreferenceId. */
+                    public quotaPreferenceId: string;
+
+                    /** CreateQuotaPreferenceRequest quotaPreference. */
+                    public quotaPreference?: (google.api.cloudquotas.v1beta.IQuotaPreference|null);
+
+                    /** CreateQuotaPreferenceRequest ignoreSafetyChecks. */
+                    public ignoreSafetyChecks: google.api.cloudquotas.v1beta.QuotaSafetyCheck[];
+
+                    /**
+                     * Creates a new CreateQuotaPreferenceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateQuotaPreferenceRequest instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest): google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest;
+
+                    /**
+                     * Encodes the specified CreateQuotaPreferenceRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest.verify|verify} messages.
+                     * @param message CreateQuotaPreferenceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateQuotaPreferenceRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest.verify|verify} messages.
+                     * @param message CreateQuotaPreferenceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.ICreateQuotaPreferenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateQuotaPreferenceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateQuotaPreferenceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest;
+
+                    /**
+                     * Decodes a CreateQuotaPreferenceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateQuotaPreferenceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest;
+
+                    /**
+                     * Verifies a CreateQuotaPreferenceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateQuotaPreferenceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateQuotaPreferenceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateQuotaPreferenceRequest message. Also converts values to other types if specified.
+                     * @param message CreateQuotaPreferenceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.CreateQuotaPreferenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateQuotaPreferenceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateQuotaPreferenceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateQuotaPreferenceRequest. */
+                interface IUpdateQuotaPreferenceRequest {
+
+                    /** UpdateQuotaPreferenceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateQuotaPreferenceRequest quotaPreference */
+                    quotaPreference?: (google.api.cloudquotas.v1beta.IQuotaPreference|null);
+
+                    /** UpdateQuotaPreferenceRequest allowMissing */
+                    allowMissing?: (boolean|null);
+
+                    /** UpdateQuotaPreferenceRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** UpdateQuotaPreferenceRequest ignoreSafetyChecks */
+                    ignoreSafetyChecks?: (google.api.cloudquotas.v1beta.QuotaSafetyCheck[]|null);
+                }
+
+                /** Represents an UpdateQuotaPreferenceRequest. */
+                class UpdateQuotaPreferenceRequest implements IUpdateQuotaPreferenceRequest {
+
+                    /**
+                     * Constructs a new UpdateQuotaPreferenceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest);
+
+                    /** UpdateQuotaPreferenceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateQuotaPreferenceRequest quotaPreference. */
+                    public quotaPreference?: (google.api.cloudquotas.v1beta.IQuotaPreference|null);
+
+                    /** UpdateQuotaPreferenceRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /** UpdateQuotaPreferenceRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** UpdateQuotaPreferenceRequest ignoreSafetyChecks. */
+                    public ignoreSafetyChecks: google.api.cloudquotas.v1beta.QuotaSafetyCheck[];
+
+                    /**
+                     * Creates a new UpdateQuotaPreferenceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateQuotaPreferenceRequest instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest): google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest;
+
+                    /**
+                     * Encodes the specified UpdateQuotaPreferenceRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest.verify|verify} messages.
+                     * @param message UpdateQuotaPreferenceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateQuotaPreferenceRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest.verify|verify} messages.
+                     * @param message UpdateQuotaPreferenceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IUpdateQuotaPreferenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateQuotaPreferenceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateQuotaPreferenceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest;
+
+                    /**
+                     * Decodes an UpdateQuotaPreferenceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateQuotaPreferenceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest;
+
+                    /**
+                     * Verifies an UpdateQuotaPreferenceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateQuotaPreferenceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateQuotaPreferenceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateQuotaPreferenceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateQuotaPreferenceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.UpdateQuotaPreferenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateQuotaPreferenceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateQuotaPreferenceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** QuotaSafetyCheck enum. */
+                enum QuotaSafetyCheck {
+                    QUOTA_SAFETY_CHECK_UNSPECIFIED = 0,
+                    QUOTA_DECREASE_BELOW_USAGE = 1,
+                    QUOTA_DECREASE_PERCENTAGE_TOO_HIGH = 2
+                }
+
+                /** Properties of a QuotaInfo. */
+                interface IQuotaInfo {
+
+                    /** QuotaInfo name */
+                    name?: (string|null);
+
+                    /** QuotaInfo quotaId */
+                    quotaId?: (string|null);
+
+                    /** QuotaInfo metric */
+                    metric?: (string|null);
+
+                    /** QuotaInfo service */
+                    service?: (string|null);
+
+                    /** QuotaInfo isPrecise */
+                    isPrecise?: (boolean|null);
+
+                    /** QuotaInfo refreshInterval */
+                    refreshInterval?: (string|null);
+
+                    /** QuotaInfo containerType */
+                    containerType?: (google.api.cloudquotas.v1beta.QuotaInfo.ContainerType|keyof typeof google.api.cloudquotas.v1beta.QuotaInfo.ContainerType|null);
+
+                    /** QuotaInfo dimensions */
+                    dimensions?: (string[]|null);
+
+                    /** QuotaInfo metricDisplayName */
+                    metricDisplayName?: (string|null);
+
+                    /** QuotaInfo quotaDisplayName */
+                    quotaDisplayName?: (string|null);
+
+                    /** QuotaInfo metricUnit */
+                    metricUnit?: (string|null);
+
+                    /** QuotaInfo quotaIncreaseEligibility */
+                    quotaIncreaseEligibility?: (google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility|null);
+
+                    /** QuotaInfo isFixed */
+                    isFixed?: (boolean|null);
+
+                    /** QuotaInfo dimensionsInfos */
+                    dimensionsInfos?: (google.api.cloudquotas.v1beta.IDimensionsInfo[]|null);
+
+                    /** QuotaInfo isConcurrent */
+                    isConcurrent?: (boolean|null);
+
+                    /** QuotaInfo serviceRequestQuotaUri */
+                    serviceRequestQuotaUri?: (string|null);
+                }
+
+                /** Represents a QuotaInfo. */
+                class QuotaInfo implements IQuotaInfo {
+
+                    /**
+                     * Constructs a new QuotaInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IQuotaInfo);
+
+                    /** QuotaInfo name. */
+                    public name: string;
+
+                    /** QuotaInfo quotaId. */
+                    public quotaId: string;
+
+                    /** QuotaInfo metric. */
+                    public metric: string;
+
+                    /** QuotaInfo service. */
+                    public service: string;
+
+                    /** QuotaInfo isPrecise. */
+                    public isPrecise: boolean;
+
+                    /** QuotaInfo refreshInterval. */
+                    public refreshInterval: string;
+
+                    /** QuotaInfo containerType. */
+                    public containerType: (google.api.cloudquotas.v1beta.QuotaInfo.ContainerType|keyof typeof google.api.cloudquotas.v1beta.QuotaInfo.ContainerType);
+
+                    /** QuotaInfo dimensions. */
+                    public dimensions: string[];
+
+                    /** QuotaInfo metricDisplayName. */
+                    public metricDisplayName: string;
+
+                    /** QuotaInfo quotaDisplayName. */
+                    public quotaDisplayName: string;
+
+                    /** QuotaInfo metricUnit. */
+                    public metricUnit: string;
+
+                    /** QuotaInfo quotaIncreaseEligibility. */
+                    public quotaIncreaseEligibility?: (google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility|null);
+
+                    /** QuotaInfo isFixed. */
+                    public isFixed: boolean;
+
+                    /** QuotaInfo dimensionsInfos. */
+                    public dimensionsInfos: google.api.cloudquotas.v1beta.IDimensionsInfo[];
+
+                    /** QuotaInfo isConcurrent. */
+                    public isConcurrent: boolean;
+
+                    /** QuotaInfo serviceRequestQuotaUri. */
+                    public serviceRequestQuotaUri: string;
+
+                    /**
+                     * Creates a new QuotaInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QuotaInfo instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IQuotaInfo): google.api.cloudquotas.v1beta.QuotaInfo;
+
+                    /**
+                     * Encodes the specified QuotaInfo message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaInfo.verify|verify} messages.
+                     * @param message QuotaInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IQuotaInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QuotaInfo message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaInfo.verify|verify} messages.
+                     * @param message QuotaInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IQuotaInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QuotaInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QuotaInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.QuotaInfo;
+
+                    /**
+                     * Decodes a QuotaInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QuotaInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.QuotaInfo;
+
+                    /**
+                     * Verifies a QuotaInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QuotaInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QuotaInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.QuotaInfo;
+
+                    /**
+                     * Creates a plain object from a QuotaInfo message. Also converts values to other types if specified.
+                     * @param message QuotaInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.QuotaInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QuotaInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QuotaInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QuotaInfo {
+
+                    /** ContainerType enum. */
+                    enum ContainerType {
+                        CONTAINER_TYPE_UNSPECIFIED = 0,
+                        PROJECT = 1,
+                        FOLDER = 2,
+                        ORGANIZATION = 3
+                    }
+                }
+
+                /** Properties of a QuotaIncreaseEligibility. */
+                interface IQuotaIncreaseEligibility {
+
+                    /** QuotaIncreaseEligibility isEligible */
+                    isEligible?: (boolean|null);
+
+                    /** QuotaIncreaseEligibility ineligibilityReason */
+                    ineligibilityReason?: (google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.IneligibilityReason|keyof typeof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.IneligibilityReason|null);
+                }
+
+                /** Represents a QuotaIncreaseEligibility. */
+                class QuotaIncreaseEligibility implements IQuotaIncreaseEligibility {
+
+                    /**
+                     * Constructs a new QuotaIncreaseEligibility.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility);
+
+                    /** QuotaIncreaseEligibility isEligible. */
+                    public isEligible: boolean;
+
+                    /** QuotaIncreaseEligibility ineligibilityReason. */
+                    public ineligibilityReason: (google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.IneligibilityReason|keyof typeof google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.IneligibilityReason);
+
+                    /**
+                     * Creates a new QuotaIncreaseEligibility instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QuotaIncreaseEligibility instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility): google.api.cloudquotas.v1beta.QuotaIncreaseEligibility;
+
+                    /**
+                     * Encodes the specified QuotaIncreaseEligibility message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.verify|verify} messages.
+                     * @param message QuotaIncreaseEligibility message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QuotaIncreaseEligibility message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaIncreaseEligibility.verify|verify} messages.
+                     * @param message QuotaIncreaseEligibility message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IQuotaIncreaseEligibility, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QuotaIncreaseEligibility message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QuotaIncreaseEligibility
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.QuotaIncreaseEligibility;
+
+                    /**
+                     * Decodes a QuotaIncreaseEligibility message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QuotaIncreaseEligibility
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.QuotaIncreaseEligibility;
+
+                    /**
+                     * Verifies a QuotaIncreaseEligibility message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QuotaIncreaseEligibility message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QuotaIncreaseEligibility
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.QuotaIncreaseEligibility;
+
+                    /**
+                     * Creates a plain object from a QuotaIncreaseEligibility message. Also converts values to other types if specified.
+                     * @param message QuotaIncreaseEligibility
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.QuotaIncreaseEligibility, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QuotaIncreaseEligibility to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QuotaIncreaseEligibility
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QuotaIncreaseEligibility {
+
+                    /** IneligibilityReason enum. */
+                    enum IneligibilityReason {
+                        INELIGIBILITY_REASON_UNSPECIFIED = 0,
+                        NO_VALID_BILLING_ACCOUNT = 1,
+                        NOT_SUPPORTED = 3,
+                        NOT_ENOUGH_USAGE_HISTORY = 4,
+                        OTHER = 2
+                    }
+                }
+
+                /** Properties of a QuotaPreference. */
+                interface IQuotaPreference {
+
+                    /** QuotaPreference name */
+                    name?: (string|null);
+
+                    /** QuotaPreference dimensions */
+                    dimensions?: ({ [k: string]: string }|null);
+
+                    /** QuotaPreference quotaConfig */
+                    quotaConfig?: (google.api.cloudquotas.v1beta.IQuotaConfig|null);
+
+                    /** QuotaPreference etag */
+                    etag?: (string|null);
+
+                    /** QuotaPreference createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QuotaPreference updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QuotaPreference service */
+                    service?: (string|null);
+
+                    /** QuotaPreference quotaId */
+                    quotaId?: (string|null);
+
+                    /** QuotaPreference reconciling */
+                    reconciling?: (boolean|null);
+
+                    /** QuotaPreference justification */
+                    justification?: (string|null);
+
+                    /** QuotaPreference contactEmail */
+                    contactEmail?: (string|null);
+                }
+
+                /** Represents a QuotaPreference. */
+                class QuotaPreference implements IQuotaPreference {
+
+                    /**
+                     * Constructs a new QuotaPreference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IQuotaPreference);
+
+                    /** QuotaPreference name. */
+                    public name: string;
+
+                    /** QuotaPreference dimensions. */
+                    public dimensions: { [k: string]: string };
+
+                    /** QuotaPreference quotaConfig. */
+                    public quotaConfig?: (google.api.cloudquotas.v1beta.IQuotaConfig|null);
+
+                    /** QuotaPreference etag. */
+                    public etag: string;
+
+                    /** QuotaPreference createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QuotaPreference updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QuotaPreference service. */
+                    public service: string;
+
+                    /** QuotaPreference quotaId. */
+                    public quotaId: string;
+
+                    /** QuotaPreference reconciling. */
+                    public reconciling: boolean;
+
+                    /** QuotaPreference justification. */
+                    public justification: string;
+
+                    /** QuotaPreference contactEmail. */
+                    public contactEmail: string;
+
+                    /**
+                     * Creates a new QuotaPreference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QuotaPreference instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IQuotaPreference): google.api.cloudquotas.v1beta.QuotaPreference;
+
+                    /**
+                     * Encodes the specified QuotaPreference message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaPreference.verify|verify} messages.
+                     * @param message QuotaPreference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IQuotaPreference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QuotaPreference message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaPreference.verify|verify} messages.
+                     * @param message QuotaPreference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IQuotaPreference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QuotaPreference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QuotaPreference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.QuotaPreference;
+
+                    /**
+                     * Decodes a QuotaPreference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QuotaPreference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.QuotaPreference;
+
+                    /**
+                     * Verifies a QuotaPreference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QuotaPreference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QuotaPreference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.QuotaPreference;
+
+                    /**
+                     * Creates a plain object from a QuotaPreference message. Also converts values to other types if specified.
+                     * @param message QuotaPreference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.QuotaPreference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QuotaPreference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QuotaPreference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QuotaConfig. */
+                interface IQuotaConfig {
+
+                    /** QuotaConfig preferredValue */
+                    preferredValue?: (number|Long|string|null);
+
+                    /** QuotaConfig stateDetail */
+                    stateDetail?: (string|null);
+
+                    /** QuotaConfig grantedValue */
+                    grantedValue?: (google.protobuf.IInt64Value|null);
+
+                    /** QuotaConfig traceId */
+                    traceId?: (string|null);
+
+                    /** QuotaConfig annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** QuotaConfig requestOrigin */
+                    requestOrigin?: (google.api.cloudquotas.v1beta.QuotaConfig.Origin|keyof typeof google.api.cloudquotas.v1beta.QuotaConfig.Origin|null);
+                }
+
+                /** Represents a QuotaConfig. */
+                class QuotaConfig implements IQuotaConfig {
+
+                    /**
+                     * Constructs a new QuotaConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IQuotaConfig);
+
+                    /** QuotaConfig preferredValue. */
+                    public preferredValue: (number|Long|string);
+
+                    /** QuotaConfig stateDetail. */
+                    public stateDetail: string;
+
+                    /** QuotaConfig grantedValue. */
+                    public grantedValue?: (google.protobuf.IInt64Value|null);
+
+                    /** QuotaConfig traceId. */
+                    public traceId: string;
+
+                    /** QuotaConfig annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** QuotaConfig requestOrigin. */
+                    public requestOrigin: (google.api.cloudquotas.v1beta.QuotaConfig.Origin|keyof typeof google.api.cloudquotas.v1beta.QuotaConfig.Origin);
+
+                    /**
+                     * Creates a new QuotaConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QuotaConfig instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IQuotaConfig): google.api.cloudquotas.v1beta.QuotaConfig;
+
+                    /**
+                     * Encodes the specified QuotaConfig message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaConfig.verify|verify} messages.
+                     * @param message QuotaConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IQuotaConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QuotaConfig message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaConfig.verify|verify} messages.
+                     * @param message QuotaConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IQuotaConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QuotaConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QuotaConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.QuotaConfig;
+
+                    /**
+                     * Decodes a QuotaConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QuotaConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.QuotaConfig;
+
+                    /**
+                     * Verifies a QuotaConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QuotaConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QuotaConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.QuotaConfig;
+
+                    /**
+                     * Creates a plain object from a QuotaConfig message. Also converts values to other types if specified.
+                     * @param message QuotaConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.QuotaConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QuotaConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QuotaConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QuotaConfig {
+
+                    /** Origin enum. */
+                    enum Origin {
+                        ORIGIN_UNSPECIFIED = 0,
+                        CLOUD_CONSOLE = 1,
+                        AUTO_ADJUSTER = 2
+                    }
+                }
+
+                /** Properties of a DimensionsInfo. */
+                interface IDimensionsInfo {
+
+                    /** DimensionsInfo dimensions */
+                    dimensions?: ({ [k: string]: string }|null);
+
+                    /** DimensionsInfo details */
+                    details?: (google.api.cloudquotas.v1beta.IQuotaDetails|null);
+
+                    /** DimensionsInfo applicableLocations */
+                    applicableLocations?: (string[]|null);
+                }
+
+                /** Represents a DimensionsInfo. */
+                class DimensionsInfo implements IDimensionsInfo {
+
+                    /**
+                     * Constructs a new DimensionsInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IDimensionsInfo);
+
+                    /** DimensionsInfo dimensions. */
+                    public dimensions: { [k: string]: string };
+
+                    /** DimensionsInfo details. */
+                    public details?: (google.api.cloudquotas.v1beta.IQuotaDetails|null);
+
+                    /** DimensionsInfo applicableLocations. */
+                    public applicableLocations: string[];
+
+                    /**
+                     * Creates a new DimensionsInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DimensionsInfo instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IDimensionsInfo): google.api.cloudquotas.v1beta.DimensionsInfo;
+
+                    /**
+                     * Encodes the specified DimensionsInfo message. Does not implicitly {@link google.api.cloudquotas.v1beta.DimensionsInfo.verify|verify} messages.
+                     * @param message DimensionsInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IDimensionsInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DimensionsInfo message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.DimensionsInfo.verify|verify} messages.
+                     * @param message DimensionsInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IDimensionsInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DimensionsInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DimensionsInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.DimensionsInfo;
+
+                    /**
+                     * Decodes a DimensionsInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DimensionsInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.DimensionsInfo;
+
+                    /**
+                     * Verifies a DimensionsInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DimensionsInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DimensionsInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.DimensionsInfo;
+
+                    /**
+                     * Creates a plain object from a DimensionsInfo message. Also converts values to other types if specified.
+                     * @param message DimensionsInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.DimensionsInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DimensionsInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DimensionsInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QuotaDetails. */
+                interface IQuotaDetails {
+
+                    /** QuotaDetails value */
+                    value?: (number|Long|string|null);
+
+                    /** QuotaDetails rolloutInfo */
+                    rolloutInfo?: (google.api.cloudquotas.v1beta.IRolloutInfo|null);
+                }
+
+                /** Represents a QuotaDetails. */
+                class QuotaDetails implements IQuotaDetails {
+
+                    /**
+                     * Constructs a new QuotaDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IQuotaDetails);
+
+                    /** QuotaDetails value. */
+                    public value: (number|Long|string);
+
+                    /** QuotaDetails rolloutInfo. */
+                    public rolloutInfo?: (google.api.cloudquotas.v1beta.IRolloutInfo|null);
+
+                    /**
+                     * Creates a new QuotaDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QuotaDetails instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IQuotaDetails): google.api.cloudquotas.v1beta.QuotaDetails;
+
+                    /**
+                     * Encodes the specified QuotaDetails message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaDetails.verify|verify} messages.
+                     * @param message QuotaDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IQuotaDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QuotaDetails message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaDetails.verify|verify} messages.
+                     * @param message QuotaDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IQuotaDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QuotaDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QuotaDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.QuotaDetails;
+
+                    /**
+                     * Decodes a QuotaDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QuotaDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.QuotaDetails;
+
+                    /**
+                     * Verifies a QuotaDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QuotaDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QuotaDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.QuotaDetails;
+
+                    /**
+                     * Creates a plain object from a QuotaDetails message. Also converts values to other types if specified.
+                     * @param message QuotaDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.QuotaDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QuotaDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QuotaDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RolloutInfo. */
+                interface IRolloutInfo {
+
+                    /** RolloutInfo ongoingRollout */
+                    ongoingRollout?: (boolean|null);
+                }
+
+                /** Represents a RolloutInfo. */
+                class RolloutInfo implements IRolloutInfo {
+
+                    /**
+                     * Constructs a new RolloutInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IRolloutInfo);
+
+                    /** RolloutInfo ongoingRollout. */
+                    public ongoingRollout: boolean;
+
+                    /**
+                     * Creates a new RolloutInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RolloutInfo instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IRolloutInfo): google.api.cloudquotas.v1beta.RolloutInfo;
+
+                    /**
+                     * Encodes the specified RolloutInfo message. Does not implicitly {@link google.api.cloudquotas.v1beta.RolloutInfo.verify|verify} messages.
+                     * @param message RolloutInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IRolloutInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RolloutInfo message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.RolloutInfo.verify|verify} messages.
+                     * @param message RolloutInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IRolloutInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RolloutInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RolloutInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.RolloutInfo;
+
+                    /**
+                     * Decodes a RolloutInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RolloutInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.RolloutInfo;
+
+                    /**
+                     * Verifies a RolloutInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RolloutInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RolloutInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.RolloutInfo;
+
+                    /**
+                     * Creates a plain object from a RolloutInfo message. Also converts values to other types if specified.
+                     * @param message RolloutInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.RolloutInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RolloutInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RolloutInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a QuotaAdjusterSettingsManager */
+                class QuotaAdjusterSettingsManager extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new QuotaAdjusterSettingsManager service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new QuotaAdjusterSettingsManager service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): QuotaAdjusterSettingsManager;
+
+                    /**
+                     * Calls UpdateQuotaAdjusterSettings.
+                     * @param request UpdateQuotaAdjusterSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QuotaAdjusterSettings
+                     */
+                    public updateQuotaAdjusterSettings(request: google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest, callback: google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager.UpdateQuotaAdjusterSettingsCallback): void;
+
+                    /**
+                     * Calls UpdateQuotaAdjusterSettings.
+                     * @param request UpdateQuotaAdjusterSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateQuotaAdjusterSettings(request: google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest): Promise<google.api.cloudquotas.v1beta.QuotaAdjusterSettings>;
+
+                    /**
+                     * Calls GetQuotaAdjusterSettings.
+                     * @param request GetQuotaAdjusterSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QuotaAdjusterSettings
+                     */
+                    public getQuotaAdjusterSettings(request: google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest, callback: google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager.GetQuotaAdjusterSettingsCallback): void;
+
+                    /**
+                     * Calls GetQuotaAdjusterSettings.
+                     * @param request GetQuotaAdjusterSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getQuotaAdjusterSettings(request: google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest): Promise<google.api.cloudquotas.v1beta.QuotaAdjusterSettings>;
+                }
+
+                namespace QuotaAdjusterSettingsManager {
+
+                    /**
+                     * Callback as used by {@link google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager|updateQuotaAdjusterSettings}.
+                     * @param error Error, if any
+                     * @param [response] QuotaAdjusterSettings
+                     */
+                    type UpdateQuotaAdjusterSettingsCallback = (error: (Error|null), response?: google.api.cloudquotas.v1beta.QuotaAdjusterSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.api.cloudquotas.v1beta.QuotaAdjusterSettingsManager|getQuotaAdjusterSettings}.
+                     * @param error Error, if any
+                     * @param [response] QuotaAdjusterSettings
+                     */
+                    type GetQuotaAdjusterSettingsCallback = (error: (Error|null), response?: google.api.cloudquotas.v1beta.QuotaAdjusterSettings) => void;
+                }
+
+                /** Properties of a GetQuotaAdjusterSettingsRequest. */
+                interface IGetQuotaAdjusterSettingsRequest {
+
+                    /** GetQuotaAdjusterSettingsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetQuotaAdjusterSettingsRequest. */
+                class GetQuotaAdjusterSettingsRequest implements IGetQuotaAdjusterSettingsRequest {
+
+                    /**
+                     * Constructs a new GetQuotaAdjusterSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest);
+
+                    /** GetQuotaAdjusterSettingsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetQuotaAdjusterSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetQuotaAdjusterSettingsRequest instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest): google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Encodes the specified GetQuotaAdjusterSettingsRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest.verify|verify} messages.
+                     * @param message GetQuotaAdjusterSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetQuotaAdjusterSettingsRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest.verify|verify} messages.
+                     * @param message GetQuotaAdjusterSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IGetQuotaAdjusterSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetQuotaAdjusterSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetQuotaAdjusterSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Decodes a GetQuotaAdjusterSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetQuotaAdjusterSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Verifies a GetQuotaAdjusterSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetQuotaAdjusterSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetQuotaAdjusterSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Creates a plain object from a GetQuotaAdjusterSettingsRequest message. Also converts values to other types if specified.
+                     * @param message GetQuotaAdjusterSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetQuotaAdjusterSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetQuotaAdjusterSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateQuotaAdjusterSettingsRequest. */
+                interface IUpdateQuotaAdjusterSettingsRequest {
+
+                    /** UpdateQuotaAdjusterSettingsRequest quotaAdjusterSettings */
+                    quotaAdjusterSettings?: (google.api.cloudquotas.v1beta.IQuotaAdjusterSettings|null);
+
+                    /** UpdateQuotaAdjusterSettingsRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateQuotaAdjusterSettingsRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateQuotaAdjusterSettingsRequest. */
+                class UpdateQuotaAdjusterSettingsRequest implements IUpdateQuotaAdjusterSettingsRequest {
+
+                    /**
+                     * Constructs a new UpdateQuotaAdjusterSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest);
+
+                    /** UpdateQuotaAdjusterSettingsRequest quotaAdjusterSettings. */
+                    public quotaAdjusterSettings?: (google.api.cloudquotas.v1beta.IQuotaAdjusterSettings|null);
+
+                    /** UpdateQuotaAdjusterSettingsRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateQuotaAdjusterSettingsRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateQuotaAdjusterSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateQuotaAdjusterSettingsRequest instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest): google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Encodes the specified UpdateQuotaAdjusterSettingsRequest message. Does not implicitly {@link google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest.verify|verify} messages.
+                     * @param message UpdateQuotaAdjusterSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateQuotaAdjusterSettingsRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest.verify|verify} messages.
+                     * @param message UpdateQuotaAdjusterSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IUpdateQuotaAdjusterSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateQuotaAdjusterSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateQuotaAdjusterSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Decodes an UpdateQuotaAdjusterSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateQuotaAdjusterSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Verifies an UpdateQuotaAdjusterSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateQuotaAdjusterSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateQuotaAdjusterSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateQuotaAdjusterSettingsRequest message. Also converts values to other types if specified.
+                     * @param message UpdateQuotaAdjusterSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateQuotaAdjusterSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateQuotaAdjusterSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QuotaAdjusterSettings. */
+                interface IQuotaAdjusterSettings {
+
+                    /** QuotaAdjusterSettings name */
+                    name?: (string|null);
+
+                    /** QuotaAdjusterSettings enablement */
+                    enablement?: (google.api.cloudquotas.v1beta.QuotaAdjusterSettings.Enablement|keyof typeof google.api.cloudquotas.v1beta.QuotaAdjusterSettings.Enablement|null);
+
+                    /** QuotaAdjusterSettings updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QuotaAdjusterSettings etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a QuotaAdjusterSettings. */
+                class QuotaAdjusterSettings implements IQuotaAdjusterSettings {
+
+                    /**
+                     * Constructs a new QuotaAdjusterSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1beta.IQuotaAdjusterSettings);
+
+                    /** QuotaAdjusterSettings name. */
+                    public name: string;
+
+                    /** QuotaAdjusterSettings enablement. */
+                    public enablement: (google.api.cloudquotas.v1beta.QuotaAdjusterSettings.Enablement|keyof typeof google.api.cloudquotas.v1beta.QuotaAdjusterSettings.Enablement);
+
+                    /** QuotaAdjusterSettings updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QuotaAdjusterSettings etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new QuotaAdjusterSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QuotaAdjusterSettings instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1beta.IQuotaAdjusterSettings): google.api.cloudquotas.v1beta.QuotaAdjusterSettings;
+
+                    /**
+                     * Encodes the specified QuotaAdjusterSettings message. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaAdjusterSettings.verify|verify} messages.
+                     * @param message QuotaAdjusterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1beta.IQuotaAdjusterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QuotaAdjusterSettings message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1beta.QuotaAdjusterSettings.verify|verify} messages.
+                     * @param message QuotaAdjusterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1beta.IQuotaAdjusterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QuotaAdjusterSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QuotaAdjusterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1beta.QuotaAdjusterSettings;
+
+                    /**
+                     * Decodes a QuotaAdjusterSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QuotaAdjusterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1beta.QuotaAdjusterSettings;
+
+                    /**
+                     * Verifies a QuotaAdjusterSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QuotaAdjusterSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QuotaAdjusterSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1beta.QuotaAdjusterSettings;
+
+                    /**
+                     * Creates a plain object from a QuotaAdjusterSettings message. Also converts values to other types if specified.
+                     * @param message QuotaAdjusterSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1beta.QuotaAdjusterSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QuotaAdjusterSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QuotaAdjusterSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QuotaAdjusterSettings {
+
+                    /** Enablement enum. */
+                    enum Enablement {
+                        ENABLEMENT_UNSPECIFIED = 0,
+                        ENABLED = 2,
+                        DISABLED = 3
+                    }
                 }
             }
         }
@@ -2517,6 +4968,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -2554,6 +5008,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -3135,6 +5592,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -3148,6 +5620,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -3429,6 +5916,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -3445,6 +5935,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -3648,7 +6141,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */
@@ -3679,7 +6175,8 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -4035,6 +6532,21 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
         /** Properties of a FileDescriptorProto. */
         interface IFileDescriptorProto {
 
@@ -4075,7 +6587,7 @@ export namespace google {
             syntax?: (string|null);
 
             /** FileDescriptorProto edition */
-            edition?: (string|null);
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -4124,7 +6636,7 @@ export namespace google {
             public syntax: string;
 
             /** FileDescriptorProto edition. */
-            public edition: string;
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -4575,6 +7087,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -4588,6 +7109,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -4665,6 +7195,136 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -4851,8 +7511,8 @@ export namespace google {
             /** Label enum. */
             enum Label {
                 LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
             }
         }
 
@@ -5564,9 +8224,6 @@ export namespace google {
             /** FileOptions pyGenericServices */
             pyGenericServices?: (boolean|null);
 
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
             /** FileOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -5593,6 +8250,9 @@ export namespace google {
 
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -5640,9 +8300,6 @@ export namespace google {
             /** FileOptions pyGenericServices. */
             public pyGenericServices: boolean;
 
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
             /** FileOptions deprecated. */
             public deprecated: boolean;
 
@@ -5669,6 +8326,9 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -5779,6 +8439,9 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -5809,6 +8472,9 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -5921,8 +8587,14 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -5970,8 +8642,14 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6090,10 +8768,116 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -6107,6 +8891,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6201,6 +8988,9 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -6222,6 +9012,9 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6310,6 +9103,12 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -6325,6 +9124,12 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6410,6 +9215,9 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -6431,6 +9239,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -6525,6 +9336,9 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -6549,6 +9363,9 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6873,6 +9690,394 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

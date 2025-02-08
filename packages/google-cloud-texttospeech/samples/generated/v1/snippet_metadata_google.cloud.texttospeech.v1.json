@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-texttospeech",
-        "version": "5.0.2",
+        "version": "5.8.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -62,7 +62,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -82,6 +82,10 @@
                     {
                         "name": "audio_config",
                         "type": ".google.cloud.texttospeech.v1.AudioConfig"
+                    },
+                    {
+                        "name": "advanced_voice_options",
+                        "type": ".google.cloud.texttospeech.v1.AdvancedVoiceOptions"
                     }
                 ],
                 "resultType": ".google.cloud.texttospeech.v1.SynthesizeSpeechResponse",
@@ -100,6 +104,50 @@
             }
         },
         {
+            "regionTag": "texttospeech_v1_generated_TextToSpeech_StreamingSynthesize_async",
+            "title": "TextToSpeech streamingSynthesize Sample",
+            "origin": "API_DEFINITION",
+            "description": " Performs bidirectional streaming speech synthesis: receive audio while sending text.",
+            "canonical": true,
+            "file": "text_to_speech.streaming_synthesize.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamingSynthesize",
+                "fullName": "google.cloud.texttospeech.v1.TextToSpeech.StreamingSynthesize",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "streaming_config",
+                        "type": ".google.cloud.texttospeech.v1.StreamingSynthesizeConfig"
+                    },
+                    {
+                        "name": "input",
+                        "type": ".google.cloud.texttospeech.v1.StreamingSynthesisInput"
+                    }
+                ],
+                "resultType": ".google.cloud.texttospeech.v1.StreamingSynthesizeResponse",
+                "client": {
+                    "shortName": "TextToSpeechClient",
+                    "fullName": "google.cloud.texttospeech.v1.TextToSpeechClient"
+                },
+                "method": {
+                    "shortName": "StreamingSynthesize",
+                    "fullName": "google.cloud.texttospeech.v1.TextToSpeech.StreamingSynthesize",
+                    "service": {
+                        "shortName": "TextToSpeech",
+                        "fullName": "google.cloud.texttospeech.v1.TextToSpeech"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "texttospeech_v1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_async",
             "title": "TextToSpeech synthesizeLongAudio Sample",
             "origin": "API_DEFINITION",
@@ -110,7 +158,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],

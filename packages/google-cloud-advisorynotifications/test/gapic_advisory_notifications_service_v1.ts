@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -129,18 +129,104 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.AdvisoryNotificationsServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient
-          .servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'advisorynotifications.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          advisorynotificationsserviceModule.v1
+            .AdvisoryNotificationsServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'advisorynotifications.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          advisorynotificationsserviceModule.v1
+            .AdvisoryNotificationsServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'advisorynotifications.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'advisorynotifications.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'advisorynotifications.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'advisorynotifications.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+              {universeDomain: 'configured.example.com'}
+            );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'advisorynotifications.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {
@@ -877,9 +963,9 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       assert(
         (client.descriptors.page.listNotifications.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -932,9 +1018,9 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       assert(
         (client.descriptors.page.listNotifications.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -985,9 +1071,9 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       assert(
         (client.descriptors.page.listNotifications.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1029,9 +1115,9 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       assert(
         (client.descriptors.page.listNotifications.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -1189,6 +1275,72 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       });
     });
 
+    describe('organizationLocationSettings', () => {
+      const fakePath = '/rendered/path/organizationLocationSettings';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+      };
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.organizationLocationSettingsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationSettingsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationSettingsPath', () => {
+        const result = client.organizationLocationSettingsPath(
+          'organizationValue',
+          'locationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationLocationSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationSettingsName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationSettingsName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationSettingsName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationSettingsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationNotification', () => {
       const fakePath = '/rendered/path/projectLocationNotification';
       const expectedParameters = {
@@ -1270,10 +1422,10 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       });
     });
 
-    describe('settings', () => {
-      const fakePath = '/rendered/path/settings';
+    describe('projectLocationSettings', () => {
+      const fakePath = '/rendered/path/projectLocationSettings';
       const expectedParameters = {
-        organization: 'organizationValue',
+        project: 'projectValue',
         location: 'locationValue',
       };
       const client =
@@ -1284,41 +1436,52 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
           }
         );
       client.initialize();
-      client.pathTemplates.settingsPathTemplate.render = sinon
+      client.pathTemplates.projectLocationSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.settingsPathTemplate.match = sinon
+      client.pathTemplates.projectLocationSettingsPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('settingsPath', () => {
-        const result = client.settingsPath(
-          'organizationValue',
+      it('projectLocationSettingsPath', () => {
+        const result = client.projectLocationSettingsPath(
+          'projectValue',
           'locationValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.settingsPathTemplate.render as SinonStub)
+          (
+            client.pathTemplates.projectLocationSettingsPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchOrganizationFromSettingsName', () => {
-        const result = client.matchOrganizationFromSettingsName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
+      it('matchProjectFromProjectLocationSettingsName', () => {
+        const result =
+          client.matchProjectFromProjectLocationSettingsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.settingsPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.projectLocationSettingsPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchLocationFromSettingsName', () => {
-        const result = client.matchLocationFromSettingsName(fakePath);
+      it('matchLocationFromProjectLocationSettingsName', () => {
+        const result =
+          client.matchLocationFromProjectLocationSettingsName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.settingsPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.projectLocationSettingsPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

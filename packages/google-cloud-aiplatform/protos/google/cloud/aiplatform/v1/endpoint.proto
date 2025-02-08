@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import "google/cloud/aiplatform/v1/encryption_spec.proto";
 import "google/cloud/aiplatform/v1/explanation.proto";
 import "google/cloud/aiplatform/v1/io.proto";
 import "google/cloud/aiplatform/v1/machine_resources.proto";
+import "google/cloud/aiplatform/v1/service_networking.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Cloud.AIPlatform.V1";
@@ -126,6 +128,14 @@ message Endpoint {
   // can be set.
   bool enable_private_service_connect = 17 [deprecated = true];
 
+  // Optional. Configuration for private service connect.
+  //
+  // [network][google.cloud.aiplatform.v1.Endpoint.network] and
+  // [private_service_connect_config][google.cloud.aiplatform.v1.Endpoint.private_service_connect_config]
+  // are mutually exclusive.
+  PrivateServiceConnectConfig private_service_connect_config = 21
+      [(google.api.field_behavior) = OPTIONAL];
+
   // Output only. Resource name of the Model Monitoring job associated with this
   // Endpoint if monitoring is enabled by
   // [JobService.CreateModelDeploymentMonitoringJob][google.cloud.aiplatform.v1.JobService.CreateModelDeploymentMonitoringJob].
@@ -141,6 +151,31 @@ message Endpoint {
   // Configures the request-response logging for online prediction.
   PredictRequestResponseLoggingConfig predict_request_response_logging_config =
       18;
+
+  // If true, the endpoint will be exposed through a dedicated
+  // DNS [Endpoint.dedicated_endpoint_dns]. Your request to the dedicated DNS
+  // will be isolated from other users' traffic and will have better performance
+  // and reliability.
+  // Note: Once you enabled dedicated endpoint, you won't be able to send
+  // request to the shared DNS {region}-aiplatform.googleapis.com. The
+  // limitation will be removed soon.
+  bool dedicated_endpoint_enabled = 24;
+
+  // Output only. DNS of the dedicated endpoint. Will only be populated if
+  // dedicated_endpoint_enabled is true.
+  // Format:
+  // `https://{endpoint_id}.{region}-{project_number}.prediction.vertexai.goog`.
+  string dedicated_endpoint_dns = 25
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Configurations that are applied to the endpoint for online prediction.
+  ClientConnectionConfig client_connection_config = 23;
+
+  // Output only. Reserved for future use.
+  bool satisfies_pzs = 27 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Reserved for future use.
+  bool satisfies_pzi = 28 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // A deployment of a Model. Endpoints contain one or more DeployedModels.
@@ -221,6 +256,13 @@ message DeployedModel {
   // will be used for the explanation configuration.
   ExplanationSpec explanation_spec = 9;
 
+  // If true, deploy the model without explainable feature, regardless the
+  // existence of
+  // [Model.explanation_spec][google.cloud.aiplatform.v1.Model.explanation_spec]
+  // or
+  // [explanation_spec][google.cloud.aiplatform.v1.DeployedModel.explanation_spec].
+  bool disable_explanations = 19;
+
   // The service account that the DeployedModel's container runs as. Specify the
   // email address of the service account. If this service account is not
   // specified, the container runs as a service account that doesn't have access
@@ -255,6 +297,13 @@ message DeployedModel {
   // [network][google.cloud.aiplatform.v1.Endpoint.network] is configured.
   PrivateEndpoints private_endpoints = 14
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Configuration for faster model deployment.
+  FasterDeploymentConfig faster_deployment_config = 23;
+
+  // System labels to apply to Model Garden deployments.
+  // System labels are managed by Google for internal use only.
+  map<string, string> system_labels = 28;
 }
 
 // PrivateEndpoints proto is used to provide paths for users to send
@@ -293,4 +342,16 @@ message PredictRequestResponseLoggingConfig {
   // most special characters will become underscores). If no table name is
   // given, a new table will be created with name `request_response_logging`
   BigQueryDestination bigquery_destination = 3;
+}
+
+// Configuration for faster model deployment.
+message FasterDeploymentConfig {
+  // If true, enable fast tryout feature for this deployed model.
+  bool fast_tryout_enabled = 2;
+}
+
+// Configurations (e.g. inference timeout) that are applied on your endpoints.
+message ClientConnectionConfig {
+  // Customizable online prediction request timeout.
+  google.protobuf.Duration inference_timeout = 1;
 }

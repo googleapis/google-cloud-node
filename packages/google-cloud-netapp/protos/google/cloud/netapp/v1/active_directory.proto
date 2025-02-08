@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -89,7 +89,10 @@ message CreateActiveDirectoryRequest {
   // Required. Fields of the to be created active directory.
   ActiveDirectory active_directory = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // Required. ID of the active directory to create.
+  // Required. ID of the active directory to create. Must be unique within the
+  // parent resource. Must contain only letters, numbers and hyphen, with the
+  // first character a letter , the last a letter or a number, and a 63
+  // character maximum.
   string active_directory_id = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
@@ -149,6 +152,9 @@ message ActiveDirectory {
 
     // Active Directory State is Error
     ERROR = 6;
+
+    // Active Directory State is Diagnosing.
+    DIAGNOSING = 7;
   }
 
   // Identifier. The resource name of the active directory.
@@ -190,11 +196,17 @@ message ActiveDirectory {
   // Required. Password of the Active Directory domain administrator.
   string password = 11 [(google.api.field_behavior) = REQUIRED];
 
-  // Users to be added to the Built-in Backup Operator active directory group.
-  repeated string backup_operators = 12;
+  // Optional. Users to be added to the Built-in Backup Operator active
+  // directory group.
+  repeated string backup_operators = 12
+      [(google.api.field_behavior) = OPTIONAL];
 
-  // Domain users to be given the SeSecurityPrivilege.
-  repeated string security_operators = 13;
+  // Optional. Users to be added to the Built-in Admininstrators group.
+  repeated string administrators = 22 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Domain users to be given the SeSecurityPrivilege.
+  repeated string security_operators = 13
+      [(google.api.field_behavior) = OPTIONAL];
 
   // Name of the active directory machine. This optional parameter is used only
   // while creating kerberos volume

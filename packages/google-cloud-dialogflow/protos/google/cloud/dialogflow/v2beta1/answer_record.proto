@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import "google/cloud/dialogflow/v2beta1/participant.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2Beta1";
 option go_package = "cloud.google.com/go/dialogflow/apiv2beta1/dialogflowpb;dialogflowpb";
 option java_multiple_files = true;
@@ -243,6 +242,10 @@ message AgentAssistantFeedback {
 
     // Text of actual submitted summary.
     string summary_text = 3;
+
+    // Optional. Actual text sections of submitted summary.
+    map<string, string> text_sections = 4
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Feedback for knowledge search.
@@ -255,6 +258,22 @@ message AgentAssistantFeedback {
 
     // The URIs clicked by the human agent. The value is appended for each
     // UpdateAnswerRecordRequest.
+    // If the value is not empty,
+    // [AnswerFeedback.clicked][google.cloud.dialogflow.v2beta1.AnswerFeedback.clicked]
+    // will be updated to be true.
+    repeated string clicked_uris = 2;
+  }
+
+  // Feedback for knowledge assist.
+  message KnowledgeAssistFeedback {
+    // Whether the suggested answer was copied by the human agent.
+    // If the value is set to be true,
+    // [AnswerFeedback.clicked][google.cloud.dialogflow.v2beta1.AnswerFeedback.clicked]
+    // will be updated to be true.
+    bool answer_copied = 1;
+
+    // The URIs clicked by the human agent. The value is appended for each
+    // [UpdateAnswerRecordRequest][google.cloud.dialogflow.v2beta1.UpdateAnswerRecordRequest].
     // If the value is not empty,
     // [AnswerFeedback.clicked][google.cloud.dialogflow.v2beta1.AnswerFeedback.clicked]
     // will be updated to be true.
@@ -295,6 +314,10 @@ message AgentAssistantFeedback {
 
   // Optional. Feedback for knowledge search.
   KnowledgeSearchFeedback knowledge_search_feedback = 5
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Feedback for knowledge assist.
+  KnowledgeAssistFeedback knowledge_assist_feedback = 6
       [(google.api.field_behavior) = OPTIONAL];
 }
 

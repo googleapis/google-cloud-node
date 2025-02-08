@@ -4,6 +4,85 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.12.0...recaptcha-enterprise-v5.13.0) (2024-11-14)
+
+
+### Features
+
+* [recaptchaenterprise] A new enum `Challenge` is added ([#5807](https://github.com/googleapis/google-cloud-node/issues/5807)) ([9cfcf1f](https://github.com/googleapis/google-cloud-node/commit/9cfcf1fead76fdaa16f22737f33859c52945481e))
+
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.11.0...recaptcha-enterprise-v5.12.0) (2024-10-30)
+
+
+### Features
+
+* [recaptchaenterprise] support for ListIpOverrides and RemoveIpOverride ([#5777](https://github.com/googleapis/google-cloud-node/issues/5777)) ([ae63b6a](https://github.com/googleapis/google-cloud-node/commit/ae63b6a3f18b20f27b43a9f21f26f69af95b2461))
+
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.10.0...recaptcha-enterprise-v5.11.0) (2024-08-29)
+
+
+### Features
+
+* [recaptchaenterprise] add AddIpOverride RPC ([#5629](https://github.com/googleapis/google-cloud-node/issues/5629)) ([a211bb6](https://github.com/googleapis/google-cloud-node/commit/a211bb6ca388ef08b2ea819515d71399b0b51979))
+* [recaptchaenterprise] add AssessmentEnvironment for CreateAssessement to explicitly describe the environment of the assessment ([#5639](https://github.com/googleapis/google-cloud-node/issues/5639)) ([4fe0674](https://github.com/googleapis/google-cloud-node/commit/4fe0674834f7bce5e845017efae304dd0c8ef862))
+
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.9.0...recaptcha-enterprise-v5.10.0) (2024-06-26)
+
+
+### Features
+
+* [recaptchaenterprise] added SMS Toll Fraud assessment ([#5499](https://github.com/googleapis/google-cloud-node/issues/5499)) ([6179569](https://github.com/googleapis/google-cloud-node/commit/617956910ab08fb98763da804a85a6c3e6acec8d))
+
+## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.8.0...recaptcha-enterprise-v5.9.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.7.0...recaptcha-enterprise-v5.8.0) (2024-05-02)
+
+
+### Features
+
+* [recaptchaenterprise]Add Fraud Prevention settings field ([#5281](https://github.com/googleapis/google-cloud-node/issues/5281)) ([9a2060a](https://github.com/googleapis/google-cloud-node/commit/9a2060a6a3baca737c6a6239512977149737154a))
+
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.6.0...recaptcha-enterprise-v5.7.0) (2024-04-05)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5190](https://github.com/googleapis/google-cloud-node/issues/5190)) ([b569fbe](https://github.com/googleapis/google-cloud-node/commit/b569fbe1472d0fd71c1bfb58d0b1661814ac5727))
+
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.5.0...recaptcha-enterprise-v5.6.0) (2024-03-26)
+
+
+### Features
+
+* [recaptchaenterprise] Existing resource_reference option of the field name is removed from message `google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMemberShip` ([#5164](https://github.com/googleapis/google-cloud-node/issues/5164)) ([068ecea](https://github.com/googleapis/google-cloud-node/commit/068ecea9f9966547ad02cf5c1e9d007c7f233343))
+
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.4.0...recaptcha-enterprise-v5.5.0) (2024-03-07)
+
+
+### Features
+
+* [recaptchaenterprise] Add include_recaptcha_script for as a new action in firewall policies ([#5108](https://github.com/googleapis/google-cloud-node/issues/5108)) ([77b54be](https://github.com/googleapis/google-cloud-node/commit/77b54bec52823952f8b57c21a4cc05d97cafc55e))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.3.0...recaptcha-enterprise-v5.4.0) (2024-02-22)
+
+
+### Features
+
+* [recaptchaenterprise] Add an API method for reordering firewall policies ([#5050](https://github.com/googleapis/google-cloud-node/issues/5050)) ([5c58e55](https://github.com/googleapis/google-cloud-node/commit/5c58e553b1d0411715e160754787ded4b33d099c))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.2.0...recaptcha-enterprise-v5.3.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5027](https://github.com/googleapis/google-cloud-node/issues/5027)) ([88763bb](https://github.com/googleapis/google-cloud-node/commit/88763bb1b7ce9ff884b9e3f476230d38985b2ff2))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.1.1...recaptcha-enterprise-v5.2.0) (2024-01-15)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/g_suite_add_ons_client_config.json`.
@@ -38,30 +39,30 @@ import * as gapicConfig from './g_suite_add_ons_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  A service for managing Google Workspace Add-ons deployments.
+ *  A service for managing Google Workspace add-ons deployments.
  *
- *  A Google Workspace Add-on is a third-party embedded component that can be
+ *  A Google Workspace add-on is a third-party embedded component that can be
  *  installed in Google Workspace Applications like Gmail, Calendar, Drive, and
- *  the Google Docs, Sheets, and Slides editors. Google Workspace Add-ons can
+ *  the Google Docs, Sheets, and Slides editors. Google Workspace add-ons can
  *  display UI cards, receive contextual information from the host application,
  *  and perform actions in the host application (See:
  *  https://developers.google.com/gsuite/add-ons/overview for more information).
  *
- *  A Google Workspace Add-on deployment resource specifies metadata about the
+ *  A Google Workspace add-on deployment resource specifies metadata about the
  *  add-on, including a specification of the entry points in the host application
  *  that trigger add-on executions (see:
  *  https://developers.google.com/gsuite/add-ons/concepts/gsuite-manifests).
- *  Add-on deployments defined via the Google Workspace Add-ons API define their
+ *  Add-on deployments defined via the Google Workspace add-ons API define their
  *  entrypoints using HTTPS URLs (See:
  *  https://developers.google.com/gsuite/add-ons/guides/alternate-runtimes),
  *
- *  A Google Workspace Add-on deployment can be installed in developer mode,
+ *  A Google Workspace add-on deployment can be installed in developer mode,
  *  which allows an add-on developer to test the experience an end-user would see
  *  when installing and running the add-on in their G Suite applications.  When
  *  running in developer mode, more detailed error messages are exposed in the
  *  add-on UI to aid in debugging.
  *
- *  A Google Workspace Add-on deployment can be published to Google Workspace
+ *  A Google Workspace add-on deployment can be published to Google Workspace
  *  Marketplace, which allows other Google Workspace users to discover and
  *  install the add-on.  See:
  *  https://developers.google.com/gsuite/add-ons/how-tos/publish-add-on-overview
@@ -77,6 +78,8 @@ export class GSuiteAddOnsClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -134,8 +137,27 @@ export class GSuiteAddOnsClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof GSuiteAddOnsClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'gsuiteaddons.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -150,7 +172,7 @@ export class GSuiteAddOnsClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -175,16 +197,16 @@ export class GSuiteAddOnsClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -320,19 +342,50 @@ export class GSuiteAddOnsClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'gsuiteaddons.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'gsuiteaddons.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -377,7 +430,7 @@ export class GSuiteAddOnsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the project for which to get the Google Workspace Add-ons
+   *   Required. Name of the project for which to get the Google Workspace add-ons
    *   authorization information.
    *
    *   Example: `projects/my_project/authorization`.

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,17 +33,17 @@ function main(scope, names) {
    *  This can only be an organization number (such as "organizations/123"), a
    *  folder number (such as "folders/123"), a project ID (such as
    *  "projects/my-project-id"), or a project number (such as "projects/12345").
-   *  To know how to get organization id, visit here
+   *  To know how to get organization ID, visit here
    *   (https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id).
-   *  To know how to get folder or project id, visit here
+   *  To know how to get folder or project ID, visit here
    *   (https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects).
    */
   // const scope = 'abc123'
   /**
    *  Required. The names refer to the full_resource_names 
    *  (https://cloud.google.com/asset-inventory/docs/resource-name-format)
-   *  of searchable asset
-   *  types (https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+   *  of the asset types supported by search
+   *  APIs (https://cloud.google.com/asset-inventory/docs/supported-asset-types).
    *  A maximum of 20 resources' effective policies can be retrieved in a batch.
    */
   // const names = ['abc','def']

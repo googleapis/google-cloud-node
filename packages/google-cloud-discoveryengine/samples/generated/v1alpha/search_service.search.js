@@ -54,10 +54,13 @@ function main(servingConfig) {
   // const imageQuery = {}
   /**
    *  Maximum number of
-   *  Document google.cloud.discoveryengine.v1alpha.Document s to return. If
-   *  unspecified, defaults to a reasonable value. The maximum allowed value is
-   *  100. Values above 100 are coerced to 100.
-   *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *  Document google.cloud.discoveryengine.v1alpha.Document s to return. The
+   *  maximum allowed value depends on the data type. Values above the maximum
+   *  value are coerced to the maximum value.
+   *  * Websites with basic indexing: Default `10`, Maximum `25`.
+   *  * Websites with advanced indexing: Default `25`, Maximum `50`.
+   *  * Other: Default `50`, Maximum `100`.
+   *  If this field is negative, an  `INVALID_ARGUMENT` is returned.
    */
   // const pageSize = 1234
   /**
@@ -80,6 +83,13 @@ function main(servingConfig) {
    *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    */
   // const offset = 1234
+  /**
+   *  Specs defining dataStores to filter on in a search call and configurations
+   *  for those dataStores. This is only considered for engines with multiple
+   *  dataStores use case. For single dataStore within an engine, they should
+   *  use the specs at the top level.
+   */
+  // const dataStoreSpecs = [1,2,3,4]
   /**
    *  The filter syntax consists of an expression language for constructing a
    *  predicate from one or more fields of the documents being filtered. Filter
@@ -112,8 +122,13 @@ function main(servingConfig) {
    *  The order in which documents are returned. Documents can be ordered by
    *  a field in an Document google.cloud.discoveryengine.v1alpha.Document 
    *  object. Leave it unset if ordered by relevance. `order_by` expression is
-   *  case-sensitive. For more information on ordering, see
-   *  Ordering (https://cloud.google.com/retail/docs/filter-and-order#order)
+   *  case-sensitive.
+   *  For more information on ordering the website search results, see
+   *  Order web search
+   *  results (https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+   *  For more information on ordering the healthcare search results, see
+   *  Order healthcare search
+   *  results (https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
    *  If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    */
   // const orderBy = 'abc123'
@@ -125,6 +140,21 @@ function main(servingConfig) {
    */
   // const userInfo = {}
   /**
+   *  The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *  information, see Standard
+   *  fields (https://cloud.google.com/apis/design/standard_fields). This field
+   *  helps to better interpret the query. If a value isn't specified, the query
+   *  language code is automatically detected, which may not be accurate.
+   */
+  // const languageCode = 'abc123'
+  /**
+   *  The Unicode country/region code (CLDR) of a location, such as "US" and
+   *  "419". For more information, see Standard
+   *  fields (https://cloud.google.com/apis/design/standard_fields). If set,
+   *  then results will be boosted based on the region_code provided.
+   */
+  // const regionCode = 'abc123'
+  /**
    *  Facet specifications for faceted search. If empty, no facets are returned.
    *  A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
    *  error is returned.
@@ -133,7 +163,7 @@ function main(servingConfig) {
   /**
    *  Boost specification to boost certain documents.
    *  For more information on boosting, see
-   *  Boosting (https://cloud.google.com/retail/docs/boosting#boost)
+   *  Boosting (https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
    */
   // const boostSpec = {}
   /**
@@ -141,15 +171,13 @@ function main(servingConfig) {
    *  For public website search only, supported values are:
    *  * `user_country_code`: string. Default empty. If set to non-empty, results
    *     are restricted or boosted based on the location provided.
-   *     Example:
-   *     user_country_code: "au"
+   *     For example, `user_country_code: "au"`
    *     For available codes see Country
    *     Codes (https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
    *  * `search_type`: double. Default empty. Enables non-webpage searching
    *     depending on the value. The only valid non-default value is 1,
    *     which enables image searching.
-   *     Example:
-   *     search_type: 1
+   *     For example, `search_type: 1`
    */
   // const params = [1,2,3,4]
   /**
@@ -183,11 +211,13 @@ function main(servingConfig) {
   /**
    *  Uses the provided embedding to do additional semantic document retrieval.
    *  The retrieval is based on the dot product of
-   *  SearchRequest.embedding_spec.embedding_vectors.vector   and the document
-   *  embedding that is provided in
-   *  SearchRequest.embedding_spec.embedding_vectors.field_path .
-   *  If SearchRequest.embedding_spec.embedding_vectors.field_path   is not
-   *  provided, it will use ServingConfig.embedding_config.field_paths .
+   *  SearchRequest.EmbeddingSpec.EmbeddingVector.vector google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.vector 
+   *  and the document embedding that is provided in
+   *  SearchRequest.EmbeddingSpec.EmbeddingVector.field_path google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path.
+   *  If
+   *  SearchRequest.EmbeddingSpec.EmbeddingVector.field_path google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path 
+   *  is not provided, it will use
+   *  ServingConfig.EmbeddingConfig.field_path google.cloud.discoveryengine.v1alpha.ServingConfig.embedding_config.
    */
   // const embeddingSpec = {}
   /**
@@ -195,17 +225,17 @@ function main(servingConfig) {
    *  documents. This overrides
    *  ServingConfig.ranking_expression google.cloud.discoveryengine.v1alpha.ServingConfig.ranking_expression.
    *  The ranking expression is a single function or multiple functions that are
-   *  joint by "+".
+   *  joined by "+".
    *    * ranking_expression = function, { " + ", function };
    *  Supported functions:
    *    * double * relevance_score
    *    * double * dotProduct(embedding_field_path)
    *  Function variables:
-   *    `relevance_score`: pre-defined keywords, used for measure relevance
+   *    * `relevance_score`: pre-defined keywords, used for measure relevance
    *    between query and document.
-   *    `embedding_field_path`: the document embedding field
+   *    * `embedding_field_path`: the document embedding field
    *    used with query embedding vector.
-   *    `dotProduct`: embedding function between embedding_field_path and query
+   *    * `dotProduct`: embedding function between embedding_field_path and query
    *    embedding vector.
    *   Example ranking expression:
    *     If document has an embedding field doc_embedding, the ranking expression
@@ -235,6 +265,59 @@ function main(servingConfig) {
    *  for more details.
    */
   // const userLabels = [1,2,3,4]
+  /**
+   *  If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+   *  natural language query understanding will be done.
+   */
+  // const naturalLanguageQueryUnderstandingSpec = {}
+  /**
+   *  Search as you type configuration. Only supported for the
+   *  IndustryVertical.MEDIA google.cloud.discoveryengine.v1alpha.IndustryVertical.MEDIA 
+   *  vertical.
+   */
+  // const searchAsYouTypeSpec = {}
+  /**
+   *  Custom fine tuning configs.
+   *  If set, it has higher priority than the configs set in
+   *  ServingConfig.custom_fine_tuning_spec google.cloud.discoveryengine.v1alpha.ServingConfig.custom_fine_tuning_spec.
+   */
+  // const customFineTuningSpec = {}
+  /**
+   *  The session resource name. Optional.
+   *  Session allows users to do multi-turn /search API calls or coordination
+   *  between /search API calls and /answer API calls.
+   *  Example #1 (multi-turn /search API calls):
+   *    1. Call /search API with the auto-session mode (see below).
+   *    2. Call /search API with the session ID generated in the first call.
+   *       Here, the previous search query gets considered in query
+   *       standing. I.e., if the first query is "How did Alphabet do in 2022?"
+   *       and the current query is "How about 2023?", the current query will
+   *       be interpreted as "How did Alphabet do in 2023?".
+   *  Example #2 (coordination between /search API calls and /answer API calls):
+   *    1. Call /search API with the auto-session mode (see below).
+   *    2. Call /answer API with the session ID generated in the first call.
+   *       Here, the answer generation happens in the context of the search
+   *       results from the first search call.
+   *  Auto-session mode: when `projects/.../sessions/-` is used, a new session
+   *  gets automatically created. Otherwise, users can use the create-session API
+   *  to create a session manually.
+   *  Multi-turn Search feature is currently at private GA stage. Please use
+   *  v1alpha or v1beta version instead before we launch this feature to public
+   *  GA. Or ask for allowlisting through Google Support team.
+   */
+  // const session = 'abc123'
+  /**
+   *  Session specification.
+   *  Can be used only when `session` is set.
+   */
+  // const sessionSpec = {}
+  /**
+   *  The relevance threshold of the search results.
+   *  Default to Google defined threshold, leveraging a balance of
+   *  precision and recall to deliver both highly accurate results and
+   *  comprehensive coverage of relevant information.
+   */
+  // const relevanceThreshold = {}
 
   // Imports the Discoveryengine library
   const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1alpha;
@@ -249,7 +332,7 @@ function main(servingConfig) {
     };
 
     // Run request
-    const iterable = await discoveryengineClient.searchAsync(request);
+    const iterable = discoveryengineClient.searchAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

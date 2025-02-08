@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listSpecialistPoolsAsync(request);
+    const iterable = aiplatformClient.listSpecialistPoolsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

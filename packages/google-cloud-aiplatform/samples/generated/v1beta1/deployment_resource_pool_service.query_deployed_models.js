@@ -61,7 +61,7 @@ function main(deploymentResourcePool) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.queryDeployedModelsAsync(request);
+    const iterable = aiplatformClient.queryDeployedModelsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

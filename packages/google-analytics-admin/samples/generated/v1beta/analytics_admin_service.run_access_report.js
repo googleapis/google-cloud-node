@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,9 +33,9 @@ function main() {
    *  level. If requested at the account level, Data Access Reports include all
    *  access for all properties under that account.
    *  To request at the property level, entity should be for example
-   *  'properties/123' if "123" is your GA4 property ID. To request at the
-   *  account level, entity should be for example 'accounts/1234' if "1234" is
-   *  your GA4 Account ID.
+   *  'properties/123' if "123" is your Google Analytics property ID. To request
+   *  at the account level, entity should be for example 'accounts/1234' if
+   *  "1234" is your Google Analytics Account ID.
    */
   // const entity = 'abc123'
   /**
@@ -111,6 +111,21 @@ function main() {
    *  requests, this field must be false.
    */
   // const returnEntityQuota = true
+  /**
+   *  Optional. Determines whether to include users who have never made an API
+   *  call in the response. If true, all users with access to the specified
+   *  property or account are included in the response, regardless of whether
+   *  they have made an API call or not. If false, only the users who have made
+   *  an API call will be included.
+   */
+  // const includeAllUsers = true
+  /**
+   *  Optional. Decides whether to return the users within user groups. This
+   *  field works only when include_all_users is set to true. If true, it will
+   *  return all users with access to the specified property or account.
+   *  If false, only the users with direct access will be returned.
+   */
+  // const expandGroups = true
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-cloud/admin').v1beta;

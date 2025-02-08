@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -167,16 +167,100 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.AppConnectorsServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        appconnectorsserviceModule.v1.AppConnectorsServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new appconnectorsserviceModule.v1.AppConnectorsServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'beyondcorp.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        appconnectorsserviceModule.v1.AppConnectorsServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new appconnectorsserviceModule.v1.AppConnectorsServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          appconnectorsserviceModule.v1.AppConnectorsServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'beyondcorp.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          appconnectorsserviceModule.v1.AppConnectorsServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'beyondcorp.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new appconnectorsserviceModule.v1.AppConnectorsServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'beyondcorp.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new appconnectorsserviceModule.v1.AppConnectorsServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'beyondcorp.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new appconnectorsserviceModule.v1.AppConnectorsServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'beyondcorp.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new appconnectorsserviceModule.v1.AppConnectorsServiceClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'beyondcorp.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new appconnectorsserviceModule.v1.AppConnectorsServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -289,7 +373,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.AppConnector()
       );
@@ -321,7 +405,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnectors.v1.AppConnector()
       );
@@ -369,7 +453,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAppConnector = stubSimpleCall(
         undefined,
@@ -423,7 +507,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -457,7 +541,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -512,7 +596,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAppConnector = stubLongRunningCall(
         undefined,
@@ -544,7 +628,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAppConnector = stubLongRunningCall(
         undefined,
@@ -624,7 +708,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['appConnector', 'name']
       );
       request.appConnector.name = defaultValue1;
-      const expectedHeaderRequestParams = `app_connector.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connector.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -659,7 +743,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['appConnector', 'name']
       );
       request.appConnector.name = defaultValue1;
-      const expectedHeaderRequestParams = `app_connector.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connector.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -715,7 +799,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['appConnector', 'name']
       );
       request.appConnector.name = defaultValue1;
-      const expectedHeaderRequestParams = `app_connector.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connector.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAppConnector = stubLongRunningCall(
         undefined,
@@ -748,7 +832,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['appConnector', 'name']
       );
       request.appConnector.name = defaultValue1;
-      const expectedHeaderRequestParams = `app_connector.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connector.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAppConnector = stubLongRunningCall(
         undefined,
@@ -827,7 +911,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -861,7 +945,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -916,7 +1000,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAppConnector = stubLongRunningCall(
         undefined,
@@ -948,7 +1032,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAppConnector = stubLongRunningCall(
         undefined,
@@ -1027,7 +1111,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['appConnector']
       );
       request.appConnector = defaultValue1;
-      const expectedHeaderRequestParams = `app_connector=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connector=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1060,7 +1144,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['appConnector']
       );
       request.appConnector = defaultValue1;
-      const expectedHeaderRequestParams = `app_connector=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connector=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1115,7 +1199,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['appConnector']
       );
       request.appConnector = defaultValue1;
-      const expectedHeaderRequestParams = `app_connector=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connector=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reportStatus = stubLongRunningCall(
         undefined,
@@ -1147,7 +1231,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['appConnector']
       );
       request.appConnector = defaultValue1;
-      const expectedHeaderRequestParams = `app_connector=${defaultValue1}`;
+      const expectedHeaderRequestParams = `app_connector=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reportStatus = stubLongRunningCall(
         undefined,
@@ -1223,7 +1307,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnectors.v1.AppConnector()
@@ -1263,7 +1347,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnectors.v1.AppConnector()
@@ -1321,7 +1405,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAppConnectors = stubSimpleCall(
         undefined,
@@ -1353,7 +1437,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnectors.v1.AppConnector()
@@ -1396,9 +1480,9 @@ describe('v1.AppConnectorsServiceClient', () => {
       assert(
         (client.descriptors.page.listAppConnectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1417,7 +1501,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAppConnectors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1449,9 +1533,9 @@ describe('v1.AppConnectorsServiceClient', () => {
       assert(
         (client.descriptors.page.listAppConnectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1470,7 +1554,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnectors.v1.AppConnector()
@@ -1500,9 +1584,9 @@ describe('v1.AppConnectorsServiceClient', () => {
       assert(
         (client.descriptors.page.listAppConnectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1521,7 +1605,7 @@ describe('v1.AppConnectorsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAppConnectors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1542,9 +1626,9 @@ describe('v1.AppConnectorsServiceClient', () => {
       assert(
         (client.descriptors.page.listAppConnectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

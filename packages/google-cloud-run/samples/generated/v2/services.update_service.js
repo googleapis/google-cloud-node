@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,6 +29,10 @@ function main(service) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  Optional. The list of fields to be updated.
+   */
+  // const updateMask = {}
+  /**
    *  Required. The Service to be updated.
    */
   // const service = {}
@@ -38,9 +42,9 @@ function main(service) {
    */
   // const validateOnly = true
   /**
-   *  If set to true, and if the Service does not exist, it will create a new
-   *  one. The caller must have 'run.services.create' permissions if this is set
-   *  to true and the Service does not exist.
+   *  Optional. If set to true, and if the Service does not exist, it will create
+   *  a new one. The caller must have 'run.services.create' permissions if this
+   *  is set to true and the Service does not exist.
    */
   // const allowMissing = true
 

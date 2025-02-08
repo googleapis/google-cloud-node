@@ -29,14 +29,27 @@ function main(parent, userEvent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent DataStore resource name, such as
+   *  Required. The parent resource name.
+   *  If the write user event action is applied in
+   *  DataStore google.cloud.discoveryengine.v1.DataStore  level, the format
+   *  is:
    *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   *  If the write user event action is applied in Location   level, for
+   *  example, the event with
+   *  Document google.cloud.discoveryengine.v1.Document  across multiple
+   *  DataStore google.cloud.discoveryengine.v1.DataStore, the format is:
+   *  `projects/{project}/locations/{location}`.
    */
   // const parent = 'abc123'
   /**
    *  Required. User event to write.
    */
   // const userEvent = {}
+  /**
+   *  If set to true, the user event is written asynchronously after
+   *  validation, and the API responds without waiting for the write.
+   */
+  // const writeAsync = true
 
   // Imports the Discoveryengine library
   const {UserEventServiceClient} = require('@google-cloud/discoveryengine').v1;

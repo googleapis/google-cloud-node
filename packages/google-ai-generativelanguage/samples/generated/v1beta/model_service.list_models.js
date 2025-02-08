@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,7 @@ function main() {
    */
   /**
    *  The maximum number of `Models` to return (per page).
-   *  The service may return fewer models.
-   *  If unspecified, at most 50 models will be returned per page.
+   *  If unspecified, 50 models will be returned per page.
    *  This method returns at most 1000 models per page, even if you pass a larger
    *  page_size.
    */
@@ -57,7 +56,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await generativelanguageClient.listModelsAsync(request);
+    const iterable = generativelanguageClient.listModelsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

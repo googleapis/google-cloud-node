@@ -2,7 +2,13 @@
   "../../protos/google/cloud/eventarc/v1/channel.proto",
   "../../protos/google/cloud/eventarc/v1/channel_connection.proto",
   "../../protos/google/cloud/eventarc/v1/discovery.proto",
+  "../../protos/google/cloud/eventarc/v1/enrollment.proto",
   "../../protos/google/cloud/eventarc/v1/eventarc.proto",
+  "../../protos/google/cloud/eventarc/v1/google_api_source.proto",
   "../../protos/google/cloud/eventarc/v1/google_channel_config.proto",
+  "../../protos/google/cloud/eventarc/v1/logging_config.proto",
+  "../../protos/google/cloud/eventarc/v1/message_bus.proto",
+  "../../protos/google/cloud/eventarc/v1/network_config.proto",
+  "../../protos/google/cloud/eventarc/v1/pipeline.proto",
   "../../protos/google/cloud/eventarc/v1/trigger.proto"
 ]

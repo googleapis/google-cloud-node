@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,9 +38,9 @@ function main(job) {
    */
   // const validateOnly = true
   /**
-   *  If set to true, and if the Job does not exist, it will create a new
-   *  one. Caller must have both create and update permissions for this call if
-   *  this is set to true.
+   *  Optional. If set to true, and if the Job does not exist, it will create a
+   *  new one. Caller must have both create and update permissions for this call
+   *  if this is set to true.
    */
   // const allowMissing = true
 

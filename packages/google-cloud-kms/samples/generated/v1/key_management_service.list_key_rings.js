@@ -77,7 +77,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await kmsClient.listKeyRingsAsync(request);
+    const iterable = kmsClient.listKeyRingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ option java_package = "com.google.cloud.networkservices.v1";
 option php_namespace = "Google\\Cloud\\NetworkServices\\V1";
 option ruby_package = "Google::Cloud::NetworkServices::V1";
 
+// Service describing handlers for resources.
 service NetworkServices {
   option (google.api.default_host) = "networkservices.googleapis.com";
   option (google.api.oauth_scopes) =

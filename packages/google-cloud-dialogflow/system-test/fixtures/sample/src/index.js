@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,9 +30,12 @@ function main() {
     new dialogflow.ConversationProfilesClient();
   const conversationsClient = new dialogflow.ConversationsClient();
   const documentsClient = new dialogflow.DocumentsClient();
+  const encryptionSpecServiceClient =
+    new dialogflow.EncryptionSpecServiceClient();
   const entityTypesClient = new dialogflow.EntityTypesClient();
   const environmentsClient = new dialogflow.EnvironmentsClient();
   const fulfillmentsClient = new dialogflow.FulfillmentsClient();
+  const generatorsClient = new dialogflow.GeneratorsClient();
   const intentsClient = new dialogflow.IntentsClient();
   const knowledgeBasesClient = new dialogflow.KnowledgeBasesClient();
   const participantsClient = new dialogflow.ParticipantsClient();

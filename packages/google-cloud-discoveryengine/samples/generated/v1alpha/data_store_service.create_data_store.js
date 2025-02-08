@@ -57,6 +57,15 @@ function main(parent, dataStore, dataStoreId) {
    *  be ignored.
    */
   // const createAdvancedSiteSearch = true
+  /**
+   *  A boolean flag indicating whether to skip the default schema creation for
+   *  the data store. Only enable this flag if you are certain that the default
+   *  schema is incompatible with your use case.
+   *  If set to true, you must manually create a schema for the data store before
+   *  any documents can be ingested.
+   *  This flag cannot be specified if `data_store.starting_schema` is specified.
+   */
+  // const skipDefaultSchemaCreation = true
 
   // Imports the Discoveryengine library
   const {DataStoreServiceClient} = require('@google-cloud/discoveryengine').v1alpha;

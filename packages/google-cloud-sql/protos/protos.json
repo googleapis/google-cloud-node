@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -155,6 +158,13 @@
                       }
                     },
                     "BackupRun": {
+                      "oneofs": {
+                        "_maxChargeableBytes": {
+                          "oneof": [
+                            "maxChargeableBytes"
+                          ]
+                        }
+                      },
                       "fields": {
                         "kind": {
                           "type": "string",
@@ -223,6 +233,14 @@
                         "timeZone": {
                           "type": "string",
                           "id": 23
+                        },
+                        "maxChargeableBytes": {
+                          "type": "int64",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -342,6 +360,13 @@
                       }
                     },
                     "BackupConfiguration": {
+                      "oneofs": {
+                        "_transactionalLogStorageState": {
+                          "oneof": [
+                            "transactionalLogStorageState"
+                          ]
+                        }
+                      },
                       "fields": {
                         "startTime": {
                           "type": "string",
@@ -378,6 +403,25 @@
                         "transactionLogRetentionDays": {
                           "type": "google.protobuf.Int32Value",
                           "id": 9
+                        },
+                        "transactionalLogStorageState": {
+                          "type": "TransactionalLogStorageState",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TransactionalLogStorageState": {
+                          "values": {
+                            "TRANSACTIONAL_LOG_STORAGE_STATE_UNSPECIFIED": 0,
+                            "DISK": 1,
+                            "SWITCHING_TO_CLOUD_STORAGE": 2,
+                            "SWITCHED_TO_CLOUD_STORAGE": 3,
+                            "CLOUD_STORAGE": 4
+                          }
                         }
                       }
                     },
@@ -632,6 +676,27 @@
                             "mysqlExportOptions": {
                               "type": "MysqlExportOptions",
                               "id": 3
+                            },
+                            "threads": {
+                              "type": "google.protobuf.Int32Value",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "parallel": {
+                              "type": "google.protobuf.BoolValue",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "postgresExportOptions": {
+                              "type": "PostgresExportOptions",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -640,6 +705,24 @@
                                 "masterData": {
                                   "type": "google.protobuf.Int32Value",
                                   "id": 1
+                                }
+                              }
+                            },
+                            "PostgresExportOptions": {
+                              "fields": {
+                                "clean": {
+                                  "type": "google.protobuf.BoolValue",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "ifExists": {
+                                  "type": "google.protobuf.BoolValue",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             }
@@ -703,9 +786,61 @@
                         "bakImportOptions": {
                           "type": "SqlBakImportOptions",
                           "id": 7
+                        },
+                        "sqlImportOptions": {
+                          "type": "SqlImportOptions",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
+                        "SqlImportOptions": {
+                          "fields": {
+                            "threads": {
+                              "type": "google.protobuf.Int32Value",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "parallel": {
+                              "type": "google.protobuf.BoolValue",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "postgresImportOptions": {
+                              "type": "PostgresImportOptions",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "PostgresImportOptions": {
+                              "fields": {
+                                "clean": {
+                                  "type": "google.protobuf.BoolValue",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "ifExists": {
+                                  "type": "google.protobuf.BoolValue",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "SqlCsvImportOptions": {
                           "fields": {
                             "table": {
@@ -807,6 +942,11 @@
                           "oneof": [
                             "pscConfig"
                           ]
+                        },
+                        "_serverCaMode": {
+                          "oneof": [
+                            "serverCaMode"
+                          ]
                         }
                       },
                       "fields": {
@@ -845,6 +985,13 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "serverCaMode": {
+                          "type": "CaMode",
+                          "id": 10,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -854,6 +1001,13 @@
                             "ALLOW_UNENCRYPTED_AND_ENCRYPTED": 1,
                             "ENCRYPTED_ONLY": 2,
                             "TRUSTED_CLIENT_CERTIFICATE_REQUIRED": 3
+                          }
+                        },
+                        "CaMode": {
+                          "values": {
+                            "CA_MODE_UNSPECIFIED": 0,
+                            "GOOGLE_MANAGED_INTERNAL_CA": 1,
+                            "GOOGLE_MANAGED_CAS_CA": 2
                           }
                         }
                       }
@@ -1124,6 +1278,10 @@
                         "targetProject": {
                           "type": "string",
                           "id": 15
+                        },
+                        "acquireSsrsLeaseContext": {
+                          "type": "AcquireSsrsLeaseContext",
+                          "id": 20
                         }
                       },
                       "nested": {
@@ -1184,7 +1342,14 @@
                             "LOG_CLEANUP": 36,
                             "AUTO_RESTART": 37,
                             "REENCRYPT": 38,
-                            "SWITCHOVER": 39
+                            "SWITCHOVER": 39,
+                            "ACQUIRE_SSRS_LEASE": 42,
+                            "RELEASE_SSRS_LEASE": 43,
+                            "RECONFIGURE_OLD_PRIMARY": 44,
+                            "CLUSTER_MAINTENANCE": 45,
+                            "SELF_SERVICE_MAINTENANCE": 46,
+                            "SWITCHOVER_TO_REPLICA": 47,
+                            "MAJOR_VERSION_UPGRADE": 48
                           }
                         },
                         "SqlOperationStatus": {
@@ -1254,7 +1419,10 @@
                         },
                         "disallowCompromisedCredentials": {
                           "type": "google.protobuf.BoolValue",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       },
                       "nested": {
@@ -1419,6 +1587,20 @@
                         "dataCacheConfig": {
                           "type": "DataCacheConfig",
                           "id": 37
+                        },
+                        "enableGoogleMlIntegration": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 40,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableDataplexIntegration": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 41,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1594,6 +1776,7 @@
                         "POSTGRES_13": 23,
                         "POSTGRES_14": 110,
                         "POSTGRES_15": 172,
+                        "POSTGRES_16": 272,
                         "MYSQL_8_0": 20,
                         "MYSQL_8_0_18": 41,
                         "MYSQL_8_0_26": 85,
@@ -1607,6 +1790,12 @@
                         "MYSQL_8_0_34": 239,
                         "MYSQL_8_0_35": 240,
                         "MYSQL_8_0_36": 241,
+                        "MYSQL_8_0_37": 355,
+                        "MYSQL_8_0_38": 356,
+                        "MYSQL_8_0_39": 357,
+                        "MYSQL_8_0_40": 358,
+                        "MYSQL_8_4": 398,
+                        "MYSQL_8_4_0": 399,
                         "SQLSERVER_2019_STANDARD": 26,
                         "SQLSERVER_2019_ENTERPRISE": 27,
                         "SQLSERVER_2019_EXPRESS": 28,
@@ -1657,6 +1846,60 @@
                         "canary": 1,
                         "stable": 2,
                         "week5": 3
+                      }
+                    },
+                    "AcquireSsrsLeaseContext": {
+                      "oneofs": {
+                        "_setupLogin": {
+                          "oneof": [
+                            "setupLogin"
+                          ]
+                        },
+                        "_serviceLogin": {
+                          "oneof": [
+                            "serviceLogin"
+                          ]
+                        },
+                        "_reportDatabase": {
+                          "oneof": [
+                            "reportDatabase"
+                          ]
+                        },
+                        "_duration": {
+                          "oneof": [
+                            "duration"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "setupLogin": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceLogin": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reportDatabase": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
                       }
                     },
                     "SqlConnectService": {
@@ -1750,6 +1993,19 @@
                         "dnsName": {
                           "type": "string",
                           "id": 34
+                        },
+                        "serverCaMode": {
+                          "type": "CaMode",
+                          "id": 35
+                        }
+                      },
+                      "nested": {
+                        "CaMode": {
+                          "values": {
+                            "CA_MODE_UNSPECIFIED": 0,
+                            "GOOGLE_MANAGED_INTERNAL_CA": 1,
+                            "GOOGLE_MANAGED_CAS_CA": 2
+                          }
                         }
                       }
                     },
@@ -2600,6 +2856,36 @@
                               }
                             }
                           ]
+                        },
+                        "AcquireSsrsLease": {
+                          "requestType": "SqlInstancesAcquireSsrsLeaseRequest",
+                          "responseType": "SqlInstancesAcquireSsrsLeaseResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project}/instances/{instance}/acquireSsrsLease",
+                            "(google.api.http).body": "body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project}/instances/{instance}/acquireSsrsLease",
+                                "body": "body"
+                              }
+                            }
+                          ]
+                        },
+                        "ReleaseSsrsLease": {
+                          "requestType": "SqlInstancesReleaseSsrsLeaseRequest",
+                          "responseType": "SqlInstancesReleaseSsrsLeaseResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project}/instances/{instance}/releaseSsrsLease"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project}/instances/{instance}/releaseSsrsLease"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -3114,6 +3400,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "migrationType": {
+                          "type": "MigrationType",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "syncParallelLevel": {
+                          "type": "ExternalSyncParallelLevel",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3122,6 +3422,13 @@
                             "EXTERNAL_SYNC_MODE_UNSPECIFIED": 0,
                             "ONLINE": 1,
                             "OFFLINE": 2
+                          }
+                        },
+                        "MigrationType": {
+                          "values": {
+                            "MIGRATION_TYPE_UNSPECIFIED": 0,
+                            "LOGICAL": 1,
+                            "PHYSICAL": 2
                           }
                         }
                       }
@@ -3158,6 +3465,13 @@
                         "syncParallelLevel": {
                           "type": "ExternalSyncParallelLevel",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "migrationType": {
+                          "type": "SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3318,6 +3632,14 @@
                         }
                       }
                     },
+                    "InstancesAcquireSsrsLeaseRequest": {
+                      "fields": {
+                        "acquireSsrsLeaseContext": {
+                          "type": "AcquireSsrsLeaseContext",
+                          "id": 1
+                        }
+                      }
+                    },
                     "SqlInstancesVerifyExternalSyncSettingsResponse": {
                       "fields": {
                         "kind": {
@@ -3470,6 +3792,16 @@
                         "_writeEndpoint": {
                           "oneof": [
                             "writeEndpoint"
+                          ]
+                        },
+                        "_geminiConfig": {
+                          "oneof": [
+                            "geminiConfig"
+                          ]
+                        },
+                        "_switchTransactionLogsToCloudStorageEnabled": {
+                          "oneof": [
+                            "switchTransactionLogsToCloudStorageEnabled"
                           ]
                         }
                       },
@@ -3643,6 +3975,14 @@
                           "type": "string",
                           "id": 42
                         },
+                        "upgradableDatabaseVersions": {
+                          "rule": "repeated",
+                          "type": "AvailableDatabaseVersion",
+                          "id": 45,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "sqlNetworkArchitecture": {
                           "type": "SqlNetworkArchitecture",
                           "id": 47,
@@ -3680,6 +4020,35 @@
                           "id": 52,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "replicationCluster": {
+                          "type": "ReplicationCluster",
+                          "id": 54,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "geminiConfig": {
+                          "type": "GeminiInstanceConfig",
+                          "id": 55,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 56,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "switchTransactionLogsToCloudStorageEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 57,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY",
                             "proto3_optional": true
                           }
                         }
@@ -3791,6 +4160,157 @@
                             "SQL_NETWORK_ARCHITECTURE_UNSPECIFIED": 0,
                             "NEW_NETWORK_ARCHITECTURE": 1,
                             "OLD_NETWORK_ARCHITECTURE": 2
+                          }
+                        }
+                      }
+                    },
+                    "GeminiInstanceConfig": {
+                      "oneofs": {
+                        "_entitled": {
+                          "oneof": [
+                            "entitled"
+                          ]
+                        },
+                        "_googleVacuumMgmtEnabled": {
+                          "oneof": [
+                            "googleVacuumMgmtEnabled"
+                          ]
+                        },
+                        "_oomSessionCancelEnabled": {
+                          "oneof": [
+                            "oomSessionCancelEnabled"
+                          ]
+                        },
+                        "_activeQueryEnabled": {
+                          "oneof": [
+                            "activeQueryEnabled"
+                          ]
+                        },
+                        "_indexAdvisorEnabled": {
+                          "oneof": [
+                            "indexAdvisorEnabled"
+                          ]
+                        },
+                        "_flagRecommenderEnabled": {
+                          "oneof": [
+                            "flagRecommenderEnabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "entitled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "googleVacuumMgmtEnabled": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "oomSessionCancelEnabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "activeQueryEnabled": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "indexAdvisorEnabled": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "flagRecommenderEnabled": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReplicationCluster": {
+                      "fields": {
+                        "psaWriteEndpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "failoverDrReplicaName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "drReplica": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AvailableDatabaseVersion": {
+                      "oneofs": {
+                        "_majorVersion": {
+                          "oneof": [
+                            "majorVersion"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "majorVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -3980,7 +4500,17 @@
                             "TURN_ON_PITR_AFTER_PROMOTE": 36,
                             "INCOMPATIBLE_DATABASE_MINOR_VERSION": 37,
                             "SOURCE_MAX_SUBSCRIPTIONS": 38,
-                            "UNABLE_TO_VERIFY_DEFINERS": 39
+                            "UNABLE_TO_VERIFY_DEFINERS": 39,
+                            "SUBSCRIPTION_CALCULATION_STATUS": 40,
+                            "PG_SUBSCRIPTION_COUNT": 41,
+                            "PG_SYNC_PARALLEL_LEVEL": 42,
+                            "INSUFFICIENT_DISK_SIZE": 43,
+                            "INSUFFICIENT_MACHINE_TIER": 44,
+                            "UNSUPPORTED_EXTENSIONS_NOT_MIGRATED": 45,
+                            "EXTENSIONS_NOT_MIGRATED": 46,
+                            "PG_CRON_FLAG_ENABLED_IN_REPLICA": 47,
+                            "EXTENSIONS_NOT_ENABLED_IN_REPLICA": 48,
+                            "UNSUPPORTED_COLUMNS": 49
                           }
                         }
                       }
@@ -4045,6 +4575,65 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      }
+                    },
+                    "SqlInstancesAcquireSsrsLeaseRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "body": {
+                          "type": "InstancesAcquireSsrsLeaseRequest",
+                          "id": 100,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SqlInstancesAcquireSsrsLeaseResponse": {
+                      "fields": {
+                        "operationId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SqlInstancesReleaseSsrsLeaseRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SqlInstancesReleaseSsrsLeaseResponse": {
+                      "fields": {
+                        "operationId": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -5439,6 +6028,36 @@
                               }
                             }
                           ]
+                        },
+                        "AcquireSsrsLease": {
+                          "requestType": "SqlInstancesAcquireSsrsLeaseRequest",
+                          "responseType": "SqlInstancesAcquireSsrsLeaseResponse",
+                          "options": {
+                            "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}/acquireSsrsLease",
+                            "(google.api.http).body": "body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/sql/v1beta4/projects/{project}/instances/{instance}/acquireSsrsLease",
+                                "body": "body"
+                              }
+                            }
+                          ]
+                        },
+                        "ReleaseSsrsLease": {
+                          "requestType": "SqlInstancesReleaseSsrsLeaseRequest",
+                          "responseType": "SqlInstancesReleaseSsrsLeaseResponse",
+                          "options": {
+                            "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}/releaseSsrsLease"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/sql/v1beta4/projects/{project}/instances/{instance}/releaseSsrsLease"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -6210,6 +6829,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "migrationType": {
+                          "type": "MigrationType",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "syncParallelLevel": {
+                          "type": "ExternalSyncParallelLevel",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -6218,6 +6851,13 @@
                             "EXTERNAL_SYNC_MODE_UNSPECIFIED": 0,
                             "ONLINE": 1,
                             "OFFLINE": 2
+                          }
+                        },
+                        "MigrationType": {
+                          "values": {
+                            "MIGRATION_TYPE_UNSPECIFIED": 0,
+                            "LOGICAL": 1,
+                            "PHYSICAL": 2
                           }
                         }
                       }
@@ -6254,6 +6894,13 @@
                         "syncParallelLevel": {
                           "type": "ExternalSyncParallelLevel",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "migrationType": {
+                          "type": "SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -6428,6 +7075,72 @@
                         }
                       }
                     },
+                    "SqlInstancesReleaseSsrsLeaseRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SqlInstancesReleaseSsrsLeaseResponse": {
+                      "fields": {
+                        "operationId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SqlInstancesAcquireSsrsLeaseRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "body": {
+                          "type": "InstancesAcquireSsrsLeaseRequest",
+                          "id": 100
+                        }
+                      }
+                    },
+                    "SqlInstancesAcquireSsrsLeaseResponse": {
+                      "oneofs": {
+                        "_operationId": {
+                          "oneof": [
+                            "operationId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "operationId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "AclEntry": {
                       "fields": {
                         "value": {
@@ -6499,6 +7212,13 @@
                       }
                     },
                     "BackupConfiguration": {
+                      "oneofs": {
+                        "_transactionalLogStorageState": {
+                          "oneof": [
+                            "transactionalLogStorageState"
+                          ]
+                        }
+                      },
                       "fields": {
                         "startTime": {
                           "type": "string",
@@ -6535,6 +7255,25 @@
                         "backupRetentionSettings": {
                           "type": "BackupRetentionSettings",
                           "id": 10
+                        },
+                        "transactionalLogStorageState": {
+                          "type": "TransactionalLogStorageState",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TransactionalLogStorageState": {
+                          "values": {
+                            "TRANSACTIONAL_LOG_STORAGE_STATE_UNSPECIFIED": 0,
+                            "DISK": 1,
+                            "SWITCHING_TO_CLOUD_STORAGE": 2,
+                            "SWITCHED_TO_CLOUD_STORAGE": 3,
+                            "CLOUD_STORAGE": 4
+                          }
                         }
                       }
                     },
@@ -6661,6 +7400,11 @@
                           "oneof": [
                             "preferredZone"
                           ]
+                        },
+                        "_preferredSecondaryZone": {
+                          "oneof": [
+                            "preferredSecondaryZone"
+                          ]
                         }
                       },
                       "fields": {
@@ -6696,6 +7440,14 @@
                         "preferredZone": {
                           "type": "string",
                           "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "preferredSecondaryZone": {
+                          "type": "string",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -6832,6 +7584,16 @@
                         "_writeEndpoint": {
                           "oneof": [
                             "writeEndpoint"
+                          ]
+                        },
+                        "_replicationCluster": {
+                          "oneof": [
+                            "replicationCluster"
+                          ]
+                        },
+                        "_geminiConfig": {
+                          "oneof": [
+                            "geminiConfig"
                           ]
                         }
                       },
@@ -7005,6 +7767,14 @@
                           "type": "string",
                           "id": 42
                         },
+                        "upgradableDatabaseVersions": {
+                          "rule": "repeated",
+                          "type": "AvailableDatabaseVersion",
+                          "id": 45,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "sqlNetworkArchitecture": {
                           "type": "SqlNetworkArchitecture",
                           "id": 47,
@@ -7042,6 +7812,20 @@
                           "id": 52,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "replicationCluster": {
+                          "type": "ReplicationCluster",
+                          "id": 54,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "geminiConfig": {
+                          "type": "GeminiInstanceConfig",
+                          "id": 55,
+                          "options": {
                             "proto3_optional": true
                           }
                         }
@@ -7153,6 +7937,177 @@
                             "SQL_NETWORK_ARCHITECTURE_UNSPECIFIED": 0,
                             "NEW_NETWORK_ARCHITECTURE": 1,
                             "OLD_NETWORK_ARCHITECTURE": 2
+                          }
+                        }
+                      }
+                    },
+                    "GeminiInstanceConfig": {
+                      "oneofs": {
+                        "_entitled": {
+                          "oneof": [
+                            "entitled"
+                          ]
+                        },
+                        "_googleVacuumMgmtEnabled": {
+                          "oneof": [
+                            "googleVacuumMgmtEnabled"
+                          ]
+                        },
+                        "_oomSessionCancelEnabled": {
+                          "oneof": [
+                            "oomSessionCancelEnabled"
+                          ]
+                        },
+                        "_activeQueryEnabled": {
+                          "oneof": [
+                            "activeQueryEnabled"
+                          ]
+                        },
+                        "_indexAdvisorEnabled": {
+                          "oneof": [
+                            "indexAdvisorEnabled"
+                          ]
+                        },
+                        "_flagRecommenderEnabled": {
+                          "oneof": [
+                            "flagRecommenderEnabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "entitled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "googleVacuumMgmtEnabled": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "oomSessionCancelEnabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "activeQueryEnabled": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "indexAdvisorEnabled": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "flagRecommenderEnabled": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReplicationCluster": {
+                      "oneofs": {
+                        "_psaWriteEndpoint": {
+                          "oneof": [
+                            "psaWriteEndpoint"
+                          ]
+                        },
+                        "_failoverDrReplicaName": {
+                          "oneof": [
+                            "failoverDrReplicaName"
+                          ]
+                        },
+                        "_drReplica": {
+                          "oneof": [
+                            "drReplica"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "psaWriteEndpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "failoverDrReplicaName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "drReplica": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AvailableDatabaseVersion": {
+                      "oneofs": {
+                        "_majorVersion": {
+                          "oneof": [
+                            "majorVersion"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "majorVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -7332,6 +8287,20 @@
                             "mysqlExportOptions": {
                               "type": "MysqlExportOptions",
                               "id": 3
+                            },
+                            "threads": {
+                              "type": "google.protobuf.Int32Value",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "parallel": {
+                              "type": "google.protobuf.BoolValue",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -7475,9 +8444,34 @@
                         "bakImportOptions": {
                           "type": "SqlBakImportOptions",
                           "id": 7
+                        },
+                        "sqlImportOptions": {
+                          "type": "SqlImportOptions",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
+                        "SqlImportOptions": {
+                          "fields": {
+                            "threads": {
+                              "type": "google.protobuf.Int32Value",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "parallel": {
+                              "type": "google.protobuf.BoolValue",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "SqlCsvImportOptions": {
                           "fields": {
                             "table": {
@@ -7696,6 +8690,14 @@
                         }
                       }
                     },
+                    "InstancesAcquireSsrsLeaseRequest": {
+                      "fields": {
+                        "acquireSsrsLeaseContext": {
+                          "type": "AcquireSsrsLeaseContext",
+                          "id": 1
+                        }
+                      }
+                    },
                     "PerformDiskShrinkContext": {
                       "fields": {
                         "targetSizeGb": {
@@ -7795,7 +8797,16 @@
                             "TURN_ON_PITR_AFTER_PROMOTE": 36,
                             "INCOMPATIBLE_DATABASE_MINOR_VERSION": 37,
                             "SOURCE_MAX_SUBSCRIPTIONS": 38,
-                            "UNABLE_TO_VERIFY_DEFINERS": 39
+                            "UNABLE_TO_VERIFY_DEFINERS": 39,
+                            "SUBSCRIPTION_CALCULATION_STATUS": 40,
+                            "PG_SUBSCRIPTION_COUNT": 41,
+                            "PG_SYNC_PARALLEL_LEVEL": 42,
+                            "INSUFFICIENT_DISK_SIZE": 43,
+                            "INSUFFICIENT_MACHINE_TIER": 44,
+                            "UNSUPPORTED_EXTENSIONS_NOT_MIGRATED": 45,
+                            "EXTENSIONS_NOT_MIGRATED": 46,
+                            "PG_CRON_FLAG_ENABLED_IN_REPLICA": 47,
+                            "EXTENSIONS_NOT_ENABLED_IN_REPLICA": 48
                           }
                         }
                       }
@@ -8163,6 +9174,10 @@
                         "targetProject": {
                           "type": "string",
                           "id": 15
+                        },
+                        "acquireSsrsLeaseContext": {
+                          "type": "AcquireSsrsLeaseContext",
+                          "id": 20
                         }
                       },
                       "nested": {
@@ -8223,7 +9238,13 @@
                             "LOG_CLEANUP": 36,
                             "AUTO_RESTART": 37,
                             "REENCRYPT": 38,
-                            "SWITCHOVER": 39
+                            "SWITCHOVER": 39,
+                            "ACQUIRE_SSRS_LEASE": 42,
+                            "RELEASE_SSRS_LEASE": 43,
+                            "RECONFIGURE_OLD_PRIMARY": 44,
+                            "CLUSTER_MAINTENANCE": 45,
+                            "SELF_SERVICE_MAINTENANCE": 46,
+                            "SWITCHOVER_TO_REPLICA": 47
                           }
                         },
                         "SqlOperationStatus": {
@@ -8293,7 +9314,10 @@
                         },
                         "disallowCompromisedCredentials": {
                           "type": "google.protobuf.BoolValue",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       },
                       "nested": {
@@ -8530,6 +9554,20 @@
                         "dataCacheConfig": {
                           "type": "DataCacheConfig",
                           "id": 37
+                        },
+                        "enableGoogleMlIntegration": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 40,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableDataplexIntegration": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 41,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -8839,6 +9877,7 @@
                         "POSTGRES_13": 23,
                         "POSTGRES_14": 110,
                         "POSTGRES_15": 172,
+                        "POSTGRES_16": 272,
                         "MYSQL_8_0": 20,
                         "MYSQL_8_0_18": 41,
                         "MYSQL_8_0_26": 85,
@@ -8852,6 +9891,12 @@
                         "MYSQL_8_0_34": 239,
                         "MYSQL_8_0_35": 240,
                         "MYSQL_8_0_36": 241,
+                        "MYSQL_8_0_37": 355,
+                        "MYSQL_8_0_38": 356,
+                        "MYSQL_8_0_39": 357,
+                        "MYSQL_8_0_40": 358,
+                        "MYSQL_8_4": 398,
+                        "MYSQL_8_4_0": 399,
                         "SQLSERVER_2019_STANDARD": 26,
                         "SQLSERVER_2019_ENTERPRISE": 27,
                         "SQLSERVER_2019_EXPRESS": 28,
@@ -8911,6 +9956,60 @@
                         "canary": 1,
                         "stable": 2,
                         "week5": 3
+                      }
+                    },
+                    "AcquireSsrsLeaseContext": {
+                      "oneofs": {
+                        "_setupLogin": {
+                          "oneof": [
+                            "setupLogin"
+                          ]
+                        },
+                        "_serviceLogin": {
+                          "oneof": [
+                            "serviceLogin"
+                          ]
+                        },
+                        "_reportDatabase": {
+                          "oneof": [
+                            "reportDatabase"
+                          ]
+                        },
+                        "_duration": {
+                          "oneof": [
+                            "duration"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "setupLogin": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceLogin": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reportDatabase": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
                       }
                     },
                     "SqlFlagType": {
@@ -9696,6 +10795,10 @@
                   "rule": "repeated",
                   "type": "ClientLibrarySettings",
                   "id": 109
+                },
+                "protoReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 110
                 }
               }
             },
@@ -9753,6 +10856,31 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "renamedResources": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 3
+                },
+                "ignoredResources": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 4
+                },
+                "forcedNamespaceAliases": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                },
+                "handwrittenSignatures": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 6
                 }
               }
             },
@@ -9781,6 +10909,11 @@
                 "longRunning": {
                   "type": "LongRunning",
                   "id": 2
+                },
+                "autoPopulatedFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
                 }
               },
               "nested": {
@@ -9812,7 +10945,10 @@
                 "CLOUD": 1,
                 "ADS": 2,
                 "PHOTOS": 3,
-                "STREET_VIEW": 4
+                "STREET_VIEW": 4,
+                "SHOPPING": 5,
+                "GEO": 6,
+                "GENERATIVE_AI": 7
               }
             },
             "ClientLibraryDestination": {
@@ -9849,7 +10985,8 @@
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
               }
             }
           }
@@ -9872,6 +11009,21 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
+              }
+            },
+            "Edition": {
+              "values": {
+                "EDITION_UNKNOWN": 0,
+                "EDITION_PROTO2": 998,
+                "EDITION_PROTO3": 999,
+                "EDITION_2023": 1000,
+                "EDITION_2024": 1001,
+                "EDITION_1_TEST_ONLY": 1,
+                "EDITION_2_TEST_ONLY": 2,
+                "EDITION_99997_TEST_ONLY": 99997,
+                "EDITION_99998_TEST_ONLY": 99998,
+                "EDITION_99999_TEST_ONLY": 99999,
+                "EDITION_MAX": 2147483647
               }
             },
             "FileDescriptorProto": {
@@ -9938,8 +11090,8 @@
                   "id": 12
                 },
                 "edition": {
-                  "type": "string",
-                  "id": 13
+                  "type": "Edition",
+                  "id": 14
                 }
               }
             },
@@ -10031,6 +11183,26 @@
                   "rule": "repeated",
                   "type": "UninterpretedOption",
                   "id": 999
+                },
+                "declaration": {
+                  "rule": "repeated",
+                  "type": "Declaration",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_SOURCE"
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
+                "verification": {
+                  "type": "VerificationState",
+                  "id": 3,
+                  "options": {
+                    "default": "UNVERIFIED",
+                    "retention": "RETENTION_SOURCE"
+                  }
                 }
               },
               "extensions": [
@@ -10038,7 +11210,45 @@
                   1000,
                   536870911
                 ]
-              ]
+              ],
+              "nested": {
+                "Declaration": {
+                  "fields": {
+                    "number": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "fullName": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "type": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "reserved": {
+                      "type": "bool",
+                      "id": 5
+                    },
+                    "repeated": {
+                      "type": "bool",
+                      "id": 6
+                    }
+                  },
+                  "reserved": [
+                    [
+                      4,
+                      4
+                    ]
+                  ]
+                },
+                "VerificationState": {
+                  "values": {
+                    "DECLARATION": 0,
+                    "UNVERIFIED": 1
+                  }
+                }
+              }
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -10113,8 +11323,8 @@
                 "Label": {
                   "values": {
                     "LABEL_OPTIONAL": 1,
-                    "LABEL_REQUIRED": 2,
-                    "LABEL_REPEATED": 3
+                    "LABEL_REPEATED": 3,
+                    "LABEL_REQUIRED": 2
                   }
                 }
               }
@@ -10302,13 +11512,6 @@
                     "default": false
                   }
                 },
-                "phpGenericServices": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
-                },
                 "deprecated": {
                   "type": "bool",
                   "id": 23,
@@ -10351,6 +11554,10 @@
                   "type": "string",
                   "id": 45
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -10364,6 +11571,10 @@
                 ]
               ],
               "reserved": [
+                [
+                  42,
+                  42
+                ],
                 [
                   38,
                   38
@@ -10412,6 +11623,10 @@
                   "options": {
                     "deprecated": true
                   }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 12
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -10507,9 +11722,22 @@
                   "type": "OptionRetention",
                   "id": 17
                 },
-                "target": {
+                "targets": {
+                  "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 18
+                  "id": 19,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "editionDefaults": {
+                  "rule": "repeated",
+                  "type": "EditionDefault",
+                  "id": 20
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 21
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -10527,6 +11755,10 @@
                 [
                   4,
                   4
+                ],
+                [
+                  18,
+                  18
                 ]
               ],
               "nested": {
@@ -10564,11 +11796,27 @@
                     "TARGET_TYPE_SERVICE": 8,
                     "TARGET_TYPE_METHOD": 9
                   }
+                },
+                "EditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "value": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
                 }
               }
             },
             "OneofOptions": {
               "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 1
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -10602,6 +11850,10 @@
                     "deprecated": true
                   }
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 7
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -10630,6 +11882,17 @@
                     "default": false
                   }
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 2
+                },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -10645,6 +11908,10 @@
             },
             "ServiceOptions": {
               "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 34
+                },
                 "deprecated": {
                   "type": "bool",
                   "id": 33,
@@ -10680,6 +11947,10 @@
                   "options": {
                     "default": "IDEMPOTENCY_UNKNOWN"
                   }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 35
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -10746,6 +12017,166 @@
                     "isExtension": {
                       "rule": "required",
                       "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FeatureSet": {
+              "fields": {
+                "fieldPresence": {
+                  "type": "FieldPresence",
+                  "id": 1,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_2023",
+                    "edition_defaults.value": "EXPLICIT"
+                  }
+                },
+                "enumType": {
+                  "type": "EnumType",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "OPEN"
+                  }
+                },
+                "repeatedFieldEncoding": {
+                  "type": "RepeatedFieldEncoding",
+                  "id": 3,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "PACKED"
+                  }
+                },
+                "utf8Validation": {
+                  "type": "Utf8Validation",
+                  "id": 4,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "VERIFY"
+                  }
+                },
+                "messageEncoding": {
+                  "type": "MessageEncoding",
+                  "id": 5,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "edition_defaults.value": "LENGTH_PREFIXED"
+                  }
+                },
+                "jsonFormat": {
+                  "type": "JsonFormat",
+                  "id": 6,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "ALLOW"
+                  }
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  9995,
+                  9999
+                ]
+              ],
+              "reserved": [
+                [
+                  999,
+                  999
+                ]
+              ],
+              "nested": {
+                "FieldPresence": {
+                  "values": {
+                    "FIELD_PRESENCE_UNKNOWN": 0,
+                    "EXPLICIT": 1,
+                    "IMPLICIT": 2,
+                    "LEGACY_REQUIRED": 3
+                  }
+                },
+                "EnumType": {
+                  "values": {
+                    "ENUM_TYPE_UNKNOWN": 0,
+                    "OPEN": 1,
+                    "CLOSED": 2
+                  }
+                },
+                "RepeatedFieldEncoding": {
+                  "values": {
+                    "REPEATED_FIELD_ENCODING_UNKNOWN": 0,
+                    "PACKED": 1,
+                    "EXPANDED": 2
+                  }
+                },
+                "Utf8Validation": {
+                  "values": {
+                    "UTF8_VALIDATION_UNKNOWN": 0,
+                    "VERIFY": 2,
+                    "NONE": 3
+                  }
+                },
+                "MessageEncoding": {
+                  "values": {
+                    "MESSAGE_ENCODING_UNKNOWN": 0,
+                    "LENGTH_PREFIXED": 1,
+                    "DELIMITED": 2
+                  }
+                },
+                "JsonFormat": {
+                  "values": {
+                    "JSON_FORMAT_UNKNOWN": 0,
+                    "ALLOW": 1,
+                    "LEGACY_BEST_EFFORT": 2
+                  }
+                }
+              }
+            },
+            "FeatureSetDefaults": {
+              "fields": {
+                "defaults": {
+                  "rule": "repeated",
+                  "type": "FeatureSetEditionDefault",
+                  "id": 1
+                },
+                "minimumEdition": {
+                  "type": "Edition",
+                  "id": 4
+                },
+                "maximumEdition": {
+                  "type": "Edition",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "FeatureSetEditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "features": {
+                      "type": "FeatureSet",
                       "id": 2
                     }
                   }

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import type {
   Descriptors,
   ClientOptions,
   GrpcClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
   LocationsClient,
@@ -32,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v3/entity_types_client_config.json`.
@@ -53,6 +55,8 @@ export class EntityTypesClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -112,8 +116,27 @@ export class EntityTypesClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof EntityTypesClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'dialogflow.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -128,7 +151,7 @@ export class EntityTypesClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -153,10 +176,10 @@ export class EntityTypesClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
@@ -166,7 +189,7 @@ export class EntityTypesClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -323,8 +346,31 @@ export class EntityTypesClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
+    const exportEntityTypesResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3.ExportEntityTypesResponse'
+    ) as gax.protobuf.Type;
+    const exportEntityTypesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3.ExportEntityTypesMetadata'
+    ) as gax.protobuf.Type;
+    const importEntityTypesResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3.ImportEntityTypesResponse'
+    ) as gax.protobuf.Type;
+    const importEntityTypesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3.ImportEntityTypesMetadata'
+    ) as gax.protobuf.Type;
 
-    this.descriptors.longrunning = {};
+    this.descriptors.longrunning = {
+      exportEntityTypes: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportEntityTypesResponse.decode.bind(exportEntityTypesResponse),
+        exportEntityTypesMetadata.decode.bind(exportEntityTypesMetadata)
+      ),
+      importEntityTypes: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importEntityTypesResponse.decode.bind(importEntityTypesResponse),
+        importEntityTypesMetadata.decode.bind(importEntityTypesMetadata)
+      ),
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -381,6 +427,8 @@ export class EntityTypesClient {
       'updateEntityType',
       'deleteEntityType',
       'listEntityTypes',
+      'exportEntityTypes',
+      'importEntityTypes',
     ];
     for (const methodName of entityTypesStubMethods) {
       const callPromise = this.entityTypesStub.then(
@@ -397,7 +445,10 @@ export class EntityTypesClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -413,19 +464,50 @@ export class EntityTypesClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'dialogflow.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'dialogflow.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -474,8 +556,8 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the entity type.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/entityTypes/<Entity Type ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
    * @param {string} request.languageCode
    *   The language to retrieve the entity type for. The following fields are
    *   language dependent:
@@ -583,7 +665,7 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to create a entity type for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {google.cloud.dialogflow.cx.v3.EntityType} request.entityType
    *   Required. The entity type to create.
    * @param {string} request.languageCode
@@ -800,8 +882,8 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the entity type to delete.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *   ID>/entityTypes/<Entity Type ID>`.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
    * @param {boolean} request.force
    *   This field has no effect for entity type not being used.
    *   For entity types that are used by intents or pages:
@@ -900,13 +982,343 @@ export class EntityTypesClient {
   }
 
   /**
+   * Exports the selected entity types.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent agent to export entity types.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+   * @param {string[]} request.entityTypes
+   *   Required. The name of the entity types to export.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
+   * @param {string} [request.entityTypesUri]
+   *   Optional. The [Google Cloud
+   *   Storage](https://cloud.google.com/storage/docs/) URI to export the entity
+   *   types to. The format of this URI must be
+   *   `gs://<bucket-name>/<object-name>`.
+   *
+   *   Dialogflow performs a write operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have write permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+   * @param {boolean} [request.entityTypesContentInline]
+   *   Optional. The option to return the serialized entity types inline.
+   * @param {google.cloud.dialogflow.cx.v3.ExportEntityTypesRequest.DataFormat} [request.dataFormat]
+   *   Optional. The data format of the exported entity types. If not specified,
+   *   `BLOB` is assumed.
+   * @param {string} [request.languageCode]
+   *   Optional. The language to retrieve the entity type for. The following
+   *   fields are language dependent:
+   *
+   *   *   `EntityType.entities.value`
+   *   *   `EntityType.entities.synonyms`
+   *   *   `EntityType.excluded_phrases.value`
+   *
+   *   If not specified, all language dependent fields will be retrieved.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
+   *   are supported.
+   *   Note: languages must be enabled in the agent before they can be used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/entity_types.export_entity_types.js</caption>
+   * region_tag:dialogflow_v3_generated_EntityTypes_ExportEntityTypes_async
+   */
+  exportEntityTypes(
+    request?: protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesResponse,
+        protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportEntityTypes(
+    request: protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesResponse,
+        protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportEntityTypes(
+    request: protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesResponse,
+        protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportEntityTypes(
+    request?: protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesResponse,
+            protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesResponse,
+        protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesResponse,
+        protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.exportEntityTypes(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `exportEntityTypes()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/entity_types.export_entity_types.js</caption>
+   * region_tag:dialogflow_v3_generated_EntityTypes_ExportEntityTypes_async
+   */
+  async checkExportEntityTypesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.cx.v3.ExportEntityTypesResponse,
+      protos.google.cloud.dialogflow.cx.v3.ExportEntityTypesMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportEntityTypes,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.cx.v3.ExportEntityTypesResponse,
+      protos.google.cloud.dialogflow.cx.v3.ExportEntityTypesMetadata
+    >;
+  }
+  /**
+   * Imports the specified entitytypes into the agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to import the entity types into.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+   * @param {string} request.entityTypesUri
+   *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
+   *   to import entity types from. The format of this URI must be
+   *   `gs://<bucket-name>/<object-name>`.
+   *
+   *   Dialogflow performs a read operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have read permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+   * @param {google.cloud.dialogflow.cx.v3.InlineSource} request.entityTypesContent
+   *   Uncompressed byte content of entity types.
+   * @param {google.cloud.dialogflow.cx.v3.ImportEntityTypesRequest.MergeOption} request.mergeOption
+   *   Required. Merge option for importing entity types.
+   * @param {string} [request.targetEntityType]
+   *   Optional. The target entity type to import into.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entity_types/<EntityTypeID>`.
+   *   If set, there should be only one entity type included in
+   *   {@link protos.google.cloud.dialogflow.cx.v3.ImportEntityTypesRequest.entity_types|entity_types},
+   *   of which the type should match the type of the target entity type. All
+   *   {@link protos.google.cloud.dialogflow.cx.v3.EntityType.entities|entities} in the
+   *   imported entity type will be added to the target entity type.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/entity_types.import_entity_types.js</caption>
+   * region_tag:dialogflow_v3_generated_EntityTypes_ImportEntityTypes_async
+   */
+  importEntityTypes(
+    request?: protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesResponse,
+        protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  importEntityTypes(
+    request: protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesResponse,
+        protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importEntityTypes(
+    request: protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesResponse,
+        protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importEntityTypes(
+    request?: protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesResponse,
+            protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesResponse,
+        protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesResponse,
+        protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importEntityTypes(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importEntityTypes()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/entity_types.import_entity_types.js</caption>
+   * region_tag:dialogflow_v3_generated_EntityTypes_ImportEntityTypes_async
+   */
+  async checkImportEntityTypesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.cx.v3.ImportEntityTypesResponse,
+      protos.google.cloud.dialogflow.cx.v3.ImportEntityTypesMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importEntityTypes,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.cx.v3.ImportEntityTypesResponse,
+      protos.google.cloud.dialogflow.cx.v3.ImportEntityTypesMetadata
+    >;
+  }
+  /**
    * Returns the list of all entity types in the specified agent.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all entity types for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list entity types for. The following fields are language
    *   dependent:
@@ -1018,7 +1430,7 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all entity types for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list entity types for. The following fields are language
    *   dependent:
@@ -1078,7 +1490,7 @@ export class EntityTypesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all entity types for.
-   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    * @param {string} request.languageCode
    *   The language to list entity types for. The following fields are language
    *   dependent:

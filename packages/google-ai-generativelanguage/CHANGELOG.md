@@ -1,5 +1,79 @@
 # Changelog
 
+## [2.9.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.8.0...generativelanguage-v2.9.0) (2025-01-11)
+
+
+### Features
+
+* [generativelanguage] Add GoogleSearch tool type ([#5929](https://github.com/googleapis/google-cloud-node/issues/5929)) ([e5a665a](https://github.com/googleapis/google-cloud-node/commit/e5a665a909fb52d2ec4d05f147ac2c7ebd8ceb01))
+
+## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.7.0...generativelanguage-v2.8.0) (2024-11-21)
+
+
+### Features
+
+* [generativelanguage] Adds search grounding ([#5828](https://github.com/googleapis/google-cloud-node/issues/5828)) ([0b27dc2](https://github.com/googleapis/google-cloud-node/commit/0b27dc2c46300e144e82f6bd90a0fbf7072b22db))
+
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.6.0...generativelanguage-v2.7.0) (2024-10-10)
+
+
+### Features
+
+* [generativelanguage] Add GoogleSearchRetrieval tool and candidate.grounding_metadata ([#5699](https://github.com/googleapis/google-cloud-node/issues/5699)) ([3eb6375](https://github.com/googleapis/google-cloud-node/commit/3eb6375a4e4f28565de5e921c33e8547654a0fa2))
+
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.5.0...generativelanguage-v2.6.0) (2024-06-26)
+
+
+### Features
+
+* [generativelanguage] Add code execution ([#5506](https://github.com/googleapis/google-cloud-node/issues/5506)) ([13034af](https://github.com/googleapis/google-cloud-node/commit/13034af24e1d08cccab85e1f1f448a8ff24e469c))
+* [generativelanguage] Add content caching ([#5451](https://github.com/googleapis/google-cloud-node/issues/5451)) ([75c026f](https://github.com/googleapis/google-cloud-node/commit/75c026f34b039e368c38bfb6242f01048d3bfb79))
+
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.4.0...generativelanguage-v2.5.0) (2024-05-21)
+
+
+### Features
+
+* [generativelanguage] Add video metadata to files API ([#5359](https://github.com/googleapis/google-cloud-node/issues/5359)) ([4185d57](https://github.com/googleapis/google-cloud-node/commit/4185d574058dea56f118cf019cd28adf89c7b5a9))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5350](https://github.com/googleapis/google-cloud-node/issues/5350)) ([6c03873](https://github.com/googleapis/google-cloud-node/commit/6c038731de1f36456042e6b4ecf2a9686be662c7))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.3.0...generativelanguage-v2.4.0) (2024-05-08)
+
+
+### Features
+
+* Add FileState to File  ([#5312](https://github.com/googleapis/google-cloud-node/issues/5312)) ([01f4b53](https://github.com/googleapis/google-cloud-node/commit/01f4b533eab40cbc0868be66418bda716b998dc3))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.2.0...generativelanguage-v2.3.0) (2024-04-18)
+
+
+### Features
+
+* [generativelanguage] Add rest binding for tuned models ([#5228](https://github.com/googleapis/google-cloud-node/issues/5228)) ([b0ddbbe](https://github.com/googleapis/google-cloud-node/commit/b0ddbbecf97de696c7699efbb351e8f862f7d8cf))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.1.1...generativelanguage-v2.2.0) (2024-04-05)
+
+
+### Features
+
+* [generativelanguage] Add system instructions ([#5208](https://github.com/googleapis/google-cloud-node/issues/5208)) ([54c5762](https://github.com/googleapis/google-cloud-node/commit/54c5762d6ea9ac57d14271e651c03353326f15ac))
+
+## [2.1.1](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.1.0...generativelanguage-v2.1.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* [generativelanguage] make learning rate a one-of ([#5142](https://github.com/googleapis/google-cloud-node/issues/5142)) ([b2a5f9d](https://github.com/googleapis/google-cloud-node/commit/b2a5f9d476c5cc5bbf9eb47f0dc605284943d8c5))
+
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.0.1...generativelanguage-v2.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5022](https://github.com/googleapis/google-cloud-node/issues/5022)) ([b6498d8](https://github.com/googleapis/google-cloud-node/commit/b6498d8580d056817981dedbaa0ea5d82e9dccc2))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.0.0...generativelanguage-v2.0.1) (2024-01-23)
 
 

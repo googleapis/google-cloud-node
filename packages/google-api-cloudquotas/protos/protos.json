@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -506,6 +509,8 @@
                           "values": {
                             "INELIGIBILITY_REASON_UNSPECIFIED": 0,
                             "NO_VALID_BILLING_ACCOUNT": 1,
+                            "NOT_SUPPORTED": 3,
+                            "NOT_ENOUGH_USAGE_HISTORY": 4,
                             "OTHER": 2
                           }
                         }
@@ -524,7 +529,10 @@
                         "dimensions": {
                           "keyType": "string",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         },
                         "quotaConfig": {
                           "type": "QuotaConfig",
@@ -583,7 +591,7 @@
                           "type": "string",
                           "id": 12,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "INPUT_ONLY"
                           }
                         }
                       }
@@ -621,7 +629,10 @@
                         "annotations": {
                           "keyType": "string",
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "requestOrigin": {
                           "type": "Origin",
@@ -664,6 +675,824 @@
                         "value": {
                           "type": "int64",
                           "id": 1
+                        },
+                        "rolloutInfo": {
+                          "type": "RolloutInfo",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RolloutInfo": {
+                      "fields": {
+                        "ongoingRollout": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "v1beta": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.CloudQuotas.V1Beta",
+                    "go_package": "cloud.google.com/go/cloudquotas/apiv1beta/cloudquotaspb;cloudquotaspb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "QuotaAdjusterSettingsProto",
+                    "java_package": "com.google.api.cloudquotas.v1beta",
+                    "php_namespace": "Google\\Cloud\\CloudQuotas\\V1beta",
+                    "ruby_package": "Google::Cloud::CloudQuotas::V1beta",
+                    "(google.api.resource_definition).type": "cloudquotas.googleapis.com/Location",
+                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}"
+                  },
+                  "nested": {
+                    "CloudQuotas": {
+                      "options": {
+                        "(google.api.default_host)": "cloudquotas.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListQuotaInfos": {
+                          "requestType": "ListQuotaInfosRequest",
+                          "responseType": "ListQuotaInfosResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*/services/*}/quotaInfos",
+                            "(google.api.http).additional_bindings.get": "/v1beta/{parent=folders/*/locations/*/services/*}/quotaInfos",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*/services/*}/quotaInfos",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1beta/{parent=organizations/*/locations/*/services/*}/quotaInfos"
+                                  },
+                                  {
+                                    "get": "/v1beta/{parent=folders/*/locations/*/services/*}/quotaInfos"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetQuotaInfo": {
+                          "requestType": "GetQuotaInfoRequest",
+                          "responseType": "QuotaInfo",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/services/*/quotaInfos/*}",
+                            "(google.api.http).additional_bindings.get": "/v1beta/{name=folders/*/locations/*/services/*/quotaInfos/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/services/*/quotaInfos/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1beta/{name=organizations/*/locations/*/services/*/quotaInfos/*}"
+                                  },
+                                  {
+                                    "get": "/v1beta/{name=folders/*/locations/*/services/*/quotaInfos/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListQuotaPreferences": {
+                          "requestType": "ListQuotaPreferencesRequest",
+                          "responseType": "ListQuotaPreferencesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*}/quotaPreferences",
+                            "(google.api.http).additional_bindings.get": "/v1beta/{parent=organizations/*/locations/*}/quotaPreferences",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*}/quotaPreferences",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1beta/{parent=folders/*/locations/*}/quotaPreferences"
+                                  },
+                                  {
+                                    "get": "/v1beta/{parent=organizations/*/locations/*}/quotaPreferences"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetQuotaPreference": {
+                          "requestType": "GetQuotaPreferenceRequest",
+                          "responseType": "QuotaPreference",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/quotaPreferences/*}",
+                            "(google.api.http).additional_bindings.get": "/v1beta/{name=folders/*/locations/*/quotaPreferences/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/quotaPreferences/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1beta/{name=organizations/*/locations/*/quotaPreferences/*}"
+                                  },
+                                  {
+                                    "get": "/v1beta/{name=folders/*/locations/*/quotaPreferences/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateQuotaPreference": {
+                          "requestType": "CreateQuotaPreferenceRequest",
+                          "responseType": "QuotaPreference",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*}/quotaPreferences",
+                            "(google.api.http).body": "quota_preference",
+                            "(google.api.http).additional_bindings.post": "/v1beta/{parent=organizations/*/locations/*}/quotaPreferences",
+                            "(google.api.http).additional_bindings.body": "quota_preference",
+                            "(google.api.method_signature)": "parent,quota_preference"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*}/quotaPreferences",
+                                "body": "quota_preference",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta/{parent=folders/*/locations/*}/quotaPreferences",
+                                    "body": "quota_preference"
+                                  },
+                                  {
+                                    "post": "/v1beta/{parent=organizations/*/locations/*}/quotaPreferences",
+                                    "body": "quota_preference"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,quota_preference,quota_preference_id"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,quota_preference"
+                            }
+                          ]
+                        },
+                        "UpdateQuotaPreference": {
+                          "requestType": "UpdateQuotaPreferenceRequest",
+                          "responseType": "QuotaPreference",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{quota_preference.name=projects/*/locations/*/quotaPreferences/*}",
+                            "(google.api.http).body": "quota_preference",
+                            "(google.api.http).additional_bindings.patch": "/v1beta/{quota_preference.name=organizations/*/locations/*/quotaPreferences/*}",
+                            "(google.api.http).additional_bindings.body": "quota_preference",
+                            "(google.api.method_signature)": "quota_preference,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{quota_preference.name=projects/*/locations/*/quotaPreferences/*}",
+                                "body": "quota_preference",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1beta/{quota_preference.name=folders/*/locations/*/quotaPreferences/*}",
+                                    "body": "quota_preference"
+                                  },
+                                  {
+                                    "patch": "/v1beta/{quota_preference.name=organizations/*/locations/*/quotaPreferences/*}",
+                                    "body": "quota_preference"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "quota_preference,update_mask"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListQuotaInfosRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudquotas.googleapis.com/QuotaInfo"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListQuotaInfosResponse": {
+                      "fields": {
+                        "quotaInfos": {
+                          "rule": "repeated",
+                          "type": "QuotaInfo",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetQuotaInfoRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudquotas.googleapis.com/QuotaInfo"
+                          }
+                        }
+                      }
+                    },
+                    "ListQuotaPreferencesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudquotas.googleapis.com/QuotaPreference"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListQuotaPreferencesResponse": {
+                      "fields": {
+                        "quotaPreferences": {
+                          "rule": "repeated",
+                          "type": "QuotaPreference",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetQuotaPreferenceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudquotas.googleapis.com/QuotaPreference"
+                          }
+                        }
+                      }
+                    },
+                    "CreateQuotaPreferenceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudquotas.googleapis.com/QuotaPreference"
+                          }
+                        },
+                        "quotaPreferenceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "quotaPreference": {
+                          "type": "QuotaPreference",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "ignoreSafetyChecks": {
+                          "rule": "repeated",
+                          "type": "QuotaSafetyCheck",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "UpdateQuotaPreferenceRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "quotaPreference": {
+                          "type": "QuotaPreference",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ignoreSafetyChecks": {
+                          "rule": "repeated",
+                          "type": "QuotaSafetyCheck",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "QuotaSafetyCheck": {
+                      "values": {
+                        "QUOTA_SAFETY_CHECK_UNSPECIFIED": 0,
+                        "QUOTA_DECREASE_BELOW_USAGE": 1,
+                        "QUOTA_DECREASE_PERCENTAGE_TOO_HIGH": 2
+                      }
+                    },
+                    "QuotaInfo": {
+                      "options": {
+                        "(google.api.resource).type": "cloudquotas.googleapis.com/QuotaInfo",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/services/{service}/quotaInfos/{quota_info}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "quotaId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "metric": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "isPrecise": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "refreshInterval": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "containerType": {
+                          "type": "ContainerType",
+                          "id": 7
+                        },
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "metricDisplayName": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "quotaDisplayName": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "metricUnit": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "quotaIncreaseEligibility": {
+                          "type": "QuotaIncreaseEligibility",
+                          "id": 12
+                        },
+                        "isFixed": {
+                          "type": "bool",
+                          "id": 13
+                        },
+                        "dimensionsInfos": {
+                          "rule": "repeated",
+                          "type": "DimensionsInfo",
+                          "id": 14
+                        },
+                        "isConcurrent": {
+                          "type": "bool",
+                          "id": 15
+                        },
+                        "serviceRequestQuotaUri": {
+                          "type": "string",
+                          "id": 17
+                        }
+                      },
+                      "nested": {
+                        "ContainerType": {
+                          "values": {
+                            "CONTAINER_TYPE_UNSPECIFIED": 0,
+                            "PROJECT": 1,
+                            "FOLDER": 2,
+                            "ORGANIZATION": 3
+                          }
+                        }
+                      }
+                    },
+                    "QuotaIncreaseEligibility": {
+                      "fields": {
+                        "isEligible": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "ineligibilityReason": {
+                          "type": "IneligibilityReason",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "IneligibilityReason": {
+                          "values": {
+                            "INELIGIBILITY_REASON_UNSPECIFIED": 0,
+                            "NO_VALID_BILLING_ACCOUNT": 1,
+                            "NOT_SUPPORTED": 3,
+                            "NOT_ENOUGH_USAGE_HISTORY": 4,
+                            "OTHER": 2
+                          }
+                        }
+                      }
+                    },
+                    "QuotaPreference": {
+                      "options": {
+                        "(google.api.resource).type": "cloudquotas.googleapis.com/QuotaPreference",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/quotaPreferences/{quota_preference}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dimensions": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "quotaConfig": {
+                          "type": "QuotaConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "quotaId": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reconciling": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "justification": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "contactEmail": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "QuotaConfig": {
+                      "fields": {
+                        "preferredValue": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "stateDetail": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "grantedValue": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "traceId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestOrigin": {
+                          "type": "Origin",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Origin": {
+                          "values": {
+                            "ORIGIN_UNSPECIFIED": 0,
+                            "CLOUD_CONSOLE": 1,
+                            "AUTO_ADJUSTER": 2
+                          }
+                        }
+                      }
+                    },
+                    "DimensionsInfo": {
+                      "fields": {
+                        "dimensions": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "details": {
+                          "type": "QuotaDetails",
+                          "id": 2
+                        },
+                        "applicableLocations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "QuotaDetails": {
+                      "fields": {
+                        "value": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "rolloutInfo": {
+                          "type": "RolloutInfo",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RolloutInfo": {
+                      "fields": {
+                        "ongoingRollout": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "QuotaAdjusterSettingsManager": {
+                      "options": {
+                        "(google.api.default_host)": "cloudquotas.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "UpdateQuotaAdjusterSettings": {
+                          "requestType": "UpdateQuotaAdjusterSettingsRequest",
+                          "responseType": "QuotaAdjusterSettings",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{quota_adjuster_settings.name=projects/*/locations/*/quotaAdjusterSettings}",
+                            "(google.api.http).body": "quota_adjuster_settings",
+                            "(google.api.method_signature)": "quota_adjuster_settings,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{quota_adjuster_settings.name=projects/*/locations/*/quotaAdjusterSettings}",
+                                "body": "quota_adjuster_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "quota_adjuster_settings,update_mask"
+                            }
+                          ]
+                        },
+                        "GetQuotaAdjusterSettings": {
+                          "requestType": "GetQuotaAdjusterSettingsRequest",
+                          "responseType": "QuotaAdjusterSettings",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/quotaAdjusterSettings}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/quotaAdjusterSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetQuotaAdjusterSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudquotas.googleapis.com/QuotaAdjusterSettings"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateQuotaAdjusterSettingsRequest": {
+                      "fields": {
+                        "quotaAdjusterSettings": {
+                          "type": "QuotaAdjusterSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QuotaAdjusterSettings": {
+                      "options": {
+                        "(google.api.resource).type": "cloudquotas.googleapis.com/QuotaAdjusterSettings",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/quotaAdjusterSettings",
+                        "(google.api.resource).plural": "quotaAdjusterSettings",
+                        "(google.api.resource).singular": "quotaAdjusterSettings",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "enablement": {
+                          "type": "Enablement",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Enablement": {
+                          "values": {
+                            "ENABLEMENT_UNSPECIFIED": 0,
+                            "ENABLED": 2,
+                            "DISABLED": 3
+                          }
                         }
                       }
                     }
@@ -878,6 +1707,10 @@
                   "rule": "repeated",
                   "type": "ClientLibrarySettings",
                   "id": 109
+                },
+                "protoReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 110
                 }
               }
             },
@@ -935,6 +1768,31 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "renamedResources": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 3
+                },
+                "ignoredResources": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 4
+                },
+                "forcedNamespaceAliases": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                },
+                "handwrittenSignatures": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 6
                 }
               }
             },
@@ -963,6 +1821,11 @@
                 "longRunning": {
                   "type": "LongRunning",
                   "id": 2
+                },
+                "autoPopulatedFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
                 }
               },
               "nested": {
@@ -994,7 +1857,10 @@
                 "CLOUD": 1,
                 "ADS": 2,
                 "PHOTOS": 3,
-                "STREET_VIEW": 4
+                "STREET_VIEW": 4,
+                "SHOPPING": 5,
+                "GEO": 6,
+                "GENERATIVE_AI": 7
               }
             },
             "ClientLibraryDestination": {
@@ -1031,7 +1897,8 @@
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
               }
             },
             "resourceReference": {
@@ -1133,6 +2000,21 @@
                 }
               }
             },
+            "Edition": {
+              "values": {
+                "EDITION_UNKNOWN": 0,
+                "EDITION_PROTO2": 998,
+                "EDITION_PROTO3": 999,
+                "EDITION_2023": 1000,
+                "EDITION_2024": 1001,
+                "EDITION_1_TEST_ONLY": 1,
+                "EDITION_2_TEST_ONLY": 2,
+                "EDITION_99997_TEST_ONLY": 99997,
+                "EDITION_99998_TEST_ONLY": 99998,
+                "EDITION_99999_TEST_ONLY": 99999,
+                "EDITION_MAX": 2147483647
+              }
+            },
             "FileDescriptorProto": {
               "fields": {
                 "name": {
@@ -1197,8 +2079,8 @@
                   "id": 12
                 },
                 "edition": {
-                  "type": "string",
-                  "id": 13
+                  "type": "Edition",
+                  "id": 14
                 }
               }
             },
@@ -1290,6 +2172,26 @@
                   "rule": "repeated",
                   "type": "UninterpretedOption",
                   "id": 999
+                },
+                "declaration": {
+                  "rule": "repeated",
+                  "type": "Declaration",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_SOURCE"
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
+                "verification": {
+                  "type": "VerificationState",
+                  "id": 3,
+                  "options": {
+                    "default": "UNVERIFIED",
+                    "retention": "RETENTION_SOURCE"
+                  }
                 }
               },
               "extensions": [
@@ -1297,7 +2199,45 @@
                   1000,
                   536870911
                 ]
-              ]
+              ],
+              "nested": {
+                "Declaration": {
+                  "fields": {
+                    "number": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "fullName": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "type": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "reserved": {
+                      "type": "bool",
+                      "id": 5
+                    },
+                    "repeated": {
+                      "type": "bool",
+                      "id": 6
+                    }
+                  },
+                  "reserved": [
+                    [
+                      4,
+                      4
+                    ]
+                  ]
+                },
+                "VerificationState": {
+                  "values": {
+                    "DECLARATION": 0,
+                    "UNVERIFIED": 1
+                  }
+                }
+              }
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -1372,8 +2312,8 @@
                 "Label": {
                   "values": {
                     "LABEL_OPTIONAL": 1,
-                    "LABEL_REQUIRED": 2,
-                    "LABEL_REPEATED": 3
+                    "LABEL_REPEATED": 3,
+                    "LABEL_REQUIRED": 2
                   }
                 }
               }
@@ -1561,13 +2501,6 @@
                     "default": false
                   }
                 },
-                "phpGenericServices": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
-                },
                 "deprecated": {
                   "type": "bool",
                   "id": 23,
@@ -1610,6 +2543,10 @@
                   "type": "string",
                   "id": 45
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -1623,6 +2560,10 @@
                 ]
               ],
               "reserved": [
+                [
+                  42,
+                  42
+                ],
                 [
                   38,
                   38
@@ -1671,6 +2612,10 @@
                   "options": {
                     "deprecated": true
                   }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 12
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -1766,9 +2711,22 @@
                   "type": "OptionRetention",
                   "id": 17
                 },
-                "target": {
+                "targets": {
+                  "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 18
+                  "id": 19,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "editionDefaults": {
+                  "rule": "repeated",
+                  "type": "EditionDefault",
+                  "id": 20
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 21
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -1786,6 +2744,10 @@
                 [
                   4,
                   4
+                ],
+                [
+                  18,
+                  18
                 ]
               ],
               "nested": {
@@ -1823,11 +2785,27 @@
                     "TARGET_TYPE_SERVICE": 8,
                     "TARGET_TYPE_METHOD": 9
                   }
+                },
+                "EditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "value": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
                 }
               }
             },
             "OneofOptions": {
               "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 1
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -1861,6 +2839,10 @@
                     "deprecated": true
                   }
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 7
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -1889,6 +2871,17 @@
                     "default": false
                   }
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 2
+                },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -1904,6 +2897,10 @@
             },
             "ServiceOptions": {
               "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 34
+                },
                 "deprecated": {
                   "type": "bool",
                   "id": 33,
@@ -1939,6 +2936,10 @@
                   "options": {
                     "default": "IDEMPOTENCY_UNKNOWN"
                   }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 35
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -2005,6 +3006,166 @@
                     "isExtension": {
                       "rule": "required",
                       "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FeatureSet": {
+              "fields": {
+                "fieldPresence": {
+                  "type": "FieldPresence",
+                  "id": 1,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_2023",
+                    "edition_defaults.value": "EXPLICIT"
+                  }
+                },
+                "enumType": {
+                  "type": "EnumType",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "OPEN"
+                  }
+                },
+                "repeatedFieldEncoding": {
+                  "type": "RepeatedFieldEncoding",
+                  "id": 3,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "PACKED"
+                  }
+                },
+                "utf8Validation": {
+                  "type": "Utf8Validation",
+                  "id": 4,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "VERIFY"
+                  }
+                },
+                "messageEncoding": {
+                  "type": "MessageEncoding",
+                  "id": 5,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "edition_defaults.value": "LENGTH_PREFIXED"
+                  }
+                },
+                "jsonFormat": {
+                  "type": "JsonFormat",
+                  "id": 6,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "ALLOW"
+                  }
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  9995,
+                  9999
+                ]
+              ],
+              "reserved": [
+                [
+                  999,
+                  999
+                ]
+              ],
+              "nested": {
+                "FieldPresence": {
+                  "values": {
+                    "FIELD_PRESENCE_UNKNOWN": 0,
+                    "EXPLICIT": 1,
+                    "IMPLICIT": 2,
+                    "LEGACY_REQUIRED": 3
+                  }
+                },
+                "EnumType": {
+                  "values": {
+                    "ENUM_TYPE_UNKNOWN": 0,
+                    "OPEN": 1,
+                    "CLOSED": 2
+                  }
+                },
+                "RepeatedFieldEncoding": {
+                  "values": {
+                    "REPEATED_FIELD_ENCODING_UNKNOWN": 0,
+                    "PACKED": 1,
+                    "EXPANDED": 2
+                  }
+                },
+                "Utf8Validation": {
+                  "values": {
+                    "UTF8_VALIDATION_UNKNOWN": 0,
+                    "VERIFY": 2,
+                    "NONE": 3
+                  }
+                },
+                "MessageEncoding": {
+                  "values": {
+                    "MESSAGE_ENCODING_UNKNOWN": 0,
+                    "LENGTH_PREFIXED": 1,
+                    "DELIMITED": 2
+                  }
+                },
+                "JsonFormat": {
+                  "values": {
+                    "JSON_FORMAT_UNKNOWN": 0,
+                    "ALLOW": 1,
+                    "LEGACY_BEST_EFFORT": 2
+                  }
+                }
+              }
+            },
+            "FeatureSetDefaults": {
+              "fields": {
+                "defaults": {
+                  "rule": "repeated",
+                  "type": "FeatureSetEditionDefault",
+                  "id": 1
+                },
+                "minimumEdition": {
+                  "type": "Edition",
+                  "id": 4
+                },
+                "maximumEdition": {
+                  "type": "Edition",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "FeatureSetEditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "features": {
+                      "type": "FeatureSet",
                       "id": 2
                     }
                   }

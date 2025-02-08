@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@ function main(parent, securityHealthAnalyticsCustomModule) {
    */
   /**
    *  Required. Resource name of the new custom module's parent. Its format is
-   *  "organizations/{organization}/securityHealthAnalyticsSettings",
-   *  "folders/{folder}/securityHealthAnalyticsSettings", or
-   *  "projects/{project}/securityHealthAnalyticsSettings"
+   *  `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *  `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *  `projects/{project}/securityHealthAnalyticsSettings`
    */
   // const parent = 'abc123'
   /**

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -505,6 +505,7 @@
                          * @property {google.cloud.functions.v1.CloudFunction.DockerRegistry|null} [dockerRegistry] CloudFunction dockerRegistry
                          * @property {google.cloud.functions.v1.CloudFunction.IAutomaticUpdatePolicy|null} [automaticUpdatePolicy] CloudFunction automaticUpdatePolicy
                          * @property {google.cloud.functions.v1.CloudFunction.IOnDeployUpdatePolicy|null} [onDeployUpdatePolicy] CloudFunction onDeployUpdatePolicy
+                         * @property {string|null} [buildServiceAccount] CloudFunction buildServiceAccount
                          */
     
                         /**
@@ -807,6 +808,14 @@
                          */
                         CloudFunction.prototype.onDeployUpdatePolicy = null;
     
+                        /**
+                         * CloudFunction buildServiceAccount.
+                         * @member {string} buildServiceAccount
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.buildServiceAccount = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -942,6 +951,8 @@
                                 $root.google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy.encode(message.automaticUpdatePolicy, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
                             if (message.onDeployUpdatePolicy != null && Object.hasOwnProperty.call(message, "onDeployUpdatePolicy"))
                                 $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.encode(message.onDeployUpdatePolicy, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
+                            if (message.buildServiceAccount != null && Object.hasOwnProperty.call(message, "buildServiceAccount"))
+                                writer.uint32(/* id 43, wireType 2 =*/346).string(message.buildServiceAccount);
                             return writer;
                         };
     
@@ -1175,6 +1186,10 @@
                                     }
                                 case 41: {
                                         message.onDeployUpdatePolicy = $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 43: {
+                                        message.buildServiceAccount = reader.string();
                                         break;
                                     }
                                 default:
@@ -1414,6 +1429,9 @@
                                         return "onDeployUpdatePolicy." + error;
                                 }
                             }
+                            if (message.buildServiceAccount != null && message.hasOwnProperty("buildServiceAccount"))
+                                if (!$util.isString(message.buildServiceAccount))
+                                    return "buildServiceAccount: string expected";
                             return null;
                         };
     
@@ -1646,6 +1664,8 @@
                                     throw TypeError(".google.cloud.functions.v1.CloudFunction.onDeployUpdatePolicy: object expected");
                                 message.onDeployUpdatePolicy = $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.fromObject(object.onDeployUpdatePolicy);
                             }
+                            if (object.buildServiceAccount != null)
+                                message.buildServiceAccount = String(object.buildServiceAccount);
                             return message;
                         };
     
@@ -1699,6 +1719,7 @@
                                 object.buildName = "";
                                 object.dockerRepository = "";
                                 object.dockerRegistry = options.enums === String ? "DOCKER_REGISTRY_UNSPECIFIED" : 0;
+                                object.buildServiceAccount = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1810,6 +1831,8 @@
                                 if (options.oneofs)
                                     object.runtimeUpdatePolicy = "onDeployUpdatePolicy";
                             }
+                            if (message.buildServiceAccount != null && message.hasOwnProperty("buildServiceAccount"))
+                                object.buildServiceAccount = message.buildServiceAccount;
                             return object;
                         };
     
@@ -7811,6 +7834,24 @@
                     })();
     
                     /**
+                     * OperationType enum.
+                     * @name google.cloud.functions.v2.OperationType
+                     * @enum {number}
+                     * @property {number} OPERATIONTYPE_UNSPECIFIED=0 OPERATIONTYPE_UNSPECIFIED value
+                     * @property {number} CREATE_FUNCTION=1 CREATE_FUNCTION value
+                     * @property {number} UPDATE_FUNCTION=2 UPDATE_FUNCTION value
+                     * @property {number} DELETE_FUNCTION=3 DELETE_FUNCTION value
+                     */
+                    v2.OperationType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OPERATIONTYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CREATE_FUNCTION"] = 1;
+                        values[valuesById[2] = "UPDATE_FUNCTION"] = 2;
+                        values[valuesById[3] = "DELETE_FUNCTION"] = 3;
+                        return values;
+                    })();
+    
+                    /**
                      * Environment enum.
                      * @name google.cloud.functions.v2.Environment
                      * @enum {number}
@@ -7844,6 +7885,8 @@
                          * @property {google.cloud.functions.v2.Environment|null} [environment] Function environment
                          * @property {string|null} [url] Function url
                          * @property {string|null} [kmsKeyName] Function kmsKeyName
+                         * @property {boolean|null} [satisfiesPzs] Function satisfiesPzs
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Function createTime
                          */
     
                         /**
@@ -7960,6 +8003,22 @@
                         Function.prototype.kmsKeyName = "";
     
                         /**
+                         * Function satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.functions.v2.Function
+                         * @instance
+                         */
+                        Function.prototype.satisfiesPzs = false;
+    
+                        /**
+                         * Function createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.functions.v2.Function
+                         * @instance
+                         */
+                        Function.prototype.createTime = null;
+    
+                        /**
                          * Creates a new Function instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2.Function
@@ -8009,6 +8068,10 @@
                                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.url);
                             if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
                                 writer.uint32(/* id 25, wireType 2 =*/202).string(message.kmsKeyName);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 27, wireType 0 =*/216).bool(message.satisfiesPzs);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             return writer;
                         };
     
@@ -8110,6 +8173,14 @@
                                     }
                                 case 25: {
                                         message.kmsKeyName = reader.string();
+                                        break;
+                                    }
+                                case 27: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
+                                case 28: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -8217,6 +8288,14 @@
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 if (!$util.isString(message.kmsKeyName))
                                     return "kmsKeyName: string expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
                             return null;
                         };
     
@@ -8329,6 +8408,13 @@
                                 message.url = String(object.url);
                             if (object.kmsKeyName != null)
                                 message.kmsKeyName = String(object.kmsKeyName);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.functions.v2.Function.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
                             return message;
                         };
     
@@ -8360,6 +8446,8 @@
                                 object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
                                 object.url = "";
                                 object.kmsKeyName = "";
+                                object.satisfiesPzs = false;
+                                object.createTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -8392,6 +8480,10 @@
                                 object.url = message.url;
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 object.kmsKeyName = message.kmsKeyName;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             return object;
                         };
     
@@ -8752,6 +8844,7 @@
                          * @property {string|null} [bucket] StorageSource bucket
                          * @property {string|null} [object] StorageSource object
                          * @property {number|Long|null} [generation] StorageSource generation
+                         * @property {string|null} [sourceUploadUrl] StorageSource sourceUploadUrl
                          */
     
                         /**
@@ -8794,6 +8887,14 @@
                         StorageSource.prototype.generation = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
+                         * StorageSource sourceUploadUrl.
+                         * @member {string} sourceUploadUrl
+                         * @memberof google.cloud.functions.v2.StorageSource
+                         * @instance
+                         */
+                        StorageSource.prototype.sourceUploadUrl = "";
+    
+                        /**
                          * Creates a new StorageSource instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2.StorageSource
@@ -8823,6 +8924,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.object);
                             if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int64(message.generation);
+                            if (message.sourceUploadUrl != null && Object.hasOwnProperty.call(message, "sourceUploadUrl"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.sourceUploadUrl);
                             return writer;
                         };
     
@@ -8869,6 +8972,10 @@
                                         message.generation = reader.int64();
                                         break;
                                     }
+                                case 4: {
+                                        message.sourceUploadUrl = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8913,6 +9020,9 @@
                             if (message.generation != null && message.hasOwnProperty("generation"))
                                 if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                     return "generation: integer|Long expected";
+                            if (message.sourceUploadUrl != null && message.hasOwnProperty("sourceUploadUrl"))
+                                if (!$util.isString(message.sourceUploadUrl))
+                                    return "sourceUploadUrl: string expected";
                             return null;
                         };
     
@@ -8941,6 +9051,8 @@
                                     message.generation = object.generation;
                                 else if (typeof object.generation === "object")
                                     message.generation = new $util.LongBits(object.generation.low >>> 0, object.generation.high >>> 0).toNumber();
+                            if (object.sourceUploadUrl != null)
+                                message.sourceUploadUrl = String(object.sourceUploadUrl);
                             return message;
                         };
     
@@ -8965,6 +9077,7 @@
                                     object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.generation = options.longs === String ? "0" : 0;
+                                object.sourceUploadUrl = "";
                             }
                             if (message.bucket != null && message.hasOwnProperty("bucket"))
                                 object.bucket = message.bucket;
@@ -8975,6 +9088,8 @@
                                     object.generation = options.longs === String ? String(message.generation) : message.generation;
                                 else
                                     object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
+                            if (message.sourceUploadUrl != null && message.hasOwnProperty("sourceUploadUrl"))
+                                object.sourceUploadUrl = message.sourceUploadUrl;
                             return object;
                         };
     
@@ -9388,6 +9503,7 @@
                          * @interface ISource
                          * @property {google.cloud.functions.v2.IStorageSource|null} [storageSource] Source storageSource
                          * @property {google.cloud.functions.v2.IRepoSource|null} [repoSource] Source repoSource
+                         * @property {string|null} [gitUri] Source gitUri
                          */
     
                         /**
@@ -9421,17 +9537,25 @@
                          */
                         Source.prototype.repoSource = null;
     
+                        /**
+                         * Source gitUri.
+                         * @member {string|null|undefined} gitUri
+                         * @memberof google.cloud.functions.v2.Source
+                         * @instance
+                         */
+                        Source.prototype.gitUri = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Source source.
-                         * @member {"storageSource"|"repoSource"|undefined} source
+                         * @member {"storageSource"|"repoSource"|"gitUri"|undefined} source
                          * @memberof google.cloud.functions.v2.Source
                          * @instance
                          */
                         Object.defineProperty(Source.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource"]),
+                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource", "gitUri"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -9463,6 +9587,8 @@
                                 $root.google.cloud.functions.v2.StorageSource.encode(message.storageSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.repoSource != null && Object.hasOwnProperty.call(message, "repoSource"))
                                 $root.google.cloud.functions.v2.RepoSource.encode(message.repoSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.gitUri != null && Object.hasOwnProperty.call(message, "gitUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.gitUri);
                             return writer;
                         };
     
@@ -9503,6 +9629,10 @@
                                     }
                                 case 2: {
                                         message.repoSource = $root.google.cloud.functions.v2.RepoSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.gitUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -9559,6 +9689,13 @@
                                         return "repoSource." + error;
                                 }
                             }
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                if (!$util.isString(message.gitUri))
+                                    return "gitUri: string expected";
+                            }
                             return null;
                         };
     
@@ -9584,6 +9721,8 @@
                                     throw TypeError(".google.cloud.functions.v2.Source.repoSource: object expected");
                                 message.repoSource = $root.google.cloud.functions.v2.RepoSource.fromObject(object.repoSource);
                             }
+                            if (object.gitUri != null)
+                                message.gitUri = String(object.gitUri);
                             return message;
                         };
     
@@ -9609,6 +9748,11 @@
                                 object.repoSource = $root.google.cloud.functions.v2.RepoSource.toObject(message.repoSource, options);
                                 if (options.oneofs)
                                     object.source = "repoSource";
+                            }
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri")) {
+                                object.gitUri = message.gitUri;
+                                if (options.oneofs)
+                                    object.source = "gitUri";
                             }
                             return object;
                         };
@@ -9650,6 +9794,7 @@
                          * @interface ISourceProvenance
                          * @property {google.cloud.functions.v2.IStorageSource|null} [resolvedStorageSource] SourceProvenance resolvedStorageSource
                          * @property {google.cloud.functions.v2.IRepoSource|null} [resolvedRepoSource] SourceProvenance resolvedRepoSource
+                         * @property {string|null} [gitUri] SourceProvenance gitUri
                          */
     
                         /**
@@ -9684,6 +9829,14 @@
                         SourceProvenance.prototype.resolvedRepoSource = null;
     
                         /**
+                         * SourceProvenance gitUri.
+                         * @member {string} gitUri
+                         * @memberof google.cloud.functions.v2.SourceProvenance
+                         * @instance
+                         */
+                        SourceProvenance.prototype.gitUri = "";
+    
+                        /**
                          * Creates a new SourceProvenance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2.SourceProvenance
@@ -9711,6 +9864,8 @@
                                 $root.google.cloud.functions.v2.StorageSource.encode(message.resolvedStorageSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.resolvedRepoSource != null && Object.hasOwnProperty.call(message, "resolvedRepoSource"))
                                 $root.google.cloud.functions.v2.RepoSource.encode(message.resolvedRepoSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.gitUri != null && Object.hasOwnProperty.call(message, "gitUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.gitUri);
                             return writer;
                         };
     
@@ -9751,6 +9906,10 @@
                                     }
                                 case 2: {
                                         message.resolvedRepoSource = $root.google.cloud.functions.v2.RepoSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.gitUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -9798,6 +9957,9 @@
                                 if (error)
                                     return "resolvedRepoSource." + error;
                             }
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri"))
+                                if (!$util.isString(message.gitUri))
+                                    return "gitUri: string expected";
                             return null;
                         };
     
@@ -9823,6 +9985,8 @@
                                     throw TypeError(".google.cloud.functions.v2.SourceProvenance.resolvedRepoSource: object expected");
                                 message.resolvedRepoSource = $root.google.cloud.functions.v2.RepoSource.fromObject(object.resolvedRepoSource);
                             }
+                            if (object.gitUri != null)
+                                message.gitUri = String(object.gitUri);
                             return message;
                         };
     
@@ -9842,11 +10006,14 @@
                             if (options.defaults) {
                                 object.resolvedStorageSource = null;
                                 object.resolvedRepoSource = null;
+                                object.gitUri = "";
                             }
                             if (message.resolvedStorageSource != null && message.hasOwnProperty("resolvedStorageSource"))
                                 object.resolvedStorageSource = $root.google.cloud.functions.v2.StorageSource.toObject(message.resolvedStorageSource, options);
                             if (message.resolvedRepoSource != null && message.hasOwnProperty("resolvedRepoSource"))
                                 object.resolvedRepoSource = $root.google.cloud.functions.v2.RepoSource.toObject(message.resolvedRepoSource, options);
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri"))
+                                object.gitUri = message.gitUri;
                             return object;
                         };
     
@@ -9885,6 +10052,8 @@
                          * Properties of a BuildConfig.
                          * @memberof google.cloud.functions.v2
                          * @interface IBuildConfig
+                         * @property {google.cloud.functions.v2.IAutomaticUpdatePolicy|null} [automaticUpdatePolicy] BuildConfig automaticUpdatePolicy
+                         * @property {google.cloud.functions.v2.IOnDeployUpdatePolicy|null} [onDeployUpdatePolicy] BuildConfig onDeployUpdatePolicy
                          * @property {string|null} [build] BuildConfig build
                          * @property {string|null} [runtime] BuildConfig runtime
                          * @property {string|null} [entryPoint] BuildConfig entryPoint
@@ -9894,6 +10063,7 @@
                          * @property {Object.<string,string>|null} [environmentVariables] BuildConfig environmentVariables
                          * @property {google.cloud.functions.v2.BuildConfig.DockerRegistry|null} [dockerRegistry] BuildConfig dockerRegistry
                          * @property {string|null} [dockerRepository] BuildConfig dockerRepository
+                         * @property {string|null} [serviceAccount] BuildConfig serviceAccount
                          */
     
                         /**
@@ -9911,6 +10081,22 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * BuildConfig automaticUpdatePolicy.
+                         * @member {google.cloud.functions.v2.IAutomaticUpdatePolicy|null|undefined} automaticUpdatePolicy
+                         * @memberof google.cloud.functions.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.automaticUpdatePolicy = null;
+    
+                        /**
+                         * BuildConfig onDeployUpdatePolicy.
+                         * @member {google.cloud.functions.v2.IOnDeployUpdatePolicy|null|undefined} onDeployUpdatePolicy
+                         * @memberof google.cloud.functions.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.onDeployUpdatePolicy = null;
     
                         /**
                          * BuildConfig build.
@@ -9985,6 +10171,28 @@
                         BuildConfig.prototype.dockerRepository = "";
     
                         /**
+                         * BuildConfig serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.functions.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.serviceAccount = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BuildConfig runtimeUpdatePolicy.
+                         * @member {"automaticUpdatePolicy"|"onDeployUpdatePolicy"|undefined} runtimeUpdatePolicy
+                         * @memberof google.cloud.functions.v2.BuildConfig
+                         * @instance
+                         */
+                        Object.defineProperty(BuildConfig.prototype, "runtimeUpdatePolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["automaticUpdatePolicy", "onDeployUpdatePolicy"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new BuildConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2.BuildConfig
@@ -10027,6 +10235,12 @@
                                 $root.google.cloud.functions.v2.SourceProvenance.encode(message.sourceProvenance, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.dockerRegistry != null && Object.hasOwnProperty.call(message, "dockerRegistry"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.dockerRegistry);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 27, wireType 2 =*/218).string(message.serviceAccount);
+                            if (message.automaticUpdatePolicy != null && Object.hasOwnProperty.call(message, "automaticUpdatePolicy"))
+                                $root.google.cloud.functions.v2.AutomaticUpdatePolicy.encode(message.automaticUpdatePolicy, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
+                            if (message.onDeployUpdatePolicy != null && Object.hasOwnProperty.call(message, "onDeployUpdatePolicy"))
+                                $root.google.cloud.functions.v2.OnDeployUpdatePolicy.encode(message.onDeployUpdatePolicy, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
                             return writer;
                         };
     
@@ -10061,6 +10275,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 40: {
+                                        message.automaticUpdatePolicy = $root.google.cloud.functions.v2.AutomaticUpdatePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 41: {
+                                        message.onDeployUpdatePolicy = $root.google.cloud.functions.v2.OnDeployUpdatePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 1: {
                                         message.build = reader.string();
                                         break;
@@ -10116,6 +10338,10 @@
                                         message.dockerRepository = reader.string();
                                         break;
                                     }
+                                case 27: {
+                                        message.serviceAccount = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10151,6 +10377,25 @@
                         BuildConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.automaticUpdatePolicy != null && message.hasOwnProperty("automaticUpdatePolicy")) {
+                                properties.runtimeUpdatePolicy = 1;
+                                {
+                                    var error = $root.google.cloud.functions.v2.AutomaticUpdatePolicy.verify(message.automaticUpdatePolicy);
+                                    if (error)
+                                        return "automaticUpdatePolicy." + error;
+                                }
+                            }
+                            if (message.onDeployUpdatePolicy != null && message.hasOwnProperty("onDeployUpdatePolicy")) {
+                                if (properties.runtimeUpdatePolicy === 1)
+                                    return "runtimeUpdatePolicy: multiple values";
+                                properties.runtimeUpdatePolicy = 1;
+                                {
+                                    var error = $root.google.cloud.functions.v2.OnDeployUpdatePolicy.verify(message.onDeployUpdatePolicy);
+                                    if (error)
+                                        return "onDeployUpdatePolicy." + error;
+                                }
+                            }
                             if (message.build != null && message.hasOwnProperty("build"))
                                 if (!$util.isString(message.build))
                                     return "build: string expected";
@@ -10193,6 +10438,9 @@
                             if (message.dockerRepository != null && message.hasOwnProperty("dockerRepository"))
                                 if (!$util.isString(message.dockerRepository))
                                     return "dockerRepository: string expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
                             return null;
                         };
     
@@ -10208,6 +10456,16 @@
                             if (object instanceof $root.google.cloud.functions.v2.BuildConfig)
                                 return object;
                             var message = new $root.google.cloud.functions.v2.BuildConfig();
+                            if (object.automaticUpdatePolicy != null) {
+                                if (typeof object.automaticUpdatePolicy !== "object")
+                                    throw TypeError(".google.cloud.functions.v2.BuildConfig.automaticUpdatePolicy: object expected");
+                                message.automaticUpdatePolicy = $root.google.cloud.functions.v2.AutomaticUpdatePolicy.fromObject(object.automaticUpdatePolicy);
+                            }
+                            if (object.onDeployUpdatePolicy != null) {
+                                if (typeof object.onDeployUpdatePolicy !== "object")
+                                    throw TypeError(".google.cloud.functions.v2.BuildConfig.onDeployUpdatePolicy: object expected");
+                                message.onDeployUpdatePolicy = $root.google.cloud.functions.v2.OnDeployUpdatePolicy.fromObject(object.onDeployUpdatePolicy);
+                            }
                             if (object.build != null)
                                 message.build = String(object.build);
                             if (object.runtime != null)
@@ -10255,6 +10513,8 @@
                             }
                             if (object.dockerRepository != null)
                                 message.dockerRepository = String(object.dockerRepository);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
                             return message;
                         };
     
@@ -10282,6 +10542,7 @@
                                 object.dockerRepository = "";
                                 object.sourceProvenance = null;
                                 object.dockerRegistry = options.enums === String ? "DOCKER_REGISTRY_UNSPECIFIED" : 0;
+                                object.serviceAccount = "";
                             }
                             if (message.build != null && message.hasOwnProperty("build"))
                                 object.build = message.build;
@@ -10305,6 +10566,18 @@
                                 object.sourceProvenance = $root.google.cloud.functions.v2.SourceProvenance.toObject(message.sourceProvenance, options);
                             if (message.dockerRegistry != null && message.hasOwnProperty("dockerRegistry"))
                                 object.dockerRegistry = options.enums === String ? $root.google.cloud.functions.v2.BuildConfig.DockerRegistry[message.dockerRegistry] === undefined ? message.dockerRegistry : $root.google.cloud.functions.v2.BuildConfig.DockerRegistry[message.dockerRegistry] : message.dockerRegistry;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            if (message.automaticUpdatePolicy != null && message.hasOwnProperty("automaticUpdatePolicy")) {
+                                object.automaticUpdatePolicy = $root.google.cloud.functions.v2.AutomaticUpdatePolicy.toObject(message.automaticUpdatePolicy, options);
+                                if (options.oneofs)
+                                    object.runtimeUpdatePolicy = "automaticUpdatePolicy";
+                            }
+                            if (message.onDeployUpdatePolicy != null && message.hasOwnProperty("onDeployUpdatePolicy")) {
+                                object.onDeployUpdatePolicy = $root.google.cloud.functions.v2.OnDeployUpdatePolicy.toObject(message.onDeployUpdatePolicy, options);
+                                if (options.oneofs)
+                                    object.runtimeUpdatePolicy = "onDeployUpdatePolicy";
+                            }
                             return object;
                         };
     
@@ -10377,6 +10650,7 @@
                          * @property {string|null} [revision] ServiceConfig revision
                          * @property {number|null} [maxInstanceRequestConcurrency] ServiceConfig maxInstanceRequestConcurrency
                          * @property {google.cloud.functions.v2.ServiceConfig.SecurityLevel|null} [securityLevel] ServiceConfig securityLevel
+                         * @property {string|null} [binaryAuthorizationPolicy] ServiceConfig binaryAuthorizationPolicy
                          */
     
                         /**
@@ -10542,6 +10816,14 @@
                         ServiceConfig.prototype.securityLevel = 0;
     
                         /**
+                         * ServiceConfig binaryAuthorizationPolicy.
+                         * @member {string} binaryAuthorizationPolicy
+                         * @memberof google.cloud.functions.v2.ServiceConfig
+                         * @instance
+                         */
+                        ServiceConfig.prototype.binaryAuthorizationPolicy = "";
+    
+                        /**
                          * Creates a new ServiceConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2.ServiceConfig
@@ -10604,6 +10886,8 @@
                                 writer.uint32(/* id 21, wireType 0 =*/168).int32(message.securityLevel);
                             if (message.availableCpu != null && Object.hasOwnProperty.call(message, "availableCpu"))
                                 writer.uint32(/* id 22, wireType 2 =*/178).string(message.availableCpu);
+                            if (message.binaryAuthorizationPolicy != null && Object.hasOwnProperty.call(message, "binaryAuthorizationPolicy"))
+                                writer.uint32(/* id 23, wireType 2 =*/186).string(message.binaryAuthorizationPolicy);
                             return writer;
                         };
     
@@ -10733,6 +11017,10 @@
                                         message.securityLevel = reader.int32();
                                         break;
                                     }
+                                case 23: {
+                                        message.binaryAuthorizationPolicy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10858,6 +11146,9 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.binaryAuthorizationPolicy != null && message.hasOwnProperty("binaryAuthorizationPolicy"))
+                                if (!$util.isString(message.binaryAuthorizationPolicy))
+                                    return "binaryAuthorizationPolicy: string expected";
                             return null;
                         };
     
@@ -10988,6 +11279,8 @@
                                 message.securityLevel = 2;
                                 break;
                             }
+                            if (object.binaryAuthorizationPolicy != null)
+                                message.binaryAuthorizationPolicy = String(object.binaryAuthorizationPolicy);
                             return message;
                         };
     
@@ -11026,6 +11319,7 @@
                                 object.maxInstanceRequestConcurrency = 0;
                                 object.securityLevel = options.enums === String ? "SECURITY_LEVEL_UNSPECIFIED" : 0;
                                 object.availableCpu = "";
+                                object.binaryAuthorizationPolicy = "";
                             }
                             if (message.service != null && message.hasOwnProperty("service"))
                                 object.service = message.service;
@@ -11073,6 +11367,8 @@
                                 object.securityLevel = options.enums === String ? $root.google.cloud.functions.v2.ServiceConfig.SecurityLevel[message.securityLevel] === undefined ? message.securityLevel : $root.google.cloud.functions.v2.ServiceConfig.SecurityLevel[message.securityLevel] : message.securityLevel;
                             if (message.availableCpu != null && message.hasOwnProperty("availableCpu"))
                                 object.availableCpu = message.availableCpu;
+                            if (message.binaryAuthorizationPolicy != null && message.hasOwnProperty("binaryAuthorizationPolicy"))
+                                object.binaryAuthorizationPolicy = message.binaryAuthorizationPolicy;
                             return object;
                         };
     
@@ -11964,6 +12260,7 @@
                          * @property {string|null} [serviceAccountEmail] EventTrigger serviceAccountEmail
                          * @property {google.cloud.functions.v2.EventTrigger.RetryPolicy|null} [retryPolicy] EventTrigger retryPolicy
                          * @property {string|null} [channel] EventTrigger channel
+                         * @property {string|null} [service] EventTrigger service
                          */
     
                         /**
@@ -12047,6 +12344,14 @@
                         EventTrigger.prototype.channel = "";
     
                         /**
+                         * EventTrigger service.
+                         * @member {string} service
+                         * @memberof google.cloud.functions.v2.EventTrigger
+                         * @instance
+                         */
+                        EventTrigger.prototype.service = "";
+    
+                        /**
                          * Creates a new EventTrigger instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2.EventTrigger
@@ -12087,6 +12392,8 @@
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.retryPolicy);
                             if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.channel);
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.service);
                             return writer;
                         };
     
@@ -12153,6 +12460,10 @@
                                     }
                                 case 8: {
                                         message.channel = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.service = reader.string();
                                         break;
                                     }
                                 default:
@@ -12226,6 +12537,9 @@
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 if (!$util.isString(message.channel))
                                     return "channel: string expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
                             return null;
                         };
     
@@ -12283,6 +12597,8 @@
                             }
                             if (object.channel != null)
                                 message.channel = String(object.channel);
+                            if (object.service != null)
+                                message.service = String(object.service);
                             return message;
                         };
     
@@ -12309,6 +12625,7 @@
                                 object.serviceAccountEmail = "";
                                 object.retryPolicy = options.enums === String ? "RETRY_POLICY_UNSPECIFIED" : 0;
                                 object.channel = "";
+                                object.service = "";
                             }
                             if (message.trigger != null && message.hasOwnProperty("trigger"))
                                 object.trigger = message.trigger;
@@ -12329,6 +12646,8 @@
                                 object.retryPolicy = options.enums === String ? $root.google.cloud.functions.v2.EventTrigger.RetryPolicy[message.retryPolicy] === undefined ? message.retryPolicy : $root.google.cloud.functions.v2.EventTrigger.RetryPolicy[message.retryPolicy] : message.retryPolicy;
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 object.channel = message.channel;
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
                             return object;
                         };
     
@@ -12634,6 +12953,7 @@
                          * @memberof google.cloud.functions.v2
                          * @interface IGetFunctionRequest
                          * @property {string|null} [name] GetFunctionRequest name
+                         * @property {string|null} [revision] GetFunctionRequest revision
                          */
     
                         /**
@@ -12658,6 +12978,14 @@
                          * @instance
                          */
                         GetFunctionRequest.prototype.name = "";
+    
+                        /**
+                         * GetFunctionRequest revision.
+                         * @member {string} revision
+                         * @memberof google.cloud.functions.v2.GetFunctionRequest
+                         * @instance
+                         */
+                        GetFunctionRequest.prototype.revision = "";
     
                         /**
                          * Creates a new GetFunctionRequest instance using the specified properties.
@@ -12685,6 +13013,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.revision != null && Object.hasOwnProperty.call(message, "revision"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.revision);
                             return writer;
                         };
     
@@ -12721,6 +13051,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.revision = reader.string();
                                         break;
                                     }
                                 default:
@@ -12761,6 +13095,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                if (!$util.isString(message.revision))
+                                    return "revision: string expected";
                             return null;
                         };
     
@@ -12778,6 +13115,8 @@
                             var message = new $root.google.cloud.functions.v2.GetFunctionRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.revision != null)
+                                message.revision = String(object.revision);
                             return message;
                         };
     
@@ -12794,10 +13133,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.revision = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                object.revision = message.revision;
                             return object;
                         };
     
@@ -14117,6 +14460,7 @@
                          * @interface IGenerateUploadUrlRequest
                          * @property {string|null} [parent] GenerateUploadUrlRequest parent
                          * @property {string|null} [kmsKeyName] GenerateUploadUrlRequest kmsKeyName
+                         * @property {google.cloud.functions.v2.Environment|null} [environment] GenerateUploadUrlRequest environment
                          */
     
                         /**
@@ -14151,6 +14495,14 @@
                         GenerateUploadUrlRequest.prototype.kmsKeyName = "";
     
                         /**
+                         * GenerateUploadUrlRequest environment.
+                         * @member {google.cloud.functions.v2.Environment} environment
+                         * @memberof google.cloud.functions.v2.GenerateUploadUrlRequest
+                         * @instance
+                         */
+                        GenerateUploadUrlRequest.prototype.environment = 0;
+    
+                        /**
                          * Creates a new GenerateUploadUrlRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2.GenerateUploadUrlRequest
@@ -14178,6 +14530,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                             if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.kmsKeyName);
+                            if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.environment);
                             return writer;
                         };
     
@@ -14218,6 +14572,10 @@
                                     }
                                 case 2: {
                                         message.kmsKeyName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.environment = reader.int32();
                                         break;
                                     }
                                 default:
@@ -14261,6 +14619,15 @@
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 if (!$util.isString(message.kmsKeyName))
                                     return "kmsKeyName: string expected";
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                switch (message.environment) {
+                                default:
+                                    return "environment: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -14280,6 +14647,26 @@
                                 message.parent = String(object.parent);
                             if (object.kmsKeyName != null)
                                 message.kmsKeyName = String(object.kmsKeyName);
+                            switch (object.environment) {
+                            default:
+                                if (typeof object.environment === "number") {
+                                    message.environment = object.environment;
+                                    break;
+                                }
+                                break;
+                            case "ENVIRONMENT_UNSPECIFIED":
+                            case 0:
+                                message.environment = 0;
+                                break;
+                            case "GEN_1":
+                            case 1:
+                                message.environment = 1;
+                                break;
+                            case "GEN_2":
+                            case 2:
+                                message.environment = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -14299,11 +14686,14 @@
                             if (options.defaults) {
                                 object.parent = "";
                                 object.kmsKeyName = "";
+                                object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 object.kmsKeyName = message.kmsKeyName;
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                object.environment = options.enums === String ? $root.google.cloud.functions.v2.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2.Environment[message.environment] : message.environment;
                             return object;
                         };
     
@@ -15433,6 +15823,8 @@
                              * @property {google.cloud.functions.v2.ListRuntimesResponse.RuntimeStage|null} [stage] Runtime stage
                              * @property {Array.<string>|null} [warnings] Runtime warnings
                              * @property {google.cloud.functions.v2.Environment|null} [environment] Runtime environment
+                             * @property {google.type.IDate|null} [deprecationDate] Runtime deprecationDate
+                             * @property {google.type.IDate|null} [decommissionDate] Runtime decommissionDate
                              */
     
                             /**
@@ -15492,6 +15884,22 @@
                             Runtime.prototype.environment = 0;
     
                             /**
+                             * Runtime deprecationDate.
+                             * @member {google.type.IDate|null|undefined} deprecationDate
+                             * @memberof google.cloud.functions.v2.ListRuntimesResponse.Runtime
+                             * @instance
+                             */
+                            Runtime.prototype.deprecationDate = null;
+    
+                            /**
+                             * Runtime decommissionDate.
+                             * @member {google.type.IDate|null|undefined} decommissionDate
+                             * @memberof google.cloud.functions.v2.ListRuntimesResponse.Runtime
+                             * @instance
+                             */
+                            Runtime.prototype.decommissionDate = null;
+    
+                            /**
                              * Creates a new Runtime instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.functions.v2.ListRuntimesResponse.Runtime
@@ -15526,6 +15934,10 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.environment);
                                 if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.displayName);
+                                if (message.deprecationDate != null && Object.hasOwnProperty.call(message, "deprecationDate"))
+                                    $root.google.type.Date.encode(message.deprecationDate, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.decommissionDate != null && Object.hasOwnProperty.call(message, "decommissionDate"))
+                                    $root.google.type.Date.encode(message.decommissionDate, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 return writer;
                             };
     
@@ -15580,6 +15992,14 @@
                                         }
                                     case 4: {
                                             message.environment = reader.int32();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.deprecationDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.decommissionDate = $root.google.type.Date.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -15652,6 +16072,16 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.deprecationDate != null && message.hasOwnProperty("deprecationDate")) {
+                                    var error = $root.google.type.Date.verify(message.deprecationDate);
+                                    if (error)
+                                        return "deprecationDate." + error;
+                                }
+                                if (message.decommissionDate != null && message.hasOwnProperty("decommissionDate")) {
+                                    var error = $root.google.type.Date.verify(message.decommissionDate);
+                                    if (error)
+                                        return "decommissionDate." + error;
+                                }
                                 return null;
                             };
     
@@ -15734,6 +16164,16 @@
                                     message.environment = 2;
                                     break;
                                 }
+                                if (object.deprecationDate != null) {
+                                    if (typeof object.deprecationDate !== "object")
+                                        throw TypeError(".google.cloud.functions.v2.ListRuntimesResponse.Runtime.deprecationDate: object expected");
+                                    message.deprecationDate = $root.google.type.Date.fromObject(object.deprecationDate);
+                                }
+                                if (object.decommissionDate != null) {
+                                    if (typeof object.decommissionDate !== "object")
+                                        throw TypeError(".google.cloud.functions.v2.ListRuntimesResponse.Runtime.decommissionDate: object expected");
+                                    message.decommissionDate = $root.google.type.Date.fromObject(object.decommissionDate);
+                                }
                                 return message;
                             };
     
@@ -15757,6 +16197,8 @@
                                     object.stage = options.enums === String ? "RUNTIME_STAGE_UNSPECIFIED" : 0;
                                     object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
                                     object.displayName = "";
+                                    object.deprecationDate = null;
+                                    object.decommissionDate = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -15771,6 +16213,10 @@
                                     object.environment = options.enums === String ? $root.google.cloud.functions.v2.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2.Environment[message.environment] : message.environment;
                                 if (message.displayName != null && message.hasOwnProperty("displayName"))
                                     object.displayName = message.displayName;
+                                if (message.deprecationDate != null && message.hasOwnProperty("deprecationDate"))
+                                    object.deprecationDate = $root.google.type.Date.toObject(message.deprecationDate, options);
+                                if (message.decommissionDate != null && message.hasOwnProperty("decommissionDate"))
+                                    object.decommissionDate = $root.google.type.Date.toObject(message.decommissionDate, options);
                                 return object;
                             };
     
@@ -15830,6 +16276,384 @@
                         return ListRuntimesResponse;
                     })();
     
+                    v2.AutomaticUpdatePolicy = (function() {
+    
+                        /**
+                         * Properties of an AutomaticUpdatePolicy.
+                         * @memberof google.cloud.functions.v2
+                         * @interface IAutomaticUpdatePolicy
+                         */
+    
+                        /**
+                         * Constructs a new AutomaticUpdatePolicy.
+                         * @memberof google.cloud.functions.v2
+                         * @classdesc Represents an AutomaticUpdatePolicy.
+                         * @implements IAutomaticUpdatePolicy
+                         * @constructor
+                         * @param {google.cloud.functions.v2.IAutomaticUpdatePolicy=} [properties] Properties to set
+                         */
+                        function AutomaticUpdatePolicy(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new AutomaticUpdatePolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v2.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2.IAutomaticUpdatePolicy=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v2.AutomaticUpdatePolicy} AutomaticUpdatePolicy instance
+                         */
+                        AutomaticUpdatePolicy.create = function create(properties) {
+                            return new AutomaticUpdatePolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutomaticUpdatePolicy message. Does not implicitly {@link google.cloud.functions.v2.AutomaticUpdatePolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v2.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2.IAutomaticUpdatePolicy} message AutomaticUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomaticUpdatePolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutomaticUpdatePolicy message, length delimited. Does not implicitly {@link google.cloud.functions.v2.AutomaticUpdatePolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v2.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2.IAutomaticUpdatePolicy} message AutomaticUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomaticUpdatePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutomaticUpdatePolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v2.AutomaticUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v2.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomaticUpdatePolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v2.AutomaticUpdatePolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutomaticUpdatePolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v2.AutomaticUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v2.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomaticUpdatePolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutomaticUpdatePolicy message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v2.AutomaticUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutomaticUpdatePolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutomaticUpdatePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v2.AutomaticUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v2.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                         */
+                        AutomaticUpdatePolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v2.AutomaticUpdatePolicy)
+                                return object;
+                            return new $root.google.cloud.functions.v2.AutomaticUpdatePolicy();
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutomaticUpdatePolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v2.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2.AutomaticUpdatePolicy} message AutomaticUpdatePolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutomaticUpdatePolicy.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this AutomaticUpdatePolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v2.AutomaticUpdatePolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutomaticUpdatePolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutomaticUpdatePolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.functions.v2.AutomaticUpdatePolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutomaticUpdatePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.functions.v2.AutomaticUpdatePolicy";
+                        };
+    
+                        return AutomaticUpdatePolicy;
+                    })();
+    
+                    v2.OnDeployUpdatePolicy = (function() {
+    
+                        /**
+                         * Properties of an OnDeployUpdatePolicy.
+                         * @memberof google.cloud.functions.v2
+                         * @interface IOnDeployUpdatePolicy
+                         * @property {string|null} [runtimeVersion] OnDeployUpdatePolicy runtimeVersion
+                         */
+    
+                        /**
+                         * Constructs a new OnDeployUpdatePolicy.
+                         * @memberof google.cloud.functions.v2
+                         * @classdesc Represents an OnDeployUpdatePolicy.
+                         * @implements IOnDeployUpdatePolicy
+                         * @constructor
+                         * @param {google.cloud.functions.v2.IOnDeployUpdatePolicy=} [properties] Properties to set
+                         */
+                        function OnDeployUpdatePolicy(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OnDeployUpdatePolicy runtimeVersion.
+                         * @member {string} runtimeVersion
+                         * @memberof google.cloud.functions.v2.OnDeployUpdatePolicy
+                         * @instance
+                         */
+                        OnDeployUpdatePolicy.prototype.runtimeVersion = "";
+    
+                        /**
+                         * Creates a new OnDeployUpdatePolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v2.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2.IOnDeployUpdatePolicy=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v2.OnDeployUpdatePolicy} OnDeployUpdatePolicy instance
+                         */
+                        OnDeployUpdatePolicy.create = function create(properties) {
+                            return new OnDeployUpdatePolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OnDeployUpdatePolicy message. Does not implicitly {@link google.cloud.functions.v2.OnDeployUpdatePolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v2.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2.IOnDeployUpdatePolicy} message OnDeployUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OnDeployUpdatePolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.runtimeVersion != null && Object.hasOwnProperty.call(message, "runtimeVersion"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.runtimeVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OnDeployUpdatePolicy message, length delimited. Does not implicitly {@link google.cloud.functions.v2.OnDeployUpdatePolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v2.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2.IOnDeployUpdatePolicy} message OnDeployUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OnDeployUpdatePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OnDeployUpdatePolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v2.OnDeployUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v2.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OnDeployUpdatePolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v2.OnDeployUpdatePolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.runtimeVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OnDeployUpdatePolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v2.OnDeployUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v2.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OnDeployUpdatePolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OnDeployUpdatePolicy message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v2.OnDeployUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OnDeployUpdatePolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.runtimeVersion != null && message.hasOwnProperty("runtimeVersion"))
+                                if (!$util.isString(message.runtimeVersion))
+                                    return "runtimeVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OnDeployUpdatePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v2.OnDeployUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v2.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                         */
+                        OnDeployUpdatePolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v2.OnDeployUpdatePolicy)
+                                return object;
+                            var message = new $root.google.cloud.functions.v2.OnDeployUpdatePolicy();
+                            if (object.runtimeVersion != null)
+                                message.runtimeVersion = String(object.runtimeVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OnDeployUpdatePolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v2.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2.OnDeployUpdatePolicy} message OnDeployUpdatePolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OnDeployUpdatePolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.runtimeVersion = "";
+                            if (message.runtimeVersion != null && message.hasOwnProperty("runtimeVersion"))
+                                object.runtimeVersion = message.runtimeVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OnDeployUpdatePolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v2.OnDeployUpdatePolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OnDeployUpdatePolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OnDeployUpdatePolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.functions.v2.OnDeployUpdatePolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OnDeployUpdatePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.functions.v2.OnDeployUpdatePolicy";
+                        };
+    
+                        return OnDeployUpdatePolicy;
+                    })();
+    
                     v2.OperationMetadata = (function() {
     
                         /**
@@ -15845,6 +16669,9 @@
                          * @property {string|null} [apiVersion] OperationMetadata apiVersion
                          * @property {google.protobuf.IAny|null} [requestResource] OperationMetadata requestResource
                          * @property {Array.<google.cloud.functions.v2.IStage>|null} [stages] OperationMetadata stages
+                         * @property {string|null} [sourceToken] OperationMetadata sourceToken
+                         * @property {string|null} [buildName] OperationMetadata buildName
+                         * @property {google.cloud.functions.v2.OperationType|null} [operationType] OperationMetadata operationType
                          */
     
                         /**
@@ -15936,6 +16763,30 @@
                         OperationMetadata.prototype.stages = $util.emptyArray;
     
                         /**
+                         * OperationMetadata sourceToken.
+                         * @member {string} sourceToken
+                         * @memberof google.cloud.functions.v2.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.sourceToken = "";
+    
+                        /**
+                         * OperationMetadata buildName.
+                         * @member {string} buildName
+                         * @memberof google.cloud.functions.v2.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.buildName = "";
+    
+                        /**
+                         * OperationMetadata operationType.
+                         * @member {google.cloud.functions.v2.OperationType} operationType
+                         * @memberof google.cloud.functions.v2.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.operationType = 0;
+    
+                        /**
                          * Creates a new OperationMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2.OperationMetadata
@@ -15978,6 +16829,12 @@
                             if (message.stages != null && message.stages.length)
                                 for (var i = 0; i < message.stages.length; ++i)
                                     $root.google.cloud.functions.v2.Stage.encode(message.stages[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.sourceToken != null && Object.hasOwnProperty.call(message, "sourceToken"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.sourceToken);
+                            if (message.operationType != null && Object.hasOwnProperty.call(message, "operationType"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.operationType);
+                            if (message.buildName != null && Object.hasOwnProperty.call(message, "buildName"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.buildName);
                             return writer;
                         };
     
@@ -16048,6 +16905,18 @@
                                         if (!(message.stages && message.stages.length))
                                             message.stages = [];
                                         message.stages.push($root.google.cloud.functions.v2.Stage.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 10: {
+                                        message.sourceToken = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.buildName = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.operationType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -16124,6 +16993,22 @@
                                         return "stages." + error;
                                 }
                             }
+                            if (message.sourceToken != null && message.hasOwnProperty("sourceToken"))
+                                if (!$util.isString(message.sourceToken))
+                                    return "sourceToken: string expected";
+                            if (message.buildName != null && message.hasOwnProperty("buildName"))
+                                if (!$util.isString(message.buildName))
+                                    return "buildName: string expected";
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                switch (message.operationType) {
+                                default:
+                                    return "operationType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -16174,6 +17059,34 @@
                                     message.stages[i] = $root.google.cloud.functions.v2.Stage.fromObject(object.stages[i]);
                                 }
                             }
+                            if (object.sourceToken != null)
+                                message.sourceToken = String(object.sourceToken);
+                            if (object.buildName != null)
+                                message.buildName = String(object.buildName);
+                            switch (object.operationType) {
+                            default:
+                                if (typeof object.operationType === "number") {
+                                    message.operationType = object.operationType;
+                                    break;
+                                }
+                                break;
+                            case "OPERATIONTYPE_UNSPECIFIED":
+                            case 0:
+                                message.operationType = 0;
+                                break;
+                            case "CREATE_FUNCTION":
+                            case 1:
+                                message.operationType = 1;
+                                break;
+                            case "UPDATE_FUNCTION":
+                            case 2:
+                                message.operationType = 2;
+                                break;
+                            case "DELETE_FUNCTION":
+                            case 3:
+                                message.operationType = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -16201,6 +17114,9 @@
                                 object.cancelRequested = false;
                                 object.apiVersion = "";
                                 object.requestResource = null;
+                                object.sourceToken = "";
+                                object.operationType = options.enums === String ? "OPERATIONTYPE_UNSPECIFIED" : 0;
+                                object.buildName = "";
                             }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
@@ -16223,6 +17139,12 @@
                                 for (var j = 0; j < message.stages.length; ++j)
                                     object.stages[j] = $root.google.cloud.functions.v2.Stage.toObject(message.stages[j], options);
                             }
+                            if (message.sourceToken != null && message.hasOwnProperty("sourceToken"))
+                                object.sourceToken = message.sourceToken;
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                object.operationType = options.enums === String ? $root.google.cloud.functions.v2.OperationType[message.operationType] === undefined ? message.operationType : $root.google.cloud.functions.v2.OperationType[message.operationType] : message.operationType;
+                            if (message.buildName != null && message.hasOwnProperty("buildName"))
+                                object.buildName = message.buildName;
                             return object;
                         };
     
@@ -17274,6 +18196,24 @@
                     })();
     
                     /**
+                     * OperationType enum.
+                     * @name google.cloud.functions.v2alpha.OperationType
+                     * @enum {number}
+                     * @property {number} OPERATIONTYPE_UNSPECIFIED=0 OPERATIONTYPE_UNSPECIFIED value
+                     * @property {number} CREATE_FUNCTION=1 CREATE_FUNCTION value
+                     * @property {number} UPDATE_FUNCTION=2 UPDATE_FUNCTION value
+                     * @property {number} DELETE_FUNCTION=3 DELETE_FUNCTION value
+                     */
+                    v2alpha.OperationType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OPERATIONTYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CREATE_FUNCTION"] = 1;
+                        values[valuesById[2] = "UPDATE_FUNCTION"] = 2;
+                        values[valuesById[3] = "DELETE_FUNCTION"] = 3;
+                        return values;
+                    })();
+    
+                    /**
                      * Environment enum.
                      * @name google.cloud.functions.v2alpha.Environment
                      * @enum {number}
@@ -17307,6 +18247,8 @@
                          * @property {google.cloud.functions.v2alpha.Environment|null} [environment] Function environment
                          * @property {string|null} [url] Function url
                          * @property {string|null} [kmsKeyName] Function kmsKeyName
+                         * @property {boolean|null} [satisfiesPzs] Function satisfiesPzs
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Function createTime
                          */
     
                         /**
@@ -17423,6 +18365,22 @@
                         Function.prototype.kmsKeyName = "";
     
                         /**
+                         * Function satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.functions.v2alpha.Function
+                         * @instance
+                         */
+                        Function.prototype.satisfiesPzs = false;
+    
+                        /**
+                         * Function createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.functions.v2alpha.Function
+                         * @instance
+                         */
+                        Function.prototype.createTime = null;
+    
+                        /**
                          * Creates a new Function instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2alpha.Function
@@ -17472,6 +18430,10 @@
                                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.url);
                             if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
                                 writer.uint32(/* id 25, wireType 2 =*/202).string(message.kmsKeyName);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 27, wireType 0 =*/216).bool(message.satisfiesPzs);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             return writer;
                         };
     
@@ -17573,6 +18535,14 @@
                                     }
                                 case 25: {
                                         message.kmsKeyName = reader.string();
+                                        break;
+                                    }
+                                case 27: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
+                                case 28: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -17680,6 +18650,14 @@
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 if (!$util.isString(message.kmsKeyName))
                                     return "kmsKeyName: string expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
                             return null;
                         };
     
@@ -17792,6 +18770,13 @@
                                 message.url = String(object.url);
                             if (object.kmsKeyName != null)
                                 message.kmsKeyName = String(object.kmsKeyName);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.functions.v2alpha.Function.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
                             return message;
                         };
     
@@ -17823,6 +18808,8 @@
                                 object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
                                 object.url = "";
                                 object.kmsKeyName = "";
+                                object.satisfiesPzs = false;
+                                object.createTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -17855,6 +18842,10 @@
                                 object.url = message.url;
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 object.kmsKeyName = message.kmsKeyName;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             return object;
                         };
     
@@ -18215,6 +19206,7 @@
                          * @property {string|null} [bucket] StorageSource bucket
                          * @property {string|null} [object] StorageSource object
                          * @property {number|Long|null} [generation] StorageSource generation
+                         * @property {string|null} [sourceUploadUrl] StorageSource sourceUploadUrl
                          */
     
                         /**
@@ -18257,6 +19249,14 @@
                         StorageSource.prototype.generation = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
+                         * StorageSource sourceUploadUrl.
+                         * @member {string} sourceUploadUrl
+                         * @memberof google.cloud.functions.v2alpha.StorageSource
+                         * @instance
+                         */
+                        StorageSource.prototype.sourceUploadUrl = "";
+    
+                        /**
                          * Creates a new StorageSource instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2alpha.StorageSource
@@ -18286,6 +19286,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.object);
                             if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int64(message.generation);
+                            if (message.sourceUploadUrl != null && Object.hasOwnProperty.call(message, "sourceUploadUrl"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.sourceUploadUrl);
                             return writer;
                         };
     
@@ -18332,6 +19334,10 @@
                                         message.generation = reader.int64();
                                         break;
                                     }
+                                case 4: {
+                                        message.sourceUploadUrl = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -18376,6 +19382,9 @@
                             if (message.generation != null && message.hasOwnProperty("generation"))
                                 if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                     return "generation: integer|Long expected";
+                            if (message.sourceUploadUrl != null && message.hasOwnProperty("sourceUploadUrl"))
+                                if (!$util.isString(message.sourceUploadUrl))
+                                    return "sourceUploadUrl: string expected";
                             return null;
                         };
     
@@ -18404,6 +19413,8 @@
                                     message.generation = object.generation;
                                 else if (typeof object.generation === "object")
                                     message.generation = new $util.LongBits(object.generation.low >>> 0, object.generation.high >>> 0).toNumber();
+                            if (object.sourceUploadUrl != null)
+                                message.sourceUploadUrl = String(object.sourceUploadUrl);
                             return message;
                         };
     
@@ -18428,6 +19439,7 @@
                                     object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.generation = options.longs === String ? "0" : 0;
+                                object.sourceUploadUrl = "";
                             }
                             if (message.bucket != null && message.hasOwnProperty("bucket"))
                                 object.bucket = message.bucket;
@@ -18438,6 +19450,8 @@
                                     object.generation = options.longs === String ? String(message.generation) : message.generation;
                                 else
                                     object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
+                            if (message.sourceUploadUrl != null && message.hasOwnProperty("sourceUploadUrl"))
+                                object.sourceUploadUrl = message.sourceUploadUrl;
                             return object;
                         };
     
@@ -18851,6 +19865,7 @@
                          * @interface ISource
                          * @property {google.cloud.functions.v2alpha.IStorageSource|null} [storageSource] Source storageSource
                          * @property {google.cloud.functions.v2alpha.IRepoSource|null} [repoSource] Source repoSource
+                         * @property {string|null} [gitUri] Source gitUri
                          */
     
                         /**
@@ -18884,17 +19899,25 @@
                          */
                         Source.prototype.repoSource = null;
     
+                        /**
+                         * Source gitUri.
+                         * @member {string|null|undefined} gitUri
+                         * @memberof google.cloud.functions.v2alpha.Source
+                         * @instance
+                         */
+                        Source.prototype.gitUri = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Source source.
-                         * @member {"storageSource"|"repoSource"|undefined} source
+                         * @member {"storageSource"|"repoSource"|"gitUri"|undefined} source
                          * @memberof google.cloud.functions.v2alpha.Source
                          * @instance
                          */
                         Object.defineProperty(Source.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource"]),
+                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource", "gitUri"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -18926,6 +19949,8 @@
                                 $root.google.cloud.functions.v2alpha.StorageSource.encode(message.storageSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.repoSource != null && Object.hasOwnProperty.call(message, "repoSource"))
                                 $root.google.cloud.functions.v2alpha.RepoSource.encode(message.repoSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.gitUri != null && Object.hasOwnProperty.call(message, "gitUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.gitUri);
                             return writer;
                         };
     
@@ -18966,6 +19991,10 @@
                                     }
                                 case 2: {
                                         message.repoSource = $root.google.cloud.functions.v2alpha.RepoSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.gitUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -19022,6 +20051,13 @@
                                         return "repoSource." + error;
                                 }
                             }
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                if (!$util.isString(message.gitUri))
+                                    return "gitUri: string expected";
+                            }
                             return null;
                         };
     
@@ -19047,6 +20083,8 @@
                                     throw TypeError(".google.cloud.functions.v2alpha.Source.repoSource: object expected");
                                 message.repoSource = $root.google.cloud.functions.v2alpha.RepoSource.fromObject(object.repoSource);
                             }
+                            if (object.gitUri != null)
+                                message.gitUri = String(object.gitUri);
                             return message;
                         };
     
@@ -19072,6 +20110,11 @@
                                 object.repoSource = $root.google.cloud.functions.v2alpha.RepoSource.toObject(message.repoSource, options);
                                 if (options.oneofs)
                                     object.source = "repoSource";
+                            }
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri")) {
+                                object.gitUri = message.gitUri;
+                                if (options.oneofs)
+                                    object.source = "gitUri";
                             }
                             return object;
                         };
@@ -19113,6 +20156,7 @@
                          * @interface ISourceProvenance
                          * @property {google.cloud.functions.v2alpha.IStorageSource|null} [resolvedStorageSource] SourceProvenance resolvedStorageSource
                          * @property {google.cloud.functions.v2alpha.IRepoSource|null} [resolvedRepoSource] SourceProvenance resolvedRepoSource
+                         * @property {string|null} [gitUri] SourceProvenance gitUri
                          */
     
                         /**
@@ -19147,6 +20191,14 @@
                         SourceProvenance.prototype.resolvedRepoSource = null;
     
                         /**
+                         * SourceProvenance gitUri.
+                         * @member {string} gitUri
+                         * @memberof google.cloud.functions.v2alpha.SourceProvenance
+                         * @instance
+                         */
+                        SourceProvenance.prototype.gitUri = "";
+    
+                        /**
                          * Creates a new SourceProvenance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2alpha.SourceProvenance
@@ -19174,6 +20226,8 @@
                                 $root.google.cloud.functions.v2alpha.StorageSource.encode(message.resolvedStorageSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.resolvedRepoSource != null && Object.hasOwnProperty.call(message, "resolvedRepoSource"))
                                 $root.google.cloud.functions.v2alpha.RepoSource.encode(message.resolvedRepoSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.gitUri != null && Object.hasOwnProperty.call(message, "gitUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.gitUri);
                             return writer;
                         };
     
@@ -19214,6 +20268,10 @@
                                     }
                                 case 2: {
                                         message.resolvedRepoSource = $root.google.cloud.functions.v2alpha.RepoSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.gitUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -19261,6 +20319,9 @@
                                 if (error)
                                     return "resolvedRepoSource." + error;
                             }
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri"))
+                                if (!$util.isString(message.gitUri))
+                                    return "gitUri: string expected";
                             return null;
                         };
     
@@ -19286,6 +20347,8 @@
                                     throw TypeError(".google.cloud.functions.v2alpha.SourceProvenance.resolvedRepoSource: object expected");
                                 message.resolvedRepoSource = $root.google.cloud.functions.v2alpha.RepoSource.fromObject(object.resolvedRepoSource);
                             }
+                            if (object.gitUri != null)
+                                message.gitUri = String(object.gitUri);
                             return message;
                         };
     
@@ -19305,11 +20368,14 @@
                             if (options.defaults) {
                                 object.resolvedStorageSource = null;
                                 object.resolvedRepoSource = null;
+                                object.gitUri = "";
                             }
                             if (message.resolvedStorageSource != null && message.hasOwnProperty("resolvedStorageSource"))
                                 object.resolvedStorageSource = $root.google.cloud.functions.v2alpha.StorageSource.toObject(message.resolvedStorageSource, options);
                             if (message.resolvedRepoSource != null && message.hasOwnProperty("resolvedRepoSource"))
                                 object.resolvedRepoSource = $root.google.cloud.functions.v2alpha.RepoSource.toObject(message.resolvedRepoSource, options);
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri"))
+                                object.gitUri = message.gitUri;
                             return object;
                         };
     
@@ -19348,6 +20414,8 @@
                          * Properties of a BuildConfig.
                          * @memberof google.cloud.functions.v2alpha
                          * @interface IBuildConfig
+                         * @property {google.cloud.functions.v2alpha.IAutomaticUpdatePolicy|null} [automaticUpdatePolicy] BuildConfig automaticUpdatePolicy
+                         * @property {google.cloud.functions.v2alpha.IOnDeployUpdatePolicy|null} [onDeployUpdatePolicy] BuildConfig onDeployUpdatePolicy
                          * @property {string|null} [build] BuildConfig build
                          * @property {string|null} [runtime] BuildConfig runtime
                          * @property {string|null} [entryPoint] BuildConfig entryPoint
@@ -19357,6 +20425,7 @@
                          * @property {Object.<string,string>|null} [environmentVariables] BuildConfig environmentVariables
                          * @property {google.cloud.functions.v2alpha.BuildConfig.DockerRegistry|null} [dockerRegistry] BuildConfig dockerRegistry
                          * @property {string|null} [dockerRepository] BuildConfig dockerRepository
+                         * @property {string|null} [serviceAccount] BuildConfig serviceAccount
                          */
     
                         /**
@@ -19374,6 +20443,22 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * BuildConfig automaticUpdatePolicy.
+                         * @member {google.cloud.functions.v2alpha.IAutomaticUpdatePolicy|null|undefined} automaticUpdatePolicy
+                         * @memberof google.cloud.functions.v2alpha.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.automaticUpdatePolicy = null;
+    
+                        /**
+                         * BuildConfig onDeployUpdatePolicy.
+                         * @member {google.cloud.functions.v2alpha.IOnDeployUpdatePolicy|null|undefined} onDeployUpdatePolicy
+                         * @memberof google.cloud.functions.v2alpha.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.onDeployUpdatePolicy = null;
     
                         /**
                          * BuildConfig build.
@@ -19448,6 +20533,28 @@
                         BuildConfig.prototype.dockerRepository = "";
     
                         /**
+                         * BuildConfig serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.functions.v2alpha.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.serviceAccount = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BuildConfig runtimeUpdatePolicy.
+                         * @member {"automaticUpdatePolicy"|"onDeployUpdatePolicy"|undefined} runtimeUpdatePolicy
+                         * @memberof google.cloud.functions.v2alpha.BuildConfig
+                         * @instance
+                         */
+                        Object.defineProperty(BuildConfig.prototype, "runtimeUpdatePolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["automaticUpdatePolicy", "onDeployUpdatePolicy"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new BuildConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2alpha.BuildConfig
@@ -19490,6 +20597,12 @@
                                 $root.google.cloud.functions.v2alpha.SourceProvenance.encode(message.sourceProvenance, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.dockerRegistry != null && Object.hasOwnProperty.call(message, "dockerRegistry"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.dockerRegistry);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 27, wireType 2 =*/218).string(message.serviceAccount);
+                            if (message.automaticUpdatePolicy != null && Object.hasOwnProperty.call(message, "automaticUpdatePolicy"))
+                                $root.google.cloud.functions.v2alpha.AutomaticUpdatePolicy.encode(message.automaticUpdatePolicy, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
+                            if (message.onDeployUpdatePolicy != null && Object.hasOwnProperty.call(message, "onDeployUpdatePolicy"))
+                                $root.google.cloud.functions.v2alpha.OnDeployUpdatePolicy.encode(message.onDeployUpdatePolicy, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
                             return writer;
                         };
     
@@ -19524,6 +20637,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 40: {
+                                        message.automaticUpdatePolicy = $root.google.cloud.functions.v2alpha.AutomaticUpdatePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 41: {
+                                        message.onDeployUpdatePolicy = $root.google.cloud.functions.v2alpha.OnDeployUpdatePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 1: {
                                         message.build = reader.string();
                                         break;
@@ -19579,6 +20700,10 @@
                                         message.dockerRepository = reader.string();
                                         break;
                                     }
+                                case 27: {
+                                        message.serviceAccount = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -19614,6 +20739,25 @@
                         BuildConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.automaticUpdatePolicy != null && message.hasOwnProperty("automaticUpdatePolicy")) {
+                                properties.runtimeUpdatePolicy = 1;
+                                {
+                                    var error = $root.google.cloud.functions.v2alpha.AutomaticUpdatePolicy.verify(message.automaticUpdatePolicy);
+                                    if (error)
+                                        return "automaticUpdatePolicy." + error;
+                                }
+                            }
+                            if (message.onDeployUpdatePolicy != null && message.hasOwnProperty("onDeployUpdatePolicy")) {
+                                if (properties.runtimeUpdatePolicy === 1)
+                                    return "runtimeUpdatePolicy: multiple values";
+                                properties.runtimeUpdatePolicy = 1;
+                                {
+                                    var error = $root.google.cloud.functions.v2alpha.OnDeployUpdatePolicy.verify(message.onDeployUpdatePolicy);
+                                    if (error)
+                                        return "onDeployUpdatePolicy." + error;
+                                }
+                            }
                             if (message.build != null && message.hasOwnProperty("build"))
                                 if (!$util.isString(message.build))
                                     return "build: string expected";
@@ -19656,6 +20800,9 @@
                             if (message.dockerRepository != null && message.hasOwnProperty("dockerRepository"))
                                 if (!$util.isString(message.dockerRepository))
                                     return "dockerRepository: string expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
                             return null;
                         };
     
@@ -19671,6 +20818,16 @@
                             if (object instanceof $root.google.cloud.functions.v2alpha.BuildConfig)
                                 return object;
                             var message = new $root.google.cloud.functions.v2alpha.BuildConfig();
+                            if (object.automaticUpdatePolicy != null) {
+                                if (typeof object.automaticUpdatePolicy !== "object")
+                                    throw TypeError(".google.cloud.functions.v2alpha.BuildConfig.automaticUpdatePolicy: object expected");
+                                message.automaticUpdatePolicy = $root.google.cloud.functions.v2alpha.AutomaticUpdatePolicy.fromObject(object.automaticUpdatePolicy);
+                            }
+                            if (object.onDeployUpdatePolicy != null) {
+                                if (typeof object.onDeployUpdatePolicy !== "object")
+                                    throw TypeError(".google.cloud.functions.v2alpha.BuildConfig.onDeployUpdatePolicy: object expected");
+                                message.onDeployUpdatePolicy = $root.google.cloud.functions.v2alpha.OnDeployUpdatePolicy.fromObject(object.onDeployUpdatePolicy);
+                            }
                             if (object.build != null)
                                 message.build = String(object.build);
                             if (object.runtime != null)
@@ -19718,6 +20875,8 @@
                             }
                             if (object.dockerRepository != null)
                                 message.dockerRepository = String(object.dockerRepository);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
                             return message;
                         };
     
@@ -19745,6 +20904,7 @@
                                 object.dockerRepository = "";
                                 object.sourceProvenance = null;
                                 object.dockerRegistry = options.enums === String ? "DOCKER_REGISTRY_UNSPECIFIED" : 0;
+                                object.serviceAccount = "";
                             }
                             if (message.build != null && message.hasOwnProperty("build"))
                                 object.build = message.build;
@@ -19768,6 +20928,18 @@
                                 object.sourceProvenance = $root.google.cloud.functions.v2alpha.SourceProvenance.toObject(message.sourceProvenance, options);
                             if (message.dockerRegistry != null && message.hasOwnProperty("dockerRegistry"))
                                 object.dockerRegistry = options.enums === String ? $root.google.cloud.functions.v2alpha.BuildConfig.DockerRegistry[message.dockerRegistry] === undefined ? message.dockerRegistry : $root.google.cloud.functions.v2alpha.BuildConfig.DockerRegistry[message.dockerRegistry] : message.dockerRegistry;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            if (message.automaticUpdatePolicy != null && message.hasOwnProperty("automaticUpdatePolicy")) {
+                                object.automaticUpdatePolicy = $root.google.cloud.functions.v2alpha.AutomaticUpdatePolicy.toObject(message.automaticUpdatePolicy, options);
+                                if (options.oneofs)
+                                    object.runtimeUpdatePolicy = "automaticUpdatePolicy";
+                            }
+                            if (message.onDeployUpdatePolicy != null && message.hasOwnProperty("onDeployUpdatePolicy")) {
+                                object.onDeployUpdatePolicy = $root.google.cloud.functions.v2alpha.OnDeployUpdatePolicy.toObject(message.onDeployUpdatePolicy, options);
+                                if (options.oneofs)
+                                    object.runtimeUpdatePolicy = "onDeployUpdatePolicy";
+                            }
                             return object;
                         };
     
@@ -19840,6 +21012,7 @@
                          * @property {string|null} [revision] ServiceConfig revision
                          * @property {number|null} [maxInstanceRequestConcurrency] ServiceConfig maxInstanceRequestConcurrency
                          * @property {google.cloud.functions.v2alpha.ServiceConfig.SecurityLevel|null} [securityLevel] ServiceConfig securityLevel
+                         * @property {string|null} [binaryAuthorizationPolicy] ServiceConfig binaryAuthorizationPolicy
                          */
     
                         /**
@@ -20005,6 +21178,14 @@
                         ServiceConfig.prototype.securityLevel = 0;
     
                         /**
+                         * ServiceConfig binaryAuthorizationPolicy.
+                         * @member {string} binaryAuthorizationPolicy
+                         * @memberof google.cloud.functions.v2alpha.ServiceConfig
+                         * @instance
+                         */
+                        ServiceConfig.prototype.binaryAuthorizationPolicy = "";
+    
+                        /**
                          * Creates a new ServiceConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2alpha.ServiceConfig
@@ -20067,6 +21248,8 @@
                                 writer.uint32(/* id 21, wireType 0 =*/168).int32(message.securityLevel);
                             if (message.availableCpu != null && Object.hasOwnProperty.call(message, "availableCpu"))
                                 writer.uint32(/* id 22, wireType 2 =*/178).string(message.availableCpu);
+                            if (message.binaryAuthorizationPolicy != null && Object.hasOwnProperty.call(message, "binaryAuthorizationPolicy"))
+                                writer.uint32(/* id 23, wireType 2 =*/186).string(message.binaryAuthorizationPolicy);
                             return writer;
                         };
     
@@ -20196,6 +21379,10 @@
                                         message.securityLevel = reader.int32();
                                         break;
                                     }
+                                case 23: {
+                                        message.binaryAuthorizationPolicy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20321,6 +21508,9 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.binaryAuthorizationPolicy != null && message.hasOwnProperty("binaryAuthorizationPolicy"))
+                                if (!$util.isString(message.binaryAuthorizationPolicy))
+                                    return "binaryAuthorizationPolicy: string expected";
                             return null;
                         };
     
@@ -20451,6 +21641,8 @@
                                 message.securityLevel = 2;
                                 break;
                             }
+                            if (object.binaryAuthorizationPolicy != null)
+                                message.binaryAuthorizationPolicy = String(object.binaryAuthorizationPolicy);
                             return message;
                         };
     
@@ -20489,6 +21681,7 @@
                                 object.maxInstanceRequestConcurrency = 0;
                                 object.securityLevel = options.enums === String ? "SECURITY_LEVEL_UNSPECIFIED" : 0;
                                 object.availableCpu = "";
+                                object.binaryAuthorizationPolicy = "";
                             }
                             if (message.service != null && message.hasOwnProperty("service"))
                                 object.service = message.service;
@@ -20536,6 +21729,8 @@
                                 object.securityLevel = options.enums === String ? $root.google.cloud.functions.v2alpha.ServiceConfig.SecurityLevel[message.securityLevel] === undefined ? message.securityLevel : $root.google.cloud.functions.v2alpha.ServiceConfig.SecurityLevel[message.securityLevel] : message.securityLevel;
                             if (message.availableCpu != null && message.hasOwnProperty("availableCpu"))
                                 object.availableCpu = message.availableCpu;
+                            if (message.binaryAuthorizationPolicy != null && message.hasOwnProperty("binaryAuthorizationPolicy"))
+                                object.binaryAuthorizationPolicy = message.binaryAuthorizationPolicy;
                             return object;
                         };
     
@@ -21427,6 +22622,7 @@
                          * @property {string|null} [serviceAccountEmail] EventTrigger serviceAccountEmail
                          * @property {google.cloud.functions.v2alpha.EventTrigger.RetryPolicy|null} [retryPolicy] EventTrigger retryPolicy
                          * @property {string|null} [channel] EventTrigger channel
+                         * @property {string|null} [service] EventTrigger service
                          */
     
                         /**
@@ -21510,6 +22706,14 @@
                         EventTrigger.prototype.channel = "";
     
                         /**
+                         * EventTrigger service.
+                         * @member {string} service
+                         * @memberof google.cloud.functions.v2alpha.EventTrigger
+                         * @instance
+                         */
+                        EventTrigger.prototype.service = "";
+    
+                        /**
                          * Creates a new EventTrigger instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2alpha.EventTrigger
@@ -21550,6 +22754,8 @@
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.retryPolicy);
                             if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.channel);
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.service);
                             return writer;
                         };
     
@@ -21616,6 +22822,10 @@
                                     }
                                 case 8: {
                                         message.channel = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.service = reader.string();
                                         break;
                                     }
                                 default:
@@ -21689,6 +22899,9 @@
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 if (!$util.isString(message.channel))
                                     return "channel: string expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
                             return null;
                         };
     
@@ -21746,6 +22959,8 @@
                             }
                             if (object.channel != null)
                                 message.channel = String(object.channel);
+                            if (object.service != null)
+                                message.service = String(object.service);
                             return message;
                         };
     
@@ -21772,6 +22987,7 @@
                                 object.serviceAccountEmail = "";
                                 object.retryPolicy = options.enums === String ? "RETRY_POLICY_UNSPECIFIED" : 0;
                                 object.channel = "";
+                                object.service = "";
                             }
                             if (message.trigger != null && message.hasOwnProperty("trigger"))
                                 object.trigger = message.trigger;
@@ -21792,6 +23008,8 @@
                                 object.retryPolicy = options.enums === String ? $root.google.cloud.functions.v2alpha.EventTrigger.RetryPolicy[message.retryPolicy] === undefined ? message.retryPolicy : $root.google.cloud.functions.v2alpha.EventTrigger.RetryPolicy[message.retryPolicy] : message.retryPolicy;
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 object.channel = message.channel;
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
                             return object;
                         };
     
@@ -22097,6 +23315,7 @@
                          * @memberof google.cloud.functions.v2alpha
                          * @interface IGetFunctionRequest
                          * @property {string|null} [name] GetFunctionRequest name
+                         * @property {string|null} [revision] GetFunctionRequest revision
                          */
     
                         /**
@@ -22121,6 +23340,14 @@
                          * @instance
                          */
                         GetFunctionRequest.prototype.name = "";
+    
+                        /**
+                         * GetFunctionRequest revision.
+                         * @member {string} revision
+                         * @memberof google.cloud.functions.v2alpha.GetFunctionRequest
+                         * @instance
+                         */
+                        GetFunctionRequest.prototype.revision = "";
     
                         /**
                          * Creates a new GetFunctionRequest instance using the specified properties.
@@ -22148,6 +23375,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.revision != null && Object.hasOwnProperty.call(message, "revision"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.revision);
                             return writer;
                         };
     
@@ -22184,6 +23413,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.revision = reader.string();
                                         break;
                                     }
                                 default:
@@ -22224,6 +23457,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                if (!$util.isString(message.revision))
+                                    return "revision: string expected";
                             return null;
                         };
     
@@ -22241,6 +23477,8 @@
                             var message = new $root.google.cloud.functions.v2alpha.GetFunctionRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.revision != null)
+                                message.revision = String(object.revision);
                             return message;
                         };
     
@@ -22257,10 +23495,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.revision = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                object.revision = message.revision;
                             return object;
                         };
     
@@ -23580,6 +24822,7 @@
                          * @interface IGenerateUploadUrlRequest
                          * @property {string|null} [parent] GenerateUploadUrlRequest parent
                          * @property {string|null} [kmsKeyName] GenerateUploadUrlRequest kmsKeyName
+                         * @property {google.cloud.functions.v2alpha.Environment|null} [environment] GenerateUploadUrlRequest environment
                          */
     
                         /**
@@ -23614,6 +24857,14 @@
                         GenerateUploadUrlRequest.prototype.kmsKeyName = "";
     
                         /**
+                         * GenerateUploadUrlRequest environment.
+                         * @member {google.cloud.functions.v2alpha.Environment} environment
+                         * @memberof google.cloud.functions.v2alpha.GenerateUploadUrlRequest
+                         * @instance
+                         */
+                        GenerateUploadUrlRequest.prototype.environment = 0;
+    
+                        /**
                          * Creates a new GenerateUploadUrlRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2alpha.GenerateUploadUrlRequest
@@ -23641,6 +24892,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                             if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.kmsKeyName);
+                            if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.environment);
                             return writer;
                         };
     
@@ -23681,6 +24934,10 @@
                                     }
                                 case 2: {
                                         message.kmsKeyName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.environment = reader.int32();
                                         break;
                                     }
                                 default:
@@ -23724,6 +24981,15 @@
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 if (!$util.isString(message.kmsKeyName))
                                     return "kmsKeyName: string expected";
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                switch (message.environment) {
+                                default:
+                                    return "environment: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -23743,6 +25009,26 @@
                                 message.parent = String(object.parent);
                             if (object.kmsKeyName != null)
                                 message.kmsKeyName = String(object.kmsKeyName);
+                            switch (object.environment) {
+                            default:
+                                if (typeof object.environment === "number") {
+                                    message.environment = object.environment;
+                                    break;
+                                }
+                                break;
+                            case "ENVIRONMENT_UNSPECIFIED":
+                            case 0:
+                                message.environment = 0;
+                                break;
+                            case "GEN_1":
+                            case 1:
+                                message.environment = 1;
+                                break;
+                            case "GEN_2":
+                            case 2:
+                                message.environment = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -23762,11 +25048,14 @@
                             if (options.defaults) {
                                 object.parent = "";
                                 object.kmsKeyName = "";
+                                object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 object.kmsKeyName = message.kmsKeyName;
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                object.environment = options.enums === String ? $root.google.cloud.functions.v2alpha.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2alpha.Environment[message.environment] : message.environment;
                             return object;
                         };
     
@@ -24896,6 +26185,8 @@
                              * @property {google.cloud.functions.v2alpha.ListRuntimesResponse.RuntimeStage|null} [stage] Runtime stage
                              * @property {Array.<string>|null} [warnings] Runtime warnings
                              * @property {google.cloud.functions.v2alpha.Environment|null} [environment] Runtime environment
+                             * @property {google.type.IDate|null} [deprecationDate] Runtime deprecationDate
+                             * @property {google.type.IDate|null} [decommissionDate] Runtime decommissionDate
                              */
     
                             /**
@@ -24955,6 +26246,22 @@
                             Runtime.prototype.environment = 0;
     
                             /**
+                             * Runtime deprecationDate.
+                             * @member {google.type.IDate|null|undefined} deprecationDate
+                             * @memberof google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime
+                             * @instance
+                             */
+                            Runtime.prototype.deprecationDate = null;
+    
+                            /**
+                             * Runtime decommissionDate.
+                             * @member {google.type.IDate|null|undefined} decommissionDate
+                             * @memberof google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime
+                             * @instance
+                             */
+                            Runtime.prototype.decommissionDate = null;
+    
+                            /**
                              * Creates a new Runtime instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime
@@ -24989,6 +26296,10 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.environment);
                                 if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.displayName);
+                                if (message.deprecationDate != null && Object.hasOwnProperty.call(message, "deprecationDate"))
+                                    $root.google.type.Date.encode(message.deprecationDate, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.decommissionDate != null && Object.hasOwnProperty.call(message, "decommissionDate"))
+                                    $root.google.type.Date.encode(message.decommissionDate, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 return writer;
                             };
     
@@ -25043,6 +26354,14 @@
                                         }
                                     case 4: {
                                             message.environment = reader.int32();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.deprecationDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.decommissionDate = $root.google.type.Date.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -25115,6 +26434,16 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.deprecationDate != null && message.hasOwnProperty("deprecationDate")) {
+                                    var error = $root.google.type.Date.verify(message.deprecationDate);
+                                    if (error)
+                                        return "deprecationDate." + error;
+                                }
+                                if (message.decommissionDate != null && message.hasOwnProperty("decommissionDate")) {
+                                    var error = $root.google.type.Date.verify(message.decommissionDate);
+                                    if (error)
+                                        return "decommissionDate." + error;
+                                }
                                 return null;
                             };
     
@@ -25197,6 +26526,16 @@
                                     message.environment = 2;
                                     break;
                                 }
+                                if (object.deprecationDate != null) {
+                                    if (typeof object.deprecationDate !== "object")
+                                        throw TypeError(".google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime.deprecationDate: object expected");
+                                    message.deprecationDate = $root.google.type.Date.fromObject(object.deprecationDate);
+                                }
+                                if (object.decommissionDate != null) {
+                                    if (typeof object.decommissionDate !== "object")
+                                        throw TypeError(".google.cloud.functions.v2alpha.ListRuntimesResponse.Runtime.decommissionDate: object expected");
+                                    message.decommissionDate = $root.google.type.Date.fromObject(object.decommissionDate);
+                                }
                                 return message;
                             };
     
@@ -25220,6 +26559,8 @@
                                     object.stage = options.enums === String ? "RUNTIME_STAGE_UNSPECIFIED" : 0;
                                     object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
                                     object.displayName = "";
+                                    object.deprecationDate = null;
+                                    object.decommissionDate = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -25234,6 +26575,10 @@
                                     object.environment = options.enums === String ? $root.google.cloud.functions.v2alpha.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2alpha.Environment[message.environment] : message.environment;
                                 if (message.displayName != null && message.hasOwnProperty("displayName"))
                                     object.displayName = message.displayName;
+                                if (message.deprecationDate != null && message.hasOwnProperty("deprecationDate"))
+                                    object.deprecationDate = $root.google.type.Date.toObject(message.deprecationDate, options);
+                                if (message.decommissionDate != null && message.hasOwnProperty("decommissionDate"))
+                                    object.decommissionDate = $root.google.type.Date.toObject(message.decommissionDate, options);
                                 return object;
                             };
     
@@ -25293,6 +26638,384 @@
                         return ListRuntimesResponse;
                     })();
     
+                    v2alpha.AutomaticUpdatePolicy = (function() {
+    
+                        /**
+                         * Properties of an AutomaticUpdatePolicy.
+                         * @memberof google.cloud.functions.v2alpha
+                         * @interface IAutomaticUpdatePolicy
+                         */
+    
+                        /**
+                         * Constructs a new AutomaticUpdatePolicy.
+                         * @memberof google.cloud.functions.v2alpha
+                         * @classdesc Represents an AutomaticUpdatePolicy.
+                         * @implements IAutomaticUpdatePolicy
+                         * @constructor
+                         * @param {google.cloud.functions.v2alpha.IAutomaticUpdatePolicy=} [properties] Properties to set
+                         */
+                        function AutomaticUpdatePolicy(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new AutomaticUpdatePolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v2alpha.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.IAutomaticUpdatePolicy=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v2alpha.AutomaticUpdatePolicy} AutomaticUpdatePolicy instance
+                         */
+                        AutomaticUpdatePolicy.create = function create(properties) {
+                            return new AutomaticUpdatePolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutomaticUpdatePolicy message. Does not implicitly {@link google.cloud.functions.v2alpha.AutomaticUpdatePolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v2alpha.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.IAutomaticUpdatePolicy} message AutomaticUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomaticUpdatePolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutomaticUpdatePolicy message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.AutomaticUpdatePolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v2alpha.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.IAutomaticUpdatePolicy} message AutomaticUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomaticUpdatePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutomaticUpdatePolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v2alpha.AutomaticUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v2alpha.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomaticUpdatePolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v2alpha.AutomaticUpdatePolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutomaticUpdatePolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v2alpha.AutomaticUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v2alpha.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomaticUpdatePolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutomaticUpdatePolicy message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v2alpha.AutomaticUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutomaticUpdatePolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutomaticUpdatePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v2alpha.AutomaticUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v2alpha.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                         */
+                        AutomaticUpdatePolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v2alpha.AutomaticUpdatePolicy)
+                                return object;
+                            return new $root.google.cloud.functions.v2alpha.AutomaticUpdatePolicy();
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutomaticUpdatePolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v2alpha.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.AutomaticUpdatePolicy} message AutomaticUpdatePolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutomaticUpdatePolicy.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this AutomaticUpdatePolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v2alpha.AutomaticUpdatePolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutomaticUpdatePolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutomaticUpdatePolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.functions.v2alpha.AutomaticUpdatePolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutomaticUpdatePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.functions.v2alpha.AutomaticUpdatePolicy";
+                        };
+    
+                        return AutomaticUpdatePolicy;
+                    })();
+    
+                    v2alpha.OnDeployUpdatePolicy = (function() {
+    
+                        /**
+                         * Properties of an OnDeployUpdatePolicy.
+                         * @memberof google.cloud.functions.v2alpha
+                         * @interface IOnDeployUpdatePolicy
+                         * @property {string|null} [runtimeVersion] OnDeployUpdatePolicy runtimeVersion
+                         */
+    
+                        /**
+                         * Constructs a new OnDeployUpdatePolicy.
+                         * @memberof google.cloud.functions.v2alpha
+                         * @classdesc Represents an OnDeployUpdatePolicy.
+                         * @implements IOnDeployUpdatePolicy
+                         * @constructor
+                         * @param {google.cloud.functions.v2alpha.IOnDeployUpdatePolicy=} [properties] Properties to set
+                         */
+                        function OnDeployUpdatePolicy(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OnDeployUpdatePolicy runtimeVersion.
+                         * @member {string} runtimeVersion
+                         * @memberof google.cloud.functions.v2alpha.OnDeployUpdatePolicy
+                         * @instance
+                         */
+                        OnDeployUpdatePolicy.prototype.runtimeVersion = "";
+    
+                        /**
+                         * Creates a new OnDeployUpdatePolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v2alpha.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.IOnDeployUpdatePolicy=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v2alpha.OnDeployUpdatePolicy} OnDeployUpdatePolicy instance
+                         */
+                        OnDeployUpdatePolicy.create = function create(properties) {
+                            return new OnDeployUpdatePolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OnDeployUpdatePolicy message. Does not implicitly {@link google.cloud.functions.v2alpha.OnDeployUpdatePolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v2alpha.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.IOnDeployUpdatePolicy} message OnDeployUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OnDeployUpdatePolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.runtimeVersion != null && Object.hasOwnProperty.call(message, "runtimeVersion"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.runtimeVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OnDeployUpdatePolicy message, length delimited. Does not implicitly {@link google.cloud.functions.v2alpha.OnDeployUpdatePolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v2alpha.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.IOnDeployUpdatePolicy} message OnDeployUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OnDeployUpdatePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OnDeployUpdatePolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v2alpha.OnDeployUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v2alpha.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OnDeployUpdatePolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v2alpha.OnDeployUpdatePolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.runtimeVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OnDeployUpdatePolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v2alpha.OnDeployUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v2alpha.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OnDeployUpdatePolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OnDeployUpdatePolicy message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v2alpha.OnDeployUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OnDeployUpdatePolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.runtimeVersion != null && message.hasOwnProperty("runtimeVersion"))
+                                if (!$util.isString(message.runtimeVersion))
+                                    return "runtimeVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OnDeployUpdatePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v2alpha.OnDeployUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v2alpha.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                         */
+                        OnDeployUpdatePolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v2alpha.OnDeployUpdatePolicy)
+                                return object;
+                            var message = new $root.google.cloud.functions.v2alpha.OnDeployUpdatePolicy();
+                            if (object.runtimeVersion != null)
+                                message.runtimeVersion = String(object.runtimeVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OnDeployUpdatePolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v2alpha.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2alpha.OnDeployUpdatePolicy} message OnDeployUpdatePolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OnDeployUpdatePolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.runtimeVersion = "";
+                            if (message.runtimeVersion != null && message.hasOwnProperty("runtimeVersion"))
+                                object.runtimeVersion = message.runtimeVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OnDeployUpdatePolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v2alpha.OnDeployUpdatePolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OnDeployUpdatePolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OnDeployUpdatePolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.functions.v2alpha.OnDeployUpdatePolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OnDeployUpdatePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.functions.v2alpha.OnDeployUpdatePolicy";
+                        };
+    
+                        return OnDeployUpdatePolicy;
+                    })();
+    
                     v2alpha.OperationMetadata = (function() {
     
                         /**
@@ -25308,6 +27031,8 @@
                          * @property {string|null} [apiVersion] OperationMetadata apiVersion
                          * @property {google.protobuf.IAny|null} [requestResource] OperationMetadata requestResource
                          * @property {Array.<google.cloud.functions.v2alpha.IStage>|null} [stages] OperationMetadata stages
+                         * @property {string|null} [buildName] OperationMetadata buildName
+                         * @property {google.cloud.functions.v2alpha.OperationType|null} [operationType] OperationMetadata operationType
                          */
     
                         /**
@@ -25399,6 +27124,22 @@
                         OperationMetadata.prototype.stages = $util.emptyArray;
     
                         /**
+                         * OperationMetadata buildName.
+                         * @member {string} buildName
+                         * @memberof google.cloud.functions.v2alpha.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.buildName = "";
+    
+                        /**
+                         * OperationMetadata operationType.
+                         * @member {google.cloud.functions.v2alpha.OperationType} operationType
+                         * @memberof google.cloud.functions.v2alpha.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.operationType = 0;
+    
+                        /**
                          * Creates a new OperationMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2alpha.OperationMetadata
@@ -25441,6 +27182,10 @@
                             if (message.stages != null && message.stages.length)
                                 for (var i = 0; i < message.stages.length; ++i)
                                     $root.google.cloud.functions.v2alpha.Stage.encode(message.stages[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.operationType != null && Object.hasOwnProperty.call(message, "operationType"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.operationType);
+                            if (message.buildName != null && Object.hasOwnProperty.call(message, "buildName"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.buildName);
                             return writer;
                         };
     
@@ -25511,6 +27256,14 @@
                                         if (!(message.stages && message.stages.length))
                                             message.stages = [];
                                         message.stages.push($root.google.cloud.functions.v2alpha.Stage.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 13: {
+                                        message.buildName = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.operationType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -25587,6 +27340,19 @@
                                         return "stages." + error;
                                 }
                             }
+                            if (message.buildName != null && message.hasOwnProperty("buildName"))
+                                if (!$util.isString(message.buildName))
+                                    return "buildName: string expected";
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                switch (message.operationType) {
+                                default:
+                                    return "operationType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -25637,6 +27403,32 @@
                                     message.stages[i] = $root.google.cloud.functions.v2alpha.Stage.fromObject(object.stages[i]);
                                 }
                             }
+                            if (object.buildName != null)
+                                message.buildName = String(object.buildName);
+                            switch (object.operationType) {
+                            default:
+                                if (typeof object.operationType === "number") {
+                                    message.operationType = object.operationType;
+                                    break;
+                                }
+                                break;
+                            case "OPERATIONTYPE_UNSPECIFIED":
+                            case 0:
+                                message.operationType = 0;
+                                break;
+                            case "CREATE_FUNCTION":
+                            case 1:
+                                message.operationType = 1;
+                                break;
+                            case "UPDATE_FUNCTION":
+                            case 2:
+                                message.operationType = 2;
+                                break;
+                            case "DELETE_FUNCTION":
+                            case 3:
+                                message.operationType = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -25664,6 +27456,8 @@
                                 object.cancelRequested = false;
                                 object.apiVersion = "";
                                 object.requestResource = null;
+                                object.operationType = options.enums === String ? "OPERATIONTYPE_UNSPECIFIED" : 0;
+                                object.buildName = "";
                             }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
@@ -25686,6 +27480,10 @@
                                 for (var j = 0; j < message.stages.length; ++j)
                                     object.stages[j] = $root.google.cloud.functions.v2alpha.Stage.toObject(message.stages[j], options);
                             }
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                object.operationType = options.enums === String ? $root.google.cloud.functions.v2alpha.OperationType[message.operationType] === undefined ? message.operationType : $root.google.cloud.functions.v2alpha.OperationType[message.operationType] : message.operationType;
+                            if (message.buildName != null && message.hasOwnProperty("buildName"))
+                                object.buildName = message.buildName;
                             return object;
                         };
     
@@ -26737,6 +28535,24 @@
                     })();
     
                     /**
+                     * OperationType enum.
+                     * @name google.cloud.functions.v2beta.OperationType
+                     * @enum {number}
+                     * @property {number} OPERATIONTYPE_UNSPECIFIED=0 OPERATIONTYPE_UNSPECIFIED value
+                     * @property {number} CREATE_FUNCTION=1 CREATE_FUNCTION value
+                     * @property {number} UPDATE_FUNCTION=2 UPDATE_FUNCTION value
+                     * @property {number} DELETE_FUNCTION=3 DELETE_FUNCTION value
+                     */
+                    v2beta.OperationType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OPERATIONTYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CREATE_FUNCTION"] = 1;
+                        values[valuesById[2] = "UPDATE_FUNCTION"] = 2;
+                        values[valuesById[3] = "DELETE_FUNCTION"] = 3;
+                        return values;
+                    })();
+    
+                    /**
                      * Environment enum.
                      * @name google.cloud.functions.v2beta.Environment
                      * @enum {number}
@@ -26770,6 +28586,8 @@
                          * @property {google.cloud.functions.v2beta.Environment|null} [environment] Function environment
                          * @property {string|null} [url] Function url
                          * @property {string|null} [kmsKeyName] Function kmsKeyName
+                         * @property {boolean|null} [satisfiesPzs] Function satisfiesPzs
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Function createTime
                          */
     
                         /**
@@ -26886,6 +28704,22 @@
                         Function.prototype.kmsKeyName = "";
     
                         /**
+                         * Function satisfiesPzs.
+                         * @member {boolean} satisfiesPzs
+                         * @memberof google.cloud.functions.v2beta.Function
+                         * @instance
+                         */
+                        Function.prototype.satisfiesPzs = false;
+    
+                        /**
+                         * Function createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.functions.v2beta.Function
+                         * @instance
+                         */
+                        Function.prototype.createTime = null;
+    
+                        /**
                          * Creates a new Function instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2beta.Function
@@ -26935,6 +28769,10 @@
                                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.url);
                             if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
                                 writer.uint32(/* id 25, wireType 2 =*/202).string(message.kmsKeyName);
+                            if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                writer.uint32(/* id 27, wireType 0 =*/216).bool(message.satisfiesPzs);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             return writer;
                         };
     
@@ -27036,6 +28874,14 @@
                                     }
                                 case 25: {
                                         message.kmsKeyName = reader.string();
+                                        break;
+                                    }
+                                case 27: {
+                                        message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
+                                case 28: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -27143,6 +28989,14 @@
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 if (!$util.isString(message.kmsKeyName))
                                     return "kmsKeyName: string expected";
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                if (typeof message.satisfiesPzs !== "boolean")
+                                    return "satisfiesPzs: boolean expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
                             return null;
                         };
     
@@ -27255,6 +29109,13 @@
                                 message.url = String(object.url);
                             if (object.kmsKeyName != null)
                                 message.kmsKeyName = String(object.kmsKeyName);
+                            if (object.satisfiesPzs != null)
+                                message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.functions.v2beta.Function.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
                             return message;
                         };
     
@@ -27286,6 +29147,8 @@
                                 object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
                                 object.url = "";
                                 object.kmsKeyName = "";
+                                object.satisfiesPzs = false;
+                                object.createTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -27318,6 +29181,10 @@
                                 object.url = message.url;
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 object.kmsKeyName = message.kmsKeyName;
+                            if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                object.satisfiesPzs = message.satisfiesPzs;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             return object;
                         };
     
@@ -27678,6 +29545,7 @@
                          * @property {string|null} [bucket] StorageSource bucket
                          * @property {string|null} [object] StorageSource object
                          * @property {number|Long|null} [generation] StorageSource generation
+                         * @property {string|null} [sourceUploadUrl] StorageSource sourceUploadUrl
                          */
     
                         /**
@@ -27720,6 +29588,14 @@
                         StorageSource.prototype.generation = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
+                         * StorageSource sourceUploadUrl.
+                         * @member {string} sourceUploadUrl
+                         * @memberof google.cloud.functions.v2beta.StorageSource
+                         * @instance
+                         */
+                        StorageSource.prototype.sourceUploadUrl = "";
+    
+                        /**
                          * Creates a new StorageSource instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2beta.StorageSource
@@ -27749,6 +29625,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.object);
                             if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int64(message.generation);
+                            if (message.sourceUploadUrl != null && Object.hasOwnProperty.call(message, "sourceUploadUrl"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.sourceUploadUrl);
                             return writer;
                         };
     
@@ -27795,6 +29673,10 @@
                                         message.generation = reader.int64();
                                         break;
                                     }
+                                case 4: {
+                                        message.sourceUploadUrl = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -27839,6 +29721,9 @@
                             if (message.generation != null && message.hasOwnProperty("generation"))
                                 if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                     return "generation: integer|Long expected";
+                            if (message.sourceUploadUrl != null && message.hasOwnProperty("sourceUploadUrl"))
+                                if (!$util.isString(message.sourceUploadUrl))
+                                    return "sourceUploadUrl: string expected";
                             return null;
                         };
     
@@ -27867,6 +29752,8 @@
                                     message.generation = object.generation;
                                 else if (typeof object.generation === "object")
                                     message.generation = new $util.LongBits(object.generation.low >>> 0, object.generation.high >>> 0).toNumber();
+                            if (object.sourceUploadUrl != null)
+                                message.sourceUploadUrl = String(object.sourceUploadUrl);
                             return message;
                         };
     
@@ -27891,6 +29778,7 @@
                                     object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.generation = options.longs === String ? "0" : 0;
+                                object.sourceUploadUrl = "";
                             }
                             if (message.bucket != null && message.hasOwnProperty("bucket"))
                                 object.bucket = message.bucket;
@@ -27901,6 +29789,8 @@
                                     object.generation = options.longs === String ? String(message.generation) : message.generation;
                                 else
                                     object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
+                            if (message.sourceUploadUrl != null && message.hasOwnProperty("sourceUploadUrl"))
+                                object.sourceUploadUrl = message.sourceUploadUrl;
                             return object;
                         };
     
@@ -28314,6 +30204,7 @@
                          * @interface ISource
                          * @property {google.cloud.functions.v2beta.IStorageSource|null} [storageSource] Source storageSource
                          * @property {google.cloud.functions.v2beta.IRepoSource|null} [repoSource] Source repoSource
+                         * @property {string|null} [gitUri] Source gitUri
                          */
     
                         /**
@@ -28347,17 +30238,25 @@
                          */
                         Source.prototype.repoSource = null;
     
+                        /**
+                         * Source gitUri.
+                         * @member {string|null|undefined} gitUri
+                         * @memberof google.cloud.functions.v2beta.Source
+                         * @instance
+                         */
+                        Source.prototype.gitUri = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Source source.
-                         * @member {"storageSource"|"repoSource"|undefined} source
+                         * @member {"storageSource"|"repoSource"|"gitUri"|undefined} source
                          * @memberof google.cloud.functions.v2beta.Source
                          * @instance
                          */
                         Object.defineProperty(Source.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource"]),
+                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource", "gitUri"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -28389,6 +30288,8 @@
                                 $root.google.cloud.functions.v2beta.StorageSource.encode(message.storageSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.repoSource != null && Object.hasOwnProperty.call(message, "repoSource"))
                                 $root.google.cloud.functions.v2beta.RepoSource.encode(message.repoSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.gitUri != null && Object.hasOwnProperty.call(message, "gitUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.gitUri);
                             return writer;
                         };
     
@@ -28429,6 +30330,10 @@
                                     }
                                 case 2: {
                                         message.repoSource = $root.google.cloud.functions.v2beta.RepoSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.gitUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -28485,6 +30390,13 @@
                                         return "repoSource." + error;
                                 }
                             }
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                if (!$util.isString(message.gitUri))
+                                    return "gitUri: string expected";
+                            }
                             return null;
                         };
     
@@ -28510,6 +30422,8 @@
                                     throw TypeError(".google.cloud.functions.v2beta.Source.repoSource: object expected");
                                 message.repoSource = $root.google.cloud.functions.v2beta.RepoSource.fromObject(object.repoSource);
                             }
+                            if (object.gitUri != null)
+                                message.gitUri = String(object.gitUri);
                             return message;
                         };
     
@@ -28535,6 +30449,11 @@
                                 object.repoSource = $root.google.cloud.functions.v2beta.RepoSource.toObject(message.repoSource, options);
                                 if (options.oneofs)
                                     object.source = "repoSource";
+                            }
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri")) {
+                                object.gitUri = message.gitUri;
+                                if (options.oneofs)
+                                    object.source = "gitUri";
                             }
                             return object;
                         };
@@ -28576,6 +30495,7 @@
                          * @interface ISourceProvenance
                          * @property {google.cloud.functions.v2beta.IStorageSource|null} [resolvedStorageSource] SourceProvenance resolvedStorageSource
                          * @property {google.cloud.functions.v2beta.IRepoSource|null} [resolvedRepoSource] SourceProvenance resolvedRepoSource
+                         * @property {string|null} [gitUri] SourceProvenance gitUri
                          */
     
                         /**
@@ -28610,6 +30530,14 @@
                         SourceProvenance.prototype.resolvedRepoSource = null;
     
                         /**
+                         * SourceProvenance gitUri.
+                         * @member {string} gitUri
+                         * @memberof google.cloud.functions.v2beta.SourceProvenance
+                         * @instance
+                         */
+                        SourceProvenance.prototype.gitUri = "";
+    
+                        /**
                          * Creates a new SourceProvenance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2beta.SourceProvenance
@@ -28637,6 +30565,8 @@
                                 $root.google.cloud.functions.v2beta.StorageSource.encode(message.resolvedStorageSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.resolvedRepoSource != null && Object.hasOwnProperty.call(message, "resolvedRepoSource"))
                                 $root.google.cloud.functions.v2beta.RepoSource.encode(message.resolvedRepoSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.gitUri != null && Object.hasOwnProperty.call(message, "gitUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.gitUri);
                             return writer;
                         };
     
@@ -28677,6 +30607,10 @@
                                     }
                                 case 2: {
                                         message.resolvedRepoSource = $root.google.cloud.functions.v2beta.RepoSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.gitUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -28724,6 +30658,9 @@
                                 if (error)
                                     return "resolvedRepoSource." + error;
                             }
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri"))
+                                if (!$util.isString(message.gitUri))
+                                    return "gitUri: string expected";
                             return null;
                         };
     
@@ -28749,6 +30686,8 @@
                                     throw TypeError(".google.cloud.functions.v2beta.SourceProvenance.resolvedRepoSource: object expected");
                                 message.resolvedRepoSource = $root.google.cloud.functions.v2beta.RepoSource.fromObject(object.resolvedRepoSource);
                             }
+                            if (object.gitUri != null)
+                                message.gitUri = String(object.gitUri);
                             return message;
                         };
     
@@ -28768,11 +30707,14 @@
                             if (options.defaults) {
                                 object.resolvedStorageSource = null;
                                 object.resolvedRepoSource = null;
+                                object.gitUri = "";
                             }
                             if (message.resolvedStorageSource != null && message.hasOwnProperty("resolvedStorageSource"))
                                 object.resolvedStorageSource = $root.google.cloud.functions.v2beta.StorageSource.toObject(message.resolvedStorageSource, options);
                             if (message.resolvedRepoSource != null && message.hasOwnProperty("resolvedRepoSource"))
                                 object.resolvedRepoSource = $root.google.cloud.functions.v2beta.RepoSource.toObject(message.resolvedRepoSource, options);
+                            if (message.gitUri != null && message.hasOwnProperty("gitUri"))
+                                object.gitUri = message.gitUri;
                             return object;
                         };
     
@@ -28811,6 +30753,8 @@
                          * Properties of a BuildConfig.
                          * @memberof google.cloud.functions.v2beta
                          * @interface IBuildConfig
+                         * @property {google.cloud.functions.v2beta.IAutomaticUpdatePolicy|null} [automaticUpdatePolicy] BuildConfig automaticUpdatePolicy
+                         * @property {google.cloud.functions.v2beta.IOnDeployUpdatePolicy|null} [onDeployUpdatePolicy] BuildConfig onDeployUpdatePolicy
                          * @property {string|null} [build] BuildConfig build
                          * @property {string|null} [runtime] BuildConfig runtime
                          * @property {string|null} [entryPoint] BuildConfig entryPoint
@@ -28820,6 +30764,7 @@
                          * @property {Object.<string,string>|null} [environmentVariables] BuildConfig environmentVariables
                          * @property {google.cloud.functions.v2beta.BuildConfig.DockerRegistry|null} [dockerRegistry] BuildConfig dockerRegistry
                          * @property {string|null} [dockerRepository] BuildConfig dockerRepository
+                         * @property {string|null} [serviceAccount] BuildConfig serviceAccount
                          */
     
                         /**
@@ -28837,6 +30782,22 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * BuildConfig automaticUpdatePolicy.
+                         * @member {google.cloud.functions.v2beta.IAutomaticUpdatePolicy|null|undefined} automaticUpdatePolicy
+                         * @memberof google.cloud.functions.v2beta.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.automaticUpdatePolicy = null;
+    
+                        /**
+                         * BuildConfig onDeployUpdatePolicy.
+                         * @member {google.cloud.functions.v2beta.IOnDeployUpdatePolicy|null|undefined} onDeployUpdatePolicy
+                         * @memberof google.cloud.functions.v2beta.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.onDeployUpdatePolicy = null;
     
                         /**
                          * BuildConfig build.
@@ -28911,6 +30872,28 @@
                         BuildConfig.prototype.dockerRepository = "";
     
                         /**
+                         * BuildConfig serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.functions.v2beta.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.serviceAccount = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BuildConfig runtimeUpdatePolicy.
+                         * @member {"automaticUpdatePolicy"|"onDeployUpdatePolicy"|undefined} runtimeUpdatePolicy
+                         * @memberof google.cloud.functions.v2beta.BuildConfig
+                         * @instance
+                         */
+                        Object.defineProperty(BuildConfig.prototype, "runtimeUpdatePolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["automaticUpdatePolicy", "onDeployUpdatePolicy"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new BuildConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2beta.BuildConfig
@@ -28953,6 +30936,12 @@
                                 $root.google.cloud.functions.v2beta.SourceProvenance.encode(message.sourceProvenance, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.dockerRegistry != null && Object.hasOwnProperty.call(message, "dockerRegistry"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.dockerRegistry);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 27, wireType 2 =*/218).string(message.serviceAccount);
+                            if (message.automaticUpdatePolicy != null && Object.hasOwnProperty.call(message, "automaticUpdatePolicy"))
+                                $root.google.cloud.functions.v2beta.AutomaticUpdatePolicy.encode(message.automaticUpdatePolicy, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
+                            if (message.onDeployUpdatePolicy != null && Object.hasOwnProperty.call(message, "onDeployUpdatePolicy"))
+                                $root.google.cloud.functions.v2beta.OnDeployUpdatePolicy.encode(message.onDeployUpdatePolicy, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
                             return writer;
                         };
     
@@ -28987,6 +30976,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 40: {
+                                        message.automaticUpdatePolicy = $root.google.cloud.functions.v2beta.AutomaticUpdatePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 41: {
+                                        message.onDeployUpdatePolicy = $root.google.cloud.functions.v2beta.OnDeployUpdatePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 1: {
                                         message.build = reader.string();
                                         break;
@@ -29042,6 +31039,10 @@
                                         message.dockerRepository = reader.string();
                                         break;
                                     }
+                                case 27: {
+                                        message.serviceAccount = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29077,6 +31078,25 @@
                         BuildConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.automaticUpdatePolicy != null && message.hasOwnProperty("automaticUpdatePolicy")) {
+                                properties.runtimeUpdatePolicy = 1;
+                                {
+                                    var error = $root.google.cloud.functions.v2beta.AutomaticUpdatePolicy.verify(message.automaticUpdatePolicy);
+                                    if (error)
+                                        return "automaticUpdatePolicy." + error;
+                                }
+                            }
+                            if (message.onDeployUpdatePolicy != null && message.hasOwnProperty("onDeployUpdatePolicy")) {
+                                if (properties.runtimeUpdatePolicy === 1)
+                                    return "runtimeUpdatePolicy: multiple values";
+                                properties.runtimeUpdatePolicy = 1;
+                                {
+                                    var error = $root.google.cloud.functions.v2beta.OnDeployUpdatePolicy.verify(message.onDeployUpdatePolicy);
+                                    if (error)
+                                        return "onDeployUpdatePolicy." + error;
+                                }
+                            }
                             if (message.build != null && message.hasOwnProperty("build"))
                                 if (!$util.isString(message.build))
                                     return "build: string expected";
@@ -29119,6 +31139,9 @@
                             if (message.dockerRepository != null && message.hasOwnProperty("dockerRepository"))
                                 if (!$util.isString(message.dockerRepository))
                                     return "dockerRepository: string expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
                             return null;
                         };
     
@@ -29134,6 +31157,16 @@
                             if (object instanceof $root.google.cloud.functions.v2beta.BuildConfig)
                                 return object;
                             var message = new $root.google.cloud.functions.v2beta.BuildConfig();
+                            if (object.automaticUpdatePolicy != null) {
+                                if (typeof object.automaticUpdatePolicy !== "object")
+                                    throw TypeError(".google.cloud.functions.v2beta.BuildConfig.automaticUpdatePolicy: object expected");
+                                message.automaticUpdatePolicy = $root.google.cloud.functions.v2beta.AutomaticUpdatePolicy.fromObject(object.automaticUpdatePolicy);
+                            }
+                            if (object.onDeployUpdatePolicy != null) {
+                                if (typeof object.onDeployUpdatePolicy !== "object")
+                                    throw TypeError(".google.cloud.functions.v2beta.BuildConfig.onDeployUpdatePolicy: object expected");
+                                message.onDeployUpdatePolicy = $root.google.cloud.functions.v2beta.OnDeployUpdatePolicy.fromObject(object.onDeployUpdatePolicy);
+                            }
                             if (object.build != null)
                                 message.build = String(object.build);
                             if (object.runtime != null)
@@ -29181,6 +31214,8 @@
                             }
                             if (object.dockerRepository != null)
                                 message.dockerRepository = String(object.dockerRepository);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
                             return message;
                         };
     
@@ -29208,6 +31243,7 @@
                                 object.dockerRepository = "";
                                 object.sourceProvenance = null;
                                 object.dockerRegistry = options.enums === String ? "DOCKER_REGISTRY_UNSPECIFIED" : 0;
+                                object.serviceAccount = "";
                             }
                             if (message.build != null && message.hasOwnProperty("build"))
                                 object.build = message.build;
@@ -29231,6 +31267,18 @@
                                 object.sourceProvenance = $root.google.cloud.functions.v2beta.SourceProvenance.toObject(message.sourceProvenance, options);
                             if (message.dockerRegistry != null && message.hasOwnProperty("dockerRegistry"))
                                 object.dockerRegistry = options.enums === String ? $root.google.cloud.functions.v2beta.BuildConfig.DockerRegistry[message.dockerRegistry] === undefined ? message.dockerRegistry : $root.google.cloud.functions.v2beta.BuildConfig.DockerRegistry[message.dockerRegistry] : message.dockerRegistry;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            if (message.automaticUpdatePolicy != null && message.hasOwnProperty("automaticUpdatePolicy")) {
+                                object.automaticUpdatePolicy = $root.google.cloud.functions.v2beta.AutomaticUpdatePolicy.toObject(message.automaticUpdatePolicy, options);
+                                if (options.oneofs)
+                                    object.runtimeUpdatePolicy = "automaticUpdatePolicy";
+                            }
+                            if (message.onDeployUpdatePolicy != null && message.hasOwnProperty("onDeployUpdatePolicy")) {
+                                object.onDeployUpdatePolicy = $root.google.cloud.functions.v2beta.OnDeployUpdatePolicy.toObject(message.onDeployUpdatePolicy, options);
+                                if (options.oneofs)
+                                    object.runtimeUpdatePolicy = "onDeployUpdatePolicy";
+                            }
                             return object;
                         };
     
@@ -29303,6 +31351,7 @@
                          * @property {string|null} [revision] ServiceConfig revision
                          * @property {number|null} [maxInstanceRequestConcurrency] ServiceConfig maxInstanceRequestConcurrency
                          * @property {google.cloud.functions.v2beta.ServiceConfig.SecurityLevel|null} [securityLevel] ServiceConfig securityLevel
+                         * @property {string|null} [binaryAuthorizationPolicy] ServiceConfig binaryAuthorizationPolicy
                          */
     
                         /**
@@ -29468,6 +31517,14 @@
                         ServiceConfig.prototype.securityLevel = 0;
     
                         /**
+                         * ServiceConfig binaryAuthorizationPolicy.
+                         * @member {string} binaryAuthorizationPolicy
+                         * @memberof google.cloud.functions.v2beta.ServiceConfig
+                         * @instance
+                         */
+                        ServiceConfig.prototype.binaryAuthorizationPolicy = "";
+    
+                        /**
                          * Creates a new ServiceConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2beta.ServiceConfig
@@ -29530,6 +31587,8 @@
                                 writer.uint32(/* id 21, wireType 0 =*/168).int32(message.securityLevel);
                             if (message.availableCpu != null && Object.hasOwnProperty.call(message, "availableCpu"))
                                 writer.uint32(/* id 22, wireType 2 =*/178).string(message.availableCpu);
+                            if (message.binaryAuthorizationPolicy != null && Object.hasOwnProperty.call(message, "binaryAuthorizationPolicy"))
+                                writer.uint32(/* id 23, wireType 2 =*/186).string(message.binaryAuthorizationPolicy);
                             return writer;
                         };
     
@@ -29659,6 +31718,10 @@
                                         message.securityLevel = reader.int32();
                                         break;
                                     }
+                                case 23: {
+                                        message.binaryAuthorizationPolicy = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29784,6 +31847,9 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.binaryAuthorizationPolicy != null && message.hasOwnProperty("binaryAuthorizationPolicy"))
+                                if (!$util.isString(message.binaryAuthorizationPolicy))
+                                    return "binaryAuthorizationPolicy: string expected";
                             return null;
                         };
     
@@ -29914,6 +31980,8 @@
                                 message.securityLevel = 2;
                                 break;
                             }
+                            if (object.binaryAuthorizationPolicy != null)
+                                message.binaryAuthorizationPolicy = String(object.binaryAuthorizationPolicy);
                             return message;
                         };
     
@@ -29952,6 +32020,7 @@
                                 object.maxInstanceRequestConcurrency = 0;
                                 object.securityLevel = options.enums === String ? "SECURITY_LEVEL_UNSPECIFIED" : 0;
                                 object.availableCpu = "";
+                                object.binaryAuthorizationPolicy = "";
                             }
                             if (message.service != null && message.hasOwnProperty("service"))
                                 object.service = message.service;
@@ -29999,6 +32068,8 @@
                                 object.securityLevel = options.enums === String ? $root.google.cloud.functions.v2beta.ServiceConfig.SecurityLevel[message.securityLevel] === undefined ? message.securityLevel : $root.google.cloud.functions.v2beta.ServiceConfig.SecurityLevel[message.securityLevel] : message.securityLevel;
                             if (message.availableCpu != null && message.hasOwnProperty("availableCpu"))
                                 object.availableCpu = message.availableCpu;
+                            if (message.binaryAuthorizationPolicy != null && message.hasOwnProperty("binaryAuthorizationPolicy"))
+                                object.binaryAuthorizationPolicy = message.binaryAuthorizationPolicy;
                             return object;
                         };
     
@@ -30890,6 +32961,7 @@
                          * @property {string|null} [serviceAccountEmail] EventTrigger serviceAccountEmail
                          * @property {google.cloud.functions.v2beta.EventTrigger.RetryPolicy|null} [retryPolicy] EventTrigger retryPolicy
                          * @property {string|null} [channel] EventTrigger channel
+                         * @property {string|null} [service] EventTrigger service
                          */
     
                         /**
@@ -30973,6 +33045,14 @@
                         EventTrigger.prototype.channel = "";
     
                         /**
+                         * EventTrigger service.
+                         * @member {string} service
+                         * @memberof google.cloud.functions.v2beta.EventTrigger
+                         * @instance
+                         */
+                        EventTrigger.prototype.service = "";
+    
+                        /**
                          * Creates a new EventTrigger instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2beta.EventTrigger
@@ -31013,6 +33093,8 @@
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.retryPolicy);
                             if (message.channel != null && Object.hasOwnProperty.call(message, "channel"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.channel);
+                            if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.service);
                             return writer;
                         };
     
@@ -31079,6 +33161,10 @@
                                     }
                                 case 8: {
                                         message.channel = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.service = reader.string();
                                         break;
                                     }
                                 default:
@@ -31152,6 +33238,9 @@
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 if (!$util.isString(message.channel))
                                     return "channel: string expected";
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                if (!$util.isString(message.service))
+                                    return "service: string expected";
                             return null;
                         };
     
@@ -31209,6 +33298,8 @@
                             }
                             if (object.channel != null)
                                 message.channel = String(object.channel);
+                            if (object.service != null)
+                                message.service = String(object.service);
                             return message;
                         };
     
@@ -31235,6 +33326,7 @@
                                 object.serviceAccountEmail = "";
                                 object.retryPolicy = options.enums === String ? "RETRY_POLICY_UNSPECIFIED" : 0;
                                 object.channel = "";
+                                object.service = "";
                             }
                             if (message.trigger != null && message.hasOwnProperty("trigger"))
                                 object.trigger = message.trigger;
@@ -31255,6 +33347,8 @@
                                 object.retryPolicy = options.enums === String ? $root.google.cloud.functions.v2beta.EventTrigger.RetryPolicy[message.retryPolicy] === undefined ? message.retryPolicy : $root.google.cloud.functions.v2beta.EventTrigger.RetryPolicy[message.retryPolicy] : message.retryPolicy;
                             if (message.channel != null && message.hasOwnProperty("channel"))
                                 object.channel = message.channel;
+                            if (message.service != null && message.hasOwnProperty("service"))
+                                object.service = message.service;
                             return object;
                         };
     
@@ -31560,6 +33654,7 @@
                          * @memberof google.cloud.functions.v2beta
                          * @interface IGetFunctionRequest
                          * @property {string|null} [name] GetFunctionRequest name
+                         * @property {string|null} [revision] GetFunctionRequest revision
                          */
     
                         /**
@@ -31584,6 +33679,14 @@
                          * @instance
                          */
                         GetFunctionRequest.prototype.name = "";
+    
+                        /**
+                         * GetFunctionRequest revision.
+                         * @member {string} revision
+                         * @memberof google.cloud.functions.v2beta.GetFunctionRequest
+                         * @instance
+                         */
+                        GetFunctionRequest.prototype.revision = "";
     
                         /**
                          * Creates a new GetFunctionRequest instance using the specified properties.
@@ -31611,6 +33714,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.revision != null && Object.hasOwnProperty.call(message, "revision"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.revision);
                             return writer;
                         };
     
@@ -31647,6 +33752,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.revision = reader.string();
                                         break;
                                     }
                                 default:
@@ -31687,6 +33796,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                if (!$util.isString(message.revision))
+                                    return "revision: string expected";
                             return null;
                         };
     
@@ -31704,6 +33816,8 @@
                             var message = new $root.google.cloud.functions.v2beta.GetFunctionRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.revision != null)
+                                message.revision = String(object.revision);
                             return message;
                         };
     
@@ -31720,10 +33834,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.revision = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                object.revision = message.revision;
                             return object;
                         };
     
@@ -33043,6 +35161,7 @@
                          * @interface IGenerateUploadUrlRequest
                          * @property {string|null} [parent] GenerateUploadUrlRequest parent
                          * @property {string|null} [kmsKeyName] GenerateUploadUrlRequest kmsKeyName
+                         * @property {google.cloud.functions.v2beta.Environment|null} [environment] GenerateUploadUrlRequest environment
                          */
     
                         /**
@@ -33077,6 +35196,14 @@
                         GenerateUploadUrlRequest.prototype.kmsKeyName = "";
     
                         /**
+                         * GenerateUploadUrlRequest environment.
+                         * @member {google.cloud.functions.v2beta.Environment} environment
+                         * @memberof google.cloud.functions.v2beta.GenerateUploadUrlRequest
+                         * @instance
+                         */
+                        GenerateUploadUrlRequest.prototype.environment = 0;
+    
+                        /**
                          * Creates a new GenerateUploadUrlRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2beta.GenerateUploadUrlRequest
@@ -33104,6 +35231,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                             if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.kmsKeyName);
+                            if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.environment);
                             return writer;
                         };
     
@@ -33144,6 +35273,10 @@
                                     }
                                 case 2: {
                                         message.kmsKeyName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.environment = reader.int32();
                                         break;
                                     }
                                 default:
@@ -33187,6 +35320,15 @@
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 if (!$util.isString(message.kmsKeyName))
                                     return "kmsKeyName: string expected";
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                switch (message.environment) {
+                                default:
+                                    return "environment: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -33206,6 +35348,26 @@
                                 message.parent = String(object.parent);
                             if (object.kmsKeyName != null)
                                 message.kmsKeyName = String(object.kmsKeyName);
+                            switch (object.environment) {
+                            default:
+                                if (typeof object.environment === "number") {
+                                    message.environment = object.environment;
+                                    break;
+                                }
+                                break;
+                            case "ENVIRONMENT_UNSPECIFIED":
+                            case 0:
+                                message.environment = 0;
+                                break;
+                            case "GEN_1":
+                            case 1:
+                                message.environment = 1;
+                                break;
+                            case "GEN_2":
+                            case 2:
+                                message.environment = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -33225,11 +35387,14 @@
                             if (options.defaults) {
                                 object.parent = "";
                                 object.kmsKeyName = "";
+                                object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName"))
                                 object.kmsKeyName = message.kmsKeyName;
+                            if (message.environment != null && message.hasOwnProperty("environment"))
+                                object.environment = options.enums === String ? $root.google.cloud.functions.v2beta.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2beta.Environment[message.environment] : message.environment;
                             return object;
                         };
     
@@ -34359,6 +36524,8 @@
                              * @property {google.cloud.functions.v2beta.ListRuntimesResponse.RuntimeStage|null} [stage] Runtime stage
                              * @property {Array.<string>|null} [warnings] Runtime warnings
                              * @property {google.cloud.functions.v2beta.Environment|null} [environment] Runtime environment
+                             * @property {google.type.IDate|null} [deprecationDate] Runtime deprecationDate
+                             * @property {google.type.IDate|null} [decommissionDate] Runtime decommissionDate
                              */
     
                             /**
@@ -34418,6 +36585,22 @@
                             Runtime.prototype.environment = 0;
     
                             /**
+                             * Runtime deprecationDate.
+                             * @member {google.type.IDate|null|undefined} deprecationDate
+                             * @memberof google.cloud.functions.v2beta.ListRuntimesResponse.Runtime
+                             * @instance
+                             */
+                            Runtime.prototype.deprecationDate = null;
+    
+                            /**
+                             * Runtime decommissionDate.
+                             * @member {google.type.IDate|null|undefined} decommissionDate
+                             * @memberof google.cloud.functions.v2beta.ListRuntimesResponse.Runtime
+                             * @instance
+                             */
+                            Runtime.prototype.decommissionDate = null;
+    
+                            /**
                              * Creates a new Runtime instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.functions.v2beta.ListRuntimesResponse.Runtime
@@ -34452,6 +36635,10 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.environment);
                                 if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.displayName);
+                                if (message.deprecationDate != null && Object.hasOwnProperty.call(message, "deprecationDate"))
+                                    $root.google.type.Date.encode(message.deprecationDate, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.decommissionDate != null && Object.hasOwnProperty.call(message, "decommissionDate"))
+                                    $root.google.type.Date.encode(message.decommissionDate, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 return writer;
                             };
     
@@ -34506,6 +36693,14 @@
                                         }
                                     case 4: {
                                             message.environment = reader.int32();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.deprecationDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.decommissionDate = $root.google.type.Date.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -34578,6 +36773,16 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.deprecationDate != null && message.hasOwnProperty("deprecationDate")) {
+                                    var error = $root.google.type.Date.verify(message.deprecationDate);
+                                    if (error)
+                                        return "deprecationDate." + error;
+                                }
+                                if (message.decommissionDate != null && message.hasOwnProperty("decommissionDate")) {
+                                    var error = $root.google.type.Date.verify(message.decommissionDate);
+                                    if (error)
+                                        return "decommissionDate." + error;
+                                }
                                 return null;
                             };
     
@@ -34660,6 +36865,16 @@
                                     message.environment = 2;
                                     break;
                                 }
+                                if (object.deprecationDate != null) {
+                                    if (typeof object.deprecationDate !== "object")
+                                        throw TypeError(".google.cloud.functions.v2beta.ListRuntimesResponse.Runtime.deprecationDate: object expected");
+                                    message.deprecationDate = $root.google.type.Date.fromObject(object.deprecationDate);
+                                }
+                                if (object.decommissionDate != null) {
+                                    if (typeof object.decommissionDate !== "object")
+                                        throw TypeError(".google.cloud.functions.v2beta.ListRuntimesResponse.Runtime.decommissionDate: object expected");
+                                    message.decommissionDate = $root.google.type.Date.fromObject(object.decommissionDate);
+                                }
                                 return message;
                             };
     
@@ -34683,6 +36898,8 @@
                                     object.stage = options.enums === String ? "RUNTIME_STAGE_UNSPECIFIED" : 0;
                                     object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
                                     object.displayName = "";
+                                    object.deprecationDate = null;
+                                    object.decommissionDate = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -34697,6 +36914,10 @@
                                     object.environment = options.enums === String ? $root.google.cloud.functions.v2beta.Environment[message.environment] === undefined ? message.environment : $root.google.cloud.functions.v2beta.Environment[message.environment] : message.environment;
                                 if (message.displayName != null && message.hasOwnProperty("displayName"))
                                     object.displayName = message.displayName;
+                                if (message.deprecationDate != null && message.hasOwnProperty("deprecationDate"))
+                                    object.deprecationDate = $root.google.type.Date.toObject(message.deprecationDate, options);
+                                if (message.decommissionDate != null && message.hasOwnProperty("decommissionDate"))
+                                    object.decommissionDate = $root.google.type.Date.toObject(message.decommissionDate, options);
                                 return object;
                             };
     
@@ -34756,6 +36977,384 @@
                         return ListRuntimesResponse;
                     })();
     
+                    v2beta.AutomaticUpdatePolicy = (function() {
+    
+                        /**
+                         * Properties of an AutomaticUpdatePolicy.
+                         * @memberof google.cloud.functions.v2beta
+                         * @interface IAutomaticUpdatePolicy
+                         */
+    
+                        /**
+                         * Constructs a new AutomaticUpdatePolicy.
+                         * @memberof google.cloud.functions.v2beta
+                         * @classdesc Represents an AutomaticUpdatePolicy.
+                         * @implements IAutomaticUpdatePolicy
+                         * @constructor
+                         * @param {google.cloud.functions.v2beta.IAutomaticUpdatePolicy=} [properties] Properties to set
+                         */
+                        function AutomaticUpdatePolicy(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new AutomaticUpdatePolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v2beta.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2beta.IAutomaticUpdatePolicy=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v2beta.AutomaticUpdatePolicy} AutomaticUpdatePolicy instance
+                         */
+                        AutomaticUpdatePolicy.create = function create(properties) {
+                            return new AutomaticUpdatePolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutomaticUpdatePolicy message. Does not implicitly {@link google.cloud.functions.v2beta.AutomaticUpdatePolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v2beta.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2beta.IAutomaticUpdatePolicy} message AutomaticUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomaticUpdatePolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutomaticUpdatePolicy message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.AutomaticUpdatePolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v2beta.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2beta.IAutomaticUpdatePolicy} message AutomaticUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutomaticUpdatePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutomaticUpdatePolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v2beta.AutomaticUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v2beta.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomaticUpdatePolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v2beta.AutomaticUpdatePolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutomaticUpdatePolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v2beta.AutomaticUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v2beta.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutomaticUpdatePolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutomaticUpdatePolicy message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v2beta.AutomaticUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutomaticUpdatePolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutomaticUpdatePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v2beta.AutomaticUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v2beta.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                         */
+                        AutomaticUpdatePolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v2beta.AutomaticUpdatePolicy)
+                                return object;
+                            return new $root.google.cloud.functions.v2beta.AutomaticUpdatePolicy();
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutomaticUpdatePolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v2beta.AutomaticUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2beta.AutomaticUpdatePolicy} message AutomaticUpdatePolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutomaticUpdatePolicy.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this AutomaticUpdatePolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v2beta.AutomaticUpdatePolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutomaticUpdatePolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutomaticUpdatePolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.functions.v2beta.AutomaticUpdatePolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutomaticUpdatePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.functions.v2beta.AutomaticUpdatePolicy";
+                        };
+    
+                        return AutomaticUpdatePolicy;
+                    })();
+    
+                    v2beta.OnDeployUpdatePolicy = (function() {
+    
+                        /**
+                         * Properties of an OnDeployUpdatePolicy.
+                         * @memberof google.cloud.functions.v2beta
+                         * @interface IOnDeployUpdatePolicy
+                         * @property {string|null} [runtimeVersion] OnDeployUpdatePolicy runtimeVersion
+                         */
+    
+                        /**
+                         * Constructs a new OnDeployUpdatePolicy.
+                         * @memberof google.cloud.functions.v2beta
+                         * @classdesc Represents an OnDeployUpdatePolicy.
+                         * @implements IOnDeployUpdatePolicy
+                         * @constructor
+                         * @param {google.cloud.functions.v2beta.IOnDeployUpdatePolicy=} [properties] Properties to set
+                         */
+                        function OnDeployUpdatePolicy(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OnDeployUpdatePolicy runtimeVersion.
+                         * @member {string} runtimeVersion
+                         * @memberof google.cloud.functions.v2beta.OnDeployUpdatePolicy
+                         * @instance
+                         */
+                        OnDeployUpdatePolicy.prototype.runtimeVersion = "";
+    
+                        /**
+                         * Creates a new OnDeployUpdatePolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.functions.v2beta.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2beta.IOnDeployUpdatePolicy=} [properties] Properties to set
+                         * @returns {google.cloud.functions.v2beta.OnDeployUpdatePolicy} OnDeployUpdatePolicy instance
+                         */
+                        OnDeployUpdatePolicy.create = function create(properties) {
+                            return new OnDeployUpdatePolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OnDeployUpdatePolicy message. Does not implicitly {@link google.cloud.functions.v2beta.OnDeployUpdatePolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.functions.v2beta.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2beta.IOnDeployUpdatePolicy} message OnDeployUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OnDeployUpdatePolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.runtimeVersion != null && Object.hasOwnProperty.call(message, "runtimeVersion"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.runtimeVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OnDeployUpdatePolicy message, length delimited. Does not implicitly {@link google.cloud.functions.v2beta.OnDeployUpdatePolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.functions.v2beta.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2beta.IOnDeployUpdatePolicy} message OnDeployUpdatePolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OnDeployUpdatePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OnDeployUpdatePolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.functions.v2beta.OnDeployUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.functions.v2beta.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OnDeployUpdatePolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v2beta.OnDeployUpdatePolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.runtimeVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OnDeployUpdatePolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.functions.v2beta.OnDeployUpdatePolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.functions.v2beta.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OnDeployUpdatePolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OnDeployUpdatePolicy message.
+                         * @function verify
+                         * @memberof google.cloud.functions.v2beta.OnDeployUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OnDeployUpdatePolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.runtimeVersion != null && message.hasOwnProperty("runtimeVersion"))
+                                if (!$util.isString(message.runtimeVersion))
+                                    return "runtimeVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OnDeployUpdatePolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.functions.v2beta.OnDeployUpdatePolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.functions.v2beta.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                         */
+                        OnDeployUpdatePolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.functions.v2beta.OnDeployUpdatePolicy)
+                                return object;
+                            var message = new $root.google.cloud.functions.v2beta.OnDeployUpdatePolicy();
+                            if (object.runtimeVersion != null)
+                                message.runtimeVersion = String(object.runtimeVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OnDeployUpdatePolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.functions.v2beta.OnDeployUpdatePolicy
+                         * @static
+                         * @param {google.cloud.functions.v2beta.OnDeployUpdatePolicy} message OnDeployUpdatePolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OnDeployUpdatePolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.runtimeVersion = "";
+                            if (message.runtimeVersion != null && message.hasOwnProperty("runtimeVersion"))
+                                object.runtimeVersion = message.runtimeVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OnDeployUpdatePolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.functions.v2beta.OnDeployUpdatePolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OnDeployUpdatePolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OnDeployUpdatePolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.functions.v2beta.OnDeployUpdatePolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OnDeployUpdatePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.functions.v2beta.OnDeployUpdatePolicy";
+                        };
+    
+                        return OnDeployUpdatePolicy;
+                    })();
+    
                     v2beta.OperationMetadata = (function() {
     
                         /**
@@ -34771,6 +37370,8 @@
                          * @property {string|null} [apiVersion] OperationMetadata apiVersion
                          * @property {google.protobuf.IAny|null} [requestResource] OperationMetadata requestResource
                          * @property {Array.<google.cloud.functions.v2beta.IStage>|null} [stages] OperationMetadata stages
+                         * @property {string|null} [buildName] OperationMetadata buildName
+                         * @property {google.cloud.functions.v2beta.OperationType|null} [operationType] OperationMetadata operationType
                          */
     
                         /**
@@ -34862,6 +37463,22 @@
                         OperationMetadata.prototype.stages = $util.emptyArray;
     
                         /**
+                         * OperationMetadata buildName.
+                         * @member {string} buildName
+                         * @memberof google.cloud.functions.v2beta.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.buildName = "";
+    
+                        /**
+                         * OperationMetadata operationType.
+                         * @member {google.cloud.functions.v2beta.OperationType} operationType
+                         * @memberof google.cloud.functions.v2beta.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.operationType = 0;
+    
+                        /**
                          * Creates a new OperationMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.functions.v2beta.OperationMetadata
@@ -34904,6 +37521,10 @@
                             if (message.stages != null && message.stages.length)
                                 for (var i = 0; i < message.stages.length; ++i)
                                     $root.google.cloud.functions.v2beta.Stage.encode(message.stages[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.operationType != null && Object.hasOwnProperty.call(message, "operationType"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.operationType);
+                            if (message.buildName != null && Object.hasOwnProperty.call(message, "buildName"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.buildName);
                             return writer;
                         };
     
@@ -34974,6 +37595,14 @@
                                         if (!(message.stages && message.stages.length))
                                             message.stages = [];
                                         message.stages.push($root.google.cloud.functions.v2beta.Stage.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 13: {
+                                        message.buildName = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.operationType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -35050,6 +37679,19 @@
                                         return "stages." + error;
                                 }
                             }
+                            if (message.buildName != null && message.hasOwnProperty("buildName"))
+                                if (!$util.isString(message.buildName))
+                                    return "buildName: string expected";
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                switch (message.operationType) {
+                                default:
+                                    return "operationType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -35100,6 +37742,32 @@
                                     message.stages[i] = $root.google.cloud.functions.v2beta.Stage.fromObject(object.stages[i]);
                                 }
                             }
+                            if (object.buildName != null)
+                                message.buildName = String(object.buildName);
+                            switch (object.operationType) {
+                            default:
+                                if (typeof object.operationType === "number") {
+                                    message.operationType = object.operationType;
+                                    break;
+                                }
+                                break;
+                            case "OPERATIONTYPE_UNSPECIFIED":
+                            case 0:
+                                message.operationType = 0;
+                                break;
+                            case "CREATE_FUNCTION":
+                            case 1:
+                                message.operationType = 1;
+                                break;
+                            case "UPDATE_FUNCTION":
+                            case 2:
+                                message.operationType = 2;
+                                break;
+                            case "DELETE_FUNCTION":
+                            case 3:
+                                message.operationType = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -35127,6 +37795,8 @@
                                 object.cancelRequested = false;
                                 object.apiVersion = "";
                                 object.requestResource = null;
+                                object.operationType = options.enums === String ? "OPERATIONTYPE_UNSPECIFIED" : 0;
+                                object.buildName = "";
                             }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
@@ -35149,6 +37819,10 @@
                                 for (var j = 0; j < message.stages.length; ++j)
                                     object.stages[j] = $root.google.cloud.functions.v2beta.Stage.toObject(message.stages[j], options);
                             }
+                            if (message.operationType != null && message.hasOwnProperty("operationType"))
+                                object.operationType = options.enums === String ? $root.google.cloud.functions.v2beta.OperationType[message.operationType] === undefined ? message.operationType : $root.google.cloud.functions.v2beta.OperationType[message.operationType] : message.operationType;
+                            if (message.buildName != null && message.hasOwnProperty("buildName"))
+                                object.buildName = message.buildName;
                             return object;
                         };
     
@@ -37682,6 +40356,7 @@
                  * @property {string|null} [docTagPrefix] Publishing docTagPrefix
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
+                 * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
                  */
     
                 /**
@@ -37775,6 +40450,14 @@
                 Publishing.prototype.librarySettings = $util.emptyArray;
     
                 /**
+                 * Publishing protoReferenceDocumentationUri.
+                 * @member {string} protoReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.protoReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -37819,6 +40502,8 @@
                     if (message.librarySettings != null && message.librarySettings.length)
                         for (var i = 0; i < message.librarySettings.length; ++i)
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
+                    if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
+                        writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -37893,6 +40578,10 @@
                                 if (!(message.librarySettings && message.librarySettings.length))
                                     message.librarySettings = [];
                                 message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 110: {
+                                message.protoReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -37970,6 +40659,9 @@
                         case 2:
                         case 3:
                         case 4:
+                        case 5:
+                        case 6:
+                        case 7:
                             break;
                         }
                     if (message.librarySettings != null && message.hasOwnProperty("librarySettings")) {
@@ -37981,6 +40673,9 @@
                                 return "librarySettings." + error;
                         }
                     }
+                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                        if (!$util.isString(message.protoReferenceDocumentationUri))
+                            return "protoReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -38050,6 +40745,18 @@
                     case 4:
                         message.organization = 4;
                         break;
+                    case "SHOPPING":
+                    case 5:
+                        message.organization = 5;
+                        break;
+                    case "GEO":
+                    case 6:
+                        message.organization = 6;
+                        break;
+                    case "GENERATIVE_AI":
+                    case 7:
+                        message.organization = 7;
+                        break;
                     }
                     if (object.librarySettings) {
                         if (!Array.isArray(object.librarySettings))
@@ -38061,6 +40768,8 @@
                             message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i]);
                         }
                     }
+                    if (object.protoReferenceDocumentationUri != null)
+                        message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
                     return message;
                 };
     
@@ -38089,6 +40798,7 @@
                         object.githubLabel = "";
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
+                        object.protoReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -38117,6 +40827,8 @@
                         for (var j = 0; j < message.librarySettings.length; ++j)
                             object.librarySettings[j] = $root.google.api.ClientLibrarySettings.toObject(message.librarySettings[j], options);
                     }
+                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                        object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
                     return object;
                 };
     
@@ -39279,6 +41991,11 @@
                  * @memberof google.api
                  * @interface IDotnetSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] DotnetSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] DotnetSettings renamedServices
+                 * @property {Object.<string,string>|null} [renamedResources] DotnetSettings renamedResources
+                 * @property {Array.<string>|null} [ignoredResources] DotnetSettings ignoredResources
+                 * @property {Array.<string>|null} [forcedNamespaceAliases] DotnetSettings forcedNamespaceAliases
+                 * @property {Array.<string>|null} [handwrittenSignatures] DotnetSettings handwrittenSignatures
                  */
     
                 /**
@@ -39290,6 +42007,11 @@
                  * @param {google.api.IDotnetSettings=} [properties] Properties to set
                  */
                 function DotnetSettings(properties) {
+                    this.renamedServices = {};
+                    this.renamedResources = {};
+                    this.ignoredResources = [];
+                    this.forcedNamespaceAliases = [];
+                    this.handwrittenSignatures = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -39303,6 +42025,46 @@
                  * @instance
                  */
                 DotnetSettings.prototype.common = null;
+    
+                /**
+                 * DotnetSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.renamedServices = $util.emptyObject;
+    
+                /**
+                 * DotnetSettings renamedResources.
+                 * @member {Object.<string,string>} renamedResources
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.renamedResources = $util.emptyObject;
+    
+                /**
+                 * DotnetSettings ignoredResources.
+                 * @member {Array.<string>} ignoredResources
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.ignoredResources = $util.emptyArray;
+    
+                /**
+                 * DotnetSettings forcedNamespaceAliases.
+                 * @member {Array.<string>} forcedNamespaceAliases
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.forcedNamespaceAliases = $util.emptyArray;
+    
+                /**
+                 * DotnetSettings handwrittenSignatures.
+                 * @member {Array.<string>} handwrittenSignatures
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.handwrittenSignatures = $util.emptyArray;
     
                 /**
                  * Creates a new DotnetSettings instance using the specified properties.
@@ -39330,6 +42092,21 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
+                    if (message.renamedResources != null && Object.hasOwnProperty.call(message, "renamedResources"))
+                        for (var keys = Object.keys(message.renamedResources), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedResources[keys[i]]).ldelim();
+                    if (message.ignoredResources != null && message.ignoredResources.length)
+                        for (var i = 0; i < message.ignoredResources.length; ++i)
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.ignoredResources[i]);
+                    if (message.forcedNamespaceAliases != null && message.forcedNamespaceAliases.length)
+                        for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.forcedNamespaceAliases[i]);
+                    if (message.handwrittenSignatures != null && message.handwrittenSignatures.length)
+                        for (var i = 0; i < message.handwrittenSignatures.length; ++i)
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.handwrittenSignatures[i]);
                     return writer;
                 };
     
@@ -39360,12 +42137,76 @@
                 DotnetSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
+                                break;
+                            }
+                        case 3: {
+                                if (message.renamedResources === $util.emptyObject)
+                                    message.renamedResources = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedResources[key] = value;
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.ignoredResources && message.ignoredResources.length))
+                                    message.ignoredResources = [];
+                                message.ignoredResources.push(reader.string());
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.forcedNamespaceAliases && message.forcedNamespaceAliases.length))
+                                    message.forcedNamespaceAliases = [];
+                                message.forcedNamespaceAliases.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.handwrittenSignatures && message.handwrittenSignatures.length))
+                                    message.handwrittenSignatures = [];
+                                message.handwrittenSignatures.push(reader.string());
                                 break;
                             }
                         default:
@@ -39408,6 +42249,43 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
+                    if (message.renamedResources != null && message.hasOwnProperty("renamedResources")) {
+                        if (!$util.isObject(message.renamedResources))
+                            return "renamedResources: object expected";
+                        var key = Object.keys(message.renamedResources);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedResources[key[i]]))
+                                return "renamedResources: string{k:string} expected";
+                    }
+                    if (message.ignoredResources != null && message.hasOwnProperty("ignoredResources")) {
+                        if (!Array.isArray(message.ignoredResources))
+                            return "ignoredResources: array expected";
+                        for (var i = 0; i < message.ignoredResources.length; ++i)
+                            if (!$util.isString(message.ignoredResources[i]))
+                                return "ignoredResources: string[] expected";
+                    }
+                    if (message.forcedNamespaceAliases != null && message.hasOwnProperty("forcedNamespaceAliases")) {
+                        if (!Array.isArray(message.forcedNamespaceAliases))
+                            return "forcedNamespaceAliases: array expected";
+                        for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
+                            if (!$util.isString(message.forcedNamespaceAliases[i]))
+                                return "forcedNamespaceAliases: string[] expected";
+                    }
+                    if (message.handwrittenSignatures != null && message.hasOwnProperty("handwrittenSignatures")) {
+                        if (!Array.isArray(message.handwrittenSignatures))
+                            return "handwrittenSignatures: array expected";
+                        for (var i = 0; i < message.handwrittenSignatures.length; ++i)
+                            if (!$util.isString(message.handwrittenSignatures[i]))
+                                return "handwrittenSignatures: string[] expected";
+                    }
                     return null;
                 };
     
@@ -39428,6 +42306,41 @@
                             throw TypeError(".google.api.DotnetSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.DotnetSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
+                    if (object.renamedResources) {
+                        if (typeof object.renamedResources !== "object")
+                            throw TypeError(".google.api.DotnetSettings.renamedResources: object expected");
+                        message.renamedResources = {};
+                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i)
+                            message.renamedResources[keys[i]] = String(object.renamedResources[keys[i]]);
+                    }
+                    if (object.ignoredResources) {
+                        if (!Array.isArray(object.ignoredResources))
+                            throw TypeError(".google.api.DotnetSettings.ignoredResources: array expected");
+                        message.ignoredResources = [];
+                        for (var i = 0; i < object.ignoredResources.length; ++i)
+                            message.ignoredResources[i] = String(object.ignoredResources[i]);
+                    }
+                    if (object.forcedNamespaceAliases) {
+                        if (!Array.isArray(object.forcedNamespaceAliases))
+                            throw TypeError(".google.api.DotnetSettings.forcedNamespaceAliases: array expected");
+                        message.forcedNamespaceAliases = [];
+                        for (var i = 0; i < object.forcedNamespaceAliases.length; ++i)
+                            message.forcedNamespaceAliases[i] = String(object.forcedNamespaceAliases[i]);
+                    }
+                    if (object.handwrittenSignatures) {
+                        if (!Array.isArray(object.handwrittenSignatures))
+                            throw TypeError(".google.api.DotnetSettings.handwrittenSignatures: array expected");
+                        message.handwrittenSignatures = [];
+                        for (var i = 0; i < object.handwrittenSignatures.length; ++i)
+                            message.handwrittenSignatures[i] = String(object.handwrittenSignatures[i]);
+                    }
                     return message;
                 };
     
@@ -39444,10 +42357,45 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.ignoredResources = [];
+                        object.forcedNamespaceAliases = [];
+                        object.handwrittenSignatures = [];
+                    }
+                    if (options.objects || options.defaults) {
+                        object.renamedServices = {};
+                        object.renamedResources = {};
+                    }
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
+                    if (message.renamedResources && (keys2 = Object.keys(message.renamedResources)).length) {
+                        object.renamedResources = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedResources[keys2[j]] = message.renamedResources[keys2[j]];
+                    }
+                    if (message.ignoredResources && message.ignoredResources.length) {
+                        object.ignoredResources = [];
+                        for (var j = 0; j < message.ignoredResources.length; ++j)
+                            object.ignoredResources[j] = message.ignoredResources[j];
+                    }
+                    if (message.forcedNamespaceAliases && message.forcedNamespaceAliases.length) {
+                        object.forcedNamespaceAliases = [];
+                        for (var j = 0; j < message.forcedNamespaceAliases.length; ++j)
+                            object.forcedNamespaceAliases[j] = message.forcedNamespaceAliases[j];
+                    }
+                    if (message.handwrittenSignatures && message.handwrittenSignatures.length) {
+                        object.handwrittenSignatures = [];
+                        for (var j = 0; j < message.handwrittenSignatures.length; ++j)
+                            object.handwrittenSignatures[j] = message.handwrittenSignatures[j];
+                    }
                     return object;
                 };
     
@@ -39904,6 +42852,7 @@
                  * @interface IMethodSettings
                  * @property {string|null} [selector] MethodSettings selector
                  * @property {google.api.MethodSettings.ILongRunning|null} [longRunning] MethodSettings longRunning
+                 * @property {Array.<string>|null} [autoPopulatedFields] MethodSettings autoPopulatedFields
                  */
     
                 /**
@@ -39915,6 +42864,7 @@
                  * @param {google.api.IMethodSettings=} [properties] Properties to set
                  */
                 function MethodSettings(properties) {
+                    this.autoPopulatedFields = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -39936,6 +42886,14 @@
                  * @instance
                  */
                 MethodSettings.prototype.longRunning = null;
+    
+                /**
+                 * MethodSettings autoPopulatedFields.
+                 * @member {Array.<string>} autoPopulatedFields
+                 * @memberof google.api.MethodSettings
+                 * @instance
+                 */
+                MethodSettings.prototype.autoPopulatedFields = $util.emptyArray;
     
                 /**
                  * Creates a new MethodSettings instance using the specified properties.
@@ -39965,6 +42923,9 @@
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
                     if (message.longRunning != null && Object.hasOwnProperty.call(message, "longRunning"))
                         $root.google.api.MethodSettings.LongRunning.encode(message.longRunning, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.autoPopulatedFields != null && message.autoPopulatedFields.length)
+                        for (var i = 0; i < message.autoPopulatedFields.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.autoPopulatedFields[i]);
                     return writer;
                 };
     
@@ -40005,6 +42966,12 @@
                             }
                         case 2: {
                                 message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.autoPopulatedFields && message.autoPopulatedFields.length))
+                                    message.autoPopulatedFields = [];
+                                message.autoPopulatedFields.push(reader.string());
                                 break;
                             }
                         default:
@@ -40050,6 +43017,13 @@
                         if (error)
                             return "longRunning." + error;
                     }
+                    if (message.autoPopulatedFields != null && message.hasOwnProperty("autoPopulatedFields")) {
+                        if (!Array.isArray(message.autoPopulatedFields))
+                            return "autoPopulatedFields: array expected";
+                        for (var i = 0; i < message.autoPopulatedFields.length; ++i)
+                            if (!$util.isString(message.autoPopulatedFields[i]))
+                                return "autoPopulatedFields: string[] expected";
+                    }
                     return null;
                 };
     
@@ -40072,6 +43046,13 @@
                             throw TypeError(".google.api.MethodSettings.longRunning: object expected");
                         message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning);
                     }
+                    if (object.autoPopulatedFields) {
+                        if (!Array.isArray(object.autoPopulatedFields))
+                            throw TypeError(".google.api.MethodSettings.autoPopulatedFields: array expected");
+                        message.autoPopulatedFields = [];
+                        for (var i = 0; i < object.autoPopulatedFields.length; ++i)
+                            message.autoPopulatedFields[i] = String(object.autoPopulatedFields[i]);
+                    }
                     return message;
                 };
     
@@ -40088,6 +43069,8 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.autoPopulatedFields = [];
                     if (options.defaults) {
                         object.selector = "";
                         object.longRunning = null;
@@ -40096,6 +43079,11 @@
                         object.selector = message.selector;
                     if (message.longRunning != null && message.hasOwnProperty("longRunning"))
                         object.longRunning = $root.google.api.MethodSettings.LongRunning.toObject(message.longRunning, options);
+                    if (message.autoPopulatedFields && message.autoPopulatedFields.length) {
+                        object.autoPopulatedFields = [];
+                        for (var j = 0; j < message.autoPopulatedFields.length; ++j)
+                            object.autoPopulatedFields[j] = message.autoPopulatedFields[j];
+                    }
                     return object;
                 };
     
@@ -40425,6 +43413,9 @@
              * @property {number} ADS=2 ADS value
              * @property {number} PHOTOS=3 PHOTOS value
              * @property {number} STREET_VIEW=4 STREET_VIEW value
+             * @property {number} SHOPPING=5 SHOPPING value
+             * @property {number} GEO=6 GEO value
+             * @property {number} GENERATIVE_AI=7 GENERATIVE_AI value
              */
             api.ClientLibraryOrganization = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -40433,6 +43424,9 @@
                 values[valuesById[2] = "ADS"] = 2;
                 values[valuesById[3] = "PHOTOS"] = 3;
                 values[valuesById[4] = "STREET_VIEW"] = 4;
+                values[valuesById[5] = "SHOPPING"] = 5;
+                values[valuesById[6] = "GEO"] = 6;
+                values[valuesById[7] = "GENERATIVE_AI"] = 7;
                 return values;
             })();
     
@@ -40490,6 +43484,7 @@
              * @property {number} IMMUTABLE=5 IMMUTABLE value
              * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
              * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             * @property {number} IDENTIFIER=8 IDENTIFIER value
              */
             api.FieldBehavior = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -40501,6 +43496,7 @@
                 values[valuesById[5] = "IMMUTABLE"] = 5;
                 values[valuesById[6] = "UNORDERED_LIST"] = 6;
                 values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                values[valuesById[8] = "IDENTIFIER"] = 8;
                 return values;
             })();
     
@@ -41424,6 +44420,38 @@
                 return FileDescriptorSet;
             })();
     
+            /**
+             * Edition enum.
+             * @name google.protobuf.Edition
+             * @enum {number}
+             * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
+             * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
+             * @property {number} EDITION_2023=1000 EDITION_2023 value
+             * @property {number} EDITION_2024=1001 EDITION_2024 value
+             * @property {number} EDITION_1_TEST_ONLY=1 EDITION_1_TEST_ONLY value
+             * @property {number} EDITION_2_TEST_ONLY=2 EDITION_2_TEST_ONLY value
+             * @property {number} EDITION_99997_TEST_ONLY=99997 EDITION_99997_TEST_ONLY value
+             * @property {number} EDITION_99998_TEST_ONLY=99998 EDITION_99998_TEST_ONLY value
+             * @property {number} EDITION_99999_TEST_ONLY=99999 EDITION_99999_TEST_ONLY value
+             * @property {number} EDITION_MAX=2147483647 EDITION_MAX value
+             */
+            protobuf.Edition = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[998] = "EDITION_PROTO2"] = 998;
+                values[valuesById[999] = "EDITION_PROTO3"] = 999;
+                values[valuesById[1000] = "EDITION_2023"] = 1000;
+                values[valuesById[1001] = "EDITION_2024"] = 1001;
+                values[valuesById[1] = "EDITION_1_TEST_ONLY"] = 1;
+                values[valuesById[2] = "EDITION_2_TEST_ONLY"] = 2;
+                values[valuesById[99997] = "EDITION_99997_TEST_ONLY"] = 99997;
+                values[valuesById[99998] = "EDITION_99998_TEST_ONLY"] = 99998;
+                values[valuesById[99999] = "EDITION_99999_TEST_ONLY"] = 99999;
+                values[valuesById[2147483647] = "EDITION_MAX"] = 2147483647;
+                return values;
+            })();
+    
             protobuf.FileDescriptorProto = (function() {
     
                 /**
@@ -41442,7 +44470,7 @@
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [sourceCodeInfo] FileDescriptorProto sourceCodeInfo
                  * @property {string|null} [syntax] FileDescriptorProto syntax
-                 * @property {string|null} [edition] FileDescriptorProto edition
+                 * @property {google.protobuf.Edition|null} [edition] FileDescriptorProto edition
                  */
     
                 /**
@@ -41565,11 +44593,11 @@
     
                 /**
                  * FileDescriptorProto edition.
-                 * @member {string} edition
+                 * @member {google.protobuf.Edition} edition
                  * @memberof google.protobuf.FileDescriptorProto
                  * @instance
                  */
-                FileDescriptorProto.prototype.edition = "";
+                FileDescriptorProto.prototype.edition = 0;
     
                 /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
@@ -41627,7 +44655,7 @@
                     if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
-                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.edition);
+                        writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
                     return writer;
                 };
     
@@ -41734,8 +44762,8 @@
                                 message.syntax = reader.string();
                                 break;
                             }
-                        case 13: {
-                                message.edition = reader.string();
+                        case 14: {
+                                message.edition = reader.int32();
                                 break;
                             }
                         default:
@@ -41850,8 +44878,22 @@
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
                     if (message.edition != null && message.hasOwnProperty("edition"))
-                        if (!$util.isString(message.edition))
-                            return "edition: string expected";
+                        switch (message.edition) {
+                        default:
+                            return "edition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
                     return null;
                 };
     
@@ -41944,8 +44986,58 @@
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
-                    if (object.edition != null)
-                        message.edition = String(object.edition);
+                    switch (object.edition) {
+                    default:
+                        if (typeof object.edition === "number") {
+                            message.edition = object.edition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.edition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.edition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.edition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.edition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.edition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.edition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.edition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.edition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.edition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.edition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.edition = 2147483647;
+                        break;
+                    }
                     return message;
                 };
     
@@ -41977,7 +45069,7 @@
                         object.options = null;
                         object.sourceCodeInfo = null;
                         object.syntax = "";
-                        object.edition = "";
+                        object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -42025,7 +45117,7 @@
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
-                        object.edition = message.edition;
+                        object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
                     return object;
                 };
     
@@ -43128,6 +46220,9 @@
                  * @memberof google.protobuf
                  * @interface IExtensionRangeOptions
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ExtensionRangeOptions uninterpretedOption
+                 * @property {Array.<google.protobuf.ExtensionRangeOptions.IDeclaration>|null} [declaration] ExtensionRangeOptions declaration
+                 * @property {google.protobuf.IFeatureSet|null} [features] ExtensionRangeOptions features
+                 * @property {google.protobuf.ExtensionRangeOptions.VerificationState|null} [verification] ExtensionRangeOptions verification
                  */
     
                 /**
@@ -43140,6 +46235,7 @@
                  */
                 function ExtensionRangeOptions(properties) {
                     this.uninterpretedOption = [];
+                    this.declaration = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -43153,6 +46249,30 @@
                  * @instance
                  */
                 ExtensionRangeOptions.prototype.uninterpretedOption = $util.emptyArray;
+    
+                /**
+                 * ExtensionRangeOptions declaration.
+                 * @member {Array.<google.protobuf.ExtensionRangeOptions.IDeclaration>} declaration
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.declaration = $util.emptyArray;
+    
+                /**
+                 * ExtensionRangeOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.features = null;
+    
+                /**
+                 * ExtensionRangeOptions verification.
+                 * @member {google.protobuf.ExtensionRangeOptions.VerificationState} verification
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.verification = 1;
     
                 /**
                  * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -43178,6 +46298,13 @@
                 ExtensionRangeOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (message.declaration != null && message.declaration.length)
+                        for (var i = 0; i < message.declaration.length; ++i)
+                            $root.google.protobuf.ExtensionRangeOptions.Declaration.encode(message.declaration[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.verification != null && Object.hasOwnProperty.call(message, "verification"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.verification);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -43219,6 +46346,20 @@
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.declaration && message.declaration.length))
+                                    message.declaration = [];
+                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 50: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.verification = reader.int32();
                                 break;
                             }
                         default:
@@ -43265,6 +46406,28 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message.declaration != null && message.hasOwnProperty("declaration")) {
+                        if (!Array.isArray(message.declaration))
+                            return "declaration: array expected";
+                        for (var i = 0; i < message.declaration.length; ++i) {
+                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i]);
+                            if (error)
+                                return "declaration." + error;
+                        }
+                    }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
+                    if (message.verification != null && message.hasOwnProperty("verification"))
+                        switch (message.verification) {
+                        default:
+                            return "verification: enum value expected";
+                        case 0:
+                        case 1:
+                            break;
+                        }
                     return null;
                 };
     
@@ -43290,6 +46453,37 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object.declaration) {
+                        if (!Array.isArray(object.declaration))
+                            throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: array expected");
+                        message.declaration = [];
+                        for (var i = 0; i < object.declaration.length; ++i) {
+                            if (typeof object.declaration[i] !== "object")
+                                throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: object expected");
+                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i]);
+                        }
+                    }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.ExtensionRangeOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
+                    switch (object.verification) {
+                    case "DECLARATION":
+                    case 0:
+                        message.verification = 0;
+                        break;
+                    default:
+                        if (typeof object.verification === "number") {
+                            message.verification = object.verification;
+                            break;
+                        }
+                        break;
+                    case "UNVERIFIED":
+                    case 1:
+                        message.verification = 1;
+                        break;
+                    }
                     return message;
                 };
     
@@ -43306,8 +46500,23 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
+                        object.declaration = [];
                         object.uninterpretedOption = [];
+                    }
+                    if (options.defaults) {
+                        object.verification = options.enums === String ? "UNVERIFIED" : 1;
+                        object.features = null;
+                    }
+                    if (message.declaration && message.declaration.length) {
+                        object.declaration = [];
+                        for (var j = 0; j < message.declaration.length; ++j)
+                            object.declaration[j] = $root.google.protobuf.ExtensionRangeOptions.Declaration.toObject(message.declaration[j], options);
+                    }
+                    if (message.verification != null && message.hasOwnProperty("verification"))
+                        object.verification = options.enums === String ? $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] === undefined ? message.verification : $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] : message.verification;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -43341,6 +46550,316 @@
                     }
                     return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions";
                 };
+    
+                ExtensionRangeOptions.Declaration = (function() {
+    
+                    /**
+                     * Properties of a Declaration.
+                     * @memberof google.protobuf.ExtensionRangeOptions
+                     * @interface IDeclaration
+                     * @property {number|null} [number] Declaration number
+                     * @property {string|null} [fullName] Declaration fullName
+                     * @property {string|null} [type] Declaration type
+                     * @property {boolean|null} [reserved] Declaration reserved
+                     * @property {boolean|null} [repeated] Declaration repeated
+                     */
+    
+                    /**
+                     * Constructs a new Declaration.
+                     * @memberof google.protobuf.ExtensionRangeOptions
+                     * @classdesc Represents a Declaration.
+                     * @implements IDeclaration
+                     * @constructor
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration=} [properties] Properties to set
+                     */
+                    function Declaration(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Declaration number.
+                     * @member {number} number
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.number = 0;
+    
+                    /**
+                     * Declaration fullName.
+                     * @member {string} fullName
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.fullName = "";
+    
+                    /**
+                     * Declaration type.
+                     * @member {string} type
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.type = "";
+    
+                    /**
+                     * Declaration reserved.
+                     * @member {boolean} reserved
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.reserved = false;
+    
+                    /**
+                     * Declaration repeated.
+                     * @member {boolean} repeated
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.repeated = false;
+    
+                    /**
+                     * Creates a new Declaration instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration=} [properties] Properties to set
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration instance
+                     */
+                    Declaration.create = function create(properties) {
+                        return new Declaration(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration} message Declaration message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Declaration.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.number);
+                        if (message.fullName != null && Object.hasOwnProperty.call(message, "fullName"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.fullName);
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
+                        if (message.reserved != null && Object.hasOwnProperty.call(message, "reserved"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.reserved);
+                        if (message.repeated != null && Object.hasOwnProperty.call(message, "repeated"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).bool(message.repeated);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration} message Declaration message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Declaration.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Declaration message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Declaration.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.number = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.fullName = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.type = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.reserved = reader.bool();
+                                    break;
+                                }
+                            case 6: {
+                                    message.repeated = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Declaration.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Declaration message.
+                     * @function verify
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Declaration.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.number != null && message.hasOwnProperty("number"))
+                            if (!$util.isInteger(message.number))
+                                return "number: integer expected";
+                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                            if (!$util.isString(message.fullName))
+                                return "fullName: string expected";
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            if (!$util.isString(message.type))
+                                return "type: string expected";
+                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                            if (typeof message.reserved !== "boolean")
+                                return "reserved: boolean expected";
+                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                            if (typeof message.repeated !== "boolean")
+                                return "repeated: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     */
+                    Declaration.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.ExtensionRangeOptions.Declaration)
+                            return object;
+                        var message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
+                        if (object.number != null)
+                            message.number = object.number | 0;
+                        if (object.fullName != null)
+                            message.fullName = String(object.fullName);
+                        if (object.type != null)
+                            message.type = String(object.type);
+                        if (object.reserved != null)
+                            message.reserved = Boolean(object.reserved);
+                        if (object.repeated != null)
+                            message.repeated = Boolean(object.repeated);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.Declaration} message Declaration
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Declaration.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.number = 0;
+                            object.fullName = "";
+                            object.type = "";
+                            object.reserved = false;
+                            object.repeated = false;
+                        }
+                        if (message.number != null && message.hasOwnProperty("number"))
+                            object.number = message.number;
+                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                            object.fullName = message.fullName;
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            object.type = message.type;
+                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                            object.reserved = message.reserved;
+                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                            object.repeated = message.repeated;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Declaration to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Declaration.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Declaration
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Declaration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions.Declaration";
+                    };
+    
+                    return Declaration;
+                })();
+    
+                /**
+                 * VerificationState enum.
+                 * @name google.protobuf.ExtensionRangeOptions.VerificationState
+                 * @enum {number}
+                 * @property {number} DECLARATION=0 DECLARATION value
+                 * @property {number} UNVERIFIED=1 UNVERIFIED value
+                 */
+                ExtensionRangeOptions.VerificationState = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "DECLARATION"] = 0;
+                    values[valuesById[1] = "UNVERIFIED"] = 1;
+                    return values;
+                })();
     
                 return ExtensionRangeOptions;
             })();
@@ -43637,8 +47156,8 @@
                         default:
                             return "label: enum value expected";
                         case 1:
-                        case 2:
                         case 3:
+                        case 2:
                             break;
                         }
                     if (message.type != null && message.hasOwnProperty("type"))
@@ -43718,13 +47237,13 @@
                     case 1:
                         message.label = 1;
                         break;
-                    case "LABEL_REQUIRED":
-                    case 2:
-                        message.label = 2;
-                        break;
                     case "LABEL_REPEATED":
                     case 3:
                         message.label = 3;
+                        break;
+                    case "LABEL_REQUIRED":
+                    case 2:
+                        message.label = 2;
                         break;
                     }
                     switch (object.type) {
@@ -43955,14 +47474,14 @@
                  * @name google.protobuf.FieldDescriptorProto.Label
                  * @enum {number}
                  * @property {number} LABEL_OPTIONAL=1 LABEL_OPTIONAL value
-                 * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  * @property {number} LABEL_REPEATED=3 LABEL_REPEATED value
+                 * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  */
                 FieldDescriptorProto.Label = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
                     values[valuesById[1] = "LABEL_OPTIONAL"] = 1;
-                    values[valuesById[2] = "LABEL_REQUIRED"] = 2;
                     values[valuesById[3] = "LABEL_REPEATED"] = 3;
+                    values[valuesById[2] = "LABEL_REQUIRED"] = 2;
                     return values;
                 })();
     
@@ -45661,7 +49180,6 @@
                  * @property {boolean|null} [ccGenericServices] FileOptions ccGenericServices
                  * @property {boolean|null} [javaGenericServices] FileOptions javaGenericServices
                  * @property {boolean|null} [pyGenericServices] FileOptions pyGenericServices
-                 * @property {boolean|null} [phpGenericServices] FileOptions phpGenericServices
                  * @property {boolean|null} [deprecated] FileOptions deprecated
                  * @property {boolean|null} [ccEnableArenas] FileOptions ccEnableArenas
                  * @property {string|null} [objcClassPrefix] FileOptions objcClassPrefix
@@ -45671,6 +49189,7 @@
                  * @property {string|null} [phpNamespace] FileOptions phpNamespace
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
+                 * @property {google.protobuf.IFeatureSet|null} [features] FileOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
                  * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
@@ -45773,14 +49292,6 @@
                 FileOptions.prototype.pyGenericServices = false;
     
                 /**
-                 * FileOptions phpGenericServices.
-                 * @member {boolean} phpGenericServices
-                 * @memberof google.protobuf.FileOptions
-                 * @instance
-                 */
-                FileOptions.prototype.phpGenericServices = false;
-    
-                /**
                  * FileOptions deprecated.
                  * @member {boolean} deprecated
                  * @memberof google.protobuf.FileOptions
@@ -45851,6 +49362,14 @@
                  * @instance
                  */
                 FileOptions.prototype.rubyPackage = "";
+    
+                /**
+                 * FileOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.features = null;
     
                 /**
                  * FileOptions uninterpretedOption.
@@ -45926,12 +49445,12 @@
                         writer.uint32(/* id 40, wireType 2 =*/322).string(message.phpClassPrefix);
                     if (message.phpNamespace != null && Object.hasOwnProperty.call(message, "phpNamespace"))
                         writer.uint32(/* id 41, wireType 2 =*/330).string(message.phpNamespace);
-                    if (message.phpGenericServices != null && Object.hasOwnProperty.call(message, "phpGenericServices"))
-                        writer.uint32(/* id 42, wireType 0 =*/336).bool(message.phpGenericServices);
                     if (message.phpMetadataNamespace != null && Object.hasOwnProperty.call(message, "phpMetadataNamespace"))
                         writer.uint32(/* id 44, wireType 2 =*/354).string(message.phpMetadataNamespace);
                     if (message.rubyPackage != null && Object.hasOwnProperty.call(message, "rubyPackage"))
                         writer.uint32(/* id 45, wireType 2 =*/362).string(message.rubyPackage);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -46012,10 +49531,6 @@
                                 message.pyGenericServices = reader.bool();
                                 break;
                             }
-                        case 42: {
-                                message.phpGenericServices = reader.bool();
-                                break;
-                            }
                         case 23: {
                                 message.deprecated = reader.bool();
                                 break;
@@ -46050,6 +49565,10 @@
                             }
                         case 45: {
                                 message.rubyPackage = reader.string();
+                                break;
+                            }
+                        case 50: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -46135,9 +49654,6 @@
                     if (message.pyGenericServices != null && message.hasOwnProperty("pyGenericServices"))
                         if (typeof message.pyGenericServices !== "boolean")
                             return "pyGenericServices: boolean expected";
-                    if (message.phpGenericServices != null && message.hasOwnProperty("phpGenericServices"))
-                        if (typeof message.phpGenericServices !== "boolean")
-                            return "phpGenericServices: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -46165,6 +49681,11 @@
                     if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
                         if (!$util.isString(message.rubyPackage))
                             return "rubyPackage: string expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -46236,8 +49757,6 @@
                         message.javaGenericServices = Boolean(object.javaGenericServices);
                     if (object.pyGenericServices != null)
                         message.pyGenericServices = Boolean(object.pyGenericServices);
-                    if (object.phpGenericServices != null)
-                        message.phpGenericServices = Boolean(object.phpGenericServices);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.ccEnableArenas != null)
@@ -46256,6 +49775,11 @@
                         message.phpMetadataNamespace = String(object.phpMetadataNamespace);
                     if (object.rubyPackage != null)
                         message.rubyPackage = String(object.rubyPackage);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.FileOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: array expected");
@@ -46314,9 +49838,9 @@
                         object.swiftPrefix = "";
                         object.phpClassPrefix = "";
                         object.phpNamespace = "";
-                        object.phpGenericServices = false;
                         object.phpMetadataNamespace = "";
                         object.rubyPackage = "";
+                        object.features = null;
                     }
                     if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
                         object.javaPackage = message.javaPackage;
@@ -46352,12 +49876,12 @@
                         object.phpClassPrefix = message.phpClassPrefix;
                     if (message.phpNamespace != null && message.hasOwnProperty("phpNamespace"))
                         object.phpNamespace = message.phpNamespace;
-                    if (message.phpGenericServices != null && message.hasOwnProperty("phpGenericServices"))
-                        object.phpGenericServices = message.phpGenericServices;
                     if (message.phpMetadataNamespace != null && message.hasOwnProperty("phpMetadataNamespace"))
                         object.phpMetadataNamespace = message.phpMetadataNamespace;
                     if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
                         object.rubyPackage = message.rubyPackage;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -46427,6 +49951,7 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] MessageOptions deprecatedLegacyJsonFieldConflicts
+                 * @property {google.protobuf.IFeatureSet|null} [features] MessageOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
                  * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
@@ -46488,6 +50013,14 @@
                 MessageOptions.prototype.deprecatedLegacyJsonFieldConflicts = false;
     
                 /**
+                 * MessageOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.features = null;
+    
+                /**
                  * MessageOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.MessageOptions
@@ -46537,6 +50070,8 @@
                         writer.uint32(/* id 7, wireType 0 =*/56).bool(message.mapEntry);
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 11, wireType 0 =*/88).bool(message.deprecatedLegacyJsonFieldConflicts);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -46594,6 +50129,10 @@
                             }
                         case 11: {
                                 message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+                                break;
+                            }
+                        case 12: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -46656,6 +50195,11 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -46695,6 +50239,11 @@
                         message.mapEntry = Boolean(object.mapEntry);
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: array expected");
@@ -46734,6 +50283,7 @@
                         object.deprecated = false;
                         object.mapEntry = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
+                        object.features = null;
                         object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
@@ -46746,6 +50296,8 @@
                         object.mapEntry = message.mapEntry;
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -46800,7 +50352,9 @@
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {boolean|null} [debugRedact] FieldOptions debugRedact
                  * @property {google.protobuf.FieldOptions.OptionRetention|null} [retention] FieldOptions retention
-                 * @property {google.protobuf.FieldOptions.OptionTargetType|null} [target] FieldOptions target
+                 * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
+                 * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
+                 * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -46815,6 +50369,8 @@
                  * @param {google.protobuf.IFieldOptions=} [properties] Properties to set
                  */
                 function FieldOptions(properties) {
+                    this.targets = [];
+                    this.editionDefaults = [];
                     this.uninterpretedOption = [];
                     this[".google.api.fieldBehavior"] = [];
                     if (properties)
@@ -46896,12 +50452,28 @@
                 FieldOptions.prototype.retention = 0;
     
                 /**
-                 * FieldOptions target.
-                 * @member {google.protobuf.FieldOptions.OptionTargetType} target
+                 * FieldOptions targets.
+                 * @member {Array.<google.protobuf.FieldOptions.OptionTargetType>} targets
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
-                FieldOptions.prototype.target = 0;
+                FieldOptions.prototype.targets = $util.emptyArray;
+    
+                /**
+                 * FieldOptions editionDefaults.
+                 * @member {Array.<google.protobuf.FieldOptions.IEditionDefault>} editionDefaults
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.editionDefaults = $util.emptyArray;
+    
+                /**
+                 * FieldOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.features = null;
     
                 /**
                  * FieldOptions uninterpretedOption.
@@ -46969,8 +50541,14 @@
                         writer.uint32(/* id 16, wireType 0 =*/128).bool(message.debugRedact);
                     if (message.retention != null && Object.hasOwnProperty.call(message, "retention"))
                         writer.uint32(/* id 17, wireType 0 =*/136).int32(message.retention);
-                    if (message.target != null && Object.hasOwnProperty.call(message, "target"))
-                        writer.uint32(/* id 18, wireType 0 =*/144).int32(message.target);
+                    if (message.targets != null && message.targets.length)
+                        for (var i = 0; i < message.targets.length; ++i)
+                            writer.uint32(/* id 19, wireType 0 =*/152).int32(message.targets[i]);
+                    if (message.editionDefaults != null && message.editionDefaults.length)
+                        for (var i = 0; i < message.editionDefaults.length; ++i)
+                            $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -47052,8 +50630,25 @@
                                 message.retention = reader.int32();
                                 break;
                             }
-                        case 18: {
-                                message.target = reader.int32();
+                        case 19: {
+                                if (!(message.targets && message.targets.length))
+                                    message.targets = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.targets.push(reader.int32());
+                                } else
+                                    message.targets.push(reader.int32());
+                                break;
+                            }
+                        case 20: {
+                                if (!(message.editionDefaults && message.editionDefaults.length))
+                                    message.editionDefaults = [];
+                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 21: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -47157,22 +50752,40 @@
                         case 2:
                             break;
                         }
-                    if (message.target != null && message.hasOwnProperty("target"))
-                        switch (message.target) {
-                        default:
-                            return "target: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                            break;
+                    if (message.targets != null && message.hasOwnProperty("targets")) {
+                        if (!Array.isArray(message.targets))
+                            return "targets: array expected";
+                        for (var i = 0; i < message.targets.length; ++i)
+                            switch (message.targets[i]) {
+                            default:
+                                return "targets: enum value[] expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                            case 7:
+                            case 8:
+                            case 9:
+                                break;
+                            }
+                    }
+                    if (message.editionDefaults != null && message.hasOwnProperty("editionDefaults")) {
+                        if (!Array.isArray(message.editionDefaults))
+                            return "editionDefaults: array expected";
+                        for (var i = 0; i < message.editionDefaults.length; ++i) {
+                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i]);
+                            if (error)
+                                return "editionDefaults." + error;
                         }
+                    }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -47197,6 +50810,7 @@
                             case 5:
                             case 6:
                             case 7:
+                            case 8:
                                 break;
                             }
                     }
@@ -47292,53 +50906,73 @@
                         message.retention = 2;
                         break;
                     }
-                    switch (object.target) {
-                    default:
-                        if (typeof object.target === "number") {
-                            message.target = object.target;
-                            break;
+                    if (object.targets) {
+                        if (!Array.isArray(object.targets))
+                            throw TypeError(".google.protobuf.FieldOptions.targets: array expected");
+                        message.targets = [];
+                        for (var i = 0; i < object.targets.length; ++i)
+                            switch (object.targets[i]) {
+                            default:
+                                if (typeof object.targets[i] === "number") {
+                                    message.targets[i] = object.targets[i];
+                                    break;
+                                }
+                            case "TARGET_TYPE_UNKNOWN":
+                            case 0:
+                                message.targets[i] = 0;
+                                break;
+                            case "TARGET_TYPE_FILE":
+                            case 1:
+                                message.targets[i] = 1;
+                                break;
+                            case "TARGET_TYPE_EXTENSION_RANGE":
+                            case 2:
+                                message.targets[i] = 2;
+                                break;
+                            case "TARGET_TYPE_MESSAGE":
+                            case 3:
+                                message.targets[i] = 3;
+                                break;
+                            case "TARGET_TYPE_FIELD":
+                            case 4:
+                                message.targets[i] = 4;
+                                break;
+                            case "TARGET_TYPE_ONEOF":
+                            case 5:
+                                message.targets[i] = 5;
+                                break;
+                            case "TARGET_TYPE_ENUM":
+                            case 6:
+                                message.targets[i] = 6;
+                                break;
+                            case "TARGET_TYPE_ENUM_ENTRY":
+                            case 7:
+                                message.targets[i] = 7;
+                                break;
+                            case "TARGET_TYPE_SERVICE":
+                            case 8:
+                                message.targets[i] = 8;
+                                break;
+                            case "TARGET_TYPE_METHOD":
+                            case 9:
+                                message.targets[i] = 9;
+                                break;
+                            }
+                    }
+                    if (object.editionDefaults) {
+                        if (!Array.isArray(object.editionDefaults))
+                            throw TypeError(".google.protobuf.FieldOptions.editionDefaults: array expected");
+                        message.editionDefaults = [];
+                        for (var i = 0; i < object.editionDefaults.length; ++i) {
+                            if (typeof object.editionDefaults[i] !== "object")
+                                throw TypeError(".google.protobuf.FieldOptions.editionDefaults: object expected");
+                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i]);
                         }
-                        break;
-                    case "TARGET_TYPE_UNKNOWN":
-                    case 0:
-                        message.target = 0;
-                        break;
-                    case "TARGET_TYPE_FILE":
-                    case 1:
-                        message.target = 1;
-                        break;
-                    case "TARGET_TYPE_EXTENSION_RANGE":
-                    case 2:
-                        message.target = 2;
-                        break;
-                    case "TARGET_TYPE_MESSAGE":
-                    case 3:
-                        message.target = 3;
-                        break;
-                    case "TARGET_TYPE_FIELD":
-                    case 4:
-                        message.target = 4;
-                        break;
-                    case "TARGET_TYPE_ONEOF":
-                    case 5:
-                        message.target = 5;
-                        break;
-                    case "TARGET_TYPE_ENUM":
-                    case 6:
-                        message.target = 6;
-                        break;
-                    case "TARGET_TYPE_ENUM_ENTRY":
-                    case 7:
-                        message.target = 7;
-                        break;
-                    case "TARGET_TYPE_SERVICE":
-                    case 8:
-                        message.target = 8;
-                        break;
-                    case "TARGET_TYPE_METHOD":
-                    case 9:
-                        message.target = 9;
-                        break;
+                    }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -47393,6 +51027,10 @@
                             case 7:
                                 message[".google.api.fieldBehavior"][i] = 7;
                                 break;
+                            case "IDENTIFIER":
+                            case 8:
+                                message[".google.api.fieldBehavior"][i] = 8;
+                                break;
                             }
                     }
                     if (object[".google.api.resourceReference"] != null) {
@@ -47417,6 +51055,8 @@
                         options = {};
                     var object = {};
                     if (options.arrays || options.defaults) {
+                        object.targets = [];
+                        object.editionDefaults = [];
                         object.uninterpretedOption = [];
                         object[".google.api.fieldBehavior"] = [];
                     }
@@ -47430,7 +51070,7 @@
                         object.unverifiedLazy = false;
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
-                        object.target = options.enums === String ? "TARGET_TYPE_UNKNOWN" : 0;
+                        object.features = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -47451,8 +51091,18 @@
                         object.debugRedact = message.debugRedact;
                     if (message.retention != null && message.hasOwnProperty("retention"))
                         object.retention = options.enums === String ? $root.google.protobuf.FieldOptions.OptionRetention[message.retention] === undefined ? message.retention : $root.google.protobuf.FieldOptions.OptionRetention[message.retention] : message.retention;
-                    if (message.target != null && message.hasOwnProperty("target"))
-                        object.target = options.enums === String ? $root.google.protobuf.FieldOptions.OptionTargetType[message.target] === undefined ? message.target : $root.google.protobuf.FieldOptions.OptionTargetType[message.target] : message.target;
+                    if (message.targets && message.targets.length) {
+                        object.targets = [];
+                        for (var j = 0; j < message.targets.length; ++j)
+                            object.targets[j] = options.enums === String ? $root.google.protobuf.FieldOptions.OptionTargetType[message.targets[j]] === undefined ? message.targets[j] : $root.google.protobuf.FieldOptions.OptionTargetType[message.targets[j]] : message.targets[j];
+                    }
+                    if (message.editionDefaults && message.editionDefaults.length) {
+                        object.editionDefaults = [];
+                        for (var j = 0; j < message.editionDefaults.length; ++j)
+                            object.editionDefaults[j] = $root.google.protobuf.FieldOptions.EditionDefault.toObject(message.editionDefaults[j], options);
+                    }
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -47572,6 +51222,297 @@
                     return values;
                 })();
     
+                FieldOptions.EditionDefault = (function() {
+    
+                    /**
+                     * Properties of an EditionDefault.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IEditionDefault
+                     * @property {google.protobuf.Edition|null} [edition] EditionDefault edition
+                     * @property {string|null} [value] EditionDefault value
+                     */
+    
+                    /**
+                     * Constructs a new EditionDefault.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents an EditionDefault.
+                     * @implements IEditionDefault
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IEditionDefault=} [properties] Properties to set
+                     */
+                    function EditionDefault(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * EditionDefault edition.
+                     * @member {google.protobuf.Edition} edition
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     */
+                    EditionDefault.prototype.edition = 0;
+    
+                    /**
+                     * EditionDefault value.
+                     * @member {string} value
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     */
+                    EditionDefault.prototype.value = "";
+    
+                    /**
+                     * Creates a new EditionDefault instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault instance
+                     */
+                    EditionDefault.create = function create(properties) {
+                        return new EditionDefault(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault} message EditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EditionDefault.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault} message EditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an EditionDefault message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EditionDefault.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 3: {
+                                    message.edition = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.value = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EditionDefault.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an EditionDefault message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    EditionDefault.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            switch (message.edition) {
+                            default:
+                                return "edition: enum value expected";
+                            case 0:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            if (!$util.isString(message.value))
+                                return "value: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     */
+                    EditionDefault.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.EditionDefault)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.EditionDefault();
+                        switch (object.edition) {
+                        default:
+                            if (typeof object.edition === "number") {
+                                message.edition = object.edition;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.edition = 0;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.edition = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.edition = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.edition = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.edition = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.edition = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.edition = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.edition = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.edition = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.edition = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.edition = 2147483647;
+                            break;
+                        }
+                        if (object.value != null)
+                            message.value = String(object.value);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.EditionDefault} message EditionDefault
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    EditionDefault.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.value = "";
+                            object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            object.value = message.value;
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this EditionDefault to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    EditionDefault.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EditionDefault
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EditionDefault.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.EditionDefault";
+                    };
+    
+                    return EditionDefault;
+                })();
+    
                 return FieldOptions;
             })();
     
@@ -47581,6 +51522,7 @@
                  * Properties of an OneofOptions.
                  * @memberof google.protobuf
                  * @interface IOneofOptions
+                 * @property {google.protobuf.IFeatureSet|null} [features] OneofOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] OneofOptions uninterpretedOption
                  */
     
@@ -47599,6 +51541,14 @@
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
+    
+                /**
+                 * OneofOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 */
+                OneofOptions.prototype.features = null;
     
                 /**
                  * OneofOptions uninterpretedOption.
@@ -47632,6 +51582,8 @@
                 OneofOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -47669,6 +51621,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
+                        case 1: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
@@ -47710,6 +51666,11 @@
                 OneofOptions.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -47734,6 +51695,11 @@
                     if (object instanceof $root.google.protobuf.OneofOptions)
                         return object;
                     var message = new $root.google.protobuf.OneofOptions();
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.OneofOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: array expected");
@@ -47762,6 +51728,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
+                    if (options.defaults)
+                        object.features = null;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -47808,6 +51778,7 @@
                  * @property {boolean|null} [allowAlias] EnumOptions allowAlias
                  * @property {boolean|null} [deprecated] EnumOptions deprecated
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] EnumOptions deprecatedLegacyJsonFieldConflicts
+                 * @property {google.protobuf.IFeatureSet|null} [features] EnumOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumOptions uninterpretedOption
                  */
     
@@ -47852,6 +51823,14 @@
                 EnumOptions.prototype.deprecatedLegacyJsonFieldConflicts = false;
     
                 /**
+                 * EnumOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.EnumOptions
+                 * @instance
+                 */
+                EnumOptions.prototype.features = null;
+    
+                /**
                  * EnumOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumOptions
@@ -47889,6 +51868,8 @@
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 6, wireType 0 =*/48).bool(message.deprecatedLegacyJsonFieldConflicts);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -47936,6 +51917,10 @@
                             }
                         case 6: {
                                 message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -47988,6 +51973,11 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -48018,6 +52008,11 @@
                         message.deprecated = Boolean(object.deprecated);
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.EnumOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: array expected");
@@ -48050,6 +52045,7 @@
                         object.allowAlias = false;
                         object.deprecated = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
+                        object.features = null;
                     }
                     if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
                         object.allowAlias = message.allowAlias;
@@ -48057,6 +52053,8 @@
                         object.deprecated = message.deprecated;
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -48101,6 +52099,8 @@
                  * @memberof google.protobuf
                  * @interface IEnumValueOptions
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
+                 * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
+                 * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -48127,6 +52127,22 @@
                  * @instance
                  */
                 EnumValueOptions.prototype.deprecated = false;
+    
+                /**
+                 * EnumValueOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.features = null;
+    
+                /**
+                 * EnumValueOptions debugRedact.
+                 * @member {boolean} debugRedact
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.debugRedact = false;
     
                 /**
                  * EnumValueOptions uninterpretedOption.
@@ -48162,6 +52178,10 @@
                         writer = $Writer.create();
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -48201,6 +52221,14 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 2: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.debugRedact = reader.bool();
                                 break;
                             }
                         case 999: {
@@ -48247,6 +52275,14 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
+                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                        if (typeof message.debugRedact !== "boolean")
+                            return "debugRedact: boolean expected";
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -48273,6 +52309,13 @@
                     var message = new $root.google.protobuf.EnumValueOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
+                    if (object.debugRedact != null)
+                        message.debugRedact = Boolean(object.debugRedact);
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -48301,10 +52344,17 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.deprecated = false;
+                        object.features = null;
+                        object.debugRedact = false;
+                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                        object.debugRedact = message.debugRedact;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -48348,6 +52398,7 @@
                  * Properties of a ServiceOptions.
                  * @memberof google.protobuf
                  * @interface IServiceOptions
+                 * @property {google.protobuf.IFeatureSet|null} [features] ServiceOptions features
                  * @property {boolean|null} [deprecated] ServiceOptions deprecated
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
@@ -48369,6 +52420,14 @@
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
+    
+                /**
+                 * ServiceOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype.features = null;
     
                 /**
                  * ServiceOptions deprecated.
@@ -48428,6 +52487,8 @@
                         writer = $Writer.create();
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -48469,6 +52530,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
+                        case 34: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
                         case 33: {
                                 message.deprecated = reader.bool();
                                 break;
@@ -48522,6 +52587,11 @@
                 ServiceOptions.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -48555,6 +52625,11 @@
                     if (object instanceof $root.google.protobuf.ServiceOptions)
                         return object;
                     var message = new $root.google.protobuf.ServiceOptions();
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.ServiceOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.uninterpretedOption) {
@@ -48591,11 +52666,14 @@
                         object.uninterpretedOption = [];
                     if (options.defaults) {
                         object.deprecated = false;
+                        object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -48645,6 +52723,7 @@
                  * @interface IMethodOptions
                  * @property {boolean|null} [deprecated] MethodOptions deprecated
                  * @property {google.protobuf.MethodOptions.IdempotencyLevel|null} [idempotencyLevel] MethodOptions idempotencyLevel
+                 * @property {google.protobuf.IFeatureSet|null} [features] MethodOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
@@ -48683,6 +52762,14 @@
                  * @instance
                  */
                 MethodOptions.prototype.idempotencyLevel = 0;
+    
+                /**
+                 * MethodOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype.features = null;
     
                 /**
                  * MethodOptions uninterpretedOption.
@@ -48744,6 +52831,8 @@
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.idempotencyLevel != null && Object.hasOwnProperty.call(message, "idempotencyLevel"))
                         writer.uint32(/* id 34, wireType 0 =*/272).int32(message.idempotencyLevel);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -48794,6 +52883,10 @@
                             }
                         case 34: {
                                 message.idempotencyLevel = reader.int32();
+                                break;
+                            }
+                        case 35: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -48863,6 +52956,11 @@
                         case 2:
                             break;
                         }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -48926,6 +53024,11 @@
                         message.idempotencyLevel = 2;
                         break;
                     }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.MethodOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: array expected");
@@ -48976,6 +53079,7 @@
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
+                        object.features = null;
                         object[".google.longrunning.operationInfo"] = null;
                         object[".google.api.http"] = null;
                     }
@@ -48983,6 +53087,8 @@
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
                         object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -49671,6 +53777,1268 @@
                 })();
     
                 return UninterpretedOption;
+            })();
+    
+            protobuf.FeatureSet = (function() {
+    
+                /**
+                 * Properties of a FeatureSet.
+                 * @memberof google.protobuf
+                 * @interface IFeatureSet
+                 * @property {google.protobuf.FeatureSet.FieldPresence|null} [fieldPresence] FeatureSet fieldPresence
+                 * @property {google.protobuf.FeatureSet.EnumType|null} [enumType] FeatureSet enumType
+                 * @property {google.protobuf.FeatureSet.RepeatedFieldEncoding|null} [repeatedFieldEncoding] FeatureSet repeatedFieldEncoding
+                 * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
+                 * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
+                 * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 */
+    
+                /**
+                 * Constructs a new FeatureSet.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FeatureSet.
+                 * @implements IFeatureSet
+                 * @constructor
+                 * @param {google.protobuf.IFeatureSet=} [properties] Properties to set
+                 */
+                function FeatureSet(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FeatureSet fieldPresence.
+                 * @member {google.protobuf.FeatureSet.FieldPresence} fieldPresence
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.fieldPresence = 0;
+    
+                /**
+                 * FeatureSet enumType.
+                 * @member {google.protobuf.FeatureSet.EnumType} enumType
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enumType = 0;
+    
+                /**
+                 * FeatureSet repeatedFieldEncoding.
+                 * @member {google.protobuf.FeatureSet.RepeatedFieldEncoding} repeatedFieldEncoding
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.repeatedFieldEncoding = 0;
+    
+                /**
+                 * FeatureSet utf8Validation.
+                 * @member {google.protobuf.FeatureSet.Utf8Validation} utf8Validation
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.utf8Validation = 0;
+    
+                /**
+                 * FeatureSet messageEncoding.
+                 * @member {google.protobuf.FeatureSet.MessageEncoding} messageEncoding
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.messageEncoding = 0;
+    
+                /**
+                 * FeatureSet jsonFormat.
+                 * @member {google.protobuf.FeatureSet.JsonFormat} jsonFormat
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.jsonFormat = 0;
+    
+                /**
+                 * Creates a new FeatureSet instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet=} [properties] Properties to set
+                 * @returns {google.protobuf.FeatureSet} FeatureSet instance
+                 */
+                FeatureSet.create = function create(properties) {
+                    return new FeatureSet(properties);
+                };
+    
+                /**
+                 * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet} message FeatureSet message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSet.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.fieldPresence);
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.enumType);
+                    if (message.repeatedFieldEncoding != null && Object.hasOwnProperty.call(message, "repeatedFieldEncoding"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.repeatedFieldEncoding);
+                    if (message.utf8Validation != null && Object.hasOwnProperty.call(message, "utf8Validation"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.utf8Validation);
+                    if (message.messageEncoding != null && Object.hasOwnProperty.call(message, "messageEncoding"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
+                    if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet} message FeatureSet message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSet.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FeatureSet message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSet.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.fieldPresence = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.enumType = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.repeatedFieldEncoding = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.utf8Validation = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.messageEncoding = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSet.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FeatureSet message.
+                 * @function verify
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FeatureSet.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                        switch (message.fieldPresence) {
+                        default:
+                            return "fieldPresence: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                        switch (message.enumType) {
+                        default:
+                            return "enumType: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                        switch (message.repeatedFieldEncoding) {
+                        default:
+                            return "repeatedFieldEncoding: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                        switch (message.utf8Validation) {
+                        default:
+                            return "utf8Validation: enum value expected";
+                        case 0:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                        switch (message.messageEncoding) {
+                        default:
+                            return "messageEncoding: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                        switch (message.jsonFormat) {
+                        default:
+                            return "jsonFormat: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 */
+                FeatureSet.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FeatureSet)
+                        return object;
+                    var message = new $root.google.protobuf.FeatureSet();
+                    switch (object.fieldPresence) {
+                    default:
+                        if (typeof object.fieldPresence === "number") {
+                            message.fieldPresence = object.fieldPresence;
+                            break;
+                        }
+                        break;
+                    case "FIELD_PRESENCE_UNKNOWN":
+                    case 0:
+                        message.fieldPresence = 0;
+                        break;
+                    case "EXPLICIT":
+                    case 1:
+                        message.fieldPresence = 1;
+                        break;
+                    case "IMPLICIT":
+                    case 2:
+                        message.fieldPresence = 2;
+                        break;
+                    case "LEGACY_REQUIRED":
+                    case 3:
+                        message.fieldPresence = 3;
+                        break;
+                    }
+                    switch (object.enumType) {
+                    default:
+                        if (typeof object.enumType === "number") {
+                            message.enumType = object.enumType;
+                            break;
+                        }
+                        break;
+                    case "ENUM_TYPE_UNKNOWN":
+                    case 0:
+                        message.enumType = 0;
+                        break;
+                    case "OPEN":
+                    case 1:
+                        message.enumType = 1;
+                        break;
+                    case "CLOSED":
+                    case 2:
+                        message.enumType = 2;
+                        break;
+                    }
+                    switch (object.repeatedFieldEncoding) {
+                    default:
+                        if (typeof object.repeatedFieldEncoding === "number") {
+                            message.repeatedFieldEncoding = object.repeatedFieldEncoding;
+                            break;
+                        }
+                        break;
+                    case "REPEATED_FIELD_ENCODING_UNKNOWN":
+                    case 0:
+                        message.repeatedFieldEncoding = 0;
+                        break;
+                    case "PACKED":
+                    case 1:
+                        message.repeatedFieldEncoding = 1;
+                        break;
+                    case "EXPANDED":
+                    case 2:
+                        message.repeatedFieldEncoding = 2;
+                        break;
+                    }
+                    switch (object.utf8Validation) {
+                    default:
+                        if (typeof object.utf8Validation === "number") {
+                            message.utf8Validation = object.utf8Validation;
+                            break;
+                        }
+                        break;
+                    case "UTF8_VALIDATION_UNKNOWN":
+                    case 0:
+                        message.utf8Validation = 0;
+                        break;
+                    case "VERIFY":
+                    case 2:
+                        message.utf8Validation = 2;
+                        break;
+                    case "NONE":
+                    case 3:
+                        message.utf8Validation = 3;
+                        break;
+                    }
+                    switch (object.messageEncoding) {
+                    default:
+                        if (typeof object.messageEncoding === "number") {
+                            message.messageEncoding = object.messageEncoding;
+                            break;
+                        }
+                        break;
+                    case "MESSAGE_ENCODING_UNKNOWN":
+                    case 0:
+                        message.messageEncoding = 0;
+                        break;
+                    case "LENGTH_PREFIXED":
+                    case 1:
+                        message.messageEncoding = 1;
+                        break;
+                    case "DELIMITED":
+                    case 2:
+                        message.messageEncoding = 2;
+                        break;
+                    }
+                    switch (object.jsonFormat) {
+                    default:
+                        if (typeof object.jsonFormat === "number") {
+                            message.jsonFormat = object.jsonFormat;
+                            break;
+                        }
+                        break;
+                    case "JSON_FORMAT_UNKNOWN":
+                    case 0:
+                        message.jsonFormat = 0;
+                        break;
+                    case "ALLOW":
+                    case 1:
+                        message.jsonFormat = 1;
+                        break;
+                    case "LEGACY_BEST_EFFORT":
+                    case 2:
+                        message.jsonFormat = 2;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.FeatureSet} message FeatureSet
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FeatureSet.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.fieldPresence = options.enums === String ? "FIELD_PRESENCE_UNKNOWN" : 0;
+                        object.enumType = options.enums === String ? "ENUM_TYPE_UNKNOWN" : 0;
+                        object.repeatedFieldEncoding = options.enums === String ? "REPEATED_FIELD_ENCODING_UNKNOWN" : 0;
+                        object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
+                        object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
+                        object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                    }
+                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                        object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
+                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                        object.enumType = options.enums === String ? $root.google.protobuf.FeatureSet.EnumType[message.enumType] === undefined ? message.enumType : $root.google.protobuf.FeatureSet.EnumType[message.enumType] : message.enumType;
+                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                        object.repeatedFieldEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] === undefined ? message.repeatedFieldEncoding : $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] : message.repeatedFieldEncoding;
+                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                        object.utf8Validation = options.enums === String ? $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] === undefined ? message.utf8Validation : $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] : message.utf8Validation;
+                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                        object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
+                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                        object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FeatureSet to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FeatureSet.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FeatureSet
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FeatureSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FeatureSet";
+                };
+    
+                /**
+                 * FieldPresence enum.
+                 * @name google.protobuf.FeatureSet.FieldPresence
+                 * @enum {number}
+                 * @property {number} FIELD_PRESENCE_UNKNOWN=0 FIELD_PRESENCE_UNKNOWN value
+                 * @property {number} EXPLICIT=1 EXPLICIT value
+                 * @property {number} IMPLICIT=2 IMPLICIT value
+                 * @property {number} LEGACY_REQUIRED=3 LEGACY_REQUIRED value
+                 */
+                FeatureSet.FieldPresence = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FIELD_PRESENCE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "EXPLICIT"] = 1;
+                    values[valuesById[2] = "IMPLICIT"] = 2;
+                    values[valuesById[3] = "LEGACY_REQUIRED"] = 3;
+                    return values;
+                })();
+    
+                /**
+                 * EnumType enum.
+                 * @name google.protobuf.FeatureSet.EnumType
+                 * @enum {number}
+                 * @property {number} ENUM_TYPE_UNKNOWN=0 ENUM_TYPE_UNKNOWN value
+                 * @property {number} OPEN=1 OPEN value
+                 * @property {number} CLOSED=2 CLOSED value
+                 */
+                FeatureSet.EnumType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENUM_TYPE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "OPEN"] = 1;
+                    values[valuesById[2] = "CLOSED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * RepeatedFieldEncoding enum.
+                 * @name google.protobuf.FeatureSet.RepeatedFieldEncoding
+                 * @enum {number}
+                 * @property {number} REPEATED_FIELD_ENCODING_UNKNOWN=0 REPEATED_FIELD_ENCODING_UNKNOWN value
+                 * @property {number} PACKED=1 PACKED value
+                 * @property {number} EXPANDED=2 EXPANDED value
+                 */
+                FeatureSet.RepeatedFieldEncoding = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "REPEATED_FIELD_ENCODING_UNKNOWN"] = 0;
+                    values[valuesById[1] = "PACKED"] = 1;
+                    values[valuesById[2] = "EXPANDED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Utf8Validation enum.
+                 * @name google.protobuf.FeatureSet.Utf8Validation
+                 * @enum {number}
+                 * @property {number} UTF8_VALIDATION_UNKNOWN=0 UTF8_VALIDATION_UNKNOWN value
+                 * @property {number} VERIFY=2 VERIFY value
+                 * @property {number} NONE=3 NONE value
+                 */
+                FeatureSet.Utf8Validation = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "UTF8_VALIDATION_UNKNOWN"] = 0;
+                    values[valuesById[2] = "VERIFY"] = 2;
+                    values[valuesById[3] = "NONE"] = 3;
+                    return values;
+                })();
+    
+                /**
+                 * MessageEncoding enum.
+                 * @name google.protobuf.FeatureSet.MessageEncoding
+                 * @enum {number}
+                 * @property {number} MESSAGE_ENCODING_UNKNOWN=0 MESSAGE_ENCODING_UNKNOWN value
+                 * @property {number} LENGTH_PREFIXED=1 LENGTH_PREFIXED value
+                 * @property {number} DELIMITED=2 DELIMITED value
+                 */
+                FeatureSet.MessageEncoding = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "MESSAGE_ENCODING_UNKNOWN"] = 0;
+                    values[valuesById[1] = "LENGTH_PREFIXED"] = 1;
+                    values[valuesById[2] = "DELIMITED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * JsonFormat enum.
+                 * @name google.protobuf.FeatureSet.JsonFormat
+                 * @enum {number}
+                 * @property {number} JSON_FORMAT_UNKNOWN=0 JSON_FORMAT_UNKNOWN value
+                 * @property {number} ALLOW=1 ALLOW value
+                 * @property {number} LEGACY_BEST_EFFORT=2 LEGACY_BEST_EFFORT value
+                 */
+                FeatureSet.JsonFormat = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "JSON_FORMAT_UNKNOWN"] = 0;
+                    values[valuesById[1] = "ALLOW"] = 1;
+                    values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
+                    return values;
+                })();
+    
+                return FeatureSet;
+            })();
+    
+            protobuf.FeatureSetDefaults = (function() {
+    
+                /**
+                 * Properties of a FeatureSetDefaults.
+                 * @memberof google.protobuf
+                 * @interface IFeatureSetDefaults
+                 * @property {Array.<google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault>|null} [defaults] FeatureSetDefaults defaults
+                 * @property {google.protobuf.Edition|null} [minimumEdition] FeatureSetDefaults minimumEdition
+                 * @property {google.protobuf.Edition|null} [maximumEdition] FeatureSetDefaults maximumEdition
+                 */
+    
+                /**
+                 * Constructs a new FeatureSetDefaults.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FeatureSetDefaults.
+                 * @implements IFeatureSetDefaults
+                 * @constructor
+                 * @param {google.protobuf.IFeatureSetDefaults=} [properties] Properties to set
+                 */
+                function FeatureSetDefaults(properties) {
+                    this.defaults = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FeatureSetDefaults defaults.
+                 * @member {Array.<google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault>} defaults
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.defaults = $util.emptyArray;
+    
+                /**
+                 * FeatureSetDefaults minimumEdition.
+                 * @member {google.protobuf.Edition} minimumEdition
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.minimumEdition = 0;
+    
+                /**
+                 * FeatureSetDefaults maximumEdition.
+                 * @member {google.protobuf.Edition} maximumEdition
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.maximumEdition = 0;
+    
+                /**
+                 * Creates a new FeatureSetDefaults instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults=} [properties] Properties to set
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults instance
+                 */
+                FeatureSetDefaults.create = function create(properties) {
+                    return new FeatureSetDefaults(properties);
+                };
+    
+                /**
+                 * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults} message FeatureSetDefaults message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSetDefaults.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.defaults != null && message.defaults.length)
+                        for (var i = 0; i < message.defaults.length; ++i)
+                            $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.encode(message.defaults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.minimumEdition != null && Object.hasOwnProperty.call(message, "minimumEdition"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.minimumEdition);
+                    if (message.maximumEdition != null && Object.hasOwnProperty.call(message, "maximumEdition"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.maximumEdition);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults} message FeatureSetDefaults message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSetDefaults.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSetDefaults.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.defaults && message.defaults.length))
+                                    message.defaults = [];
+                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                message.minimumEdition = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.maximumEdition = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSetDefaults.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FeatureSetDefaults message.
+                 * @function verify
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FeatureSetDefaults.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.defaults != null && message.hasOwnProperty("defaults")) {
+                        if (!Array.isArray(message.defaults))
+                            return "defaults: array expected";
+                        for (var i = 0; i < message.defaults.length; ++i) {
+                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i]);
+                            if (error)
+                                return "defaults." + error;
+                        }
+                    }
+                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                        switch (message.minimumEdition) {
+                        default:
+                            return "minimumEdition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
+                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                        switch (message.maximumEdition) {
+                        default:
+                            return "maximumEdition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 */
+                FeatureSetDefaults.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FeatureSetDefaults)
+                        return object;
+                    var message = new $root.google.protobuf.FeatureSetDefaults();
+                    if (object.defaults) {
+                        if (!Array.isArray(object.defaults))
+                            throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: array expected");
+                        message.defaults = [];
+                        for (var i = 0; i < object.defaults.length; ++i) {
+                            if (typeof object.defaults[i] !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: object expected");
+                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i]);
+                        }
+                    }
+                    switch (object.minimumEdition) {
+                    default:
+                        if (typeof object.minimumEdition === "number") {
+                            message.minimumEdition = object.minimumEdition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.minimumEdition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.minimumEdition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.minimumEdition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.minimumEdition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.minimumEdition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.minimumEdition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.minimumEdition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.minimumEdition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.minimumEdition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.minimumEdition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.minimumEdition = 2147483647;
+                        break;
+                    }
+                    switch (object.maximumEdition) {
+                    default:
+                        if (typeof object.maximumEdition === "number") {
+                            message.maximumEdition = object.maximumEdition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.maximumEdition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.maximumEdition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.maximumEdition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.maximumEdition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.maximumEdition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.maximumEdition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.maximumEdition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.maximumEdition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.maximumEdition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.maximumEdition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.maximumEdition = 2147483647;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.FeatureSetDefaults} message FeatureSetDefaults
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FeatureSetDefaults.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.defaults = [];
+                    if (options.defaults) {
+                        object.minimumEdition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        object.maximumEdition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                    }
+                    if (message.defaults && message.defaults.length) {
+                        object.defaults = [];
+                        for (var j = 0; j < message.defaults.length; ++j)
+                            object.defaults[j] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject(message.defaults[j], options);
+                    }
+                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                        object.minimumEdition = options.enums === String ? $root.google.protobuf.Edition[message.minimumEdition] === undefined ? message.minimumEdition : $root.google.protobuf.Edition[message.minimumEdition] : message.minimumEdition;
+                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                        object.maximumEdition = options.enums === String ? $root.google.protobuf.Edition[message.maximumEdition] === undefined ? message.maximumEdition : $root.google.protobuf.Edition[message.maximumEdition] : message.maximumEdition;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FeatureSetDefaults to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FeatureSetDefaults.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FeatureSetDefaults
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FeatureSetDefaults.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FeatureSetDefaults";
+                };
+    
+                FeatureSetDefaults.FeatureSetEditionDefault = (function() {
+    
+                    /**
+                     * Properties of a FeatureSetEditionDefault.
+                     * @memberof google.protobuf.FeatureSetDefaults
+                     * @interface IFeatureSetEditionDefault
+                     * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
+                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSetEditionDefault.
+                     * @memberof google.protobuf.FeatureSetDefaults
+                     * @classdesc Represents a FeatureSetEditionDefault.
+                     * @implements IFeatureSetEditionDefault
+                     * @constructor
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault=} [properties] Properties to set
+                     */
+                    function FeatureSetEditionDefault(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSetEditionDefault edition.
+                     * @member {google.protobuf.Edition} edition
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.edition = 0;
+    
+                    /**
+                     * FeatureSetEditionDefault features.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.features = null;
+    
+                    /**
+                     * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault instance
+                     */
+                    FeatureSetEditionDefault.create = function create(properties) {
+                        return new FeatureSetEditionDefault(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault} message FeatureSetEditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSetEditionDefault.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault} message FeatureSetEditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSetEditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 3: {
+                                    message.edition = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSetEditionDefault.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSetEditionDefault message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSetEditionDefault.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            switch (message.edition) {
+                            default:
+                                return "edition: enum value expected";
+                            case 0:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.features != null && message.hasOwnProperty("features")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                            if (error)
+                                return "features." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     */
+                    FeatureSetEditionDefault.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault)
+                            return object;
+                        var message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
+                        switch (object.edition) {
+                        default:
+                            if (typeof object.edition === "number") {
+                                message.edition = object.edition;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.edition = 0;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.edition = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.edition = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.edition = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.edition = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.edition = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.edition = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.edition = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.edition = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.edition = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.edition = 2147483647;
+                            break;
+                        }
+                        if (object.features != null) {
+                            if (typeof object.features !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
+                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} message FeatureSetEditionDefault
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSetEditionDefault.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.features = null;
+                            object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.features != null && message.hasOwnProperty("features"))
+                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSetEditionDefault to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSetEditionDefault.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSetEditionDefault
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSetEditionDefault.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault";
+                    };
+    
+                    return FeatureSetEditionDefault;
+                })();
+    
+                return FeatureSetDefaults;
             })();
     
             protobuf.SourceCodeInfo = (function() {
@@ -55590,6 +60958,256 @@
                 };
     
                 return Expr;
+            })();
+    
+            type.Date = (function() {
+    
+                /**
+                 * Properties of a Date.
+                 * @memberof google.type
+                 * @interface IDate
+                 * @property {number|null} [year] Date year
+                 * @property {number|null} [month] Date month
+                 * @property {number|null} [day] Date day
+                 */
+    
+                /**
+                 * Constructs a new Date.
+                 * @memberof google.type
+                 * @classdesc Represents a Date.
+                 * @implements IDate
+                 * @constructor
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 */
+                function Date(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Date year.
+                 * @member {number} year
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.year = 0;
+    
+                /**
+                 * Date month.
+                 * @member {number} month
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.month = 0;
+    
+                /**
+                 * Date day.
+                 * @member {number} day
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.day = 0;
+    
+                /**
+                 * Creates a new Date instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 * @returns {google.type.Date} Date instance
+                 */
+                Date.create = function create(properties) {
+                    return new Date(properties);
+                };
+    
+                /**
+                 * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.year = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.month = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.day = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Date message.
+                 * @function verify
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Date.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Date message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Date} Date
+                 */
+                Date.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Date)
+                        return object;
+                    var message = new $root.google.type.Date();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Date message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.Date} message Date
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Date.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Date to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Date
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Date.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Date
+                 * @function getTypeUrl
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Date.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.Date";
+                };
+    
+                return Date;
             })();
     
             return type;

@@ -1,5 +1,88 @@
 # Changelog
 
+## [3.11.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.10.0...network-management-v3.11.0) (2025-01-16)
+
+
+### Features
+
+* [networkmanagement] expose the new v1 vpcflowlogs api proto ([#5947](https://github.com/googleapis/google-cloud-node/issues/5947)) ([79de654](https://github.com/googleapis/google-cloud-node/commit/79de654a6f6ec0e304419cd0fd9411f0864fcbb3))
+
+## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.9.0...network-management-v3.10.0) (2024-11-21)
+
+
+### Features
+
+* [networkmanagement] add round-trip mode ([#5814](https://github.com/googleapis/google-cloud-node/issues/5814)) ([9946273](https://github.com/googleapis/google-cloud-node/commit/994627330c440344fc3b2bbbcb6ee466e1cbc45c))
+
+## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.8.0...network-management-v3.9.0) (2024-11-14)
+
+
+### Features
+
+* [networkmanagement] add DNS endpoint of Google Kubernetes Engine cluster control plane ([#5790](https://github.com/googleapis/google-cloud-node/issues/5790)) ([f0be12a](https://github.com/googleapis/google-cloud-node/commit/f0be12aad7540be57ed9f1a87ad62fa309e7a25b))
+* Add more detailed drop causes to corresponding enum ([f0be12a](https://github.com/googleapis/google-cloud-node/commit/f0be12aad7540be57ed9f1a87ad62fa309e7a25b))
+* Add more detailed drop causes to corresponding enum ([f0be12a](https://github.com/googleapis/google-cloud-node/commit/f0be12aad7540be57ed9f1a87ad62fa309e7a25b))
+
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.7.0...network-management-v3.8.0) (2024-10-30)
+
+
+### Features
+
+* [networkmanagement] add messages and fields related to Redis Instances ([#5755](https://github.com/googleapis/google-cloud-node/issues/5755)) ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add fields related to advertised routes to the RouteInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add firewall policy URI to the FirewallInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add load balancer name to the ForwardingRuleInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add messages and fields related to Redis Clusters ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add more detailed abort and drop causes to corresponding enums ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add PSC network attachment URI to the InstanceInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add PSC target fields to the ForwardingRuleInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add region name field to the RouteInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add region name to the ForwardingRuleInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+* Add subnet URI and region name to the NetworkInfo proto ([312ba7f](https://github.com/googleapis/google-cloud-node/commit/312ba7fa3330b19e20f32ff6a7e6703185623a26))
+
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.6.0...network-management-v3.7.0) (2024-08-19)
+
+
+### Features
+
+* [networkmanagement] expose the new vpcflowlogs api proto ([#5606](https://github.com/googleapis/google-cloud-node/issues/5606)) ([c18942b](https://github.com/googleapis/google-cloud-node/commit/c18942bff326cc28125d5c9b50b8d318b6ffefc8))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.5.0...network-management-v3.6.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.4.0...network-management-v3.5.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5189](https://github.com/googleapis/google-cloud-node/issues/5189)) ([64b5a75](https://github.com/googleapis/google-cloud-node/commit/64b5a759caa979837199086c2d546a565ad2b3b1))
+
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.3.0...network-management-v3.4.0) (2024-03-26)
+
+
+### Features
+
+* [networkmanagement] add new fields and enum values related to round-trip ([#5171](https://github.com/googleapis/google-cloud-node/issues/5171)) ([009e21a](https://github.com/googleapis/google-cloud-node/commit/009e21ab1ca8cddc53dc68a197c0b23989ec55c0))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.2.0...network-management-v3.3.0) (2024-03-12)
+
+
+### Features
+
+* [networkmanagement] add new NAT fields to Network Management API definition ([#5118](https://github.com/googleapis/google-cloud-node/issues/5118)) ([8488d9a](https://github.com/googleapis/google-cloud-node/commit/8488d9a2de0950e50e5eab05cc286511d03de5e7))
+
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.1.0...network-management-v3.2.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5026](https://github.com/googleapis/google-cloud-node/issues/5026)) ([43acd89](https://github.com/googleapis/google-cloud-node/commit/43acd893e6c428f219d62f0c4264e4db78b99f99))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.0.0...network-management-v3.1.0) (2023-09-06)
 
 

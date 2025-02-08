@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,12 +30,12 @@ function main(parent) {
    */
   /**
    *  Required. Name of the source the findings belong to. Its format is
-   *  "organizations/[organization_id]/sources/[source_id],
-   *  folders/[folder_id]/sources/[source_id], or
-   *  projects/[project_id]/sources/[source_id]". To list across all sources
+   *  `organizations/[organization_id]/sources/[source_id]`,
+   *  `folders/[folder_id]/sources/[source_id]`, or
+   *  `projects/[project_id]/sources/[source_id]`. To list across all sources
    *  provide a source_id of `-`. For example:
-   *  organizations/{organization_id}/sources/-, folders/{folder_id}/sources/- or
-   *  projects/{projects_id}/sources/-
+   *  `organizations/{organization_id}/sources/-`,
+   *  `folders/{folder_id}/sources/-` or `projects/{projects_id}/sources/-`
    */
   // const parent = 'abc123'
   /**
@@ -174,7 +174,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.listFindingsAsync(request);
+    const iterable = securitycenterClient.listFindingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

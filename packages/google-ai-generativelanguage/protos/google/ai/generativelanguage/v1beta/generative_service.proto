@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,13 +35,22 @@ option java_package = "com.google.ai.generativelanguage.v1beta";
 service GenerativeService {
   option (google.api.default_host) = "generativelanguage.googleapis.com";
 
-  // Generates a response from the model given an input
-  // `GenerateContentRequest`.
+  // Generates a model response given an input `GenerateContentRequest`.
+  // Refer to the [text generation
+  // guide](https://ai.google.dev/gemini-api/docs/text-generation) for detailed
+  // usage information. Input capabilities differ between models, including
+  // tuned models. Refer to the [model
+  // guide](https://ai.google.dev/gemini-api/docs/models/gemini) and [tuning
+  // guide](https://ai.google.dev/gemini-api/docs/model-tuning) for details.
   rpc GenerateContent(GenerateContentRequest)
       returns (GenerateContentResponse) {
     option (google.api.http) = {
       post: "/v1beta/{model=models/*}:generateContent"
       body: "*"
+      additional_bindings {
+        post: "/v1beta/{model=tunedModels/*}:generateContent"
+        body: "*"
+      }
     };
     option (google.api.method_signature) = "model,contents";
   }
@@ -57,18 +66,25 @@ service GenerativeService {
         "model,contents,safety_settings,answer_style";
   }
 
-  // Generates a streamed response from the model given an input
-  // `GenerateContentRequest`.
+  // Generates a [streamed
+  // response](https://ai.google.dev/gemini-api/docs/text-generation?lang=python#generate-a-text-stream)
+  // from the model given an input `GenerateContentRequest`.
   rpc StreamGenerateContent(GenerateContentRequest)
       returns (stream GenerateContentResponse) {
     option (google.api.http) = {
       post: "/v1beta/{model=models/*}:streamGenerateContent"
       body: "*"
+      additional_bindings {
+        post: "/v1beta/{model=tunedModels/*}:streamGenerateContent"
+        body: "*"
+      }
     };
     option (google.api.method_signature) = "model,contents";
   }
 
-  // Generates an embedding from the model given an input `Content`.
+  // Generates a text embedding vector from the input `Content` using the
+  // specified [Gemini Embedding
+  // model](https://ai.google.dev/gemini-api/docs/models/gemini#text-embedding).
   rpc EmbedContent(EmbedContentRequest) returns (EmbedContentResponse) {
     option (google.api.http) = {
       post: "/v1beta/{model=models/*}:embedContent"
@@ -77,8 +93,9 @@ service GenerativeService {
     option (google.api.method_signature) = "model,content";
   }
 
-  // Generates multiple embeddings from the model given input text in a
-  // synchronous call.
+  // Generates multiple embedding vectors from the input `Content` which
+  // consists of a batch of strings represented as `EmbedContentRequest`
+  // objects.
   rpc BatchEmbedContents(BatchEmbedContentsRequest)
       returns (BatchEmbedContentsResponse) {
     option (google.api.http) = {
@@ -88,7 +105,9 @@ service GenerativeService {
     option (google.api.method_signature) = "model,requests";
   }
 
-  // Runs a model's tokenizer on input content and returns the token count.
+  // Runs a model's tokenizer on input `Content` and returns the token count.
+  // Refer to the [tokens guide](https://ai.google.dev/gemini-api/docs/tokens)
+  // to learn more about tokens.
   rpc CountTokens(CountTokensRequest) returns (CountTokensResponse) {
     option (google.api.http) = {
       post: "/v1beta/{model=models/*}:countTokens"
@@ -117,13 +136,19 @@ enum TaskType {
 
   // Specifies that the embeddings will be used for clustering.
   CLUSTERING = 5;
+
+  // Specifies that the given text will be used for question answering.
+  QUESTION_ANSWERING = 6;
+
+  // Specifies that the given text will be used for fact verification.
+  FACT_VERIFICATION = 7;
 }
 
 // Request to generate a completion from the model.
 message GenerateContentRequest {
   // Required. The name of the `Model` to use for generating the completion.
   //
-  // Format: `name=models/{model}`.
+  // Format: `models/{model}`.
   string model = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -131,21 +156,37 @@ message GenerateContentRequest {
     }
   ];
 
+  // Optional. Developer set [system
+  // instruction(s)](https://ai.google.dev/gemini-api/docs/system-instructions).
+  // Currently, text only.
+  optional Content system_instruction = 8
+      [(google.api.field_behavior) = OPTIONAL];
+
   // Required. The content of the current conversation with the model.
   //
-  // For single-turn queries, this is a single instance. For multi-turn queries,
-  // this is a repeated field that contains conversation history + latest
-  // request.
+  // For single-turn queries, this is a single instance. For multi-turn queries
+  // like [chat](https://ai.google.dev/gemini-api/docs/text-generation#chat),
+  // this is a repeated field that contains the conversation history and the
+  // latest request.
   repeated Content contents = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // Optional. A list of `Tools` the model may use to generate the next
+  // Optional. A list of `Tools` the `Model` may use to generate the next
   // response.
   //
   // A `Tool` is a piece of code that enables the system to interact with
   // external systems to perform an action, or set of actions, outside of
-  // knowledge and scope of the model. The only supported tool is currently
-  // `Function`.
+  // knowledge and scope of the `Model`. Supported `Tool`s are `Function` and
+  // `code_execution`. Refer to the [Function
+  // calling](https://ai.google.dev/gemini-api/docs/function-calling) and the
+  // [Code execution](https://ai.google.dev/gemini-api/docs/code-execution)
+  // guides to learn more.
   repeated Tool tools = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Tool configuration for any `Tool` specified in the request. Refer
+  // to the [Function calling
+  // guide](https://ai.google.dev/gemini-api/docs/function-calling#function_calling_mode)
+  // for a usage example.
+  ToolConfig tool_config = 7 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. A list of unique `SafetySetting` instances for blocking unsafe
   // content.
@@ -159,81 +200,217 @@ message GenerateContentRequest {
   // `SafetyCategory` provided in the list, the API will use the default safety
   // setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
   // HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
-  // HARM_CATEGORY_HARASSMENT are supported.
+  // HARM_CATEGORY_HARASSMENT, HARM_CATEGORY_CIVIC_INTEGRITY are supported.
+  // Refer to the [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
+  // for detailed information on available safety settings. Also refer to the
+  // [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
+  // learn how to incorporate safety considerations in your AI applications.
   repeated SafetySetting safety_settings = 3
       [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Configuration options for model generation and outputs.
   optional GenerationConfig generation_config = 4
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The name of the content
+  // [cached](https://ai.google.dev/gemini-api/docs/caching) to use as context
+  // to serve the prediction. Format: `cachedContents/{cachedContent}`
+  optional string cached_content = 9 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "generativelanguage.googleapis.com/CachedContent"
+    }
+  ];
+}
+
+// The configuration for the prebuilt speaker to use.
+message PrebuiltVoiceConfig {
+  // The name of the preset voice to use.
+  optional string voice_name = 1;
+}
+
+// The configuration for the voice to use.
+message VoiceConfig {
+  // The configuration for the speaker to use.
+  oneof voice_config {
+    // The configuration for the prebuilt voice to use.
+    PrebuiltVoiceConfig prebuilt_voice_config = 1;
+  }
+}
+
+// The speech generation config.
+message SpeechConfig {
+  // The configuration for the speaker to use.
+  VoiceConfig voice_config = 1;
 }
 
 // Configuration options for model generation and outputs. Not all parameters
-// may be configurable for every model.
+// are configurable for every model.
 message GenerationConfig {
+  // Supported modalities of the response.
+  enum Modality {
+    // Default value.
+    MODALITY_UNSPECIFIED = 0;
+
+    // Indicates the model should return text.
+    TEXT = 1;
+
+    // Indicates the model should return images.
+    IMAGE = 2;
+
+    // Indicates the model should return audio.
+    AUDIO = 3;
+  }
+
   // Optional. Number of generated responses to return.
   //
-  // This value must be between [1, 8], inclusive. If unset, this will default
+  // Currently, this value can only be set to 1. If unset, this will default
   // to 1.
   optional int32 candidate_count = 1 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The set of character sequences (up to 5) that will stop output
   // generation. If specified, the API will stop at the first appearance of a
-  // stop sequence. The stop sequence will not be included as part of the
+  // `stop_sequence`. The stop sequence will not be included as part of the
   // response.
   repeated string stop_sequences = 2 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. The maximum number of tokens to include in a candidate.
+  // Optional. The maximum number of tokens to include in a response candidate.
   //
-  // If unset, this will default to output_token_limit specified in the `Model`
-  // specification.
+  // Note: The default value varies by model, see the `Model.output_token_limit`
+  // attribute of the `Model` returned from the `getModel` function.
   optional int32 max_output_tokens = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Controls the randomness of the output.
-  // Note: The default value varies by model, see the `Model.temperature`
-  // attribute of the `Model` returned the `getModel` function.
   //
-  // Values can range from [0.0,1.0],
-  // inclusive. A value closer to 1.0 will produce responses that are more
-  // varied and creative, while a value closer to 0.0 will typically result in
-  // more straightforward responses from the model.
+  // Note: The default value varies by model, see the `Model.temperature`
+  // attribute of the `Model` returned from the `getModel` function.
+  //
+  // Values can range from [0.0, 2.0].
   optional float temperature = 5 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The maximum cumulative probability of tokens to consider when
   // sampling.
   //
-  // The model uses combined Top-k and nucleus sampling.
+  // The model uses combined Top-k and Top-p (nucleus) sampling.
   //
   // Tokens are sorted based on their assigned probabilities so that only the
   // most likely tokens are considered. Top-k sampling directly limits the
-  // maximum number of tokens to consider, while Nucleus sampling limits number
-  // of tokens based on the cumulative probability.
+  // maximum number of tokens to consider, while Nucleus sampling limits the
+  // number of tokens based on the cumulative probability.
   //
-  // Note: The default value varies by model, see the `Model.top_p`
-  // attribute of the `Model` returned the `getModel` function.
+  // Note: The default value varies by `Model` and is specified by
+  // the`Model.top_p` attribute returned from the `getModel` function. An empty
+  // `top_k` attribute indicates that the model doesn't apply top-k sampling
+  // and doesn't allow setting `top_k` on requests.
   optional float top_p = 6 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The maximum number of tokens to consider when sampling.
   //
-  // The model uses combined Top-k and nucleus sampling.
+  // Gemini models use Top-p (nucleus) sampling or a combination of Top-k and
+  // nucleus sampling. Top-k sampling considers the set of `top_k` most probable
+  // tokens. Models running with nucleus sampling don't allow top_k setting.
   //
-  // Top-k sampling considers the set of `top_k` most probable tokens.
-  // Defaults to 40.
-  //
-  // Note: The default value varies by model, see the `Model.top_k`
-  // attribute of the `Model` returned the `getModel` function.
+  // Note: The default value varies by `Model` and is specified by
+  // the`Model.top_p` attribute returned from the `getModel` function. An empty
+  // `top_k` attribute indicates that the model doesn't apply top-k sampling
+  // and doesn't allow setting `top_k` on requests.
   optional int32 top_k = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. MIME type of the generated candidate text.
+  // Supported MIME types are:
+  // `text/plain`: (default) Text output.
+  // `application/json`: JSON response in the response candidates.
+  // `text/x.enum`: ENUM as a string response in the response candidates.
+  // Refer to the
+  // [docs](https://ai.google.dev/gemini-api/docs/prompting_with_media#plain_text_formats)
+  // for a list of all supported text MIME types.
+  string response_mime_type = 13 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Output schema of the generated candidate text. Schemas must be a
+  // subset of the [OpenAPI schema](https://spec.openapis.org/oas/v3.0.3#schema)
+  // and can be objects, primitives or arrays.
+  //
+  // If set, a compatible `response_mime_type` must also be set.
+  // Compatible MIME types:
+  // `application/json`: Schema for JSON response.
+  // Refer to the [JSON text generation
+  // guide](https://ai.google.dev/gemini-api/docs/json-mode) for more details.
+  Schema response_schema = 14 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Presence penalty applied to the next token's logprobs if the
+  // token has already been seen in the response.
+  //
+  // This penalty is binary on/off and not dependant on the number of times the
+  // token is used (after the first). Use
+  // [frequency_penalty][google.ai.generativelanguage.v1beta.GenerationConfig.frequency_penalty]
+  // for a penalty that increases with each use.
+  //
+  // A positive penalty will discourage the use of tokens that have already
+  // been used in the response, increasing the vocabulary.
+  //
+  // A negative penalty will encourage the use of tokens that have already been
+  // used in the response, decreasing the vocabulary.
+  optional float presence_penalty = 15 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Frequency penalty applied to the next token's logprobs,
+  // multiplied by the number of times each token has been seen in the respponse
+  // so far.
+  //
+  // A positive penalty will discourage the use of tokens that have already
+  // been used, proportional to the number of times the token has been used:
+  // The more a token is used, the more dificult it is for the model to use
+  // that token again increasing the vocabulary of responses.
+  //
+  // Caution: A _negative_ penalty will encourage the model to reuse tokens
+  // proportional to the number of times the token has been used. Small
+  // negative values will reduce the vocabulary of a response. Larger negative
+  // values will cause the model to start repeating a common token  until it
+  // hits the
+  // [max_output_tokens][google.ai.generativelanguage.v1beta.GenerationConfig.max_output_tokens]
+  // limit.
+  optional float frequency_penalty = 16
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If true, export the logprobs results in response.
+  optional bool response_logprobs = 17 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Only valid if
+  // [response_logprobs=True][google.ai.generativelanguage.v1beta.GenerationConfig.response_logprobs].
+  // This sets the number of top logprobs to return at each decoding step in the
+  // [Candidate.logprobs_result][google.ai.generativelanguage.v1beta.Candidate.logprobs_result].
+  optional int32 logprobs = 18 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Enables enhanced civic answers. It may not be available for all
+  // models.
+  optional bool enable_enhanced_civic_answers = 19
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The requested modalities of the response. Represents the set of
+  // modalities that the model can return, and should be expected in the
+  // response. This is an exact match to the modalities of the response.
+  //
+  // A model may have multiple combinations of supported modalities. If the
+  // requested modalities do not match any of the supported combinations, an
+  // error will be returned.
+  //
+  // An empty list is equivalent to requesting only text.
+  repeated Modality response_modalities = 20
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The speech generation config.
+  optional SpeechConfig speech_config = 21
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Configuration for retrieving grounding content from a `Corpus` or
 // `Document` created using the Semantic Retriever API.
 message SemanticRetrieverConfig {
-  // Required. Name of the resource for retrieval, e.g. corpora/123 or
-  // corpora/123/documents/abc.
+  // Required. Name of the resource for retrieval. Example: `corpora/123` or
+  // `corpora/123/documents/abc`.
   string source = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // Required. Query to use for similarity matching `Chunk`s in the given
-  // resource.
+  // Required. Query to use for matching `Chunk`s in the given resource by
+  // similarity.
   Content query = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. Filters for selecting `Document`s and/or `Chunk`s from the
@@ -249,35 +426,45 @@ message SemanticRetrieverConfig {
       [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Response from the model supporting multiple candidates.
+// Response from the model supporting multiple candidate responses.
 //
-// Note on safety ratings and content filtering. They are reported for both
+// Safety ratings and content filtering are reported for both
 // prompt in `GenerateContentResponse.prompt_feedback` and for each candidate
-// in `finish_reason` and in `safety_ratings`. The API contract is that:
-//  - either all requested candidates are returned or no candidates at all
-//  - no candidates are returned only if there was something wrong with the
-//    prompt (see `prompt_feedback`)
-//  - feedback on each candidate is reported on `finish_reason` and
+// in `finish_reason` and in `safety_ratings`. The API:
+//  - Returns either all requested candidates or none of them
+//  - Returns no candidates at all only if there was something wrong with the
+//    prompt (check `prompt_feedback`)
+//  - Reports feedback on each candidate in `finish_reason` and
 //    `safety_ratings`.
 message GenerateContentResponse {
   // A set of the feedback metadata the prompt specified in
   // `GenerateContentRequest.content`.
   message PromptFeedback {
-    // Specifies what was the reason why prompt was blocked.
+    // Specifies the reason why the prompt was blocked.
     enum BlockReason {
       // Default value. This value is unused.
       BLOCK_REASON_UNSPECIFIED = 0;
 
-      // Prompt was blocked due to safety reasons. You can inspect
-      // `safety_ratings` to understand which safety category blocked it.
+      // Prompt was blocked due to safety reasons. Inspect `safety_ratings`
+      // to understand which safety category blocked it.
       SAFETY = 1;
 
-      // Prompt was blocked due to unknown reaasons.
+      // Prompt was blocked due to unknown reasons.
       OTHER = 2;
+
+      // Prompt was blocked due to the terms which are included from the
+      // terminology blocklist.
+      BLOCKLIST = 3;
+
+      // Prompt was blocked due to prohibited content.
+      PROHIBITED_CONTENT = 4;
+
+      // Candidates blocked due to unsafe image generation content.
+      IMAGE_SAFETY = 5;
     }
 
     // Optional. If set, the prompt was blocked and no candidates are returned.
-    // Rephrase your prompt.
+    // Rephrase the prompt.
     BlockReason block_reason = 1 [(google.api.field_behavior) = OPTIONAL];
 
     // Ratings for safety of the prompt.
@@ -285,11 +472,35 @@ message GenerateContentResponse {
     repeated SafetyRating safety_ratings = 2;
   }
 
+  // Metadata on the generation request's token usage.
+  message UsageMetadata {
+    // Number of tokens in the prompt. When `cached_content` is set, this is
+    // still the total effective prompt size meaning this includes the number of
+    // tokens in the cached content.
+    int32 prompt_token_count = 1;
+
+    // Number of tokens in the cached part of the prompt (the cached content)
+    int32 cached_content_token_count = 4;
+
+    // Total number of tokens across all the generated response candidates.
+    int32 candidates_token_count = 2;
+
+    // Total token count for the generation request (prompt + response
+    // candidates).
+    int32 total_token_count = 3;
+  }
+
   // Candidate responses from the model.
   repeated Candidate candidates = 1;
 
   // Returns the prompt's feedback related to the content filters.
   PromptFeedback prompt_feedback = 2;
+
+  // Output only. Metadata on the generation requests' token usage.
+  UsageMetadata usage_metadata = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The model version used to generate the response.
+  string model_version = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // A response candidate generated from the model.
@@ -305,17 +516,38 @@ message Candidate {
     // The maximum number of tokens as specified in the request was reached.
     MAX_TOKENS = 2;
 
-    // The candidate content was flagged for safety reasons.
+    // The response candidate content was flagged for safety reasons.
     SAFETY = 3;
 
-    // The candidate content was flagged for recitation reasons.
+    // The response candidate content was flagged for recitation reasons.
     RECITATION = 4;
+
+    // The response candidate content was flagged for using an unsupported
+    // language.
+    LANGUAGE = 6;
 
     // Unknown reason.
     OTHER = 5;
+
+    // Token generation stopped because the content contains forbidden terms.
+    BLOCKLIST = 7;
+
+    // Token generation stopped for potentially containing prohibited content.
+    PROHIBITED_CONTENT = 8;
+
+    // Token generation stopped because the content potentially contains
+    // Sensitive Personally Identifiable Information (SPII).
+    SPII = 9;
+
+    // The function call generated by the model is invalid.
+    MALFORMED_FUNCTION_CALL = 10;
+
+    // Token generation stopped because generated images contain safety
+    // violations.
+    IMAGE_SAFETY = 11;
   }
 
-  // Output only. Index of the candidate in the list of candidates.
+  // Output only. Index of the candidate in the list of response candidates.
   optional int32 index = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Generated content returned from the model.
@@ -323,7 +555,7 @@ message Candidate {
 
   // Optional. Output only. The reason why the model stopped generating tokens.
   //
-  // If empty, the model has not stopped generating the tokens.
+  // If empty, the model has not stopped generating tokens.
   FinishReason finish_reason = 2 [
     (google.api.field_behavior) = OPTIONAL,
     (google.api.field_behavior) = OUTPUT_ONLY
@@ -351,6 +583,47 @@ message Candidate {
   // This field is populated for `GenerateAnswer` calls.
   repeated GroundingAttribution grounding_attributions = 8
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Grounding metadata for the candidate.
+  //
+  // This field is populated for `GenerateContent` calls.
+  GroundingMetadata grounding_metadata = 9
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Average log probability score of the candidate.
+  double avg_logprobs = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Log-likelihood scores for the response tokens and top tokens
+  LogprobsResult logprobs_result = 11
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Logprobs Result
+message LogprobsResult {
+  // Candidate for the logprobs token and score.
+  message Candidate {
+    // The candidate’s token string value.
+    optional string token = 1;
+
+    // The candidate’s token id value.
+    optional int32 token_id = 3;
+
+    // The candidate's log probability.
+    optional float log_probability = 2;
+  }
+
+  // Candidates with top log probabilities at each decoding step.
+  message TopCandidates {
+    // Sorted by log probability in descending order.
+    repeated Candidate candidates = 1;
+  }
+
+  // Length = total number of decoding steps.
+  repeated TopCandidates top_candidates = 1;
+
+  // Length = total number of decoding steps.
+  // The chosen candidates may or may not be in top_candidates.
+  repeated Candidate chosen_candidates = 2;
 }
 
 // Identifier for the source contributing to this attribution.
@@ -397,7 +670,100 @@ message GroundingAttribution {
   Content content = 2;
 }
 
-// Request to generate a grounded answer from the model.
+// Metadata related to retrieval in the grounding flow.
+message RetrievalMetadata {
+  // Optional. Score indicating how likely information from google search could
+  // help answer the prompt. The score is in the range [0, 1], where 0 is the
+  // least likely and 1 is the most likely. This score is only populated when
+  // google search grounding and dynamic retrieval is enabled. It will be
+  // compared to the threshold to determine whether to trigger google search.
+  float google_search_dynamic_retrieval_score = 2
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Metadata returned to client when grounding is enabled.
+message GroundingMetadata {
+  // Optional. Google search entry for the following-up web searches.
+  optional SearchEntryPoint search_entry_point = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // List of supporting references retrieved from specified grounding source.
+  repeated GroundingChunk grounding_chunks = 2;
+
+  // List of grounding support.
+  repeated GroundingSupport grounding_supports = 3;
+
+  // Metadata related to retrieval in the grounding flow.
+  optional RetrievalMetadata retrieval_metadata = 4;
+
+  // Web search queries for the following-up web search.
+  repeated string web_search_queries = 5;
+}
+
+// Google search entry point.
+message SearchEntryPoint {
+  // Optional. Web content snippet that can be embedded in a web page or an app
+  // webview.
+  string rendered_content = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Base64 encoded JSON representing array of <search term, search
+  // url> tuple.
+  bytes sdk_blob = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Grounding chunk.
+message GroundingChunk {
+  // Chunk from the web.
+  message Web {
+    // URI reference of the chunk.
+    optional string uri = 1;
+
+    // Title of the chunk.
+    optional string title = 2;
+  }
+
+  // Chunk type.
+  oneof chunk_type {
+    // Grounding chunk from the web.
+    Web web = 1;
+  }
+}
+
+// Segment of the content.
+message Segment {
+  // Output only. The index of a Part object within its parent Content object.
+  int32 part_index = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Start index in the given Part, measured in bytes. Offset from
+  // the start of the Part, inclusive, starting at zero.
+  int32 start_index = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. End index in the given Part, measured in bytes. Offset from
+  // the start of the Part, exclusive, starting at zero.
+  int32 end_index = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The text corresponding to the segment from the response.
+  string text = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Grounding support.
+message GroundingSupport {
+  // Segment of the content this support belongs to.
+  optional Segment segment = 1;
+
+  // A list of indices (into 'grounding_chunk') specifying the
+  // citations associated with the claim. For instance [1,3,4] means
+  // that grounding_chunk[1], grounding_chunk[3],
+  // grounding_chunk[4] are the retrieved content attributed to the claim.
+  repeated int32 grounding_chunk_indices = 2;
+
+  // Confidence score of the support references. Ranges from 0 to 1. 1 is the
+  // most confident. This list must have the same size as the
+  // grounding_chunk_indices.
+  repeated float confidence_scores = 3;
+}
+
+// Request to generate a grounded answer from the `Model`.
 message GenerateAnswerRequest {
   // Style for grounded answers.
   enum AnswerStyle {
@@ -436,12 +802,12 @@ message GenerateAnswerRequest {
     }
   ];
 
-  // Required. The content of the current conversation with the model. For
+  // Required. The content of the current conversation with the `Model`. For
   // single-turn queries, this is a single question to answer. For multi-turn
   // queries, this is a repeated field that contains conversation history and
   // the last `Content` in the list containing the question.
   //
-  // Note: GenerateAnswer currently only supports queries in English.
+  // Note: `GenerateAnswer` only supports queries in English.
   repeated Content contents = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. Style in which answers should be returned.
@@ -457,7 +823,14 @@ message GenerateAnswerRequest {
   // overrides the default settings for each `SafetyCategory` specified in the
   // safety_settings. If there is no `SafetySetting` for a given
   // `SafetyCategory` provided in the list, the API will use the default safety
-  // setting for that category.
+  // setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
+  // HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
+  // HARM_CATEGORY_HARASSMENT are supported.
+  // Refer to the
+  // [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
+  // for detailed information on available safety settings. Also refer to the
+  // [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
+  // learn how to incorporate safety considerations in your AI applications.
   repeated SafetySetting safety_settings = 3
       [(google.api.field_behavior) = OPTIONAL];
 
@@ -474,14 +847,14 @@ message GenerateAnswerRequest {
 // Response from the model for a grounded answer.
 message GenerateAnswerResponse {
   // Feedback related to the input data used to answer the question, as opposed
-  // to model-generated response to the question.
+  // to the model-generated response to the question.
   message InputFeedback {
     // Specifies what was the reason why input was blocked.
     enum BlockReason {
       // Default value. This value is unused.
       BLOCK_REASON_UNSPECIFIED = 0;
 
-      // Input was blocked due to safety reasons. You can inspect
+      // Input was blocked due to safety reasons. Inspect
       // `safety_ratings` to understand which safety category blocked it.
       SAFETY = 1;
 
@@ -490,7 +863,7 @@ message GenerateAnswerResponse {
     }
 
     // Optional. If set, the input was blocked and no candidates are returned.
-    // Rephrase your input.
+    // Rephrase the input.
     optional BlockReason block_reason = 1
         [(google.api.field_behavior) = OPTIONAL];
 
@@ -510,23 +883,23 @@ message GenerateAnswerResponse {
   // Output only. The model's estimate of the probability that its answer is
   // correct and grounded in the input passages.
   //
-  // A low answerable_probability indicates that the answer might not be
+  // A low `answerable_probability` indicates that the answer might not be
   // grounded in the sources.
   //
-  // When `answerable_probability` is low, some clients may wish to:
+  // When `answerable_probability` is low, you may want to:
   //
   // * Display a message to the effect of "We couldn’t answer that question" to
   // the user.
   // * Fall back to a general-purpose LLM that answers the question from world
   // knowledge. The threshold and nature of such fallbacks will depend on
-  // individual clients’ use cases. 0.5 is a good starting threshold.
+  // individual use cases. `0.5` is a good starting threshold.
   optional float answerable_probability = 2
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Feedback related to the input data used to answer the
-  // question, as opposed to model-generated response to the question.
+  // question, as opposed to the model-generated response to the question.
   //
-  // "Input data" can be one or more of the following:
+  // The input data can be one or more of the following:
   //
   // - Question specified by the last entry in `GenerateAnswerRequest.content`
   // - Conversation history specified by the other entries in
@@ -566,6 +939,13 @@ message EmbedContentRequest {
   // Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality
   // embeddings for retrieval.
   optional string title = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Optional reduced dimension for the output embedding. If set,
+  // excessive values in the output embedding are truncated from the end.
+  // Supported by newer models since 2024 only. You cannot set this value if
+  // using the earlier model (`models/embedding-001`).
+  optional int32 output_dimensionality = 5
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // A list of floats representing an embedding.
@@ -627,16 +1007,30 @@ message CountTokensRequest {
     }
   ];
 
-  // Required. The input given to the model as a prompt.
-  repeated Content contents = 2 [(google.api.field_behavior) = REQUIRED];
+  // Optional. The input given to the model as a prompt. This field is ignored
+  // when `generate_content_request` is set.
+  repeated Content contents = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The overall input given to the `Model`. This includes the prompt
+  // as well as other model steering information like [system
+  // instructions](https://ai.google.dev/gemini-api/docs/system-instructions),
+  // and/or function declarations for [function
+  // calling](https://ai.google.dev/gemini-api/docs/function-calling).
+  // `Model`s/`Content`s and `generate_content_request`s are mutually
+  // exclusive. You can either send `Model` + `Content`s or a
+  // `generate_content_request`, but never both.
+  GenerateContentRequest generate_content_request = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // A response from `CountTokens`.
 //
 // It returns the model's `token_count` for the `prompt`.
 message CountTokensResponse {
-  // The number of tokens that the `model` tokenizes the `prompt` into.
-  //
-  // Always non-negative.
+  // The number of tokens that the `Model` tokenizes the `prompt` into. Always
+  // non-negative.
   int32 total_tokens = 1;
+
+  // Number of tokens in the cached part of the prompt (the cached content).
+  int32 cached_content_token_count = 5;
 }

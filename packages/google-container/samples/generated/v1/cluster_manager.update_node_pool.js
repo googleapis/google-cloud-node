@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -135,6 +135,12 @@ function main(nodeVersion, imageType) {
    */
   // const windowsNodeConfig = {}
   /**
+   *  A list of hardware accelerators to be attached to each node.
+   *  See https://cloud.google.com/compute/docs/gpus for more information about
+   *  support for GPUs.
+   */
+  // const accelerators = [1,2,3,4]
+  /**
    *  Optional. The desired Google Compute Engine machine
    *  type (https://cloud.google.com/compute/docs/machine-types) for nodes in the
    *  node pool. Initiates an upgrade operation that migrates the nodes in the
@@ -161,6 +167,21 @@ function main(nodeVersion, imageType) {
    *  Existing tags will be replaced with new values.
    */
   // const resourceManagerTags = {}
+  /**
+   *  The desired containerd config for nodes in the node pool.
+   *  Initiates an upgrade operation that recreates the nodes with the new
+   *  config.
+   */
+  // const containerdConfig = {}
+  /**
+   *  Specifies the configuration of queued provisioning.
+   */
+  // const queuedProvisioning = {}
+  /**
+   *  List of Storage Pools where boot disks are provisioned.
+   *  Existing Storage Pools will be replaced with storage-pools.
+   */
+  // const storagePools = ['abc','def']
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

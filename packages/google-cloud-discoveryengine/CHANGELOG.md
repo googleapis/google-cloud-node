@@ -1,5 +1,97 @@
 # Changelog
 
+## [1.14.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.13.0...discoveryengine-v1.14.0) (2024-09-10)
+
+
+### Features
+
+* [discoveryengine] promote search tuning service to v1 ([#5655](https://github.com/googleapis/google-cloud-node/issues/5655)) ([f4072a0](https://github.com/googleapis/google-cloud-node/commit/f4072a051e85b1fd42116416f19e850bb32fc542))
+
+## [1.13.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.12.0...discoveryengine-v1.13.0) (2024-08-19)
+
+
+### Features
+
+* [discoveryengine] support natural language understanding in search ([#5596](https://github.com/googleapis/google-cloud-node/issues/5596)) ([5cf8d9e](https://github.com/googleapis/google-cloud-node/commit/5cf8d9e6be7c9f95910185062817379a2e29ffdc))
+
+## [1.12.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.11.0...discoveryengine-v1.12.0) (2024-08-09)
+
+
+### Features
+
+* [discoveryengine] Update CompletionService ([#5574](https://github.com/googleapis/google-cloud-node/issues/5574)) ([384096f](https://github.com/googleapis/google-cloud-node/commit/384096fe3bbab56e9f708a2bc422f711cc1d8641))
+* [discoveryengine] Update SearchService ([#5578](https://github.com/googleapis/google-cloud-node/issues/5578)) ([af46d57](https://github.com/googleapis/google-cloud-node/commit/af46d5779f82d7a37c687e1364b8c653bb6369e9))
+
+## [1.11.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.10.0...discoveryengine-v1.11.0) (2024-07-22)
+
+
+### Features
+
+* [discoveryengine] add sample query set APIs ([#5552](https://github.com/googleapis/google-cloud-node/issues/5552)) ([8a0e59f](https://github.com/googleapis/google-cloud-node/commit/8a0e59fe0213105c5fd065f1255d2f1bf5b4138c))
+
+
+### Bug Fixes
+
+* [discoveryengine] update sample query, sample query set patterns ([#5558](https://github.com/googleapis/google-cloud-node/issues/5558)) ([2c4325f](https://github.com/googleapis/google-cloud-node/commit/2c4325f28954f48538cdf113b2a8330dabf08680))
+
+## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.9.0...discoveryengine-v1.10.0) (2024-07-10)
+
+
+### Features
+
+* [discoveryengine] add Chunk resource in the search response ([#5526](https://github.com/googleapis/google-cloud-node/issues/5526)) ([b0dc1b2](https://github.com/googleapis/google-cloud-node/commit/b0dc1b2ef66334394613c6e92a4c5b0ebb8e0faf))
+
+## [1.9.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.8.0...discoveryengine-v1.9.0) (2024-06-03)
+
+
+### Features
+
+* [discoveryengine] promote grounding check APIs to v1 GA ([#5387](https://github.com/googleapis/google-cloud-node/issues/5387)) ([d1bee15](https://github.com/googleapis/google-cloud-node/commit/d1bee15d1460292b6c637182328d1367fca6bc62))
+* [discoveryengine] support multiple parent patterns for controls ([#5392](https://github.com/googleapis/google-cloud-node/issues/5392)) ([86d6104](https://github.com/googleapis/google-cloud-node/commit/86d61047ce001f8a396a934e6bda663636219d58))
+
+## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.7.0...discoveryengine-v1.8.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.6.0...discoveryengine-v1.7.0) (2024-04-18)
+
+
+### Features
+
+* [discoveryengine] add answer generation APIs ([7d36b46](https://github.com/googleapis/google-cloud-node/commit/7d36b464c362985b7e8ffdf2bad1689da7a8661c))
+
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.5.0...discoveryengine-v1.6.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.4.1...discoveryengine-v1.5.0) (2024-04-05)
+
+
+### Features
+
+* [discoveryengine] support import data from Cloud Spanner, BigTable, SQL and Firestore ([#5218](https://github.com/googleapis/google-cloud-node/issues/5218)) ([cc25e93](https://github.com/googleapis/google-cloud-node/commit/cc25e935f087526738303cd94c406bd352a7b595))
+
+## [1.4.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.4.0...discoveryengine-v1.4.1) (2024-03-12)
+
+
+### Bug Fixes
+
+* [discoveryengine] `http_uri` fix for method `ListChunks` in service `ChunkService` ([#5120](https://github.com/googleapis/google-cloud-node/issues/5120)) ([494a98f](https://github.com/googleapis/google-cloud-node/commit/494a98f6b4908f89eedcc05db68bb6af99dc02cb))
+
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.3.1...discoveryengine-v1.4.0) (2024-02-09)
+
+
+### Features
+
+* [discoveryengine] add data store, engine, serving config and site search engine services ([#5032](https://github.com/googleapis/google-cloud-node/issues/5032)) ([c7f3230](https://github.com/googleapis/google-cloud-node/commit/c7f32309224d2bb4d8933eb4071bbe081d80d171))
+
 ## [1.3.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.3.0...discoveryengine-v1.3.1) (2024-01-05)
 
 

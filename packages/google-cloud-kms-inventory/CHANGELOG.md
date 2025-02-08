@@ -1,5 +1,41 @@
 # Changelog
 
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.4.0...kms-inventory-v1.5.0) (2024-06-21)
+
+
+### Features
+
+* [kmsinventory] support Key Access Justifications policy configuration ([#5480](https://github.com/googleapis/google-cloud-node/issues/5480)) ([83da16f](https://github.com/googleapis/google-cloud-node/commit/83da16fbfb5fc37d689b72ef9d6f607d7167ae95))
+
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.3.0...kms-inventory-v1.4.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.2.0...kms-inventory-v1.3.0) (2024-05-08)
+
+
+### Features
+
+* [kmsinventory] add client library for KMS Autokey service, which enables automated KMS key provision and management ([#5314](https://github.com/googleapis/google-cloud-node/issues/5314)) ([a6da262](https://github.com/googleapis/google-cloud-node/commit/a6da26277bac24fa82392cadb7602f61b64e67fb))
+
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.1.0...kms-inventory-v1.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5189](https://github.com/googleapis/google-cloud-node/issues/5189)) ([64b5a75](https://github.com/googleapis/google-cloud-node/commit/64b5a759caa979837199086c2d546a565ad2b3b1))
+
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.0.1...kms-inventory-v1.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5025](https://github.com/googleapis/google-cloud-node/issues/5025)) ([7244cab](https://github.com/googleapis/google-cloud-node/commit/7244cab107973bef57c5ea84ae77c51718126822))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.0.0...kms-inventory-v1.0.1) (2023-09-06)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  If provided, this value must match the current value of the
+   *  Optional. If provided, this value must match the current value of the
    *  target BackupPlan's etag google.cloud.gkebackup.v1.BackupPlan.etag  field
    *  or the request is rejected.
    */

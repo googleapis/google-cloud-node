@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -129,18 +129,104 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        binauthzmanagementservicev1beta1Module.v1beta1
-          .BinauthzManagementServiceV1Beta1Client.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'binaryauthorization.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        binauthzmanagementservicev1beta1Module.v1beta1
-          .BinauthzManagementServiceV1Beta1Client.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          binauthzmanagementservicev1beta1Module.v1beta1
+            .BinauthzManagementServiceV1Beta1Client.servicePath;
+        assert.strictEqual(servicePath, 'binaryauthorization.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          binauthzmanagementservicev1beta1Module.v1beta1
+            .BinauthzManagementServiceV1Beta1Client.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'binaryauthorization.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'binaryauthorization.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'binaryauthorization.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'binaryauthorization.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+              {universeDomain: 'configured.example.com'}
+            );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'binaryauthorization.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new binauthzmanagementservicev1beta1Module.v1beta1.BinauthzManagementServiceV1Beta1Client(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {
@@ -1310,9 +1396,9 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1365,9 +1451,9 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1418,9 +1504,9 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1462,9 +1548,9 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       assert(
         (client.descriptors.page.listAttestors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

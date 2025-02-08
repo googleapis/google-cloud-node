@@ -37,7 +37,7 @@ if [ ${BUILD_TYPE} == "presubmit" ]; then
     GIT_DIFF_ARG="origin/main..."
 
     # Then fetch enough history for finding the common commit.
-    git fetch origin main --deepen=200
+    git fetch origin main --deepen=300
 
 elif [ ${BUILD_TYPE} == "continuous" ]; then
     # For continuous build, we want to know the difference in the last
@@ -73,12 +73,14 @@ fi
 subdirs=(
     containers
     packages
+    scripts
 )
 
 RETVAL=0
 # These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo). 
 # When we hit these packages, we will run the "samples with credentials" trigger, which contains the credentials as an env variable
-tests_with_credentials="packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/"
+
+tests_with_credentials="packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do

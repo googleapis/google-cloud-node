@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,15 +47,11 @@ option (google.api.resource_definition) = {
   pattern: "organizations/{organization}/locations/{location}"
 };
 
-// The Cloud Data Loss Prevention (DLP) API is a service that allows clients
-// to detect the presence of Personally Identifiable Information (PII) and other
-// privacy-sensitive data in user-supplied, unstructured data streams, like text
-// blocks or images.
-// The service also includes methods for sensitive data redaction and
-// scheduling of data scans on Google Cloud Platform based data sets.
-//
+// Sensitive Data Protection provides access to a powerful sensitive data
+// inspection, classification, and de-identification platform that works
+// on text, images, and Google Cloud storage repositories.
 // To learn more about concepts and find how-to guides see
-// https://cloud.google.com/dlp/docs/.
+// https://cloud.google.com/sensitive-data-protection/docs/.
 service DlpService {
   option (google.api.default_host) = "dlp.googleapis.com";
   option (google.api.oauth_scopes) =
@@ -68,8 +64,10 @@ service DlpService {
   // system will automatically choose what detectors to run. By default this may
   // be all types, but may change over time as detectors are updated.
   //
-  // For how to guides, see https://cloud.google.com/dlp/docs/inspecting-images
-  // and https://cloud.google.com/dlp/docs/inspecting-text,
+  // For how to guides, see
+  // https://cloud.google.com/sensitive-data-protection/docs/inspecting-images
+  // and
+  // https://cloud.google.com/sensitive-data-protection/docs/inspecting-text,
   rpc InspectContent(InspectContentRequest) returns (InspectContentResponse) {
     option (google.api.http) = {
       post: "/v2/{parent=projects/*}/content:inspect"
@@ -83,8 +81,9 @@ service DlpService {
 
   // Redacts potentially sensitive info from an image.
   // This method has limits on input size, processing time, and output size.
-  // See https://cloud.google.com/dlp/docs/redacting-sensitive-data-images to
-  // learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/redacting-sensitive-data-images
+  // to learn more.
   //
   // When no InfoTypes or CustomInfoTypes are specified in this request, the
   // system will automatically choose what detectors to run. By default this may
@@ -102,8 +101,9 @@ service DlpService {
 
   // De-identifies potentially sensitive info from a ContentItem.
   // This method has limits on input size and output size.
-  // See https://cloud.google.com/dlp/docs/deidentify-sensitive-data to
-  // learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/deidentify-sensitive-data
+  // to learn more.
   //
   // When no InfoTypes or CustomInfoTypes are specified in this request, the
   // system will automatically choose what detectors to run. By default this may
@@ -122,7 +122,7 @@ service DlpService {
 
   // Re-identifies content that has been de-identified.
   // See
-  // https://cloud.google.com/dlp/docs/pseudonymization#re-identification_in_free_text_code_example
+  // https://cloud.google.com/sensitive-data-protection/docs/pseudonymization#re-identification_in_free_text_code_example
   // to learn more.
   rpc ReidentifyContent(ReidentifyContentRequest)
       returns (ReidentifyContentResponse) {
@@ -137,8 +137,9 @@ service DlpService {
   }
 
   // Returns a list of the sensitive information types that DLP API
-  // supports. See https://cloud.google.com/dlp/docs/infotypes-reference to
-  // learn more.
+  // supports. See
+  // https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
+  // to learn more.
   rpc ListInfoTypes(ListInfoTypesRequest) returns (ListInfoTypesResponse) {
     option (google.api.http) = {
       get: "/v2/infoTypes"
@@ -149,11 +150,13 @@ service DlpService {
 
   // Creates an InspectTemplate for reusing frequently used configuration
   // for inspecting content, images, and storage.
-  // See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+  // to learn more.
   rpc CreateInspectTemplate(CreateInspectTemplateRequest)
       returns (InspectTemplate) {
     option (google.api.http) = {
-      post: "/v2/{parent=organizations/*}/inspectTemplates"
+      post: "/v2/{parent=projects/*/locations/*}/inspectTemplates"
       body: "*"
       additional_bindings {
         post: "/v2/{parent=organizations/*/locations/*}/inspectTemplates"
@@ -164,7 +167,7 @@ service DlpService {
         body: "*"
       }
       additional_bindings {
-        post: "/v2/{parent=projects/*/locations/*}/inspectTemplates"
+        post: "/v2/{parent=organizations/*}/inspectTemplates"
         body: "*"
       }
     };
@@ -172,11 +175,13 @@ service DlpService {
   }
 
   // Updates the InspectTemplate.
-  // See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+  // to learn more.
   rpc UpdateInspectTemplate(UpdateInspectTemplateRequest)
       returns (InspectTemplate) {
     option (google.api.http) = {
-      patch: "/v2/{name=organizations/*/inspectTemplates/*}"
+      patch: "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
       body: "*"
       additional_bindings {
         patch: "/v2/{name=organizations/*/locations/*/inspectTemplates/*}"
@@ -187,7 +192,7 @@ service DlpService {
         body: "*"
       }
       additional_bindings {
-        patch: "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
+        patch: "/v2/{name=organizations/*/inspectTemplates/*}"
         body: "*"
       }
     };
@@ -195,50 +200,56 @@ service DlpService {
   }
 
   // Gets an InspectTemplate.
-  // See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+  // to learn more.
   rpc GetInspectTemplate(GetInspectTemplateRequest) returns (InspectTemplate) {
     option (google.api.http) = {
-      get: "/v2/{name=organizations/*/inspectTemplates/*}"
+      get: "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
       additional_bindings {
         get: "/v2/{name=organizations/*/locations/*/inspectTemplates/*}"
       }
       additional_bindings { get: "/v2/{name=projects/*/inspectTemplates/*}" }
       additional_bindings {
-        get: "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
+        get: "/v2/{name=organizations/*/inspectTemplates/*}"
       }
     };
     option (google.api.method_signature) = "name";
   }
 
   // Lists InspectTemplates.
-  // See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+  // to learn more.
   rpc ListInspectTemplates(ListInspectTemplatesRequest)
       returns (ListInspectTemplatesResponse) {
     option (google.api.http) = {
-      get: "/v2/{parent=organizations/*}/inspectTemplates"
+      get: "/v2/{parent=projects/*/locations/*}/inspectTemplates"
       additional_bindings {
         get: "/v2/{parent=organizations/*/locations/*}/inspectTemplates"
       }
       additional_bindings { get: "/v2/{parent=projects/*}/inspectTemplates" }
       additional_bindings {
-        get: "/v2/{parent=projects/*/locations/*}/inspectTemplates"
+        get: "/v2/{parent=organizations/*}/inspectTemplates"
       }
     };
     option (google.api.method_signature) = "parent";
   }
 
   // Deletes an InspectTemplate.
-  // See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+  // to learn more.
   rpc DeleteInspectTemplate(DeleteInspectTemplateRequest)
       returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v2/{name=organizations/*/inspectTemplates/*}"
+      delete: "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
       additional_bindings {
         delete: "/v2/{name=organizations/*/locations/*/inspectTemplates/*}"
       }
       additional_bindings { delete: "/v2/{name=projects/*/inspectTemplates/*}" }
       additional_bindings {
-        delete: "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
+        delete: "/v2/{name=organizations/*/inspectTemplates/*}"
       }
     };
     option (google.api.method_signature) = "name";
@@ -246,8 +257,9 @@ service DlpService {
 
   // Creates a DeidentifyTemplate for reusing frequently used configuration
   // for de-identifying content, images, and storage.
-  // See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-  // more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+  // to learn more.
   rpc CreateDeidentifyTemplate(CreateDeidentifyTemplateRequest)
       returns (DeidentifyTemplate) {
     option (google.api.http) = {
@@ -270,8 +282,9 @@ service DlpService {
   }
 
   // Updates the DeidentifyTemplate.
-  // See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-  // more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+  // to learn more.
   rpc UpdateDeidentifyTemplate(UpdateDeidentifyTemplateRequest)
       returns (DeidentifyTemplate) {
     option (google.api.http) = {
@@ -295,8 +308,9 @@ service DlpService {
   }
 
   // Gets a DeidentifyTemplate.
-  // See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-  // more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+  // to learn more.
   rpc GetDeidentifyTemplate(GetDeidentifyTemplateRequest)
       returns (DeidentifyTemplate) {
     option (google.api.http) = {
@@ -313,8 +327,9 @@ service DlpService {
   }
 
   // Lists DeidentifyTemplates.
-  // See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-  // more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+  // to learn more.
   rpc ListDeidentifyTemplates(ListDeidentifyTemplatesRequest)
       returns (ListDeidentifyTemplatesResponse) {
     option (google.api.http) = {
@@ -331,8 +346,9 @@ service DlpService {
   }
 
   // Deletes a DeidentifyTemplate.
-  // See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-  // more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+  // to learn more.
   rpc DeleteDeidentifyTemplate(DeleteDeidentifyTemplateRequest)
       returns (google.protobuf.Empty) {
     option (google.api.http) = {
@@ -352,7 +368,9 @@ service DlpService {
 
   // Creates a job trigger to run DLP actions such as scanning storage for
   // sensitive information on a set schedule.
-  // See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+  // to learn more.
   rpc CreateJobTrigger(CreateJobTriggerRequest) returns (JobTrigger) {
     option (google.api.http) = {
       post: "/v2/{parent=projects/*}/jobTriggers"
@@ -370,7 +388,9 @@ service DlpService {
   }
 
   // Updates a job trigger.
-  // See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+  // to learn more.
   rpc UpdateJobTrigger(UpdateJobTriggerRequest) returns (JobTrigger) {
     option (google.api.http) = {
       patch: "/v2/{name=projects/*/jobTriggers/*}"
@@ -400,7 +420,9 @@ service DlpService {
   }
 
   // Gets a job trigger.
-  // See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+  // to learn more.
   rpc GetJobTrigger(GetJobTriggerRequest) returns (JobTrigger) {
     option (google.api.http) = {
       get: "/v2/{name=projects/*/jobTriggers/*}"
@@ -415,7 +437,9 @@ service DlpService {
   }
 
   // Lists job triggers.
-  // See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+  // to learn more.
   rpc ListJobTriggers(ListJobTriggersRequest)
       returns (ListJobTriggersResponse) {
     option (google.api.http) = {
@@ -431,7 +455,9 @@ service DlpService {
   }
 
   // Deletes a job trigger.
-  // See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+  // to learn more.
   rpc DeleteJobTrigger(DeleteJobTriggerRequest)
       returns (google.protobuf.Empty) {
     option (google.api.http) = {
@@ -523,8 +549,11 @@ service DlpService {
   }
 
   // Creates a new job to inspect storage or calculate risk metrics.
-  // See https://cloud.google.com/dlp/docs/inspecting-storage and
-  // https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+  // and
+  // https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+  // to learn more.
   //
   // When no InfoTypes or CustomInfoTypes are specified in inspect jobs, the
   // system will automatically choose what detectors to run. By default this may
@@ -543,8 +572,11 @@ service DlpService {
   }
 
   // Lists DlpJobs that match the specified filter in the request.
-  // See https://cloud.google.com/dlp/docs/inspecting-storage and
-  // https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+  // and
+  // https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+  // to learn more.
   rpc ListDlpJobs(ListDlpJobsRequest) returns (ListDlpJobsResponse) {
     option (google.api.http) = {
       get: "/v2/{parent=projects/*}/dlpJobs"
@@ -557,8 +589,11 @@ service DlpService {
   }
 
   // Gets the latest state of a long-running DlpJob.
-  // See https://cloud.google.com/dlp/docs/inspecting-storage and
-  // https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+  // and
+  // https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+  // to learn more.
   rpc GetDlpJob(GetDlpJobRequest) returns (DlpJob) {
     option (google.api.http) = {
       get: "/v2/{name=projects/*/dlpJobs/*}"
@@ -570,8 +605,11 @@ service DlpService {
   // Deletes a long-running DlpJob. This method indicates that the client is
   // no longer interested in the DlpJob result. The job will be canceled if
   // possible.
-  // See https://cloud.google.com/dlp/docs/inspecting-storage and
-  // https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+  // and
+  // https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+  // to learn more.
   rpc DeleteDlpJob(DeleteDlpJobRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/v2/{name=projects/*/dlpJobs/*}"
@@ -585,8 +623,11 @@ service DlpService {
   // Starts asynchronous cancellation on a long-running DlpJob. The server
   // makes a best effort to cancel the DlpJob, but success is not
   // guaranteed.
-  // See https://cloud.google.com/dlp/docs/inspecting-storage and
-  // https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+  // and
+  // https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+  // to learn more.
   rpc CancelDlpJob(CancelDlpJobRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/v2/{name=projects/*/dlpJobs/*}:cancel"
@@ -599,8 +640,9 @@ service DlpService {
   }
 
   // Creates a pre-built stored infoType to be used for inspection.
-  // See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-  // learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+  // to learn more.
   rpc CreateStoredInfoType(CreateStoredInfoTypeRequest)
       returns (StoredInfoType) {
     option (google.api.http) = {
@@ -624,8 +666,9 @@ service DlpService {
 
   // Updates the stored infoType by creating a new version. The existing version
   // will continue to be used until the new version is ready.
-  // See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-  // learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+  // to learn more.
   rpc UpdateStoredInfoType(UpdateStoredInfoTypeRequest)
       returns (StoredInfoType) {
     option (google.api.http) = {
@@ -648,8 +691,9 @@ service DlpService {
   }
 
   // Gets a stored infoType.
-  // See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-  // learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+  // to learn more.
   rpc GetStoredInfoType(GetStoredInfoTypeRequest) returns (StoredInfoType) {
     option (google.api.http) = {
       get: "/v2/{name=organizations/*/storedInfoTypes/*}"
@@ -665,8 +709,9 @@ service DlpService {
   }
 
   // Lists stored infoTypes.
-  // See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-  // learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+  // to learn more.
   rpc ListStoredInfoTypes(ListStoredInfoTypesRequest)
       returns (ListStoredInfoTypesResponse) {
     option (google.api.http) = {
@@ -683,8 +728,9 @@ service DlpService {
   }
 
   // Deletes a stored infoType.
-  // See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-  // learn more.
+  // See
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+  // to learn more.
   rpc DeleteStoredInfoType(DeleteStoredInfoTypeRequest)
       returns (google.protobuf.Empty) {
     option (google.api.http) = {
@@ -695,6 +741,128 @@ service DlpService {
       additional_bindings { delete: "/v2/{name=projects/*/storedInfoTypes/*}" }
       additional_bindings {
         delete: "/v2/{name=projects/*/locations/*/storedInfoTypes/*}"
+      }
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Lists project data profiles for an organization.
+  rpc ListProjectDataProfiles(ListProjectDataProfilesRequest)
+      returns (ListProjectDataProfilesResponse) {
+    option (google.api.http) = {
+      get: "/v2/{parent=organizations/*/locations/*}/projectDataProfiles"
+      additional_bindings {
+        get: "/v2/{parent=projects/*/locations/*}/projectDataProfiles"
+      }
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Lists table data profiles for an organization.
+  rpc ListTableDataProfiles(ListTableDataProfilesRequest)
+      returns (ListTableDataProfilesResponse) {
+    option (google.api.http) = {
+      get: "/v2/{parent=organizations/*/locations/*}/tableDataProfiles"
+      additional_bindings {
+        get: "/v2/{parent=projects/*/locations/*}/tableDataProfiles"
+      }
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Lists column data profiles for an organization.
+  rpc ListColumnDataProfiles(ListColumnDataProfilesRequest)
+      returns (ListColumnDataProfilesResponse) {
+    option (google.api.http) = {
+      get: "/v2/{parent=organizations/*/locations/*}/columnDataProfiles"
+      additional_bindings {
+        get: "/v2/{parent=projects/*/locations/*}/columnDataProfiles"
+      }
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Gets a project data profile.
+  rpc GetProjectDataProfile(GetProjectDataProfileRequest)
+      returns (ProjectDataProfile) {
+    option (google.api.http) = {
+      get: "/v2/{name=organizations/*/locations/*/projectDataProfiles/*}"
+      additional_bindings {
+        get: "/v2/{name=projects/*/locations/*/projectDataProfiles/*}"
+      }
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Lists file store data profiles for an organization.
+  rpc ListFileStoreDataProfiles(ListFileStoreDataProfilesRequest)
+      returns (ListFileStoreDataProfilesResponse) {
+    option (google.api.http) = {
+      get: "/v2/{parent=organizations/*/locations/*}/fileStoreDataProfiles"
+      additional_bindings {
+        get: "/v2/{parent=projects/*/locations/*}/fileStoreDataProfiles"
+      }
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Gets a file store data profile.
+  rpc GetFileStoreDataProfile(GetFileStoreDataProfileRequest)
+      returns (FileStoreDataProfile) {
+    option (google.api.http) = {
+      get: "/v2/{name=organizations/*/locations/*/fileStoreDataProfiles/*}"
+      additional_bindings {
+        get: "/v2/{name=projects/*/locations/*/fileStoreDataProfiles/*}"
+      }
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Delete a FileStoreDataProfile. Will not prevent the profile from being
+  // regenerated if the resource is still included in a discovery configuration.
+  rpc DeleteFileStoreDataProfile(DeleteFileStoreDataProfileRequest)
+      returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v2/{name=organizations/*/locations/*/fileStoreDataProfiles/*}"
+      additional_bindings {
+        delete: "/v2/{name=projects/*/locations/*/fileStoreDataProfiles/*}"
+      }
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Gets a table data profile.
+  rpc GetTableDataProfile(GetTableDataProfileRequest)
+      returns (TableDataProfile) {
+    option (google.api.http) = {
+      get: "/v2/{name=organizations/*/locations/*/tableDataProfiles/*}"
+      additional_bindings {
+        get: "/v2/{name=projects/*/locations/*/tableDataProfiles/*}"
+      }
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Gets a column data profile.
+  rpc GetColumnDataProfile(GetColumnDataProfileRequest)
+      returns (ColumnDataProfile) {
+    option (google.api.http) = {
+      get: "/v2/{name=organizations/*/locations/*/columnDataProfiles/*}"
+      additional_bindings {
+        get: "/v2/{name=projects/*/locations/*/columnDataProfiles/*}"
+      }
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Delete a TableDataProfile. Will not prevent the profile from being
+  // regenerated if the table is still included in a discovery configuration.
+  rpc DeleteTableDataProfile(DeleteTableDataProfileRequest)
+      returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v2/{name=organizations/*/locations/*/tableDataProfiles/*}"
+      additional_bindings {
+        delete: "/v2/{name=projects/*/locations/*/tableDataProfiles/*}"
       }
     };
     option (google.api.method_signature) = "name";
@@ -719,6 +887,80 @@ service DlpService {
       post: "/v2/{name=projects/*/locations/*/dlpJobs/*}:finish"
       body: "*"
     };
+  }
+
+  // Create a Connection to an external data source.
+  rpc CreateConnection(CreateConnectionRequest) returns (Connection) {
+    option (google.api.http) = {
+      post: "/v2/{parent=projects/*/locations/*}/connections"
+      body: "*"
+      additional_bindings {
+        post: "/v2/{parent=organizations/*/locations/*}/connections"
+        body: "*"
+      }
+    };
+    option (google.api.method_signature) = "parent, connection";
+  }
+
+  // Get a Connection by name.
+  rpc GetConnection(GetConnectionRequest) returns (Connection) {
+    option (google.api.http) = {
+      get: "/v2/{name=projects/*/locations/*/connections/*}"
+      additional_bindings {
+        get: "/v2/{name=organizations/*/locations/*/connections/*}"
+      }
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Lists Connections in a parent. Use SearchConnections to see all connections
+  // within an organization.
+  rpc ListConnections(ListConnectionsRequest)
+      returns (ListConnectionsResponse) {
+    option (google.api.http) = {
+      get: "/v2/{parent=projects/*/locations/*}/connections"
+      additional_bindings {
+        get: "/v2/{parent=organizations/*/locations/*}/connections"
+      }
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Searches for Connections in a parent.
+  rpc SearchConnections(SearchConnectionsRequest)
+      returns (SearchConnectionsResponse) {
+    option (google.api.http) = {
+      get: "/v2/{parent=projects/*/locations/*}/connections:search"
+      additional_bindings {
+        get: "/v2/{parent=organizations/*/locations/*}/connections:search"
+      }
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
+  // Delete a Connection.
+  rpc DeleteConnection(DeleteConnectionRequest)
+      returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v2/{name=projects/*/locations/*/connections/*}"
+      additional_bindings {
+        delete: "/v2/{name=organizations/*/locations/*/connections/*}"
+      }
+    };
+    option (google.api.method_signature) = "name";
+  }
+
+  // Update a Connection.
+  rpc UpdateConnection(UpdateConnectionRequest) returns (Connection) {
+    option (google.api.http) = {
+      patch: "/v2/{name=projects/*/locations/*/connections/*}"
+      body: "*"
+      additional_bindings {
+        patch: "/v2/{name=organizations/*/locations/*/connections/*}"
+        body: "*"
+      }
+    };
+    option (google.api.method_signature) = "name";
   }
 }
 
@@ -869,7 +1111,7 @@ message InspectConfig {
 
   // Restricts what info_types to look for. The values must correspond to
   // InfoType values returned by ListInfoTypes or listed at
-  // https://cloud.google.com/dlp/docs/infotypes-reference.
+  // https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference.
   //
   // When no InfoTypes or CustomInfoTypes are specified in a request, the
   // system may automatically choose a default list of detectors to run, which
@@ -885,7 +1127,8 @@ message InspectConfig {
   //
   // In general, the highest likelihood setting yields the fewest findings in
   // results and the lowest chance of a false positive. For more information,
-  // see [Match likelihood](https://cloud.google.com/dlp/docs/likelihood).
+  // see [Match
+  // likelihood](https://cloud.google.com/sensitive-data-protection/docs/likelihood).
   Likelihood min_likelihood = 2;
 
   // Minimum likelihood per infotype. For each infotype, a user can specify a
@@ -922,7 +1165,8 @@ message InspectConfig {
   bool exclude_info_types = 5;
 
   // CustomInfoTypes provided by the user. See
-  // https://cloud.google.com/dlp/docs/creating-custom-infotypes to learn more.
+  // https://cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes
+  // to learn more.
   repeated CustomInfoType custom_info_types = 6;
 
   // Deprecated and unused.
@@ -938,7 +1182,7 @@ message InspectConfig {
 message ByteContentItem {
   // The type of data being sent for inspection. To learn more, see
   // [Supported file
-  // types](https://cloud.google.com/dlp/docs/supported-file-types).
+  // types](https://cloud.google.com/sensitive-data-protection/docs/supported-file-types).
   enum BytesType {
     // Unused
     BYTES_TYPE_UNSPECIFIED = 0;
@@ -981,6 +1225,15 @@ message ByteContentItem {
 
     // tsv
     TSV = 13;
+
+    // Audio file types. Only used for profiling.
+    AUDIO = 15;
+
+    // Video file types. Only used for profiling.
+    VIDEO = 16;
+
+    // Executable file types. Only used for profiling.
+    EXECUTABLE = 17;
   }
 
   // The type of data stored in the bytes string. Default will be TEXT_UTF8.
@@ -990,6 +1243,7 @@ message ByteContentItem {
   bytes data = 2;
 }
 
+// Type of content to inspect.
 message ContentItem {
   // Data of the item either in the byte array or UTF-8 string form, or table.
   oneof data_item {
@@ -997,8 +1251,8 @@ message ContentItem {
     string value = 3;
 
     // Structured content for inspection. See
-    // https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table to
-    // learn more.
+    // https://cloud.google.com/sensitive-data-protection/docs/inspecting-text#inspecting_a_table
+    // to learn more.
     Table table = 4;
 
     // Content data to inspect or redact. Replaces `type` and `data`.
@@ -1007,7 +1261,7 @@ message ContentItem {
 }
 
 // Structured content to inspect. Up to 50,000 `Value`s per request allowed. See
-// https://cloud.google.com/dlp/docs/inspecting-structured-text#inspecting_a_table
+// https://cloud.google.com/sensitive-data-protection/docs/inspecting-structured-text#inspecting_a_table
 // to learn more.
 message Table {
   // Values of the row.
@@ -1094,6 +1348,7 @@ message Finding {
   // No more than 10 labels can be associated with a given finding.
   //
   // Examples:
+  //
   // * `"environment" : "production"`
   // * `"pipeline" : "etl"`
   map<string, string> labels = 10;
@@ -1187,6 +1442,7 @@ message MetadataLocation {
 
 // Storage metadata label to indicate which metadata entry contains findings.
 message StorageMetadataLabel {
+  // Label name.
   string key = 1;
 }
 
@@ -1322,12 +1578,12 @@ message RedactImageRequest {
   //
   // The format of this value varies depending on whether you have [specified a
   // processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -1387,12 +1643,12 @@ message DeidentifyContentRequest {
   //
   // The format of this value varies depending on whether you have [specified a
   // processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -1456,12 +1712,12 @@ message ReidentifyContentRequest {
   //
   // The format of this value varies depending on whether you have [specified a
   // processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -1528,12 +1784,12 @@ message InspectContentRequest {
   //
   // The format of this value varies depending on whether you have [specified a
   // processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -1658,6 +1914,10 @@ message InspectDataSourceDetails {
     // inspect job.
     repeated InfoTypeStats info_type_stats = 3;
 
+    // Number of rows scanned after sampling and time filtering (applicable for
+    // row based stores such as BigQuery).
+    int64 num_rows_processed = 5;
+
     // Statistics related to the processing of hybrid inspect.
     HybridInspectStatistics hybrid_stats = 7;
   }
@@ -1672,12 +1932,16 @@ message InspectDataSourceDetails {
 // The schema of data to be saved to the BigQuery table when the
 // `DataProfileAction` is enabled.
 message DataProfileBigQueryRowSchema {
+  // Data profile type.
   oneof data_profile {
     // Table data profile column
     TableDataProfile table_profile = 1;
 
     // Column data profile column
     ColumnDataProfile column_profile = 2;
+
+    // File store data profile column.
+    FileStoreDataProfile file_store_profile = 3;
   }
 }
 
@@ -1786,8 +2050,17 @@ message InfoTypeCategory {
     // The infoType is typically used in Argentina.
     ARGENTINA = 2;
 
+    // The infoType is typically used in Armenia.
+    ARMENIA = 51;
+
     // The infoType is typically used in Australia.
     AUSTRALIA = 3;
+
+    // The infoType is typically used in Azerbaijan.
+    AZERBAIJAN = 48;
+
+    // The infoType is typically used in Belarus.
+    BELARUS = 50;
 
     // The infoType is typically used in Belgium.
     BELGIUM = 4;
@@ -1843,6 +2116,9 @@ message InfoTypeCategory {
     // The infoType is typically used in Japan.
     JAPAN = 20;
 
+    // The infoType is typically used in Kazakhstan.
+    KAZAKHSTAN = 47;
+
     // The infoType is typically used in Korea.
     KOREA = 21;
 
@@ -1870,6 +2146,9 @@ message InfoTypeCategory {
     // The infoType is typically used in Portugal.
     PORTUGAL = 28;
 
+    // The infoType is typically used in Russia.
+    RUSSIA = 44;
+
     // The infoType is typically used in Singapore.
     SINGAPORE = 29;
 
@@ -1894,6 +2173,9 @@ message InfoTypeCategory {
     // The infoType is typically used in Turkey.
     TURKEY = 35;
 
+    // The infoType is typically used in Ukraine.
+    UKRAINE = 45;
+
     // The infoType is typically used in the United Kingdom.
     UNITED_KINGDOM = 36;
 
@@ -1902,6 +2184,9 @@ message InfoTypeCategory {
 
     // The infoType is typically used in Uruguay.
     URUGUAY = 38;
+
+    // The infoType is typically used in Uzbekistan.
+    UZBEKISTAN = 46;
 
     // The infoType is typically used in Venezuela.
     VENEZUELA = 39;
@@ -1958,6 +2243,7 @@ message InfoTypeCategory {
     CONTEXTUAL_INFORMATION = 7;
   }
 
+  // Categories of infotypes.
   oneof category {
     // The region or country that issued the ID or document represented by the
     // infoType.
@@ -1986,7 +2272,7 @@ message ListInfoTypesRequest {
   //
   // The format of this value is as follows:
   //
-  //     locations/<var>LOCATION_ID</var>
+  //     `locations/{location_id}`
   string parent = 4;
 
   // BCP-47 language code for localized infoType friendly
@@ -2009,7 +2295,8 @@ message ListInfoTypesResponse {
 }
 
 // Configuration for a risk analysis job. See
-// https://cloud.google.com/dlp/docs/concepts-risk-analysis to learn more.
+// https://cloud.google.com/sensitive-data-protection/docs/concepts-risk-analysis
+// to learn more.
 message RiskAnalysisJobConfig {
   // Privacy metric to compute.
   PrivacyMetric privacy_metric = 1;
@@ -2600,6 +2887,7 @@ message DateTime {
 
 // The configuration that controls how the data will change.
 message DeidentifyConfig {
+  // Type of transformation
   oneof transformation {
     // Treat the dataset as free-form text and apply the same free text
     // transformation everywhere.
@@ -2636,6 +2924,7 @@ message ImageTransformations {
     // Apply to all text.
     message AllText {}
 
+    // Part of the image to transform.
     oneof target {
       // Apply transformation to the selected info_types.
       SelectedInfoTypes selected_info_types = 4;
@@ -2655,6 +2944,7 @@ message ImageTransformations {
     Color redaction_color = 3;
   }
 
+  // List of transforms to make.
   repeated ImageTransformation transforms = 2;
 }
 
@@ -2688,6 +2978,7 @@ message TransformationErrorHandling {
 
 // A rule for transforming a value.
 message PrimitiveTransformation {
+  // Type of transformation.
   oneof transformation {
     // Replace with a specified value.
     ReplaceValueConfig replace_config = 1;
@@ -2764,7 +3055,8 @@ message TimePartConfig {
 // Outputs a base64 encoded representation of the hashed output
 // (for example, L7k0BHmF1ha5U3NfGykjro4xWi1MPVQPjhMAZbSV9mM=).
 // Currently, only string and integer values can be hashed.
-// See https://cloud.google.com/dlp/docs/pseudonymization to learn more.
+// See https://cloud.google.com/sensitive-data-protection/docs/pseudonymization
+// to learn more.
 message CryptoHashConfig {
   // The key used by the hash function.
   CryptoKey crypto_key = 1;
@@ -2842,10 +3134,11 @@ message ReplaceValueConfig {
 
 // Replace each input value with a value randomly selected from the dictionary.
 message ReplaceDictionaryConfig {
+  // Type of dictionary.
   oneof type {
     // A list of words to select from for random replacement. The
-    // [limits](https://cloud.google.com/dlp/limits) page contains details about
-    // the size limits of dictionaries.
+    // [limits](https://cloud.google.com/sensitive-data-protection/limits) page
+    // contains details about the size limits of dictionaries.
     CustomInfoType.Dictionary.WordList word_list = 1;
   }
 }
@@ -2882,6 +3175,7 @@ message CharsToIgnore {
     WHITESPACE = 5;
   }
 
+  // Type of characters to skip.
   oneof characters {
     // Characters to not transform when masking.
     string characters_to_skip = 1;
@@ -2953,7 +3247,9 @@ message CharacterMaskConfig {
 // being transformed, we will first attempt converting the type of the data to
 // be transformed to match the type of the bound before comparing.
 //
-// See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
+// See
+// https://cloud.google.com/sensitive-data-protection/docs/concepts-bucketing to
+// learn more.
 message FixedSizeBucketingConfig {
   // Required. Lower bound value of buckets. All values less than `lower_bound`
   // are grouped together into a single bucket; for example if `lower_bound` =
@@ -2974,13 +3270,16 @@ message FixedSizeBucketingConfig {
 
 // Generalization function that buckets values based on ranges. The ranges and
 // replacement values are dynamically provided by the user for custom behavior,
-// such as 1-30 -> LOW 31-65 -> MEDIUM 66-100 -> HIGH
-// This can be used on
-// data of type: number, long, string, timestamp.
+// such as 1-30 -> LOW, 31-65 -> MEDIUM, 66-100 -> HIGH.
+//
+// This can be used on data of type: number, long, string, timestamp.
+//
 // If the bound `Value` type differs from the type of data being transformed, we
 // will first attempt converting the type of the data to be transformed to match
 // the type of the bound before comparing.
-// See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
+// See
+// https://cloud.google.com/sensitive-data-protection/docs/concepts-bucketing to
+// learn more.
 message BucketingConfig {
   // Bucket is represented as a range, along with replacement values.
   message Bucket {
@@ -3006,8 +3305,9 @@ message BucketingConfig {
 // encoded as ASCII. For a given crypto key and context, the same identifier
 // will be replaced with the same surrogate. Identifiers must be at least two
 // characters long. In the case that the identifier is the empty string, it will
-// be skipped. See https://cloud.google.com/dlp/docs/pseudonymization to learn
-// more.
+// be skipped. See
+// https://cloud.google.com/sensitive-data-protection/docs/pseudonymization to
+// learn more.
 //
 // Note: We recommend using  CryptoDeterministicConfig for all use cases which
 // do not require preserving the input alphabet space and size, plus warrant
@@ -3071,8 +3371,7 @@ message CryptoReplaceFfxFpeConfig {
     // This must be encoded as ASCII.
     // The order of characters does not matter.
     // The full list of allowed characters is:
-    // <code>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-    // ~`!@#$%^&*()_-+={[}]|\:;"'<,>.?/</code>
+    // ``0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~`!@#$%^&*()_-+={[}]|\:;"'<,>.?/``
     string custom_alphabet = 5;
 
     // The native way to select the alphabet. Must be in the range [2, 95].
@@ -3091,7 +3390,7 @@ message CryptoReplaceFfxFpeConfig {
   //
   // This annotation identifies the surrogate when inspecting content using the
   // custom infoType
-  // [`SurrogateType`](https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype).
+  // [`SurrogateType`](https://cloud.google.com/sensitive-data-protection/docs/reference/rest/v2/InspectConfig#surrogatetype).
   // This facilitates reversal of the surrogate when it occurs in free text.
   //
   // In order for inspection to work properly, the name of this infoType must
@@ -3153,7 +3452,7 @@ message UnwrappedCryptoKey {
 // dlp.kms.encrypt
 //
 // For more information, see [Creating a wrapped key]
-// (https://cloud.google.com/dlp/docs/create-wrapped-key).
+// (https://cloud.google.com/sensitive-data-protection/docs/create-wrapped-key).
 //
 // Note: When you use Cloud KMS for cryptographic operations,
 // [charges apply](https://cloud.google.com/kms/pricing).
@@ -3166,7 +3465,8 @@ message KmsWrappedCryptoKey {
 }
 
 // Shifts dates by random number of days, with option to be consistent for the
-// same context. See https://cloud.google.com/dlp/docs/concepts-date-shifting
+// same context. See
+// https://cloud.google.com/sensitive-data-protection/docs/concepts-date-shifting
 // to learn more.
 message DateShiftConfig {
   // Required. Range of shift in days. Actual shift will be selected at random
@@ -3459,6 +3759,7 @@ message TransformationDetails {
 
 // Specifies the location of a transformation.
 message TransformationLocation {
+  // Location type.
   oneof location_type {
     // For infotype transformations, link to the corresponding findings ID so
     // that location information does not need to be duplicated. Each findings
@@ -3476,6 +3777,7 @@ message TransformationLocation {
   TransformationContainerType container_type = 3;
 }
 
+// The field in a record to transform.
 message RecordTransformation {
   // For record transformations, provide a field.
   FieldId field_id = 1;
@@ -3487,6 +3789,7 @@ message RecordTransformation {
   string container_version = 3;
 }
 
+// The outcome of a transformation.
 message TransformationResultStatus {
   // Transformation result status type, this will be either SUCCESS, or it will
   // be the reason for why the transformation was not completely successful.
@@ -3500,6 +3803,7 @@ message TransformationResultStatus {
 // storing of transformation was successful, otherwise, reason for not
 // transforming.
 enum TransformationResultStatusType {
+  // Unused.
   STATE_TYPE_UNSPECIFIED = 0;
 
   // This will be set when a finding could not be transformed (i.e. outside user
@@ -3522,12 +3826,16 @@ enum TransformationResultStatusType {
 
 // Describes functionality of a given container in its original format.
 enum TransformationContainerType {
+  // Unused.
   TRANSFORM_UNKNOWN_CONTAINER = 0;
 
+  // Body of a file.
   TRANSFORM_BODY = 1;
 
+  // Metadata for a file.
   TRANSFORM_METADATA = 2;
 
+  // A table.
   TRANSFORM_TABLE = 3;
 }
 
@@ -3597,6 +3905,7 @@ message TransformationDetailsStorageConfig {
 
 // Schedule for inspect job triggers.
 message Schedule {
+  // Type of schedule.
   oneof option {
     // With this option a job is started on a regular periodic basis. For
     // example: every day (86400 seconds).
@@ -3616,8 +3925,9 @@ message Manual {}
 
 // The inspectTemplate contains a configuration (set of types of sensitive data
 // to be detected) to be used anywhere you otherwise would normally specify
-// InspectConfig. See https://cloud.google.com/dlp/docs/concepts-templates
-// to learn more.
+// InspectConfig. See
+// https://cloud.google.com/sensitive-data-protection/docs/concepts-templates to
+// learn more.
 message InspectTemplate {
   option (google.api.resource) = {
     type: "dlp.googleapis.com/InspectTemplate"
@@ -3653,7 +3963,9 @@ message InspectTemplate {
 }
 
 // DeidentifyTemplates contains instructions on how to de-identify content.
-// See https://cloud.google.com/dlp/docs/concepts-templates to learn more.
+// See
+// https://cloud.google.com/sensitive-data-protection/docs/concepts-templates to
+// learn more.
 message DeidentifyTemplate {
   option (google.api.resource) = {
     type: "dlp.googleapis.com/DeidentifyTemplate"
@@ -3691,16 +4003,33 @@ message DeidentifyTemplate {
 // Details information about an error encountered during job execution or
 // the results of an unsuccessful activation of the JobTrigger.
 message Error {
+  // Additional information about the error.
+  enum ErrorExtraInfo {
+    // Unused.
+    ERROR_INFO_UNSPECIFIED = 0;
+
+    // Image scan is not available in the region.
+    IMAGE_SCAN_UNAVAILABLE_IN_REGION = 1;
+
+    // File store cluster is not supported for profile generation.
+    FILE_STORE_CLUSTER_UNSUPPORTED = 2;
+  }
+
   // Detailed error codes and messages.
   google.rpc.Status details = 1;
 
   // The times the error occurred. List includes the oldest timestamp and the
   // last 9 timestamps.
   repeated google.protobuf.Timestamp timestamps = 2;
+
+  // Additional information about the error.
+  ErrorExtraInfo extra_info = 4;
 }
 
-// Contains a configuration to make dlp api calls on a repeating basis.
-// See https://cloud.google.com/dlp/docs/concepts-job-triggers to learn more.
+// Contains a configuration to make API calls on a repeating basis.
+// See
+// https://cloud.google.com/sensitive-data-protection/docs/concepts-job-triggers
+// to learn more.
 message JobTrigger {
   option (google.api.resource) = {
     type: "dlp.googleapis.com/JobTrigger"
@@ -3710,6 +4039,7 @@ message JobTrigger {
 
   // What event needs to occur for a new job to be started.
   message Trigger {
+    // What event needs to occur for a new job to be started.
     oneof trigger {
       // Create a job on a repeating basis based on the elapse of time.
       Schedule schedule = 1;
@@ -3782,7 +4112,8 @@ message JobTrigger {
 }
 
 // A task to execute on the completion of a job.
-// See https://cloud.google.com/dlp/docs/concepts-actions to learn more.
+// See https://cloud.google.com/sensitive-data-protection/docs/concepts-actions
+// to learn more.
 message Action {
   // If set, the detailed findings will be persisted to the specified
   // OutputStorageConfig. Only a single instance of this action can be
@@ -3796,7 +4127,7 @@ message Action {
   // Publish a message into a given Pub/Sub topic when DlpJob has completed. The
   // message contains a single field, `DlpJobName`, which is equal to the
   // finished job's
-  // [`DlpJob.name`](https://cloud.google.com/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
+  // [`DlpJob.name`](https://cloud.google.com/sensitive-data-protection/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
   // Compatible with: Inspect, Risk
   message PublishToPubSub {
     // Cloud Pub/Sub topic to send notifications to. The topic must have given
@@ -3865,9 +4196,10 @@ message Action {
     TransformationDetailsStorageConfig transformation_details_storage_config =
         3;
 
+    // Where to store the output.
     oneof output {
       // Required. User settable Cloud Storage bucket and folders to store
-      // de-identified files. This field must be set for cloud storage
+      // de-identified files. This field must be set for Cloud Storage
       // deidentification. The output Cloud Storage bucket must be different
       // from the input bucket. De-identified files will overwrite files in the
       // output path.
@@ -3877,12 +4209,12 @@ message Action {
     }
 
     // List of user-specified file type groups to transform. If specified, only
-    // the files with these filetypes will be transformed. If empty, all
+    // the files with these file types will be transformed. If empty, all
     // supported files will be transformed. Supported types may be automatically
     // added over time. If a file type is set in this field that isn't supported
     // by the Deidentify action then the job will fail and will not be
-    // successfully created/started. Currently the only filetypes supported are:
-    // IMAGES, TEXT_FILES, CSV, TSV.
+    // successfully created/started. Currently the only file types supported
+    // are: IMAGES, TEXT_FILES, CSV, TSV.
     repeated FileType file_types_to_transform = 8;
   }
 
@@ -3897,6 +4229,7 @@ message Action {
   // as 'Custom' under the Stackdriver label 'info_type'.
   message PublishToStackdriver {}
 
+  // Extra events to execute after the job has finished.
   oneof action {
     // Save resulting findings in a provided location.
     SaveFindings save_findings = 1;
@@ -3958,16 +4291,16 @@ message CreateInspectTemplateRequest {
   //
   // The format of this value varies depending on the scope of the request
   // (project or organization) and whether you have [specified a processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
-  // + Organizations scope, location specified:<br/>
-  //   `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Organizations scope, no location specified (defaults to global):<br/>
-  //   `organizations/`<var>ORG_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
+  // + Organizations scope, location specified:
+  //   `organizations/{org_id}/locations/{location_id}`
+  // + Organizations scope, no location specified (defaults to global):
+  //   `organizations/{org_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -4032,16 +4365,16 @@ message ListInspectTemplatesRequest {
   //
   // The format of this value varies depending on the scope of the request
   // (project or organization) and whether you have [specified a processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
-  // + Organizations scope, location specified:<br/>
-  //   `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Organizations scope, no location specified (defaults to global):<br/>
-  //   `organizations/`<var>ORG_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
+  // + Organizations scope, location specified:
+  //   `organizations/{org_id}/locations/{location_id}`
+  // + Organizations scope, no location specified (defaults to global):
+  //   `organizations/{org_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -4063,7 +4396,7 @@ message ListInspectTemplatesRequest {
   // returns a page of max size 100.
   int32 page_size = 3;
 
-  // Comma separated list of fields to order by,
+  // Comma-separated list of fields to order by,
   // followed by `asc` or `desc` postfix. This list is case insensitive. The
   // default sorting order is ascending. Redundant space characters are
   // insignificant.
@@ -4111,12 +4444,12 @@ message CreateJobTriggerRequest {
   //
   // The format of this value varies depending on whether you have [specified a
   // processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -4183,8 +4516,13 @@ message GetJobTriggerRequest {
 message CreateDiscoveryConfigRequest {
   // Required. Parent resource name.
   //
-  // The format of this value is as follows:
-  // `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+  // The format of this value varies depending on the scope of the request
+  // (project or organization):
+  //
+  // + Projects scope:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Organizations scope:
+  //   `organizations/{org_id}/locations/{location_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -4243,7 +4581,7 @@ message ListDiscoveryConfigsRequest {
   // Required. Parent resource name.
   //
   // The format of this value is as follows:
-  // `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+  // `projects/{project_id}/locations/{location_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -4265,7 +4603,7 @@ message ListDiscoveryConfigsRequest {
   // Size of the page. This value can be limited by a server.
   int32 page_size = 3;
 
-  // Comma separated list of config fields to order by,
+  // Comma-separated list of config fields to order by,
   // followed by `asc` or `desc` postfix. This list is case insensitive. The
   // default sorting order is ascending. Redundant space characters are
   // insignificant.
@@ -4310,12 +4648,12 @@ message CreateDlpJobRequest {
   //
   // The format of this value varies depending on whether you have [specified a
   // processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -4355,12 +4693,12 @@ message ListJobTriggersRequest {
   //
   // The format of this value varies depending on whether you have [specified a
   // processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -4382,7 +4720,7 @@ message ListJobTriggersRequest {
   // Size of the page. This value can be limited by a server.
   int32 page_size = 3;
 
-  // Comma separated list of triggeredJob fields to order by,
+  // Comma-separated list of triggeredJob fields to order by,
   // followed by `asc` or `desc` postfix. This list is case insensitive. The
   // default sorting order is ascending. Redundant space characters are
   // insignificant.
@@ -4469,14 +4807,32 @@ message InspectJobConfig {
   repeated Action actions = 4;
 }
 
+// Whether a profile being created is the first generation or an update.
+enum ProfileGeneration {
+  // Unused.
+  PROFILE_GENERATION_UNSPECIFIED = 0;
+
+  // The profile is the first profile for the resource.
+  PROFILE_GENERATION_NEW = 1;
+
+  // The profile is an update to a previous profile.
+  PROFILE_GENERATION_UPDATE = 2;
+}
+
 // A task to execute when a data profile has been generated.
 message DataProfileAction {
   // If set, the detailed data profiles will be persisted to the location
   // of your choice whenever updated.
   message Export {
     // Store all table and column profiles in an existing table or a new table
-    // in an existing dataset. Each re-generation will result in a new row in
-    // BigQuery.
+    // in an existing dataset. Each re-generation will result in new rows in
+    // BigQuery. Data is inserted using [streaming
+    // insert](https://cloud.google.com/blog/products/bigquery/life-of-a-bigquery-streaming-insert)
+    // and so data may be in the buffer for a period of time after the profile
+    // has finished. The Pub/Sub notification is sent before the streaming
+    // buffer is guaranteed to be written, so data may not be instantly
+    // visible to queries by the time your topic receives the Pub/Sub
+    // notification.
     BigQueryTable profile_table = 1;
   }
 
@@ -4492,8 +4848,11 @@ message DataProfileAction {
       // The full table data profile.
       TABLE_PROFILE = 1;
 
-      // The resource name of the table.
+      // The name of the profiled resource.
       RESOURCE_NAME = 2;
+
+      // The full file store data profile.
+      FILE_STORE_PROFILE = 3;
     }
 
     // Cloud Pub/Sub topic to send notifications to.
@@ -4522,13 +4881,9 @@ message DataProfileAction {
     // New profile (not a re-profile).
     NEW_PROFILE = 1;
 
-    // Changed one of the following profile metrics:
-    // * Table data risk score
-    // * Table sensitivity score
-    // * Table resource visibility
-    // * Table encryption type
-    // * Table predicted infoTypes
-    // * Table other infoTypes
+    // One of the following profile metrics changed: Data risk score,
+    // Sensitivity score, Resource visibility, Encryption type, Predicted
+    // infoTypes, Other infoTypes
     CHANGED_PROFILE = 2;
 
     // Table data risk score or sensitivity score increased.
@@ -4538,12 +4893,85 @@ message DataProfileAction {
     ERROR_CHANGED = 4;
   }
 
+  // Message expressing intention to publish to Google Security Operations.
+  message PublishToChronicle {}
+
+  // If set, a summary finding will be created/updated in SCC for each profile.
+  message PublishToSecurityCommandCenter {}
+
+  // If set, attaches the [tags]
+  // (https://cloud.google.com/resource-manager/docs/tags/tags-overview)
+  // provided to profiled resources. Tags support [access
+  // control](https://cloud.google.com/iam/docs/tags-access-control). You can
+  // conditionally grant or deny access to a resource based on whether the
+  // resource has a specific tag.
+  message TagResources {
+    // The tag to attach to profiles matching the condition. At most one
+    // `TagCondition` can be specified per sensitivity level.
+    message TagCondition {
+      // The tag value to attach to resources.
+      TagValue tag = 1;
+
+      // The type of condition on which attaching the tag will be predicated.
+      oneof type {
+        // Conditions attaching the tag to a resource on its profile having this
+        // sensitivity score.
+        SensitivityScore sensitivity_score = 2;
+      }
+    }
+
+    // A value of a tag.
+    message TagValue {
+      // The format of the tag value.
+      oneof format {
+        // The namespaced name for the tag value to attach to resources. Must be
+        // in the format `{parent_id}/{tag_key_short_name}/{short_name}`, for
+        // example, "123456/environment/prod".
+        string namespaced_value = 1;
+      }
+    }
+
+    // The tags to associate with different conditions.
+    repeated TagCondition tag_conditions = 1;
+
+    // The profile generations for which the tag should be attached to
+    // resources. If you attach a tag to only new profiles, then if the
+    // sensitivity score of a profile subsequently changes, its tag doesn't
+    // change. By default, this field includes only new profiles. To include
+    // both new and updated profiles for tagging, this field should explicitly
+    // include both `PROFILE_GENERATION_NEW` and `PROFILE_GENERATION_UPDATE`.
+    repeated ProfileGeneration profile_generations_to_tag = 2;
+
+    // Whether applying a tag to a resource should lower the risk of the profile
+    // for that resource. For example, in conjunction with an [IAM deny
+    // policy](https://cloud.google.com/iam/docs/deny-overview), you can deny
+    // all principals a permission if a tag value is present, mitigating the
+    // risk of the resource. This also lowers the data risk of resources at the
+    // lower levels of the resource hierarchy. For example, reducing the data
+    // risk of a table data profile also reduces the data risk of the
+    // constituent column data profiles.
+    bool lower_data_risk_to_low = 3;
+  }
+
+  // Type of action to execute when a profile is generated.
   oneof action {
     // Export data profiles into a provided location.
     Export export_data = 1;
 
     // Publish a message into the Pub/Sub topic.
     PubSubNotification pub_sub_notification = 2;
+
+    // Publishes generated data profiles to Google Security Operations.
+    // For more information, see [Use Sensitive Data Protection data in
+    // context-aware
+    // analytics](https://cloud.google.com/chronicle/docs/detection/usecase-dlp-high-risk-user-download).
+    PublishToChronicle publish_to_chronicle = 3;
+
+    // Publishes findings to SCC for each data profile.
+    PublishToSecurityCommandCenter publish_to_scc = 4;
+
+    // Tags the profiled resources with the specified tag values.
+    TagResources tag_resources = 8;
   }
 }
 
@@ -4553,7 +4981,7 @@ message DataProfileAction {
 //
 // The generated data profiles are retained according to the
 // [data retention policy]
-// (https://cloud.google.com/dlp/docs/data-profiles#retention).
+// (https://cloud.google.com/sensitive-data-protection/docs/data-profiles#retention).
 message DataProfileJobConfig {
   // The data to scan.
   DataProfileLocation location = 1;
@@ -4562,6 +4990,9 @@ message DataProfileJobConfig {
   // account that exists within this project must have access to all resources
   // that are profiled, and the Cloud DLP API must be enabled.
   string project_id = 5;
+
+  // Must be set only when scanning other clouds.
+  OtherCloudDiscoveryStartingLocation other_cloud_starting_location = 8;
 
   // Detection logic for profile generation.
   //
@@ -4578,7 +5009,7 @@ message DataProfileJobConfig {
   // scanned.
   //
   // For more information, see
-  // https://cloud.google.com/dlp/docs/data-profiles#data-residency.
+  // https://cloud.google.com/sensitive-data-protection/docs/data-profiles#data-residency.
   repeated string inspect_templates = 7;
 
   // Actions to execute at the completion of the job.
@@ -4616,8 +5047,8 @@ message BigQueryTableTypes {
   repeated BigQueryTableType types = 1;
 }
 
-// Over time new types may be added. Currently VIEW, MATERIALIZED_VIEW,
-// and SNAPSHOT are not supported.
+// Over time new types may be added. Currently VIEW, MATERIALIZED_VIEW, and
+// non-BigLake external tables are not supported.
 enum BigQueryTableTypeCollection {
   // Unused.
   BIG_QUERY_COLLECTION_UNSPECIFIED = 0;
@@ -4635,8 +5066,8 @@ enum BigQueryTableTypeCollection {
   BIG_QUERY_COLLECTION_ONLY_SUPPORTED_TYPES = 2;
 }
 
-// Over time new types may be added. Currently VIEW, MATERIALIZED_VIEW,
-// SNAPSHOT, and non-BigLake external tables are not supported.
+// Over time new types may be added. Currently VIEW, MATERIALIZED_VIEW, and
+// non-BigLake external tables are not supported.
 enum BigQueryTableType {
   // Unused.
   BIG_QUERY_TABLE_TYPE_UNSPECIFIED = 0;
@@ -4646,6 +5077,9 @@ enum BigQueryTableType {
 
   // A table that references data stored in Cloud Storage.
   BIG_QUERY_TABLE_TYPE_EXTERNAL_BIG_LAKE = 2;
+
+  // A snapshot of a BigQuery table.
+  BIG_QUERY_TABLE_TYPE_SNAPSHOT = 3;
 }
 
 // How frequently data profiles can be updated. New options can be added at a
@@ -4674,7 +5108,7 @@ message DataProfileLocation {
     // The ID of an organization to scan.
     int64 organization_id = 1;
 
-    // The ID of the Folder within an organization to scan.
+    // The ID of the folder within an organization to scan.
     int64 folder_id = 2;
   }
 }
@@ -4685,7 +5119,7 @@ message DataProfileLocation {
 //
 // The generated data profiles are retained according to the
 // [data retention policy]
-// (https://cloud.google.com/dlp/docs/data-profiles#retention).
+// (https://cloud.google.com/sensitive-data-protection/docs/data-profiles#retention).
 message DiscoveryConfig {
   option (google.api.resource) = {
     type: "dlp.googleapis.com/DiscoveryConfig"
@@ -4727,6 +5161,9 @@ message DiscoveryConfig {
   // Only set when the parent is an org.
   OrgConfig org_config = 2;
 
+  // Must be set only when scanning other clouds.
+  OtherCloudDiscoveryStartingLocation other_cloud_starting_location = 12;
+
   // Detection logic for profile generation.
   //
   // Not all template features are used by Discovery. FindingLimits,
@@ -4742,7 +5179,7 @@ message DiscoveryConfig {
   // scanned.
   //
   // For more information, see
-  // https://cloud.google.com/dlp/docs/data-profiles#data-residency.
+  // https://cloud.google.com/sensitive-data-protection/docs/data-profiles#data-residency.
   repeated string inspect_templates = 3;
 
   // Actions to execute at the completion of scanning.
@@ -4780,6 +5217,23 @@ message DiscoveryTarget {
     // BigQuery target for Discovery. The first target to match a table will be
     // the one applied.
     BigQueryDiscoveryTarget big_query_target = 1;
+
+    // Cloud SQL target for Discovery. The first target to match a table will be
+    // the one applied.
+    CloudSqlDiscoveryTarget cloud_sql_target = 2;
+
+    // Discovery target that looks for credentials and secrets stored in cloud
+    // resource metadata and reports them as vulnerabilities to Security Command
+    // Center. Only one target of this type is allowed.
+    SecretsDiscoveryTarget secrets_target = 3;
+
+    // Cloud Storage target for Discovery. The first target to match a table
+    // will be the one applied.
+    CloudStorageDiscoveryTarget cloud_storage_target = 4;
+
+    // Other clouds target for discovery. The first target to match a resource
+    // will be the one applied.
+    OtherCloudDiscoveryTarget other_cloud_target = 5;
   }
 }
 
@@ -4832,6 +5286,11 @@ message DiscoveryBigQueryFilter {
     // configuration. If none is specified, a default one will be added
     // automatically.
     AllOtherBigQueryTables other_tables = 2;
+
+    // The table to scan. Discovery configurations including this can only
+    // include one DiscoveryTarget (the DiscoveryTarget with this
+    // TableReference).
+    TableReference table_reference = 3;
   }
 }
 
@@ -4892,6 +5351,15 @@ message DiscoveryGenerationCadence {
 
   // Governs when to update data profiles when a table is modified.
   DiscoveryTableModifiedCadence table_modified_cadence = 2;
+
+  // Governs when to update data profiles when the inspection rules
+  // defined by the `InspectTemplate` change.
+  // If not set, changing the template will not cause a data profile to update.
+  DiscoveryInspectTemplateModifiedCadence inspect_template_modified_cadence = 3;
+
+  // Frequency at which profiles should be updated, regardless of whether the
+  // underlying resource has changed. Defaults to never.
+  DataProfileUpdateFrequency refresh_frequency = 4;
 }
 
 // The cadence at which to update data profiles when a table is modified.
@@ -4943,6 +5411,642 @@ enum BigQuerySchemaModification {
   SCHEMA_REMOVED_COLUMNS = 2;
 }
 
+// The cadence at which to update data profiles when the inspection rules
+// defined by the `InspectTemplate` change.
+message DiscoveryInspectTemplateModifiedCadence {
+  // How frequently data profiles can be updated when the template is modified.
+  // Defaults to never.
+  DataProfileUpdateFrequency frequency = 1;
+}
+
+// Target used to match against for discovery with Cloud SQL tables.
+message CloudSqlDiscoveryTarget {
+  // Required. The tables the discovery cadence applies to. The first target
+  // with a matching filter will be the one to apply to a table.
+  DiscoveryCloudSqlFilter filter = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // In addition to matching the filter, these conditions must be true
+  // before a profile is generated.
+  DiscoveryCloudSqlConditions conditions = 2;
+
+  // Type of schedule.
+  oneof cadence {
+    // How often and when to update profiles. New tables that match both the
+    // filter and conditions are scanned as quickly as possible depending on
+    // system capacity.
+    DiscoveryCloudSqlGenerationCadence generation_cadence = 3;
+
+    // Disable profiling for database resources that match this filter.
+    Disabled disabled = 4;
+  }
+}
+
+// Determines what tables will have profiles generated within an organization
+// or project. Includes the ability to filter by regular expression patterns
+// on project ID, location, instance, database, and database resource name.
+message DiscoveryCloudSqlFilter {
+  // Whether the filter applies to a specific set of database resources or all
+  // other database resources within the location being profiled. The first
+  // filter to match will be applied, regardless of the condition. If none is
+  // set, will default to `others`.
+  oneof filter {
+    // A specific set of database resources for this filter to apply to.
+    DatabaseResourceCollection collection = 1;
+
+    // Catch-all. This should always be the last target in the list because
+    // anything above it will apply first. Should only appear once in a
+    // configuration. If none is specified, a default one will be added
+    // automatically.
+    AllOtherDatabaseResources others = 2;
+
+    // The database resource to scan. Targets including this can only include
+    // one target (the target with this database resource reference).
+    DatabaseResourceReference database_resource_reference = 3;
+  }
+}
+
+// Match database resources using regex filters. Examples of database
+// resources are tables, views, and stored procedures.
+message DatabaseResourceCollection {
+  // The first filter containing a pattern that matches a database resource will
+  // be used.
+  oneof pattern {
+    // A collection of regular expressions to match a database resource against.
+    DatabaseResourceRegexes include_regexes = 1;
+  }
+}
+
+// A collection of regular expressions to determine what database resources to
+// match against.
+message DatabaseResourceRegexes {
+  // A group of regular expression patterns to match against one or more
+  // database resources.
+  // Maximum of 100 entries. The sum of all regular expression's length can't
+  // exceed 10 KiB.
+  repeated DatabaseResourceRegex patterns = 1;
+}
+
+// A pattern to match against one or more database resources. At least one
+// pattern must be specified. Regular expressions use RE2
+// [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found
+// under the google/re2 repository on GitHub.
+message DatabaseResourceRegex {
+  // For organizations, if unset, will match all projects. Has no effect
+  // for configurations created within a project.
+  string project_id_regex = 1;
+
+  // Regex to test the instance name against. If empty, all instances match.
+  string instance_regex = 2;
+
+  // Regex to test the database name against. If empty, all databases match.
+  string database_regex = 3;
+
+  // Regex to test the database resource's name against. An example of a
+  // database resource name is a table's name. Other database resource names
+  // like view names could be included in the future. If empty, all database
+  // resources match.
+  string database_resource_name_regex = 4;
+}
+
+// Match database resources not covered by any other filter.
+message AllOtherDatabaseResources {}
+
+// Identifies a single database resource, like a table within a database.
+message DatabaseResourceReference {
+  // Required. If within a project-level config, then this must match the
+  // config's project ID.
+  string project_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The instance where this resource is located. For example: Cloud
+  // SQL instance ID.
+  string instance = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Name of a database within the instance.
+  string database = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Name of a database resource, for example, a table within the
+  // database.
+  string database_resource = 4 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Requirements that must be true before a table is profiled for the
+// first time.
+message DiscoveryCloudSqlConditions {
+  // The database engines that should be profiled.
+  enum DatabaseEngine {
+    // Unused.
+    DATABASE_ENGINE_UNSPECIFIED = 0;
+
+    // Include all supported database engines.
+    ALL_SUPPORTED_DATABASE_ENGINES = 1;
+
+    // MySQL database.
+    MYSQL = 2;
+
+    // PostgreSQL database.
+    POSTGRES = 3;
+  }
+
+  // Cloud SQL database resource types. New values can be added at a later time.
+  enum DatabaseResourceType {
+    // Unused.
+    DATABASE_RESOURCE_TYPE_UNSPECIFIED = 0;
+
+    // Includes database resource types that become supported at a later time.
+    DATABASE_RESOURCE_TYPE_ALL_SUPPORTED_TYPES = 1;
+
+    // Tables.
+    DATABASE_RESOURCE_TYPE_TABLE = 2;
+  }
+
+  // Optional. Database engines that should be profiled.
+  // Optional. Defaults to ALL_SUPPORTED_DATABASE_ENGINES if unspecified.
+  repeated DatabaseEngine database_engines = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Data profiles will only be generated for the database resource types
+  // specified in this field.
+  // If not specified, defaults to [DATABASE_RESOURCE_TYPE_ALL_SUPPORTED_TYPES].
+  repeated DatabaseResourceType types = 3;
+}
+
+// How often existing tables should have their profiles refreshed.
+// New tables are scanned as quickly as possible depending on system
+// capacity.
+message DiscoveryCloudSqlGenerationCadence {
+  // How frequently to modify the profile when the table's schema is modified.
+  message SchemaModifiedCadence {
+    // The type of modification that causes a profile update.
+    enum CloudSqlSchemaModification {
+      // Unused.
+      SQL_SCHEMA_MODIFICATION_UNSPECIFIED = 0;
+
+      // New columns have appeared.
+      NEW_COLUMNS = 1;
+
+      // Columns have been removed from the table.
+      REMOVED_COLUMNS = 2;
+    }
+
+    // The types of schema modifications to consider.
+    // Defaults to NEW_COLUMNS.
+    repeated CloudSqlSchemaModification types = 1;
+
+    // Frequency to regenerate data profiles when the schema is modified.
+    // Defaults to monthly.
+    DataProfileUpdateFrequency frequency = 2;
+  }
+
+  // When to reprofile if the schema has changed.
+  SchemaModifiedCadence schema_modified_cadence = 1;
+
+  // Data changes (non-schema changes) in Cloud SQL tables can't trigger
+  // reprofiling. If you set this field, profiles are refreshed at this
+  // frequency regardless of whether the underlying tables have changed.
+  // Defaults to never.
+  DataProfileUpdateFrequency refresh_frequency = 2;
+
+  // Governs when to update data profiles when the inspection rules
+  // defined by the `InspectTemplate` change.
+  // If not set, changing the template will not cause a data profile to update.
+  DiscoveryInspectTemplateModifiedCadence inspect_template_modified_cadence = 3;
+}
+
+// Discovery target for credentials and secrets in cloud resource metadata.
+//
+// This target does not include any filtering or frequency controls. Cloud
+// DLP will scan cloud resource metadata for secrets daily.
+//
+// No inspect template should be included in the discovery config for a
+// security benchmarks scan. Instead, the built-in list of secrets and
+// credentials infoTypes will be used (see
+// https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference#credentials_and_secrets).
+//
+// Credentials and secrets discovered will be reported as vulnerabilities to
+// Security Command Center.
+message SecretsDiscoveryTarget {}
+
+// Target used to match against for discovery with Cloud Storage buckets.
+message CloudStorageDiscoveryTarget {
+  // Required. The buckets the generation_cadence applies to. The first target
+  // with a matching filter will be the one to apply to a bucket.
+  DiscoveryCloudStorageFilter filter = 1
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. In addition to matching the filter, these conditions must be true
+  // before a profile is generated.
+  DiscoveryFileStoreConditions conditions = 4
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // How often and when to update profiles.
+  oneof cadence {
+    // Optional. How often and when to update profiles. New buckets that match
+    // both the filter and conditions are scanned as quickly as possible
+    // depending on system capacity.
+    DiscoveryCloudStorageGenerationCadence generation_cadence = 2
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Disable profiling for buckets that match this filter.
+    Disabled disabled = 3 [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+// Determines which buckets will have profiles generated within an organization
+// or project. Includes the ability to filter by regular expression patterns
+// on project ID and bucket name.
+message DiscoveryCloudStorageFilter {
+  // Whether the filter applies to a specific set of buckets or all
+  // other buckets within the location being profiled. The first
+  // filter to match will be applied, regardless of the condition. If none is
+  // set, will default to `others`.
+  oneof filter {
+    // Optional. A specific set of buckets for this filter to apply to.
+    FileStoreCollection collection = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The bucket to scan. Targets including this can only include one
+    // target (the target with this bucket). This enables profiling the contents
+    // of a single bucket, while the other options allow for easy profiling of
+    // many bucets within a project or an organization.
+    CloudStorageResourceReference cloud_storage_resource_reference = 2
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Catch-all. This should always be the last target in the list
+    // because anything above it will apply first. Should only appear once in a
+    // configuration. If none is specified, a default one will be added
+    // automatically.
+    AllOtherResources others = 100 [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+// Match file stores (e.g. buckets) using regex filters.
+message FileStoreCollection {
+  // The first filter containing a pattern that matches a file store will
+  // be used.
+  oneof pattern {
+    // Optional. A collection of regular expressions to match a file store
+    // against.
+    FileStoreRegexes include_regexes = 1
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+// A collection of regular expressions to determine what file store to match
+// against.
+message FileStoreRegexes {
+  // Required. The group of regular expression patterns to match against one or
+  // more file stores. Maximum of 100 entries. The sum of all regular
+  // expression's length can't exceed 10 KiB.
+  repeated FileStoreRegex patterns = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// A pattern to match against one or more file stores.
+message FileStoreRegex {
+  // The type of resource regex to use.
+  oneof resource_regex {
+    // Optional. Regex for Cloud Storage.
+    CloudStorageRegex cloud_storage_regex = 1
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+// A pattern to match against one or more file stores. At least one
+// pattern must be specified. Regular expressions use RE2
+// [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found
+// under the google/re2 repository on GitHub.
+message CloudStorageRegex {
+  // Optional. For organizations, if unset, will match all projects.
+  string project_id_regex = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Regex to test the bucket name against. If empty, all buckets
+  // match. Example: "marketing2021" or "(marketing)\d{4}" will both match the
+  // bucket gs://marketing2021
+  string bucket_name_regex = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Identifies a single Cloud Storage bucket.
+message CloudStorageResourceReference {
+  // Required. The bucket to scan.
+  string bucket_name = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. If within a project-level config, then this must match the
+  // config's project id.
+  string project_id = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// How often existing buckets should have their profiles refreshed.
+// New buckets are scanned as quickly as possible depending on system
+// capacity.
+message DiscoveryCloudStorageGenerationCadence {
+  // Optional. Data changes in Cloud Storage can't trigger reprofiling. If you
+  // set this field, profiles are refreshed at this frequency regardless of
+  // whether the underlying buckets have changed. Defaults to never.
+  DataProfileUpdateFrequency refresh_frequency = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Governs when to update data profiles when the inspection rules
+  // defined by the `InspectTemplate` change.
+  // If not set, changing the template will not cause a data profile to update.
+  DiscoveryInspectTemplateModifiedCadence inspect_template_modified_cadence = 2
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Requirements that must be true before a Cloud Storage bucket or object is
+// scanned in discovery for the first time. There is an AND relationship between
+// the top-level attributes.
+message DiscoveryCloudStorageConditions {
+  // The attribute of an object. See
+  // https://cloud.google.com/storage/docs/storage-classes for more information
+  // on storage classes.
+  enum CloudStorageObjectAttribute {
+    // Unused.
+    CLOUD_STORAGE_OBJECT_ATTRIBUTE_UNSPECIFIED = 0;
+
+    // Scan objects regardless of the attribute.
+    ALL_SUPPORTED_OBJECTS = 1;
+
+    // Scan objects with the standard storage class.
+    STANDARD = 2;
+
+    // Scan objects with the nearline storage class. This will incur retrieval
+    // fees.
+    NEARLINE = 3;
+
+    // Scan objects with the coldline storage class. This will incur retrieval
+    // fees.
+    COLDLINE = 4;
+
+    // Scan objects with the archive storage class. This will incur retrieval
+    // fees.
+    ARCHIVE = 5;
+
+    // Scan objects with the regional storage class.
+    REGIONAL = 6;
+
+    // Scan objects with the multi-regional storage class.
+    MULTI_REGIONAL = 7;
+
+    // Scan objects with the dual-regional storage class. This will incur
+    // retrieval fees.
+    DURABLE_REDUCED_AVAILABILITY = 8;
+  }
+
+  // The attribute of a bucket.
+  enum CloudStorageBucketAttribute {
+    // Unused.
+    CLOUD_STORAGE_BUCKET_ATTRIBUTE_UNSPECIFIED = 0;
+
+    // Scan buckets regardless of the attribute.
+    ALL_SUPPORTED_BUCKETS = 1;
+
+    // Buckets with autoclass disabled
+    // (https://cloud.google.com/storage/docs/autoclass). Only one of
+    // AUTOCLASS_DISABLED or AUTOCLASS_ENABLED should be set.
+    AUTOCLASS_DISABLED = 2;
+
+    // Buckets with autoclass enabled
+    // (https://cloud.google.com/storage/docs/autoclass). Only one of
+    // AUTOCLASS_DISABLED or AUTOCLASS_ENABLED should be set. Scanning
+    // Autoclass-enabled buckets can affect object storage classes.
+    AUTOCLASS_ENABLED = 3;
+  }
+
+  // Required. Only objects with the specified attributes will be scanned. If an
+  // object has one of the specified attributes but is inside an excluded
+  // bucket, it will not be scanned. Defaults to [ALL_SUPPORTED_OBJECTS]. A
+  // profile will be created even if no objects match the
+  // included_object_attributes.
+  repeated CloudStorageObjectAttribute included_object_attributes = 1
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Only objects with the specified attributes will be scanned.
+  // Defaults to [ALL_SUPPORTED_BUCKETS] if unset.
+  repeated CloudStorageBucketAttribute included_bucket_attributes = 2
+      [(google.api.field_behavior) = REQUIRED];
+}
+
+// Requirements that must be true before a file store is scanned in discovery
+// for the first time. There is an AND relationship between the top-level
+// attributes.
+message DiscoveryFileStoreConditions {
+  // Optional. File store must have been created after this date. Used to avoid
+  // backfilling.
+  google.protobuf.Timestamp created_after = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Minimum age a file store must have. If set, the value must be 1
+  // hour or greater.
+  google.protobuf.Duration min_age = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // File store specific conditions.
+  oneof conditions {
+    // Optional. Cloud Storage conditions.
+    DiscoveryCloudStorageConditions cloud_storage_conditions = 3
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+// Target used to match against for discovery of resources from other clouds.
+// An [AWS connector in Security Command Center
+// (Enterprise](https://cloud.google.com/security-command-center/docs/connect-scc-to-aws)
+// is required to use this feature.
+message OtherCloudDiscoveryTarget {
+  // Required. The type of data profiles generated by this discovery target.
+  // Supported values are:
+  // * aws/s3/bucket
+  DataSourceType data_source_type = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The resources that the discovery cadence applies to. The
+  // first target with a matching filter will be the one to apply to a resource.
+  DiscoveryOtherCloudFilter filter = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. In addition to matching the filter, these conditions must be true
+  // before a profile is generated.
+  DiscoveryOtherCloudConditions conditions = 3
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Type of cadence.
+  oneof cadence {
+    // How often and when to update data profiles. New resources that match both
+    // the filter and conditions are scanned as quickly as possible depending on
+    // system capacity.
+    DiscoveryOtherCloudGenerationCadence generation_cadence = 4;
+
+    // Disable profiling for resources that match this filter.
+    Disabled disabled = 5;
+  }
+}
+
+// Determines which resources from the other cloud will have profiles generated.
+// Includes the ability to filter by resource names.
+message DiscoveryOtherCloudFilter {
+  // Whether the filter applies to a specific set of resources or all
+  // other resources. The first filter to match will be applied, regardless of
+  // the condition. Defaults to `others` if none is set.
+  oneof filter {
+    // A collection of resources for this filter to apply to.
+    OtherCloudResourceCollection collection = 1;
+
+    // The resource to scan. Configs using this filter can only have one target
+    // (the target with this single resource reference).
+    OtherCloudSingleResourceReference single_resource = 2;
+
+    // Optional. Catch-all. This should always be the last target in the list
+    // because anything above it will apply first. Should only appear once in a
+    // configuration. If none is specified, a default one will be added
+    // automatically.
+    AllOtherResources others = 100 [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+// Match resources using regex filters.
+message OtherCloudResourceCollection {
+  // The first filter containing a pattern that matches a resource will be used.
+  oneof pattern {
+    // A collection of regular expressions to match a resource against.
+    OtherCloudResourceRegexes include_regexes = 1;
+  }
+}
+
+// A collection of regular expressions to determine what resources to match
+// against.
+message OtherCloudResourceRegexes {
+  // A group of regular expression patterns to match against one or more
+  // resources.
+  // Maximum of 100 entries. The sum of all regular expression's length can't
+  // exceed 10 KiB.
+  repeated OtherCloudResourceRegex patterns = 1;
+}
+
+// A pattern to match against one or more resources. At least one pattern must
+// be specified. Regular expressions use RE2
+// [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found
+// under the google/re2 repository on GitHub.
+message OtherCloudResourceRegex {
+  // The type of resource regex to use.
+  oneof resource_regex {
+    // Regex for Amazon S3 buckets.
+    AmazonS3BucketRegex amazon_s3_bucket_regex = 1;
+  }
+}
+
+// AWS account regex.
+message AwsAccountRegex {
+  // Optional. Regex to test the AWS account ID against.
+  // If empty, all accounts match.
+  string account_id_regex = 1 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Amazon S3 bucket regex.
+message AmazonS3BucketRegex {
+  // The AWS account regex.
+  AwsAccountRegex aws_account_regex = 1;
+
+  // Optional. Regex to test the bucket name against.
+  // If empty, all buckets match.
+  string bucket_name_regex = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Identifies a single resource, like a single Amazon S3 bucket.
+message OtherCloudSingleResourceReference {
+  // The resource to scan.
+  oneof resource {
+    // Amazon S3 bucket.
+    AmazonS3Bucket amazon_s3_bucket = 1;
+  }
+}
+
+// AWS account.
+message AwsAccount {
+  // Required. AWS account ID.
+  string account_id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Amazon S3 bucket.
+message AmazonS3Bucket {
+  // The AWS account.
+  AwsAccount aws_account = 1;
+
+  // Required. The bucket name.
+  string bucket_name = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Requirements that must be true before a resource is profiled for the first
+// time.
+message DiscoveryOtherCloudConditions {
+  // Minimum age a resource must be before Cloud DLP can profile it. Value must
+  // be 1 hour or greater.
+  google.protobuf.Duration min_age = 1;
+
+  // The conditions to apply.
+  oneof conditions {
+    // Amazon S3 bucket conditions.
+    AmazonS3BucketConditions amazon_s3_bucket_conditions = 2;
+  }
+}
+
+// Amazon S3 bucket conditions.
+message AmazonS3BucketConditions {
+  // Supported Amazon S3 bucket types.
+  // Defaults to TYPE_ALL_SUPPORTED.
+  enum BucketType {
+    // Unused.
+    TYPE_UNSPECIFIED = 0;
+
+    // All supported classes.
+    TYPE_ALL_SUPPORTED = 1;
+
+    // A general purpose Amazon S3 bucket.
+    TYPE_GENERAL_PURPOSE = 2;
+  }
+
+  // Supported Amazon S3 object storage classes.
+  // Defaults to ALL_SUPPORTED_CLASSES.
+  enum ObjectStorageClass {
+    // Unused.
+    UNSPECIFIED = 0;
+
+    // All supported classes.
+    ALL_SUPPORTED_CLASSES = 1;
+
+    // Standard object class.
+    STANDARD = 2;
+
+    // Standard - infrequent access object class.
+    STANDARD_INFREQUENT_ACCESS = 4;
+
+    // Glacier - instant retrieval object class.
+    GLACIER_INSTANT_RETRIEVAL = 6;
+
+    // Objects in the S3 Intelligent-Tiering access tiers.
+    INTELLIGENT_TIERING = 7;
+  }
+
+  // Optional. Bucket types that should be profiled.
+  // Optional. Defaults to TYPE_ALL_SUPPORTED if unspecified.
+  repeated BucketType bucket_types = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Object classes that should be profiled.
+  // Optional. Defaults to ALL_SUPPORTED_CLASSES if unspecified.
+  repeated ObjectStorageClass object_storage_classes = 2
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// How often existing resources should have their profiles refreshed.
+// New resources are scanned as quickly as possible depending on system
+// capacity.
+message DiscoveryOtherCloudGenerationCadence {
+  // Optional. Frequency to update profiles regardless of whether the underlying
+  // resource has changes. Defaults to never.
+  DataProfileUpdateFrequency refresh_frequency = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Governs when to update data profiles when the inspection rules
+  // defined by the `InspectTemplate` change.
+  // If not set, changing the template will not cause a data profile to update.
+  DiscoveryInspectTemplateModifiedCadence inspect_template_modified_cadence = 2
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
 // The location to begin a discovery scan. Denotes an organization ID or folder
 // ID within an organization.
 message DiscoveryStartingLocation {
@@ -4951,10 +6055,38 @@ message DiscoveryStartingLocation {
     // The ID of an organization to scan.
     int64 organization_id = 1;
 
-    // The ID of the Folder within an organization to scan.
+    // The ID of the folder within an organization to be scanned.
     int64 folder_id = 2;
   }
 }
+
+// The other cloud starting location for discovery.
+message OtherCloudDiscoveryStartingLocation {
+  // The AWS starting location for discovery.
+  message AwsDiscoveryStartingLocation {
+    // The scope of this starting location.
+    oneof scope {
+      // The AWS account ID that this discovery config applies to.
+      // Within an AWS organization, you can find the AWS account ID inside an
+      // AWS account ARN. Example:
+      // arn:{partition}:organizations::{management_account_id}:account/{org_id}/{account_id}
+      string account_id = 2;
+
+      // All AWS assets stored in Asset Inventory that didn't match other AWS
+      // discovery configs.
+      bool all_asset_inventory_assets = 3;
+    }
+  }
+
+  // The other cloud starting location for discovery.
+  oneof location {
+    // The AWS starting location for discovery.
+    AwsDiscoveryStartingLocation aws_location = 1;
+  }
+}
+
+// Match discovery resources not covered by any other filter.
+message AllOtherResources {}
 
 // Combines all of the information about a DLP job.
 message DlpJob {
@@ -5001,6 +6133,7 @@ message DlpJob {
   // State of a job.
   JobState state = 3;
 
+  // Job details.
   oneof details {
     // Results from analyzing risk of a data source.
     AnalyzeDataSourceRiskDetails risk_details = 4;
@@ -5047,12 +6180,12 @@ message ListDlpJobsRequest {
   //
   // The format of this value varies depending on whether you have [specified a
   // processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -5105,7 +6238,7 @@ message ListDlpJobsRequest {
   // The type of job. Defaults to `DlpJobType.INSPECT`
   DlpJobType type = 5;
 
-  // Comma separated list of fields to order by,
+  // Comma-separated list of fields to order by,
   // followed by `asc` or `desc` postfix. This list is case insensitive. The
   // default sorting order is ascending. Redundant space characters are
   // insignificant.
@@ -5144,7 +6277,7 @@ message CancelDlpJobRequest {
 
 // The request message for finishing a DLP hybrid job.
 message FinishDlpJobRequest {
-  // Required. The name of the DlpJob resource to be cancelled.
+  // Required. The name of the DlpJob resource to be finished.
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = { type: "dlp.googleapis.com/DlpJob" }
@@ -5166,16 +6299,16 @@ message CreateDeidentifyTemplateRequest {
   //
   // The format of this value varies depending on the scope of the request
   // (project or organization) and whether you have [specified a processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
-  // + Organizations scope, location specified:<br/>
-  //   `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Organizations scope, no location specified (defaults to global):<br/>
-  //   `organizations/`<var>ORG_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
+  // + Organizations scope, location specified:
+  //   `organizations/{org_id}/locations/{location_id}`
+  // + Organizations scope, no location specified (defaults to global):
+  //   `organizations/{org_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -5242,16 +6375,16 @@ message ListDeidentifyTemplatesRequest {
   //
   // The format of this value varies depending on the scope of the request
   // (project or organization) and whether you have [specified a processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
-  // + Organizations scope, location specified:<br/>
-  //   `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Organizations scope, no location specified (defaults to global):<br/>
-  //   `organizations/`<var>ORG_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
+  // + Organizations scope, location specified:
+  //   `organizations/{org_id}/locations/{location_id}`
+  // + Organizations scope, no location specified (defaults to global):
+  //   `organizations/{org_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -5273,7 +6406,7 @@ message ListDeidentifyTemplatesRequest {
   // returns a page of max size 100.
   int32 page_size = 3;
 
-  // Comma separated list of fields to order by,
+  // Comma-separated list of fields to order by,
   // followed by `asc` or `desc` postfix. This list is case insensitive. The
   // default sorting order is ascending. Redundant space characters are
   // insignificant.
@@ -5319,8 +6452,8 @@ message DeleteDeidentifyTemplateRequest {
 
 // Configuration for a custom dictionary created from a data source of any size
 // up to the maximum size defined in the
-// [limits](https://cloud.google.com/dlp/limits) page. The artifacts of
-// dictionary creation are stored in the specified Cloud Storage
+// [limits](https://cloud.google.com/sensitive-data-protection/limits) page. The
+// artifacts of dictionary creation are stored in the specified Cloud Storage
 // location. Consider using `CustomInfoType.Dictionary` for smaller dictionaries
 // that satisfy the size requirements.
 message LargeCustomDictionaryConfig {
@@ -5330,6 +6463,7 @@ message LargeCustomDictionaryConfig {
   // longer be used.
   CloudStoragePath output_path = 1;
 
+  // Source of the dictionary.
   oneof source {
     // Set of files containing newline-delimited lists of dictionary phrases.
     CloudStorageFileSet cloud_storage_file_set = 2;
@@ -5347,7 +6481,7 @@ message LargeCustomDictionaryStats {
 
 // Configuration for stored infoTypes. All fields and subfield are provided
 // by the user. For more information, see
-// https://cloud.google.com/dlp/docs/creating-custom-infotypes.
+// https://cloud.google.com/sensitive-data-protection/docs/creating-custom-infotypes.
 message StoredInfoTypeConfig {
   // Display name of the StoredInfoType (max 256 characters).
   string display_name = 1;
@@ -5438,16 +6572,16 @@ message CreateStoredInfoTypeRequest {
   //
   // The format of this value varies depending on the scope of the request
   // (project or organization) and whether you have [specified a processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
-  // + Organizations scope, location specified:<br/>
-  //   `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Organizations scope, no location specified (defaults to global):<br/>
-  //   `organizations/`<var>ORG_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
+  // + Organizations scope, location specified:
+  //   `organizations/{org_id}/locations/{location_id}`
+  // + Organizations scope, no location specified (defaults to global):
+  //   `organizations/{org_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -5514,12 +6648,12 @@ message ListStoredInfoTypesRequest {
   //
   // The format of this value varies depending on the scope of the request
   // (project or organization) and whether you have [specified a processing
-  // location](https://cloud.google.com/dlp/docs/specifying-location):
+  // location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
   //
-  // + Projects scope, location specified:<br/>
-  //   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-  // + Projects scope, no location specified (defaults to global):<br/>
-  //   `projects/`<var>PROJECT_ID</var>
+  // + Projects scope, location specified:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Projects scope, no location specified (defaults to global):
+  //   `projects/{project_id}`
   //
   // The following example `parent` string specifies a parent project with the
   // identifier `example-project`, and specifies the `europe-west3` location
@@ -5541,7 +6675,7 @@ message ListStoredInfoTypesRequest {
   // returns a page of max size 100.
   int32 page_size = 3;
 
-  // Comma separated list of fields to order by,
+  // Comma-separated list of fields to order by,
   // followed by `asc` or `desc` postfix. This list is case insensitive. The
   // default sorting order is ascending. Redundant space characters are
   // insignificant.
@@ -5657,6 +6791,7 @@ message HybridFindingDetails {
   // No more than 10 labels can be associated with a given finding.
   //
   // Examples:
+  //
   // * `"environment" : "production"`
   // * `"pipeline" : "etl"`
   map<string, string> labels = 5;
@@ -5787,6 +6922,238 @@ enum StoredInfoTypeState {
   INVALID = 4;
 }
 
+// Request to list the profiles generated for a given organization or project.
+message ListProjectDataProfilesRequest {
+  // Required. organizations/{org_id}/locations/{loc_id}
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "dlp.googleapis.com/ProjectDataProfile"
+    }
+  ];
+
+  // Page token to continue retrieval.
+  string page_token = 2;
+
+  // Size of the page. This value can be limited by the server. If zero, server
+  // returns a page of max size 100.
+  int32 page_size = 3;
+
+  // Comma-separated list of fields to order by, followed by `asc` or `desc`
+  // postfix. This list is case insensitive. The default sorting order is
+  // ascending. Redundant space characters are insignificant. Only one order
+  // field at a time is allowed.
+  //
+  // Examples:
+  // * `project_id`
+  // * `sensitivity_level desc`
+  //
+  // Supported fields are:
+  //
+  // - `project_id`: Google Cloud project ID
+  // - `sensitivity_level`: How sensitive the data in a project is, at most.
+  // - `data_risk_level`: How much risk is associated with this data.
+  // - `profile_last_generated`: When the profile was last updated in epoch
+  // seconds.
+  string order_by = 4;
+
+  // Allows filtering.
+  //
+  // Supported syntax:
+  //
+  // * Filter expressions are made up of one or more restrictions.
+  // * Restrictions can be combined by `AND` or `OR` logical operators. A
+  // sequence of restrictions implicitly uses `AND`.
+  // * A restriction has the form of `{field} {operator} {value}`.
+  // * Supported fields/values:
+  //     - `sensitivity_level` - HIGH|MODERATE|LOW
+  //     - `data_risk_level` - HIGH|MODERATE|LOW
+  //     - `status_code` - an RPC status code as defined in
+  //     https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+  // * The operator must be `=` or `!=`.
+  //
+  // Examples:
+  //
+  // * `project_id = 12345 AND status_code = 1`
+  // * `project_id = 12345 AND sensitivity_level = HIGH`
+  //
+  // The length of this field should be no more than 500 characters.
+  string filter = 5;
+}
+
+// List of profiles generated for a given organization or project.
+message ListProjectDataProfilesResponse {
+  // List of data profiles.
+  repeated ProjectDataProfile project_data_profiles = 1;
+
+  // The next page token.
+  string next_page_token = 2;
+}
+
+// Request to list the profiles generated for a given organization or project.
+message ListTableDataProfilesRequest {
+  // Required. Resource name of the organization or project, for
+  // example `organizations/433245324/locations/europe` or
+  // `projects/project-id/locations/asia`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "dlp.googleapis.com/TableDataProfile"
+    }
+  ];
+
+  // Page token to continue retrieval.
+  string page_token = 2;
+
+  // Size of the page. This value can be limited by the server. If zero, server
+  // returns a page of max size 100.
+  int32 page_size = 3;
+
+  // Comma-separated list of fields to order by, followed by `asc` or `desc`
+  // postfix. This list is case insensitive. The default sorting order is
+  // ascending. Redundant space characters are insignificant. Only one order
+  // field at a time is allowed.
+  //
+  // Examples:
+  // * `project_id asc`
+  // * `table_id`
+  // * `sensitivity_level desc`
+  //
+  // Supported fields are:
+  //
+  // - `project_id`: The Google Cloud project ID.
+  // - `dataset_id`: The ID of a BigQuery dataset.
+  // - `table_id`: The ID of a BigQuery table.
+  // - `sensitivity_level`: How sensitive the data in a table is, at most.
+  // - `data_risk_level`: How much risk is associated with this data.
+  // - `profile_last_generated`: When the profile was last updated in epoch
+  // seconds.
+  // - `last_modified`: The last time the resource was modified.
+  // - `resource_visibility`: Visibility restriction for this resource.
+  // - `row_count`: Number of rows in this resource.
+  string order_by = 4;
+
+  // Allows filtering.
+  //
+  // Supported syntax:
+  //
+  // * Filter expressions are made up of one or more restrictions.
+  // * Restrictions can be combined by `AND` or `OR` logical operators. A
+  // sequence of restrictions implicitly uses `AND`.
+  // * A restriction has the form of `{field} {operator} {value}`.
+  // * Supported fields/values:
+  //     - `project_id` - The Google Cloud project ID.
+  //     - `dataset_id` - The BigQuery dataset ID.
+  //     - `table_id` - The ID of the BigQuery table.
+  //     - `sensitivity_level` - HIGH|MODERATE|LOW
+  //     - `data_risk_level` - HIGH|MODERATE|LOW
+  //     - `resource_visibility`: PUBLIC|RESTRICTED
+  //     - `status_code` - an RPC status code as defined in
+  //     https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+  // * The operator must be `=` or `!=`.
+  //
+  // Examples:
+  //
+  // * `project_id = 12345 AND status_code = 1`
+  // * `project_id = 12345 AND sensitivity_level = HIGH`
+  // * `project_id = 12345 AND resource_visibility = PUBLIC`
+  //
+  // The length of this field should be no more than 500 characters.
+  string filter = 5;
+}
+
+// List of profiles generated for a given organization or project.
+message ListTableDataProfilesResponse {
+  // List of data profiles.
+  repeated TableDataProfile table_data_profiles = 1;
+
+  // The next page token.
+  string next_page_token = 2;
+}
+
+// Request to list the profiles generated for a given organization or project.
+message ListColumnDataProfilesRequest {
+  // Required. Resource name of the organization or project, for
+  // example `organizations/433245324/locations/europe` or
+  // `projects/project-id/locations/asia`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "dlp.googleapis.com/ColumnDataProfile"
+    }
+  ];
+
+  // Page token to continue retrieval.
+  string page_token = 2;
+
+  // Size of the page. This value can be limited by the server. If zero, server
+  // returns a page of max size 100.
+  int32 page_size = 3;
+
+  // Comma-separated list of fields to order by, followed by `asc` or `desc`
+  // postfix. This list is case insensitive. The default sorting order is
+  // ascending. Redundant space characters are insignificant. Only one order
+  // field at a time is allowed.
+  //
+  // Examples:
+  //
+  // * `project_id asc`
+  // * `table_id`
+  // * `sensitivity_level desc`
+  //
+  // Supported fields are:
+  //
+  // - `project_id`: The Google Cloud project ID.
+  // - `dataset_id`: The ID of a BigQuery dataset.
+  // - `table_id`: The ID of a BigQuery table.
+  // - `sensitivity_level`: How sensitive the data in a column is, at most.
+  // - `data_risk_level`: How much risk is associated with this data.
+  // - `profile_last_generated`: When the profile was last updated in epoch
+  // seconds.
+  string order_by = 4;
+
+  // Allows filtering.
+  //
+  // Supported syntax:
+  //
+  // * Filter expressions are made up of one or more restrictions.
+  // * Restrictions can be combined by `AND` or `OR` logical operators. A
+  // sequence of restrictions implicitly uses `AND`.
+  // * A restriction has the form of `{field} {operator} {value}`.
+  // * Supported fields/values:
+  //     - `table_data_profile_name` - The name of the related table data
+  //     profile.
+  //     - `project_id` - The Google Cloud project ID. (REQUIRED)
+  //     - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
+  //     - `table_id` - The BigQuery table ID. (REQUIRED)
+  //     - `field_id` - The ID of the BigQuery field.
+  //     - `info_type` - The infotype detected in the resource.
+  //     - `sensitivity_level` - HIGH|MEDIUM|LOW
+  //     - `data_risk_level`: How much risk is associated with this data.
+  //     - `status_code` - an RPC status code as defined in
+  //     https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+  // * The operator must be `=` for project_id, dataset_id, and table_id. Other
+  //   filters also support `!=`.
+  //
+  // Examples:
+  //
+  // * project_id = 12345 AND status_code = 1
+  // * project_id = 12345 AND sensitivity_level = HIGH
+  // * project_id = 12345 AND info_type = STREET_ADDRESS
+  //
+  // The length of this field should be no more than 500 characters.
+  string filter = 5;
+}
+
+// List of profiles generated for a given organization or project.
+message ListColumnDataProfilesResponse {
+  // List of data profiles.
+  repeated ColumnDataProfile column_data_profiles = 1;
+
+  // The next page token.
+  string next_page_token = 2;
+}
+
 // Score is a summary of all elements in the data profile.
 // A higher number means more risk.
 message DataRiskLevel {
@@ -5799,6 +7166,9 @@ message DataRiskLevel {
     // additional access restrictions in place or no indication of sensitive
     // data found.
     RISK_LOW = 10;
+
+    // Unable to determine risk.
+    RISK_UNKNOWN = 12;
 
     // Medium risk - Sensitive data may be present but additional access or fine
     // grain access restrictions appear to be present.  Consider limiting
@@ -5815,14 +7185,53 @@ message DataRiskLevel {
   DataRiskLevelScore score = 1;
 }
 
-// How broadly a resource has been shared. New items may be added over time.
-// A higher number means more restricted.
+// An aggregated profile for this project, based on the resources profiled
+// within it.
+message ProjectDataProfile {
+  option (google.api.resource) = {
+    type: "dlp.googleapis.com/ProjectDataProfile"
+    pattern: "organizations/{organization}/locations/{location}/projectDataProfiles/{project_data_profile}"
+    pattern: "projects/{project}/locations/{location}/projectDataProfiles/{project_data_profile}"
+  };
+
+  // The resource name of the profile.
+  string name = 1;
+
+  // Project ID or account that was profiled.
+  string project_id = 2;
+
+  // The last time the profile was generated.
+  google.protobuf.Timestamp profile_last_generated = 3;
+
+  // The sensitivity score of this project.
+  SensitivityScore sensitivity_score = 4;
+
+  // The data risk level of this project.
+  DataRiskLevel data_risk_level = 5;
+
+  // Success or error status of the last attempt to profile the project.
+  ProfileStatus profile_status = 7;
+
+  // The number of table data profiles generated for this project.
+  int64 table_data_profile_count = 9;
+
+  // The number of file store data profiles generated for this project.
+  int64 file_store_data_profile_count = 10;
+}
+
+// How broadly the data in the resource has been shared. New items may be added
+// over time. A higher number means more restricted.
 enum ResourceVisibility {
   // Unused.
   RESOURCE_VISIBILITY_UNSPECIFIED = 0;
 
   // Visible to any user.
   RESOURCE_VISIBILITY_PUBLIC = 10;
+
+  // May contain public items.
+  // For example, if a Cloud Storage bucket has uniform bucket level access
+  // disabled, some objects inside it may be public, but none are known yet.
+  RESOURCE_VISIBILITY_INCONCLUSIVE = 15;
 
   // Visible only to specific users.
   RESOURCE_VISIBILITY_RESTRICTED = 20;
@@ -5834,12 +7243,31 @@ message DataProfileConfigSnapshot {
   // is a copy of the inspect_template specified in `DataProfileJobConfig`.
   InspectConfig inspect_config = 2;
 
+  // A copy of the configuration used to generate this profile. This is
+  // deprecated, and the DiscoveryConfig field is preferred moving forward.
+  // DataProfileJobConfig will still be written here for Discovery in BigQuery
+  // for backwards compatibility, but will not be updated with new fields, while
+  // DiscoveryConfig will.
+  DataProfileJobConfig data_profile_job = 3 [deprecated = true];
+
   // A copy of the configuration used to generate this profile.
-  DataProfileJobConfig data_profile_job = 3;
+  DiscoveryConfig discovery_config = 4;
+
+  // Name of the inspection template used to generate this profile
+  string inspect_template_name = 5;
+
+  // Timestamp when the template was modified
+  google.protobuf.Timestamp inspect_template_modified_time = 6;
 }
 
 // The profile for a scanned table.
 message TableDataProfile {
+  option (google.api.resource) = {
+    type: "dlp.googleapis.com/TableDataProfile"
+    pattern: "organizations/{organization}/locations/{location}/tableDataProfiles/{table_data_profile}"
+    pattern: "projects/{project}/locations/{location}/tableDataProfiles/{table_data_profile}"
+  };
+
   // Possible states of a profile. New items may be added.
   enum State {
     // Unused.
@@ -5858,24 +7286,28 @@ message TableDataProfile {
   // The name of the profile.
   string name = 1;
 
-  // The resource name to the project data profile for this table.
+  // The resource type that was profiled.
+  DataSourceType data_source_type = 36;
+
+  // The resource name of the project data profile for this table.
   string project_data_profile = 2;
 
-  // The Google Cloud project ID that owns the BigQuery dataset.
+  // The Google Cloud project ID that owns the resource.
   string dataset_project_id = 24;
 
-  // The BigQuery location where the dataset's data is stored.
+  // If supported, the location where the dataset's data is stored.
   // See https://cloud.google.com/bigquery/docs/locations for supported
   // locations.
   string dataset_location = 29;
 
-  // The BigQuery dataset ID.
+  // If the resource is BigQuery, the dataset ID.
   string dataset_id = 25;
 
-  // The BigQuery table ID.
+  // The table ID.
   string table_id = 26;
 
-  // The resource name of the table.
+  // The Cloud Asset Inventory resource that was profiled in order to generate
+  // this TableDataProfile.
   // https://cloud.google.com/apis/design/resource_names#full_resource_name
   string full_resource = 3;
 
@@ -5936,6 +7368,7 @@ message TableDataProfile {
   google.protobuf.Timestamp create_time = 23;
 }
 
+// Success or errors for the profile generation.
 message ProfileStatus {
   // Profiling status code and optional message. The `status.code` value is 0
   // (default value) for OK.
@@ -5992,6 +7425,7 @@ enum NullPercentageLevel {
   // Some null entries.
   NULL_PERCENTAGE_LOW = 2;
 
+  // A few null entries.
   NULL_PERCENTAGE_MEDIUM = 3;
 
   // A lot of null entries.
@@ -6019,6 +7453,12 @@ enum UniquenessScoreLevel {
 
 // The profile for a scanned column within a table.
 message ColumnDataProfile {
+  option (google.api.resource) = {
+    type: "dlp.googleapis.com/ColumnDataProfile"
+    pattern: "organizations/{organization}/locations/{location}/columnDataProfiles/{column_data_profile}"
+    pattern: "projects/{project}/locations/{location}/columnDataProfiles/{column_data_profile}"
+  };
+
   // Possible states of a profile. New items may be added.
   enum State {
     // Unused.
@@ -6081,6 +7521,18 @@ message ColumnDataProfile {
 
     // Json type.
     TYPE_JSON = 14;
+
+    // Interval type.
+    TYPE_INTERVAL = 15;
+
+    // `Range<Date>` type.
+    TYPE_RANGE_DATE = 16;
+
+    // `Range<Datetime>` type.
+    TYPE_RANGE_DATETIME = 17;
+
+    // `Range<Timestamp>` type.
+    TYPE_RANGE_TIMESTAMP = 18;
   }
 
   // The possible policy states for a column.
@@ -6108,21 +7560,21 @@ message ColumnDataProfile {
   // The resource name of the table data profile.
   string table_data_profile = 4;
 
-  // The resource name of the table this column is within.
+  // The resource name of the resource this column is within.
   string table_full_resource = 5;
 
-  // The Google Cloud project ID that owns the BigQuery dataset.
+  // The Google Cloud project ID that owns the profiled resource.
   string dataset_project_id = 19;
 
-  // The BigQuery location where the dataset's data is stored.
+  // If supported, the location where the dataset's data is stored.
   // See https://cloud.google.com/bigquery/docs/locations for supported
-  // locations.
+  // BigQuery locations.
   string dataset_location = 20;
 
-  // The BigQuery dataset ID.
+  // The BigQuery dataset ID, if the resource profiled is a BigQuery table.
   string dataset_id = 21;
 
-  // The BigQuery table ID.
+  // The table ID.
   string table_id = 22;
 
   // The name of the column.
@@ -6159,6 +7611,321 @@ message ColumnDataProfile {
 
   // Indicates if a policy tag has been applied to the column.
   ColumnPolicyState policy_state = 15;
+}
+
+// The profile for a file store.
+//
+// * Cloud Storage: maps 1:1 with a bucket.
+// * Amazon S3: maps 1:1 with a bucket.
+message FileStoreDataProfile {
+  option (google.api.resource) = {
+    type: "dlp.googleapis.com/FileStoreDataProfile"
+    pattern: "organizations/{organization}/locations/{location}/fileStoreDataProfiles/{file_store_data_profile}"
+    pattern: "projects/{project}/locations/{location}/fileStoreDataProfiles/{file_store_data_profile}"
+  };
+
+  // Possible states of a profile. New items may be added.
+  enum State {
+    // Unused.
+    STATE_UNSPECIFIED = 0;
+
+    // The profile is currently running. Once a profile has finished it will
+    // transition to DONE.
+    RUNNING = 1;
+
+    // The profile is no longer generating.
+    // If profile_status.status.code is 0, the profile succeeded, otherwise, it
+    // failed.
+    DONE = 2;
+  }
+
+  // The name of the profile.
+  string name = 1;
+
+  // The resource type that was profiled.
+  DataSourceType data_source_type = 2;
+
+  // The resource name of the project data profile for this file store.
+  string project_data_profile = 3;
+
+  // The Google Cloud project ID that owns the resource.
+  // For Amazon S3 buckets, this is the AWS Account Id.
+  string project_id = 4;
+
+  // The location of the file store.
+  //
+  // * Cloud Storage:
+  // https://cloud.google.com/storage/docs/locations#available-locations
+  // * Amazon S3:
+  // https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints
+  string file_store_location = 5;
+
+  // For resources that have multiple storage locations, these are those
+  // regions. For Cloud Storage this is the list of regions chosen for
+  // dual-region storage. `file_store_location` will normally be the
+  // corresponding multi-region for the list of individual locations. The first
+  // region is always picked as the processing and storage location for the data
+  // profile.
+  repeated string data_storage_locations = 19;
+
+  // The location type of the bucket (region, dual-region, multi-region, etc).
+  // If dual-region, expect data_storage_locations to be populated.
+  string location_type = 20;
+
+  // The file store path.
+  //
+  // * Cloud Storage: `gs://{bucket}`
+  // * Amazon S3: `s3://{bucket}`
+  string file_store_path = 6;
+
+  // The resource name of the resource profiled.
+  // https://cloud.google.com/apis/design/resource_names#full_resource_name
+  //
+  // Example format of an S3 bucket full resource name:
+  // `//cloudasset.googleapis.com/organizations/{org_id}/otherCloudConnections/aws/arn:aws:s3:::{bucket_name}`
+  string full_resource = 24;
+
+  // The snapshot of the configurations used to generate the profile.
+  DataProfileConfigSnapshot config_snapshot = 7;
+
+  // Success or error status from the most recent profile generation attempt.
+  // May be empty if the profile is still being generated.
+  ProfileStatus profile_status = 8;
+
+  // State of a profile.
+  State state = 9;
+
+  // The last time the profile was generated.
+  google.protobuf.Timestamp profile_last_generated = 10;
+
+  // How broadly a resource has been shared.
+  ResourceVisibility resource_visibility = 11;
+
+  // The sensitivity score of this resource.
+  SensitivityScore sensitivity_score = 12;
+
+  // The data risk level of this resource.
+  DataRiskLevel data_risk_level = 13;
+
+  // The time the file store was first created.
+  google.protobuf.Timestamp create_time = 14;
+
+  // The time the file store was last modified.
+  google.protobuf.Timestamp last_modified_time = 15;
+
+  // FileClusterSummary per each cluster.
+  repeated FileClusterSummary file_cluster_summaries = 16;
+
+  // Attributes of the resource being profiled.
+  // Currently used attributes:
+  //
+  // * customer_managed_encryption: boolean
+  //     - true: the resource is encrypted with a customer-managed key.
+  //     - false: the resource is encrypted with a provider-managed key.
+  map<string, Value> resource_attributes = 17;
+
+  // The labels applied to the resource at the time the profile was generated.
+  map<string, string> resource_labels = 18;
+
+  // InfoTypes detected in this file store.
+  repeated FileStoreInfoTypeSummary file_store_info_type_summaries = 21;
+
+  // The file store does not have any files.
+  bool file_store_is_empty = 23;
+}
+
+// Information regarding the discovered InfoType.
+message FileStoreInfoTypeSummary {
+  // The InfoType seen.
+  InfoType info_type = 1;
+}
+
+// Information regarding the discovered file extension.
+message FileExtensionInfo {
+  // The file extension if set. (aka .pdf, .jpg, .txt)
+  string file_extension = 1;
+}
+
+// The file cluster summary.
+message FileClusterSummary {
+  // The file cluster type.
+  FileClusterType file_cluster_type = 1;
+
+  // InfoTypes detected in this cluster.
+  repeated FileStoreInfoTypeSummary file_store_info_type_summaries = 2;
+
+  // The sensitivity score of this cluster. The score will be SENSITIVITY_LOW
+  // if nothing has been scanned.
+  SensitivityScore sensitivity_score = 3;
+
+  // The data risk level of this cluster. RISK_LOW if nothing has been
+  // scanned.
+  DataRiskLevel data_risk_level = 4;
+
+  // A list of errors detected while scanning this cluster. The list is
+  // truncated to 10 per cluster.
+  repeated Error errors = 6;
+
+  // A sample of file types scanned in this cluster. Empty if no files were
+  // scanned. File extensions can be derived from the file name or the file
+  // content.
+  repeated FileExtensionInfo file_extensions_scanned = 7;
+
+  // A sample of file types seen in this cluster. Empty if no files were seen.
+  // File extensions can be derived from the file name or the file content.
+  repeated FileExtensionInfo file_extensions_seen = 8;
+
+  // True if no files exist in this cluster. If the bucket had more files than
+  // could be listed, this will be false even if no files for this cluster
+  // were seen and file_extensions_seen is empty.
+  bool no_files_exist = 9;
+}
+
+// Request to get a project data profile.
+message GetProjectDataProfileRequest {
+  // Required. Resource name, for example
+  // `organizations/12345/locations/us/projectDataProfiles/53234423`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "dlp.googleapis.com/ProjectDataProfile"
+    }
+  ];
+}
+
+// Request to get a file store data profile.
+message GetFileStoreDataProfileRequest {
+  // Required. Resource name, for example
+  // `organizations/12345/locations/us/fileStoreDataProfiles/53234423`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "dlp.googleapis.com/ProjectDataProfile"
+    }
+  ];
+}
+
+// Request to list the file store profiles generated for a given organization or
+// project.
+message ListFileStoreDataProfilesRequest {
+  // Required. Resource name of the organization or project, for
+  // example `organizations/433245324/locations/europe` or
+  // `projects/project-id/locations/asia`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "dlp.googleapis.com/FileStoreDataProfile"
+    }
+  ];
+
+  // Optional. Page token to continue retrieval.
+  string page_token = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Size of the page. This value can be limited by the server. If
+  // zero, server returns a page of max size 100.
+  int32 page_size = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Comma-separated list of fields to order by, followed by `asc` or
+  // `desc` postfix. This list is case insensitive. The default sorting order is
+  // ascending. Redundant space characters are insignificant. Only one order
+  // field at a time is allowed.
+  //
+  // Examples:
+  //
+  // * `project_id asc`
+  // * `name`
+  // * `sensitivity_level desc`
+  //
+  // Supported fields are:
+  //
+  // - `project_id`: The Google Cloud project ID.
+  // - `sensitivity_level`: How sensitive the data in a table is, at most.
+  // - `data_risk_level`: How much risk is associated with this data.
+  // - `profile_last_generated`: When the profile was last updated in epoch
+  // seconds.
+  // - `last_modified`: The last time the resource was modified.
+  // - `resource_visibility`: Visibility restriction for this resource.
+  // - `name`: The name of the profile.
+  // - `create_time`: The time the file store was first created.
+  string order_by = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Allows filtering.
+  //
+  // Supported syntax:
+  //
+  // * Filter expressions are made up of one or more restrictions.
+  // * Restrictions can be combined by `AND` or `OR` logical operators. A
+  // sequence of restrictions implicitly uses `AND`.
+  // * A restriction has the form of `{field} {operator} {value}`.
+  // * Supported fields/values:
+  //     - `project_id` - The Google Cloud project ID.
+  //     - `account_id` - The AWS account ID.
+  //     - `file_store_path` - The path like "gs://bucket".
+  //     - `data_source_type` - The profile's data source type, like
+  //     "google/storage/bucket".
+  //     - `data_storage_location` - The location where the file store's data is
+  //     stored, like "us-central1".
+  //     - `sensitivity_level` - HIGH|MODERATE|LOW
+  //     - `data_risk_level` - HIGH|MODERATE|LOW
+  //     - `resource_visibility`: PUBLIC|RESTRICTED
+  //     - `status_code` - an RPC status code as defined in
+  //     https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+  // * The operator must be `=` or `!=`.
+  //
+  // Examples:
+  //
+  // * `project_id = 12345 AND status_code = 1`
+  // * `project_id = 12345 AND sensitivity_level = HIGH`
+  // * `project_id = 12345 AND resource_visibility = PUBLIC`
+  // * `file_store_path = "gs://mybucket"`
+  //
+  // The length of this field should be no more than 500 characters.
+  string filter = 5 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// List of file store data profiles generated for a given organization or
+// project.
+message ListFileStoreDataProfilesResponse {
+  // List of data profiles.
+  repeated FileStoreDataProfile file_store_data_profiles = 1;
+
+  // The next page token.
+  string next_page_token = 2;
+}
+
+// Request message for DeleteFileStoreProfile.
+message DeleteFileStoreDataProfileRequest {
+  // Required. Resource name of the file store data profile.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "dlp.googleapis.com/FileStoreDataProfile"
+    }
+  ];
+}
+
+// Request to get a table data profile.
+message GetTableDataProfileRequest {
+  // Required. Resource name, for example
+  // `organizations/12345/locations/us/tableDataProfiles/53234423`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "dlp.googleapis.com/TableDataProfile"
+    }
+  ];
+}
+
+// Request to get a column data profile.
+message GetColumnDataProfileRequest {
+  // Required. Resource name, for example
+  // `organizations/12345/locations/us/columnDataProfiles/53234423`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "dlp.googleapis.com/ColumnDataProfile"
+    }
+  ];
 }
 
 // A condition for determining whether a Pub/Sub should be triggered.
@@ -6221,6 +7988,322 @@ message DataProfilePubSubMessage {
   // `full_resource` will be populated.
   TableDataProfile profile = 1;
 
+  // If `DetailLevel` is `FILE_STORE_PROFILE` this will be fully populated.
+  // Otherwise, if `DetailLevel` is `RESOURCE_NAME`, then only `name` and
+  // `file_store_path` will be populated.
+  FileStoreDataProfile file_store_profile = 3;
+
   // The event that caused the Pub/Sub message to be sent.
   DataProfileAction.EventType event = 2;
+}
+
+// Request message for CreateConnection.
+message CreateConnectionRequest {
+  // Required. Parent resource name.
+  //
+  // The format of this value varies depending on the scope of the request
+  // (project or organization):
+  //
+  // + Projects scope:
+  //   `projects/{project_id}/locations/{location_id}`
+  // + Organizations scope:
+  //   `organizations/{org_id}/locations/{location_id}`
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "dlp.googleapis.com/Connection"
+    }
+  ];
+
+  // Required. The connection resource.
+  Connection connection = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Request message for GetConnection.
+message GetConnectionRequest {
+  // Required. Resource name in the format:
+  // `projects/{project}/locations/{location}/connections/{connection}`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = { type: "dlp.googleapis.com/Connection" }
+  ];
+}
+
+// Request message for ListConnections.
+message ListConnectionsRequest {
+  // Required. Resource name of the organization or project, for
+  // example, `organizations/433245324/locations/europe` or
+  // `projects/project-id/locations/asia`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "dlp.googleapis.com/Connection"
+    }
+  ];
+
+  // Optional. Number of results per page, max 1000.
+  int32 page_size = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Page token from a previous page to return the next set of
+  // results. If set, all other request fields must match the original request.
+  string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
+  string filter = 4 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Request message for SearchConnections.
+message SearchConnectionsRequest {
+  // Required. Resource name of the organization or project with a wildcard
+  // location, for example, `organizations/433245324/locations/-` or
+  // `projects/project-id/locations/-`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "dlp.googleapis.com/Connection"
+    }
+  ];
+
+  // Optional. Number of results per page, max 1000.
+  int32 page_size = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Page token from a previous page to return the next set of
+  // results. If set, all other request fields must match the original request.
+  string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
+  string filter = 4 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Response message for ListConnections.
+message ListConnectionsResponse {
+  // List of connections.
+  repeated Connection connections = 1;
+
+  // Token to retrieve the next page of results. An empty value means there are
+  // no more results.
+  string next_page_token = 2;
+}
+
+// Response message for SearchConnections.
+message SearchConnectionsResponse {
+  // List of connections that match the search query. Note that only a subset
+  // of the fields will be populated, and only "name" is guaranteed to be set.
+  // For full details of a Connection, call GetConnection with the name.
+  repeated Connection connections = 1;
+
+  // Token to retrieve the next page of results. An empty value means there are
+  // no more results.
+  string next_page_token = 2;
+}
+
+// Request message for UpdateConnection.
+message UpdateConnectionRequest {
+  // Required. Resource name in the format:
+  // `projects/{project}/locations/{location}/connections/{connection}`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = { type: "dlp.googleapis.com/Connection" }
+  ];
+
+  // Required. The connection with new values for the relevant fields.
+  Connection connection = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Mask to control which fields get updated.
+  google.protobuf.FieldMask update_mask = 3
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Request message for DeleteConnection.
+message DeleteConnectionRequest {
+  // Required. Resource name of the Connection to be deleted, in the format:
+  // `projects/{project}/locations/{location}/connections/{connection}`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = { type: "dlp.googleapis.com/Connection" }
+  ];
+}
+
+// A data connection to allow DLP to profile data in locations that require
+// additional configuration.
+message Connection {
+  option (google.api.resource) = {
+    type: "dlp.googleapis.com/Connection"
+    pattern: "projects/{project}/locations/{location}/connections/{connection}"
+    pattern: "organizations/{organization}/locations/{location}/connections/{connection}"
+  };
+
+  // Output only. Name of the connection:
+  // `projects/{project}/locations/{location}/connections/{name}`.
+  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Required. The connection's state in its lifecycle.
+  ConnectionState state = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Output only. Set if status == ERROR, to provide additional details. Will
+  // store the last 10 errors sorted with the most recent first.
+  repeated Error errors = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Type of connection.
+  oneof properties {
+    // Connect to a Cloud SQL instance.
+    CloudSqlProperties cloud_sql = 4;
+  }
+}
+
+// State of the connection.
+// New values may be added over time.
+enum ConnectionState {
+  // Unused
+  CONNECTION_STATE_UNSPECIFIED = 0;
+
+  // DLP automatically created this connection during an initial scan, and it is
+  // awaiting full configuration by a user.
+  MISSING_CREDENTIALS = 1;
+
+  // A configured connection that has not encountered any errors.
+  AVAILABLE = 2;
+
+  // A configured connection that encountered errors during its last use. It
+  // will not be used again until it is set to AVAILABLE.
+  //
+  // If the resolution requires external action, then the client must send a
+  // request to set the status to AVAILABLE when the connection is ready for
+  // use. If the resolution doesn't require external action, then any changes to
+  // the connection properties will automatically mark it as AVAILABLE.
+  ERROR = 3;
+}
+
+// A credential consisting of a username and password, where the password is
+// stored in a Secret Manager resource.
+// Note: Secret Manager [charges
+// apply](https://cloud.google.com/secret-manager/pricing).
+message SecretManagerCredential {
+  // Required. The username.
+  string username = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The name of the Secret Manager resource that stores the password,
+  // in the form `projects/project-id/secrets/secret-name/versions/version`.
+  string password_secret_version_name = 2
+      [(google.api.field_behavior) = REQUIRED];
+}
+
+// Use IAM authentication to connect. This requires the Cloud SQL IAM feature
+// to be enabled on the instance, which is not the default for Cloud SQL.
+// See https://cloud.google.com/sql/docs/postgres/authentication and
+// https://cloud.google.com/sql/docs/mysql/authentication.
+message CloudSqlIamCredential {}
+
+// Cloud SQL connection properties.
+message CloudSqlProperties {
+  // Database engine of a Cloud SQL instance.
+  // New values may be added over time.
+  enum DatabaseEngine {
+    // An engine that is not currently supported by Sensitive Data Protection.
+    DATABASE_ENGINE_UNKNOWN = 0;
+
+    // Cloud SQL for MySQL instance.
+    DATABASE_ENGINE_MYSQL = 1;
+
+    // Cloud SQL for PostgreSQL instance.
+    DATABASE_ENGINE_POSTGRES = 2;
+  }
+
+  // Optional. Immutable. The Cloud SQL instance for which the connection is
+  // defined. Only one connection per instance is allowed. This can only be set
+  // at creation time, and cannot be updated.
+  //
+  // It is an error to use a connection_name from different project or region
+  // than the one that holds the connection.
+  // For example, a Connection resource for Cloud SQL connection_name
+  // `project-id:us-central1:sql-instance`
+  // must be created under the parent
+  // `projects/project-id/locations/us-central1`
+  string connection_name = 1 [
+    (google.api.field_behavior) = IMMUTABLE,
+    (google.api.field_behavior) = OPTIONAL
+  ];
+
+  // How to authenticate to the instance.
+  oneof credential {
+    // A username and password stored in Secret Manager.
+    SecretManagerCredential username_password = 2;
+
+    // Built-in IAM authentication (must be configured in Cloud SQL).
+    CloudSqlIamCredential cloud_sql_iam = 3;
+  }
+
+  // Required. DLP will limit its connections to max_connections.
+  // Must be 2 or greater.
+  int32 max_connections = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The database engine used by the Cloud SQL instance that this
+  // connection configures.
+  DatabaseEngine database_engine = 7 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Request message for DeleteTableProfile.
+message DeleteTableDataProfileRequest {
+  // Required. Resource name of the table data profile.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "dlp.googleapis.com/TableDataProfile"
+    }
+  ];
+}
+
+// Message used to identify the type of resource being profiled.
+message DataSourceType {
+  // Output only. An identifying string to the type of resource being profiled.
+  // Current values:
+  //
+  // * google/bigquery/table
+  // * google/project
+  // * google/sql/table
+  // * google/gcs/bucket
+  string data_source = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Message used to identify file cluster type being profiled.
+message FileClusterType {
+  // Cluster type. Each cluster corresponds to a set of file types.
+  // Over time, new types may be added and files may move between clusters.
+  enum Cluster {
+    // Unused.
+    CLUSTER_UNSPECIFIED = 0;
+
+    // Unsupported files.
+    CLUSTER_UNKNOWN = 1;
+
+    // Plain text.
+    CLUSTER_TEXT = 2;
+
+    // Structured data like CSV, TSV etc.
+    CLUSTER_STRUCTURED_DATA = 3;
+
+    // Source code.
+    CLUSTER_SOURCE_CODE = 4;
+
+    // Rich document like docx, xlsx etc.
+    CLUSTER_RICH_DOCUMENT = 5;
+
+    // Images like jpeg, bmp.
+    CLUSTER_IMAGE = 6;
+
+    // Archives and containers like .zip, .tar etc.
+    CLUSTER_ARCHIVE = 7;
+
+    // Multimedia like .mp4, .avi etc.
+    CLUSTER_MULTIMEDIA = 8;
+
+    // Executable files like .exe, .class, .apk etc.
+    CLUSTER_EXECUTABLE = 9;
+  }
+
+  // File cluster type.
+  oneof file_cluster_type {
+    // Cluster type.
+    Cluster cluster = 1;
+  }
 }

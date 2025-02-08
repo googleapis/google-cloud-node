@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/data_catalog_client_config.json`.
@@ -53,6 +54,8 @@ export class DataCatalogClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -111,8 +114,27 @@ export class DataCatalogClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataCatalogClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'datacatalog.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -124,7 +146,7 @@ export class DataCatalogClient {
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -149,16 +171,16 @@ export class DataCatalogClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -378,6 +400,9 @@ export class DataCatalogClient {
       'getIamPolicy',
       'testIamPermissions',
       'importEntries',
+      'setConfig',
+      'retrieveConfig',
+      'retrieveEffectiveConfig',
     ];
     for (const methodName of dataCatalogStubMethods) {
       const callPromise = this.dataCatalogStub.then(
@@ -413,19 +438,50 @@ export class DataCatalogClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'datacatalog.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'datacatalog.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -3343,6 +3399,291 @@ export class DataCatalogClient {
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
+  }
+  /**
+   * Sets the configuration related to the migration to Dataplex for an
+   * organization or project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The organization or project whose config is being specified.
+   * @param {google.cloud.datacatalog.v1.TagTemplateMigration} request.tagTemplateMigration
+   *   Opt-in status for the migration of Tag Templates to Dataplex.
+   * @param {google.cloud.datacatalog.v1.CatalogUIExperience} request.catalogUiExperience
+   *   Opt-in status for the UI switch to Dataplex.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.datacatalog.v1.MigrationConfig|MigrationConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_catalog.set_config.js</caption>
+   * region_tag:datacatalog_v1_generated_DataCatalog_SetConfig_async
+   */
+  setConfig(
+    request?: protos.google.cloud.datacatalog.v1.ISetConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IMigrationConfig,
+      protos.google.cloud.datacatalog.v1.ISetConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  setConfig(
+    request: protos.google.cloud.datacatalog.v1.ISetConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IMigrationConfig,
+      protos.google.cloud.datacatalog.v1.ISetConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setConfig(
+    request: protos.google.cloud.datacatalog.v1.ISetConfigRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IMigrationConfig,
+      protos.google.cloud.datacatalog.v1.ISetConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setConfig(
+    request?: protos.google.cloud.datacatalog.v1.ISetConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IMigrationConfig,
+          | protos.google.cloud.datacatalog.v1.ISetConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datacatalog.v1.IMigrationConfig,
+      protos.google.cloud.datacatalog.v1.ISetConfigRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IMigrationConfig,
+      protos.google.cloud.datacatalog.v1.ISetConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.setConfig(request, options, callback);
+  }
+  /**
+   * Retrieves the configuration related to the migration from Data Catalog to
+   * Dataplex for a specific organization, including all the projects under it
+   * which have a separate configuration set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The organization whose config is being retrieved.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.datacatalog.v1.OrganizationConfig|OrganizationConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_catalog.retrieve_config.js</caption>
+   * region_tag:datacatalog_v1_generated_DataCatalog_RetrieveConfig_async
+   */
+  retrieveConfig(
+    request?: protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IOrganizationConfig,
+      protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  retrieveConfig(
+    request: protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IOrganizationConfig,
+      | protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  retrieveConfig(
+    request: protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IOrganizationConfig,
+      | protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  retrieveConfig(
+    request?: protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IOrganizationConfig,
+          | protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datacatalog.v1.IOrganizationConfig,
+      | protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IOrganizationConfig,
+      protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.retrieveConfig(request, options, callback);
+  }
+  /**
+   * Retrieves the effective configuration related to the migration from Data
+   * Catalog to Dataplex for a specific organization or project. If there is no
+   * specific configuration set for the resource, the setting is checked
+   * hierarchicahlly through the ancestors of the resource, starting from the
+   * resource itself.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource whose effective config is being retrieved.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.datacatalog.v1.MigrationConfig|MigrationConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_catalog.retrieve_effective_config.js</caption>
+   * region_tag:datacatalog_v1_generated_DataCatalog_RetrieveEffectiveConfig_async
+   */
+  retrieveEffectiveConfig(
+    request?: protos.google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IMigrationConfig,
+      (
+        | protos.google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  retrieveEffectiveConfig(
+    request: protos.google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IMigrationConfig,
+      | protos.google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  retrieveEffectiveConfig(
+    request: protos.google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.IMigrationConfig,
+      | protos.google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  retrieveEffectiveConfig(
+    request?: protos.google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.datacatalog.v1.IMigrationConfig,
+          | protos.google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datacatalog.v1.IMigrationConfig,
+      | protos.google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.IMigrationConfig,
+      (
+        | protos.google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.retrieveEffectiveConfig(
+      request,
+      options,
+      callback
+    );
   }
 
   /**

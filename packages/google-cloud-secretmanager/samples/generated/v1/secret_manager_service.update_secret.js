@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,8 @@ function main(secret, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Secret google.cloud.secretmanager.v1.Secret  with updated field values.
+   *  Required. Secret google.cloud.secretmanager.v1.Secret  with updated field
+   *  values.
    */
   // const secret = {}
   /**

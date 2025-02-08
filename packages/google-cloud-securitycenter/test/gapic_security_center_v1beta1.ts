@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -161,16 +161,98 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1beta1.SecurityCenterClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        securitycenterModule.v1beta1.SecurityCenterClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'securitycenter.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        securitycenterModule.v1beta1.SecurityCenterClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          securitycenterModule.v1beta1.SecurityCenterClient.servicePath;
+        assert.strictEqual(servicePath, 'securitycenter.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          securitycenterModule.v1beta1.SecurityCenterClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'securitycenter.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'securitycenter.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'securitycenter.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new securitycenterModule.v1beta1.SecurityCenterClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'securitycenter.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'securitycenter.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new securitycenterModule.v1beta1.SecurityCenterClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -274,7 +356,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
@@ -305,7 +387,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
@@ -352,7 +434,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSource = stubSimpleCall(
         undefined,
@@ -404,7 +486,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
@@ -435,7 +517,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
@@ -482,7 +564,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFinding = stubSimpleCall(
         undefined,
@@ -534,7 +616,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -565,7 +647,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -612,7 +694,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -664,7 +746,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.OrganizationSettings()
       );
@@ -696,7 +778,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.OrganizationSettings()
       );
@@ -743,7 +825,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOrganizationSettings = stubSimpleCall(
         undefined,
@@ -801,7 +883,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
@@ -832,7 +914,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
@@ -879,7 +961,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSource = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSource(request), expectedError);
@@ -928,7 +1010,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
@@ -959,7 +1041,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
@@ -1006,7 +1088,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setFindingState = stubSimpleCall(
         undefined,
@@ -1058,7 +1140,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1089,7 +1171,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1136,7 +1218,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -1188,7 +1270,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1220,7 +1302,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1267,7 +1349,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -1320,7 +1402,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['finding', 'name']
       );
       request.finding.name = defaultValue1;
-      const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
@@ -1352,7 +1434,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['finding', 'name']
       );
       request.finding.name = defaultValue1;
-      const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
@@ -1400,7 +1482,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['finding', 'name']
       );
       request.finding.name = defaultValue1;
-      const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `finding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFinding = stubSimpleCall(
         undefined,
@@ -1454,7 +1536,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['organizationSettings', 'name']
       );
       request.organizationSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.OrganizationSettings()
       );
@@ -1487,7 +1569,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['organizationSettings', 'name']
       );
       request.organizationSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.OrganizationSettings()
       );
@@ -1535,7 +1617,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['organizationSettings', 'name']
       );
       request.organizationSettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateOrganizationSettings = stubSimpleCall(
         undefined,
@@ -1595,7 +1677,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['source', 'name']
       );
       request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
@@ -1627,7 +1709,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['source', 'name']
       );
       request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
@@ -1675,7 +1757,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['source', 'name']
       );
       request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSource = stubSimpleCall(
         undefined,
@@ -1729,7 +1811,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['securityMarks', 'name']
       );
       request.securityMarks.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SecurityMarks()
       );
@@ -1762,7 +1844,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['securityMarks', 'name']
       );
       request.securityMarks.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SecurityMarks()
       );
@@ -1810,7 +1892,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['securityMarks', 'name']
       );
       request.securityMarks.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSecurityMarks = stubSimpleCall(
         undefined,
@@ -1863,7 +1945,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1896,7 +1978,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1950,7 +2032,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runAssetDiscovery = stubLongRunningCall(
         undefined,
@@ -1981,7 +2063,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runAssetDiscovery = stubLongRunningCall(
         undefined,
@@ -2057,7 +2139,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2096,7 +2178,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2153,7 +2235,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.groupAssets = stubSimpleCall(
         undefined,
@@ -2184,7 +2266,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2227,9 +2309,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2247,7 +2329,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupAssets.createStream = stubPageStreamingCall(
         undefined,
@@ -2281,9 +2363,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2301,7 +2383,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2331,9 +2413,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2351,7 +2433,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupAssets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2374,9 +2456,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2396,7 +2478,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2435,7 +2517,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2492,7 +2574,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.groupFindings = stubSimpleCall(
         undefined,
@@ -2523,7 +2605,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2566,9 +2648,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2586,7 +2668,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupFindings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2618,9 +2700,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2638,7 +2720,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2668,9 +2750,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2688,7 +2770,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupFindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2709,9 +2791,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2731,7 +2813,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult()
@@ -2770,7 +2852,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult()
@@ -2827,7 +2909,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAssets = stubSimpleCall(
         undefined,
@@ -2858,7 +2940,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult()
@@ -2901,9 +2983,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2921,7 +3003,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
         undefined,
@@ -2955,9 +3037,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2975,7 +3057,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult()
@@ -3005,9 +3087,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3025,7 +3107,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3048,9 +3130,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3070,7 +3152,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Finding()
@@ -3109,7 +3191,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Finding()
@@ -3166,7 +3248,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFindings = stubSimpleCall(
         undefined,
@@ -3197,7 +3279,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Finding()
@@ -3238,9 +3320,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3258,7 +3340,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFindings.createStream = stubPageStreamingCall(
         undefined,
@@ -3290,9 +3372,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3310,7 +3392,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Finding()
@@ -3340,9 +3422,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3360,7 +3442,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3381,9 +3463,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3403,7 +3485,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Source()
@@ -3442,7 +3524,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Source()
@@ -3497,7 +3579,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSources = stubSimpleCall(
         undefined,
@@ -3528,7 +3610,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Source()
@@ -3569,9 +3651,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3589,7 +3671,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSources.createStream = stubPageStreamingCall(
         undefined,
@@ -3621,9 +3703,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3641,7 +3723,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Source()
@@ -3671,9 +3753,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3691,7 +3773,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3714,9 +3796,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

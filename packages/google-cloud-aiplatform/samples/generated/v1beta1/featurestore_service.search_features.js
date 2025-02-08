@@ -115,7 +115,7 @@ function main(location) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.searchFeaturesAsync(request);
+    const iterable = aiplatformClient.searchFeaturesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

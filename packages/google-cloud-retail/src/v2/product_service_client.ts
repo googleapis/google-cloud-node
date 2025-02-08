@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v2/product_service_client_config.json`.
@@ -55,6 +56,8 @@ export class ProductServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -114,8 +117,27 @@ export class ProductServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ProductServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'retail.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -130,7 +152,7 @@ export class ProductServiceClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -155,10 +177,10 @@ export class ProductServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
@@ -168,7 +190,7 @@ export class ProductServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -260,6 +282,12 @@ export class ProductServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
+    const purgeProductsResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2.PurgeProductsResponse'
+    ) as gax.protobuf.Type;
+    const purgeProductsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2.PurgeProductsMetadata'
+    ) as gax.protobuf.Type;
     const importProductsResponse = protoFilesRoot.lookup(
       '.google.cloud.retail.v2.ImportProductsResponse'
     ) as gax.protobuf.Type;
@@ -298,6 +326,11 @@ export class ProductServiceClient {
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
+      purgeProducts: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeProductsResponse.decode.bind(purgeProductsResponse),
+        purgeProductsMetadata.decode.bind(purgeProductsMetadata)
+      ),
       importProducts: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importProductsResponse.decode.bind(importProductsResponse),
@@ -393,6 +426,7 @@ export class ProductServiceClient {
       'listProducts',
       'updateProduct',
       'deleteProduct',
+      'purgeProducts',
       'importProducts',
       'setInventory',
       'addFulfillmentPlaces',
@@ -434,19 +468,50 @@ export class ProductServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'retail.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'retail.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -895,6 +960,204 @@ export class ProductServiceClient {
   }
 
   /**
+   * Permanently deletes all selected {@link protos.google.cloud.retail.v2.Product|Product}s
+   * under a branch.
+   *
+   * This process is asynchronous. If the request is valid, the removal will be
+   * enqueued and processed offline. Depending on the number of
+   * {@link protos.google.cloud.retail.v2.Product|Product}s, this operation could take hours
+   * to complete. Before the operation completes, some
+   * {@link protos.google.cloud.retail.v2.Product|Product}s may still be returned by
+   * {@link protos.google.cloud.retail.v2.ProductService.GetProduct|ProductService.GetProduct}
+   * or
+   * {@link protos.google.cloud.retail.v2.ProductService.ListProducts|ProductService.ListProducts}.
+   *
+   * Depending on the number of {@link protos.google.cloud.retail.v2.Product|Product}s, this
+   * operation could take hours to complete. To get a sample of
+   * {@link protos.google.cloud.retail.v2.Product|Product}s that would be deleted, set
+   * {@link protos.google.cloud.retail.v2.PurgeProductsRequest.force|PurgeProductsRequest.force}
+   * to false.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the branch under which the products are
+   *   created. The format is
+   *   `projects/${projectId}/locations/global/catalogs/${catalogId}/branches/${branchId}`
+   * @param {string} request.filter
+   *   Required. The filter string to specify the products to be deleted with a
+   *   length limit of 5,000 characters.
+   *
+   *   Empty string filter is not allowed. "*" implies delete all items in a
+   *   branch.
+   *
+   *   The eligible fields for filtering are:
+   *
+   *   * `availability`: Double quoted
+   *   {@link protos.google.cloud.retail.v2.Product.availability|Product.availability} string.
+   *   * `create_time` : in ISO 8601 "zulu" format.
+   *
+   *   Supported syntax:
+   *
+   *   * Comparators (">", "<", ">=", "<=", "=").
+   *     Examples:
+   *     * create_time <= "2015-02-13T17:05:46Z"
+   *     * availability = "IN_STOCK"
+   *
+   *   * Conjunctions ("AND")
+   *     Examples:
+   *     * create_time <= "2015-02-13T17:05:46Z" AND availability = "PREORDER"
+   *
+   *   * Disjunctions ("OR")
+   *     Examples:
+   *     * create_time <= "2015-02-13T17:05:46Z" OR availability = "IN_STOCK"
+   *
+   *   * Can support nested queries.
+   *     Examples:
+   *     * (create_time <= "2015-02-13T17:05:46Z" AND availability = "PREORDER")
+   *     OR (create_time >= "2015-02-14T13:03:32Z" AND availability = "IN_STOCK")
+   *
+   *   * Filter Limits:
+   *     * Filter should not contain more than 6 conditions.
+   *     * Max nesting depth should not exceed 2 levels.
+   *
+   *   Examples queries:
+   *   * Delete back order products created before a timestamp.
+   *     create_time <= "2015-02-13T17:05:46Z" OR availability = "BACKORDER"
+   * @param {boolean} request.force
+   *   Actually perform the purge.
+   *   If `force` is set to false, the method will return the expected purge count
+   *   without deleting any products.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/product_service.purge_products.js</caption>
+   * region_tag:retail_v2_generated_ProductService_PurgeProducts_async
+   */
+  purgeProducts(
+    request?: protos.google.cloud.retail.v2.IPurgeProductsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  purgeProducts(
+    request: protos.google.cloud.retail.v2.IPurgeProductsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeProducts(
+    request: protos.google.cloud.retail.v2.IPurgeProductsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeProducts(
+    request?: protos.google.cloud.retail.v2.IPurgeProductsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2.IPurgeProductsResponse,
+            protos.google.cloud.retail.v2.IPurgeProductsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2.IPurgeProductsResponse,
+        protos.google.cloud.retail.v2.IPurgeProductsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.purgeProducts(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeProducts()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/product_service.purge_products.js</caption>
+   * region_tag:retail_v2_generated_ProductService_PurgeProducts_async
+   */
+  async checkPurgeProductsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2.PurgeProductsResponse,
+      protos.google.cloud.retail.v2.PurgeProductsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.purgeProducts,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2.PurgeProductsResponse,
+      protos.google.cloud.retail.v2.PurgeProductsMetadata
+    >;
+  }
+  /**
    * Bulk import of multiple {@link protos.google.cloud.retail.v2.Product|Product}s.
    *
    * Request processing may be synchronous.
@@ -919,7 +1182,8 @@ export class ProductServiceClient {
    *   The desired location of errors incurred during the Import.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Indicates which fields in the provided imported `products` to update. If
-   *   not set, all fields are updated.
+   *   not set, all fields are updated. If provided, only the existing product
+   *   fields are updated. Missing products will not be created.
    * @param {google.cloud.retail.v2.ImportProductsRequest.ReconciliationMode} request.reconciliationMode
    *   The mode of reconciliation between existing products and the products to be
    *   imported. Defaults to
@@ -933,9 +1197,14 @@ export class ProductServiceClient {
    *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
    *   to be within the same project as
    *   {@link protos.google.cloud.retail.v2.ImportProductsRequest.parent|ImportProductsRequest.parent}.
-   *   Make sure that `service-<project
-   *   number>@gcp-sa-retail.iam.gserviceaccount.com` has the
-   *   `pubsub.topics.publish` IAM permission on the topic.
+   *   Make sure that both
+   *   `cloud-retail-customer-data-access@system.gserviceaccount.com` and
+   *   `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
+   *   have the `pubsub.topics.publish` IAM permission on the topic.
+   *
+   *   Only supported when
+   *   {@link protos.google.cloud.retail.v2.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
+   *   is set to `FULL`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1326,10 +1595,11 @@ export class ProductServiceClient {
     >;
   }
   /**
-   * It is recommended to use the
+   * We recommend that you use the
    * {@link protos.google.cloud.retail.v2.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
-   * method instead of
-   * {@link protos.google.cloud.retail.v2.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces}.
+   * method instead of the
+   * {@link protos.google.cloud.retail.v2.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces}
+   * method.
    * {@link protos.google.cloud.retail.v2.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
    * achieves the same results but provides more fine-grained control over
    * ingesting local inventory data.
@@ -1544,10 +1814,11 @@ export class ProductServiceClient {
     >;
   }
   /**
-   * It is recommended to use the
+   * We recommend that you use the
    * {@link protos.google.cloud.retail.v2.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
-   * method instead of
-   * {@link protos.google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
+   * method instead of the
+   * {@link protos.google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}
+   * method.
    * {@link protos.google.cloud.retail.v2.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
    * achieves the same results but provides more fine-grained control over
    * ingesting local inventory data.
@@ -2304,7 +2575,7 @@ export class ProductServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listProducts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2635,7 +2906,7 @@ export class ProductServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -2648,6 +2919,20 @@ export class ProductServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2684,6 +2969,13 @@ export class ProductServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2719,11 +3011,11 @@ export class ProductServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -2732,6 +3024,20 @@ export class ProductServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2762,7 +3068,7 @@ export class ProductServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -2775,6 +3081,20 @@ export class ProductServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

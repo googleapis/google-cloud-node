@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@ function main(recognizer) {
   // const configMask = {}
   /**
    *  Audio files with file metadata for ASR.
-   *  The maximum number of files allowed to be specified is 5.
+   *  The maximum number of files allowed to be specified is 15.
    */
   // const files = [1,2,3,4]
   /**

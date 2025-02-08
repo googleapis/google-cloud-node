@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -448,7 +448,7 @@ message ServiceAccount {
 
 // Carries information about an accelerator that can be attached to a VM.
 message Accelerator {
-  // The accelerator type string (for example, "nvidia-tesla-k80").
+  // The accelerator type string (for example, "nvidia-tesla-t4").
   //
   // Only NVIDIA GPU accelerators are currently supported. If an NVIDIA GPU is
   // attached, the required runtime libraries will be made available to all

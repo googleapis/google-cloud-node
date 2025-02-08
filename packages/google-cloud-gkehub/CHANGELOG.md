@@ -1,5 +1,53 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.5.0...gke-hub-v5.0.0) (2025-01-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* [gkehub] Update the configmanagement feature ([#5925](https://github.com/googleapis/google-cloud-node/issues/5925))
+
+### Features
+
+* [gkehub] Update the configmanagement feature ([#5925](https://github.com/googleapis/google-cloud-node/issues/5925)) ([95905ab](https://github.com/googleapis/google-cloud-node/commit/95905ab973a7cc74540201eec9a889cb450c3a39))
+
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.4.0...gke-hub-v4.5.0) (2024-06-26)
+
+
+### Features
+
+* [gkehub] add a new field `PENDING` under `DeploymentState` enum ([#5472](https://github.com/googleapis/google-cloud-node/issues/5472)) ([dc87003](https://github.com/googleapis/google-cloud-node/commit/dc87003cc97da35701fca6127f41cfc088c5a99d))
+
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.3.0...gke-hub-v4.4.0) (2024-05-23)
+
+
+### Features
+
+* [gkehub] Add ServiceMesh feature to gkehub v1beta API ([#5368](https://github.com/googleapis/google-cloud-node/issues/5368)) ([0c4c15d](https://github.com/googleapis/google-cloud-node/commit/0c4c15d88fc06402ab665b9b7e29302f3406da45))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.2.0...gke-hub-v4.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5353](https://github.com/googleapis/google-cloud-node/issues/5353)) ([1a2388d](https://github.com/googleapis/google-cloud-node/commit/1a2388d7096176b4155a0c4f01e15ffb8c4d5096))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.1.0...gke-hub-v4.2.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.0.1...gke-hub-v4.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5025](https://github.com/googleapis/google-cloud-node/issues/5025)) ([7244cab](https://github.com/googleapis/google-cloud-node/commit/7244cab107973bef57c5ea84ae77c51718126822))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.0.0...gke-hub-v4.0.1) (2023-09-06)
 
 

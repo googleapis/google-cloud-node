@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -96,7 +96,8 @@ function main(participant) {
    *  and
    *  AudioEncoding.AUDIO_ENCODING_MULAW google.cloud.dialogflow.v2.AudioEncoding.AUDIO_ENCODING_MULAW 
    *  - Lifecycle: conversation should be in `Assist Stage`, go to
-   *    Conversation.CreateConversation   for more information.
+   *    Conversations.CreateConversation google.cloud.dialogflow.v2.Conversations.CreateConversation 
+   *    for more information.
    *  InvalidArgument Error will be returned if the one of restriction checks
    *  failed.
    *  You can find more details in
@@ -134,7 +135,7 @@ function main(participant) {
     stream.on('error', (err) => { throw(err) });
     stream.on('end', () => { /* API call completed */ });
     stream.write(request);
-    stream.end(); 
+    stream.end();
   }
 
   callStreamingAnalyzeContent();

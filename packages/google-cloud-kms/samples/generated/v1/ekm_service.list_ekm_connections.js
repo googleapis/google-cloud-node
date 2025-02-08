@@ -77,7 +77,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await kmsClient.listEkmConnectionsAsync(request);
+    const iterable = kmsClient.listEkmConnectionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

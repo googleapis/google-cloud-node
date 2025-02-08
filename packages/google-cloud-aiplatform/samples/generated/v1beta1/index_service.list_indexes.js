@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listIndexesAsync(request);
+    const iterable = aiplatformClient.listIndexesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

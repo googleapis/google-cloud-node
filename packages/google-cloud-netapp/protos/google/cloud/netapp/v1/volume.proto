@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ syntax = "proto3";
 package google.cloud.netapp.v1;
 
 import "google/api/field_behavior.proto";
+import "google/api/field_info.proto";
 import "google/api/resource.proto";
 import "google/cloud/netapp/v1/common.proto";
 import "google/protobuf/field_mask.proto";
@@ -102,7 +103,7 @@ enum SecurityStyle {
   // SecurityStyle uses NTFS
   NTFS = 1;
 
-  // SecurityStyle uses NTFS
+  // SecurityStyle uses UNIX
   UNIX = 2;
 }
 
@@ -170,9 +171,10 @@ message CreateVolumeRequest {
     }
   ];
 
-  // Required. Id of the requesting volume
-  // If auto-generating Id server-side, remove this field and
-  // Id from the method_signature of Create RPC
+  // Required. Id of the requesting volume. Must be unique within the parent
+  // resource. Must contain only letters, numbers and hyphen, with the first
+  // character a letter, the last a letter or a number,
+  // and a 63 character maximum.
   string volume_id = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The volume being created.
@@ -256,6 +258,14 @@ message Volume {
 
     // Volume State is Error
     ERROR = 7;
+
+    // Volume State is Preparing. Note that this is different from CREATING
+    // where CREATING means the volume is being created, while PREPARING means
+    // the volume is created and now being prepared for the replication.
+    PREPARING = 8;
+
+    // Volume State is Read Only
+    READ_ONLY = 9;
   }
 
   // Identifier. Name of the volume
@@ -274,8 +284,8 @@ message Volume {
   // Required. Share name of the volume
   string share_name = 5 [(google.api.field_behavior) = REQUIRED];
 
-  // Output only. Name of the Private Service Access allocated range. This is
-  // optional. If not provided, any available range will be chosen.
+  // Output only. This field is not implemented. The values provided in this
+  // field are ignored.
   string psa_range = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Required. StoragePool name of the volume
@@ -382,6 +392,31 @@ message Volume {
 
   // Optional. List of actions that are restricted on this volume.
   repeated RestrictedAction restricted_actions = 31
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Flag indicating if the volume will be a large capacity volume or
+  // a regular volume.
+  bool large_capacity = 32 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Flag indicating if the volume will have an IP address per node
+  // for volumes supporting multiple IP endpoints. Only the volume with
+  // large_capacity will be allowed to have multiple endpoints.
+  bool multiple_endpoints = 33 [(google.api.field_behavior) = OPTIONAL];
+
+  // Tiering policy for the volume.
+  optional TieringPolicy tiering_policy = 34;
+
+  // Output only. Specifies the replica zone for regional volume.
+  string replica_zone = 36 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Specifies the active zone for regional volume.
+  string zone = 37 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Size of the volume cold tier data in GiB.
+  int64 cold_tier_size_gib = 39 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. The Hybrid Replication parameters for the volume.
+  HybridReplicationParameters hybrid_replication_parameters = 40
       [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -533,6 +568,12 @@ message MountOption {
 
   // Instructions for mounting
   string instructions = 4;
+
+  // Output only. IP Address.
+  string ip_address = 5 [
+    (google.api.field_info).format = IPV4,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
 }
 
 // The RestoreParameters if volume is created from a snapshot or backup.
@@ -576,4 +617,71 @@ message BackupConfig {
   // This field should be nil when there's no backup policy attached.
   optional bool scheduled_backup_enabled = 3
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. Total size of all backups in a chain in bytes = baseline
+  // backup size + sum(incremental backup size).
+  optional int64 backup_chain_bytes = 4
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Defines tiering policy for the volume.
+message TieringPolicy {
+  // Tier action for the volume.
+  enum TierAction {
+    // Unspecified.
+    TIER_ACTION_UNSPECIFIED = 0;
+
+    // When tiering is enabled, new cold data will be tiered.
+    ENABLED = 1;
+
+    // When paused, tiering won't be performed on new data. Existing data stays
+    // tiered until accessed.
+    PAUSED = 2;
+  }
+
+  // Optional. Flag indicating if the volume has tiering policy enable/pause.
+  // Default is PAUSED.
+  optional TierAction tier_action = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Time in days to mark the volume's data block as cold and make it
+  // eligible for tiering, can be range from 7-183. Default is 31.
+  optional int32 cooling_threshold_days = 2
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// The Hybrid Replication parameters for the volume.
+message HybridReplicationParameters {
+  // Required. Desired name for the replication of this volume.
+  string replication = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "netapp.googleapis.com/Replication"
+    }
+  ];
+
+  // Required. Name of the user's local source volume to be peered with the
+  // destination volume.
+  string peer_volume_name = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Name of the user's local source cluster to be peered with the
+  // destination cluster.
+  string peer_cluster_name = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Name of the user's local source vserver svm to be peered with the
+  // destination vserver svm.
+  string peer_svm_name = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. List of node ip addresses to be peered with.
+  repeated string peer_ip_addresses = 5
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Name of source cluster location associated with the Hybrid
+  // replication. This is a free-form field for the display purpose only.
+  string cluster_location = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Description of the replication.
+  string description = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Labels to be added to the replication as the key value pairs.
+  map<string, string> labels = 8 [(google.api.field_behavior) = OPTIONAL];
 }

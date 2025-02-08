@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v2/profiler_service_client_config.json`.
@@ -39,9 +40,8 @@ const version = require('../../../package.json').version;
  *  Manage the collection of continuous profiling data provided by profiling
  *  agents running in the cloud or by an offline provider of profiling data.
  *
- *  General guidelines:
- *  * Profiles for a single deployment must be created in ascending time order.
- *  * Profiles can be created in either online or offline mode, see below.
+ *  __The APIs listed in this service are intended for use within our profiler
+ *  agents only.__
  * @class
  * @memberof v2
  */
@@ -53,6 +53,8 @@ export class ProfilerServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -110,8 +112,27 @@ export class ProfilerServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ProfilerServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'cloudprofiler.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -126,7 +147,7 @@ export class ProfilerServiceClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -151,16 +172,16 @@ export class ProfilerServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -274,19 +295,50 @@ export class ProfilerServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'cloudprofiler.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'cloudprofiler.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -331,6 +383,11 @@ export class ProfilerServiceClient {
   // -------------------
   /**
    * CreateProfile creates a new profile resource in the online mode.
+   *
+   * _Direct use of this API is discouraged, please use a [supported
+   * profiler
+   * agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent)
+   * instead for profile collection._
    *
    * The server ensures that the new profiles are created at a constant rate per
    * deployment, so the creation request may hang for some time until the next
@@ -437,9 +494,14 @@ export class ProfilerServiceClient {
     return this.innerApiCalls.createProfile(request, options, callback);
   }
   /**
-   * CreateOfflineProfile creates a new profile resource in the offline mode.
-   * The client provides the profile to create along with the profile bytes, the
-   * server records it.
+   * CreateOfflineProfile creates a new profile resource in the offline
+   * mode. The client provides the profile to create along with the profile
+   * bytes, the server records it.
+   *
+   * _Direct use of this API is discouraged, please use a [supported
+   * profiler
+   * agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent)
+   * instead for profile collection._
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -541,6 +603,11 @@ export class ProfilerServiceClient {
    * created in the online mode. Updating the bytes for profiles created in the
    * offline mode is currently not supported: the profile content must be
    * provided at the time of the profile creation.
+   *
+   * _Direct use of this API is discouraged, please use a [supported
+   * profiler
+   * agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent)
+   * instead for profile collection._
    *
    * @param {Object} request
    *   The request object that will be sent.

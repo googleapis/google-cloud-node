@@ -11,7 +11,7 @@ var config = {
 
 ### The `config` object
 
-A `config` object is not required if you are in an environment which supports [Application Default Credentials](https://developers.google.com/identity/protocols/application-default-credentials). This could be your own development machine when using the [gcloud SDK](https://cloud.google.com/sdk) or within Google App Engine and Compute Engine.
+A `config` object is not required if you are in an environment which supports [Application Default Credentials](https://cloud.google.com/docs/authentication/application-default-credentials). This could be your own development machine when using the [gcloud SDK](https://cloud.google.com/sdk) or within Google App Engine and Compute Engine. How you [set up Application Default Credentials](https://cloud.google.com/docs/authentication/provide-credentials-adc) depends on where your code is running.
 
 If this doesn't describe your environment, the `config` object expects the following properties:
 

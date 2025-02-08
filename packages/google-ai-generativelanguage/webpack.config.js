@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'DiscussService',
-    filename: './discuss-service.js',
+    library: 'CacheService',
+    filename: './cache-service.js',
   },
   node: {
     child_process: 'empty',

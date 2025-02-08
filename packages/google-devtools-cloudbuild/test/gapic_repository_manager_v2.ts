@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -167,16 +167,95 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2.RepositoryManagerClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        repositorymanagerModule.v2.RepositoryManagerClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        repositorymanagerModule.v2.RepositoryManagerClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          repositorymanagerModule.v2.RepositoryManagerClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudbuild.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          repositorymanagerModule.v2.RepositoryManagerClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudbuild.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudbuild.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new repositorymanagerModule.v2.RepositoryManagerClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'cloudbuild.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new repositorymanagerModule.v2.RepositoryManagerClient(
+            {universeDomain: 'configured.example.com'}
+          );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'cloudbuild.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new repositorymanagerModule.v2.RepositoryManagerClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -280,7 +359,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v2.Connection()
       );
@@ -311,7 +390,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v2.Connection()
       );
@@ -358,7 +437,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnection = stubSimpleCall(
         undefined,
@@ -410,7 +489,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v2.Repository()
       );
@@ -441,7 +520,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v2.Repository()
       );
@@ -488,7 +567,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRepository = stubSimpleCall(
         undefined,
@@ -540,7 +619,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['repository']
       );
       request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenResponse()
       );
@@ -572,7 +651,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['repository']
       );
       request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v2.FetchReadWriteTokenResponse()
       );
@@ -619,7 +698,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['repository']
       );
       request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchReadWriteToken = stubSimpleCall(
         undefined,
@@ -671,7 +750,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['repository']
       );
       request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v2.FetchReadTokenResponse()
       );
@@ -702,7 +781,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['repository']
       );
       request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v2.FetchReadTokenResponse()
       );
@@ -749,7 +828,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['repository']
       );
       request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchReadToken = stubSimpleCall(
         undefined,
@@ -801,7 +880,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['repository']
       );
       request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v2.FetchGitRefsResponse()
       );
@@ -832,7 +911,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['repository']
       );
       request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v2.FetchGitRefsResponse()
       );
@@ -879,7 +958,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['repository']
       );
       request.repository = defaultValue1;
-      const expectedHeaderRequestParams = `repository=${defaultValue1}`;
+      const expectedHeaderRequestParams = `repository=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchGitRefs = stubSimpleCall(
         undefined,
@@ -931,7 +1010,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -964,7 +1043,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1018,7 +1097,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnection = stubLongRunningCall(
         undefined,
@@ -1049,7 +1128,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnection = stubLongRunningCall(
         undefined,
@@ -1126,7 +1205,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1160,7 +1239,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1215,7 +1294,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnection = stubLongRunningCall(
         undefined,
@@ -1247,7 +1326,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnection = stubLongRunningCall(
         undefined,
@@ -1323,7 +1402,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1356,7 +1435,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1410,7 +1489,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnection = stubLongRunningCall(
         undefined,
@@ -1441,7 +1520,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnection = stubLongRunningCall(
         undefined,
@@ -1517,7 +1596,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1550,7 +1629,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1604,7 +1683,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRepository = stubLongRunningCall(
         undefined,
@@ -1635,7 +1714,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRepository = stubLongRunningCall(
         undefined,
@@ -1711,7 +1790,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1744,7 +1823,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1798,7 +1877,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateRepositories = stubLongRunningCall(
         undefined,
@@ -1832,7 +1911,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateRepositories = stubLongRunningCall(
         undefined,
@@ -1909,7 +1988,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1942,7 +2021,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1996,7 +2075,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRepository = stubLongRunningCall(
         undefined,
@@ -2027,7 +2106,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRepository = stubLongRunningCall(
         undefined,
@@ -2103,7 +2182,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Connection()
@@ -2142,7 +2221,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Connection()
@@ -2197,7 +2276,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConnections = stubSimpleCall(
         undefined,
@@ -2228,7 +2307,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Connection()
@@ -2268,9 +2347,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2288,7 +2367,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2317,9 +2396,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2337,7 +2416,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Connection()
@@ -2366,9 +2445,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2386,7 +2465,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2407,9 +2486,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2429,7 +2508,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Repository()
@@ -2468,7 +2547,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Repository()
@@ -2523,7 +2602,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRepositories = stubSimpleCall(
         undefined,
@@ -2554,7 +2633,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Repository()
@@ -2594,9 +2673,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2614,7 +2693,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRepositories.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2643,9 +2722,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2663,7 +2742,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Repository()
@@ -2692,9 +2771,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2712,7 +2791,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRepositories.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2733,9 +2812,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2755,7 +2834,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Repository()
@@ -2795,7 +2874,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Repository()
@@ -2850,7 +2929,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchLinkableRepositories = stubSimpleCall(
         undefined,
@@ -2884,7 +2963,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Repository()
@@ -2950,7 +3029,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchLinkableRepositories.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3005,7 +3084,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v2.Repository()
@@ -3058,7 +3137,7 @@ describe('v2.RepositoryManagerClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchLinkableRepositories.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -40,9 +40,29 @@
                 "getRecurringAudienceList"
               ]
             },
+            "GetPropertyQuotasSnapshot": {
+              "methods": [
+                "getPropertyQuotasSnapshot"
+              ]
+            },
+            "QueryReportTask": {
+              "methods": [
+                "queryReportTask"
+              ]
+            },
+            "GetReportTask": {
+              "methods": [
+                "getReportTask"
+              ]
+            },
             "CreateAudienceList": {
               "methods": [
                 "createAudienceList"
+              ]
+            },
+            "CreateReportTask": {
+              "methods": [
+                "createReportTask"
               ]
             },
             "ListAudienceLists": {
@@ -57,6 +77,13 @@
                 "listRecurringAudienceLists",
                 "listRecurringAudienceListsStream",
                 "listRecurringAudienceListsAsync"
+              ]
+            },
+            "ListReportTasks": {
+              "methods": [
+                "listReportTasks",
+                "listReportTasksStream",
+                "listReportTasksAsync"
               ]
             }
           }
@@ -94,9 +121,29 @@
                 "getRecurringAudienceList"
               ]
             },
+            "GetPropertyQuotasSnapshot": {
+              "methods": [
+                "getPropertyQuotasSnapshot"
+              ]
+            },
+            "QueryReportTask": {
+              "methods": [
+                "queryReportTask"
+              ]
+            },
+            "GetReportTask": {
+              "methods": [
+                "getReportTask"
+              ]
+            },
             "CreateAudienceList": {
               "methods": [
                 "createAudienceList"
+              ]
+            },
+            "CreateReportTask": {
+              "methods": [
+                "createReportTask"
               ]
             },
             "ListAudienceLists": {
@@ -111,6 +158,13 @@
                 "listRecurringAudienceLists",
                 "listRecurringAudienceListsStream",
                 "listRecurringAudienceListsAsync"
+              ]
+            },
+            "ListReportTasks": {
+              "methods": [
+                "listReportTasks",
+                "listReportTasksStream",
+                "listReportTasksAsync"
               ]
             }
           }

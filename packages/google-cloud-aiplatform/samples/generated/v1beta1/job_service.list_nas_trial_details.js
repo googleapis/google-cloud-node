@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listNasTrialDetailsAsync(request);
+    const iterable = aiplatformClient.listNasTrialDetailsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package google.cloud.datacatalog.v1;
 
 import "google/api/field_behavior.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.DataCatalog.V1";
 option go_package = "cloud.google.com/go/datacatalog/apiv1/datacatalogpb;datacatalogpb";
 option java_multiple_files = true;
@@ -83,6 +82,13 @@ message ColumnSchema {
     LookerColumnType type = 1;
   }
 
+  // Represents the type of a field element.
+  message FieldElementType {
+    // Required. The type of a field element. See
+    // [ColumnSchema.type][google.cloud.datacatalog.v1.ColumnSchema.type].
+    string type = 1 [(google.api.field_behavior) = REQUIRED];
+  }
+
   // Required. Name of the column.
   //
   // Must be a UTF-8 string without dots (.).
@@ -126,6 +132,15 @@ message ColumnSchema {
     // Looker specific column info of this column.
     LookerColumnSpec looker_column_spec = 18;
   }
+
+  // Optional. The subtype of the RANGE, if the type of this field is RANGE. If
+  // the type is RANGE, this field is required. Possible values for the field
+  // element type of a RANGE include:
+  // * DATE
+  // * DATETIME
+  // * TIMESTAMP
+  FieldElementType range_element_type = 19
+      [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Garbage collection policy for the column or column family.
   // Applies to systems like Cloud Bigtable.

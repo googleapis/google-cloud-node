@@ -36,6 +36,26 @@
           "timeout_millis": 5000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
+        "ImportSuggestionDenyListEntries": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
+        "PurgeSuggestionDenyListEntries": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
+        "ImportCompletionSuggestions": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
+        "PurgeCompletionSuggestions": {
+          "timeout_millis": 5000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
         }
       }
     }

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -161,6 +161,12 @@ message CustomConstraint {
     // Constraint applied when deleting the resource.
     // Not supported yet.
     DELETE = 3;
+
+    // Constraint applied when removing an IAM grant.
+    REMOVE_GRANT = 4;
+
+    // Constraint applied when enforcing forced tagging.
+    GOVERN_TAGS = 5;
   }
 
   // Allow or deny type.

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The parent, at which bulk action needs to be applied. Its format
-   *  is "organizations/[organization_id]", "folders/[folder_id]",
-   *  "projects/[project_id]".
+   *  is `organizations/[organization_id]`, `folders/[folder_id]`,
+   *  `projects/[project_id]`.
    */
   // const parent = 'abc123'
   /**
@@ -57,6 +57,12 @@ function main(parent) {
    *  of findings based on the filter.
    */
   // const muteAnnotation = 'abc123'
+  /**
+   *  Optional. All findings matching the given filter will have their mute state
+   *  set to this value. The default value is `MUTED`. Setting this to
+   *  `UNDEFINED` will clear the mute state on all matching findings.
+   */
+  // const muteState = {}
 
   // Imports the Securitycenter library
   const {SecurityCenterClient} = require('@google-cloud/security-center').v1;

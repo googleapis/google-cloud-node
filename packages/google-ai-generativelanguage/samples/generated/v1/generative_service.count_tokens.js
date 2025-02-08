@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(model, contents) {
+function main(model) {
   // [START generativelanguage_v1_generated_GenerativeService_CountTokens_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -36,9 +36,21 @@ function main(model, contents) {
    */
   // const model = 'abc123'
   /**
-   *  Required. The input given to the model as a prompt.
+   *  Optional. The input given to the model as a prompt. This field is ignored
+   *  when `generate_content_request` is set.
    */
   // const contents = [1,2,3,4]
+  /**
+   *  Optional. The overall input given to the `Model`. This includes the prompt
+   *  as well as other model steering information like system
+   *  instructions (https://ai.google.dev/gemini-api/docs/system-instructions),
+   *  and/or function declarations for function
+   *  calling (https://ai.google.dev/gemini-api/docs/function-calling).
+   *  `Model`s/`Content`s and `generate_content_request`s are mutually
+   *  exclusive. You can either send `Model` + `Content`s or a
+   *  `generate_content_request`, but never both.
+   */
+  // const generateContentRequest = {}
 
   // Imports the Generativelanguage library
   const {GenerativeServiceClient} = require('@google-ai/generativelanguage').v1;
@@ -50,7 +62,6 @@ function main(model, contents) {
     // Construct request
     const request = {
       model,
-      contents,
     };
 
     // Run request

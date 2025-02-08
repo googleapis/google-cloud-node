@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/ekm_service_client_config.json`.
@@ -58,6 +59,8 @@ export class EkmServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -117,8 +120,27 @@ export class EkmServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof EkmServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'cloudkms.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -133,7 +155,7 @@ export class EkmServiceClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -158,10 +180,10 @@ export class EkmServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
@@ -173,7 +195,7 @@ export class EkmServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -193,6 +215,9 @@ export class EkmServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      autokeyConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/autokeyConfig'
+      ),
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
@@ -207,6 +232,9 @@ export class EkmServiceClient {
       ),
       importJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}'
+      ),
+      keyHandlePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyHandles/{key_handle}'
       ),
       keyRingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}'
@@ -319,19 +347,50 @@ export class EkmServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'cloudkms.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'cloudkms.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -1356,6 +1415,30 @@ export class EkmServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified autokeyConfig resource name string.
+   *
+   * @param {string} folder
+   * @returns {string} Resource name string.
+   */
+  autokeyConfigPath(folder: string) {
+    return this.pathTemplates.autokeyConfigPathTemplate.render({
+      folder: folder,
+    });
+  }
+
+  /**
+   * Parse the folder from AutokeyConfig resource.
+   *
+   * @param {string} autokeyConfigName
+   *   A fully-qualified path representing AutokeyConfig resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromAutokeyConfigName(autokeyConfigName: string) {
+    return this.pathTemplates.autokeyConfigPathTemplate.match(autokeyConfigName)
+      .folder;
+  }
+
+  /**
    * Return a fully-qualified cryptoKey resource name string.
    *
    * @param {string} project
@@ -1676,6 +1759,58 @@ export class EkmServiceClient {
   matchImportJobFromImportJobName(importJobName: string) {
     return this.pathTemplates.importJobPathTemplate.match(importJobName)
       .import_job;
+  }
+
+  /**
+   * Return a fully-qualified keyHandle resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_handle
+   * @returns {string} Resource name string.
+   */
+  keyHandlePath(project: string, location: string, keyHandle: string) {
+    return this.pathTemplates.keyHandlePathTemplate.render({
+      project: project,
+      location: location,
+      key_handle: keyHandle,
+    });
+  }
+
+  /**
+   * Parse the project from KeyHandle resource.
+   *
+   * @param {string} keyHandleName
+   *   A fully-qualified path representing KeyHandle resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromKeyHandleName(keyHandleName: string) {
+    return this.pathTemplates.keyHandlePathTemplate.match(keyHandleName)
+      .project;
+  }
+
+  /**
+   * Parse the location from KeyHandle resource.
+   *
+   * @param {string} keyHandleName
+   *   A fully-qualified path representing KeyHandle resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromKeyHandleName(keyHandleName: string) {
+    return this.pathTemplates.keyHandlePathTemplate.match(keyHandleName)
+      .location;
+  }
+
+  /**
+   * Parse the key_handle from KeyHandle resource.
+   *
+   * @param {string} keyHandleName
+   *   A fully-qualified path representing KeyHandle resource.
+   * @returns {string} A string representing the key_handle.
+   */
+  matchKeyHandleFromKeyHandleName(keyHandleName: string) {
+    return this.pathTemplates.keyHandlePathTemplate.match(keyHandleName)
+      .key_handle;
   }
 
   /**

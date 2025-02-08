@@ -19,6 +19,11 @@
               "methods": [
                 "publishEvents"
               ]
+            },
+            "Publish": {
+              "methods": [
+                "publish"
+              ]
             }
           }
         },
@@ -33,6 +38,11 @@
             "PublishEvents": {
               "methods": [
                 "publishEvents"
+              ]
+            },
+            "Publish": {
+              "methods": [
+                "publish"
               ]
             }
           }

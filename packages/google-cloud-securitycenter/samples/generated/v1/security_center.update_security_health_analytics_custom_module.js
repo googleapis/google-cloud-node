@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,7 +33,9 @@ function main(securityHealthAnalyticsCustomModule) {
    */
   // const securityHealthAnalyticsCustomModule = {}
   /**
-   *  The list of fields to update.
+   *  The list of fields to be updated. The only fields that can be updated are
+   *  `enablement_state` and `custom_config`. If empty or set to the wildcard
+   *  value `*`, both `enablement_state` and `custom_config` are updated.
    */
   // const updateMask = {}
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(query, conversationProfile) {
+function main(parent, query, conversationProfile, sessionId) {
   // [START dialogflow_v2_generated_Conversations_SearchKnowledge_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,7 @@ function main(query, conversationProfile) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The parent resource contains the conversation profile
+   *  Required. The parent resource contains the conversation profile
    *  Format: 'projects/<Project ID>' or `projects/<Project
    *  ID>/locations/<Location ID>`.
    */
@@ -45,7 +45,7 @@ function main(query, conversationProfile) {
    */
   // const conversationProfile = 'abc123'
   /**
-   *  The ID of the search session.
+   *  Required. The ID of the search session.
    *  The session_id can be combined with Dialogflow V3 Agent ID retrieved from
    *  conversation profile or on its own to identify a search session. The search
    *  history of the same session will impact the search result. It's up to the
@@ -55,18 +55,47 @@ function main(query, conversationProfile) {
    */
   // const sessionId = 'abc123'
   /**
-   *  The conversation (between human agent and end user) where the search
-   *  request is triggered. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/conversations/<Conversation ID>`.
+   *  Optional. The conversation (between human agent and end user) where the
+   *  search request is triggered. Format: `projects/<Project
+   *  ID>/locations/<Location ID>/conversations/<Conversation ID>`.
    */
   // const conversation = 'abc123'
   /**
-   *  The name of the latest conversation message when the request is
+   *  Optional. The name of the latest conversation message when the request is
    *  triggered.
    *  Format: `projects/<Project ID>/locations/<Location
    *  ID>/conversations/<Conversation ID>/messages/<Message ID>`.
    */
   // const latestMessage = 'abc123'
+  /**
+   *  Optional. The source of the query in the request.
+   */
+  // const querySource = {}
+  /**
+   *  Optional. Information about the end-user to improve the relevance and
+   *  accuracy of generative answers.
+   *  This will be interpreted and used by a language model, so, for good
+   *  results, the data should be self-descriptive, and in a simple structure.
+   *  Example:
+   *  ```json
+   *  {
+   *    "subscription plan": "Business Premium Plus",
+   *    "devices owned": 
+   *      {"model": "Google Pixel 7"},
+   *      {"model": "Google Pixel Tablet"}
+   *     
+   *  }
+   *  ```
+   */
+  // const endUserMetadata = {}
+  /**
+   *  Optional. Configuration specific to search queries with data stores.
+   */
+  // const searchConfig = {}
+  /**
+   *  Optional. Whether to search the query exactly without query rewrite.
+   */
+  // const exactSearch = true
 
   // Imports the Dialogflow library
   const {ConversationsClient} = require('@google-cloud/dialogflow').v2;
@@ -77,8 +106,10 @@ function main(query, conversationProfile) {
   async function callSearchKnowledge() {
     // Construct request
     const request = {
+      parent,
       query,
       conversationProfile,
+      sessionId,
     };
 
     // Run request

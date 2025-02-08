@@ -30,6 +30,13 @@
                 "deleteDataset"
               ]
             },
+            "FetchDatasetErrors": {
+              "methods": [
+                "fetchDatasetErrors",
+                "fetchDatasetErrorsStream",
+                "fetchDatasetErrorsAsync"
+              ]
+            },
             "ListDatasets": {
               "methods": [
                 "listDatasets",
@@ -60,6 +67,13 @@
             "DeleteDataset": {
               "methods": [
                 "deleteDataset"
+              ]
+            },
+            "FetchDatasetErrors": {
+              "methods": [
+                "fetchDatasetErrors",
+                "fetchDatasetErrorsStream",
+                "fetchDatasetErrorsAsync"
               ]
             },
             "ListDatasets": {

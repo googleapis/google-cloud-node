@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,8 @@ function main(parent, referenceImage) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the product in which to create the reference image.
+   *  Required. Resource name of the product in which to create the reference
+   *  image.
    *  Format is
    *  `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
    */

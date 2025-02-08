@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -318,9 +318,11 @@ message UpdateFeatureOnlineStoreRequest {
   //
   // Updatable fields:
   //
-  //   * `big_query_source`
   //   * `labels`
-  //   * `sync_config`
+  //   * `description`
+  //   * `bigtable`
+  //   * `bigtable.auto_scaling`
+  //   * `bigtable.enable_multi_region_replica`
   google.protobuf.FieldMask update_mask = 2;
 }
 
@@ -480,10 +482,20 @@ message UpdateFeatureViewRequest {
   // Updatable fields:
   //
   //   * `labels`
+  //   * `service_agent_type`
+  //   * `big_query_source`
+  //   * `big_query_source.uri`
+  //   * `big_query_source.entity_id_columns`
+  //   * `feature_registry_source`
+  //   * `feature_registry_source.feature_groups`
+  //   * `sync_config`
+  //   * `sync_config.cron`
+  //   * `optimized_config.automatic_resources`
   google.protobuf.FieldMask update_mask = 2;
 }
 
-// Request message for [FeatureOnlineStoreAdminService.DeleteFeatureViews][].
+// Request message for
+// [FeatureOnlineStoreAdminService.DeleteFeatureView][google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.DeleteFeatureView].
 message DeleteFeatureViewRequest {
   // Required. The name of the FeatureView to be deleted.
   // Format:
@@ -533,7 +545,7 @@ message SyncFeatureViewRequest {
   ];
 }
 
-// Respose message for
+// Response message for
 // [FeatureOnlineStoreAdminService.SyncFeatureView][google.cloud.aiplatform.v1.FeatureOnlineStoreAdminService.SyncFeatureView].
 message SyncFeatureViewResponse {
   // Format:

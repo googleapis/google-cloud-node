@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import "google/iam/v1/policy.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.ServiceDirectory.V1Beta1";
 option go_package = "cloud.google.com/go/servicedirectory/apiv1beta1/servicedirectorypb;servicedirectorypb";
 option java_multiple_files = true;
@@ -275,7 +274,7 @@ message ListNamespacesRequest {
     }
   ];
 
-  // Optional. The maximum number of items to return.
+  // Optional. The maximum number of items to return. The default value is 100.
   int32 page_size = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The next_page_token value returned from a previous List request,
@@ -409,7 +408,7 @@ message ListServicesRequest {
     }
   ];
 
-  // Optional. The maximum number of items to return.
+  // Optional. The maximum number of items to return. The default value is 100.
   int32 page_size = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The next_page_token value returned from a previous List request,
@@ -548,7 +547,7 @@ message ListEndpointsRequest {
     }
   ];
 
-  // Optional. The maximum number of items to return.
+  // Optional. The maximum number of items to return. The default value is 100.
   int32 page_size = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The next_page_token value returned from a previous List request,

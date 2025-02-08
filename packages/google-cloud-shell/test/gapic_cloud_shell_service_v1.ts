@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -121,16 +121,95 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.CloudShellServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        cloudshellserviceModule.v1.CloudShellServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudshell.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        cloudshellserviceModule.v1.CloudShellServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          cloudshellserviceModule.v1.CloudShellServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudshell.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          cloudshellserviceModule.v1.CloudShellServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudshell.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudshell.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudshell.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new cloudshellserviceModule.v1.CloudShellServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'cloudshell.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new cloudshellserviceModule.v1.CloudShellServiceClient(
+            {universeDomain: 'configured.example.com'}
+          );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'cloudshell.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new cloudshellserviceModule.v1.CloudShellServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -234,7 +313,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.shell.v1.Environment()
       );
@@ -265,7 +344,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.shell.v1.Environment()
       );
@@ -312,7 +391,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEnvironment = stubSimpleCall(
         undefined,
@@ -364,7 +443,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -397,7 +476,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -451,7 +530,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startEnvironment = stubLongRunningCall(
         undefined,
@@ -482,7 +561,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startEnvironment = stubLongRunningCall(
         undefined,
@@ -558,7 +637,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -591,7 +670,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -645,7 +724,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.authorizeEnvironment = stubLongRunningCall(
         undefined,
@@ -676,7 +755,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.authorizeEnvironment = stubLongRunningCall(
         undefined,
@@ -752,7 +831,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -784,7 +863,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -838,7 +917,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addPublicKey = stubLongRunningCall(
         undefined,
@@ -869,7 +948,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addPublicKey = stubLongRunningCall(
         undefined,
@@ -942,7 +1021,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -975,7 +1054,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1029,7 +1108,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removePublicKey = stubLongRunningCall(
         undefined,
@@ -1060,7 +1139,7 @@ describe('v1.CloudShellServiceClient', () => {
         ['environment']
       );
       request.environment = defaultValue1;
-      const expectedHeaderRequestParams = `environment=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removePublicKey = stubLongRunningCall(
         undefined,

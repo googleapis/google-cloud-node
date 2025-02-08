@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,11 +29,11 @@ function main(updateMask, customTargetType) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Field mask is used to specify the fields to be overwritten in the
-   *  `CustomTargetType` resource by the update.
-   *  The fields specified in the update_mask are relative to the resource, not
-   *  the full request. A field will be overwritten if it's in the mask. If the
-   *  user doesn't provide a mask then all fields are overwritten.
+   *  Required. Field mask is used to specify the fields to be overwritten by the
+   *  update in the `CustomTargetType` resource. The fields specified in the
+   *  update_mask are relative to the resource, not the full request. A field
+   *  will be overwritten if it's in the mask. If the user doesn't provide a mask
+   *  then all fields are overwritten.
    */
   // const updateMask = {}
   /**

@@ -72,7 +72,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.searchMigratableResourcesAsync(request);
+    const iterable = aiplatformClient.searchMigratableResourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

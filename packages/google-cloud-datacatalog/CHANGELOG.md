@@ -4,6 +4,49 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.6.0...datacatalog-v4.7.0) (2024-11-21)
+
+
+### Features
+
+* [datacatalog] A new method `SetConfig` is added to service `DataCatalog` ([#5830](https://github.com/googleapis/google-cloud-node/issues/5830)) ([65a557c](https://github.com/googleapis/google-cloud-node/commit/65a557c7722e603c0ffea2d42d8bc176b3467ddb))
+
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.5.0...datacatalog-v4.6.0) (2024-11-14)
+
+
+### Features
+
+* [datacatalog] A new field `feature_online_store_spec` is added to message `.google.cloud.datacatalog.v1.Entry` ([#5802](https://github.com/googleapis/google-cloud-node/issues/5802)) ([1467ed6](https://github.com/googleapis/google-cloud-node/commit/1467ed612daa48726f864dd6cf0e5976d798699d))
+
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.4.0...datacatalog-v4.5.0) (2024-08-09)
+
+
+### Features
+
+* [datacatalog] add DataplexTransferStatus enum and field to TagTemplate ([#5573](https://github.com/googleapis/google-cloud-node/issues/5573)) ([bebe50e](https://github.com/googleapis/google-cloud-node/commit/bebe50e1a5910e6fc8889e2a682cd0dd2977653e))
+
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.3.0...datacatalog-v4.4.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.2.0...datacatalog-v4.3.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5187](https://github.com/googleapis/google-cloud-node/issues/5187)) ([1952fbe](https://github.com/googleapis/google-cloud-node/commit/1952fbe432b96115278d42e5c1dbdbc7de39036b))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.1.1...datacatalog-v4.2.0) (2024-03-23)
+
+
+### Features
+
+* [datacatalog] Add RANGE type to Data Catalog ([#5138](https://github.com/googleapis/google-cloud-node/issues/5138)) ([14aea77](https://github.com/googleapis/google-cloud-node/commit/14aea7707c87513792390466a44a84da35d8fb9a))
+
 ## [4.1.1](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.1.0...datacatalog-v4.1.1) (2024-01-15)
 
 

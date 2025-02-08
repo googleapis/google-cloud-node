@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ function main(parent) {
   /**
    *  A list of Certificate field names used to specify the order of the returned
    *  results. The default sorting order is ascending. To specify descending
-   *  order for a field, add a suffix " desc".
+   *  order for a field, add a suffix `" desc"`.
    */
   // const orderBy = 'abc123'
 
@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await certificatemanagerClient.listCertificatesAsync(request);
+    const iterable = certificatemanagerClient.listCertificatesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

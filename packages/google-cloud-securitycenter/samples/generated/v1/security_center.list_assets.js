@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,8 +32,8 @@ function main(parent) {
    *  Required. The name of the parent resource that contains the assets. The
    *  value that you can specify on parent depends on the method in which you
    *  specify parent. You can specify one of the following values:
-   *  "organizations/[organization_id]", "folders/[folder_id]", or
-   *  "projects/[project_id]".
+   *  `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *  `projects/[project_id]`.
    */
   // const parent = 'abc123'
   /**
@@ -170,7 +170,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.listAssetsAsync(request);
+    const iterable = securitycenterClient.listAssetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -341,6 +341,34 @@ export namespace google {
                     public undeployIssueModel(request: google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ExportIssueModel.
+                     * @param request ExportIssueModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportIssueModel(request: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.ExportIssueModelCallback): void;
+
+                    /**
+                     * Calls ExportIssueModel.
+                     * @param request ExportIssueModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportIssueModel(request: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ImportIssueModel.
+                     * @param request ImportIssueModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importIssueModel(request: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.ImportIssueModelCallback): void;
+
+                    /**
+                     * Calls ImportIssueModel.
+                     * @param request ImportIssueModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importIssueModel(request: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls GetIssue.
                      * @param request GetIssueRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Issue
@@ -523,6 +551,104 @@ export namespace google {
                     public updateSettings(request: google.cloud.contactcenterinsights.v1.IUpdateSettingsRequest): Promise<google.cloud.contactcenterinsights.v1.Settings>;
 
                     /**
+                     * Calls CreateAnalysisRule.
+                     * @param request CreateAnalysisRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnalysisRule
+                     */
+                    public createAnalysisRule(request: google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateAnalysisRuleCallback): void;
+
+                    /**
+                     * Calls CreateAnalysisRule.
+                     * @param request CreateAnalysisRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAnalysisRule(request: google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest): Promise<google.cloud.contactcenterinsights.v1.AnalysisRule>;
+
+                    /**
+                     * Calls GetAnalysisRule.
+                     * @param request GetAnalysisRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnalysisRule
+                     */
+                    public getAnalysisRule(request: google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetAnalysisRuleCallback): void;
+
+                    /**
+                     * Calls GetAnalysisRule.
+                     * @param request GetAnalysisRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAnalysisRule(request: google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest): Promise<google.cloud.contactcenterinsights.v1.AnalysisRule>;
+
+                    /**
+                     * Calls ListAnalysisRules.
+                     * @param request ListAnalysisRulesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAnalysisRulesResponse
+                     */
+                    public listAnalysisRules(request: google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListAnalysisRulesCallback): void;
+
+                    /**
+                     * Calls ListAnalysisRules.
+                     * @param request ListAnalysisRulesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAnalysisRules(request: google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest): Promise<google.cloud.contactcenterinsights.v1.ListAnalysisRulesResponse>;
+
+                    /**
+                     * Calls UpdateAnalysisRule.
+                     * @param request UpdateAnalysisRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnalysisRule
+                     */
+                    public updateAnalysisRule(request: google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateAnalysisRuleCallback): void;
+
+                    /**
+                     * Calls UpdateAnalysisRule.
+                     * @param request UpdateAnalysisRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAnalysisRule(request: google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest): Promise<google.cloud.contactcenterinsights.v1.AnalysisRule>;
+
+                    /**
+                     * Calls DeleteAnalysisRule.
+                     * @param request DeleteAnalysisRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteAnalysisRule(request: google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteAnalysisRuleCallback): void;
+
+                    /**
+                     * Calls DeleteAnalysisRule.
+                     * @param request DeleteAnalysisRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAnalysisRule(request: google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls GetEncryptionSpec.
+                     * @param request GetEncryptionSpecRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EncryptionSpec
+                     */
+                    public getEncryptionSpec(request: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetEncryptionSpecCallback): void;
+
+                    /**
+                     * Calls GetEncryptionSpec.
+                     * @param request GetEncryptionSpecRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEncryptionSpec(request: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest): Promise<google.cloud.contactcenterinsights.v1.EncryptionSpec>;
+
+                    /**
+                     * Calls InitializeEncryptionSpec.
+                     * @param request InitializeEncryptionSpecRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public initializeEncryptionSpec(request: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.InitializeEncryptionSpecCallback): void;
+
+                    /**
+                     * Calls InitializeEncryptionSpec.
+                     * @param request InitializeEncryptionSpecRequest message or plain object
+                     * @returns Promise
+                     */
+                    public initializeEncryptionSpec(request: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls CreateView.
                      * @param request CreateViewRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and View
@@ -591,6 +717,370 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteView(request: google.cloud.contactcenterinsights.v1.IDeleteViewRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls QueryMetrics.
+                     * @param request QueryMetricsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public queryMetrics(request: google.cloud.contactcenterinsights.v1.IQueryMetricsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.QueryMetricsCallback): void;
+
+                    /**
+                     * Calls QueryMetrics.
+                     * @param request QueryMetricsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryMetrics(request: google.cloud.contactcenterinsights.v1.IQueryMetricsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateQaQuestion.
+                     * @param request CreateQaQuestionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QaQuestion
+                     */
+                    public createQaQuestion(request: google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateQaQuestionCallback): void;
+
+                    /**
+                     * Calls CreateQaQuestion.
+                     * @param request CreateQaQuestionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createQaQuestion(request: google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest): Promise<google.cloud.contactcenterinsights.v1.QaQuestion>;
+
+                    /**
+                     * Calls GetQaQuestion.
+                     * @param request GetQaQuestionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QaQuestion
+                     */
+                    public getQaQuestion(request: google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetQaQuestionCallback): void;
+
+                    /**
+                     * Calls GetQaQuestion.
+                     * @param request GetQaQuestionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getQaQuestion(request: google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest): Promise<google.cloud.contactcenterinsights.v1.QaQuestion>;
+
+                    /**
+                     * Calls UpdateQaQuestion.
+                     * @param request UpdateQaQuestionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QaQuestion
+                     */
+                    public updateQaQuestion(request: google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateQaQuestionCallback): void;
+
+                    /**
+                     * Calls UpdateQaQuestion.
+                     * @param request UpdateQaQuestionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateQaQuestion(request: google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest): Promise<google.cloud.contactcenterinsights.v1.QaQuestion>;
+
+                    /**
+                     * Calls DeleteQaQuestion.
+                     * @param request DeleteQaQuestionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteQaQuestion(request: google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteQaQuestionCallback): void;
+
+                    /**
+                     * Calls DeleteQaQuestion.
+                     * @param request DeleteQaQuestionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteQaQuestion(request: google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListQaQuestions.
+                     * @param request ListQaQuestionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListQaQuestionsResponse
+                     */
+                    public listQaQuestions(request: google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListQaQuestionsCallback): void;
+
+                    /**
+                     * Calls ListQaQuestions.
+                     * @param request ListQaQuestionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listQaQuestions(request: google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest): Promise<google.cloud.contactcenterinsights.v1.ListQaQuestionsResponse>;
+
+                    /**
+                     * Calls CreateQaScorecard.
+                     * @param request CreateQaScorecardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QaScorecard
+                     */
+                    public createQaScorecard(request: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateQaScorecardCallback): void;
+
+                    /**
+                     * Calls CreateQaScorecard.
+                     * @param request CreateQaScorecardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createQaScorecard(request: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest): Promise<google.cloud.contactcenterinsights.v1.QaScorecard>;
+
+                    /**
+                     * Calls GetQaScorecard.
+                     * @param request GetQaScorecardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QaScorecard
+                     */
+                    public getQaScorecard(request: google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetQaScorecardCallback): void;
+
+                    /**
+                     * Calls GetQaScorecard.
+                     * @param request GetQaScorecardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getQaScorecard(request: google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest): Promise<google.cloud.contactcenterinsights.v1.QaScorecard>;
+
+                    /**
+                     * Calls UpdateQaScorecard.
+                     * @param request UpdateQaScorecardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QaScorecard
+                     */
+                    public updateQaScorecard(request: google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateQaScorecardCallback): void;
+
+                    /**
+                     * Calls UpdateQaScorecard.
+                     * @param request UpdateQaScorecardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateQaScorecard(request: google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest): Promise<google.cloud.contactcenterinsights.v1.QaScorecard>;
+
+                    /**
+                     * Calls DeleteQaScorecard.
+                     * @param request DeleteQaScorecardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteQaScorecard(request: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteQaScorecardCallback): void;
+
+                    /**
+                     * Calls DeleteQaScorecard.
+                     * @param request DeleteQaScorecardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteQaScorecard(request: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListQaScorecards.
+                     * @param request ListQaScorecardsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListQaScorecardsResponse
+                     */
+                    public listQaScorecards(request: google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListQaScorecardsCallback): void;
+
+                    /**
+                     * Calls ListQaScorecards.
+                     * @param request ListQaScorecardsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listQaScorecards(request: google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest): Promise<google.cloud.contactcenterinsights.v1.ListQaScorecardsResponse>;
+
+                    /**
+                     * Calls CreateQaScorecardRevision.
+                     * @param request CreateQaScorecardRevisionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QaScorecardRevision
+                     */
+                    public createQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateQaScorecardRevisionCallback): void;
+
+                    /**
+                     * Calls CreateQaScorecardRevision.
+                     * @param request CreateQaScorecardRevisionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest): Promise<google.cloud.contactcenterinsights.v1.QaScorecardRevision>;
+
+                    /**
+                     * Calls GetQaScorecardRevision.
+                     * @param request GetQaScorecardRevisionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QaScorecardRevision
+                     */
+                    public getQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetQaScorecardRevisionCallback): void;
+
+                    /**
+                     * Calls GetQaScorecardRevision.
+                     * @param request GetQaScorecardRevisionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest): Promise<google.cloud.contactcenterinsights.v1.QaScorecardRevision>;
+
+                    /**
+                     * Calls TuneQaScorecardRevision.
+                     * @param request TuneQaScorecardRevisionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public tuneQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.TuneQaScorecardRevisionCallback): void;
+
+                    /**
+                     * Calls TuneQaScorecardRevision.
+                     * @param request TuneQaScorecardRevisionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public tuneQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeployQaScorecardRevision.
+                     * @param request DeployQaScorecardRevisionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QaScorecardRevision
+                     */
+                    public deployQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeployQaScorecardRevisionCallback): void;
+
+                    /**
+                     * Calls DeployQaScorecardRevision.
+                     * @param request DeployQaScorecardRevisionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deployQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest): Promise<google.cloud.contactcenterinsights.v1.QaScorecardRevision>;
+
+                    /**
+                     * Calls UndeployQaScorecardRevision.
+                     * @param request UndeployQaScorecardRevisionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QaScorecardRevision
+                     */
+                    public undeployQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.UndeployQaScorecardRevisionCallback): void;
+
+                    /**
+                     * Calls UndeployQaScorecardRevision.
+                     * @param request UndeployQaScorecardRevisionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public undeployQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest): Promise<google.cloud.contactcenterinsights.v1.QaScorecardRevision>;
+
+                    /**
+                     * Calls DeleteQaScorecardRevision.
+                     * @param request DeleteQaScorecardRevisionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteQaScorecardRevisionCallback): void;
+
+                    /**
+                     * Calls DeleteQaScorecardRevision.
+                     * @param request DeleteQaScorecardRevisionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteQaScorecardRevision(request: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListQaScorecardRevisions.
+                     * @param request ListQaScorecardRevisionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListQaScorecardRevisionsResponse
+                     */
+                    public listQaScorecardRevisions(request: google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListQaScorecardRevisionsCallback): void;
+
+                    /**
+                     * Calls ListQaScorecardRevisions.
+                     * @param request ListQaScorecardRevisionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listQaScorecardRevisions(request: google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest): Promise<google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsResponse>;
+
+                    /**
+                     * Calls CreateFeedbackLabel.
+                     * @param request CreateFeedbackLabelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FeedbackLabel
+                     */
+                    public createFeedbackLabel(request: google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateFeedbackLabelCallback): void;
+
+                    /**
+                     * Calls CreateFeedbackLabel.
+                     * @param request CreateFeedbackLabelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createFeedbackLabel(request: google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest): Promise<google.cloud.contactcenterinsights.v1.FeedbackLabel>;
+
+                    /**
+                     * Calls ListFeedbackLabels.
+                     * @param request ListFeedbackLabelsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFeedbackLabelsResponse
+                     */
+                    public listFeedbackLabels(request: google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListFeedbackLabelsCallback): void;
+
+                    /**
+                     * Calls ListFeedbackLabels.
+                     * @param request ListFeedbackLabelsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFeedbackLabels(request: google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest): Promise<google.cloud.contactcenterinsights.v1.ListFeedbackLabelsResponse>;
+
+                    /**
+                     * Calls GetFeedbackLabel.
+                     * @param request GetFeedbackLabelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FeedbackLabel
+                     */
+                    public getFeedbackLabel(request: google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetFeedbackLabelCallback): void;
+
+                    /**
+                     * Calls GetFeedbackLabel.
+                     * @param request GetFeedbackLabelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFeedbackLabel(request: google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest): Promise<google.cloud.contactcenterinsights.v1.FeedbackLabel>;
+
+                    /**
+                     * Calls UpdateFeedbackLabel.
+                     * @param request UpdateFeedbackLabelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FeedbackLabel
+                     */
+                    public updateFeedbackLabel(request: google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateFeedbackLabelCallback): void;
+
+                    /**
+                     * Calls UpdateFeedbackLabel.
+                     * @param request UpdateFeedbackLabelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateFeedbackLabel(request: google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest): Promise<google.cloud.contactcenterinsights.v1.FeedbackLabel>;
+
+                    /**
+                     * Calls DeleteFeedbackLabel.
+                     * @param request DeleteFeedbackLabelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteFeedbackLabel(request: google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteFeedbackLabelCallback): void;
+
+                    /**
+                     * Calls DeleteFeedbackLabel.
+                     * @param request DeleteFeedbackLabelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteFeedbackLabel(request: google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListAllFeedbackLabels.
+                     * @param request ListAllFeedbackLabelsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAllFeedbackLabelsResponse
+                     */
+                    public listAllFeedbackLabels(request: google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListAllFeedbackLabelsCallback): void;
+
+                    /**
+                     * Calls ListAllFeedbackLabels.
+                     * @param request ListAllFeedbackLabelsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAllFeedbackLabels(request: google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest): Promise<google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsResponse>;
+
+                    /**
+                     * Calls BulkUploadFeedbackLabels.
+                     * @param request BulkUploadFeedbackLabelsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public bulkUploadFeedbackLabels(request: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkUploadFeedbackLabelsCallback): void;
+
+                    /**
+                     * Calls BulkUploadFeedbackLabels.
+                     * @param request BulkUploadFeedbackLabelsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkUploadFeedbackLabels(request: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls BulkDownloadFeedbackLabels.
+                     * @param request BulkDownloadFeedbackLabelsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public bulkDownloadFeedbackLabels(request: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkDownloadFeedbackLabelsCallback): void;
+
+                    /**
+                     * Calls BulkDownloadFeedbackLabels.
+                     * @param request BulkDownloadFeedbackLabelsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public bulkDownloadFeedbackLabels(request: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace ContactCenterInsights {
@@ -743,6 +1233,20 @@ export namespace google {
                     type UndeployIssueModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|exportIssueModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportIssueModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|importIssueModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportIssueModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|getIssue}.
                      * @param error Error, if any
                      * @param [response] Issue
@@ -834,6 +1338,55 @@ export namespace google {
                     type UpdateSettingsCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.Settings) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|createAnalysisRule}.
+                     * @param error Error, if any
+                     * @param [response] AnalysisRule
+                     */
+                    type CreateAnalysisRuleCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.AnalysisRule) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|getAnalysisRule}.
+                     * @param error Error, if any
+                     * @param [response] AnalysisRule
+                     */
+                    type GetAnalysisRuleCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.AnalysisRule) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|listAnalysisRules}.
+                     * @param error Error, if any
+                     * @param [response] ListAnalysisRulesResponse
+                     */
+                    type ListAnalysisRulesCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.ListAnalysisRulesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|updateAnalysisRule}.
+                     * @param error Error, if any
+                     * @param [response] AnalysisRule
+                     */
+                    type UpdateAnalysisRuleCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.AnalysisRule) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|deleteAnalysisRule}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteAnalysisRuleCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|getEncryptionSpec}.
+                     * @param error Error, if any
+                     * @param [response] EncryptionSpec
+                     */
+                    type GetEncryptionSpecCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.EncryptionSpec) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|initializeEncryptionSpec}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type InitializeEncryptionSpecCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|createView}.
                      * @param error Error, if any
                      * @param [response] View
@@ -867,6 +1420,188 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteViewCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|queryMetrics}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type QueryMetricsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|createQaQuestion}.
+                     * @param error Error, if any
+                     * @param [response] QaQuestion
+                     */
+                    type CreateQaQuestionCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.QaQuestion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|getQaQuestion}.
+                     * @param error Error, if any
+                     * @param [response] QaQuestion
+                     */
+                    type GetQaQuestionCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.QaQuestion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|updateQaQuestion}.
+                     * @param error Error, if any
+                     * @param [response] QaQuestion
+                     */
+                    type UpdateQaQuestionCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.QaQuestion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|deleteQaQuestion}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteQaQuestionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|listQaQuestions}.
+                     * @param error Error, if any
+                     * @param [response] ListQaQuestionsResponse
+                     */
+                    type ListQaQuestionsCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.ListQaQuestionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|createQaScorecard}.
+                     * @param error Error, if any
+                     * @param [response] QaScorecard
+                     */
+                    type CreateQaScorecardCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.QaScorecard) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|getQaScorecard}.
+                     * @param error Error, if any
+                     * @param [response] QaScorecard
+                     */
+                    type GetQaScorecardCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.QaScorecard) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|updateQaScorecard}.
+                     * @param error Error, if any
+                     * @param [response] QaScorecard
+                     */
+                    type UpdateQaScorecardCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.QaScorecard) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|deleteQaScorecard}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteQaScorecardCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|listQaScorecards}.
+                     * @param error Error, if any
+                     * @param [response] ListQaScorecardsResponse
+                     */
+                    type ListQaScorecardsCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.ListQaScorecardsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|createQaScorecardRevision}.
+                     * @param error Error, if any
+                     * @param [response] QaScorecardRevision
+                     */
+                    type CreateQaScorecardRevisionCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.QaScorecardRevision) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|getQaScorecardRevision}.
+                     * @param error Error, if any
+                     * @param [response] QaScorecardRevision
+                     */
+                    type GetQaScorecardRevisionCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.QaScorecardRevision) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|tuneQaScorecardRevision}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TuneQaScorecardRevisionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|deployQaScorecardRevision}.
+                     * @param error Error, if any
+                     * @param [response] QaScorecardRevision
+                     */
+                    type DeployQaScorecardRevisionCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.QaScorecardRevision) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|undeployQaScorecardRevision}.
+                     * @param error Error, if any
+                     * @param [response] QaScorecardRevision
+                     */
+                    type UndeployQaScorecardRevisionCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.QaScorecardRevision) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|deleteQaScorecardRevision}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteQaScorecardRevisionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|listQaScorecardRevisions}.
+                     * @param error Error, if any
+                     * @param [response] ListQaScorecardRevisionsResponse
+                     */
+                    type ListQaScorecardRevisionsCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|createFeedbackLabel}.
+                     * @param error Error, if any
+                     * @param [response] FeedbackLabel
+                     */
+                    type CreateFeedbackLabelCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.FeedbackLabel) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|listFeedbackLabels}.
+                     * @param error Error, if any
+                     * @param [response] ListFeedbackLabelsResponse
+                     */
+                    type ListFeedbackLabelsCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.ListFeedbackLabelsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|getFeedbackLabel}.
+                     * @param error Error, if any
+                     * @param [response] FeedbackLabel
+                     */
+                    type GetFeedbackLabelCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.FeedbackLabel) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|updateFeedbackLabel}.
+                     * @param error Error, if any
+                     * @param [response] FeedbackLabel
+                     */
+                    type UpdateFeedbackLabelCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.FeedbackLabel) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|deleteFeedbackLabel}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteFeedbackLabelCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|listAllFeedbackLabels}.
+                     * @param error Error, if any
+                     * @param [response] ListAllFeedbackLabelsResponse
+                     */
+                    type ListAllFeedbackLabelsCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|bulkUploadFeedbackLabels}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BulkUploadFeedbackLabelsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|bulkDownloadFeedbackLabels}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BulkDownloadFeedbackLabelsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** ConversationView enum. */
@@ -1811,6 +2546,9 @@ export namespace google {
                     /** ListConversationsRequest filter */
                     filter?: (string|null);
 
+                    /** ListConversationsRequest orderBy */
+                    orderBy?: (string|null);
+
                     /** ListConversationsRequest view */
                     view?: (google.cloud.contactcenterinsights.v1.ConversationView|keyof typeof google.cloud.contactcenterinsights.v1.ConversationView|null);
                 }
@@ -1835,6 +2573,9 @@ export namespace google {
 
                     /** ListConversationsRequest filter. */
                     public filter: string;
+
+                    /** ListConversationsRequest orderBy. */
+                    public orderBy: string;
 
                     /** ListConversationsRequest view. */
                     public view: (google.cloud.contactcenterinsights.v1.ConversationView|keyof typeof google.cloud.contactcenterinsights.v1.ConversationView);
@@ -2349,6 +3090,9 @@ export namespace google {
 
                     /** IngestConversationsRequest speechConfig */
                     speechConfig?: (google.cloud.contactcenterinsights.v1.ISpeechConfig|null);
+
+                    /** IngestConversationsRequest sampleSize */
+                    sampleSize?: (number|null);
                 }
 
                 /** Represents an IngestConversationsRequest. */
@@ -2378,11 +3122,17 @@ export namespace google {
                     /** IngestConversationsRequest speechConfig. */
                     public speechConfig?: (google.cloud.contactcenterinsights.v1.ISpeechConfig|null);
 
+                    /** IngestConversationsRequest sampleSize. */
+                    public sampleSize?: (number|null);
+
                     /** IngestConversationsRequest source. */
                     public source?: "gcsSource";
 
                     /** IngestConversationsRequest objectConfig. */
                     public objectConfig?: "transcriptObjectConfig";
+
+                    /** IngestConversationsRequest _sampleSize. */
+                    public _sampleSize?: "sampleSize";
 
                     /**
                      * Creates a new IngestConversationsRequest instance using the specified properties.
@@ -2472,6 +3222,12 @@ export namespace google {
 
                         /** GcsSource bucketObjectType */
                         bucketObjectType?: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType|keyof typeof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType|null);
+
+                        /** GcsSource metadataBucketUri */
+                        metadataBucketUri?: (string|null);
+
+                        /** GcsSource customMetadataKeys */
+                        customMetadataKeys?: (string[]|null);
                     }
 
                     /** Represents a GcsSource. */
@@ -2488,6 +3244,15 @@ export namespace google {
 
                         /** GcsSource bucketObjectType. */
                         public bucketObjectType: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType|keyof typeof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType);
+
+                        /** GcsSource metadataBucketUri. */
+                        public metadataBucketUri?: (string|null);
+
+                        /** GcsSource customMetadataKeys. */
+                        public customMetadataKeys: string[];
+
+                        /** GcsSource _metadataBucketUri. */
+                        public _metadataBucketUri?: "metadataBucketUri";
 
                         /**
                          * Creates a new GcsSource instance using the specified properties.
@@ -6156,6 +6921,824 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ExportIssueModelRequest. */
+                interface IExportIssueModelRequest {
+
+                    /** ExportIssueModelRequest gcsDestination */
+                    gcsDestination?: (google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination|null);
+
+                    /** ExportIssueModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ExportIssueModelRequest. */
+                class ExportIssueModelRequest implements IExportIssueModelRequest {
+
+                    /**
+                     * Constructs a new ExportIssueModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest);
+
+                    /** ExportIssueModelRequest gcsDestination. */
+                    public gcsDestination?: (google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination|null);
+
+                    /** ExportIssueModelRequest name. */
+                    public name: string;
+
+                    /** ExportIssueModelRequest Destination. */
+                    public Destination?: "gcsDestination";
+
+                    /**
+                     * Creates a new ExportIssueModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportIssueModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest;
+
+                    /**
+                     * Encodes the specified ExportIssueModelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.verify|verify} messages.
+                     * @param message ExportIssueModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportIssueModelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.verify|verify} messages.
+                     * @param message ExportIssueModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportIssueModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportIssueModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest;
+
+                    /**
+                     * Decodes an ExportIssueModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportIssueModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest;
+
+                    /**
+                     * Verifies an ExportIssueModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportIssueModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportIssueModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest;
+
+                    /**
+                     * Creates a plain object from an ExportIssueModelRequest message. Also converts values to other types if specified.
+                     * @param message ExportIssueModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportIssueModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportIssueModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExportIssueModelRequest {
+
+                    /** Properties of a GcsDestination. */
+                    interface IGcsDestination {
+
+                        /** GcsDestination objectUri */
+                        objectUri?: (string|null);
+                    }
+
+                    /** Represents a GcsDestination. */
+                    class GcsDestination implements IGcsDestination {
+
+                        /**
+                         * Constructs a new GcsDestination.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination);
+
+                        /** GcsDestination objectUri. */
+                        public objectUri: string;
+
+                        /**
+                         * Creates a new GcsDestination instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsDestination instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination;
+
+                        /**
+                         * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination.verify|verify} messages.
+                         * @param message GcsDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination.verify|verify} messages.
+                         * @param message GcsDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination;
+
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination;
+
+                        /**
+                         * Verifies a GcsDestination message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsDestination
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination;
+
+                        /**
+                         * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
+                         * @param message GcsDestination
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsDestination to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ExportIssueModelResponse. */
+                interface IExportIssueModelResponse {
+                }
+
+                /** Represents an ExportIssueModelResponse. */
+                class ExportIssueModelResponse implements IExportIssueModelResponse {
+
+                    /**
+                     * Constructs a new ExportIssueModelResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelResponse);
+
+                    /**
+                     * Creates a new ExportIssueModelResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportIssueModelResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelResponse): google.cloud.contactcenterinsights.v1.ExportIssueModelResponse;
+
+                    /**
+                     * Encodes the specified ExportIssueModelResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelResponse.verify|verify} messages.
+                     * @param message ExportIssueModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IExportIssueModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportIssueModelResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelResponse.verify|verify} messages.
+                     * @param message ExportIssueModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IExportIssueModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportIssueModelResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportIssueModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ExportIssueModelResponse;
+
+                    /**
+                     * Decodes an ExportIssueModelResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportIssueModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ExportIssueModelResponse;
+
+                    /**
+                     * Verifies an ExportIssueModelResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportIssueModelResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportIssueModelResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ExportIssueModelResponse;
+
+                    /**
+                     * Creates a plain object from an ExportIssueModelResponse message. Also converts values to other types if specified.
+                     * @param message ExportIssueModelResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ExportIssueModelResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportIssueModelResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportIssueModelResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportIssueModelMetadata. */
+                interface IExportIssueModelMetadata {
+
+                    /** ExportIssueModelMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportIssueModelMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportIssueModelMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IExportIssueModelRequest|null);
+                }
+
+                /** Represents an ExportIssueModelMetadata. */
+                class ExportIssueModelMetadata implements IExportIssueModelMetadata {
+
+                    /**
+                     * Constructs a new ExportIssueModelMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata);
+
+                    /** ExportIssueModelMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportIssueModelMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportIssueModelMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IExportIssueModelRequest|null);
+
+                    /**
+                     * Creates a new ExportIssueModelMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportIssueModelMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata): google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata;
+
+                    /**
+                     * Encodes the specified ExportIssueModelMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata.verify|verify} messages.
+                     * @param message ExportIssueModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportIssueModelMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata.verify|verify} messages.
+                     * @param message ExportIssueModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportIssueModelMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportIssueModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata;
+
+                    /**
+                     * Decodes an ExportIssueModelMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportIssueModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata;
+
+                    /**
+                     * Verifies an ExportIssueModelMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportIssueModelMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportIssueModelMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata;
+
+                    /**
+                     * Creates a plain object from an ExportIssueModelMetadata message. Also converts values to other types if specified.
+                     * @param message ExportIssueModelMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportIssueModelMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportIssueModelMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportIssueModelRequest. */
+                interface IImportIssueModelRequest {
+
+                    /** ImportIssueModelRequest gcsSource */
+                    gcsSource?: (google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource|null);
+
+                    /** ImportIssueModelRequest parent */
+                    parent?: (string|null);
+
+                    /** ImportIssueModelRequest createNewModel */
+                    createNewModel?: (boolean|null);
+                }
+
+                /** Represents an ImportIssueModelRequest. */
+                class ImportIssueModelRequest implements IImportIssueModelRequest {
+
+                    /**
+                     * Constructs a new ImportIssueModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest);
+
+                    /** ImportIssueModelRequest gcsSource. */
+                    public gcsSource?: (google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource|null);
+
+                    /** ImportIssueModelRequest parent. */
+                    public parent: string;
+
+                    /** ImportIssueModelRequest createNewModel. */
+                    public createNewModel: boolean;
+
+                    /** ImportIssueModelRequest Source. */
+                    public Source?: "gcsSource";
+
+                    /**
+                     * Creates a new ImportIssueModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportIssueModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest;
+
+                    /**
+                     * Encodes the specified ImportIssueModelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.verify|verify} messages.
+                     * @param message ImportIssueModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportIssueModelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.verify|verify} messages.
+                     * @param message ImportIssueModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportIssueModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportIssueModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest;
+
+                    /**
+                     * Decodes an ImportIssueModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportIssueModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest;
+
+                    /**
+                     * Verifies an ImportIssueModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportIssueModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportIssueModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest;
+
+                    /**
+                     * Creates a plain object from an ImportIssueModelRequest message. Also converts values to other types if specified.
+                     * @param message ImportIssueModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportIssueModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportIssueModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ImportIssueModelRequest {
+
+                    /** Properties of a GcsSource. */
+                    interface IGcsSource {
+
+                        /** GcsSource objectUri */
+                        objectUri?: (string|null);
+                    }
+
+                    /** Represents a GcsSource. */
+                    class GcsSource implements IGcsSource {
+
+                        /**
+                         * Constructs a new GcsSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource);
+
+                        /** GcsSource objectUri. */
+                        public objectUri: string;
+
+                        /**
+                         * Creates a new GcsSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsSource instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource;
+
+                        /**
+                         * Encodes the specified GcsSource message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource.verify|verify} messages.
+                         * @param message GcsSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsSource message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource.verify|verify} messages.
+                         * @param message GcsSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource;
+
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource;
+
+                        /**
+                         * Verifies a GcsSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource;
+
+                        /**
+                         * Creates a plain object from a GcsSource message. Also converts values to other types if specified.
+                         * @param message GcsSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ImportIssueModelResponse. */
+                interface IImportIssueModelResponse {
+                }
+
+                /** Represents an ImportIssueModelResponse. */
+                class ImportIssueModelResponse implements IImportIssueModelResponse {
+
+                    /**
+                     * Constructs a new ImportIssueModelResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelResponse);
+
+                    /**
+                     * Creates a new ImportIssueModelResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportIssueModelResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelResponse): google.cloud.contactcenterinsights.v1.ImportIssueModelResponse;
+
+                    /**
+                     * Encodes the specified ImportIssueModelResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelResponse.verify|verify} messages.
+                     * @param message ImportIssueModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IImportIssueModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportIssueModelResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelResponse.verify|verify} messages.
+                     * @param message ImportIssueModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IImportIssueModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportIssueModelResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportIssueModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ImportIssueModelResponse;
+
+                    /**
+                     * Decodes an ImportIssueModelResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportIssueModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ImportIssueModelResponse;
+
+                    /**
+                     * Verifies an ImportIssueModelResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportIssueModelResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportIssueModelResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ImportIssueModelResponse;
+
+                    /**
+                     * Creates a plain object from an ImportIssueModelResponse message. Also converts values to other types if specified.
+                     * @param message ImportIssueModelResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ImportIssueModelResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportIssueModelResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportIssueModelResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportIssueModelMetadata. */
+                interface IImportIssueModelMetadata {
+
+                    /** ImportIssueModelMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportIssueModelMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportIssueModelMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IImportIssueModelRequest|null);
+                }
+
+                /** Represents an ImportIssueModelMetadata. */
+                class ImportIssueModelMetadata implements IImportIssueModelMetadata {
+
+                    /**
+                     * Constructs a new ImportIssueModelMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata);
+
+                    /** ImportIssueModelMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportIssueModelMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportIssueModelMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IImportIssueModelRequest|null);
+
+                    /**
+                     * Creates a new ImportIssueModelMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportIssueModelMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata): google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata;
+
+                    /**
+                     * Encodes the specified ImportIssueModelMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata.verify|verify} messages.
+                     * @param message ImportIssueModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportIssueModelMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata.verify|verify} messages.
+                     * @param message ImportIssueModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportIssueModelMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportIssueModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata;
+
+                    /**
+                     * Decodes an ImportIssueModelMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportIssueModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata;
+
+                    /**
+                     * Verifies an ImportIssueModelMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportIssueModelMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportIssueModelMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata;
+
+                    /**
+                     * Creates a plain object from an ImportIssueModelMetadata message. Also converts values to other types if specified.
+                     * @param message ImportIssueModelMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportIssueModelMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportIssueModelMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GetIssueRequest. */
                 interface IGetIssueRequest {
 
@@ -7659,6 +9242,1018 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateAnalysisRuleRequest. */
+                interface ICreateAnalysisRuleRequest {
+
+                    /** CreateAnalysisRuleRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAnalysisRuleRequest analysisRule */
+                    analysisRule?: (google.cloud.contactcenterinsights.v1.IAnalysisRule|null);
+                }
+
+                /** Represents a CreateAnalysisRuleRequest. */
+                class CreateAnalysisRuleRequest implements ICreateAnalysisRuleRequest {
+
+                    /**
+                     * Constructs a new CreateAnalysisRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest);
+
+                    /** CreateAnalysisRuleRequest parent. */
+                    public parent: string;
+
+                    /** CreateAnalysisRuleRequest analysisRule. */
+                    public analysisRule?: (google.cloud.contactcenterinsights.v1.IAnalysisRule|null);
+
+                    /**
+                     * Creates a new CreateAnalysisRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAnalysisRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest): google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest;
+
+                    /**
+                     * Encodes the specified CreateAnalysisRuleRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest.verify|verify} messages.
+                     * @param message CreateAnalysisRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAnalysisRuleRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest.verify|verify} messages.
+                     * @param message CreateAnalysisRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ICreateAnalysisRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAnalysisRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAnalysisRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest;
+
+                    /**
+                     * Decodes a CreateAnalysisRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAnalysisRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest;
+
+                    /**
+                     * Verifies a CreateAnalysisRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAnalysisRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAnalysisRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAnalysisRuleRequest message. Also converts values to other types if specified.
+                     * @param message CreateAnalysisRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAnalysisRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAnalysisRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAnalysisRuleRequest. */
+                interface IGetAnalysisRuleRequest {
+
+                    /** GetAnalysisRuleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAnalysisRuleRequest. */
+                class GetAnalysisRuleRequest implements IGetAnalysisRuleRequest {
+
+                    /**
+                     * Constructs a new GetAnalysisRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest);
+
+                    /** GetAnalysisRuleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAnalysisRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAnalysisRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest): google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest;
+
+                    /**
+                     * Encodes the specified GetAnalysisRuleRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest.verify|verify} messages.
+                     * @param message GetAnalysisRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAnalysisRuleRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest.verify|verify} messages.
+                     * @param message GetAnalysisRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IGetAnalysisRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAnalysisRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAnalysisRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest;
+
+                    /**
+                     * Decodes a GetAnalysisRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAnalysisRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest;
+
+                    /**
+                     * Verifies a GetAnalysisRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAnalysisRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAnalysisRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest;
+
+                    /**
+                     * Creates a plain object from a GetAnalysisRuleRequest message. Also converts values to other types if specified.
+                     * @param message GetAnalysisRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAnalysisRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAnalysisRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAnalysisRuleRequest. */
+                interface IUpdateAnalysisRuleRequest {
+
+                    /** UpdateAnalysisRuleRequest analysisRule */
+                    analysisRule?: (google.cloud.contactcenterinsights.v1.IAnalysisRule|null);
+
+                    /** UpdateAnalysisRuleRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateAnalysisRuleRequest. */
+                class UpdateAnalysisRuleRequest implements IUpdateAnalysisRuleRequest {
+
+                    /**
+                     * Constructs a new UpdateAnalysisRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest);
+
+                    /** UpdateAnalysisRuleRequest analysisRule. */
+                    public analysisRule?: (google.cloud.contactcenterinsights.v1.IAnalysisRule|null);
+
+                    /** UpdateAnalysisRuleRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateAnalysisRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAnalysisRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest): google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest;
+
+                    /**
+                     * Encodes the specified UpdateAnalysisRuleRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest.verify|verify} messages.
+                     * @param message UpdateAnalysisRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAnalysisRuleRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest.verify|verify} messages.
+                     * @param message UpdateAnalysisRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IUpdateAnalysisRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAnalysisRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAnalysisRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest;
+
+                    /**
+                     * Decodes an UpdateAnalysisRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAnalysisRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest;
+
+                    /**
+                     * Verifies an UpdateAnalysisRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAnalysisRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAnalysisRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAnalysisRuleRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAnalysisRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAnalysisRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAnalysisRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAnalysisRuleRequest. */
+                interface IDeleteAnalysisRuleRequest {
+
+                    /** DeleteAnalysisRuleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteAnalysisRuleRequest. */
+                class DeleteAnalysisRuleRequest implements IDeleteAnalysisRuleRequest {
+
+                    /**
+                     * Constructs a new DeleteAnalysisRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest);
+
+                    /** DeleteAnalysisRuleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteAnalysisRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAnalysisRuleRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest): google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest;
+
+                    /**
+                     * Encodes the specified DeleteAnalysisRuleRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest.verify|verify} messages.
+                     * @param message DeleteAnalysisRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAnalysisRuleRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest.verify|verify} messages.
+                     * @param message DeleteAnalysisRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IDeleteAnalysisRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAnalysisRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAnalysisRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest;
+
+                    /**
+                     * Decodes a DeleteAnalysisRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAnalysisRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest;
+
+                    /**
+                     * Verifies a DeleteAnalysisRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAnalysisRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAnalysisRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAnalysisRuleRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAnalysisRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAnalysisRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAnalysisRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAnalysisRulesRequest. */
+                interface IListAnalysisRulesRequest {
+
+                    /** ListAnalysisRulesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAnalysisRulesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAnalysisRulesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAnalysisRulesRequest. */
+                class ListAnalysisRulesRequest implements IListAnalysisRulesRequest {
+
+                    /**
+                     * Constructs a new ListAnalysisRulesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest);
+
+                    /** ListAnalysisRulesRequest parent. */
+                    public parent: string;
+
+                    /** ListAnalysisRulesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAnalysisRulesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAnalysisRulesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAnalysisRulesRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest): google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest;
+
+                    /**
+                     * Encodes the specified ListAnalysisRulesRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest.verify|verify} messages.
+                     * @param message ListAnalysisRulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAnalysisRulesRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest.verify|verify} messages.
+                     * @param message ListAnalysisRulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListAnalysisRulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAnalysisRulesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAnalysisRulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest;
+
+                    /**
+                     * Decodes a ListAnalysisRulesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAnalysisRulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest;
+
+                    /**
+                     * Verifies a ListAnalysisRulesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAnalysisRulesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAnalysisRulesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAnalysisRulesRequest message. Also converts values to other types if specified.
+                     * @param message ListAnalysisRulesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAnalysisRulesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAnalysisRulesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAnalysisRulesResponse. */
+                interface IListAnalysisRulesResponse {
+
+                    /** ListAnalysisRulesResponse analysisRules */
+                    analysisRules?: (google.cloud.contactcenterinsights.v1.IAnalysisRule[]|null);
+
+                    /** ListAnalysisRulesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAnalysisRulesResponse. */
+                class ListAnalysisRulesResponse implements IListAnalysisRulesResponse {
+
+                    /**
+                     * Constructs a new ListAnalysisRulesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse);
+
+                    /** ListAnalysisRulesResponse analysisRules. */
+                    public analysisRules: google.cloud.contactcenterinsights.v1.IAnalysisRule[];
+
+                    /** ListAnalysisRulesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAnalysisRulesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAnalysisRulesResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse): google.cloud.contactcenterinsights.v1.ListAnalysisRulesResponse;
+
+                    /**
+                     * Encodes the specified ListAnalysisRulesResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListAnalysisRulesResponse.verify|verify} messages.
+                     * @param message ListAnalysisRulesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAnalysisRulesResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListAnalysisRulesResponse.verify|verify} messages.
+                     * @param message ListAnalysisRulesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListAnalysisRulesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAnalysisRulesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAnalysisRulesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListAnalysisRulesResponse;
+
+                    /**
+                     * Decodes a ListAnalysisRulesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAnalysisRulesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListAnalysisRulesResponse;
+
+                    /**
+                     * Verifies a ListAnalysisRulesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAnalysisRulesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAnalysisRulesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListAnalysisRulesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAnalysisRulesResponse message. Also converts values to other types if specified.
+                     * @param message ListAnalysisRulesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListAnalysisRulesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAnalysisRulesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAnalysisRulesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetEncryptionSpecRequest. */
+                interface IGetEncryptionSpecRequest {
+
+                    /** GetEncryptionSpecRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEncryptionSpecRequest. */
+                class GetEncryptionSpecRequest implements IGetEncryptionSpecRequest {
+
+                    /**
+                     * Constructs a new GetEncryptionSpecRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest);
+
+                    /** GetEncryptionSpecRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEncryptionSpecRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEncryptionSpecRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest): google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest;
+
+                    /**
+                     * Encodes the specified GetEncryptionSpecRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest.verify|verify} messages.
+                     * @param message GetEncryptionSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEncryptionSpecRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest.verify|verify} messages.
+                     * @param message GetEncryptionSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEncryptionSpecRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEncryptionSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest;
+
+                    /**
+                     * Decodes a GetEncryptionSpecRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEncryptionSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest;
+
+                    /**
+                     * Verifies a GetEncryptionSpecRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEncryptionSpecRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEncryptionSpecRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest;
+
+                    /**
+                     * Creates a plain object from a GetEncryptionSpecRequest message. Also converts values to other types if specified.
+                     * @param message GetEncryptionSpecRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEncryptionSpecRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetEncryptionSpecRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InitializeEncryptionSpecRequest. */
+                interface IInitializeEncryptionSpecRequest {
+
+                    /** InitializeEncryptionSpecRequest encryptionSpec */
+                    encryptionSpec?: (google.cloud.contactcenterinsights.v1.IEncryptionSpec|null);
+                }
+
+                /** Represents an InitializeEncryptionSpecRequest. */
+                class InitializeEncryptionSpecRequest implements IInitializeEncryptionSpecRequest {
+
+                    /**
+                     * Constructs a new InitializeEncryptionSpecRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest);
+
+                    /** InitializeEncryptionSpecRequest encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.contactcenterinsights.v1.IEncryptionSpec|null);
+
+                    /**
+                     * Creates a new InitializeEncryptionSpecRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InitializeEncryptionSpecRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InitializeEncryptionSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InitializeEncryptionSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest;
+
+                    /**
+                     * Verifies an InitializeEncryptionSpecRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InitializeEncryptionSpecRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InitializeEncryptionSpecRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest;
+
+                    /**
+                     * Creates a plain object from an InitializeEncryptionSpecRequest message. Also converts values to other types if specified.
+                     * @param message InitializeEncryptionSpecRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InitializeEncryptionSpecRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InitializeEncryptionSpecRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InitializeEncryptionSpecResponse. */
+                interface IInitializeEncryptionSpecResponse {
+                }
+
+                /** Represents an InitializeEncryptionSpecResponse. */
+                class InitializeEncryptionSpecResponse implements IInitializeEncryptionSpecResponse {
+
+                    /**
+                     * Constructs a new InitializeEncryptionSpecResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse);
+
+                    /**
+                     * Creates a new InitializeEncryptionSpecResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InitializeEncryptionSpecResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InitializeEncryptionSpecResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InitializeEncryptionSpecResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse;
+
+                    /**
+                     * Verifies an InitializeEncryptionSpecResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InitializeEncryptionSpecResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InitializeEncryptionSpecResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse;
+
+                    /**
+                     * Creates a plain object from an InitializeEncryptionSpecResponse message. Also converts values to other types if specified.
+                     * @param message InitializeEncryptionSpecResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InitializeEncryptionSpecResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InitializeEncryptionSpecResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InitializeEncryptionSpecMetadata. */
+                interface IInitializeEncryptionSpecMetadata {
+
+                    /** InitializeEncryptionSpecMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InitializeEncryptionSpecMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InitializeEncryptionSpecMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest|null);
+
+                    /** InitializeEncryptionSpecMetadata partialErrors */
+                    partialErrors?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents an InitializeEncryptionSpecMetadata. */
+                class InitializeEncryptionSpecMetadata implements IInitializeEncryptionSpecMetadata {
+
+                    /**
+                     * Constructs a new InitializeEncryptionSpecMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata);
+
+                    /** InitializeEncryptionSpecMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InitializeEncryptionSpecMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InitializeEncryptionSpecMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest|null);
+
+                    /** InitializeEncryptionSpecMetadata partialErrors. */
+                    public partialErrors: google.rpc.IStatus[];
+
+                    /**
+                     * Creates a new InitializeEncryptionSpecMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InitializeEncryptionSpecMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InitializeEncryptionSpecMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InitializeEncryptionSpecMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata;
+
+                    /**
+                     * Verifies an InitializeEncryptionSpecMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InitializeEncryptionSpecMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InitializeEncryptionSpecMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata;
+
+                    /**
+                     * Creates a plain object from an InitializeEncryptionSpecMetadata message. Also converts values to other types if specified.
+                     * @param message InitializeEncryptionSpecMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InitializeEncryptionSpecMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InitializeEncryptionSpecMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateViewRequest. */
                 interface ICreateViewRequest {
 
@@ -8271,6 +10866,6150 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a Dimension. */
+                interface IDimension {
+
+                    /** Dimension issueDimensionMetadata */
+                    issueDimensionMetadata?: (google.cloud.contactcenterinsights.v1.Dimension.IIssueDimensionMetadata|null);
+
+                    /** Dimension agentDimensionMetadata */
+                    agentDimensionMetadata?: (google.cloud.contactcenterinsights.v1.Dimension.IAgentDimensionMetadata|null);
+
+                    /** Dimension qaQuestionDimensionMetadata */
+                    qaQuestionDimensionMetadata?: (google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionDimensionMetadata|null);
+
+                    /** Dimension qaQuestionAnswerDimensionMetadata */
+                    qaQuestionAnswerDimensionMetadata?: (google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionAnswerDimensionMetadata|null);
+
+                    /** Dimension dimensionKey */
+                    dimensionKey?: (google.cloud.contactcenterinsights.v1.Dimension.DimensionKey|keyof typeof google.cloud.contactcenterinsights.v1.Dimension.DimensionKey|null);
+                }
+
+                /** Represents a Dimension. */
+                class Dimension implements IDimension {
+
+                    /**
+                     * Constructs a new Dimension.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IDimension);
+
+                    /** Dimension issueDimensionMetadata. */
+                    public issueDimensionMetadata?: (google.cloud.contactcenterinsights.v1.Dimension.IIssueDimensionMetadata|null);
+
+                    /** Dimension agentDimensionMetadata. */
+                    public agentDimensionMetadata?: (google.cloud.contactcenterinsights.v1.Dimension.IAgentDimensionMetadata|null);
+
+                    /** Dimension qaQuestionDimensionMetadata. */
+                    public qaQuestionDimensionMetadata?: (google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionDimensionMetadata|null);
+
+                    /** Dimension qaQuestionAnswerDimensionMetadata. */
+                    public qaQuestionAnswerDimensionMetadata?: (google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionAnswerDimensionMetadata|null);
+
+                    /** Dimension dimensionKey. */
+                    public dimensionKey: (google.cloud.contactcenterinsights.v1.Dimension.DimensionKey|keyof typeof google.cloud.contactcenterinsights.v1.Dimension.DimensionKey);
+
+                    /** Dimension dimensionMetadata. */
+                    public dimensionMetadata?: ("issueDimensionMetadata"|"agentDimensionMetadata"|"qaQuestionDimensionMetadata"|"qaQuestionAnswerDimensionMetadata");
+
+                    /**
+                     * Creates a new Dimension instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Dimension instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IDimension): google.cloud.contactcenterinsights.v1.Dimension;
+
+                    /**
+                     * Encodes the specified Dimension message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Dimension.verify|verify} messages.
+                     * @param message Dimension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Dimension message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Dimension.verify|verify} messages.
+                     * @param message Dimension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Dimension message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Dimension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.Dimension;
+
+                    /**
+                     * Decodes a Dimension message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Dimension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.Dimension;
+
+                    /**
+                     * Verifies a Dimension message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Dimension message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Dimension
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.Dimension;
+
+                    /**
+                     * Creates a plain object from a Dimension message. Also converts values to other types if specified.
+                     * @param message Dimension
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.Dimension, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Dimension to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Dimension
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Dimension {
+
+                    /** Properties of an IssueDimensionMetadata. */
+                    interface IIssueDimensionMetadata {
+
+                        /** IssueDimensionMetadata issueId */
+                        issueId?: (string|null);
+
+                        /** IssueDimensionMetadata issueDisplayName */
+                        issueDisplayName?: (string|null);
+
+                        /** IssueDimensionMetadata issueModelId */
+                        issueModelId?: (string|null);
+                    }
+
+                    /** Represents an IssueDimensionMetadata. */
+                    class IssueDimensionMetadata implements IIssueDimensionMetadata {
+
+                        /**
+                         * Constructs a new IssueDimensionMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.Dimension.IIssueDimensionMetadata);
+
+                        /** IssueDimensionMetadata issueId. */
+                        public issueId: string;
+
+                        /** IssueDimensionMetadata issueDisplayName. */
+                        public issueDisplayName: string;
+
+                        /** IssueDimensionMetadata issueModelId. */
+                        public issueModelId: string;
+
+                        /**
+                         * Creates a new IssueDimensionMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IssueDimensionMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.Dimension.IIssueDimensionMetadata): google.cloud.contactcenterinsights.v1.Dimension.IssueDimensionMetadata;
+
+                        /**
+                         * Encodes the specified IssueDimensionMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Dimension.IssueDimensionMetadata.verify|verify} messages.
+                         * @param message IssueDimensionMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.Dimension.IIssueDimensionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IssueDimensionMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Dimension.IssueDimensionMetadata.verify|verify} messages.
+                         * @param message IssueDimensionMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.Dimension.IIssueDimensionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IssueDimensionMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IssueDimensionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.Dimension.IssueDimensionMetadata;
+
+                        /**
+                         * Decodes an IssueDimensionMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IssueDimensionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.Dimension.IssueDimensionMetadata;
+
+                        /**
+                         * Verifies an IssueDimensionMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IssueDimensionMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IssueDimensionMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.Dimension.IssueDimensionMetadata;
+
+                        /**
+                         * Creates a plain object from an IssueDimensionMetadata message. Also converts values to other types if specified.
+                         * @param message IssueDimensionMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.Dimension.IssueDimensionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IssueDimensionMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IssueDimensionMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AgentDimensionMetadata. */
+                    interface IAgentDimensionMetadata {
+
+                        /** AgentDimensionMetadata agentId */
+                        agentId?: (string|null);
+
+                        /** AgentDimensionMetadata agentDisplayName */
+                        agentDisplayName?: (string|null);
+
+                        /** AgentDimensionMetadata agentTeam */
+                        agentTeam?: (string|null);
+                    }
+
+                    /** Represents an AgentDimensionMetadata. */
+                    class AgentDimensionMetadata implements IAgentDimensionMetadata {
+
+                        /**
+                         * Constructs a new AgentDimensionMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.Dimension.IAgentDimensionMetadata);
+
+                        /** AgentDimensionMetadata agentId. */
+                        public agentId: string;
+
+                        /** AgentDimensionMetadata agentDisplayName. */
+                        public agentDisplayName: string;
+
+                        /** AgentDimensionMetadata agentTeam. */
+                        public agentTeam: string;
+
+                        /**
+                         * Creates a new AgentDimensionMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AgentDimensionMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.Dimension.IAgentDimensionMetadata): google.cloud.contactcenterinsights.v1.Dimension.AgentDimensionMetadata;
+
+                        /**
+                         * Encodes the specified AgentDimensionMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Dimension.AgentDimensionMetadata.verify|verify} messages.
+                         * @param message AgentDimensionMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.Dimension.IAgentDimensionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AgentDimensionMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Dimension.AgentDimensionMetadata.verify|verify} messages.
+                         * @param message AgentDimensionMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.Dimension.IAgentDimensionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AgentDimensionMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AgentDimensionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.Dimension.AgentDimensionMetadata;
+
+                        /**
+                         * Decodes an AgentDimensionMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AgentDimensionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.Dimension.AgentDimensionMetadata;
+
+                        /**
+                         * Verifies an AgentDimensionMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AgentDimensionMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AgentDimensionMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.Dimension.AgentDimensionMetadata;
+
+                        /**
+                         * Creates a plain object from an AgentDimensionMetadata message. Also converts values to other types if specified.
+                         * @param message AgentDimensionMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.Dimension.AgentDimensionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AgentDimensionMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AgentDimensionMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a QaQuestionDimensionMetadata. */
+                    interface IQaQuestionDimensionMetadata {
+
+                        /** QaQuestionDimensionMetadata qaScorecardId */
+                        qaScorecardId?: (string|null);
+
+                        /** QaQuestionDimensionMetadata qaQuestionId */
+                        qaQuestionId?: (string|null);
+
+                        /** QaQuestionDimensionMetadata questionBody */
+                        questionBody?: (string|null);
+                    }
+
+                    /** Represents a QaQuestionDimensionMetadata. */
+                    class QaQuestionDimensionMetadata implements IQaQuestionDimensionMetadata {
+
+                        /**
+                         * Constructs a new QaQuestionDimensionMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionDimensionMetadata);
+
+                        /** QaQuestionDimensionMetadata qaScorecardId. */
+                        public qaScorecardId: string;
+
+                        /** QaQuestionDimensionMetadata qaQuestionId. */
+                        public qaQuestionId: string;
+
+                        /** QaQuestionDimensionMetadata questionBody. */
+                        public questionBody: string;
+
+                        /**
+                         * Creates a new QaQuestionDimensionMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QaQuestionDimensionMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionDimensionMetadata): google.cloud.contactcenterinsights.v1.Dimension.QaQuestionDimensionMetadata;
+
+                        /**
+                         * Encodes the specified QaQuestionDimensionMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Dimension.QaQuestionDimensionMetadata.verify|verify} messages.
+                         * @param message QaQuestionDimensionMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionDimensionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QaQuestionDimensionMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Dimension.QaQuestionDimensionMetadata.verify|verify} messages.
+                         * @param message QaQuestionDimensionMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionDimensionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QaQuestionDimensionMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QaQuestionDimensionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.Dimension.QaQuestionDimensionMetadata;
+
+                        /**
+                         * Decodes a QaQuestionDimensionMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QaQuestionDimensionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.Dimension.QaQuestionDimensionMetadata;
+
+                        /**
+                         * Verifies a QaQuestionDimensionMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QaQuestionDimensionMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QaQuestionDimensionMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.Dimension.QaQuestionDimensionMetadata;
+
+                        /**
+                         * Creates a plain object from a QaQuestionDimensionMetadata message. Also converts values to other types if specified.
+                         * @param message QaQuestionDimensionMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.Dimension.QaQuestionDimensionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QaQuestionDimensionMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QaQuestionDimensionMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a QaQuestionAnswerDimensionMetadata. */
+                    interface IQaQuestionAnswerDimensionMetadata {
+
+                        /** QaQuestionAnswerDimensionMetadata qaScorecardId */
+                        qaScorecardId?: (string|null);
+
+                        /** QaQuestionAnswerDimensionMetadata qaQuestionId */
+                        qaQuestionId?: (string|null);
+
+                        /** QaQuestionAnswerDimensionMetadata questionBody */
+                        questionBody?: (string|null);
+
+                        /** QaQuestionAnswerDimensionMetadata answerValue */
+                        answerValue?: (string|null);
+                    }
+
+                    /** Represents a QaQuestionAnswerDimensionMetadata. */
+                    class QaQuestionAnswerDimensionMetadata implements IQaQuestionAnswerDimensionMetadata {
+
+                        /**
+                         * Constructs a new QaQuestionAnswerDimensionMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionAnswerDimensionMetadata);
+
+                        /** QaQuestionAnswerDimensionMetadata qaScorecardId. */
+                        public qaScorecardId: string;
+
+                        /** QaQuestionAnswerDimensionMetadata qaQuestionId. */
+                        public qaQuestionId: string;
+
+                        /** QaQuestionAnswerDimensionMetadata questionBody. */
+                        public questionBody: string;
+
+                        /** QaQuestionAnswerDimensionMetadata answerValue. */
+                        public answerValue: string;
+
+                        /**
+                         * Creates a new QaQuestionAnswerDimensionMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QaQuestionAnswerDimensionMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionAnswerDimensionMetadata): google.cloud.contactcenterinsights.v1.Dimension.QaQuestionAnswerDimensionMetadata;
+
+                        /**
+                         * Encodes the specified QaQuestionAnswerDimensionMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Dimension.QaQuestionAnswerDimensionMetadata.verify|verify} messages.
+                         * @param message QaQuestionAnswerDimensionMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionAnswerDimensionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QaQuestionAnswerDimensionMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Dimension.QaQuestionAnswerDimensionMetadata.verify|verify} messages.
+                         * @param message QaQuestionAnswerDimensionMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.Dimension.IQaQuestionAnswerDimensionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QaQuestionAnswerDimensionMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QaQuestionAnswerDimensionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.Dimension.QaQuestionAnswerDimensionMetadata;
+
+                        /**
+                         * Decodes a QaQuestionAnswerDimensionMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QaQuestionAnswerDimensionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.Dimension.QaQuestionAnswerDimensionMetadata;
+
+                        /**
+                         * Verifies a QaQuestionAnswerDimensionMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QaQuestionAnswerDimensionMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QaQuestionAnswerDimensionMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.Dimension.QaQuestionAnswerDimensionMetadata;
+
+                        /**
+                         * Creates a plain object from a QaQuestionAnswerDimensionMetadata message. Also converts values to other types if specified.
+                         * @param message QaQuestionAnswerDimensionMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.Dimension.QaQuestionAnswerDimensionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QaQuestionAnswerDimensionMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QaQuestionAnswerDimensionMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** DimensionKey enum. */
+                    enum DimensionKey {
+                        DIMENSION_KEY_UNSPECIFIED = 0,
+                        ISSUE = 1,
+                        AGENT = 2,
+                        AGENT_TEAM = 3,
+                        QA_QUESTION_ID = 4,
+                        QA_QUESTION_ANSWER_VALUE = 5,
+                        CONVERSATION_PROFILE_ID = 6
+                    }
+                }
+
+                /** Properties of a QueryMetricsRequest. */
+                interface IQueryMetricsRequest {
+
+                    /** QueryMetricsRequest location */
+                    location?: (string|null);
+
+                    /** QueryMetricsRequest filter */
+                    filter?: (string|null);
+
+                    /** QueryMetricsRequest timeGranularity */
+                    timeGranularity?: (google.cloud.contactcenterinsights.v1.QueryMetricsRequest.TimeGranularity|keyof typeof google.cloud.contactcenterinsights.v1.QueryMetricsRequest.TimeGranularity|null);
+
+                    /** QueryMetricsRequest dimensions */
+                    dimensions?: (google.cloud.contactcenterinsights.v1.IDimension[]|null);
+
+                    /** QueryMetricsRequest measureMask */
+                    measureMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents a QueryMetricsRequest. */
+                class QueryMetricsRequest implements IQueryMetricsRequest {
+
+                    /**
+                     * Constructs a new QueryMetricsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IQueryMetricsRequest);
+
+                    /** QueryMetricsRequest location. */
+                    public location: string;
+
+                    /** QueryMetricsRequest filter. */
+                    public filter: string;
+
+                    /** QueryMetricsRequest timeGranularity. */
+                    public timeGranularity: (google.cloud.contactcenterinsights.v1.QueryMetricsRequest.TimeGranularity|keyof typeof google.cloud.contactcenterinsights.v1.QueryMetricsRequest.TimeGranularity);
+
+                    /** QueryMetricsRequest dimensions. */
+                    public dimensions: google.cloud.contactcenterinsights.v1.IDimension[];
+
+                    /** QueryMetricsRequest measureMask. */
+                    public measureMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new QueryMetricsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryMetricsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IQueryMetricsRequest): google.cloud.contactcenterinsights.v1.QueryMetricsRequest;
+
+                    /**
+                     * Encodes the specified QueryMetricsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsRequest.verify|verify} messages.
+                     * @param message QueryMetricsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IQueryMetricsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryMetricsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsRequest.verify|verify} messages.
+                     * @param message QueryMetricsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IQueryMetricsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryMetricsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryMetricsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QueryMetricsRequest;
+
+                    /**
+                     * Decodes a QueryMetricsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryMetricsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QueryMetricsRequest;
+
+                    /**
+                     * Verifies a QueryMetricsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryMetricsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryMetricsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QueryMetricsRequest;
+
+                    /**
+                     * Creates a plain object from a QueryMetricsRequest message. Also converts values to other types if specified.
+                     * @param message QueryMetricsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.QueryMetricsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryMetricsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryMetricsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QueryMetricsRequest {
+
+                    /** TimeGranularity enum. */
+                    enum TimeGranularity {
+                        TIME_GRANULARITY_UNSPECIFIED = 0,
+                        NONE = 1,
+                        DAILY = 2,
+                        HOURLY = 3,
+                        PER_MINUTE = 4,
+                        PER_5_MINUTES = 5,
+                        MONTHLY = 6
+                    }
+                }
+
+                /** Properties of a QueryMetricsResponse. */
+                interface IQueryMetricsResponse {
+
+                    /** QueryMetricsResponse location */
+                    location?: (string|null);
+
+                    /** QueryMetricsResponse updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QueryMetricsResponse slices */
+                    slices?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.ISlice[]|null);
+
+                    /** QueryMetricsResponse macroAverageSlice */
+                    macroAverageSlice?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.ISlice|null);
+                }
+
+                /** Represents a QueryMetricsResponse. */
+                class QueryMetricsResponse implements IQueryMetricsResponse {
+
+                    /**
+                     * Constructs a new QueryMetricsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IQueryMetricsResponse);
+
+                    /** QueryMetricsResponse location. */
+                    public location: string;
+
+                    /** QueryMetricsResponse updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QueryMetricsResponse slices. */
+                    public slices: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.ISlice[];
+
+                    /** QueryMetricsResponse macroAverageSlice. */
+                    public macroAverageSlice?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.ISlice|null);
+
+                    /** QueryMetricsResponse _macroAverageSlice. */
+                    public _macroAverageSlice?: "macroAverageSlice";
+
+                    /**
+                     * Creates a new QueryMetricsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryMetricsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IQueryMetricsResponse): google.cloud.contactcenterinsights.v1.QueryMetricsResponse;
+
+                    /**
+                     * Encodes the specified QueryMetricsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.verify|verify} messages.
+                     * @param message QueryMetricsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IQueryMetricsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryMetricsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.verify|verify} messages.
+                     * @param message QueryMetricsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IQueryMetricsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryMetricsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryMetricsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QueryMetricsResponse;
+
+                    /**
+                     * Decodes a QueryMetricsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryMetricsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QueryMetricsResponse;
+
+                    /**
+                     * Verifies a QueryMetricsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryMetricsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryMetricsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QueryMetricsResponse;
+
+                    /**
+                     * Creates a plain object from a QueryMetricsResponse message. Also converts values to other types if specified.
+                     * @param message QueryMetricsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryMetricsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryMetricsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QueryMetricsResponse {
+
+                    /** Properties of a Slice. */
+                    interface ISlice {
+
+                        /** Slice dimensions */
+                        dimensions?: (google.cloud.contactcenterinsights.v1.IDimension[]|null);
+
+                        /** Slice total */
+                        total?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.IDataPoint|null);
+
+                        /** Slice timeSeries */
+                        timeSeries?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.ITimeSeries|null);
+                    }
+
+                    /** Represents a Slice. */
+                    class Slice implements ISlice {
+
+                        /**
+                         * Constructs a new Slice.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.ISlice);
+
+                        /** Slice dimensions. */
+                        public dimensions: google.cloud.contactcenterinsights.v1.IDimension[];
+
+                        /** Slice total. */
+                        public total?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.IDataPoint|null);
+
+                        /** Slice timeSeries. */
+                        public timeSeries?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.ITimeSeries|null);
+
+                        /**
+                         * Creates a new Slice instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Slice instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.ISlice): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice;
+
+                        /**
+                         * Encodes the specified Slice message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.verify|verify} messages.
+                         * @param message Slice message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.ISlice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Slice message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.verify|verify} messages.
+                         * @param message Slice message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.ISlice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Slice message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Slice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice;
+
+                        /**
+                         * Decodes a Slice message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Slice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice;
+
+                        /**
+                         * Verifies a Slice message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Slice message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Slice
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice;
+
+                        /**
+                         * Creates a plain object from a Slice message. Also converts values to other types if specified.
+                         * @param message Slice
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Slice to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Slice
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Slice {
+
+                        /** Properties of a DataPoint. */
+                        interface IDataPoint {
+
+                            /** DataPoint conversationMeasure */
+                            conversationMeasure?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.IConversationMeasure|null);
+
+                            /** DataPoint interval */
+                            interval?: (google.type.IInterval|null);
+                        }
+
+                        /** Represents a DataPoint. */
+                        class DataPoint implements IDataPoint {
+
+                            /**
+                             * Constructs a new DataPoint.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.IDataPoint);
+
+                            /** DataPoint conversationMeasure. */
+                            public conversationMeasure?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.IConversationMeasure|null);
+
+                            /** DataPoint interval. */
+                            public interval?: (google.type.IInterval|null);
+
+                            /** DataPoint measure. */
+                            public measure?: "conversationMeasure";
+
+                            /**
+                             * Creates a new DataPoint instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DataPoint instance
+                             */
+                            public static create(properties?: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.IDataPoint): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint;
+
+                            /**
+                             * Encodes the specified DataPoint message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.verify|verify} messages.
+                             * @param message DataPoint message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.IDataPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DataPoint message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.verify|verify} messages.
+                             * @param message DataPoint message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.IDataPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DataPoint message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DataPoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint;
+
+                            /**
+                             * Decodes a DataPoint message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DataPoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint;
+
+                            /**
+                             * Verifies a DataPoint message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DataPoint message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DataPoint
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint;
+
+                            /**
+                             * Creates a plain object from a DataPoint message. Also converts values to other types if specified.
+                             * @param message DataPoint
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DataPoint to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DataPoint
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace DataPoint {
+
+                            /** Properties of a ConversationMeasure. */
+                            interface IConversationMeasure {
+
+                                /** ConversationMeasure conversationCount */
+                                conversationCount?: (number|null);
+
+                                /** ConversationMeasure averageSilencePercentage */
+                                averageSilencePercentage?: (number|null);
+
+                                /** ConversationMeasure averageDuration */
+                                averageDuration?: (google.protobuf.IDuration|null);
+
+                                /** ConversationMeasure averageTurnCount */
+                                averageTurnCount?: (number|null);
+
+                                /** ConversationMeasure averageAgentSentimentScore */
+                                averageAgentSentimentScore?: (number|null);
+
+                                /** ConversationMeasure averageClientSentimentScore */
+                                averageClientSentimentScore?: (number|null);
+
+                                /** ConversationMeasure averageCustomerSatisfactionRating */
+                                averageCustomerSatisfactionRating?: (number|null);
+
+                                /** ConversationMeasure averageQaNormalizedScore */
+                                averageQaNormalizedScore?: (number|null);
+
+                                /** ConversationMeasure qaTagScores */
+                                qaTagScores?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.IQaTagScore[]|null);
+
+                                /** ConversationMeasure averageQaQuestionNormalizedScore */
+                                averageQaQuestionNormalizedScore?: (number|null);
+                            }
+
+                            /** Represents a ConversationMeasure. */
+                            class ConversationMeasure implements IConversationMeasure {
+
+                                /**
+                                 * Constructs a new ConversationMeasure.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.IConversationMeasure);
+
+                                /** ConversationMeasure conversationCount. */
+                                public conversationCount?: (number|null);
+
+                                /** ConversationMeasure averageSilencePercentage. */
+                                public averageSilencePercentage?: (number|null);
+
+                                /** ConversationMeasure averageDuration. */
+                                public averageDuration?: (google.protobuf.IDuration|null);
+
+                                /** ConversationMeasure averageTurnCount. */
+                                public averageTurnCount?: (number|null);
+
+                                /** ConversationMeasure averageAgentSentimentScore. */
+                                public averageAgentSentimentScore?: (number|null);
+
+                                /** ConversationMeasure averageClientSentimentScore. */
+                                public averageClientSentimentScore?: (number|null);
+
+                                /** ConversationMeasure averageCustomerSatisfactionRating. */
+                                public averageCustomerSatisfactionRating?: (number|null);
+
+                                /** ConversationMeasure averageQaNormalizedScore. */
+                                public averageQaNormalizedScore?: (number|null);
+
+                                /** ConversationMeasure qaTagScores. */
+                                public qaTagScores: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.IQaTagScore[];
+
+                                /** ConversationMeasure averageQaQuestionNormalizedScore. */
+                                public averageQaQuestionNormalizedScore?: (number|null);
+
+                                /** ConversationMeasure _conversationCount. */
+                                public _conversationCount?: "conversationCount";
+
+                                /** ConversationMeasure _averageSilencePercentage. */
+                                public _averageSilencePercentage?: "averageSilencePercentage";
+
+                                /** ConversationMeasure _averageDuration. */
+                                public _averageDuration?: "averageDuration";
+
+                                /** ConversationMeasure _averageTurnCount. */
+                                public _averageTurnCount?: "averageTurnCount";
+
+                                /** ConversationMeasure _averageAgentSentimentScore. */
+                                public _averageAgentSentimentScore?: "averageAgentSentimentScore";
+
+                                /** ConversationMeasure _averageClientSentimentScore. */
+                                public _averageClientSentimentScore?: "averageClientSentimentScore";
+
+                                /** ConversationMeasure _averageCustomerSatisfactionRating. */
+                                public _averageCustomerSatisfactionRating?: "averageCustomerSatisfactionRating";
+
+                                /** ConversationMeasure _averageQaNormalizedScore. */
+                                public _averageQaNormalizedScore?: "averageQaNormalizedScore";
+
+                                /** ConversationMeasure _averageQaQuestionNormalizedScore. */
+                                public _averageQaQuestionNormalizedScore?: "averageQaQuestionNormalizedScore";
+
+                                /**
+                                 * Creates a new ConversationMeasure instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ConversationMeasure instance
+                                 */
+                                public static create(properties?: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.IConversationMeasure): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure;
+
+                                /**
+                                 * Encodes the specified ConversationMeasure message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.verify|verify} messages.
+                                 * @param message ConversationMeasure message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.IConversationMeasure, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ConversationMeasure message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.verify|verify} messages.
+                                 * @param message ConversationMeasure message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.IConversationMeasure, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ConversationMeasure message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ConversationMeasure
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure;
+
+                                /**
+                                 * Decodes a ConversationMeasure message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ConversationMeasure
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure;
+
+                                /**
+                                 * Verifies a ConversationMeasure message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ConversationMeasure message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ConversationMeasure
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure;
+
+                                /**
+                                 * Creates a plain object from a ConversationMeasure message. Also converts values to other types if specified.
+                                 * @param message ConversationMeasure
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ConversationMeasure to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ConversationMeasure
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace ConversationMeasure {
+
+                                /** Properties of a QaTagScore. */
+                                interface IQaTagScore {
+
+                                    /** QaTagScore tag */
+                                    tag?: (string|null);
+
+                                    /** QaTagScore averageTagNormalizedScore */
+                                    averageTagNormalizedScore?: (number|null);
+                                }
+
+                                /** Represents a QaTagScore. */
+                                class QaTagScore implements IQaTagScore {
+
+                                    /**
+                                     * Constructs a new QaTagScore.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.IQaTagScore);
+
+                                    /** QaTagScore tag. */
+                                    public tag: string;
+
+                                    /** QaTagScore averageTagNormalizedScore. */
+                                    public averageTagNormalizedScore: number;
+
+                                    /**
+                                     * Creates a new QaTagScore instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns QaTagScore instance
+                                     */
+                                    public static create(properties?: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.IQaTagScore): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.QaTagScore;
+
+                                    /**
+                                     * Encodes the specified QaTagScore message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.QaTagScore.verify|verify} messages.
+                                     * @param message QaTagScore message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.IQaTagScore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified QaTagScore message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.QaTagScore.verify|verify} messages.
+                                     * @param message QaTagScore message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.IQaTagScore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a QaTagScore message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns QaTagScore
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.QaTagScore;
+
+                                    /**
+                                     * Decodes a QaTagScore message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns QaTagScore
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.QaTagScore;
+
+                                    /**
+                                     * Verifies a QaTagScore message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a QaTagScore message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns QaTagScore
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.QaTagScore;
+
+                                    /**
+                                     * Creates a plain object from a QaTagScore message. Also converts values to other types if specified.
+                                     * @param message QaTagScore
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.QaTagScore, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this QaTagScore to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for QaTagScore
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+                            }
+                        }
+
+                        /** Properties of a TimeSeries. */
+                        interface ITimeSeries {
+
+                            /** TimeSeries dataPoints */
+                            dataPoints?: (google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.IDataPoint[]|null);
+                        }
+
+                        /** Represents a TimeSeries. */
+                        class TimeSeries implements ITimeSeries {
+
+                            /**
+                             * Constructs a new TimeSeries.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.ITimeSeries);
+
+                            /** TimeSeries dataPoints. */
+                            public dataPoints: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.IDataPoint[];
+
+                            /**
+                             * Creates a new TimeSeries instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TimeSeries instance
+                             */
+                            public static create(properties?: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.ITimeSeries): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.TimeSeries;
+
+                            /**
+                             * Encodes the specified TimeSeries message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.TimeSeries.verify|verify} messages.
+                             * @param message TimeSeries message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.ITimeSeries, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TimeSeries message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.TimeSeries.verify|verify} messages.
+                             * @param message TimeSeries message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.ITimeSeries, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TimeSeries message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TimeSeries
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.TimeSeries;
+
+                            /**
+                             * Decodes a TimeSeries message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TimeSeries
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.TimeSeries;
+
+                            /**
+                             * Verifies a TimeSeries message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TimeSeries message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TimeSeries
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.TimeSeries;
+
+                            /**
+                             * Creates a plain object from a TimeSeries message. Also converts values to other types if specified.
+                             * @param message TimeSeries
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.TimeSeries, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TimeSeries to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TimeSeries
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a QueryMetricsMetadata. */
+                interface IQueryMetricsMetadata {
+                }
+
+                /** Represents a QueryMetricsMetadata. */
+                class QueryMetricsMetadata implements IQueryMetricsMetadata {
+
+                    /**
+                     * Constructs a new QueryMetricsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata);
+
+                    /**
+                     * Creates a new QueryMetricsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryMetricsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata): google.cloud.contactcenterinsights.v1.QueryMetricsMetadata;
+
+                    /**
+                     * Encodes the specified QueryMetricsMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsMetadata.verify|verify} messages.
+                     * @param message QueryMetricsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryMetricsMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QueryMetricsMetadata.verify|verify} messages.
+                     * @param message QueryMetricsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryMetricsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryMetricsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QueryMetricsMetadata;
+
+                    /**
+                     * Decodes a QueryMetricsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryMetricsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QueryMetricsMetadata;
+
+                    /**
+                     * Verifies a QueryMetricsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryMetricsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryMetricsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QueryMetricsMetadata;
+
+                    /**
+                     * Creates a plain object from a QueryMetricsMetadata message. Also converts values to other types if specified.
+                     * @param message QueryMetricsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.QueryMetricsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryMetricsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryMetricsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateQaQuestionRequest. */
+                interface ICreateQaQuestionRequest {
+
+                    /** CreateQaQuestionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateQaQuestionRequest qaQuestion */
+                    qaQuestion?: (google.cloud.contactcenterinsights.v1.IQaQuestion|null);
+
+                    /** CreateQaQuestionRequest qaQuestionId */
+                    qaQuestionId?: (string|null);
+                }
+
+                /** Represents a CreateQaQuestionRequest. */
+                class CreateQaQuestionRequest implements ICreateQaQuestionRequest {
+
+                    /**
+                     * Constructs a new CreateQaQuestionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest);
+
+                    /** CreateQaQuestionRequest parent. */
+                    public parent: string;
+
+                    /** CreateQaQuestionRequest qaQuestion. */
+                    public qaQuestion?: (google.cloud.contactcenterinsights.v1.IQaQuestion|null);
+
+                    /** CreateQaQuestionRequest qaQuestionId. */
+                    public qaQuestionId: string;
+
+                    /**
+                     * Creates a new CreateQaQuestionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateQaQuestionRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest): google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest;
+
+                    /**
+                     * Encodes the specified CreateQaQuestionRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest.verify|verify} messages.
+                     * @param message CreateQaQuestionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateQaQuestionRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest.verify|verify} messages.
+                     * @param message CreateQaQuestionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ICreateQaQuestionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateQaQuestionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateQaQuestionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest;
+
+                    /**
+                     * Decodes a CreateQaQuestionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateQaQuestionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest;
+
+                    /**
+                     * Verifies a CreateQaQuestionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateQaQuestionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateQaQuestionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateQaQuestionRequest message. Also converts values to other types if specified.
+                     * @param message CreateQaQuestionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateQaQuestionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateQaQuestionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetQaQuestionRequest. */
+                interface IGetQaQuestionRequest {
+
+                    /** GetQaQuestionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetQaQuestionRequest. */
+                class GetQaQuestionRequest implements IGetQaQuestionRequest {
+
+                    /**
+                     * Constructs a new GetQaQuestionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest);
+
+                    /** GetQaQuestionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetQaQuestionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetQaQuestionRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest): google.cloud.contactcenterinsights.v1.GetQaQuestionRequest;
+
+                    /**
+                     * Encodes the specified GetQaQuestionRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetQaQuestionRequest.verify|verify} messages.
+                     * @param message GetQaQuestionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetQaQuestionRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetQaQuestionRequest.verify|verify} messages.
+                     * @param message GetQaQuestionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IGetQaQuestionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetQaQuestionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetQaQuestionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.GetQaQuestionRequest;
+
+                    /**
+                     * Decodes a GetQaQuestionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetQaQuestionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.GetQaQuestionRequest;
+
+                    /**
+                     * Verifies a GetQaQuestionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetQaQuestionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetQaQuestionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.GetQaQuestionRequest;
+
+                    /**
+                     * Creates a plain object from a GetQaQuestionRequest message. Also converts values to other types if specified.
+                     * @param message GetQaQuestionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.GetQaQuestionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetQaQuestionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetQaQuestionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQaQuestionsRequest. */
+                interface IListQaQuestionsRequest {
+
+                    /** ListQaQuestionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListQaQuestionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListQaQuestionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListQaQuestionsRequest. */
+                class ListQaQuestionsRequest implements IListQaQuestionsRequest {
+
+                    /**
+                     * Constructs a new ListQaQuestionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest);
+
+                    /** ListQaQuestionsRequest parent. */
+                    public parent: string;
+
+                    /** ListQaQuestionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListQaQuestionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListQaQuestionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQaQuestionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest): google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest;
+
+                    /**
+                     * Encodes the specified ListQaQuestionsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest.verify|verify} messages.
+                     * @param message ListQaQuestionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQaQuestionsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest.verify|verify} messages.
+                     * @param message ListQaQuestionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListQaQuestionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQaQuestionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQaQuestionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest;
+
+                    /**
+                     * Decodes a ListQaQuestionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQaQuestionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest;
+
+                    /**
+                     * Verifies a ListQaQuestionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQaQuestionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQaQuestionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListQaQuestionsRequest message. Also converts values to other types if specified.
+                     * @param message ListQaQuestionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQaQuestionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQaQuestionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQaQuestionsResponse. */
+                interface IListQaQuestionsResponse {
+
+                    /** ListQaQuestionsResponse qaQuestions */
+                    qaQuestions?: (google.cloud.contactcenterinsights.v1.IQaQuestion[]|null);
+
+                    /** ListQaQuestionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListQaQuestionsResponse. */
+                class ListQaQuestionsResponse implements IListQaQuestionsResponse {
+
+                    /**
+                     * Constructs a new ListQaQuestionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse);
+
+                    /** ListQaQuestionsResponse qaQuestions. */
+                    public qaQuestions: google.cloud.contactcenterinsights.v1.IQaQuestion[];
+
+                    /** ListQaQuestionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListQaQuestionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQaQuestionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse): google.cloud.contactcenterinsights.v1.ListQaQuestionsResponse;
+
+                    /**
+                     * Encodes the specified ListQaQuestionsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaQuestionsResponse.verify|verify} messages.
+                     * @param message ListQaQuestionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQaQuestionsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaQuestionsResponse.verify|verify} messages.
+                     * @param message ListQaQuestionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListQaQuestionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQaQuestionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQaQuestionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListQaQuestionsResponse;
+
+                    /**
+                     * Decodes a ListQaQuestionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQaQuestionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListQaQuestionsResponse;
+
+                    /**
+                     * Verifies a ListQaQuestionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQaQuestionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQaQuestionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListQaQuestionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListQaQuestionsResponse message. Also converts values to other types if specified.
+                     * @param message ListQaQuestionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListQaQuestionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQaQuestionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQaQuestionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateQaQuestionRequest. */
+                interface IUpdateQaQuestionRequest {
+
+                    /** UpdateQaQuestionRequest qaQuestion */
+                    qaQuestion?: (google.cloud.contactcenterinsights.v1.IQaQuestion|null);
+
+                    /** UpdateQaQuestionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateQaQuestionRequest. */
+                class UpdateQaQuestionRequest implements IUpdateQaQuestionRequest {
+
+                    /**
+                     * Constructs a new UpdateQaQuestionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest);
+
+                    /** UpdateQaQuestionRequest qaQuestion. */
+                    public qaQuestion?: (google.cloud.contactcenterinsights.v1.IQaQuestion|null);
+
+                    /** UpdateQaQuestionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateQaQuestionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateQaQuestionRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest): google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest;
+
+                    /**
+                     * Encodes the specified UpdateQaQuestionRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest.verify|verify} messages.
+                     * @param message UpdateQaQuestionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateQaQuestionRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest.verify|verify} messages.
+                     * @param message UpdateQaQuestionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IUpdateQaQuestionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateQaQuestionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateQaQuestionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest;
+
+                    /**
+                     * Decodes an UpdateQaQuestionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateQaQuestionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest;
+
+                    /**
+                     * Verifies an UpdateQaQuestionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateQaQuestionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateQaQuestionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateQaQuestionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateQaQuestionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateQaQuestionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateQaQuestionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteQaQuestionRequest. */
+                interface IDeleteQaQuestionRequest {
+
+                    /** DeleteQaQuestionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteQaQuestionRequest. */
+                class DeleteQaQuestionRequest implements IDeleteQaQuestionRequest {
+
+                    /**
+                     * Constructs a new DeleteQaQuestionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest);
+
+                    /** DeleteQaQuestionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteQaQuestionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteQaQuestionRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest): google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest;
+
+                    /**
+                     * Encodes the specified DeleteQaQuestionRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest.verify|verify} messages.
+                     * @param message DeleteQaQuestionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteQaQuestionRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest.verify|verify} messages.
+                     * @param message DeleteQaQuestionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IDeleteQaQuestionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteQaQuestionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteQaQuestionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest;
+
+                    /**
+                     * Decodes a DeleteQaQuestionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteQaQuestionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest;
+
+                    /**
+                     * Verifies a DeleteQaQuestionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteQaQuestionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteQaQuestionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteQaQuestionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteQaQuestionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteQaQuestionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteQaQuestionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateQaScorecardRequest. */
+                interface ICreateQaScorecardRequest {
+
+                    /** CreateQaScorecardRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateQaScorecardRequest qaScorecard */
+                    qaScorecard?: (google.cloud.contactcenterinsights.v1.IQaScorecard|null);
+
+                    /** CreateQaScorecardRequest qaScorecardId */
+                    qaScorecardId?: (string|null);
+                }
+
+                /** Represents a CreateQaScorecardRequest. */
+                class CreateQaScorecardRequest implements ICreateQaScorecardRequest {
+
+                    /**
+                     * Constructs a new CreateQaScorecardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest);
+
+                    /** CreateQaScorecardRequest parent. */
+                    public parent: string;
+
+                    /** CreateQaScorecardRequest qaScorecard. */
+                    public qaScorecard?: (google.cloud.contactcenterinsights.v1.IQaScorecard|null);
+
+                    /** CreateQaScorecardRequest qaScorecardId. */
+                    public qaScorecardId: string;
+
+                    /**
+                     * Creates a new CreateQaScorecardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateQaScorecardRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest): google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest;
+
+                    /**
+                     * Encodes the specified CreateQaScorecardRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest.verify|verify} messages.
+                     * @param message CreateQaScorecardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateQaScorecardRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest.verify|verify} messages.
+                     * @param message CreateQaScorecardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateQaScorecardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateQaScorecardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest;
+
+                    /**
+                     * Decodes a CreateQaScorecardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateQaScorecardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest;
+
+                    /**
+                     * Verifies a CreateQaScorecardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateQaScorecardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateQaScorecardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest;
+
+                    /**
+                     * Creates a plain object from a CreateQaScorecardRequest message. Also converts values to other types if specified.
+                     * @param message CreateQaScorecardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateQaScorecardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateQaScorecardRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetQaScorecardRequest. */
+                interface IGetQaScorecardRequest {
+
+                    /** GetQaScorecardRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetQaScorecardRequest. */
+                class GetQaScorecardRequest implements IGetQaScorecardRequest {
+
+                    /**
+                     * Constructs a new GetQaScorecardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest);
+
+                    /** GetQaScorecardRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetQaScorecardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetQaScorecardRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest): google.cloud.contactcenterinsights.v1.GetQaScorecardRequest;
+
+                    /**
+                     * Encodes the specified GetQaScorecardRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetQaScorecardRequest.verify|verify} messages.
+                     * @param message GetQaScorecardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetQaScorecardRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetQaScorecardRequest.verify|verify} messages.
+                     * @param message GetQaScorecardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IGetQaScorecardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetQaScorecardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetQaScorecardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.GetQaScorecardRequest;
+
+                    /**
+                     * Decodes a GetQaScorecardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetQaScorecardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.GetQaScorecardRequest;
+
+                    /**
+                     * Verifies a GetQaScorecardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetQaScorecardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetQaScorecardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.GetQaScorecardRequest;
+
+                    /**
+                     * Creates a plain object from a GetQaScorecardRequest message. Also converts values to other types if specified.
+                     * @param message GetQaScorecardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.GetQaScorecardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetQaScorecardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetQaScorecardRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateQaScorecardRequest. */
+                interface IUpdateQaScorecardRequest {
+
+                    /** UpdateQaScorecardRequest qaScorecard */
+                    qaScorecard?: (google.cloud.contactcenterinsights.v1.IQaScorecard|null);
+
+                    /** UpdateQaScorecardRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateQaScorecardRequest. */
+                class UpdateQaScorecardRequest implements IUpdateQaScorecardRequest {
+
+                    /**
+                     * Constructs a new UpdateQaScorecardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest);
+
+                    /** UpdateQaScorecardRequest qaScorecard. */
+                    public qaScorecard?: (google.cloud.contactcenterinsights.v1.IQaScorecard|null);
+
+                    /** UpdateQaScorecardRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateQaScorecardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateQaScorecardRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest): google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest;
+
+                    /**
+                     * Encodes the specified UpdateQaScorecardRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest.verify|verify} messages.
+                     * @param message UpdateQaScorecardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateQaScorecardRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest.verify|verify} messages.
+                     * @param message UpdateQaScorecardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IUpdateQaScorecardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateQaScorecardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateQaScorecardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest;
+
+                    /**
+                     * Decodes an UpdateQaScorecardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateQaScorecardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest;
+
+                    /**
+                     * Verifies an UpdateQaScorecardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateQaScorecardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateQaScorecardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateQaScorecardRequest message. Also converts values to other types if specified.
+                     * @param message UpdateQaScorecardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateQaScorecardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateQaScorecardRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteQaScorecardRequest. */
+                interface IDeleteQaScorecardRequest {
+
+                    /** DeleteQaScorecardRequest name */
+                    name?: (string|null);
+
+                    /** DeleteQaScorecardRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteQaScorecardRequest. */
+                class DeleteQaScorecardRequest implements IDeleteQaScorecardRequest {
+
+                    /**
+                     * Constructs a new DeleteQaScorecardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest);
+
+                    /** DeleteQaScorecardRequest name. */
+                    public name: string;
+
+                    /** DeleteQaScorecardRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteQaScorecardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteQaScorecardRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest): google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest;
+
+                    /**
+                     * Encodes the specified DeleteQaScorecardRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest.verify|verify} messages.
+                     * @param message DeleteQaScorecardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteQaScorecardRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest.verify|verify} messages.
+                     * @param message DeleteQaScorecardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteQaScorecardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteQaScorecardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest;
+
+                    /**
+                     * Decodes a DeleteQaScorecardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteQaScorecardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest;
+
+                    /**
+                     * Verifies a DeleteQaScorecardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteQaScorecardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteQaScorecardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteQaScorecardRequest message. Also converts values to other types if specified.
+                     * @param message DeleteQaScorecardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteQaScorecardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteQaScorecardRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateQaScorecardRevisionRequest. */
+                interface ICreateQaScorecardRevisionRequest {
+
+                    /** CreateQaScorecardRevisionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateQaScorecardRevisionRequest qaScorecardRevision */
+                    qaScorecardRevision?: (google.cloud.contactcenterinsights.v1.IQaScorecardRevision|null);
+
+                    /** CreateQaScorecardRevisionRequest qaScorecardRevisionId */
+                    qaScorecardRevisionId?: (string|null);
+                }
+
+                /** Represents a CreateQaScorecardRevisionRequest. */
+                class CreateQaScorecardRevisionRequest implements ICreateQaScorecardRevisionRequest {
+
+                    /**
+                     * Constructs a new CreateQaScorecardRevisionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest);
+
+                    /** CreateQaScorecardRevisionRequest parent. */
+                    public parent: string;
+
+                    /** CreateQaScorecardRevisionRequest qaScorecardRevision. */
+                    public qaScorecardRevision?: (google.cloud.contactcenterinsights.v1.IQaScorecardRevision|null);
+
+                    /** CreateQaScorecardRevisionRequest qaScorecardRevisionId. */
+                    public qaScorecardRevisionId: string;
+
+                    /**
+                     * Creates a new CreateQaScorecardRevisionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateQaScorecardRevisionRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest): google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest;
+
+                    /**
+                     * Encodes the specified CreateQaScorecardRevisionRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message CreateQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateQaScorecardRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message CreateQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ICreateQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateQaScorecardRevisionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest;
+
+                    /**
+                     * Decodes a CreateQaScorecardRevisionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest;
+
+                    /**
+                     * Verifies a CreateQaScorecardRevisionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateQaScorecardRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateQaScorecardRevisionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateQaScorecardRevisionRequest message. Also converts values to other types if specified.
+                     * @param message CreateQaScorecardRevisionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateQaScorecardRevisionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateQaScorecardRevisionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetQaScorecardRevisionRequest. */
+                interface IGetQaScorecardRevisionRequest {
+
+                    /** GetQaScorecardRevisionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetQaScorecardRevisionRequest. */
+                class GetQaScorecardRevisionRequest implements IGetQaScorecardRevisionRequest {
+
+                    /**
+                     * Constructs a new GetQaScorecardRevisionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest);
+
+                    /** GetQaScorecardRevisionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetQaScorecardRevisionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetQaScorecardRevisionRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest): google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest;
+
+                    /**
+                     * Encodes the specified GetQaScorecardRevisionRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message GetQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetQaScorecardRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message GetQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IGetQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetQaScorecardRevisionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest;
+
+                    /**
+                     * Decodes a GetQaScorecardRevisionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest;
+
+                    /**
+                     * Verifies a GetQaScorecardRevisionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetQaScorecardRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetQaScorecardRevisionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest;
+
+                    /**
+                     * Creates a plain object from a GetQaScorecardRevisionRequest message. Also converts values to other types if specified.
+                     * @param message GetQaScorecardRevisionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetQaScorecardRevisionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetQaScorecardRevisionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TuneQaScorecardRevisionRequest. */
+                interface ITuneQaScorecardRevisionRequest {
+
+                    /** TuneQaScorecardRevisionRequest parent */
+                    parent?: (string|null);
+
+                    /** TuneQaScorecardRevisionRequest filter */
+                    filter?: (string|null);
+
+                    /** TuneQaScorecardRevisionRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a TuneQaScorecardRevisionRequest. */
+                class TuneQaScorecardRevisionRequest implements ITuneQaScorecardRevisionRequest {
+
+                    /**
+                     * Constructs a new TuneQaScorecardRevisionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest);
+
+                    /** TuneQaScorecardRevisionRequest parent. */
+                    public parent: string;
+
+                    /** TuneQaScorecardRevisionRequest filter. */
+                    public filter: string;
+
+                    /** TuneQaScorecardRevisionRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new TuneQaScorecardRevisionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TuneQaScorecardRevisionRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest;
+
+                    /**
+                     * Encodes the specified TuneQaScorecardRevisionRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message TuneQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TuneQaScorecardRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message TuneQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TuneQaScorecardRevisionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TuneQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest;
+
+                    /**
+                     * Decodes a TuneQaScorecardRevisionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TuneQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest;
+
+                    /**
+                     * Verifies a TuneQaScorecardRevisionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TuneQaScorecardRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TuneQaScorecardRevisionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest;
+
+                    /**
+                     * Creates a plain object from a TuneQaScorecardRevisionRequest message. Also converts values to other types if specified.
+                     * @param message TuneQaScorecardRevisionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TuneQaScorecardRevisionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TuneQaScorecardRevisionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TuneQaScorecardRevisionResponse. */
+                interface ITuneQaScorecardRevisionResponse {
+                }
+
+                /** Represents a TuneQaScorecardRevisionResponse. */
+                class TuneQaScorecardRevisionResponse implements ITuneQaScorecardRevisionResponse {
+
+                    /**
+                     * Constructs a new TuneQaScorecardRevisionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse);
+
+                    /**
+                     * Creates a new TuneQaScorecardRevisionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TuneQaScorecardRevisionResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionResponse;
+
+                    /**
+                     * Encodes the specified TuneQaScorecardRevisionResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionResponse.verify|verify} messages.
+                     * @param message TuneQaScorecardRevisionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TuneQaScorecardRevisionResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionResponse.verify|verify} messages.
+                     * @param message TuneQaScorecardRevisionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TuneQaScorecardRevisionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TuneQaScorecardRevisionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionResponse;
+
+                    /**
+                     * Decodes a TuneQaScorecardRevisionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TuneQaScorecardRevisionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionResponse;
+
+                    /**
+                     * Verifies a TuneQaScorecardRevisionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TuneQaScorecardRevisionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TuneQaScorecardRevisionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionResponse;
+
+                    /**
+                     * Creates a plain object from a TuneQaScorecardRevisionResponse message. Also converts values to other types if specified.
+                     * @param message TuneQaScorecardRevisionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TuneQaScorecardRevisionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TuneQaScorecardRevisionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TuneQaScorecardRevisionMetadata. */
+                interface ITuneQaScorecardRevisionMetadata {
+
+                    /** TuneQaScorecardRevisionMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TuneQaScorecardRevisionMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TuneQaScorecardRevisionMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest|null);
+
+                    /** TuneQaScorecardRevisionMetadata qaQuestionDatasetValidationResults */
+                    qaQuestionDatasetValidationResults?: (google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetValidationResult[]|null);
+
+                    /** TuneQaScorecardRevisionMetadata qaQuestionDatasetTuningMetrics */
+                    qaQuestionDatasetTuningMetrics?: (google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetTuningMetrics[]|null);
+
+                    /** TuneQaScorecardRevisionMetadata tuningCompletionRatio */
+                    tuningCompletionRatio?: (number|null);
+                }
+
+                /** Represents a TuneQaScorecardRevisionMetadata. */
+                class TuneQaScorecardRevisionMetadata implements ITuneQaScorecardRevisionMetadata {
+
+                    /**
+                     * Constructs a new TuneQaScorecardRevisionMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata);
+
+                    /** TuneQaScorecardRevisionMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TuneQaScorecardRevisionMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TuneQaScorecardRevisionMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionRequest|null);
+
+                    /** TuneQaScorecardRevisionMetadata qaQuestionDatasetValidationResults. */
+                    public qaQuestionDatasetValidationResults: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetValidationResult[];
+
+                    /** TuneQaScorecardRevisionMetadata qaQuestionDatasetTuningMetrics. */
+                    public qaQuestionDatasetTuningMetrics: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetTuningMetrics[];
+
+                    /** TuneQaScorecardRevisionMetadata tuningCompletionRatio. */
+                    public tuningCompletionRatio: number;
+
+                    /**
+                     * Creates a new TuneQaScorecardRevisionMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TuneQaScorecardRevisionMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata;
+
+                    /**
+                     * Encodes the specified TuneQaScorecardRevisionMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.verify|verify} messages.
+                     * @param message TuneQaScorecardRevisionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TuneQaScorecardRevisionMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.verify|verify} messages.
+                     * @param message TuneQaScorecardRevisionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TuneQaScorecardRevisionMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TuneQaScorecardRevisionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata;
+
+                    /**
+                     * Decodes a TuneQaScorecardRevisionMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TuneQaScorecardRevisionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata;
+
+                    /**
+                     * Verifies a TuneQaScorecardRevisionMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TuneQaScorecardRevisionMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TuneQaScorecardRevisionMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata;
+
+                    /**
+                     * Creates a plain object from a TuneQaScorecardRevisionMetadata message. Also converts values to other types if specified.
+                     * @param message TuneQaScorecardRevisionMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TuneQaScorecardRevisionMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TuneQaScorecardRevisionMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TuneQaScorecardRevisionMetadata {
+
+                    /** Properties of a QaQuestionDatasetValidationResult. */
+                    interface IQaQuestionDatasetValidationResult {
+
+                        /** QaQuestionDatasetValidationResult question */
+                        question?: (string|null);
+
+                        /** QaQuestionDatasetValidationResult datasetValidationWarnings */
+                        datasetValidationWarnings?: (google.cloud.contactcenterinsights.v1.DatasetValidationWarning[]|null);
+
+                        /** QaQuestionDatasetValidationResult validFeedbackLabelsCount */
+                        validFeedbackLabelsCount?: (number|null);
+                    }
+
+                    /** Represents a QaQuestionDatasetValidationResult. */
+                    class QaQuestionDatasetValidationResult implements IQaQuestionDatasetValidationResult {
+
+                        /**
+                         * Constructs a new QaQuestionDatasetValidationResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetValidationResult);
+
+                        /** QaQuestionDatasetValidationResult question. */
+                        public question: string;
+
+                        /** QaQuestionDatasetValidationResult datasetValidationWarnings. */
+                        public datasetValidationWarnings: google.cloud.contactcenterinsights.v1.DatasetValidationWarning[];
+
+                        /** QaQuestionDatasetValidationResult validFeedbackLabelsCount. */
+                        public validFeedbackLabelsCount: number;
+
+                        /**
+                         * Creates a new QaQuestionDatasetValidationResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QaQuestionDatasetValidationResult instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetValidationResult): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetValidationResult;
+
+                        /**
+                         * Encodes the specified QaQuestionDatasetValidationResult message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetValidationResult.verify|verify} messages.
+                         * @param message QaQuestionDatasetValidationResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetValidationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QaQuestionDatasetValidationResult message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetValidationResult.verify|verify} messages.
+                         * @param message QaQuestionDatasetValidationResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetValidationResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QaQuestionDatasetValidationResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QaQuestionDatasetValidationResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetValidationResult;
+
+                        /**
+                         * Decodes a QaQuestionDatasetValidationResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QaQuestionDatasetValidationResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetValidationResult;
+
+                        /**
+                         * Verifies a QaQuestionDatasetValidationResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QaQuestionDatasetValidationResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QaQuestionDatasetValidationResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetValidationResult;
+
+                        /**
+                         * Creates a plain object from a QaQuestionDatasetValidationResult message. Also converts values to other types if specified.
+                         * @param message QaQuestionDatasetValidationResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetValidationResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QaQuestionDatasetValidationResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QaQuestionDatasetValidationResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a QaQuestionDatasetTuningMetrics. */
+                    interface IQaQuestionDatasetTuningMetrics {
+
+                        /** QaQuestionDatasetTuningMetrics question */
+                        question?: (string|null);
+
+                        /** QaQuestionDatasetTuningMetrics metrics */
+                        metrics?: (google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.IMetrics|null);
+                    }
+
+                    /** Represents a QaQuestionDatasetTuningMetrics. */
+                    class QaQuestionDatasetTuningMetrics implements IQaQuestionDatasetTuningMetrics {
+
+                        /**
+                         * Constructs a new QaQuestionDatasetTuningMetrics.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetTuningMetrics);
+
+                        /** QaQuestionDatasetTuningMetrics question. */
+                        public question: string;
+
+                        /** QaQuestionDatasetTuningMetrics metrics. */
+                        public metrics?: (google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.IMetrics|null);
+
+                        /**
+                         * Creates a new QaQuestionDatasetTuningMetrics instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QaQuestionDatasetTuningMetrics instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetTuningMetrics): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics;
+
+                        /**
+                         * Encodes the specified QaQuestionDatasetTuningMetrics message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.verify|verify} messages.
+                         * @param message QaQuestionDatasetTuningMetrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetTuningMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QaQuestionDatasetTuningMetrics message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.verify|verify} messages.
+                         * @param message QaQuestionDatasetTuningMetrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.IQaQuestionDatasetTuningMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QaQuestionDatasetTuningMetrics message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QaQuestionDatasetTuningMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics;
+
+                        /**
+                         * Decodes a QaQuestionDatasetTuningMetrics message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QaQuestionDatasetTuningMetrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics;
+
+                        /**
+                         * Verifies a QaQuestionDatasetTuningMetrics message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QaQuestionDatasetTuningMetrics message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QaQuestionDatasetTuningMetrics
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics;
+
+                        /**
+                         * Creates a plain object from a QaQuestionDatasetTuningMetrics message. Also converts values to other types if specified.
+                         * @param message QaQuestionDatasetTuningMetrics
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QaQuestionDatasetTuningMetrics to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QaQuestionDatasetTuningMetrics
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace QaQuestionDatasetTuningMetrics {
+
+                        /** Properties of a Metrics. */
+                        interface IMetrics {
+
+                            /** Metrics accuracy */
+                            accuracy?: (number|null);
+                        }
+
+                        /** Represents a Metrics. */
+                        class Metrics implements IMetrics {
+
+                            /**
+                             * Constructs a new Metrics.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.IMetrics);
+
+                            /** Metrics accuracy. */
+                            public accuracy: number;
+
+                            /**
+                             * Creates a new Metrics instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Metrics instance
+                             */
+                            public static create(properties?: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.IMetrics): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.Metrics;
+
+                            /**
+                             * Encodes the specified Metrics message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.Metrics.verify|verify} messages.
+                             * @param message Metrics message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.IMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Metrics message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.Metrics.verify|verify} messages.
+                             * @param message Metrics message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.IMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Metrics message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Metrics
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.Metrics;
+
+                            /**
+                             * Decodes a Metrics message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Metrics
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.Metrics;
+
+                            /**
+                             * Verifies a Metrics message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Metrics message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Metrics
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.Metrics;
+
+                            /**
+                             * Creates a plain object from a Metrics message. Also converts values to other types if specified.
+                             * @param message Metrics
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.Metrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Metrics to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Metrics
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a DeployQaScorecardRevisionRequest. */
+                interface IDeployQaScorecardRevisionRequest {
+
+                    /** DeployQaScorecardRevisionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeployQaScorecardRevisionRequest. */
+                class DeployQaScorecardRevisionRequest implements IDeployQaScorecardRevisionRequest {
+
+                    /**
+                     * Constructs a new DeployQaScorecardRevisionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest);
+
+                    /** DeployQaScorecardRevisionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeployQaScorecardRevisionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployQaScorecardRevisionRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest): google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest;
+
+                    /**
+                     * Encodes the specified DeployQaScorecardRevisionRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message DeployQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployQaScorecardRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message DeployQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IDeployQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployQaScorecardRevisionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest;
+
+                    /**
+                     * Decodes a DeployQaScorecardRevisionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest;
+
+                    /**
+                     * Verifies a DeployQaScorecardRevisionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployQaScorecardRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployQaScorecardRevisionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest;
+
+                    /**
+                     * Creates a plain object from a DeployQaScorecardRevisionRequest message. Also converts values to other types if specified.
+                     * @param message DeployQaScorecardRevisionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployQaScorecardRevisionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployQaScorecardRevisionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UndeployQaScorecardRevisionRequest. */
+                interface IUndeployQaScorecardRevisionRequest {
+
+                    /** UndeployQaScorecardRevisionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an UndeployQaScorecardRevisionRequest. */
+                class UndeployQaScorecardRevisionRequest implements IUndeployQaScorecardRevisionRequest {
+
+                    /**
+                     * Constructs a new UndeployQaScorecardRevisionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest);
+
+                    /** UndeployQaScorecardRevisionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new UndeployQaScorecardRevisionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UndeployQaScorecardRevisionRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest): google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest;
+
+                    /**
+                     * Encodes the specified UndeployQaScorecardRevisionRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message UndeployQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UndeployQaScorecardRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message UndeployQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IUndeployQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UndeployQaScorecardRevisionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UndeployQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest;
+
+                    /**
+                     * Decodes an UndeployQaScorecardRevisionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UndeployQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest;
+
+                    /**
+                     * Verifies an UndeployQaScorecardRevisionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UndeployQaScorecardRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UndeployQaScorecardRevisionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest;
+
+                    /**
+                     * Creates a plain object from an UndeployQaScorecardRevisionRequest message. Also converts values to other types if specified.
+                     * @param message UndeployQaScorecardRevisionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UndeployQaScorecardRevisionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UndeployQaScorecardRevisionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteQaScorecardRevisionRequest. */
+                interface IDeleteQaScorecardRevisionRequest {
+
+                    /** DeleteQaScorecardRevisionRequest name */
+                    name?: (string|null);
+
+                    /** DeleteQaScorecardRevisionRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteQaScorecardRevisionRequest. */
+                class DeleteQaScorecardRevisionRequest implements IDeleteQaScorecardRevisionRequest {
+
+                    /**
+                     * Constructs a new DeleteQaScorecardRevisionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest);
+
+                    /** DeleteQaScorecardRevisionRequest name. */
+                    public name: string;
+
+                    /** DeleteQaScorecardRevisionRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteQaScorecardRevisionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteQaScorecardRevisionRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest): google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest;
+
+                    /**
+                     * Encodes the specified DeleteQaScorecardRevisionRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message DeleteQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteQaScorecardRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest.verify|verify} messages.
+                     * @param message DeleteQaScorecardRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IDeleteQaScorecardRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteQaScorecardRevisionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest;
+
+                    /**
+                     * Decodes a DeleteQaScorecardRevisionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteQaScorecardRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest;
+
+                    /**
+                     * Verifies a DeleteQaScorecardRevisionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteQaScorecardRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteQaScorecardRevisionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteQaScorecardRevisionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteQaScorecardRevisionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteQaScorecardRevisionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteQaScorecardRevisionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQaScorecardsRequest. */
+                interface IListQaScorecardsRequest {
+
+                    /** ListQaScorecardsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListQaScorecardsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListQaScorecardsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListQaScorecardsRequest. */
+                class ListQaScorecardsRequest implements IListQaScorecardsRequest {
+
+                    /**
+                     * Constructs a new ListQaScorecardsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest);
+
+                    /** ListQaScorecardsRequest parent. */
+                    public parent: string;
+
+                    /** ListQaScorecardsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListQaScorecardsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListQaScorecardsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQaScorecardsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest): google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest;
+
+                    /**
+                     * Encodes the specified ListQaScorecardsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest.verify|verify} messages.
+                     * @param message ListQaScorecardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQaScorecardsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest.verify|verify} messages.
+                     * @param message ListQaScorecardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListQaScorecardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQaScorecardsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQaScorecardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest;
+
+                    /**
+                     * Decodes a ListQaScorecardsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQaScorecardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest;
+
+                    /**
+                     * Verifies a ListQaScorecardsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQaScorecardsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQaScorecardsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest;
+
+                    /**
+                     * Creates a plain object from a ListQaScorecardsRequest message. Also converts values to other types if specified.
+                     * @param message ListQaScorecardsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQaScorecardsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQaScorecardsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQaScorecardsResponse. */
+                interface IListQaScorecardsResponse {
+
+                    /** ListQaScorecardsResponse qaScorecards */
+                    qaScorecards?: (google.cloud.contactcenterinsights.v1.IQaScorecard[]|null);
+
+                    /** ListQaScorecardsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListQaScorecardsResponse. */
+                class ListQaScorecardsResponse implements IListQaScorecardsResponse {
+
+                    /**
+                     * Constructs a new ListQaScorecardsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse);
+
+                    /** ListQaScorecardsResponse qaScorecards. */
+                    public qaScorecards: google.cloud.contactcenterinsights.v1.IQaScorecard[];
+
+                    /** ListQaScorecardsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListQaScorecardsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQaScorecardsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse): google.cloud.contactcenterinsights.v1.ListQaScorecardsResponse;
+
+                    /**
+                     * Encodes the specified ListQaScorecardsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaScorecardsResponse.verify|verify} messages.
+                     * @param message ListQaScorecardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQaScorecardsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaScorecardsResponse.verify|verify} messages.
+                     * @param message ListQaScorecardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListQaScorecardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQaScorecardsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQaScorecardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListQaScorecardsResponse;
+
+                    /**
+                     * Decodes a ListQaScorecardsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQaScorecardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListQaScorecardsResponse;
+
+                    /**
+                     * Verifies a ListQaScorecardsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQaScorecardsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQaScorecardsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListQaScorecardsResponse;
+
+                    /**
+                     * Creates a plain object from a ListQaScorecardsResponse message. Also converts values to other types if specified.
+                     * @param message ListQaScorecardsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListQaScorecardsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQaScorecardsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQaScorecardsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQaScorecardRevisionsRequest. */
+                interface IListQaScorecardRevisionsRequest {
+
+                    /** ListQaScorecardRevisionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListQaScorecardRevisionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListQaScorecardRevisionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListQaScorecardRevisionsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListQaScorecardRevisionsRequest. */
+                class ListQaScorecardRevisionsRequest implements IListQaScorecardRevisionsRequest {
+
+                    /**
+                     * Constructs a new ListQaScorecardRevisionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest);
+
+                    /** ListQaScorecardRevisionsRequest parent. */
+                    public parent: string;
+
+                    /** ListQaScorecardRevisionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListQaScorecardRevisionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListQaScorecardRevisionsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListQaScorecardRevisionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQaScorecardRevisionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest): google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest;
+
+                    /**
+                     * Encodes the specified ListQaScorecardRevisionsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest.verify|verify} messages.
+                     * @param message ListQaScorecardRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQaScorecardRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest.verify|verify} messages.
+                     * @param message ListQaScorecardRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQaScorecardRevisionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQaScorecardRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest;
+
+                    /**
+                     * Decodes a ListQaScorecardRevisionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQaScorecardRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest;
+
+                    /**
+                     * Verifies a ListQaScorecardRevisionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQaScorecardRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQaScorecardRevisionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListQaScorecardRevisionsRequest message. Also converts values to other types if specified.
+                     * @param message ListQaScorecardRevisionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQaScorecardRevisionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQaScorecardRevisionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListQaScorecardRevisionsResponse. */
+                interface IListQaScorecardRevisionsResponse {
+
+                    /** ListQaScorecardRevisionsResponse qaScorecardRevisions */
+                    qaScorecardRevisions?: (google.cloud.contactcenterinsights.v1.IQaScorecardRevision[]|null);
+
+                    /** ListQaScorecardRevisionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListQaScorecardRevisionsResponse. */
+                class ListQaScorecardRevisionsResponse implements IListQaScorecardRevisionsResponse {
+
+                    /**
+                     * Constructs a new ListQaScorecardRevisionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse);
+
+                    /** ListQaScorecardRevisionsResponse qaScorecardRevisions. */
+                    public qaScorecardRevisions: google.cloud.contactcenterinsights.v1.IQaScorecardRevision[];
+
+                    /** ListQaScorecardRevisionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListQaScorecardRevisionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListQaScorecardRevisionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse): google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsResponse;
+
+                    /**
+                     * Encodes the specified ListQaScorecardRevisionsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsResponse.verify|verify} messages.
+                     * @param message ListQaScorecardRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListQaScorecardRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsResponse.verify|verify} messages.
+                     * @param message ListQaScorecardRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListQaScorecardRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListQaScorecardRevisionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListQaScorecardRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsResponse;
+
+                    /**
+                     * Decodes a ListQaScorecardRevisionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListQaScorecardRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsResponse;
+
+                    /**
+                     * Verifies a ListQaScorecardRevisionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListQaScorecardRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListQaScorecardRevisionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListQaScorecardRevisionsResponse message. Also converts values to other types if specified.
+                     * @param message ListQaScorecardRevisionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListQaScorecardRevisionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListQaScorecardRevisionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateFeedbackLabelRequest. */
+                interface ICreateFeedbackLabelRequest {
+
+                    /** CreateFeedbackLabelRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateFeedbackLabelRequest feedbackLabelId */
+                    feedbackLabelId?: (string|null);
+
+                    /** CreateFeedbackLabelRequest feedbackLabel */
+                    feedbackLabel?: (google.cloud.contactcenterinsights.v1.IFeedbackLabel|null);
+                }
+
+                /** Represents a CreateFeedbackLabelRequest. */
+                class CreateFeedbackLabelRequest implements ICreateFeedbackLabelRequest {
+
+                    /**
+                     * Constructs a new CreateFeedbackLabelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest);
+
+                    /** CreateFeedbackLabelRequest parent. */
+                    public parent: string;
+
+                    /** CreateFeedbackLabelRequest feedbackLabelId. */
+                    public feedbackLabelId: string;
+
+                    /** CreateFeedbackLabelRequest feedbackLabel. */
+                    public feedbackLabel?: (google.cloud.contactcenterinsights.v1.IFeedbackLabel|null);
+
+                    /**
+                     * Creates a new CreateFeedbackLabelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateFeedbackLabelRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest): google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest;
+
+                    /**
+                     * Encodes the specified CreateFeedbackLabelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest.verify|verify} messages.
+                     * @param message CreateFeedbackLabelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateFeedbackLabelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest.verify|verify} messages.
+                     * @param message CreateFeedbackLabelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ICreateFeedbackLabelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateFeedbackLabelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateFeedbackLabelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest;
+
+                    /**
+                     * Decodes a CreateFeedbackLabelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateFeedbackLabelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest;
+
+                    /**
+                     * Verifies a CreateFeedbackLabelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateFeedbackLabelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateFeedbackLabelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest;
+
+                    /**
+                     * Creates a plain object from a CreateFeedbackLabelRequest message. Also converts values to other types if specified.
+                     * @param message CreateFeedbackLabelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateFeedbackLabelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateFeedbackLabelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFeedbackLabelsRequest. */
+                interface IListFeedbackLabelsRequest {
+
+                    /** ListFeedbackLabelsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFeedbackLabelsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListFeedbackLabelsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFeedbackLabelsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListFeedbackLabelsRequest. */
+                class ListFeedbackLabelsRequest implements IListFeedbackLabelsRequest {
+
+                    /**
+                     * Constructs a new ListFeedbackLabelsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest);
+
+                    /** ListFeedbackLabelsRequest parent. */
+                    public parent: string;
+
+                    /** ListFeedbackLabelsRequest filter. */
+                    public filter: string;
+
+                    /** ListFeedbackLabelsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFeedbackLabelsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListFeedbackLabelsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFeedbackLabelsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest): google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest;
+
+                    /**
+                     * Encodes the specified ListFeedbackLabelsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest.verify|verify} messages.
+                     * @param message ListFeedbackLabelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFeedbackLabelsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest.verify|verify} messages.
+                     * @param message ListFeedbackLabelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListFeedbackLabelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFeedbackLabelsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFeedbackLabelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest;
+
+                    /**
+                     * Decodes a ListFeedbackLabelsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFeedbackLabelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest;
+
+                    /**
+                     * Verifies a ListFeedbackLabelsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFeedbackLabelsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFeedbackLabelsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest;
+
+                    /**
+                     * Creates a plain object from a ListFeedbackLabelsRequest message. Also converts values to other types if specified.
+                     * @param message ListFeedbackLabelsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFeedbackLabelsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFeedbackLabelsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFeedbackLabelsResponse. */
+                interface IListFeedbackLabelsResponse {
+
+                    /** ListFeedbackLabelsResponse feedbackLabels */
+                    feedbackLabels?: (google.cloud.contactcenterinsights.v1.IFeedbackLabel[]|null);
+
+                    /** ListFeedbackLabelsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListFeedbackLabelsResponse. */
+                class ListFeedbackLabelsResponse implements IListFeedbackLabelsResponse {
+
+                    /**
+                     * Constructs a new ListFeedbackLabelsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse);
+
+                    /** ListFeedbackLabelsResponse feedbackLabels. */
+                    public feedbackLabels: google.cloud.contactcenterinsights.v1.IFeedbackLabel[];
+
+                    /** ListFeedbackLabelsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListFeedbackLabelsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFeedbackLabelsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse): google.cloud.contactcenterinsights.v1.ListFeedbackLabelsResponse;
+
+                    /**
+                     * Encodes the specified ListFeedbackLabelsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListFeedbackLabelsResponse.verify|verify} messages.
+                     * @param message ListFeedbackLabelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFeedbackLabelsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListFeedbackLabelsResponse.verify|verify} messages.
+                     * @param message ListFeedbackLabelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListFeedbackLabelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFeedbackLabelsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFeedbackLabelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListFeedbackLabelsResponse;
+
+                    /**
+                     * Decodes a ListFeedbackLabelsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFeedbackLabelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListFeedbackLabelsResponse;
+
+                    /**
+                     * Verifies a ListFeedbackLabelsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFeedbackLabelsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFeedbackLabelsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListFeedbackLabelsResponse;
+
+                    /**
+                     * Creates a plain object from a ListFeedbackLabelsResponse message. Also converts values to other types if specified.
+                     * @param message ListFeedbackLabelsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListFeedbackLabelsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFeedbackLabelsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFeedbackLabelsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetFeedbackLabelRequest. */
+                interface IGetFeedbackLabelRequest {
+
+                    /** GetFeedbackLabelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFeedbackLabelRequest. */
+                class GetFeedbackLabelRequest implements IGetFeedbackLabelRequest {
+
+                    /**
+                     * Constructs a new GetFeedbackLabelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest);
+
+                    /** GetFeedbackLabelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFeedbackLabelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFeedbackLabelRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest): google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest;
+
+                    /**
+                     * Encodes the specified GetFeedbackLabelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest.verify|verify} messages.
+                     * @param message GetFeedbackLabelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFeedbackLabelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest.verify|verify} messages.
+                     * @param message GetFeedbackLabelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IGetFeedbackLabelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFeedbackLabelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFeedbackLabelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest;
+
+                    /**
+                     * Decodes a GetFeedbackLabelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFeedbackLabelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest;
+
+                    /**
+                     * Verifies a GetFeedbackLabelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFeedbackLabelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFeedbackLabelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest;
+
+                    /**
+                     * Creates a plain object from a GetFeedbackLabelRequest message. Also converts values to other types if specified.
+                     * @param message GetFeedbackLabelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFeedbackLabelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFeedbackLabelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateFeedbackLabelRequest. */
+                interface IUpdateFeedbackLabelRequest {
+
+                    /** UpdateFeedbackLabelRequest feedbackLabel */
+                    feedbackLabel?: (google.cloud.contactcenterinsights.v1.IFeedbackLabel|null);
+
+                    /** UpdateFeedbackLabelRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateFeedbackLabelRequest. */
+                class UpdateFeedbackLabelRequest implements IUpdateFeedbackLabelRequest {
+
+                    /**
+                     * Constructs a new UpdateFeedbackLabelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest);
+
+                    /** UpdateFeedbackLabelRequest feedbackLabel. */
+                    public feedbackLabel?: (google.cloud.contactcenterinsights.v1.IFeedbackLabel|null);
+
+                    /** UpdateFeedbackLabelRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateFeedbackLabelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateFeedbackLabelRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest): google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest;
+
+                    /**
+                     * Encodes the specified UpdateFeedbackLabelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest.verify|verify} messages.
+                     * @param message UpdateFeedbackLabelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateFeedbackLabelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest.verify|verify} messages.
+                     * @param message UpdateFeedbackLabelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IUpdateFeedbackLabelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateFeedbackLabelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateFeedbackLabelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest;
+
+                    /**
+                     * Decodes an UpdateFeedbackLabelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateFeedbackLabelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest;
+
+                    /**
+                     * Verifies an UpdateFeedbackLabelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateFeedbackLabelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateFeedbackLabelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateFeedbackLabelRequest message. Also converts values to other types if specified.
+                     * @param message UpdateFeedbackLabelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateFeedbackLabelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateFeedbackLabelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteFeedbackLabelRequest. */
+                interface IDeleteFeedbackLabelRequest {
+
+                    /** DeleteFeedbackLabelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteFeedbackLabelRequest. */
+                class DeleteFeedbackLabelRequest implements IDeleteFeedbackLabelRequest {
+
+                    /**
+                     * Constructs a new DeleteFeedbackLabelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest);
+
+                    /** DeleteFeedbackLabelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteFeedbackLabelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteFeedbackLabelRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest): google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest;
+
+                    /**
+                     * Encodes the specified DeleteFeedbackLabelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest.verify|verify} messages.
+                     * @param message DeleteFeedbackLabelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteFeedbackLabelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest.verify|verify} messages.
+                     * @param message DeleteFeedbackLabelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IDeleteFeedbackLabelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteFeedbackLabelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteFeedbackLabelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest;
+
+                    /**
+                     * Decodes a DeleteFeedbackLabelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteFeedbackLabelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest;
+
+                    /**
+                     * Verifies a DeleteFeedbackLabelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteFeedbackLabelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteFeedbackLabelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteFeedbackLabelRequest message. Also converts values to other types if specified.
+                     * @param message DeleteFeedbackLabelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteFeedbackLabelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteFeedbackLabelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAllFeedbackLabelsRequest. */
+                interface IListAllFeedbackLabelsRequest {
+
+                    /** ListAllFeedbackLabelsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAllFeedbackLabelsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAllFeedbackLabelsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAllFeedbackLabelsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListAllFeedbackLabelsRequest. */
+                class ListAllFeedbackLabelsRequest implements IListAllFeedbackLabelsRequest {
+
+                    /**
+                     * Constructs a new ListAllFeedbackLabelsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest);
+
+                    /** ListAllFeedbackLabelsRequest parent. */
+                    public parent: string;
+
+                    /** ListAllFeedbackLabelsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAllFeedbackLabelsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAllFeedbackLabelsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListAllFeedbackLabelsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAllFeedbackLabelsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest): google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest;
+
+                    /**
+                     * Encodes the specified ListAllFeedbackLabelsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest.verify|verify} messages.
+                     * @param message ListAllFeedbackLabelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAllFeedbackLabelsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest.verify|verify} messages.
+                     * @param message ListAllFeedbackLabelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAllFeedbackLabelsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAllFeedbackLabelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest;
+
+                    /**
+                     * Decodes a ListAllFeedbackLabelsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAllFeedbackLabelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest;
+
+                    /**
+                     * Verifies a ListAllFeedbackLabelsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAllFeedbackLabelsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAllFeedbackLabelsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAllFeedbackLabelsRequest message. Also converts values to other types if specified.
+                     * @param message ListAllFeedbackLabelsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAllFeedbackLabelsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAllFeedbackLabelsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAllFeedbackLabelsResponse. */
+                interface IListAllFeedbackLabelsResponse {
+
+                    /** ListAllFeedbackLabelsResponse feedbackLabels */
+                    feedbackLabels?: (google.cloud.contactcenterinsights.v1.IFeedbackLabel[]|null);
+
+                    /** ListAllFeedbackLabelsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAllFeedbackLabelsResponse. */
+                class ListAllFeedbackLabelsResponse implements IListAllFeedbackLabelsResponse {
+
+                    /**
+                     * Constructs a new ListAllFeedbackLabelsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse);
+
+                    /** ListAllFeedbackLabelsResponse feedbackLabels. */
+                    public feedbackLabels: google.cloud.contactcenterinsights.v1.IFeedbackLabel[];
+
+                    /** ListAllFeedbackLabelsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAllFeedbackLabelsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAllFeedbackLabelsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse): google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsResponse;
+
+                    /**
+                     * Encodes the specified ListAllFeedbackLabelsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsResponse.verify|verify} messages.
+                     * @param message ListAllFeedbackLabelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAllFeedbackLabelsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsResponse.verify|verify} messages.
+                     * @param message ListAllFeedbackLabelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IListAllFeedbackLabelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAllFeedbackLabelsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAllFeedbackLabelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsResponse;
+
+                    /**
+                     * Decodes a ListAllFeedbackLabelsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAllFeedbackLabelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsResponse;
+
+                    /**
+                     * Verifies a ListAllFeedbackLabelsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAllFeedbackLabelsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAllFeedbackLabelsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAllFeedbackLabelsResponse message. Also converts values to other types if specified.
+                     * @param message ListAllFeedbackLabelsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAllFeedbackLabelsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAllFeedbackLabelsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkUploadFeedbackLabelsRequest. */
+                interface IBulkUploadFeedbackLabelsRequest {
+
+                    /** BulkUploadFeedbackLabelsRequest gcsSource */
+                    gcsSource?: (google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.IGcsSource|null);
+
+                    /** BulkUploadFeedbackLabelsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkUploadFeedbackLabelsRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a BulkUploadFeedbackLabelsRequest. */
+                class BulkUploadFeedbackLabelsRequest implements IBulkUploadFeedbackLabelsRequest {
+
+                    /**
+                     * Constructs a new BulkUploadFeedbackLabelsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest);
+
+                    /** BulkUploadFeedbackLabelsRequest gcsSource. */
+                    public gcsSource?: (google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.IGcsSource|null);
+
+                    /** BulkUploadFeedbackLabelsRequest parent. */
+                    public parent: string;
+
+                    /** BulkUploadFeedbackLabelsRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** BulkUploadFeedbackLabelsRequest source. */
+                    public source?: "gcsSource";
+
+                    /**
+                     * Creates a new BulkUploadFeedbackLabelsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkUploadFeedbackLabelsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest;
+
+                    /**
+                     * Encodes the specified BulkUploadFeedbackLabelsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.verify|verify} messages.
+                     * @param message BulkUploadFeedbackLabelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkUploadFeedbackLabelsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.verify|verify} messages.
+                     * @param message BulkUploadFeedbackLabelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkUploadFeedbackLabelsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkUploadFeedbackLabelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest;
+
+                    /**
+                     * Decodes a BulkUploadFeedbackLabelsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkUploadFeedbackLabelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest;
+
+                    /**
+                     * Verifies a BulkUploadFeedbackLabelsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkUploadFeedbackLabelsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkUploadFeedbackLabelsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkUploadFeedbackLabelsRequest message. Also converts values to other types if specified.
+                     * @param message BulkUploadFeedbackLabelsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkUploadFeedbackLabelsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkUploadFeedbackLabelsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BulkUploadFeedbackLabelsRequest {
+
+                    /** Properties of a GcsSource. */
+                    interface IGcsSource {
+
+                        /** GcsSource format */
+                        format?: (google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource.Format|keyof typeof google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource.Format|null);
+
+                        /** GcsSource objectUri */
+                        objectUri?: (string|null);
+                    }
+
+                    /** Represents a GcsSource. */
+                    class GcsSource implements IGcsSource {
+
+                        /**
+                         * Constructs a new GcsSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.IGcsSource);
+
+                        /** GcsSource format. */
+                        public format: (google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource.Format|keyof typeof google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource.Format);
+
+                        /** GcsSource objectUri. */
+                        public objectUri: string;
+
+                        /**
+                         * Creates a new GcsSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsSource instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.IGcsSource): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource;
+
+                        /**
+                         * Encodes the specified GcsSource message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource.verify|verify} messages.
+                         * @param message GcsSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.IGcsSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsSource message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource.verify|verify} messages.
+                         * @param message GcsSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.IGcsSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource;
+
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource;
+
+                        /**
+                         * Verifies a GcsSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource;
+
+                        /**
+                         * Creates a plain object from a GcsSource message. Also converts values to other types if specified.
+                         * @param message GcsSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GcsSource {
+
+                        /** Format enum. */
+                        enum Format {
+                            FORMAT_UNSPECIFIED = 0,
+                            CSV = 1,
+                            JSON = 2
+                        }
+                    }
+                }
+
+                /** Properties of a BulkUploadFeedbackLabelsResponse. */
+                interface IBulkUploadFeedbackLabelsResponse {
+                }
+
+                /** Represents a BulkUploadFeedbackLabelsResponse. */
+                class BulkUploadFeedbackLabelsResponse implements IBulkUploadFeedbackLabelsResponse {
+
+                    /**
+                     * Constructs a new BulkUploadFeedbackLabelsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse);
+
+                    /**
+                     * Creates a new BulkUploadFeedbackLabelsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkUploadFeedbackLabelsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsResponse;
+
+                    /**
+                     * Encodes the specified BulkUploadFeedbackLabelsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsResponse.verify|verify} messages.
+                     * @param message BulkUploadFeedbackLabelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkUploadFeedbackLabelsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsResponse.verify|verify} messages.
+                     * @param message BulkUploadFeedbackLabelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkUploadFeedbackLabelsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkUploadFeedbackLabelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsResponse;
+
+                    /**
+                     * Decodes a BulkUploadFeedbackLabelsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkUploadFeedbackLabelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsResponse;
+
+                    /**
+                     * Verifies a BulkUploadFeedbackLabelsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkUploadFeedbackLabelsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkUploadFeedbackLabelsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkUploadFeedbackLabelsResponse message. Also converts values to other types if specified.
+                     * @param message BulkUploadFeedbackLabelsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkUploadFeedbackLabelsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkUploadFeedbackLabelsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkUploadFeedbackLabelsMetadata. */
+                interface IBulkUploadFeedbackLabelsMetadata {
+
+                    /** BulkUploadFeedbackLabelsMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkUploadFeedbackLabelsMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkUploadFeedbackLabelsMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest|null);
+
+                    /** BulkUploadFeedbackLabelsMetadata partialErrors */
+                    partialErrors?: (google.rpc.IStatus[]|null);
+
+                    /** BulkUploadFeedbackLabelsMetadata uploadStats */
+                    uploadStats?: (google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.IUploadStats|null);
+                }
+
+                /** Represents a BulkUploadFeedbackLabelsMetadata. */
+                class BulkUploadFeedbackLabelsMetadata implements IBulkUploadFeedbackLabelsMetadata {
+
+                    /**
+                     * Constructs a new BulkUploadFeedbackLabelsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata);
+
+                    /** BulkUploadFeedbackLabelsMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkUploadFeedbackLabelsMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkUploadFeedbackLabelsMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsRequest|null);
+
+                    /** BulkUploadFeedbackLabelsMetadata partialErrors. */
+                    public partialErrors: google.rpc.IStatus[];
+
+                    /** BulkUploadFeedbackLabelsMetadata uploadStats. */
+                    public uploadStats?: (google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.IUploadStats|null);
+
+                    /**
+                     * Creates a new BulkUploadFeedbackLabelsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkUploadFeedbackLabelsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata;
+
+                    /**
+                     * Encodes the specified BulkUploadFeedbackLabelsMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.verify|verify} messages.
+                     * @param message BulkUploadFeedbackLabelsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkUploadFeedbackLabelsMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.verify|verify} messages.
+                     * @param message BulkUploadFeedbackLabelsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkUploadFeedbackLabelsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkUploadFeedbackLabelsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata;
+
+                    /**
+                     * Decodes a BulkUploadFeedbackLabelsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkUploadFeedbackLabelsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata;
+
+                    /**
+                     * Verifies a BulkUploadFeedbackLabelsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkUploadFeedbackLabelsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkUploadFeedbackLabelsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata;
+
+                    /**
+                     * Creates a plain object from a BulkUploadFeedbackLabelsMetadata message. Also converts values to other types if specified.
+                     * @param message BulkUploadFeedbackLabelsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkUploadFeedbackLabelsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkUploadFeedbackLabelsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BulkUploadFeedbackLabelsMetadata {
+
+                    /** Properties of an UploadStats. */
+                    interface IUploadStats {
+
+                        /** UploadStats processedObjectCount */
+                        processedObjectCount?: (number|null);
+
+                        /** UploadStats failedValidationCount */
+                        failedValidationCount?: (number|null);
+
+                        /** UploadStats successfulUploadCount */
+                        successfulUploadCount?: (number|null);
+                    }
+
+                    /** Represents an UploadStats. */
+                    class UploadStats implements IUploadStats {
+
+                        /**
+                         * Constructs a new UploadStats.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.IUploadStats);
+
+                        /** UploadStats processedObjectCount. */
+                        public processedObjectCount: number;
+
+                        /** UploadStats failedValidationCount. */
+                        public failedValidationCount: number;
+
+                        /** UploadStats successfulUploadCount. */
+                        public successfulUploadCount: number;
+
+                        /**
+                         * Creates a new UploadStats instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UploadStats instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.IUploadStats): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.UploadStats;
+
+                        /**
+                         * Encodes the specified UploadStats message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.UploadStats.verify|verify} messages.
+                         * @param message UploadStats message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.IUploadStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UploadStats message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.UploadStats.verify|verify} messages.
+                         * @param message UploadStats message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.IUploadStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UploadStats message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UploadStats
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.UploadStats;
+
+                        /**
+                         * Decodes an UploadStats message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UploadStats
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.UploadStats;
+
+                        /**
+                         * Verifies an UploadStats message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UploadStats message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UploadStats
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.UploadStats;
+
+                        /**
+                         * Creates a plain object from an UploadStats message. Also converts values to other types if specified.
+                         * @param message UploadStats
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.UploadStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UploadStats to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UploadStats
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a BulkDownloadFeedbackLabelsRequest. */
+                interface IBulkDownloadFeedbackLabelsRequest {
+
+                    /** BulkDownloadFeedbackLabelsRequest gcsDestination */
+                    gcsDestination?: (google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.IGcsDestination|null);
+
+                    /** BulkDownloadFeedbackLabelsRequest parent */
+                    parent?: (string|null);
+
+                    /** BulkDownloadFeedbackLabelsRequest filter */
+                    filter?: (string|null);
+
+                    /** BulkDownloadFeedbackLabelsRequest maxDownloadCount */
+                    maxDownloadCount?: (number|null);
+
+                    /** BulkDownloadFeedbackLabelsRequest feedbackLabelType */
+                    feedbackLabelType?: (google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.FeedbackLabelType|keyof typeof google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.FeedbackLabelType|null);
+
+                    /** BulkDownloadFeedbackLabelsRequest conversationFilter */
+                    conversationFilter?: (string|null);
+
+                    /** BulkDownloadFeedbackLabelsRequest templateQaScorecardId */
+                    templateQaScorecardId?: (string[]|null);
+                }
+
+                /** Represents a BulkDownloadFeedbackLabelsRequest. */
+                class BulkDownloadFeedbackLabelsRequest implements IBulkDownloadFeedbackLabelsRequest {
+
+                    /**
+                     * Constructs a new BulkDownloadFeedbackLabelsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest);
+
+                    /** BulkDownloadFeedbackLabelsRequest gcsDestination. */
+                    public gcsDestination?: (google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.IGcsDestination|null);
+
+                    /** BulkDownloadFeedbackLabelsRequest parent. */
+                    public parent: string;
+
+                    /** BulkDownloadFeedbackLabelsRequest filter. */
+                    public filter: string;
+
+                    /** BulkDownloadFeedbackLabelsRequest maxDownloadCount. */
+                    public maxDownloadCount: number;
+
+                    /** BulkDownloadFeedbackLabelsRequest feedbackLabelType. */
+                    public feedbackLabelType: (google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.FeedbackLabelType|keyof typeof google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.FeedbackLabelType);
+
+                    /** BulkDownloadFeedbackLabelsRequest conversationFilter. */
+                    public conversationFilter: string;
+
+                    /** BulkDownloadFeedbackLabelsRequest templateQaScorecardId. */
+                    public templateQaScorecardId: string[];
+
+                    /** BulkDownloadFeedbackLabelsRequest destination. */
+                    public destination?: "gcsDestination";
+
+                    /**
+                     * Creates a new BulkDownloadFeedbackLabelsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkDownloadFeedbackLabelsRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest;
+
+                    /**
+                     * Encodes the specified BulkDownloadFeedbackLabelsRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.verify|verify} messages.
+                     * @param message BulkDownloadFeedbackLabelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkDownloadFeedbackLabelsRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.verify|verify} messages.
+                     * @param message BulkDownloadFeedbackLabelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkDownloadFeedbackLabelsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkDownloadFeedbackLabelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest;
+
+                    /**
+                     * Decodes a BulkDownloadFeedbackLabelsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkDownloadFeedbackLabelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest;
+
+                    /**
+                     * Verifies a BulkDownloadFeedbackLabelsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkDownloadFeedbackLabelsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkDownloadFeedbackLabelsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest;
+
+                    /**
+                     * Creates a plain object from a BulkDownloadFeedbackLabelsRequest message. Also converts values to other types if specified.
+                     * @param message BulkDownloadFeedbackLabelsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkDownloadFeedbackLabelsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkDownloadFeedbackLabelsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BulkDownloadFeedbackLabelsRequest {
+
+                    /** Properties of a GcsDestination. */
+                    interface IGcsDestination {
+
+                        /** GcsDestination format */
+                        format?: (google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination.Format|keyof typeof google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination.Format|null);
+
+                        /** GcsDestination objectUri */
+                        objectUri?: (string|null);
+
+                        /** GcsDestination addWhitespace */
+                        addWhitespace?: (boolean|null);
+
+                        /** GcsDestination alwaysPrintEmptyFields */
+                        alwaysPrintEmptyFields?: (boolean|null);
+
+                        /** GcsDestination recordsPerFileCount */
+                        recordsPerFileCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a GcsDestination. */
+                    class GcsDestination implements IGcsDestination {
+
+                        /**
+                         * Constructs a new GcsDestination.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.IGcsDestination);
+
+                        /** GcsDestination format. */
+                        public format: (google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination.Format|keyof typeof google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination.Format);
+
+                        /** GcsDestination objectUri. */
+                        public objectUri: string;
+
+                        /** GcsDestination addWhitespace. */
+                        public addWhitespace: boolean;
+
+                        /** GcsDestination alwaysPrintEmptyFields. */
+                        public alwaysPrintEmptyFields: boolean;
+
+                        /** GcsDestination recordsPerFileCount. */
+                        public recordsPerFileCount: (number|Long|string);
+
+                        /**
+                         * Creates a new GcsDestination instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsDestination instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.IGcsDestination): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination;
+
+                        /**
+                         * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination.verify|verify} messages.
+                         * @param message GcsDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination.verify|verify} messages.
+                         * @param message GcsDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination;
+
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination;
+
+                        /**
+                         * Verifies a GcsDestination message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsDestination
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination;
+
+                        /**
+                         * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
+                         * @param message GcsDestination
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsDestination to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GcsDestination {
+
+                        /** Format enum. */
+                        enum Format {
+                            FORMAT_UNSPECIFIED = 0,
+                            CSV = 1,
+                            JSON = 2
+                        }
+                    }
+
+                    /** FeedbackLabelType enum. */
+                    enum FeedbackLabelType {
+                        FEEDBACK_LABEL_TYPE_UNSPECIFIED = 0,
+                        QUALITY_AI = 1,
+                        TOPIC_MODELING = 2
+                    }
+                }
+
+                /** Properties of a BulkDownloadFeedbackLabelsResponse. */
+                interface IBulkDownloadFeedbackLabelsResponse {
+                }
+
+                /** Represents a BulkDownloadFeedbackLabelsResponse. */
+                class BulkDownloadFeedbackLabelsResponse implements IBulkDownloadFeedbackLabelsResponse {
+
+                    /**
+                     * Constructs a new BulkDownloadFeedbackLabelsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse);
+
+                    /**
+                     * Creates a new BulkDownloadFeedbackLabelsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkDownloadFeedbackLabelsResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsResponse;
+
+                    /**
+                     * Encodes the specified BulkDownloadFeedbackLabelsResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsResponse.verify|verify} messages.
+                     * @param message BulkDownloadFeedbackLabelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkDownloadFeedbackLabelsResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsResponse.verify|verify} messages.
+                     * @param message BulkDownloadFeedbackLabelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkDownloadFeedbackLabelsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkDownloadFeedbackLabelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsResponse;
+
+                    /**
+                     * Decodes a BulkDownloadFeedbackLabelsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkDownloadFeedbackLabelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsResponse;
+
+                    /**
+                     * Verifies a BulkDownloadFeedbackLabelsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkDownloadFeedbackLabelsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkDownloadFeedbackLabelsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsResponse;
+
+                    /**
+                     * Creates a plain object from a BulkDownloadFeedbackLabelsResponse message. Also converts values to other types if specified.
+                     * @param message BulkDownloadFeedbackLabelsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkDownloadFeedbackLabelsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkDownloadFeedbackLabelsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BulkDownloadFeedbackLabelsMetadata. */
+                interface IBulkDownloadFeedbackLabelsMetadata {
+
+                    /** BulkDownloadFeedbackLabelsMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkDownloadFeedbackLabelsMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkDownloadFeedbackLabelsMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest|null);
+
+                    /** BulkDownloadFeedbackLabelsMetadata partialErrors */
+                    partialErrors?: (google.rpc.IStatus[]|null);
+
+                    /** BulkDownloadFeedbackLabelsMetadata downloadStats */
+                    downloadStats?: (google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.IDownloadStats|null);
+                }
+
+                /** Represents a BulkDownloadFeedbackLabelsMetadata. */
+                class BulkDownloadFeedbackLabelsMetadata implements IBulkDownloadFeedbackLabelsMetadata {
+
+                    /**
+                     * Constructs a new BulkDownloadFeedbackLabelsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata);
+
+                    /** BulkDownloadFeedbackLabelsMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkDownloadFeedbackLabelsMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BulkDownloadFeedbackLabelsMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsRequest|null);
+
+                    /** BulkDownloadFeedbackLabelsMetadata partialErrors. */
+                    public partialErrors: google.rpc.IStatus[];
+
+                    /** BulkDownloadFeedbackLabelsMetadata downloadStats. */
+                    public downloadStats?: (google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.IDownloadStats|null);
+
+                    /**
+                     * Creates a new BulkDownloadFeedbackLabelsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BulkDownloadFeedbackLabelsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata;
+
+                    /**
+                     * Encodes the specified BulkDownloadFeedbackLabelsMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.verify|verify} messages.
+                     * @param message BulkDownloadFeedbackLabelsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BulkDownloadFeedbackLabelsMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.verify|verify} messages.
+                     * @param message BulkDownloadFeedbackLabelsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BulkDownloadFeedbackLabelsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BulkDownloadFeedbackLabelsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata;
+
+                    /**
+                     * Decodes a BulkDownloadFeedbackLabelsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BulkDownloadFeedbackLabelsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata;
+
+                    /**
+                     * Verifies a BulkDownloadFeedbackLabelsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BulkDownloadFeedbackLabelsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BulkDownloadFeedbackLabelsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata;
+
+                    /**
+                     * Creates a plain object from a BulkDownloadFeedbackLabelsMetadata message. Also converts values to other types if specified.
+                     * @param message BulkDownloadFeedbackLabelsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BulkDownloadFeedbackLabelsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BulkDownloadFeedbackLabelsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BulkDownloadFeedbackLabelsMetadata {
+
+                    /** Properties of a DownloadStats. */
+                    interface IDownloadStats {
+
+                        /** DownloadStats processedObjectCount */
+                        processedObjectCount?: (number|null);
+
+                        /** DownloadStats successfulDownloadCount */
+                        successfulDownloadCount?: (number|null);
+
+                        /** DownloadStats totalFilesWritten */
+                        totalFilesWritten?: (number|null);
+
+                        /** DownloadStats fileNames */
+                        fileNames?: (string[]|null);
+                    }
+
+                    /** Represents a DownloadStats. */
+                    class DownloadStats implements IDownloadStats {
+
+                        /**
+                         * Constructs a new DownloadStats.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.IDownloadStats);
+
+                        /** DownloadStats processedObjectCount. */
+                        public processedObjectCount: number;
+
+                        /** DownloadStats successfulDownloadCount. */
+                        public successfulDownloadCount: number;
+
+                        /** DownloadStats totalFilesWritten. */
+                        public totalFilesWritten: number;
+
+                        /** DownloadStats fileNames. */
+                        public fileNames: string[];
+
+                        /**
+                         * Creates a new DownloadStats instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DownloadStats instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.IDownloadStats): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.DownloadStats;
+
+                        /**
+                         * Encodes the specified DownloadStats message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.DownloadStats.verify|verify} messages.
+                         * @param message DownloadStats message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.IDownloadStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DownloadStats message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.DownloadStats.verify|verify} messages.
+                         * @param message DownloadStats message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.IDownloadStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DownloadStats message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DownloadStats
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.DownloadStats;
+
+                        /**
+                         * Decodes a DownloadStats message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DownloadStats
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.DownloadStats;
+
+                        /**
+                         * Verifies a DownloadStats message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DownloadStats message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DownloadStats
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.DownloadStats;
+
+                        /**
+                         * Creates a plain object from a DownloadStats message. Also converts values to other types if specified.
+                         * @param message DownloadStats
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsMetadata.DownloadStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DownloadStats to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DownloadStats
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** DatasetValidationWarning enum. */
+                enum DatasetValidationWarning {
+                    DATASET_VALIDATION_WARNING_UNSPECIFIED = 0,
+                    TOO_MANY_INVALID_FEEDBACK_LABELS = 1,
+                    INSUFFICIENT_FEEDBACK_LABELS = 2,
+                    INSUFFICIENT_FEEDBACK_LABELS_PER_ANSWER = 3,
+                    ALL_FEEDBACK_LABELS_HAVE_THE_SAME_ANSWER = 4
+                }
+
                 /** Properties of a Conversation. */
                 interface IConversation {
 
@@ -8309,6 +17048,9 @@ export namespace google {
 
                     /** Conversation qualityMetadata */
                     qualityMetadata?: (google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata|null);
+
+                    /** Conversation metadataJson */
+                    metadataJson?: (string|null);
 
                     /** Conversation transcript */
                     transcript?: (google.cloud.contactcenterinsights.v1.Conversation.ITranscript|null);
@@ -8382,6 +17124,9 @@ export namespace google {
 
                     /** Conversation qualityMetadata. */
                     public qualityMetadata?: (google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata|null);
+
+                    /** Conversation metadataJson. */
+                    public metadataJson: string;
 
                     /** Conversation transcript. */
                     public transcript?: (google.cloud.contactcenterinsights.v1.Conversation.ITranscript|null);
@@ -8730,6 +17475,9 @@ export namespace google {
 
                             /** AgentInfo dispositionCode */
                             dispositionCode?: (string|null);
+
+                            /** AgentInfo agentType */
+                            agentType?: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|null);
                         }
 
                         /** Represents an AgentInfo. */
@@ -8752,6 +17500,9 @@ export namespace google {
 
                             /** AgentInfo dispositionCode. */
                             public dispositionCode: string;
+
+                            /** AgentInfo agentType. */
+                            public agentType: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role);
 
                             /**
                              * Creates a new AgentInfo instance using the specified properties.
@@ -9853,6 +18604,9 @@ export namespace google {
                         /** CallAnalysisMetadata sentiments */
                         sentiments?: (google.cloud.contactcenterinsights.v1.IConversationLevelSentiment[]|null);
 
+                        /** CallAnalysisMetadata silence */
+                        silence?: (google.cloud.contactcenterinsights.v1.IConversationLevelSilence|null);
+
                         /** CallAnalysisMetadata intents */
                         intents?: ({ [k: string]: google.cloud.contactcenterinsights.v1.IIntent }|null);
 
@@ -9861,6 +18615,9 @@ export namespace google {
 
                         /** CallAnalysisMetadata issueModelResult */
                         issueModelResult?: (google.cloud.contactcenterinsights.v1.IIssueModelResult|null);
+
+                        /** CallAnalysisMetadata qaScorecardResults */
+                        qaScorecardResults?: (google.cloud.contactcenterinsights.v1.IQaScorecardResult[]|null);
                     }
 
                     /** Represents a CallAnalysisMetadata. */
@@ -9881,6 +18638,9 @@ export namespace google {
                         /** CallAnalysisMetadata sentiments. */
                         public sentiments: google.cloud.contactcenterinsights.v1.IConversationLevelSentiment[];
 
+                        /** CallAnalysisMetadata silence. */
+                        public silence?: (google.cloud.contactcenterinsights.v1.IConversationLevelSilence|null);
+
                         /** CallAnalysisMetadata intents. */
                         public intents: { [k: string]: google.cloud.contactcenterinsights.v1.IIntent };
 
@@ -9889,6 +18649,9 @@ export namespace google {
 
                         /** CallAnalysisMetadata issueModelResult. */
                         public issueModelResult?: (google.cloud.contactcenterinsights.v1.IIssueModelResult|null);
+
+                        /** CallAnalysisMetadata qaScorecardResults. */
+                        public qaScorecardResults: google.cloud.contactcenterinsights.v1.IQaScorecardResult[];
 
                         /**
                          * Creates a new CallAnalysisMetadata instance using the specified properties.
@@ -10072,6 +18835,136 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a FeedbackLabel. */
+                interface IFeedbackLabel {
+
+                    /** FeedbackLabel label */
+                    label?: (string|null);
+
+                    /** FeedbackLabel qaAnswerLabel */
+                    qaAnswerLabel?: (google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerValue|null);
+
+                    /** FeedbackLabel name */
+                    name?: (string|null);
+
+                    /** FeedbackLabel labeledResource */
+                    labeledResource?: (string|null);
+
+                    /** FeedbackLabel createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FeedbackLabel updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a FeedbackLabel. */
+                class FeedbackLabel implements IFeedbackLabel {
+
+                    /**
+                     * Constructs a new FeedbackLabel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IFeedbackLabel);
+
+                    /** FeedbackLabel label. */
+                    public label?: (string|null);
+
+                    /** FeedbackLabel qaAnswerLabel. */
+                    public qaAnswerLabel?: (google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerValue|null);
+
+                    /** FeedbackLabel name. */
+                    public name: string;
+
+                    /** FeedbackLabel labeledResource. */
+                    public labeledResource: string;
+
+                    /** FeedbackLabel createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FeedbackLabel updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FeedbackLabel labelType. */
+                    public labelType?: ("label"|"qaAnswerLabel");
+
+                    /**
+                     * Creates a new FeedbackLabel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FeedbackLabel instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IFeedbackLabel): google.cloud.contactcenterinsights.v1.FeedbackLabel;
+
+                    /**
+                     * Encodes the specified FeedbackLabel message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.FeedbackLabel.verify|verify} messages.
+                     * @param message FeedbackLabel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IFeedbackLabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FeedbackLabel message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.FeedbackLabel.verify|verify} messages.
+                     * @param message FeedbackLabel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IFeedbackLabel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FeedbackLabel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FeedbackLabel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.FeedbackLabel;
+
+                    /**
+                     * Decodes a FeedbackLabel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FeedbackLabel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.FeedbackLabel;
+
+                    /**
+                     * Verifies a FeedbackLabel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FeedbackLabel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FeedbackLabel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.FeedbackLabel;
+
+                    /**
+                     * Creates a plain object from a FeedbackLabel message. Also converts values to other types if specified.
+                     * @param message FeedbackLabel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.FeedbackLabel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FeedbackLabel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FeedbackLabel
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ConversationLevelSentiment. */
                 interface IConversationLevelSentiment {
 
@@ -10169,6 +19062,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ConversationLevelSentiment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConversationLevelSilence. */
+                interface IConversationLevelSilence {
+
+                    /** ConversationLevelSilence silenceDuration */
+                    silenceDuration?: (google.protobuf.IDuration|null);
+
+                    /** ConversationLevelSilence silencePercentage */
+                    silencePercentage?: (number|null);
+                }
+
+                /** Represents a ConversationLevelSilence. */
+                class ConversationLevelSilence implements IConversationLevelSilence {
+
+                    /**
+                     * Constructs a new ConversationLevelSilence.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IConversationLevelSilence);
+
+                    /** ConversationLevelSilence silenceDuration. */
+                    public silenceDuration?: (google.protobuf.IDuration|null);
+
+                    /** ConversationLevelSilence silencePercentage. */
+                    public silencePercentage: number;
+
+                    /**
+                     * Creates a new ConversationLevelSilence instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationLevelSilence instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IConversationLevelSilence): google.cloud.contactcenterinsights.v1.ConversationLevelSilence;
+
+                    /**
+                     * Encodes the specified ConversationLevelSilence message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationLevelSilence.verify|verify} messages.
+                     * @param message ConversationLevelSilence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IConversationLevelSilence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationLevelSilence message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationLevelSilence.verify|verify} messages.
+                     * @param message ConversationLevelSilence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IConversationLevelSilence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationLevelSilence message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationLevelSilence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ConversationLevelSilence;
+
+                    /**
+                     * Decodes a ConversationLevelSilence message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationLevelSilence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ConversationLevelSilence;
+
+                    /**
+                     * Verifies a ConversationLevelSilence message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationLevelSilence message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationLevelSilence
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ConversationLevelSilence;
+
+                    /**
+                     * Creates a plain object from a ConversationLevelSilence message. Also converts values to other types if specified.
+                     * @param message ConversationLevelSilence
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ConversationLevelSilence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationLevelSilence to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversationLevelSilence
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11980,6 +20976,9 @@ export namespace google {
 
                     /** Issue sampleUtterances */
                     sampleUtterances?: (string[]|null);
+
+                    /** Issue displayDescription */
+                    displayDescription?: (string|null);
                 }
 
                 /** Represents an Issue. */
@@ -12005,6 +21004,9 @@ export namespace google {
 
                     /** Issue sampleUtterances. */
                     public sampleUtterances: string[];
+
+                    /** Issue displayDescription. */
+                    public displayDescription: string;
 
                     /**
                      * Creates a new Issue instance using the specified properties.
@@ -13148,6 +22150,251 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an AnalysisRule. */
+                interface IAnalysisRule {
+
+                    /** AnalysisRule name */
+                    name?: (string|null);
+
+                    /** AnalysisRule createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AnalysisRule updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AnalysisRule displayName */
+                    displayName?: (string|null);
+
+                    /** AnalysisRule conversationFilter */
+                    conversationFilter?: (string|null);
+
+                    /** AnalysisRule annotatorSelector */
+                    annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
+
+                    /** AnalysisRule analysisPercentage */
+                    analysisPercentage?: (number|null);
+
+                    /** AnalysisRule active */
+                    active?: (boolean|null);
+                }
+
+                /** Represents an AnalysisRule. */
+                class AnalysisRule implements IAnalysisRule {
+
+                    /**
+                     * Constructs a new AnalysisRule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IAnalysisRule);
+
+                    /** AnalysisRule name. */
+                    public name: string;
+
+                    /** AnalysisRule createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AnalysisRule updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AnalysisRule displayName. */
+                    public displayName?: (string|null);
+
+                    /** AnalysisRule conversationFilter. */
+                    public conversationFilter: string;
+
+                    /** AnalysisRule annotatorSelector. */
+                    public annotatorSelector?: (google.cloud.contactcenterinsights.v1.IAnnotatorSelector|null);
+
+                    /** AnalysisRule analysisPercentage. */
+                    public analysisPercentage: number;
+
+                    /** AnalysisRule active. */
+                    public active: boolean;
+
+                    /** AnalysisRule _displayName. */
+                    public _displayName?: "displayName";
+
+                    /**
+                     * Creates a new AnalysisRule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnalysisRule instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IAnalysisRule): google.cloud.contactcenterinsights.v1.AnalysisRule;
+
+                    /**
+                     * Encodes the specified AnalysisRule message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnalysisRule.verify|verify} messages.
+                     * @param message AnalysisRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IAnalysisRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnalysisRule message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnalysisRule.verify|verify} messages.
+                     * @param message AnalysisRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IAnalysisRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnalysisRule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnalysisRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.AnalysisRule;
+
+                    /**
+                     * Decodes an AnalysisRule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnalysisRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.AnalysisRule;
+
+                    /**
+                     * Verifies an AnalysisRule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnalysisRule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnalysisRule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.AnalysisRule;
+
+                    /**
+                     * Creates a plain object from an AnalysisRule message. Also converts values to other types if specified.
+                     * @param message AnalysisRule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.AnalysisRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnalysisRule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnalysisRule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EncryptionSpec. */
+                interface IEncryptionSpec {
+
+                    /** EncryptionSpec name */
+                    name?: (string|null);
+
+                    /** EncryptionSpec kmsKey */
+                    kmsKey?: (string|null);
+                }
+
+                /** Represents an EncryptionSpec. */
+                class EncryptionSpec implements IEncryptionSpec {
+
+                    /**
+                     * Constructs a new EncryptionSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IEncryptionSpec);
+
+                    /** EncryptionSpec name. */
+                    public name: string;
+
+                    /** EncryptionSpec kmsKey. */
+                    public kmsKey: string;
+
+                    /**
+                     * Creates a new EncryptionSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionSpec instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IEncryptionSpec): google.cloud.contactcenterinsights.v1.EncryptionSpec;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.EncryptionSpec;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.EncryptionSpec;
+
+                    /**
+                     * Verifies an EncryptionSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.EncryptionSpec;
+
+                    /**
+                     * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                     * @param message EncryptionSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.EncryptionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EncryptionSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a RedactionConfig. */
                 interface IRedactionConfig {
 
@@ -13383,6 +22630,9 @@ export namespace google {
 
                     /** RuntimeAnnotation answerFeedback */
                     answerFeedback?: (google.cloud.contactcenterinsights.v1.IAnswerFeedback|null);
+
+                    /** RuntimeAnnotation userInput */
+                    userInput?: (google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput|null);
                 }
 
                 /** Represents a RuntimeAnnotation. */
@@ -13426,6 +22676,9 @@ export namespace google {
 
                     /** RuntimeAnnotation answerFeedback. */
                     public answerFeedback?: (google.cloud.contactcenterinsights.v1.IAnswerFeedback|null);
+
+                    /** RuntimeAnnotation userInput. */
+                    public userInput?: (google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput|null);
 
                     /** RuntimeAnnotation data. */
                     public data?: ("articleSuggestion"|"faqAnswer"|"smartReply"|"smartComposeSuggestion"|"dialogflowInteraction"|"conversationSummarizationSuggestion");
@@ -13506,6 +22759,128 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RuntimeAnnotation {
+
+                    /** Properties of a UserInput. */
+                    interface IUserInput {
+
+                        /** UserInput query */
+                        query?: (string|null);
+
+                        /** UserInput generatorName */
+                        generatorName?: (string|null);
+
+                        /** UserInput querySource */
+                        querySource?: (google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource|keyof typeof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource|null);
+                    }
+
+                    /** Represents a UserInput. */
+                    class UserInput implements IUserInput {
+
+                        /**
+                         * Constructs a new UserInput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput);
+
+                        /** UserInput query. */
+                        public query: string;
+
+                        /** UserInput generatorName. */
+                        public generatorName: string;
+
+                        /** UserInput querySource. */
+                        public querySource: (google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource|keyof typeof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource);
+
+                        /**
+                         * Creates a new UserInput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserInput instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput): google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput;
+
+                        /**
+                         * Encodes the specified UserInput message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.verify|verify} messages.
+                         * @param message UserInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserInput message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.verify|verify} messages.
+                         * @param message UserInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserInput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput;
+
+                        /**
+                         * Decodes a UserInput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput;
+
+                        /**
+                         * Verifies a UserInput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserInput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserInput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput;
+
+                        /**
+                         * Creates a plain object from a UserInput message. Also converts values to other types if specified.
+                         * @param message UserInput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserInput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserInput
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace UserInput {
+
+                        /** QuerySource enum. */
+                        enum QuerySource {
+                            QUERY_SOURCE_UNSPECIFIED = 0,
+                            AGENT_QUERY = 1,
+                            SUGGESTED_QUERY = 2
+                        }
+                    }
                 }
 
                 /** Properties of an AnswerFeedback. */
@@ -14634,6 +24009,12 @@ export namespace google {
 
                     /** AnnotatorSelector summarizationConfig */
                     summarizationConfig?: (google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig|null);
+
+                    /** AnnotatorSelector runQaAnnotator */
+                    runQaAnnotator?: (boolean|null);
+
+                    /** AnnotatorSelector qaConfig */
+                    qaConfig?: (google.cloud.contactcenterinsights.v1.AnnotatorSelector.IQaConfig|null);
                 }
 
                 /** Represents an AnnotatorSelector. */
@@ -14677,6 +24058,12 @@ export namespace google {
 
                     /** AnnotatorSelector summarizationConfig. */
                     public summarizationConfig?: (google.cloud.contactcenterinsights.v1.AnnotatorSelector.ISummarizationConfig|null);
+
+                    /** AnnotatorSelector runQaAnnotator. */
+                    public runQaAnnotator: boolean;
+
+                    /** AnnotatorSelector qaConfig. */
+                    public qaConfig?: (google.cloud.contactcenterinsights.v1.AnnotatorSelector.IQaConfig|null);
 
                     /**
                      * Creates a new AnnotatorSelector instance using the specified properties.
@@ -14869,7 +24256,1790 @@ export namespace google {
                         /** SummarizationModel enum. */
                         enum SummarizationModel {
                             SUMMARIZATION_MODEL_UNSPECIFIED = 0,
-                            BASELINE_MODEL = 1
+                            BASELINE_MODEL = 1,
+                            BASELINE_MODEL_V2_0 = 2
+                        }
+                    }
+
+                    /** Properties of a QaConfig. */
+                    interface IQaConfig {
+
+                        /** QaConfig scorecardList */
+                        scorecardList?: (google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.IScorecardList|null);
+                    }
+
+                    /** Represents a QaConfig. */
+                    class QaConfig implements IQaConfig {
+
+                        /**
+                         * Constructs a new QaConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.AnnotatorSelector.IQaConfig);
+
+                        /** QaConfig scorecardList. */
+                        public scorecardList?: (google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.IScorecardList|null);
+
+                        /** QaConfig scorecardSource. */
+                        public scorecardSource?: "scorecardList";
+
+                        /**
+                         * Creates a new QaConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QaConfig instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.AnnotatorSelector.IQaConfig): google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig;
+
+                        /**
+                         * Encodes the specified QaConfig message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.verify|verify} messages.
+                         * @param message QaConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.AnnotatorSelector.IQaConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QaConfig message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.verify|verify} messages.
+                         * @param message QaConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.AnnotatorSelector.IQaConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QaConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QaConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig;
+
+                        /**
+                         * Decodes a QaConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QaConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig;
+
+                        /**
+                         * Verifies a QaConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QaConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QaConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig;
+
+                        /**
+                         * Creates a plain object from a QaConfig message. Also converts values to other types if specified.
+                         * @param message QaConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QaConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QaConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace QaConfig {
+
+                        /** Properties of a ScorecardList. */
+                        interface IScorecardList {
+
+                            /** ScorecardList qaScorecardRevisions */
+                            qaScorecardRevisions?: (string[]|null);
+                        }
+
+                        /** Represents a ScorecardList. */
+                        class ScorecardList implements IScorecardList {
+
+                            /**
+                             * Constructs a new ScorecardList.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.IScorecardList);
+
+                            /** ScorecardList qaScorecardRevisions. */
+                            public qaScorecardRevisions: string[];
+
+                            /**
+                             * Creates a new ScorecardList instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ScorecardList instance
+                             */
+                            public static create(properties?: google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.IScorecardList): google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.ScorecardList;
+
+                            /**
+                             * Encodes the specified ScorecardList message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.ScorecardList.verify|verify} messages.
+                             * @param message ScorecardList message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.IScorecardList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ScorecardList message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.ScorecardList.verify|verify} messages.
+                             * @param message ScorecardList message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.IScorecardList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ScorecardList message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ScorecardList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.ScorecardList;
+
+                            /**
+                             * Decodes a ScorecardList message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ScorecardList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.ScorecardList;
+
+                            /**
+                             * Verifies a ScorecardList message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ScorecardList message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ScorecardList
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.ScorecardList;
+
+                            /**
+                             * Creates a plain object from a ScorecardList message. Also converts values to other types if specified.
+                             * @param message ScorecardList
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.ScorecardList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ScorecardList to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ScorecardList
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a QaQuestion. */
+                interface IQaQuestion {
+
+                    /** QaQuestion name */
+                    name?: (string|null);
+
+                    /** QaQuestion abbreviation */
+                    abbreviation?: (string|null);
+
+                    /** QaQuestion createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QaQuestion updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QaQuestion questionBody */
+                    questionBody?: (string|null);
+
+                    /** QaQuestion answerInstructions */
+                    answerInstructions?: (string|null);
+
+                    /** QaQuestion answerChoices */
+                    answerChoices?: (google.cloud.contactcenterinsights.v1.QaQuestion.IAnswerChoice[]|null);
+
+                    /** QaQuestion tags */
+                    tags?: (string[]|null);
+
+                    /** QaQuestion order */
+                    order?: (number|null);
+
+                    /** QaQuestion metrics */
+                    metrics?: (google.cloud.contactcenterinsights.v1.QaQuestion.IMetrics|null);
+
+                    /** QaQuestion tuningMetadata */
+                    tuningMetadata?: (google.cloud.contactcenterinsights.v1.QaQuestion.ITuningMetadata|null);
+                }
+
+                /** Represents a QaQuestion. */
+                class QaQuestion implements IQaQuestion {
+
+                    /**
+                     * Constructs a new QaQuestion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IQaQuestion);
+
+                    /** QaQuestion name. */
+                    public name: string;
+
+                    /** QaQuestion abbreviation. */
+                    public abbreviation: string;
+
+                    /** QaQuestion createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QaQuestion updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QaQuestion questionBody. */
+                    public questionBody: string;
+
+                    /** QaQuestion answerInstructions. */
+                    public answerInstructions: string;
+
+                    /** QaQuestion answerChoices. */
+                    public answerChoices: google.cloud.contactcenterinsights.v1.QaQuestion.IAnswerChoice[];
+
+                    /** QaQuestion tags. */
+                    public tags: string[];
+
+                    /** QaQuestion order. */
+                    public order: number;
+
+                    /** QaQuestion metrics. */
+                    public metrics?: (google.cloud.contactcenterinsights.v1.QaQuestion.IMetrics|null);
+
+                    /** QaQuestion tuningMetadata. */
+                    public tuningMetadata?: (google.cloud.contactcenterinsights.v1.QaQuestion.ITuningMetadata|null);
+
+                    /**
+                     * Creates a new QaQuestion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QaQuestion instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IQaQuestion): google.cloud.contactcenterinsights.v1.QaQuestion;
+
+                    /**
+                     * Encodes the specified QaQuestion message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaQuestion.verify|verify} messages.
+                     * @param message QaQuestion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IQaQuestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QaQuestion message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaQuestion.verify|verify} messages.
+                     * @param message QaQuestion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IQaQuestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QaQuestion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QaQuestion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaQuestion;
+
+                    /**
+                     * Decodes a QaQuestion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QaQuestion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaQuestion;
+
+                    /**
+                     * Verifies a QaQuestion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QaQuestion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QaQuestion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaQuestion;
+
+                    /**
+                     * Creates a plain object from a QaQuestion message. Also converts values to other types if specified.
+                     * @param message QaQuestion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.QaQuestion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QaQuestion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QaQuestion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QaQuestion {
+
+                    /** Properties of an AnswerChoice. */
+                    interface IAnswerChoice {
+
+                        /** AnswerChoice strValue */
+                        strValue?: (string|null);
+
+                        /** AnswerChoice numValue */
+                        numValue?: (number|null);
+
+                        /** AnswerChoice boolValue */
+                        boolValue?: (boolean|null);
+
+                        /** AnswerChoice naValue */
+                        naValue?: (boolean|null);
+
+                        /** AnswerChoice key */
+                        key?: (string|null);
+
+                        /** AnswerChoice score */
+                        score?: (number|null);
+                    }
+
+                    /** Represents an AnswerChoice. */
+                    class AnswerChoice implements IAnswerChoice {
+
+                        /**
+                         * Constructs a new AnswerChoice.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.QaQuestion.IAnswerChoice);
+
+                        /** AnswerChoice strValue. */
+                        public strValue?: (string|null);
+
+                        /** AnswerChoice numValue. */
+                        public numValue?: (number|null);
+
+                        /** AnswerChoice boolValue. */
+                        public boolValue?: (boolean|null);
+
+                        /** AnswerChoice naValue. */
+                        public naValue?: (boolean|null);
+
+                        /** AnswerChoice key. */
+                        public key: string;
+
+                        /** AnswerChoice score. */
+                        public score?: (number|null);
+
+                        /** AnswerChoice value. */
+                        public value?: ("strValue"|"numValue"|"boolValue"|"naValue");
+
+                        /** AnswerChoice _score. */
+                        public _score?: "score";
+
+                        /**
+                         * Creates a new AnswerChoice instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AnswerChoice instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.QaQuestion.IAnswerChoice): google.cloud.contactcenterinsights.v1.QaQuestion.AnswerChoice;
+
+                        /**
+                         * Encodes the specified AnswerChoice message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaQuestion.AnswerChoice.verify|verify} messages.
+                         * @param message AnswerChoice message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.QaQuestion.IAnswerChoice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AnswerChoice message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaQuestion.AnswerChoice.verify|verify} messages.
+                         * @param message AnswerChoice message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QaQuestion.IAnswerChoice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AnswerChoice message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AnswerChoice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaQuestion.AnswerChoice;
+
+                        /**
+                         * Decodes an AnswerChoice message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AnswerChoice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaQuestion.AnswerChoice;
+
+                        /**
+                         * Verifies an AnswerChoice message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AnswerChoice message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AnswerChoice
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaQuestion.AnswerChoice;
+
+                        /**
+                         * Creates a plain object from an AnswerChoice message. Also converts values to other types if specified.
+                         * @param message AnswerChoice
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.QaQuestion.AnswerChoice, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AnswerChoice to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AnswerChoice
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Metrics. */
+                    interface IMetrics {
+
+                        /** Metrics accuracy */
+                        accuracy?: (number|null);
+                    }
+
+                    /** Represents a Metrics. */
+                    class Metrics implements IMetrics {
+
+                        /**
+                         * Constructs a new Metrics.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.QaQuestion.IMetrics);
+
+                        /** Metrics accuracy. */
+                        public accuracy: number;
+
+                        /**
+                         * Creates a new Metrics instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Metrics instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.QaQuestion.IMetrics): google.cloud.contactcenterinsights.v1.QaQuestion.Metrics;
+
+                        /**
+                         * Encodes the specified Metrics message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaQuestion.Metrics.verify|verify} messages.
+                         * @param message Metrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.QaQuestion.IMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Metrics message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaQuestion.Metrics.verify|verify} messages.
+                         * @param message Metrics message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QaQuestion.IMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Metrics message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Metrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaQuestion.Metrics;
+
+                        /**
+                         * Decodes a Metrics message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Metrics
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaQuestion.Metrics;
+
+                        /**
+                         * Verifies a Metrics message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Metrics message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Metrics
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaQuestion.Metrics;
+
+                        /**
+                         * Creates a plain object from a Metrics message. Also converts values to other types if specified.
+                         * @param message Metrics
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.QaQuestion.Metrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Metrics to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Metrics
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TuningMetadata. */
+                    interface ITuningMetadata {
+
+                        /** TuningMetadata totalValidLabelCount */
+                        totalValidLabelCount?: (number|Long|string|null);
+
+                        /** TuningMetadata datasetValidationWarnings */
+                        datasetValidationWarnings?: (google.cloud.contactcenterinsights.v1.DatasetValidationWarning[]|null);
+
+                        /** TuningMetadata tuningError */
+                        tuningError?: (string|null);
+                    }
+
+                    /** Represents a TuningMetadata. */
+                    class TuningMetadata implements ITuningMetadata {
+
+                        /**
+                         * Constructs a new TuningMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.QaQuestion.ITuningMetadata);
+
+                        /** TuningMetadata totalValidLabelCount. */
+                        public totalValidLabelCount: (number|Long|string);
+
+                        /** TuningMetadata datasetValidationWarnings. */
+                        public datasetValidationWarnings: google.cloud.contactcenterinsights.v1.DatasetValidationWarning[];
+
+                        /** TuningMetadata tuningError. */
+                        public tuningError: string;
+
+                        /**
+                         * Creates a new TuningMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TuningMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.QaQuestion.ITuningMetadata): google.cloud.contactcenterinsights.v1.QaQuestion.TuningMetadata;
+
+                        /**
+                         * Encodes the specified TuningMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaQuestion.TuningMetadata.verify|verify} messages.
+                         * @param message TuningMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.QaQuestion.ITuningMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TuningMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaQuestion.TuningMetadata.verify|verify} messages.
+                         * @param message TuningMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QaQuestion.ITuningMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TuningMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TuningMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaQuestion.TuningMetadata;
+
+                        /**
+                         * Decodes a TuningMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TuningMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaQuestion.TuningMetadata;
+
+                        /**
+                         * Verifies a TuningMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TuningMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TuningMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaQuestion.TuningMetadata;
+
+                        /**
+                         * Creates a plain object from a TuningMetadata message. Also converts values to other types if specified.
+                         * @param message TuningMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.QaQuestion.TuningMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TuningMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TuningMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a QaScorecard. */
+                interface IQaScorecard {
+
+                    /** QaScorecard name */
+                    name?: (string|null);
+
+                    /** QaScorecard displayName */
+                    displayName?: (string|null);
+
+                    /** QaScorecard description */
+                    description?: (string|null);
+
+                    /** QaScorecard createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QaScorecard updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a QaScorecard. */
+                class QaScorecard implements IQaScorecard {
+
+                    /**
+                     * Constructs a new QaScorecard.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IQaScorecard);
+
+                    /** QaScorecard name. */
+                    public name: string;
+
+                    /** QaScorecard displayName. */
+                    public displayName: string;
+
+                    /** QaScorecard description. */
+                    public description: string;
+
+                    /** QaScorecard createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QaScorecard updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new QaScorecard instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QaScorecard instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IQaScorecard): google.cloud.contactcenterinsights.v1.QaScorecard;
+
+                    /**
+                     * Encodes the specified QaScorecard message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaScorecard.verify|verify} messages.
+                     * @param message QaScorecard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IQaScorecard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QaScorecard message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaScorecard.verify|verify} messages.
+                     * @param message QaScorecard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IQaScorecard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QaScorecard message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QaScorecard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaScorecard;
+
+                    /**
+                     * Decodes a QaScorecard message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QaScorecard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaScorecard;
+
+                    /**
+                     * Verifies a QaScorecard message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QaScorecard message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QaScorecard
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaScorecard;
+
+                    /**
+                     * Creates a plain object from a QaScorecard message. Also converts values to other types if specified.
+                     * @param message QaScorecard
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.QaScorecard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QaScorecard to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QaScorecard
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QaScorecardRevision. */
+                interface IQaScorecardRevision {
+
+                    /** QaScorecardRevision name */
+                    name?: (string|null);
+
+                    /** QaScorecardRevision snapshot */
+                    snapshot?: (google.cloud.contactcenterinsights.v1.IQaScorecard|null);
+
+                    /** QaScorecardRevision createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QaScorecardRevision alternateIds */
+                    alternateIds?: (string[]|null);
+
+                    /** QaScorecardRevision state */
+                    state?: (google.cloud.contactcenterinsights.v1.QaScorecardRevision.State|keyof typeof google.cloud.contactcenterinsights.v1.QaScorecardRevision.State|null);
+                }
+
+                /** Represents a QaScorecardRevision. */
+                class QaScorecardRevision implements IQaScorecardRevision {
+
+                    /**
+                     * Constructs a new QaScorecardRevision.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IQaScorecardRevision);
+
+                    /** QaScorecardRevision name. */
+                    public name: string;
+
+                    /** QaScorecardRevision snapshot. */
+                    public snapshot?: (google.cloud.contactcenterinsights.v1.IQaScorecard|null);
+
+                    /** QaScorecardRevision createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QaScorecardRevision alternateIds. */
+                    public alternateIds: string[];
+
+                    /** QaScorecardRevision state. */
+                    public state: (google.cloud.contactcenterinsights.v1.QaScorecardRevision.State|keyof typeof google.cloud.contactcenterinsights.v1.QaScorecardRevision.State);
+
+                    /**
+                     * Creates a new QaScorecardRevision instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QaScorecardRevision instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IQaScorecardRevision): google.cloud.contactcenterinsights.v1.QaScorecardRevision;
+
+                    /**
+                     * Encodes the specified QaScorecardRevision message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaScorecardRevision.verify|verify} messages.
+                     * @param message QaScorecardRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IQaScorecardRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QaScorecardRevision message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaScorecardRevision.verify|verify} messages.
+                     * @param message QaScorecardRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IQaScorecardRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QaScorecardRevision message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QaScorecardRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaScorecardRevision;
+
+                    /**
+                     * Decodes a QaScorecardRevision message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QaScorecardRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaScorecardRevision;
+
+                    /**
+                     * Verifies a QaScorecardRevision message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QaScorecardRevision message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QaScorecardRevision
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaScorecardRevision;
+
+                    /**
+                     * Creates a plain object from a QaScorecardRevision message. Also converts values to other types if specified.
+                     * @param message QaScorecardRevision
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.QaScorecardRevision, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QaScorecardRevision to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QaScorecardRevision
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QaScorecardRevision {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        EDITABLE = 12,
+                        TRAINING = 2,
+                        TRAINING_FAILED = 9,
+                        READY = 11,
+                        DELETING = 7,
+                        TRAINING_CANCELLED = 14
+                    }
+                }
+
+                /** Properties of a QaAnswer. */
+                interface IQaAnswer {
+
+                    /** QaAnswer qaQuestion */
+                    qaQuestion?: (string|null);
+
+                    /** QaAnswer conversation */
+                    conversation?: (string|null);
+
+                    /** QaAnswer questionBody */
+                    questionBody?: (string|null);
+
+                    /** QaAnswer answerValue */
+                    answerValue?: (google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerValue|null);
+
+                    /** QaAnswer tags */
+                    tags?: (string[]|null);
+
+                    /** QaAnswer answerSources */
+                    answerSources?: (google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerSource[]|null);
+                }
+
+                /** Represents a QaAnswer. */
+                class QaAnswer implements IQaAnswer {
+
+                    /**
+                     * Constructs a new QaAnswer.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IQaAnswer);
+
+                    /** QaAnswer qaQuestion. */
+                    public qaQuestion: string;
+
+                    /** QaAnswer conversation. */
+                    public conversation: string;
+
+                    /** QaAnswer questionBody. */
+                    public questionBody: string;
+
+                    /** QaAnswer answerValue. */
+                    public answerValue?: (google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerValue|null);
+
+                    /** QaAnswer tags. */
+                    public tags: string[];
+
+                    /** QaAnswer answerSources. */
+                    public answerSources: google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerSource[];
+
+                    /**
+                     * Creates a new QaAnswer instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QaAnswer instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IQaAnswer): google.cloud.contactcenterinsights.v1.QaAnswer;
+
+                    /**
+                     * Encodes the specified QaAnswer message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaAnswer.verify|verify} messages.
+                     * @param message QaAnswer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IQaAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QaAnswer message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaAnswer.verify|verify} messages.
+                     * @param message QaAnswer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IQaAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QaAnswer message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QaAnswer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaAnswer;
+
+                    /**
+                     * Decodes a QaAnswer message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QaAnswer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaAnswer;
+
+                    /**
+                     * Verifies a QaAnswer message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QaAnswer message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QaAnswer
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaAnswer;
+
+                    /**
+                     * Creates a plain object from a QaAnswer message. Also converts values to other types if specified.
+                     * @param message QaAnswer
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.QaAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QaAnswer to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QaAnswer
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QaAnswer {
+
+                    /** Properties of an AnswerValue. */
+                    interface IAnswerValue {
+
+                        /** AnswerValue strValue */
+                        strValue?: (string|null);
+
+                        /** AnswerValue numValue */
+                        numValue?: (number|null);
+
+                        /** AnswerValue boolValue */
+                        boolValue?: (boolean|null);
+
+                        /** AnswerValue naValue */
+                        naValue?: (boolean|null);
+
+                        /** AnswerValue key */
+                        key?: (string|null);
+
+                        /** AnswerValue score */
+                        score?: (number|null);
+
+                        /** AnswerValue potentialScore */
+                        potentialScore?: (number|null);
+
+                        /** AnswerValue normalizedScore */
+                        normalizedScore?: (number|null);
+                    }
+
+                    /** Represents an AnswerValue. */
+                    class AnswerValue implements IAnswerValue {
+
+                        /**
+                         * Constructs a new AnswerValue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerValue);
+
+                        /** AnswerValue strValue. */
+                        public strValue?: (string|null);
+
+                        /** AnswerValue numValue. */
+                        public numValue?: (number|null);
+
+                        /** AnswerValue boolValue. */
+                        public boolValue?: (boolean|null);
+
+                        /** AnswerValue naValue. */
+                        public naValue?: (boolean|null);
+
+                        /** AnswerValue key. */
+                        public key: string;
+
+                        /** AnswerValue score. */
+                        public score?: (number|null);
+
+                        /** AnswerValue potentialScore. */
+                        public potentialScore?: (number|null);
+
+                        /** AnswerValue normalizedScore. */
+                        public normalizedScore?: (number|null);
+
+                        /** AnswerValue value. */
+                        public value?: ("strValue"|"numValue"|"boolValue"|"naValue");
+
+                        /** AnswerValue _score. */
+                        public _score?: "score";
+
+                        /** AnswerValue _potentialScore. */
+                        public _potentialScore?: "potentialScore";
+
+                        /** AnswerValue _normalizedScore. */
+                        public _normalizedScore?: "normalizedScore";
+
+                        /**
+                         * Creates a new AnswerValue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AnswerValue instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerValue): google.cloud.contactcenterinsights.v1.QaAnswer.AnswerValue;
+
+                        /**
+                         * Encodes the specified AnswerValue message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaAnswer.AnswerValue.verify|verify} messages.
+                         * @param message AnswerValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AnswerValue message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaAnswer.AnswerValue.verify|verify} messages.
+                         * @param message AnswerValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AnswerValue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AnswerValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaAnswer.AnswerValue;
+
+                        /**
+                         * Decodes an AnswerValue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AnswerValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaAnswer.AnswerValue;
+
+                        /**
+                         * Verifies an AnswerValue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AnswerValue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AnswerValue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaAnswer.AnswerValue;
+
+                        /**
+                         * Creates a plain object from an AnswerValue message. Also converts values to other types if specified.
+                         * @param message AnswerValue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.QaAnswer.AnswerValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AnswerValue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AnswerValue
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AnswerSource. */
+                    interface IAnswerSource {
+
+                        /** AnswerSource sourceType */
+                        sourceType?: (google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource.SourceType|keyof typeof google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource.SourceType|null);
+
+                        /** AnswerSource answerValue */
+                        answerValue?: (google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerValue|null);
+                    }
+
+                    /** Represents an AnswerSource. */
+                    class AnswerSource implements IAnswerSource {
+
+                        /**
+                         * Constructs a new AnswerSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerSource);
+
+                        /** AnswerSource sourceType. */
+                        public sourceType: (google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource.SourceType|keyof typeof google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource.SourceType);
+
+                        /** AnswerSource answerValue. */
+                        public answerValue?: (google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerValue|null);
+
+                        /**
+                         * Creates a new AnswerSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AnswerSource instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerSource): google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource;
+
+                        /**
+                         * Encodes the specified AnswerSource message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource.verify|verify} messages.
+                         * @param message AnswerSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AnswerSource message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource.verify|verify} messages.
+                         * @param message AnswerSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QaAnswer.IAnswerSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AnswerSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AnswerSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource;
+
+                        /**
+                         * Decodes an AnswerSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AnswerSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource;
+
+                        /**
+                         * Verifies an AnswerSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AnswerSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AnswerSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource;
+
+                        /**
+                         * Creates a plain object from an AnswerSource message. Also converts values to other types if specified.
+                         * @param message AnswerSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AnswerSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AnswerSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AnswerSource {
+
+                        /** SourceType enum. */
+                        enum SourceType {
+                            SOURCE_TYPE_UNSPECIFIED = 0,
+                            SYSTEM_GENERATED = 1,
+                            MANUAL_EDIT = 2
+                        }
+                    }
+                }
+
+                /** Properties of a QaScorecardResult. */
+                interface IQaScorecardResult {
+
+                    /** QaScorecardResult name */
+                    name?: (string|null);
+
+                    /** QaScorecardResult qaScorecardRevision */
+                    qaScorecardRevision?: (string|null);
+
+                    /** QaScorecardResult conversation */
+                    conversation?: (string|null);
+
+                    /** QaScorecardResult createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QaScorecardResult agentId */
+                    agentId?: (string|null);
+
+                    /** QaScorecardResult qaAnswers */
+                    qaAnswers?: (google.cloud.contactcenterinsights.v1.IQaAnswer[]|null);
+
+                    /** QaScorecardResult score */
+                    score?: (number|null);
+
+                    /** QaScorecardResult potentialScore */
+                    potentialScore?: (number|null);
+
+                    /** QaScorecardResult normalizedScore */
+                    normalizedScore?: (number|null);
+
+                    /** QaScorecardResult qaTagResults */
+                    qaTagResults?: (google.cloud.contactcenterinsights.v1.QaScorecardResult.IQaTagResult[]|null);
+
+                    /** QaScorecardResult scoreSources */
+                    scoreSources?: (google.cloud.contactcenterinsights.v1.QaScorecardResult.IScoreSource[]|null);
+                }
+
+                /** Represents a QaScorecardResult. */
+                class QaScorecardResult implements IQaScorecardResult {
+
+                    /**
+                     * Constructs a new QaScorecardResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IQaScorecardResult);
+
+                    /** QaScorecardResult name. */
+                    public name: string;
+
+                    /** QaScorecardResult qaScorecardRevision. */
+                    public qaScorecardRevision: string;
+
+                    /** QaScorecardResult conversation. */
+                    public conversation: string;
+
+                    /** QaScorecardResult createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QaScorecardResult agentId. */
+                    public agentId: string;
+
+                    /** QaScorecardResult qaAnswers. */
+                    public qaAnswers: google.cloud.contactcenterinsights.v1.IQaAnswer[];
+
+                    /** QaScorecardResult score. */
+                    public score?: (number|null);
+
+                    /** QaScorecardResult potentialScore. */
+                    public potentialScore?: (number|null);
+
+                    /** QaScorecardResult normalizedScore. */
+                    public normalizedScore?: (number|null);
+
+                    /** QaScorecardResult qaTagResults. */
+                    public qaTagResults: google.cloud.contactcenterinsights.v1.QaScorecardResult.IQaTagResult[];
+
+                    /** QaScorecardResult scoreSources. */
+                    public scoreSources: google.cloud.contactcenterinsights.v1.QaScorecardResult.IScoreSource[];
+
+                    /** QaScorecardResult _score. */
+                    public _score?: "score";
+
+                    /** QaScorecardResult _potentialScore. */
+                    public _potentialScore?: "potentialScore";
+
+                    /** QaScorecardResult _normalizedScore. */
+                    public _normalizedScore?: "normalizedScore";
+
+                    /**
+                     * Creates a new QaScorecardResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QaScorecardResult instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IQaScorecardResult): google.cloud.contactcenterinsights.v1.QaScorecardResult;
+
+                    /**
+                     * Encodes the specified QaScorecardResult message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaScorecardResult.verify|verify} messages.
+                     * @param message QaScorecardResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IQaScorecardResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QaScorecardResult message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaScorecardResult.verify|verify} messages.
+                     * @param message QaScorecardResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IQaScorecardResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QaScorecardResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QaScorecardResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaScorecardResult;
+
+                    /**
+                     * Decodes a QaScorecardResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QaScorecardResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaScorecardResult;
+
+                    /**
+                     * Verifies a QaScorecardResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QaScorecardResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QaScorecardResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaScorecardResult;
+
+                    /**
+                     * Creates a plain object from a QaScorecardResult message. Also converts values to other types if specified.
+                     * @param message QaScorecardResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.QaScorecardResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QaScorecardResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QaScorecardResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QaScorecardResult {
+
+                    /** Properties of a QaTagResult. */
+                    interface IQaTagResult {
+
+                        /** QaTagResult tag */
+                        tag?: (string|null);
+
+                        /** QaTagResult score */
+                        score?: (number|null);
+
+                        /** QaTagResult potentialScore */
+                        potentialScore?: (number|null);
+
+                        /** QaTagResult normalizedScore */
+                        normalizedScore?: (number|null);
+                    }
+
+                    /** Represents a QaTagResult. */
+                    class QaTagResult implements IQaTagResult {
+
+                        /**
+                         * Constructs a new QaTagResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.QaScorecardResult.IQaTagResult);
+
+                        /** QaTagResult tag. */
+                        public tag: string;
+
+                        /** QaTagResult score. */
+                        public score?: (number|null);
+
+                        /** QaTagResult potentialScore. */
+                        public potentialScore?: (number|null);
+
+                        /** QaTagResult normalizedScore. */
+                        public normalizedScore?: (number|null);
+
+                        /** QaTagResult _score. */
+                        public _score?: "score";
+
+                        /** QaTagResult _potentialScore. */
+                        public _potentialScore?: "potentialScore";
+
+                        /** QaTagResult _normalizedScore. */
+                        public _normalizedScore?: "normalizedScore";
+
+                        /**
+                         * Creates a new QaTagResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QaTagResult instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.QaScorecardResult.IQaTagResult): google.cloud.contactcenterinsights.v1.QaScorecardResult.QaTagResult;
+
+                        /**
+                         * Encodes the specified QaTagResult message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaScorecardResult.QaTagResult.verify|verify} messages.
+                         * @param message QaTagResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.QaScorecardResult.IQaTagResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QaTagResult message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaScorecardResult.QaTagResult.verify|verify} messages.
+                         * @param message QaTagResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QaScorecardResult.IQaTagResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QaTagResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QaTagResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaScorecardResult.QaTagResult;
+
+                        /**
+                         * Decodes a QaTagResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QaTagResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaScorecardResult.QaTagResult;
+
+                        /**
+                         * Verifies a QaTagResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QaTagResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QaTagResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaScorecardResult.QaTagResult;
+
+                        /**
+                         * Creates a plain object from a QaTagResult message. Also converts values to other types if specified.
+                         * @param message QaTagResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.QaScorecardResult.QaTagResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QaTagResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QaTagResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ScoreSource. */
+                    interface IScoreSource {
+
+                        /** ScoreSource sourceType */
+                        sourceType?: (google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource.SourceType|keyof typeof google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource.SourceType|null);
+
+                        /** ScoreSource score */
+                        score?: (number|null);
+
+                        /** ScoreSource potentialScore */
+                        potentialScore?: (number|null);
+
+                        /** ScoreSource normalizedScore */
+                        normalizedScore?: (number|null);
+
+                        /** ScoreSource qaTagResults */
+                        qaTagResults?: (google.cloud.contactcenterinsights.v1.QaScorecardResult.IQaTagResult[]|null);
+                    }
+
+                    /** Represents a ScoreSource. */
+                    class ScoreSource implements IScoreSource {
+
+                        /**
+                         * Constructs a new ScoreSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.QaScorecardResult.IScoreSource);
+
+                        /** ScoreSource sourceType. */
+                        public sourceType: (google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource.SourceType|keyof typeof google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource.SourceType);
+
+                        /** ScoreSource score. */
+                        public score?: (number|null);
+
+                        /** ScoreSource potentialScore. */
+                        public potentialScore?: (number|null);
+
+                        /** ScoreSource normalizedScore. */
+                        public normalizedScore?: (number|null);
+
+                        /** ScoreSource qaTagResults. */
+                        public qaTagResults: google.cloud.contactcenterinsights.v1.QaScorecardResult.IQaTagResult[];
+
+                        /** ScoreSource _score. */
+                        public _score?: "score";
+
+                        /** ScoreSource _potentialScore. */
+                        public _potentialScore?: "potentialScore";
+
+                        /** ScoreSource _normalizedScore. */
+                        public _normalizedScore?: "normalizedScore";
+
+                        /**
+                         * Creates a new ScoreSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ScoreSource instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.QaScorecardResult.IScoreSource): google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource;
+
+                        /**
+                         * Encodes the specified ScoreSource message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource.verify|verify} messages.
+                         * @param message ScoreSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.QaScorecardResult.IScoreSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ScoreSource message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource.verify|verify} messages.
+                         * @param message ScoreSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.QaScorecardResult.IScoreSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ScoreSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ScoreSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource;
+
+                        /**
+                         * Decodes a ScoreSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ScoreSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource;
+
+                        /**
+                         * Verifies a ScoreSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ScoreSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ScoreSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource;
+
+                        /**
+                         * Creates a plain object from a ScoreSource message. Also converts values to other types if specified.
+                         * @param message ScoreSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ScoreSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ScoreSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ScoreSource {
+
+                        /** SourceType enum. */
+                        enum SourceType {
+                            SOURCE_TYPE_UNSPECIFIED = 0,
+                            SYSTEM_GENERATED_ONLY = 1,
+                            INCLUDES_MANUAL_EDITS = 2
                         }
                     }
                 }
@@ -15529,6 +26699,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -15566,6 +26739,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -16147,6 +27323,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -16160,6 +27351,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -16441,6 +27647,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -16457,6 +27666,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -16660,7 +27872,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */
@@ -16691,7 +27906,8 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -17047,6 +28263,21 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
         /** Properties of a FileDescriptorProto. */
         interface IFileDescriptorProto {
 
@@ -17087,7 +28318,7 @@ export namespace google {
             syntax?: (string|null);
 
             /** FileDescriptorProto edition */
-            edition?: (string|null);
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -17136,7 +28367,7 @@ export namespace google {
             public syntax: string;
 
             /** FileDescriptorProto edition. */
-            public edition: string;
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -17587,6 +28818,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -17600,6 +28840,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -17677,6 +28926,136 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -17863,8 +29242,8 @@ export namespace google {
             /** Label enum. */
             enum Label {
                 LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
             }
         }
 
@@ -18576,9 +29955,6 @@ export namespace google {
             /** FileOptions pyGenericServices */
             pyGenericServices?: (boolean|null);
 
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
             /** FileOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -18605,6 +29981,9 @@ export namespace google {
 
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -18652,9 +30031,6 @@ export namespace google {
             /** FileOptions pyGenericServices. */
             public pyGenericServices: boolean;
 
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
             /** FileOptions deprecated. */
             public deprecated: boolean;
 
@@ -18681,6 +30057,9 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -18791,6 +30170,9 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -18821,6 +30203,9 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -18933,8 +30318,14 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -18982,8 +30373,14 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -19102,10 +30499,116 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -19119,6 +30622,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -19213,6 +30719,9 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -19234,6 +30743,9 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -19322,6 +30834,12 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -19337,6 +30855,12 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -19422,6 +30946,9 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -19443,6 +30970,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -19537,6 +31067,9 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -19564,6 +31097,9 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -19888,6 +31424,394 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -21923,6 +33847,113 @@ export namespace google {
 
             /**
              * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of an Interval. */
+        interface IInterval {
+
+            /** Interval startTime */
+            startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime */
+            endTime?: (google.protobuf.ITimestamp|null);
+        }
+
+        /** Represents an Interval. */
+        class Interval implements IInterval {
+
+            /**
+             * Constructs a new Interval.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IInterval);
+
+            /** Interval startTime. */
+            public startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime. */
+            public endTime?: (google.protobuf.ITimestamp|null);
+
+            /**
+             * Creates a new Interval instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Interval instance
+             */
+            public static create(properties?: google.type.IInterval): google.type.Interval;
+
+            /**
+             * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Interval;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Interval;
+
+            /**
+             * Verifies an Interval message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Interval
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Interval;
+
+            /**
+             * Creates a plain object from an Interval message. Also converts values to other types if specified.
+             * @param message Interval
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Interval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Interval to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Interval
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

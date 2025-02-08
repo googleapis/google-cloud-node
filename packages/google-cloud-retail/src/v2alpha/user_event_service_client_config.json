@@ -48,12 +48,12 @@
       },
       "methods": {
         "WriteUserEvent": {
-          "timeout_millis": 5000,
+          "timeout_millis": 10000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
         },
         "CollectUserEvent": {
-          "timeout_millis": 5000,
+          "timeout_millis": 10000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
         },
@@ -67,8 +67,13 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "49abb7cadc111ff8dd551b61fcad123362c8d090"
         },
+        "ExportUserEvents": {
+          "timeout_millis": 10000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
+        },
         "RejoinUserEvents": {
-          "timeout_millis": 5000,
+          "timeout_millis": 10000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
         }

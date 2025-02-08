@@ -1,5 +1,49 @@
 # Changelog
 
+## [7.6.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.5.0...admin-v7.6.0) (2024-08-09)
+
+
+### Features
+
+* [analytics-admin] add `GetKeyEvent`, `CreateKeyEvent`, `ListKeyEvents`, `UpdateKeyEvent`, and `DeleteKeyEvent` methods ([#5597](https://github.com/googleapis/google-cloud-node/issues/5597)) ([178789b](https://github.com/googleapis/google-cloud-node/commit/178789bd72d0303fc369c823bdbd9a6f2fcd723b))
+
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.4.0...admin-v7.5.0) (2024-07-22)
+
+
+### Features
+
+* [analytics-admin] add `GetKeyEvent`, `CreateKeyEvent`, `ListKeyEvents`, `UpdateKeyEvent`, `DeleteKeyEvent` methods to the Admin API v1beta ([#5556](https://github.com/googleapis/google-cloud-node/issues/5556)) ([f0403d5](https://github.com/googleapis/google-cloud-node/commit/f0403d546bbc3775b9d4b7dd15df74b6809084e7))
+
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.3.0...admin-v7.4.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5350](https://github.com/googleapis/google-cloud-node/issues/5350)) ([6c03873](https://github.com/googleapis/google-cloud-node/commit/6c038731de1f36456042e6b4ecf2a9686be662c7))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.2.0...admin-v7.3.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable ([#5185](https://github.com/googleapis/google-cloud-node/issues/5185)) ([cc54e98](https://github.com/googleapis/google-cloud-node/commit/cc54e98f7f51598e88277ac50310b07b778acbc7))
+
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.1.0...admin-v7.2.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5022](https://github.com/googleapis/google-cloud-node/issues/5022)) ([b6498d8](https://github.com/googleapis/google-cloud-node/commit/b6498d8580d056817981dedbaa0ea5d82e9dccc2))
+
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.0.1...admin-v7.1.0) (2024-02-07)
+
+
+### Features
+
+* [analytics-admin] add `GetCalculatedMetric`, `CreateCalculatedMetric`, `ListCalculatedMetrics`, `UpdateCalculatedMetric`, `DeleteCalculatedMetric` methods to the Admin API v1alpha ([#4984](https://github.com/googleapis/google-cloud-node/issues/4984)) ([0a90c23](https://github.com/googleapis/google-cloud-node/commit/0a90c23568b82d79654e6819039178eee97c4499))
+
 ## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/admin-v7.0.0...admin-v7.0.1) (2024-01-05)
 
 

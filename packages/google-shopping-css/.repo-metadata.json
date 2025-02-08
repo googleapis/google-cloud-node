@@ -7,7 +7,7 @@
   "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/css",
+  "distribution_name": "@google-shopping/css",
   "api_id": "css.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,

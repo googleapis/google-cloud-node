@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,10 +36,9 @@ function main(parent, backupId, backup) {
   /**
    *  Required. The ID to use for the backup.
    *  The ID must be unique within the specified backupVault.
-   *  This value must start with a lowercase letter followed by up to 62
-   *  lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
-   *  Values that do not match this pattern will trigger an INVALID_ARGUMENT
-   *  error.
+   *  Must contain only letters, numbers and hyphen, with the first
+   *  character a letter, the last a letter or a
+   *  number, and a 63 character maximum.
    */
   // const backupId = 'abc123'
   /**

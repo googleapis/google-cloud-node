@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import * as contactcenterinsightsModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation, operationsProtos} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -161,16 +161,105 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.ContactCenterInsightsClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        contactcenterinsightsModule.v1.ContactCenterInsightsClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'contactcenterinsights.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        contactcenterinsightsModule.v1.ContactCenterInsightsClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          contactcenterinsightsModule.v1.ContactCenterInsightsClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'contactcenterinsights.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          contactcenterinsightsModule.v1.ContactCenterInsightsClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'contactcenterinsights.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'contactcenterinsights.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'contactcenterinsights.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new contactcenterinsightsModule.v1.ContactCenterInsightsClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'contactcenterinsights.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'contactcenterinsights.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -3111,6 +3200,683 @@ describe('v1.ContactCenterInsightsClient', () => {
     });
   });
 
+  describe('createAnalysisRule', () => {
+    it('invokes createAnalysisRule without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+      );
+      client.innerApiCalls.createAnalysisRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createAnalysisRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAnalysisRule without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+      );
+      client.innerApiCalls.createAnalysisRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAnalysisRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IAnalysisRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAnalysisRule with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAnalysisRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createAnalysisRule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAnalysisRule with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createAnalysisRule(request), expectedError);
+    });
+  });
+
+  describe('getAnalysisRule', () => {
+    it('invokes getAnalysisRule without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+      );
+      client.innerApiCalls.getAnalysisRule = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAnalysisRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAnalysisRule without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+      );
+      client.innerApiCalls.getAnalysisRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAnalysisRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IAnalysisRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAnalysisRule with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAnalysisRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAnalysisRule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAnalysisRule with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAnalysisRule(request), expectedError);
+    });
+  });
+
+  describe('updateAnalysisRule', () => {
+    it('invokes updateAnalysisRule without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
+      );
+      request.analysisRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest',
+        ['analysisRule', 'name']
+      );
+      request.analysisRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+      );
+      client.innerApiCalls.updateAnalysisRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateAnalysisRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAnalysisRule without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
+      );
+      request.analysisRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest',
+        ['analysisRule', 'name']
+      );
+      request.analysisRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+      );
+      client.innerApiCalls.updateAnalysisRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAnalysisRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IAnalysisRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAnalysisRule with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
+      );
+      request.analysisRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest',
+        ['analysisRule', 'name']
+      );
+      request.analysisRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAnalysisRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateAnalysisRule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAnalysisRule with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
+      );
+      request.analysisRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest',
+        ['analysisRule', 'name']
+      );
+      request.analysisRule.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateAnalysisRule(request), expectedError);
+    });
+  });
+
+  describe('deleteAnalysisRule', () => {
+    it('invokes deleteAnalysisRule without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAnalysisRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteAnalysisRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAnalysisRule without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteAnalysisRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAnalysisRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAnalysisRule with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAnalysisRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteAnalysisRule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAnalysisRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAnalysisRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAnalysisRule with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteAnalysisRule(request), expectedError);
+    });
+  });
+
+  describe('getEncryptionSpec', () => {
+    it('invokes getEncryptionSpec without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.EncryptionSpec()
+      );
+      client.innerApiCalls.getEncryptionSpec = stubSimpleCall(expectedResponse);
+      const [response] = await client.getEncryptionSpec(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getEncryptionSpec as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEncryptionSpec as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEncryptionSpec without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.EncryptionSpec()
+      );
+      client.innerApiCalls.getEncryptionSpec =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getEncryptionSpec(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getEncryptionSpec as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEncryptionSpec as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEncryptionSpec with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getEncryptionSpec = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getEncryptionSpec(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getEncryptionSpec as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEncryptionSpec as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEncryptionSpec with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEncryptionSpec(request), expectedError);
+    });
+  });
+
   describe('createView', () => {
     it('invokes createView without error', async () => {
       const client =
@@ -3645,6 +4411,2334 @@ describe('v1.ContactCenterInsightsClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteView(request), expectedError);
+    });
+  });
+
+  describe('createQaQuestion', () => {
+    it('invokes createQaQuestion without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+      );
+      client.innerApiCalls.createQaQuestion = stubSimpleCall(expectedResponse);
+      const [response] = await client.createQaQuestion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createQaQuestion without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+      );
+      client.innerApiCalls.createQaQuestion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createQaQuestion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IQaQuestion | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createQaQuestion with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createQaQuestion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createQaQuestion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createQaQuestion with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createQaQuestion(request), expectedError);
+    });
+  });
+
+  describe('getQaQuestion', () => {
+    it('invokes getQaQuestion without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+      );
+      client.innerApiCalls.getQaQuestion = stubSimpleCall(expectedResponse);
+      const [response] = await client.getQaQuestion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getQaQuestion without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+      );
+      client.innerApiCalls.getQaQuestion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getQaQuestion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IQaQuestion | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getQaQuestion with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getQaQuestion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getQaQuestion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getQaQuestion with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getQaQuestion(request), expectedError);
+    });
+  });
+
+  describe('updateQaQuestion', () => {
+    it('invokes updateQaQuestion without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
+      );
+      request.qaQuestion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest',
+        ['qaQuestion', 'name']
+      );
+      request.qaQuestion.name = defaultValue1;
+      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+      );
+      client.innerApiCalls.updateQaQuestion = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateQaQuestion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateQaQuestion without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
+      );
+      request.qaQuestion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest',
+        ['qaQuestion', 'name']
+      );
+      request.qaQuestion.name = defaultValue1;
+      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+      );
+      client.innerApiCalls.updateQaQuestion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateQaQuestion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IQaQuestion | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateQaQuestion with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
+      );
+      request.qaQuestion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest',
+        ['qaQuestion', 'name']
+      );
+      request.qaQuestion.name = defaultValue1;
+      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateQaQuestion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateQaQuestion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateQaQuestion with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
+      );
+      request.qaQuestion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest',
+        ['qaQuestion', 'name']
+      );
+      request.qaQuestion.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateQaQuestion(request), expectedError);
+    });
+  });
+
+  describe('deleteQaQuestion', () => {
+    it('invokes deleteQaQuestion without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteQaQuestion = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteQaQuestion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteQaQuestion without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteQaQuestion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteQaQuestion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteQaQuestion with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteQaQuestion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteQaQuestion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteQaQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteQaQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteQaQuestion with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteQaQuestion(request), expectedError);
+    });
+  });
+
+  describe('createQaScorecard', () => {
+    it('invokes createQaScorecard without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+      );
+      client.innerApiCalls.createQaScorecard = stubSimpleCall(expectedResponse);
+      const [response] = await client.createQaScorecard(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createQaScorecard without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+      );
+      client.innerApiCalls.createQaScorecard =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createQaScorecard(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IQaScorecard | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createQaScorecard with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createQaScorecard = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createQaScorecard(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createQaScorecard with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createQaScorecard(request), expectedError);
+    });
+  });
+
+  describe('getQaScorecard', () => {
+    it('invokes getQaScorecard without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+      );
+      client.innerApiCalls.getQaScorecard = stubSimpleCall(expectedResponse);
+      const [response] = await client.getQaScorecard(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getQaScorecard without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+      );
+      client.innerApiCalls.getQaScorecard =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getQaScorecard(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IQaScorecard | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getQaScorecard with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getQaScorecard = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getQaScorecard(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getQaScorecard with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getQaScorecard(request), expectedError);
+    });
+  });
+
+  describe('updateQaScorecard', () => {
+    it('invokes updateQaScorecard without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
+      );
+      request.qaScorecard ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest',
+        ['qaScorecard', 'name']
+      );
+      request.qaScorecard.name = defaultValue1;
+      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+      );
+      client.innerApiCalls.updateQaScorecard = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateQaScorecard(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateQaScorecard without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
+      );
+      request.qaScorecard ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest',
+        ['qaScorecard', 'name']
+      );
+      request.qaScorecard.name = defaultValue1;
+      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+      );
+      client.innerApiCalls.updateQaScorecard =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateQaScorecard(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IQaScorecard | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateQaScorecard with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
+      );
+      request.qaScorecard ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest',
+        ['qaScorecard', 'name']
+      );
+      request.qaScorecard.name = defaultValue1;
+      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateQaScorecard = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateQaScorecard(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateQaScorecard with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
+      );
+      request.qaScorecard ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest',
+        ['qaScorecard', 'name']
+      );
+      request.qaScorecard.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateQaScorecard(request), expectedError);
+    });
+  });
+
+  describe('deleteQaScorecard', () => {
+    it('invokes deleteQaScorecard without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteQaScorecard = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteQaScorecard(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteQaScorecard without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteQaScorecard =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteQaScorecard(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteQaScorecard with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteQaScorecard = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteQaScorecard(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteQaScorecard as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteQaScorecard as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteQaScorecard with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteQaScorecard(request), expectedError);
+    });
+  });
+
+  describe('createQaScorecardRevision', () => {
+    it('invokes createQaScorecardRevision without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+      );
+      client.innerApiCalls.createQaScorecardRevision =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createQaScorecardRevision(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createQaScorecardRevision without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+      );
+      client.innerApiCalls.createQaScorecardRevision =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createQaScorecardRevision(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createQaScorecardRevision with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createQaScorecardRevision = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createQaScorecardRevision(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createQaScorecardRevision with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createQaScorecardRevision(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getQaScorecardRevision', () => {
+    it('invokes getQaScorecardRevision without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+      );
+      client.innerApiCalls.getQaScorecardRevision =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getQaScorecardRevision(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getQaScorecardRevision without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+      );
+      client.innerApiCalls.getQaScorecardRevision =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getQaScorecardRevision(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getQaScorecardRevision with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getQaScorecardRevision = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getQaScorecardRevision(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getQaScorecardRevision with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getQaScorecardRevision(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deployQaScorecardRevision', () => {
+    it('invokes deployQaScorecardRevision without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+      );
+      client.innerApiCalls.deployQaScorecardRevision =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deployQaScorecardRevision(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deployQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deployQaScorecardRevision without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+      );
+      client.innerApiCalls.deployQaScorecardRevision =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deployQaScorecardRevision(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deployQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deployQaScorecardRevision with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deployQaScorecardRevision = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deployQaScorecardRevision(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deployQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deployQaScorecardRevision with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deployQaScorecardRevision(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('undeployQaScorecardRevision', () => {
+    it('invokes undeployQaScorecardRevision without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+      );
+      client.innerApiCalls.undeployQaScorecardRevision =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.undeployQaScorecardRevision(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.undeployQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes undeployQaScorecardRevision without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+      );
+      client.innerApiCalls.undeployQaScorecardRevision =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.undeployQaScorecardRevision(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.undeployQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes undeployQaScorecardRevision with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.undeployQaScorecardRevision = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.undeployQaScorecardRevision(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.undeployQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes undeployQaScorecardRevision with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.undeployQaScorecardRevision(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteQaScorecardRevision', () => {
+    it('invokes deleteQaScorecardRevision without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteQaScorecardRevision =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteQaScorecardRevision(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteQaScorecardRevision without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteQaScorecardRevision =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteQaScorecardRevision(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteQaScorecardRevision with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteQaScorecardRevision = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteQaScorecardRevision(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteQaScorecardRevision with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteQaScorecardRevision(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('createFeedbackLabel', () => {
+    it('invokes createFeedbackLabel without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+      );
+      client.innerApiCalls.createFeedbackLabel =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createFeedbackLabel(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createFeedbackLabel without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+      );
+      client.innerApiCalls.createFeedbackLabel =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createFeedbackLabel(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createFeedbackLabel with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createFeedbackLabel = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createFeedbackLabel(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createFeedbackLabel with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createFeedbackLabel(request), expectedError);
+    });
+  });
+
+  describe('getFeedbackLabel', () => {
+    it('invokes getFeedbackLabel without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+      );
+      client.innerApiCalls.getFeedbackLabel = stubSimpleCall(expectedResponse);
+      const [response] = await client.getFeedbackLabel(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getFeedbackLabel without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+      );
+      client.innerApiCalls.getFeedbackLabel =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getFeedbackLabel(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getFeedbackLabel with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getFeedbackLabel = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getFeedbackLabel(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getFeedbackLabel with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getFeedbackLabel(request), expectedError);
+    });
+  });
+
+  describe('updateFeedbackLabel', () => {
+    it('invokes updateFeedbackLabel without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
+      );
+      request.feedbackLabel ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest',
+        ['feedbackLabel', 'name']
+      );
+      request.feedbackLabel.name = defaultValue1;
+      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+      );
+      client.innerApiCalls.updateFeedbackLabel =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateFeedbackLabel(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateFeedbackLabel without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
+      );
+      request.feedbackLabel ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest',
+        ['feedbackLabel', 'name']
+      );
+      request.feedbackLabel.name = defaultValue1;
+      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+      );
+      client.innerApiCalls.updateFeedbackLabel =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateFeedbackLabel(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateFeedbackLabel with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
+      );
+      request.feedbackLabel ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest',
+        ['feedbackLabel', 'name']
+      );
+      request.feedbackLabel.name = defaultValue1;
+      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateFeedbackLabel = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateFeedbackLabel(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateFeedbackLabel with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
+      );
+      request.feedbackLabel ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest',
+        ['feedbackLabel', 'name']
+      );
+      request.feedbackLabel.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateFeedbackLabel(request), expectedError);
+    });
+  });
+
+  describe('deleteFeedbackLabel', () => {
+    it('invokes deleteFeedbackLabel without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteFeedbackLabel =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteFeedbackLabel(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteFeedbackLabel without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteFeedbackLabel =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteFeedbackLabel(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteFeedbackLabel with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteFeedbackLabel = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteFeedbackLabel(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteFeedbackLabel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFeedbackLabel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteFeedbackLabel with closed client', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteFeedbackLabel(request), expectedError);
     });
   });
 
@@ -5656,6 +8750,1422 @@ describe('v1.ContactCenterInsightsClient', () => {
     });
   });
 
+  describe('exportIssueModel', () => {
+    it('invokes exportIssueModel without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.exportIssueModel =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.exportIssueModel(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportIssueModel without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.exportIssueModel =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.exportIssueModel(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+              protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportIssueModel with call error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.exportIssueModel = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.exportIssueModel(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.exportIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportIssueModel with LRO error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.exportIssueModel = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.exportIssueModel(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.exportIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkExportIssueModelProgress without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkExportIssueModelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkExportIssueModelProgress with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkExportIssueModelProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('importIssueModel', () => {
+    it('invokes importIssueModel without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importIssueModel =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.importIssueModel(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importIssueModel without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importIssueModel =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.importIssueModel(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+              protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importIssueModel with call error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importIssueModel = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.importIssueModel(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importIssueModel with LRO error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importIssueModel = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.importIssueModel(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importIssueModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importIssueModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkImportIssueModelProgress without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportIssueModelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportIssueModelProgress with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkImportIssueModelProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('initializeEncryptionSpec', () => {
+    it('invokes initializeEncryptionSpec without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
+      );
+      request.encryptionSpec ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest',
+        ['encryptionSpec', 'name']
+      );
+      request.encryptionSpec.name = defaultValue1;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.initializeEncryptionSpec =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.initializeEncryptionSpec(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.initializeEncryptionSpec as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.initializeEncryptionSpec as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes initializeEncryptionSpec without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
+      );
+      request.encryptionSpec ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest',
+        ['encryptionSpec', 'name']
+      );
+      request.encryptionSpec.name = defaultValue1;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.initializeEncryptionSpec =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.initializeEncryptionSpec(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+              protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.initializeEncryptionSpec as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.initializeEncryptionSpec as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes initializeEncryptionSpec with call error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
+      );
+      request.encryptionSpec ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest',
+        ['encryptionSpec', 'name']
+      );
+      request.encryptionSpec.name = defaultValue1;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.initializeEncryptionSpec = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.initializeEncryptionSpec(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.initializeEncryptionSpec as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.initializeEncryptionSpec as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes initializeEncryptionSpec with LRO error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
+      );
+      request.encryptionSpec ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest',
+        ['encryptionSpec', 'name']
+      );
+      request.encryptionSpec.name = defaultValue1;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.initializeEncryptionSpec = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.initializeEncryptionSpec(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.initializeEncryptionSpec as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.initializeEncryptionSpec as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkInitializeEncryptionSpecProgress without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkInitializeEncryptionSpecProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkInitializeEncryptionSpecProgress with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkInitializeEncryptionSpecProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('queryMetrics', () => {
+    it('invokes queryMetrics without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.QueryMetricsRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.queryMetrics = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.queryMetrics(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryMetrics as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryMetrics as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryMetrics without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.QueryMetricsRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.queryMetrics =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.queryMetrics(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.contactcenterinsights.v1.IQueryMetricsResponse,
+              protos.google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IQueryMetricsMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryMetrics as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryMetrics as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryMetrics with call error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.QueryMetricsRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.queryMetrics = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.queryMetrics(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.queryMetrics as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryMetrics as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryMetrics with LRO error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.QueryMetricsRequest',
+        ['location']
+      );
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.queryMetrics = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.queryMetrics(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.queryMetrics as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryMetrics as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkQueryMetricsProgress without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkQueryMetricsProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkQueryMetricsProgress with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkQueryMetricsProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('tuneQaScorecardRevision', () => {
+    it('invokes tuneQaScorecardRevision without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.tuneQaScorecardRevision =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.tuneQaScorecardRevision(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.tuneQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.tuneQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes tuneQaScorecardRevision without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.tuneQaScorecardRevision =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.tuneQaScorecardRevision(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse,
+              protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionResponse,
+        protos.google.cloud.contactcenterinsights.v1.ITuneQaScorecardRevisionMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.tuneQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.tuneQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes tuneQaScorecardRevision with call error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.tuneQaScorecardRevision = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.tuneQaScorecardRevision(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.tuneQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.tuneQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes tuneQaScorecardRevision with LRO error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.tuneQaScorecardRevision = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.tuneQaScorecardRevision(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.tuneQaScorecardRevision as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.tuneQaScorecardRevision as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkTuneQaScorecardRevisionProgress without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkTuneQaScorecardRevisionProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkTuneQaScorecardRevisionProgress with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkTuneQaScorecardRevisionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('bulkUploadFeedbackLabels', () => {
+    it('invokes bulkUploadFeedbackLabels without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.bulkUploadFeedbackLabels =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.bulkUploadFeedbackLabels(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkUploadFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkUploadFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkUploadFeedbackLabels without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.bulkUploadFeedbackLabels =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.bulkUploadFeedbackLabels(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse,
+              protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkUploadFeedbackLabelsMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkUploadFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkUploadFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkUploadFeedbackLabels with call error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkUploadFeedbackLabels = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.bulkUploadFeedbackLabels(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.bulkUploadFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkUploadFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkUploadFeedbackLabels with LRO error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkUploadFeedbackLabels = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.bulkUploadFeedbackLabels(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.bulkUploadFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkUploadFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkBulkUploadFeedbackLabelsProgress without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkBulkUploadFeedbackLabelsProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBulkUploadFeedbackLabelsProgress with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBulkUploadFeedbackLabelsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('bulkDownloadFeedbackLabels', () => {
+    it('invokes bulkDownloadFeedbackLabels without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.bulkDownloadFeedbackLabels =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.bulkDownloadFeedbackLabels(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkDownloadFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkDownloadFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkDownloadFeedbackLabels without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.bulkDownloadFeedbackLabels =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.bulkDownloadFeedbackLabels(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse,
+              protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkDownloadFeedbackLabelsMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkDownloadFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkDownloadFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkDownloadFeedbackLabels with call error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkDownloadFeedbackLabels = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.bulkDownloadFeedbackLabels(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.bulkDownloadFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkDownloadFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkDownloadFeedbackLabels with LRO error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkDownloadFeedbackLabels = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.bulkDownloadFeedbackLabels(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.bulkDownloadFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkDownloadFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkBulkDownloadFeedbackLabelsProgress without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkBulkDownloadFeedbackLabelsProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkBulkDownloadFeedbackLabelsProgress with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkBulkDownloadFeedbackLabelsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listConversations', () => {
     it('invokes listConversations without error', async () => {
       const client =
@@ -5845,9 +10355,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5898,9 +10408,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5949,9 +10459,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5991,9 +10501,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6185,9 +10695,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6238,9 +10748,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6289,9 +10799,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6331,9 +10841,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listAnalyses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6528,9 +11038,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6581,9 +11091,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6632,9 +11142,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6674,9 +11184,351 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listPhraseMatchers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listAnalysisRules', () => {
+    it('invokes listAnalysisRules without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+      ];
+      client.innerApiCalls.listAnalysisRules = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAnalysisRules(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAnalysisRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnalysisRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAnalysisRules without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+      ];
+      client.innerApiCalls.listAnalysisRules =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAnalysisRules(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.contactcenterinsights.v1.IAnalysisRule[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAnalysisRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnalysisRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAnalysisRules with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAnalysisRules = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listAnalysisRules(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAnalysisRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnalysisRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAnalysisRulesStream without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+      ];
+      client.descriptors.page.listAnalysisRules.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAnalysisRulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.AnalysisRule[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.AnalysisRule
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAnalysisRules.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAnalysisRules, request)
+      );
+      assert(
+        (client.descriptors.page.listAnalysisRules.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listAnalysisRulesStream with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAnalysisRules.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAnalysisRulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.AnalysisRule[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.AnalysisRule
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAnalysisRules.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAnalysisRules, request)
+      );
+      assert(
+        (client.descriptors.page.listAnalysisRules.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listAnalysisRules without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
+        ),
+      ];
+      client.descriptors.page.listAnalysisRules.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.contactcenterinsights.v1.IAnalysisRule[] =
+        [];
+      const iterable = client.listAnalysisRulesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAnalysisRules.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAnalysisRules.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listAnalysisRules with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAnalysisRules.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAnalysisRulesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.IAnalysisRule[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAnalysisRules.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listAnalysisRules.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6863,9 +11715,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6916,9 +11768,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6966,9 +11818,9 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7009,9 +11861,2101 @@ describe('v1.ContactCenterInsightsClient', () => {
       assert(
         (client.descriptors.page.listViews.asyncIterate as SinonStub)
           .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listQaQuestions', () => {
+    it('invokes listQaQuestions without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+      ];
+      client.innerApiCalls.listQaQuestions = stubSimpleCall(expectedResponse);
+      const [response] = await client.listQaQuestions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listQaQuestions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listQaQuestions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listQaQuestions without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+      ];
+      client.innerApiCalls.listQaQuestions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listQaQuestions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.contactcenterinsights.v1.IQaQuestion[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listQaQuestions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listQaQuestions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listQaQuestions with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listQaQuestions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listQaQuestions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listQaQuestions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listQaQuestions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listQaQuestionsStream without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+      ];
+      client.descriptors.page.listQaQuestions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listQaQuestionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.QaQuestion[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.QaQuestion
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listQaQuestions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listQaQuestions, request)
+      );
+      assert(
+        (client.descriptors.page.listQaQuestions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listQaQuestionsStream with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listQaQuestions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listQaQuestionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.QaQuestion[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.QaQuestion
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listQaQuestions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listQaQuestions, request)
+      );
+      assert(
+        (client.descriptors.page.listQaQuestions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listQaQuestions without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
+        ),
+      ];
+      client.descriptors.page.listQaQuestions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.contactcenterinsights.v1.IQaQuestion[] =
+        [];
+      const iterable = client.listQaQuestionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listQaQuestions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listQaQuestions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listQaQuestions with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listQaQuestions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listQaQuestionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.IQaQuestion[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listQaQuestions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listQaQuestions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listQaScorecards', () => {
+    it('invokes listQaScorecards without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+      ];
+      client.innerApiCalls.listQaScorecards = stubSimpleCall(expectedResponse);
+      const [response] = await client.listQaScorecards(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listQaScorecards as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listQaScorecards as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listQaScorecards without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+      ];
+      client.innerApiCalls.listQaScorecards =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listQaScorecards(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.contactcenterinsights.v1.IQaScorecard[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listQaScorecards as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listQaScorecards as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listQaScorecards with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listQaScorecards = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listQaScorecards(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listQaScorecards as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listQaScorecards as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listQaScorecardsStream without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+      ];
+      client.descriptors.page.listQaScorecards.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listQaScorecardsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.QaScorecard[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.QaScorecard
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listQaScorecards.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listQaScorecards, request)
+      );
+      assert(
+        (client.descriptors.page.listQaScorecards.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listQaScorecardsStream with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listQaScorecards.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listQaScorecardsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.QaScorecard[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.QaScorecard
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listQaScorecards.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listQaScorecards, request)
+      );
+      assert(
+        (client.descriptors.page.listQaScorecards.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listQaScorecards without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
+        ),
+      ];
+      client.descriptors.page.listQaScorecards.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.contactcenterinsights.v1.IQaScorecard[] =
+        [];
+      const iterable = client.listQaScorecardsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listQaScorecards.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listQaScorecards.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listQaScorecards with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listQaScorecards.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listQaScorecardsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.IQaScorecard[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listQaScorecards.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listQaScorecards.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listQaScorecardRevisions', () => {
+    it('invokes listQaScorecardRevisions without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+      ];
+      client.innerApiCalls.listQaScorecardRevisions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listQaScorecardRevisions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listQaScorecardRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listQaScorecardRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listQaScorecardRevisions without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+      ];
+      client.innerApiCalls.listQaScorecardRevisions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listQaScorecardRevisions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listQaScorecardRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listQaScorecardRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listQaScorecardRevisions with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listQaScorecardRevisions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listQaScorecardRevisions(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listQaScorecardRevisions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listQaScorecardRevisions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listQaScorecardRevisionsStream without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+      ];
+      client.descriptors.page.listQaScorecardRevisions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listQaScorecardRevisionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listQaScorecardRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listQaScorecardRevisions, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listQaScorecardRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
           )
+      );
+    });
+
+    it('invokes listQaScorecardRevisionsStream with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listQaScorecardRevisions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listQaScorecardRevisionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listQaScorecardRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listQaScorecardRevisions, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listQaScorecardRevisions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listQaScorecardRevisions without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
+        ),
+      ];
+      client.descriptors.page.listQaScorecardRevisions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision[] =
+        [];
+      const iterable = client.listQaScorecardRevisionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listQaScorecardRevisions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listQaScorecardRevisions
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listQaScorecardRevisions with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listQaScorecardRevisions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listQaScorecardRevisionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.IQaScorecardRevision[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listQaScorecardRevisions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listQaScorecardRevisions
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listFeedbackLabels', () => {
+    it('invokes listFeedbackLabels without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+      ];
+      client.innerApiCalls.listFeedbackLabels =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listFeedbackLabels(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listFeedbackLabels without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+      ];
+      client.innerApiCalls.listFeedbackLabels =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listFeedbackLabels(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listFeedbackLabels with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listFeedbackLabels = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listFeedbackLabels(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listFeedbackLabelsStream without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+      ];
+      client.descriptors.page.listFeedbackLabels.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listFeedbackLabelsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.FeedbackLabel[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.FeedbackLabel
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listFeedbackLabels.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listFeedbackLabels, request)
+      );
+      assert(
+        (client.descriptors.page.listFeedbackLabels.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listFeedbackLabelsStream with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listFeedbackLabels.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listFeedbackLabelsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.FeedbackLabel[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.FeedbackLabel
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listFeedbackLabels.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listFeedbackLabels, request)
+      );
+      assert(
+        (client.descriptors.page.listFeedbackLabels.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listFeedbackLabels without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+      ];
+      client.descriptors.page.listFeedbackLabels.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[] =
+        [];
+      const iterable = client.listFeedbackLabelsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listFeedbackLabels.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listFeedbackLabels.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listFeedbackLabels with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listFeedbackLabels.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listFeedbackLabelsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listFeedbackLabels.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listFeedbackLabels.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listAllFeedbackLabels', () => {
+    it('invokes listAllFeedbackLabels without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+      ];
+      client.innerApiCalls.listAllFeedbackLabels =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listAllFeedbackLabels(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAllFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAllFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAllFeedbackLabels without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+      ];
+      client.innerApiCalls.listAllFeedbackLabels =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAllFeedbackLabels(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAllFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAllFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAllFeedbackLabels with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAllFeedbackLabels = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listAllFeedbackLabels(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listAllFeedbackLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAllFeedbackLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAllFeedbackLabelsStream without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+      ];
+      client.descriptors.page.listAllFeedbackLabels.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAllFeedbackLabelsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.FeedbackLabel[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.FeedbackLabel
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listAllFeedbackLabels
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAllFeedbackLabels, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listAllFeedbackLabels
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listAllFeedbackLabelsStream with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAllFeedbackLabels.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAllFeedbackLabelsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.FeedbackLabel[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.contactcenterinsights.v1.FeedbackLabel
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listAllFeedbackLabels
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAllFeedbackLabels, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listAllFeedbackLabels
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAllFeedbackLabels without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
+        ),
+      ];
+      client.descriptors.page.listAllFeedbackLabels.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[] =
+        [];
+      const iterable = client.listAllFeedbackLabelsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAllFeedbackLabels
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listAllFeedbackLabels
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listAllFeedbackLabels with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAllFeedbackLabels.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAllFeedbackLabelsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.contactcenterinsights.v1.IFeedbackLabel[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAllFeedbackLabels
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listAllFeedbackLabels
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+  describe('getIamPolicy', () => {
+    it('invokes getIamPolicy without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.getIamPolicy = stubSimpleCall(expectedResponse);
+      const response = await client.getIamPolicy(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes getIamPolicy without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.getIamPolicy = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getIamPolicy(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: IamProtos.google.iam.v1.Policy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.getIamPolicy as SinonStub).getCall(0));
+    });
+    it('invokes getIamPolicy with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.GetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.getIamPolicy = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.getIamPolicy(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.iamClient.getIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('setIamPolicy', () => {
+    it('invokes setIamPolicy without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.setIamPolicy = stubSimpleCall(expectedResponse);
+      const response = await client.setIamPolicy(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.setIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes setIamPolicy without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.Policy()
+      );
+      client.iamClient.setIamPolicy = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setIamPolicy(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: IamProtos.google.iam.v1.Policy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.setIamPolicy as SinonStub).getCall(0));
+    });
+    it('invokes setIamPolicy with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.SetIamPolicyRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.setIamPolicy = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.setIamPolicy(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.iamClient.setIamPolicy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('testIamPermissions', () => {
+    it('invokes testIamPermissions without error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+      );
+      client.iamClient.testIamPermissions = stubSimpleCall(expectedResponse);
+      const response = await client.testIamPermissions(
+        request,
+        expectedOptions
+      );
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.iamClient.testIamPermissions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes testIamPermissions without error using callback', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsResponse()
+      );
+      client.iamClient.testIamPermissions = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.testIamPermissions(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: IamProtos.google.iam.v1.TestIamPermissionsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.iamClient.testIamPermissions as SinonStub).getCall(0));
+    });
+    it('invokes testIamPermissions with error', async () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new IamProtos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.iamClient.testIamPermissions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.testIamPermissions(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.iamClient.testIamPermissions as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
       );
     });
   });
@@ -7333,13 +14277,12 @@ describe('v1.ContactCenterInsightsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('analysis', () => {
-      const fakePath = '/rendered/path/analysis';
+    describe('analysisRule', () => {
+      const fakePath = '/rendered/path/analysisRule';
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        conversation: 'conversationValue',
-        analysis: 'analysisValue',
+        analysis_rule: 'analysisRuleValue',
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
@@ -7347,75 +14290,63 @@ describe('v1.ContactCenterInsightsClient', () => {
           projectId: 'bogus',
         });
       client.initialize();
-      client.pathTemplates.analysisPathTemplate.render = sinon
+      client.pathTemplates.analysisRulePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.analysisPathTemplate.match = sinon
+      client.pathTemplates.analysisRulePathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('analysisPath', () => {
-        const result = client.analysisPath(
+      it('analysisRulePath', () => {
+        const result = client.analysisRulePath(
           'projectValue',
           'locationValue',
-          'conversationValue',
-          'analysisValue'
+          'analysisRuleValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.analysisPathTemplate.render as SinonStub)
+          (client.pathTemplates.analysisRulePathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromAnalysisName', () => {
-        const result = client.matchProjectFromAnalysisName(fakePath);
+      it('matchProjectFromAnalysisRuleName', () => {
+        const result = client.matchProjectFromAnalysisRuleName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.analysisPathTemplate.match as SinonStub)
+          (client.pathTemplates.analysisRulePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchLocationFromAnalysisName', () => {
-        const result = client.matchLocationFromAnalysisName(fakePath);
+      it('matchLocationFromAnalysisRuleName', () => {
+        const result = client.matchLocationFromAnalysisRuleName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.analysisPathTemplate.match as SinonStub)
+          (client.pathTemplates.analysisRulePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchConversationFromAnalysisName', () => {
-        const result = client.matchConversationFromAnalysisName(fakePath);
-        assert.strictEqual(result, 'conversationValue');
+      it('matchAnalysisRuleFromAnalysisRuleName', () => {
+        const result = client.matchAnalysisRuleFromAnalysisRuleName(fakePath);
+        assert.strictEqual(result, 'analysisRuleValue');
         assert(
-          (client.pathTemplates.analysisPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAnalysisFromAnalysisName', () => {
-        const result = client.matchAnalysisFromAnalysisName(fakePath);
-        assert.strictEqual(result, 'analysisValue');
-        assert(
-          (client.pathTemplates.analysisPathTemplate.match as SinonStub)
+          (client.pathTemplates.analysisRulePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
     });
 
-    describe('conversation', () => {
-      const fakePath = '/rendered/path/conversation';
+    describe('encryptionSpec', () => {
+      const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        conversation: 'conversationValue',
       };
       const client =
         new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
@@ -7423,52 +14354,41 @@ describe('v1.ContactCenterInsightsClient', () => {
           projectId: 'bogus',
         });
       client.initialize();
-      client.pathTemplates.conversationPathTemplate.render = sinon
+      client.pathTemplates.encryptionSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.conversationPathTemplate.match = sinon
+      client.pathTemplates.encryptionSpecPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('conversationPath', () => {
-        const result = client.conversationPath(
+      it('encryptionSpecPath', () => {
+        const result = client.encryptionSpecPath(
           'projectValue',
-          'locationValue',
-          'conversationValue'
+          'locationValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.conversationPathTemplate.render as SinonStub)
+          (client.pathTemplates.encryptionSpecPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromConversationName', () => {
-        const result = client.matchProjectFromConversationName(fakePath);
+      it('matchProjectFromEncryptionSpecName', () => {
+        const result = client.matchProjectFromEncryptionSpecName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
+          (client.pathTemplates.encryptionSpecPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchLocationFromConversationName', () => {
-        const result = client.matchLocationFromConversationName(fakePath);
+      it('matchLocationFromEncryptionSpecName', () => {
+        const result = client.matchLocationFromEncryptionSpecName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConversationFromConversationName', () => {
-        const result = client.matchConversationFromConversationName(fakePath);
-        assert.strictEqual(result, 'conversationValue');
-        assert(
-          (client.pathTemplates.conversationPathTemplate.match as SinonStub)
+          (client.pathTemplates.encryptionSpecPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -7726,6 +14646,1044 @@ describe('v1.ContactCenterInsightsClient', () => {
         assert.strictEqual(result, 'phraseMatcherValue');
         assert(
           (client.pathTemplates.phraseMatcherPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversation', () => {
+      const fakePath =
+        '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        authorized_view_set: 'authorizedViewSetValue',
+        authorized_view: 'authorizedViewValue',
+        conversation: 'conversationValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationAuthorizedViewSetAuthorizedViewConversationPath', () => {
+        const result =
+          client.projectLocationAuthorizedViewSetAuthorizedViewConversationPath(
+            'projectValue',
+            'locationValue',
+            'authorizedViewSetValue',
+            'authorizedViewValue',
+            'conversationValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName', () => {
+        const result =
+          client.matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName', () => {
+        const result =
+          client.matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName', () => {
+        const result =
+          client.matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewSetValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName', () => {
+        const result =
+          client.matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName', () => {
+        const result =
+          client.matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis', () => {
+      const fakePath =
+        '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        authorized_view_set: 'authorizedViewSetValue',
+        authorized_view: 'authorizedViewValue',
+        conversation: 'conversationValue',
+        analysis: 'analysisValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPath', () => {
+        const result =
+          client.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPath(
+            'projectValue',
+            'locationValue',
+            'authorizedViewSetValue',
+            'authorizedViewValue',
+            'conversationValue',
+            'analysisValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewSetValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnalysisFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName', () => {
+        const result =
+          client.matchAnalysisFromProjectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'analysisValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel', () => {
+      const fakePath =
+        '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        authorized_view_set: 'authorizedViewSetValue',
+        authorized_view: 'authorizedViewValue',
+        conversation: 'conversationValue',
+        feedback_label: 'feedbackLabelValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPath', () => {
+        const result =
+          client.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPath(
+            'projectValue',
+            'locationValue',
+            'authorizedViewSetValue',
+            'authorizedViewValue',
+            'conversationValue',
+            'feedbackLabelValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchProjectFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchLocationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchAuthorizedViewSetFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewSetValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchAuthorizedViewFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'authorizedViewValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchConversationFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeedbackLabelFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName', () => {
+        const result =
+          client.matchFeedbackLabelFromProjectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'feedbackLabelValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConversation', () => {
+      const fakePath = '/rendered/path/projectLocationConversation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation: 'conversationValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationConversationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationConversationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationConversationPath', () => {
+        const result = client.projectLocationConversationPath(
+          'projectValue',
+          'locationValue',
+          'conversationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConversationName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConversationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConversationName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConversationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationConversationName', () => {
+        const result =
+          client.matchConversationFromProjectLocationConversationName(fakePath);
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConversationAnalysis', () => {
+      const fakePath = '/rendered/path/projectLocationConversationAnalysis';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation: 'conversationValue',
+        analysis: 'analysisValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationConversationAnalysisPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationConversationAnalysisPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationConversationAnalysisPath', () => {
+        const result = client.projectLocationConversationAnalysisPath(
+          'projectValue',
+          'locationValue',
+          'conversationValue',
+          'analysisValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationAnalysisPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConversationAnalysisName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConversationAnalysisName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationConversationAnalysisName', () => {
+        const result =
+          client.matchConversationFromProjectLocationConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAnalysisFromProjectLocationConversationAnalysisName', () => {
+        const result =
+          client.matchAnalysisFromProjectLocationConversationAnalysisName(
+            fakePath
+          );
+        assert.strictEqual(result, 'analysisValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConversationAnalysisPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConversationFeedbackLabel', () => {
+      const fakePath =
+        '/rendered/path/projectLocationConversationFeedbackLabel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        conversation: 'conversationValue',
+        feedback_label: 'feedbackLabelValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationConversationFeedbackLabelPath', () => {
+        const result = client.projectLocationConversationFeedbackLabelPath(
+          'projectValue',
+          'locationValue',
+          'conversationValue',
+          'feedbackLabelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationFeedbackLabelPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConversationFeedbackLabelName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConversationFeedbackLabelName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConversationFromProjectLocationConversationFeedbackLabelName', () => {
+        const result =
+          client.matchConversationFromProjectLocationConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'conversationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeedbackLabelFromProjectLocationConversationFeedbackLabelName', () => {
+        const result =
+          client.matchFeedbackLabelFromProjectLocationConversationFeedbackLabelName(
+            fakePath
+          );
+        assert.strictEqual(result, 'feedbackLabelValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationConversationFeedbackLabelPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('qaQuestion', () => {
+      const fakePath = '/rendered/path/qaQuestion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        qa_scorecard: 'qaScorecardValue',
+        revision: 'revisionValue',
+        qa_question: 'qaQuestionValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.qaQuestionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.qaQuestionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('qaQuestionPath', () => {
+        const result = client.qaQuestionPath(
+          'projectValue',
+          'locationValue',
+          'qaScorecardValue',
+          'revisionValue',
+          'qaQuestionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.qaQuestionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromQaQuestionName', () => {
+        const result = client.matchProjectFromQaQuestionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.qaQuestionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromQaQuestionName', () => {
+        const result = client.matchLocationFromQaQuestionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.qaQuestionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchQaScorecardFromQaQuestionName', () => {
+        const result = client.matchQaScorecardFromQaQuestionName(fakePath);
+        assert.strictEqual(result, 'qaScorecardValue');
+        assert(
+          (client.pathTemplates.qaQuestionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRevisionFromQaQuestionName', () => {
+        const result = client.matchRevisionFromQaQuestionName(fakePath);
+        assert.strictEqual(result, 'revisionValue');
+        assert(
+          (client.pathTemplates.qaQuestionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchQaQuestionFromQaQuestionName', () => {
+        const result = client.matchQaQuestionFromQaQuestionName(fakePath);
+        assert.strictEqual(result, 'qaQuestionValue');
+        assert(
+          (client.pathTemplates.qaQuestionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('qaScorecard', () => {
+      const fakePath = '/rendered/path/qaScorecard';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        qa_scorecard: 'qaScorecardValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.qaScorecardPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.qaScorecardPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('qaScorecardPath', () => {
+        const result = client.qaScorecardPath(
+          'projectValue',
+          'locationValue',
+          'qaScorecardValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.qaScorecardPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromQaScorecardName', () => {
+        const result = client.matchProjectFromQaScorecardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.qaScorecardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromQaScorecardName', () => {
+        const result = client.matchLocationFromQaScorecardName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.qaScorecardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchQaScorecardFromQaScorecardName', () => {
+        const result = client.matchQaScorecardFromQaScorecardName(fakePath);
+        assert.strictEqual(result, 'qaScorecardValue');
+        assert(
+          (client.pathTemplates.qaScorecardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('qaScorecardResult', () => {
+      const fakePath = '/rendered/path/qaScorecardResult';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        qa_scorecard_result: 'qaScorecardResultValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.qaScorecardResultPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.qaScorecardResultPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('qaScorecardResultPath', () => {
+        const result = client.qaScorecardResultPath(
+          'projectValue',
+          'locationValue',
+          'qaScorecardResultValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.qaScorecardResultPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromQaScorecardResultName', () => {
+        const result = client.matchProjectFromQaScorecardResultName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.qaScorecardResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromQaScorecardResultName', () => {
+        const result = client.matchLocationFromQaScorecardResultName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.qaScorecardResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchQaScorecardResultFromQaScorecardResultName', () => {
+        const result =
+          client.matchQaScorecardResultFromQaScorecardResultName(fakePath);
+        assert.strictEqual(result, 'qaScorecardResultValue');
+        assert(
+          (
+            client.pathTemplates.qaScorecardResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('qaScorecardRevision', () => {
+      const fakePath = '/rendered/path/qaScorecardRevision';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        qa_scorecard: 'qaScorecardValue',
+        revision: 'revisionValue',
+      };
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.qaScorecardRevisionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.qaScorecardRevisionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('qaScorecardRevisionPath', () => {
+        const result = client.qaScorecardRevisionPath(
+          'projectValue',
+          'locationValue',
+          'qaScorecardValue',
+          'revisionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.qaScorecardRevisionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromQaScorecardRevisionName', () => {
+        const result = client.matchProjectFromQaScorecardRevisionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.qaScorecardRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromQaScorecardRevisionName', () => {
+        const result =
+          client.matchLocationFromQaScorecardRevisionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.qaScorecardRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchQaScorecardFromQaScorecardRevisionName', () => {
+        const result =
+          client.matchQaScorecardFromQaScorecardRevisionName(fakePath);
+        assert.strictEqual(result, 'qaScorecardValue');
+        assert(
+          (
+            client.pathTemplates.qaScorecardRevisionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRevisionFromQaScorecardRevisionName', () => {
+        const result =
+          client.matchRevisionFromQaScorecardRevisionName(fakePath);
+        assert.strictEqual(result, 'revisionValue');
+        assert(
+          (
+            client.pathTemplates.qaScorecardRevisionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

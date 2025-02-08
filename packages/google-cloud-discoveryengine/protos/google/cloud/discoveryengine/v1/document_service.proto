@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,8 @@ import "google/cloud/discoveryengine/v1/import_config.proto";
 import "google/cloud/discoveryengine/v1/purge_config.proto";
 import "google/longrunning/operations.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Cloud.DiscoveryEngine.V1";
 option go_package = "cloud.google.com/go/discoveryengine/apiv1/discoveryenginepb;discoveryenginepb";
@@ -87,6 +89,7 @@ service DocumentService {
         body: "document"
       }
     };
+    option (google.api.method_signature) = "document,update_mask";
   }
 
   // Deletes a [Document][google.cloud.discoveryengine.v1.Document].
@@ -102,7 +105,7 @@ service DocumentService {
 
   // Bulk import of multiple
   // [Document][google.cloud.discoveryengine.v1.Document]s. Request processing
-  // may be synchronous. Non-existing items will be created.
+  // may be synchronous. Non-existing items are created.
   //
   // Note: It is possible for a subset of the
   // [Document][google.cloud.discoveryengine.v1.Document]s to be successfully
@@ -154,6 +157,20 @@ service DocumentService {
       metadata_type: "google.cloud.discoveryengine.v1.PurgeDocumentsMetadata"
     };
   }
+
+  // Gets index freshness metadata for
+  // [Document][google.cloud.discoveryengine.v1.Document]s. Supported for
+  // website search only.
+  rpc BatchGetDocumentsMetadata(BatchGetDocumentsMetadataRequest)
+      returns (BatchGetDocumentsMetadataResponse) {
+    option (google.api.http) = {
+      get: "/v1/{parent=projects/*/locations/*/dataStores/*/branches/*}/batchGetDocumentsMetadata"
+      additional_bindings {
+        get: "/v1/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/batchGetDocumentsMetadata"
+      }
+    };
+    option (google.api.method_signature) = "parent";
+  }
 }
 
 // Request message for
@@ -200,7 +217,7 @@ message ListDocumentsRequest {
 
   // Maximum number of [Document][google.cloud.discoveryengine.v1.Document]s to
   // return. If unspecified, defaults to 100. The maximum allowed value is 1000.
-  // Values above 1000 will be coerced to 1000.
+  // Values above 1000 are set to 1000.
   //
   // If this field is negative, an `INVALID_ARGUMENT` error is returned.
   int32 page_size = 2;
@@ -250,7 +267,7 @@ message CreateDocumentRequest {
   Document document = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The ID to use for the
-  // [Document][google.cloud.discoveryengine.v1.Document], which will become the
+  // [Document][google.cloud.discoveryengine.v1.Document], which becomes the
   // final component of the
   // [Document.name][google.cloud.discoveryengine.v1.Document.name].
   //
@@ -285,10 +302,14 @@ message UpdateDocumentRequest {
   // is not set, a `NOT_FOUND` error is returned.
   Document document = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // If set to true, and the
+  // If set to `true` and the
   // [Document][google.cloud.discoveryengine.v1.Document] is not found, a new
-  // [Document][google.cloud.discoveryengine.v1.Document] will be created.
+  // [Document][google.cloud.discoveryengine.v1.Document] is be created.
   bool allow_missing = 2;
+
+  // Indicates which fields in the provided imported 'document' to update. If
+  // not set, by default updates all fields.
+  google.protobuf.FieldMask update_mask = 3;
 }
 
 // Request message for
@@ -311,4 +332,99 @@ message DeleteDocumentRequest {
       type: "discoveryengine.googleapis.com/Document"
     }
   ];
+}
+
+// Request message for
+// [DocumentService.BatchGetDocumentsMetadata][google.cloud.discoveryengine.v1.DocumentService.BatchGetDocumentsMetadata]
+// method.
+message BatchGetDocumentsMetadataRequest {
+  // Matcher for the [Document][google.cloud.discoveryengine.v1.Document]s by
+  // exact uris.
+  message UrisMatcher {
+    // The exact URIs to match by.
+    repeated string uris = 1;
+  }
+
+  // Matcher for the [Document][google.cloud.discoveryengine.v1.Document]s.
+  // Currently supports matching by exact URIs.
+  message Matcher {
+    // Matcher for the [Document][google.cloud.discoveryengine.v1.Document]s.
+    oneof matcher {
+      // Matcher by exact URIs.
+      UrisMatcher uris_matcher = 1;
+    }
+  }
+
+  // Required. The parent branch resource name, such as
+  // `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "discoveryengine.googleapis.com/Branch"
+    }
+  ];
+
+  // Required. Matcher for the
+  // [Document][google.cloud.discoveryengine.v1.Document]s.
+  Matcher matcher = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response message for
+// [DocumentService.BatchGetDocumentsMetadata][google.cloud.discoveryengine.v1.DocumentService.BatchGetDocumentsMetadata]
+// method.
+message BatchGetDocumentsMetadataResponse {
+  // The metadata of a [Document][google.cloud.discoveryengine.v1.Document].
+  message DocumentMetadata {
+    // The value of the matcher that was used to match the
+    // [Document][google.cloud.discoveryengine.v1.Document].
+    message MatcherValue {
+      // The value of the matcher that was used to match the
+      // [Document][google.cloud.discoveryengine.v1.Document].
+      oneof matcher_value {
+        // If match by URI, the URI of the
+        // [Document][google.cloud.discoveryengine.v1.Document].
+        string uri = 1;
+      }
+    }
+
+    // The value of the matcher that was used to match the
+    // [Document][google.cloud.discoveryengine.v1.Document].
+    MatcherValue matcher_value = 2;
+
+    // The state of the document.
+    State state = 3;
+
+    // The timestamp of the last time the
+    // [Document][google.cloud.discoveryengine.v1.Document] was last indexed.
+    google.protobuf.Timestamp last_refreshed_time = 4;
+
+    // The data ingestion source of the
+    // [Document][google.cloud.discoveryengine.v1.Document].
+    //
+    // Allowed values are:
+    //
+    // * `batch`: Data ingested via Batch API, e.g., ImportDocuments.
+    // * `streaming` Data ingested via Streaming API, e.g., FHIR streaming.
+    string data_ingestion_source = 5;
+  }
+
+  // The state of the [Document][google.cloud.discoveryengine.v1.Document].
+  enum State {
+    // Should never be set.
+    STATE_UNSPECIFIED = 0;
+
+    // The [Document][google.cloud.discoveryengine.v1.Document] is indexed.
+    INDEXED = 1;
+
+    // The [Document][google.cloud.discoveryengine.v1.Document] is not indexed
+    // because its URI is not in the
+    // [TargetSite][google.cloud.discoveryengine.v1.TargetSite].
+    NOT_IN_TARGET_SITE = 2;
+
+    // The [Document][google.cloud.discoveryengine.v1.Document] is not indexed.
+    NOT_IN_INDEX = 3;
+  }
+
+  // The metadata of the [Document][google.cloud.discoveryengine.v1.Document]s.
+  repeated DocumentMetadata documents_metadata = 1;
 }

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
 option go_package = "cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb";
 option java_multiple_files = true;
@@ -172,6 +171,19 @@ service Participants {
     };
     option (google.api.method_signature) = "parent";
   }
+
+  // Gets knowledge assist suggestions based on historical messages.
+  rpc SuggestKnowledgeAssist(SuggestKnowledgeAssistRequest)
+      returns (SuggestKnowledgeAssistResponse) {
+    option (google.api.http) = {
+      post: "/v2/{parent=projects/*/conversations/*/participants/*}/suggestions:suggestKnowledgeAssist"
+      body: "*"
+      additional_bindings {
+        post: "/v2/{parent=projects/*/locations/*/conversations/*/participants/*}/suggestions:suggestKnowledgeAssist"
+        body: "*"
+      }
+    };
+  }
 }
 
 // Represents a conversation participant (human agent, virtual agent, end-user).
@@ -224,9 +236,9 @@ message Participant {
   //    Dialogflow adds the obfuscated user id with the participant.
   //
   // 2. If you set this field in
-  //    [AnalyzeContent][google.cloud.dialogflow.v2.AnalyzeContentRequest.obfuscated_external_user_id]
+  //    [AnalyzeContent][google.cloud.dialogflow.v2.AnalyzeContentRequest.participant]
   //    or
-  //    [StreamingAnalyzeContent][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.obfuscated_external_user_id],
+  //    [StreamingAnalyzeContent][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.participant],
   //    Dialogflow will update
   //    [Participant.obfuscated_external_user_id][google.cloud.dialogflow.v2.Participant.obfuscated_external_user_id].
   //
@@ -469,8 +481,9 @@ message AnalyzeContentResponse {
   OutputAudio reply_audio = 2;
 
   // Only set if a Dialogflow automated agent has responded.
-  // Note that: [AutomatedAgentReply.detect_intent_response.output_audio][]
-  // and [AutomatedAgentReply.detect_intent_response.output_audio_config][]
+  // Note that in [AutomatedAgentReply.DetectIntentResponse][],
+  // [Sessions.DetectIntentResponse.output_audio][]
+  // and [Sessions.DetectIntentResponse.output_audio_config][]
   // are always empty, use
   // [reply_audio][google.cloud.dialogflow.v2.AnalyzeContentResponse.reply_audio]
   // instead.
@@ -617,7 +630,8 @@ message StreamingAnalyzeContentRequest {
   // and
   // [AudioEncoding.AUDIO_ENCODING_MULAW][google.cloud.dialogflow.v2.AudioEncoding.AUDIO_ENCODING_MULAW]
   // - Lifecycle: conversation should be in `Assist Stage`, go to
-  //   [Conversation.CreateConversation][] for more information.
+  //   [Conversations.CreateConversation][google.cloud.dialogflow.v2.Conversations.CreateConversation]
+  //   for more information.
   //
   // InvalidArgument Error will be returned if the one of restriction checks
   // failed.
@@ -680,9 +694,9 @@ message StreamingAnalyzeContentResponse {
   // has content.
   OutputAudio reply_audio = 3;
 
-  // Only set if a Dialogflow automated agent has responded.
-  // Note that: [AutomatedAgentReply.detect_intent_response.output_audio][]
-  // and [AutomatedAgentReply.detect_intent_response.output_audio_config][]
+  // Note that in [AutomatedAgentReply.DetectIntentResponse][],
+  // [Sessions.DetectIntentResponse.output_audio][]
+  // and [Sessions.DetectIntentResponse.output_audio_config][]
   // are always empty, use
   // [reply_audio][google.cloud.dialogflow.v2.StreamingAnalyzeContentResponse.reply_audio]
   // instead.
@@ -1055,6 +1069,9 @@ message SuggestionResult {
     // SuggestArticlesResponse if request is for ARTICLE_SUGGESTION.
     SuggestArticlesResponse suggest_articles_response = 2;
 
+    // SuggestKnowledgeAssistResponse if request is for KNOWLEDGE_ASSIST.
+    SuggestKnowledgeAssistResponse suggest_knowledge_assist_response = 8;
+
     // SuggestFaqAnswersResponse if request is for FAQ_ANSWER.
     SuggestFaqAnswersResponse suggest_faq_answers_response = 3;
 
@@ -1139,4 +1156,127 @@ message AssistQueryParameters {
   // }
   // ```
   map<string, string> documents_metadata_filters = 1;
+}
+
+// The request message for
+// [Participants.SuggestKnowledgeAssist][google.cloud.dialogflow.v2.Participants.SuggestKnowledgeAssist].
+message SuggestKnowledgeAssistRequest {
+  // Required. The name of the participant to fetch suggestions for.
+  // Format: `projects/<Project ID>/locations/<Location
+  // ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "dialogflow.googleapis.com/Participant"
+    }
+  ];
+
+  // Optional. The name of the latest conversation message to compile
+  // suggestions for. If empty, it will be the latest message of the
+  // conversation. Format: `projects/<Project ID>/locations/<Location
+  // ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+  string latest_message = 2 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "dialogflow.googleapis.com/Message"
+    }
+  ];
+
+  // Optional. Max number of messages prior to and including
+  // [latest_message][google.cloud.dialogflow.v2.SuggestKnowledgeAssistRequest.latest_message]
+  // to use as context when compiling the suggestion. The context size is by
+  // default 100 and at most 100.
+  int32 context_size = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The previously suggested query for the given conversation. This
+  // helps identify whether the next suggestion we generate is resonably
+  // different from the previous one. This is useful to avoid similar
+  // suggestions within the conversation.
+  string previous_suggested_query = 4 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// The response message for
+// [Participants.SuggestKnowledgeAssist][google.cloud.dialogflow.v2.Participants.SuggestKnowledgeAssist].
+message SuggestKnowledgeAssistResponse {
+  // Output only. Knowledge Assist suggestion.
+  KnowledgeAssistAnswer knowledge_assist_answer = 1
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // The name of the latest conversation message used to compile suggestion for.
+  // Format: `projects/<Project ID>/locations/<Location
+  // ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+  string latest_message = 2;
+
+  // Number of messages prior to and including
+  // [latest_message][google.cloud.dialogflow.v2.SuggestKnowledgeAssistResponse.latest_message]
+  // to compile the suggestion. It may be smaller than the
+  // [SuggestKnowledgeAssistRequest.context_size][google.cloud.dialogflow.v2.SuggestKnowledgeAssistRequest.context_size]
+  // field in the request if there are fewer messages in the conversation.
+  int32 context_size = 3;
+}
+
+// Represents a Knowledge Assist answer.
+message KnowledgeAssistAnswer {
+  // Represents a suggested query.
+  message SuggestedQuery {
+    // Suggested query text.
+    string query_text = 1;
+  }
+
+  // Represents an answer from Knowledge. Currently supports FAQ and Generative
+  // answers.
+  message KnowledgeAnswer {
+    // Details about source of FAQ answer.
+    message FaqSource {
+      // The corresponding FAQ question.
+      string question = 2;
+    }
+
+    // Details about source of Generative answer.
+    message GenerativeSource {
+      // Snippet Source for a Generative Prediction.
+      message Snippet {
+        // URI the data is sourced from.
+        string uri = 2;
+
+        // Text taken from that URI.
+        string text = 3;
+
+        // Title of the document.
+        string title = 4;
+
+        // Metadata of the document.
+        google.protobuf.Struct metadata = 5;
+      }
+
+      // All snippets used for this Generative Prediction, with their source URI
+      // and data.
+      repeated Snippet snippets = 1;
+    }
+
+    // The piece of text from the `source` that answers this suggested query.
+    string answer_text = 1;
+
+    // Source of result.
+    oneof source {
+      // Populated if the prediction came from FAQ.
+      FaqSource faq_source = 3;
+
+      // Populated if the prediction was Generative.
+      GenerativeSource generative_source = 4;
+    }
+  }
+
+  // The query suggested based on the context. Suggestion is made only if it
+  // is different from the previous suggestion.
+  SuggestedQuery suggested_query = 1;
+
+  // The answer generated for the suggested query. Whether or not an answer is
+  // generated depends on how confident we are about the generated query.
+  KnowledgeAnswer suggested_query_answer = 2;
+
+  // The name of the answer record.
+  // Format: `projects/<Project ID>/locations/<location ID>/answer
+  // Records/<Answer Record ID>`.
+  string answer_record = 3;
 }

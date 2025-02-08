@@ -4,6 +4,42 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [8.5.0](https://github.com/googleapis/google-cloud-node/compare/translate-v8.4.0...translate-v8.5.0) (2024-08-19)
+
+
+### Features
+
+* [translate] Add BigQuery Metastore Partition Service API version v1alpha ([#5611](https://github.com/googleapis/google-cloud-node/issues/5611)) ([700a937](https://github.com/googleapis/google-cloud-node/commit/700a9373dd608cd2a76856c26249ca01aa11ec5f))
+
+## [8.4.0](https://github.com/googleapis/google-cloud-node/compare/translate-v8.3.0...translate-v8.4.0) (2024-08-09)
+
+
+### Features
+
+* [translate] Adds AdaptiveMt HTML/Glossary support ([#5603](https://github.com/googleapis/google-cloud-node/issues/5603)) ([07ab536](https://github.com/googleapis/google-cloud-node/commit/07ab536e89a98ee6e330c293604fbc49d32eb244))
+
+## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/translate-v8.2.0...translate-v8.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/translate-v8.1.0...translate-v8.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
+## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/translate-v8.0.3...translate-v8.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5028](https://github.com/googleapis/google-cloud-node/issues/5028)) ([852f3eb](https://github.com/googleapis/google-cloud-node/commit/852f3ebf065ee24e910580b9a1fc365acb3a744a))
+
 ## [8.0.3](https://github.com/googleapis/google-cloud-node/compare/translate-v8.0.2...translate-v8.0.3) (2024-01-05)
 
 

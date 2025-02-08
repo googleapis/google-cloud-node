@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1beta/beta_analytics_data_client_config.json`.
@@ -52,6 +53,8 @@ export class BetaAnalyticsDataClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -110,8 +113,27 @@ export class BetaAnalyticsDataClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof BetaAnalyticsDataClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'analyticsdata.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -126,7 +148,7 @@ export class BetaAnalyticsDataClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -151,16 +173,16 @@ export class BetaAnalyticsDataClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -328,19 +350,50 @@ export class BetaAnalyticsDataClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'analyticsdata.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'analyticsdata.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -398,7 +451,7 @@ export class BetaAnalyticsDataClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.property
-   *   A Google Analytics GA4 property identifier whose events are tracked.
+   *   A Google Analytics property identifier whose events are tracked.
    *   Specified in the URL path and not the body. To learn more, see [where to
    *   find your Property
    *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -450,8 +503,12 @@ export class BetaAnalyticsDataClient {
    * @param {number[]} request.metricAggregations
    *   Aggregation of metrics. Aggregated metric values will be shown in rows
    *   where the dimension_values are set to "RESERVED_(MetricAggregation)".
+   *   Aggregates including both comparisons and multiple date ranges will
+   *   be aggregated based on the date ranges.
    * @param {number[]} request.orderBys
    *   Specifies how rows are ordered in the response.
+   *   Requests including both comparisons and multiple date ranges will
+   *   have order bys applied on the comparisons.
    * @param {string} request.currencyCode
    *   A currency code in ISO4217 format, such as "AED", "USD", "JPY".
    *   If the field is empty, the report uses the property's default currency.
@@ -464,14 +521,18 @@ export class BetaAnalyticsDataClient {
    *   removed by a filter.
    *
    *   Regardless of this `keep_empty_rows` setting, only data recorded by the
-   *   Google Analytics (GA4) property can be displayed in a report.
+   *   Google Analytics property can be displayed in a report.
    *
    *   For example if a property never logs a `purchase` event, then a query for
    *   the `eventName` dimension and  `eventCount` metric will not have a row
    *   eventName: "purchase" and eventCount: 0.
    * @param {boolean} request.returnPropertyQuota
-   *   Toggles whether to return the current state of this Analytics Property's
-   *   quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   *   Toggles whether to return the current state of this Google Analytics
+   *   property's quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   * @param {number[]} [request.comparisons]
+   *   Optional. The configuration of comparisons requested and displayed. The
+   *   request only requires a comparisons field in order to receive a comparison
+   *   column in the response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -559,7 +620,7 @@ export class BetaAnalyticsDataClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.property
-   *   A Google Analytics GA4 property identifier whose events are tracked.
+   *   A Google Analytics property identifier whose events are tracked.
    *   Specified in the URL path and not the body. To learn more, see [where to
    *   find your Property
    *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -604,14 +665,18 @@ export class BetaAnalyticsDataClient {
    *   removed by a filter.
    *
    *   Regardless of this `keep_empty_rows` setting, only data recorded by the
-   *   Google Analytics (GA4) property can be displayed in a report.
+   *   Google Analytics property can be displayed in a report.
    *
    *   For example if a property never logs a `purchase` event, then a query for
    *   the `eventName` dimension and  `eventCount` metric will not have a row
    *   eventName: "purchase" and eventCount: 0.
    * @param {boolean} request.returnPropertyQuota
-   *   Toggles whether to return the current state of this Analytics Property's
-   *   quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   *   Toggles whether to return the current state of this Google Analytics
+   *   property's quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   * @param {number[]} [request.comparisons]
+   *   Optional. The configuration of comparisons requested and displayed. The
+   *   request requires both a comparisons field and a comparisons dimension to
+   *   receive a comparison column in the response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -697,12 +762,12 @@ export class BetaAnalyticsDataClient {
   }
   /**
    * Returns multiple reports in a batch. All reports must be for the same
-   * GA4 Property.
+   * Google Analytics property.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.property
-   *   A Google Analytics GA4 property identifier whose events are tracked.
+   *   A Google Analytics property identifier whose events are tracked.
    *   Specified in the URL path and not the body. To learn more, see [where to
    *   find your Property
    *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -799,12 +864,12 @@ export class BetaAnalyticsDataClient {
   }
   /**
    * Returns multiple pivot reports in a batch. All reports must be for the same
-   * GA4 Property.
+   * Google Analytics property.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.property
-   *   A Google Analytics GA4 property identifier whose events are tracked.
+   *   A Google Analytics property identifier whose events are tracked.
    *   Specified in the URL path and not the body. To learn more, see [where to
    *   find your Property
    *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -908,7 +973,7 @@ export class BetaAnalyticsDataClient {
   /**
    * Returns metadata for dimensions and metrics available in reporting methods.
    * Used to explore the dimensions and metrics. In this method, a Google
-   * Analytics GA4 Property Identifier is specified in the request, and
+   * Analytics property identifier is specified in the request, and
    * the metadata response includes Custom dimensions and metrics as well as
    * Universal metadata.
    *
@@ -922,7 +987,7 @@ export class BetaAnalyticsDataClient {
    * @param {string} request.name
    *   Required. The resource name of the metadata to retrieve. This name field is
    *   specified in the URL path and not URL parameters. Property is a numeric
-   *   Google Analytics GA4 Property identifier. To learn more, see [where to find
+   *   Google Analytics property identifier. To learn more, see [where to find
    *   your Property
    *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
    *
@@ -1028,7 +1093,7 @@ export class BetaAnalyticsDataClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.property
-   *   A Google Analytics GA4 property identifier whose events are tracked.
+   *   A Google Analytics property identifier whose events are tracked.
    *   Specified in the URL path and not the body. To learn more, see [where to
    *   find your Property
    *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -1059,8 +1124,9 @@ export class BetaAnalyticsDataClient {
    * @param {number[]} request.orderBys
    *   Specifies how rows are ordered in the response.
    * @param {boolean} request.returnPropertyQuota
-   *   Toggles whether to return the current state of this Analytics Property's
-   *   Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   *   Toggles whether to return the current state of this Google Analytics
+   *   property's Realtime quota. Quota is returned in
+   *   [PropertyQuota](#PropertyQuota).
    * @param {number[]} request.minuteRanges
    *   The minute ranges of event data to read. If unspecified, one minute range
    *   for the last 30 minutes will be used. If multiple minute ranges are
@@ -1165,7 +1231,7 @@ export class BetaAnalyticsDataClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.property
-   *   A Google Analytics GA4 property identifier whose events are tracked. To
+   *   A Google Analytics property identifier whose events are tracked. To
    *   learn more, see [where to find your Property
    *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
    *   `property` should be the same value as in your `runReport` request.
@@ -1799,7 +1865,7 @@ export class BetaAnalyticsDataClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAudienceExports`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1934,7 +2000,7 @@ export class BetaAnalyticsDataClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1947,6 +2013,20 @@ export class BetaAnalyticsDataClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1983,6 +2063,13 @@ export class BetaAnalyticsDataClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2018,11 +2105,11 @@ export class BetaAnalyticsDataClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -2031,6 +2118,20 @@ export class BetaAnalyticsDataClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2061,7 +2162,7 @@ export class BetaAnalyticsDataClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -2074,6 +2175,20 @@ export class BetaAnalyticsDataClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

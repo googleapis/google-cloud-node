@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -508,12 +508,19 @@
                              * @memberof google.cloud.bigquery.migration.v2
                              * @interface IMigrationTask
                              * @property {google.cloud.bigquery.migration.v2.ITranslationConfigDetails|null} [translationConfigDetails] MigrationTask translationConfigDetails
+                             * @property {google.cloud.bigquery.migration.v2.ITranslationDetails|null} [translationDetails] MigrationTask translationDetails
                              * @property {string|null} [id] MigrationTask id
                              * @property {string|null} [type] MigrationTask type
                              * @property {google.cloud.bigquery.migration.v2.MigrationTask.State|null} [state] MigrationTask state
                              * @property {google.rpc.IErrorInfo|null} [processingError] MigrationTask processingError
                              * @property {google.protobuf.ITimestamp|null} [createTime] MigrationTask createTime
                              * @property {google.protobuf.ITimestamp|null} [lastUpdateTime] MigrationTask lastUpdateTime
+                             * @property {Array.<google.cloud.bigquery.migration.v2.IResourceErrorDetail>|null} [resourceErrorDetails] MigrationTask resourceErrorDetails
+                             * @property {number|null} [resourceErrorCount] MigrationTask resourceErrorCount
+                             * @property {Array.<google.cloud.bigquery.migration.v2.ITimeSeries>|null} [metrics] MigrationTask metrics
+                             * @property {google.cloud.bigquery.migration.v2.IMigrationTaskResult|null} [taskResult] MigrationTask taskResult
+                             * @property {number|null} [totalProcessingErrorCount] MigrationTask totalProcessingErrorCount
+                             * @property {number|null} [totalResourceErrorCount] MigrationTask totalResourceErrorCount
                              */
     
                             /**
@@ -525,6 +532,8 @@
                              * @param {google.cloud.bigquery.migration.v2.IMigrationTask=} [properties] Properties to set
                              */
                             function MigrationTask(properties) {
+                                this.resourceErrorDetails = [];
+                                this.metrics = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -538,6 +547,14 @@
                              * @instance
                              */
                             MigrationTask.prototype.translationConfigDetails = null;
+    
+                            /**
+                             * MigrationTask translationDetails.
+                             * @member {google.cloud.bigquery.migration.v2.ITranslationDetails|null|undefined} translationDetails
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTask
+                             * @instance
+                             */
+                            MigrationTask.prototype.translationDetails = null;
     
                             /**
                              * MigrationTask id.
@@ -587,17 +604,65 @@
                              */
                             MigrationTask.prototype.lastUpdateTime = null;
     
+                            /**
+                             * MigrationTask resourceErrorDetails.
+                             * @member {Array.<google.cloud.bigquery.migration.v2.IResourceErrorDetail>} resourceErrorDetails
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTask
+                             * @instance
+                             */
+                            MigrationTask.prototype.resourceErrorDetails = $util.emptyArray;
+    
+                            /**
+                             * MigrationTask resourceErrorCount.
+                             * @member {number} resourceErrorCount
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTask
+                             * @instance
+                             */
+                            MigrationTask.prototype.resourceErrorCount = 0;
+    
+                            /**
+                             * MigrationTask metrics.
+                             * @member {Array.<google.cloud.bigquery.migration.v2.ITimeSeries>} metrics
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTask
+                             * @instance
+                             */
+                            MigrationTask.prototype.metrics = $util.emptyArray;
+    
+                            /**
+                             * MigrationTask taskResult.
+                             * @member {google.cloud.bigquery.migration.v2.IMigrationTaskResult|null|undefined} taskResult
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTask
+                             * @instance
+                             */
+                            MigrationTask.prototype.taskResult = null;
+    
+                            /**
+                             * MigrationTask totalProcessingErrorCount.
+                             * @member {number} totalProcessingErrorCount
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTask
+                             * @instance
+                             */
+                            MigrationTask.prototype.totalProcessingErrorCount = 0;
+    
+                            /**
+                             * MigrationTask totalResourceErrorCount.
+                             * @member {number} totalResourceErrorCount
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTask
+                             * @instance
+                             */
+                            MigrationTask.prototype.totalResourceErrorCount = 0;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * MigrationTask taskDetails.
-                             * @member {"translationConfigDetails"|undefined} taskDetails
+                             * @member {"translationConfigDetails"|"translationDetails"|undefined} taskDetails
                              * @memberof google.cloud.bigquery.migration.v2.MigrationTask
                              * @instance
                              */
                             Object.defineProperty(MigrationTask.prototype, "taskDetails", {
-                                get: $util.oneOfGetter($oneOfFields = ["translationConfigDetails"]),
+                                get: $util.oneOfGetter($oneOfFields = ["translationConfigDetails", "translationDetails"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -639,6 +704,22 @@
                                     $root.google.protobuf.Timestamp.encode(message.lastUpdateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.translationConfigDetails != null && Object.hasOwnProperty.call(message, "translationConfigDetails"))
                                     $root.google.cloud.bigquery.migration.v2.TranslationConfigDetails.encode(message.translationConfigDetails, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                                if (message.translationDetails != null && Object.hasOwnProperty.call(message, "translationDetails"))
+                                    $root.google.cloud.bigquery.migration.v2.TranslationDetails.encode(message.translationDetails, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                                if (message.resourceErrorDetails != null && message.resourceErrorDetails.length)
+                                    for (var i = 0; i < message.resourceErrorDetails.length; ++i)
+                                        $root.google.cloud.bigquery.migration.v2.ResourceErrorDetail.encode(message.resourceErrorDetails[i], writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                                if (message.resourceErrorCount != null && Object.hasOwnProperty.call(message, "resourceErrorCount"))
+                                    writer.uint32(/* id 18, wireType 0 =*/144).int32(message.resourceErrorCount);
+                                if (message.metrics != null && message.metrics.length)
+                                    for (var i = 0; i < message.metrics.length; ++i)
+                                        $root.google.cloud.bigquery.migration.v2.TimeSeries.encode(message.metrics[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                                if (message.taskResult != null && Object.hasOwnProperty.call(message, "taskResult"))
+                                    $root.google.cloud.bigquery.migration.v2.MigrationTaskResult.encode(message.taskResult, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                                if (message.totalProcessingErrorCount != null && Object.hasOwnProperty.call(message, "totalProcessingErrorCount"))
+                                    writer.uint32(/* id 21, wireType 0 =*/168).int32(message.totalProcessingErrorCount);
+                                if (message.totalResourceErrorCount != null && Object.hasOwnProperty.call(message, "totalResourceErrorCount"))
+                                    writer.uint32(/* id 22, wireType 0 =*/176).int32(message.totalResourceErrorCount);
                                 return writer;
                             };
     
@@ -677,6 +758,10 @@
                                             message.translationConfigDetails = $root.google.cloud.bigquery.migration.v2.TranslationConfigDetails.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 16: {
+                                            message.translationDetails = $root.google.cloud.bigquery.migration.v2.TranslationDetails.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     case 1: {
                                             message.id = reader.string();
                                             break;
@@ -699,6 +784,34 @@
                                         }
                                     case 7: {
                                             message.lastUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 17: {
+                                            if (!(message.resourceErrorDetails && message.resourceErrorDetails.length))
+                                                message.resourceErrorDetails = [];
+                                            message.resourceErrorDetails.push($root.google.cloud.bigquery.migration.v2.ResourceErrorDetail.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 18: {
+                                            message.resourceErrorCount = reader.int32();
+                                            break;
+                                        }
+                                    case 19: {
+                                            if (!(message.metrics && message.metrics.length))
+                                                message.metrics = [];
+                                            message.metrics.push($root.google.cloud.bigquery.migration.v2.TimeSeries.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.taskResult = $root.google.cloud.bigquery.migration.v2.MigrationTaskResult.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 21: {
+                                            message.totalProcessingErrorCount = reader.int32();
+                                            break;
+                                        }
+                                    case 22: {
+                                            message.totalResourceErrorCount = reader.int32();
                                             break;
                                         }
                                     default:
@@ -745,6 +858,16 @@
                                             return "translationConfigDetails." + error;
                                     }
                                 }
+                                if (message.translationDetails != null && message.hasOwnProperty("translationDetails")) {
+                                    if (properties.taskDetails === 1)
+                                        return "taskDetails: multiple values";
+                                    properties.taskDetails = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.TranslationDetails.verify(message.translationDetails);
+                                        if (error)
+                                            return "translationDetails." + error;
+                                    }
+                                }
                                 if (message.id != null && message.hasOwnProperty("id"))
                                     if (!$util.isString(message.id))
                                         return "id: string expected";
@@ -779,6 +902,38 @@
                                     if (error)
                                         return "lastUpdateTime." + error;
                                 }
+                                if (message.resourceErrorDetails != null && message.hasOwnProperty("resourceErrorDetails")) {
+                                    if (!Array.isArray(message.resourceErrorDetails))
+                                        return "resourceErrorDetails: array expected";
+                                    for (var i = 0; i < message.resourceErrorDetails.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.migration.v2.ResourceErrorDetail.verify(message.resourceErrorDetails[i]);
+                                        if (error)
+                                            return "resourceErrorDetails." + error;
+                                    }
+                                }
+                                if (message.resourceErrorCount != null && message.hasOwnProperty("resourceErrorCount"))
+                                    if (!$util.isInteger(message.resourceErrorCount))
+                                        return "resourceErrorCount: integer expected";
+                                if (message.metrics != null && message.hasOwnProperty("metrics")) {
+                                    if (!Array.isArray(message.metrics))
+                                        return "metrics: array expected";
+                                    for (var i = 0; i < message.metrics.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.migration.v2.TimeSeries.verify(message.metrics[i]);
+                                        if (error)
+                                            return "metrics." + error;
+                                    }
+                                }
+                                if (message.taskResult != null && message.hasOwnProperty("taskResult")) {
+                                    var error = $root.google.cloud.bigquery.migration.v2.MigrationTaskResult.verify(message.taskResult);
+                                    if (error)
+                                        return "taskResult." + error;
+                                }
+                                if (message.totalProcessingErrorCount != null && message.hasOwnProperty("totalProcessingErrorCount"))
+                                    if (!$util.isInteger(message.totalProcessingErrorCount))
+                                        return "totalProcessingErrorCount: integer expected";
+                                if (message.totalResourceErrorCount != null && message.hasOwnProperty("totalResourceErrorCount"))
+                                    if (!$util.isInteger(message.totalResourceErrorCount))
+                                        return "totalResourceErrorCount: integer expected";
                                 return null;
                             };
     
@@ -798,6 +953,11 @@
                                     if (typeof object.translationConfigDetails !== "object")
                                         throw TypeError(".google.cloud.bigquery.migration.v2.MigrationTask.translationConfigDetails: object expected");
                                     message.translationConfigDetails = $root.google.cloud.bigquery.migration.v2.TranslationConfigDetails.fromObject(object.translationConfigDetails);
+                                }
+                                if (object.translationDetails != null) {
+                                    if (typeof object.translationDetails !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.MigrationTask.translationDetails: object expected");
+                                    message.translationDetails = $root.google.cloud.bigquery.migration.v2.TranslationDetails.fromObject(object.translationDetails);
                                 }
                                 if (object.id != null)
                                     message.id = String(object.id);
@@ -854,6 +1014,37 @@
                                         throw TypeError(".google.cloud.bigquery.migration.v2.MigrationTask.lastUpdateTime: object expected");
                                     message.lastUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.lastUpdateTime);
                                 }
+                                if (object.resourceErrorDetails) {
+                                    if (!Array.isArray(object.resourceErrorDetails))
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.MigrationTask.resourceErrorDetails: array expected");
+                                    message.resourceErrorDetails = [];
+                                    for (var i = 0; i < object.resourceErrorDetails.length; ++i) {
+                                        if (typeof object.resourceErrorDetails[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.migration.v2.MigrationTask.resourceErrorDetails: object expected");
+                                        message.resourceErrorDetails[i] = $root.google.cloud.bigquery.migration.v2.ResourceErrorDetail.fromObject(object.resourceErrorDetails[i]);
+                                    }
+                                }
+                                if (object.resourceErrorCount != null)
+                                    message.resourceErrorCount = object.resourceErrorCount | 0;
+                                if (object.metrics) {
+                                    if (!Array.isArray(object.metrics))
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.MigrationTask.metrics: array expected");
+                                    message.metrics = [];
+                                    for (var i = 0; i < object.metrics.length; ++i) {
+                                        if (typeof object.metrics[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.migration.v2.MigrationTask.metrics: object expected");
+                                        message.metrics[i] = $root.google.cloud.bigquery.migration.v2.TimeSeries.fromObject(object.metrics[i]);
+                                    }
+                                }
+                                if (object.taskResult != null) {
+                                    if (typeof object.taskResult !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.MigrationTask.taskResult: object expected");
+                                    message.taskResult = $root.google.cloud.bigquery.migration.v2.MigrationTaskResult.fromObject(object.taskResult);
+                                }
+                                if (object.totalProcessingErrorCount != null)
+                                    message.totalProcessingErrorCount = object.totalProcessingErrorCount | 0;
+                                if (object.totalResourceErrorCount != null)
+                                    message.totalResourceErrorCount = object.totalResourceErrorCount | 0;
                                 return message;
                             };
     
@@ -870,6 +1061,10 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.resourceErrorDetails = [];
+                                    object.metrics = [];
+                                }
                                 if (options.defaults) {
                                     object.id = "";
                                     object.type = "";
@@ -877,6 +1072,10 @@
                                     object.processingError = null;
                                     object.createTime = null;
                                     object.lastUpdateTime = null;
+                                    object.resourceErrorCount = 0;
+                                    object.taskResult = null;
+                                    object.totalProcessingErrorCount = 0;
+                                    object.totalResourceErrorCount = 0;
                                 }
                                 if (message.id != null && message.hasOwnProperty("id"))
                                     object.id = message.id;
@@ -895,6 +1094,29 @@
                                     if (options.oneofs)
                                         object.taskDetails = "translationConfigDetails";
                                 }
+                                if (message.translationDetails != null && message.hasOwnProperty("translationDetails")) {
+                                    object.translationDetails = $root.google.cloud.bigquery.migration.v2.TranslationDetails.toObject(message.translationDetails, options);
+                                    if (options.oneofs)
+                                        object.taskDetails = "translationDetails";
+                                }
+                                if (message.resourceErrorDetails && message.resourceErrorDetails.length) {
+                                    object.resourceErrorDetails = [];
+                                    for (var j = 0; j < message.resourceErrorDetails.length; ++j)
+                                        object.resourceErrorDetails[j] = $root.google.cloud.bigquery.migration.v2.ResourceErrorDetail.toObject(message.resourceErrorDetails[j], options);
+                                }
+                                if (message.resourceErrorCount != null && message.hasOwnProperty("resourceErrorCount"))
+                                    object.resourceErrorCount = message.resourceErrorCount;
+                                if (message.metrics && message.metrics.length) {
+                                    object.metrics = [];
+                                    for (var j = 0; j < message.metrics.length; ++j)
+                                        object.metrics[j] = $root.google.cloud.bigquery.migration.v2.TimeSeries.toObject(message.metrics[j], options);
+                                }
+                                if (message.taskResult != null && message.hasOwnProperty("taskResult"))
+                                    object.taskResult = $root.google.cloud.bigquery.migration.v2.MigrationTaskResult.toObject(message.taskResult, options);
+                                if (message.totalProcessingErrorCount != null && message.hasOwnProperty("totalProcessingErrorCount"))
+                                    object.totalProcessingErrorCount = message.totalProcessingErrorCount;
+                                if (message.totalResourceErrorCount != null && message.hasOwnProperty("totalResourceErrorCount"))
+                                    object.totalResourceErrorCount = message.totalResourceErrorCount;
                                 return object;
                             };
     
@@ -1487,6 +1709,502 @@
                             })();
     
                             return MigrationSubtask;
+                        })();
+    
+                        v2.MigrationTaskResult = (function() {
+    
+                            /**
+                             * Properties of a MigrationTaskResult.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface IMigrationTaskResult
+                             * @property {google.cloud.bigquery.migration.v2.ITranslationTaskResult|null} [translationTaskResult] MigrationTaskResult translationTaskResult
+                             */
+    
+                            /**
+                             * Constructs a new MigrationTaskResult.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a MigrationTaskResult.
+                             * @implements IMigrationTaskResult
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.IMigrationTaskResult=} [properties] Properties to set
+                             */
+                            function MigrationTaskResult(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MigrationTaskResult translationTaskResult.
+                             * @member {google.cloud.bigquery.migration.v2.ITranslationTaskResult|null|undefined} translationTaskResult
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @instance
+                             */
+                            MigrationTaskResult.prototype.translationTaskResult = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * MigrationTaskResult details.
+                             * @member {"translationTaskResult"|undefined} details
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @instance
+                             */
+                            Object.defineProperty(MigrationTaskResult.prototype, "details", {
+                                get: $util.oneOfGetter($oneOfFields = ["translationTaskResult"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new MigrationTaskResult instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IMigrationTaskResult=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.MigrationTaskResult} MigrationTaskResult instance
+                             */
+                            MigrationTaskResult.create = function create(properties) {
+                                return new MigrationTaskResult(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MigrationTaskResult message. Does not implicitly {@link google.cloud.bigquery.migration.v2.MigrationTaskResult.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IMigrationTaskResult} message MigrationTaskResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MigrationTaskResult.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.translationTaskResult != null && Object.hasOwnProperty.call(message, "translationTaskResult"))
+                                    $root.google.cloud.bigquery.migration.v2.TranslationTaskResult.encode(message.translationTaskResult, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MigrationTaskResult message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.MigrationTaskResult.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IMigrationTaskResult} message MigrationTaskResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MigrationTaskResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MigrationTaskResult message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.MigrationTaskResult} MigrationTaskResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MigrationTaskResult.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.MigrationTaskResult();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.translationTaskResult = $root.google.cloud.bigquery.migration.v2.TranslationTaskResult.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MigrationTaskResult message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.MigrationTaskResult} MigrationTaskResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MigrationTaskResult.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MigrationTaskResult message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MigrationTaskResult.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.translationTaskResult != null && message.hasOwnProperty("translationTaskResult")) {
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.TranslationTaskResult.verify(message.translationTaskResult);
+                                        if (error)
+                                            return "translationTaskResult." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MigrationTaskResult message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.MigrationTaskResult} MigrationTaskResult
+                             */
+                            MigrationTaskResult.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.MigrationTaskResult)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.MigrationTaskResult();
+                                if (object.translationTaskResult != null) {
+                                    if (typeof object.translationTaskResult !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.MigrationTaskResult.translationTaskResult: object expected");
+                                    message.translationTaskResult = $root.google.cloud.bigquery.migration.v2.TranslationTaskResult.fromObject(object.translationTaskResult);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MigrationTaskResult message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.MigrationTaskResult} message MigrationTaskResult
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MigrationTaskResult.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.translationTaskResult != null && message.hasOwnProperty("translationTaskResult")) {
+                                    object.translationTaskResult = $root.google.cloud.bigquery.migration.v2.TranslationTaskResult.toObject(message.translationTaskResult, options);
+                                    if (options.oneofs)
+                                        object.details = "translationTaskResult";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MigrationTaskResult to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MigrationTaskResult.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MigrationTaskResult
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.MigrationTaskResult
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MigrationTaskResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.MigrationTaskResult";
+                            };
+    
+                            return MigrationTaskResult;
+                        })();
+    
+                        v2.TranslationTaskResult = (function() {
+    
+                            /**
+                             * Properties of a TranslationTaskResult.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface ITranslationTaskResult
+                             * @property {Array.<google.cloud.bigquery.migration.v2.ILiteral>|null} [translatedLiterals] TranslationTaskResult translatedLiterals
+                             * @property {Array.<google.cloud.bigquery.migration.v2.IGcsReportLogMessage>|null} [reportLogMessages] TranslationTaskResult reportLogMessages
+                             */
+    
+                            /**
+                             * Constructs a new TranslationTaskResult.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a TranslationTaskResult.
+                             * @implements ITranslationTaskResult
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationTaskResult=} [properties] Properties to set
+                             */
+                            function TranslationTaskResult(properties) {
+                                this.translatedLiterals = [];
+                                this.reportLogMessages = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TranslationTaskResult translatedLiterals.
+                             * @member {Array.<google.cloud.bigquery.migration.v2.ILiteral>} translatedLiterals
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @instance
+                             */
+                            TranslationTaskResult.prototype.translatedLiterals = $util.emptyArray;
+    
+                            /**
+                             * TranslationTaskResult reportLogMessages.
+                             * @member {Array.<google.cloud.bigquery.migration.v2.IGcsReportLogMessage>} reportLogMessages
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @instance
+                             */
+                            TranslationTaskResult.prototype.reportLogMessages = $util.emptyArray;
+    
+                            /**
+                             * Creates a new TranslationTaskResult instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationTaskResult=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationTaskResult} TranslationTaskResult instance
+                             */
+                            TranslationTaskResult.create = function create(properties) {
+                                return new TranslationTaskResult(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TranslationTaskResult message. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationTaskResult.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationTaskResult} message TranslationTaskResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TranslationTaskResult.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.translatedLiterals != null && message.translatedLiterals.length)
+                                    for (var i = 0; i < message.translatedLiterals.length; ++i)
+                                        $root.google.cloud.bigquery.migration.v2.Literal.encode(message.translatedLiterals[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.reportLogMessages != null && message.reportLogMessages.length)
+                                    for (var i = 0; i < message.reportLogMessages.length; ++i)
+                                        $root.google.cloud.bigquery.migration.v2.GcsReportLogMessage.encode(message.reportLogMessages[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TranslationTaskResult message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationTaskResult.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationTaskResult} message TranslationTaskResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TranslationTaskResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TranslationTaskResult message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationTaskResult} TranslationTaskResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TranslationTaskResult.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.TranslationTaskResult();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.translatedLiterals && message.translatedLiterals.length))
+                                                message.translatedLiterals = [];
+                                            message.translatedLiterals.push($root.google.cloud.bigquery.migration.v2.Literal.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.reportLogMessages && message.reportLogMessages.length))
+                                                message.reportLogMessages = [];
+                                            message.reportLogMessages.push($root.google.cloud.bigquery.migration.v2.GcsReportLogMessage.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TranslationTaskResult message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationTaskResult} TranslationTaskResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TranslationTaskResult.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TranslationTaskResult message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TranslationTaskResult.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.translatedLiterals != null && message.hasOwnProperty("translatedLiterals")) {
+                                    if (!Array.isArray(message.translatedLiterals))
+                                        return "translatedLiterals: array expected";
+                                    for (var i = 0; i < message.translatedLiterals.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.migration.v2.Literal.verify(message.translatedLiterals[i]);
+                                        if (error)
+                                            return "translatedLiterals." + error;
+                                    }
+                                }
+                                if (message.reportLogMessages != null && message.hasOwnProperty("reportLogMessages")) {
+                                    if (!Array.isArray(message.reportLogMessages))
+                                        return "reportLogMessages: array expected";
+                                    for (var i = 0; i < message.reportLogMessages.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.migration.v2.GcsReportLogMessage.verify(message.reportLogMessages[i]);
+                                        if (error)
+                                            return "reportLogMessages." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TranslationTaskResult message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationTaskResult} TranslationTaskResult
+                             */
+                            TranslationTaskResult.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.TranslationTaskResult)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.TranslationTaskResult();
+                                if (object.translatedLiterals) {
+                                    if (!Array.isArray(object.translatedLiterals))
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.TranslationTaskResult.translatedLiterals: array expected");
+                                    message.translatedLiterals = [];
+                                    for (var i = 0; i < object.translatedLiterals.length; ++i) {
+                                        if (typeof object.translatedLiterals[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.migration.v2.TranslationTaskResult.translatedLiterals: object expected");
+                                        message.translatedLiterals[i] = $root.google.cloud.bigquery.migration.v2.Literal.fromObject(object.translatedLiterals[i]);
+                                    }
+                                }
+                                if (object.reportLogMessages) {
+                                    if (!Array.isArray(object.reportLogMessages))
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.TranslationTaskResult.reportLogMessages: array expected");
+                                    message.reportLogMessages = [];
+                                    for (var i = 0; i < object.reportLogMessages.length; ++i) {
+                                        if (typeof object.reportLogMessages[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.migration.v2.TranslationTaskResult.reportLogMessages: object expected");
+                                        message.reportLogMessages[i] = $root.google.cloud.bigquery.migration.v2.GcsReportLogMessage.fromObject(object.reportLogMessages[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TranslationTaskResult message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.TranslationTaskResult} message TranslationTaskResult
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TranslationTaskResult.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.translatedLiterals = [];
+                                    object.reportLogMessages = [];
+                                }
+                                if (message.translatedLiterals && message.translatedLiterals.length) {
+                                    object.translatedLiterals = [];
+                                    for (var j = 0; j < message.translatedLiterals.length; ++j)
+                                        object.translatedLiterals[j] = $root.google.cloud.bigquery.migration.v2.Literal.toObject(message.translatedLiterals[j], options);
+                                }
+                                if (message.reportLogMessages && message.reportLogMessages.length) {
+                                    object.reportLogMessages = [];
+                                    for (var j = 0; j < message.reportLogMessages.length; ++j)
+                                        object.reportLogMessages[j] = $root.google.cloud.bigquery.migration.v2.GcsReportLogMessage.toObject(message.reportLogMessages[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TranslationTaskResult to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TranslationTaskResult.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TranslationTaskResult
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationTaskResult
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TranslationTaskResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.TranslationTaskResult";
+                            };
+    
+                            return TranslationTaskResult;
                         })();
     
                         v2.ResourceErrorDetail = (function() {
@@ -3438,6 +4156,7 @@
                              * @property {google.cloud.bigquery.migration.v2.IDialect|null} [targetDialect] TranslationConfigDetails targetDialect
                              * @property {google.cloud.bigquery.migration.v2.ISourceEnv|null} [sourceEnv] TranslationConfigDetails sourceEnv
                              * @property {string|null} [requestSource] TranslationConfigDetails requestSource
+                             * @property {Array.<string>|null} [targetTypes] TranslationConfigDetails targetTypes
                              */
     
                             /**
@@ -3449,6 +4168,7 @@
                              * @param {google.cloud.bigquery.migration.v2.ITranslationConfigDetails=} [properties] Properties to set
                              */
                             function TranslationConfigDetails(properties) {
+                                this.targetTypes = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -3510,6 +4230,14 @@
                              * @instance
                              */
                             TranslationConfigDetails.prototype.requestSource = "";
+    
+                            /**
+                             * TranslationConfigDetails targetTypes.
+                             * @member {Array.<string>} targetTypes
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationConfigDetails
+                             * @instance
+                             */
+                            TranslationConfigDetails.prototype.targetTypes = $util.emptyArray;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -3585,6 +4313,9 @@
                                     $root.google.cloud.bigquery.migration.v2.SourceEnv.encode(message.sourceEnv, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 if (message.requestSource != null && Object.hasOwnProperty.call(message, "requestSource"))
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.requestSource);
+                                if (message.targetTypes != null && message.targetTypes.length)
+                                    for (var i = 0; i < message.targetTypes.length; ++i)
+                                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.targetTypes[i]);
                                 return writer;
                             };
     
@@ -3645,6 +4376,12 @@
                                         }
                                     case 8: {
                                             message.requestSource = reader.string();
+                                            break;
+                                        }
+                                    case 9: {
+                                            if (!(message.targetTypes && message.targetTypes.length))
+                                                message.targetTypes = [];
+                                            message.targetTypes.push(reader.string());
                                             break;
                                         }
                                     default:
@@ -3719,6 +4456,13 @@
                                 if (message.requestSource != null && message.hasOwnProperty("requestSource"))
                                     if (!$util.isString(message.requestSource))
                                         return "requestSource: string expected";
+                                if (message.targetTypes != null && message.hasOwnProperty("targetTypes")) {
+                                    if (!Array.isArray(message.targetTypes))
+                                        return "targetTypes: array expected";
+                                    for (var i = 0; i < message.targetTypes.length; ++i)
+                                        if (!$util.isString(message.targetTypes[i]))
+                                            return "targetTypes: string[] expected";
+                                }
                                 return null;
                             };
     
@@ -3760,6 +4504,13 @@
                                 }
                                 if (object.requestSource != null)
                                     message.requestSource = String(object.requestSource);
+                                if (object.targetTypes) {
+                                    if (!Array.isArray(object.targetTypes))
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.TranslationConfigDetails.targetTypes: array expected");
+                                    message.targetTypes = [];
+                                    for (var i = 0; i < object.targetTypes.length; ++i)
+                                        message.targetTypes[i] = String(object.targetTypes[i]);
+                                }
                                 return message;
                             };
     
@@ -3776,6 +4527,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.targetTypes = [];
                                 if (options.defaults) {
                                     object.sourceDialect = null;
                                     object.targetDialect = null;
@@ -3805,6 +4558,11 @@
                                     object.sourceEnv = $root.google.cloud.bigquery.migration.v2.SourceEnv.toObject(message.sourceEnv, options);
                                 if (message.requestSource != null && message.hasOwnProperty("requestSource"))
                                     object.requestSource = message.requestSource;
+                                if (message.targetTypes && message.targetTypes.length) {
+                                    object.targetTypes = [];
+                                    for (var j = 0; j < message.targetTypes.length; ++j)
+                                        object.targetTypes[j] = message.targetTypes[j];
+                                }
                                 return object;
                             };
     
@@ -3857,6 +4615,9 @@
                              * @property {google.cloud.bigquery.migration.v2.IPostgresqlDialect|null} [postgresqlDialect] Dialect postgresqlDialect
                              * @property {google.cloud.bigquery.migration.v2.IPrestoDialect|null} [prestoDialect] Dialect prestoDialect
                              * @property {google.cloud.bigquery.migration.v2.IMySQLDialect|null} [mysqlDialect] Dialect mysqlDialect
+                             * @property {google.cloud.bigquery.migration.v2.IDB2Dialect|null} [db2Dialect] Dialect db2Dialect
+                             * @property {google.cloud.bigquery.migration.v2.ISQLiteDialect|null} [sqliteDialect] Dialect sqliteDialect
+                             * @property {google.cloud.bigquery.migration.v2.IGreenplumDialect|null} [greenplumDialect] Dialect greenplumDialect
                              */
     
                             /**
@@ -3986,17 +4747,41 @@
                              */
                             Dialect.prototype.mysqlDialect = null;
     
+                            /**
+                             * Dialect db2Dialect.
+                             * @member {google.cloud.bigquery.migration.v2.IDB2Dialect|null|undefined} db2Dialect
+                             * @memberof google.cloud.bigquery.migration.v2.Dialect
+                             * @instance
+                             */
+                            Dialect.prototype.db2Dialect = null;
+    
+                            /**
+                             * Dialect sqliteDialect.
+                             * @member {google.cloud.bigquery.migration.v2.ISQLiteDialect|null|undefined} sqliteDialect
+                             * @memberof google.cloud.bigquery.migration.v2.Dialect
+                             * @instance
+                             */
+                            Dialect.prototype.sqliteDialect = null;
+    
+                            /**
+                             * Dialect greenplumDialect.
+                             * @member {google.cloud.bigquery.migration.v2.IGreenplumDialect|null|undefined} greenplumDialect
+                             * @memberof google.cloud.bigquery.migration.v2.Dialect
+                             * @instance
+                             */
+                            Dialect.prototype.greenplumDialect = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * Dialect dialectValue.
-                             * @member {"bigqueryDialect"|"hiveqlDialect"|"redshiftDialect"|"teradataDialect"|"oracleDialect"|"sparksqlDialect"|"snowflakeDialect"|"netezzaDialect"|"azureSynapseDialect"|"verticaDialect"|"sqlServerDialect"|"postgresqlDialect"|"prestoDialect"|"mysqlDialect"|undefined} dialectValue
+                             * @member {"bigqueryDialect"|"hiveqlDialect"|"redshiftDialect"|"teradataDialect"|"oracleDialect"|"sparksqlDialect"|"snowflakeDialect"|"netezzaDialect"|"azureSynapseDialect"|"verticaDialect"|"sqlServerDialect"|"postgresqlDialect"|"prestoDialect"|"mysqlDialect"|"db2Dialect"|"sqliteDialect"|"greenplumDialect"|undefined} dialectValue
                              * @memberof google.cloud.bigquery.migration.v2.Dialect
                              * @instance
                              */
                             Object.defineProperty(Dialect.prototype, "dialectValue", {
-                                get: $util.oneOfGetter($oneOfFields = ["bigqueryDialect", "hiveqlDialect", "redshiftDialect", "teradataDialect", "oracleDialect", "sparksqlDialect", "snowflakeDialect", "netezzaDialect", "azureSynapseDialect", "verticaDialect", "sqlServerDialect", "postgresqlDialect", "prestoDialect", "mysqlDialect"]),
+                                get: $util.oneOfGetter($oneOfFields = ["bigqueryDialect", "hiveqlDialect", "redshiftDialect", "teradataDialect", "oracleDialect", "sparksqlDialect", "snowflakeDialect", "netezzaDialect", "azureSynapseDialect", "verticaDialect", "sqlServerDialect", "postgresqlDialect", "prestoDialect", "mysqlDialect", "db2Dialect", "sqliteDialect", "greenplumDialect"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -4052,6 +4837,12 @@
                                     $root.google.cloud.bigquery.migration.v2.PrestoDialect.encode(message.prestoDialect, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                                 if (message.mysqlDialect != null && Object.hasOwnProperty.call(message, "mysqlDialect"))
                                     $root.google.cloud.bigquery.migration.v2.MySQLDialect.encode(message.mysqlDialect, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                                if (message.db2Dialect != null && Object.hasOwnProperty.call(message, "db2Dialect"))
+                                    $root.google.cloud.bigquery.migration.v2.DB2Dialect.encode(message.db2Dialect, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                                if (message.sqliteDialect != null && Object.hasOwnProperty.call(message, "sqliteDialect"))
+                                    $root.google.cloud.bigquery.migration.v2.SQLiteDialect.encode(message.sqliteDialect, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                                if (message.greenplumDialect != null && Object.hasOwnProperty.call(message, "greenplumDialect"))
+                                    $root.google.cloud.bigquery.migration.v2.GreenplumDialect.encode(message.greenplumDialect, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                                 return writer;
                             };
     
@@ -4140,6 +4931,18 @@
                                         }
                                     case 14: {
                                             message.mysqlDialect = $root.google.cloud.bigquery.migration.v2.MySQLDialect.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.db2Dialect = $root.google.cloud.bigquery.migration.v2.DB2Dialect.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.sqliteDialect = $root.google.cloud.bigquery.migration.v2.SQLiteDialect.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 17: {
+                                            message.greenplumDialect = $root.google.cloud.bigquery.migration.v2.GreenplumDialect.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -4316,6 +5119,36 @@
                                             return "mysqlDialect." + error;
                                     }
                                 }
+                                if (message.db2Dialect != null && message.hasOwnProperty("db2Dialect")) {
+                                    if (properties.dialectValue === 1)
+                                        return "dialectValue: multiple values";
+                                    properties.dialectValue = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.DB2Dialect.verify(message.db2Dialect);
+                                        if (error)
+                                            return "db2Dialect." + error;
+                                    }
+                                }
+                                if (message.sqliteDialect != null && message.hasOwnProperty("sqliteDialect")) {
+                                    if (properties.dialectValue === 1)
+                                        return "dialectValue: multiple values";
+                                    properties.dialectValue = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.SQLiteDialect.verify(message.sqliteDialect);
+                                        if (error)
+                                            return "sqliteDialect." + error;
+                                    }
+                                }
+                                if (message.greenplumDialect != null && message.hasOwnProperty("greenplumDialect")) {
+                                    if (properties.dialectValue === 1)
+                                        return "dialectValue: multiple values";
+                                    properties.dialectValue = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.GreenplumDialect.verify(message.greenplumDialect);
+                                        if (error)
+                                            return "greenplumDialect." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -4400,6 +5233,21 @@
                                     if (typeof object.mysqlDialect !== "object")
                                         throw TypeError(".google.cloud.bigquery.migration.v2.Dialect.mysqlDialect: object expected");
                                     message.mysqlDialect = $root.google.cloud.bigquery.migration.v2.MySQLDialect.fromObject(object.mysqlDialect);
+                                }
+                                if (object.db2Dialect != null) {
+                                    if (typeof object.db2Dialect !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.Dialect.db2Dialect: object expected");
+                                    message.db2Dialect = $root.google.cloud.bigquery.migration.v2.DB2Dialect.fromObject(object.db2Dialect);
+                                }
+                                if (object.sqliteDialect != null) {
+                                    if (typeof object.sqliteDialect !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.Dialect.sqliteDialect: object expected");
+                                    message.sqliteDialect = $root.google.cloud.bigquery.migration.v2.SQLiteDialect.fromObject(object.sqliteDialect);
+                                }
+                                if (object.greenplumDialect != null) {
+                                    if (typeof object.greenplumDialect !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.Dialect.greenplumDialect: object expected");
+                                    message.greenplumDialect = $root.google.cloud.bigquery.migration.v2.GreenplumDialect.fromObject(object.greenplumDialect);
                                 }
                                 return message;
                             };
@@ -4486,6 +5334,21 @@
                                     object.mysqlDialect = $root.google.cloud.bigquery.migration.v2.MySQLDialect.toObject(message.mysqlDialect, options);
                                     if (options.oneofs)
                                         object.dialectValue = "mysqlDialect";
+                                }
+                                if (message.db2Dialect != null && message.hasOwnProperty("db2Dialect")) {
+                                    object.db2Dialect = $root.google.cloud.bigquery.migration.v2.DB2Dialect.toObject(message.db2Dialect, options);
+                                    if (options.oneofs)
+                                        object.dialectValue = "db2Dialect";
+                                }
+                                if (message.sqliteDialect != null && message.hasOwnProperty("sqliteDialect")) {
+                                    object.sqliteDialect = $root.google.cloud.bigquery.migration.v2.SQLiteDialect.toObject(message.sqliteDialect, options);
+                                    if (options.oneofs)
+                                        object.dialectValue = "sqliteDialect";
+                                }
+                                if (message.greenplumDialect != null && message.hasOwnProperty("greenplumDialect")) {
+                                    object.greenplumDialect = $root.google.cloud.bigquery.migration.v2.GreenplumDialect.toObject(message.greenplumDialect, options);
+                                    if (options.oneofs)
+                                        object.dialectValue = "greenplumDialect";
                                 }
                                 return object;
                             };
@@ -7037,6 +7900,531 @@
                             return MySQLDialect;
                         })();
     
+                        v2.DB2Dialect = (function() {
+    
+                            /**
+                             * Properties of a DB2Dialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface IDB2Dialect
+                             */
+    
+                            /**
+                             * Constructs a new DB2Dialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a DB2Dialect.
+                             * @implements IDB2Dialect
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.IDB2Dialect=} [properties] Properties to set
+                             */
+                            function DB2Dialect(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new DB2Dialect instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.DB2Dialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IDB2Dialect=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.DB2Dialect} DB2Dialect instance
+                             */
+                            DB2Dialect.create = function create(properties) {
+                                return new DB2Dialect(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DB2Dialect message. Does not implicitly {@link google.cloud.bigquery.migration.v2.DB2Dialect.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.DB2Dialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IDB2Dialect} message DB2Dialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DB2Dialect.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DB2Dialect message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.DB2Dialect.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.DB2Dialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IDB2Dialect} message DB2Dialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DB2Dialect.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DB2Dialect message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.DB2Dialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.DB2Dialect} DB2Dialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DB2Dialect.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.DB2Dialect();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DB2Dialect message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.DB2Dialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.DB2Dialect} DB2Dialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DB2Dialect.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DB2Dialect message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.DB2Dialect
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DB2Dialect.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DB2Dialect message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.DB2Dialect
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.DB2Dialect} DB2Dialect
+                             */
+                            DB2Dialect.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.DB2Dialect)
+                                    return object;
+                                return new $root.google.cloud.bigquery.migration.v2.DB2Dialect();
+                            };
+    
+                            /**
+                             * Creates a plain object from a DB2Dialect message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.DB2Dialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.DB2Dialect} message DB2Dialect
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DB2Dialect.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this DB2Dialect to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.DB2Dialect
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DB2Dialect.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DB2Dialect
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.DB2Dialect
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DB2Dialect.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.DB2Dialect";
+                            };
+    
+                            return DB2Dialect;
+                        })();
+    
+                        v2.SQLiteDialect = (function() {
+    
+                            /**
+                             * Properties of a SQLiteDialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface ISQLiteDialect
+                             */
+    
+                            /**
+                             * Constructs a new SQLiteDialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a SQLiteDialect.
+                             * @implements ISQLiteDialect
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.ISQLiteDialect=} [properties] Properties to set
+                             */
+                            function SQLiteDialect(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new SQLiteDialect instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.SQLiteDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISQLiteDialect=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.SQLiteDialect} SQLiteDialect instance
+                             */
+                            SQLiteDialect.create = function create(properties) {
+                                return new SQLiteDialect(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SQLiteDialect message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SQLiteDialect.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.SQLiteDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISQLiteDialect} message SQLiteDialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SQLiteDialect.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SQLiteDialect message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SQLiteDialect.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SQLiteDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISQLiteDialect} message SQLiteDialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SQLiteDialect.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SQLiteDialect message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.SQLiteDialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.SQLiteDialect} SQLiteDialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SQLiteDialect.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.SQLiteDialect();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SQLiteDialect message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SQLiteDialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.SQLiteDialect} SQLiteDialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SQLiteDialect.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SQLiteDialect message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.SQLiteDialect
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SQLiteDialect.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SQLiteDialect message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.SQLiteDialect
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.SQLiteDialect} SQLiteDialect
+                             */
+                            SQLiteDialect.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.SQLiteDialect)
+                                    return object;
+                                return new $root.google.cloud.bigquery.migration.v2.SQLiteDialect();
+                            };
+    
+                            /**
+                             * Creates a plain object from a SQLiteDialect message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.SQLiteDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.SQLiteDialect} message SQLiteDialect
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SQLiteDialect.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this SQLiteDialect to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.SQLiteDialect
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SQLiteDialect.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SQLiteDialect
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.SQLiteDialect
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SQLiteDialect.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.SQLiteDialect";
+                            };
+    
+                            return SQLiteDialect;
+                        })();
+    
+                        v2.GreenplumDialect = (function() {
+    
+                            /**
+                             * Properties of a GreenplumDialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface IGreenplumDialect
+                             */
+    
+                            /**
+                             * Constructs a new GreenplumDialect.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a GreenplumDialect.
+                             * @implements IGreenplumDialect
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.IGreenplumDialect=} [properties] Properties to set
+                             */
+                            function GreenplumDialect(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new GreenplumDialect instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.GreenplumDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IGreenplumDialect=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.GreenplumDialect} GreenplumDialect instance
+                             */
+                            GreenplumDialect.create = function create(properties) {
+                                return new GreenplumDialect(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GreenplumDialect message. Does not implicitly {@link google.cloud.bigquery.migration.v2.GreenplumDialect.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.GreenplumDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IGreenplumDialect} message GreenplumDialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GreenplumDialect.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GreenplumDialect message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.GreenplumDialect.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.GreenplumDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IGreenplumDialect} message GreenplumDialect message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GreenplumDialect.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GreenplumDialect message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.GreenplumDialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.GreenplumDialect} GreenplumDialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GreenplumDialect.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.GreenplumDialect();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GreenplumDialect message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.GreenplumDialect
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.GreenplumDialect} GreenplumDialect
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GreenplumDialect.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GreenplumDialect message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.GreenplumDialect
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GreenplumDialect.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GreenplumDialect message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.GreenplumDialect
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.GreenplumDialect} GreenplumDialect
+                             */
+                            GreenplumDialect.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.GreenplumDialect)
+                                    return object;
+                                return new $root.google.cloud.bigquery.migration.v2.GreenplumDialect();
+                            };
+    
+                            /**
+                             * Creates a plain object from a GreenplumDialect message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.GreenplumDialect
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.GreenplumDialect} message GreenplumDialect
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GreenplumDialect.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this GreenplumDialect to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.GreenplumDialect
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GreenplumDialect.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GreenplumDialect
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.GreenplumDialect
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GreenplumDialect.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.GreenplumDialect";
+                            };
+    
+                            return GreenplumDialect;
+                        })();
+    
                         v2.ObjectNameMappingList = (function() {
     
                             /**
@@ -8150,6 +9538,7 @@
                              * @interface ISourceEnv
                              * @property {string|null} [defaultDatabase] SourceEnv defaultDatabase
                              * @property {Array.<string>|null} [schemaSearchPath] SourceEnv schemaSearchPath
+                             * @property {string|null} [metadataStoreDataset] SourceEnv metadataStoreDataset
                              */
     
                             /**
@@ -8185,6 +9574,14 @@
                             SourceEnv.prototype.schemaSearchPath = $util.emptyArray;
     
                             /**
+                             * SourceEnv metadataStoreDataset.
+                             * @member {string} metadataStoreDataset
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnv
+                             * @instance
+                             */
+                            SourceEnv.prototype.metadataStoreDataset = "";
+    
+                            /**
                              * Creates a new SourceEnv instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.migration.v2.SourceEnv
@@ -8213,6 +9610,8 @@
                                 if (message.schemaSearchPath != null && message.schemaSearchPath.length)
                                     for (var i = 0; i < message.schemaSearchPath.length; ++i)
                                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.schemaSearchPath[i]);
+                                if (message.metadataStoreDataset != null && Object.hasOwnProperty.call(message, "metadataStoreDataset"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.metadataStoreDataset);
                                 return writer;
                             };
     
@@ -8255,6 +9654,10 @@
                                             if (!(message.schemaSearchPath && message.schemaSearchPath.length))
                                                 message.schemaSearchPath = [];
                                             message.schemaSearchPath.push(reader.string());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.metadataStoreDataset = reader.string();
                                             break;
                                         }
                                     default:
@@ -8302,6 +9705,9 @@
                                         if (!$util.isString(message.schemaSearchPath[i]))
                                             return "schemaSearchPath: string[] expected";
                                 }
+                                if (message.metadataStoreDataset != null && message.hasOwnProperty("metadataStoreDataset"))
+                                    if (!$util.isString(message.metadataStoreDataset))
+                                        return "metadataStoreDataset: string expected";
                                 return null;
                             };
     
@@ -8326,6 +9732,8 @@
                                     for (var i = 0; i < object.schemaSearchPath.length; ++i)
                                         message.schemaSearchPath[i] = String(object.schemaSearchPath[i]);
                                 }
+                                if (object.metadataStoreDataset != null)
+                                    message.metadataStoreDataset = String(object.metadataStoreDataset);
                                 return message;
                             };
     
@@ -8344,8 +9752,10 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.schemaSearchPath = [];
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.defaultDatabase = "";
+                                    object.metadataStoreDataset = "";
+                                }
                                 if (message.defaultDatabase != null && message.hasOwnProperty("defaultDatabase"))
                                     object.defaultDatabase = message.defaultDatabase;
                                 if (message.schemaSearchPath && message.schemaSearchPath.length) {
@@ -8353,6 +9763,8 @@
                                     for (var j = 0; j < message.schemaSearchPath.length; ++j)
                                         object.schemaSearchPath[j] = message.schemaSearchPath[j];
                                 }
+                                if (message.metadataStoreDataset != null && message.hasOwnProperty("metadataStoreDataset"))
+                                    object.metadataStoreDataset = message.metadataStoreDataset;
                                 return object;
                             };
     
@@ -8383,6 +9795,2060 @@
                             };
     
                             return SourceEnv;
+                        })();
+    
+                        v2.TranslationDetails = (function() {
+    
+                            /**
+                             * Properties of a TranslationDetails.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface ITranslationDetails
+                             * @property {Array.<google.cloud.bigquery.migration.v2.ISourceTargetMapping>|null} [sourceTargetMapping] TranslationDetails sourceTargetMapping
+                             * @property {string|null} [targetBaseUri] TranslationDetails targetBaseUri
+                             * @property {google.cloud.bigquery.migration.v2.ISourceEnvironment|null} [sourceEnvironment] TranslationDetails sourceEnvironment
+                             * @property {Array.<string>|null} [targetReturnLiterals] TranslationDetails targetReturnLiterals
+                             * @property {Array.<string>|null} [targetTypes] TranslationDetails targetTypes
+                             */
+    
+                            /**
+                             * Constructs a new TranslationDetails.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a TranslationDetails.
+                             * @implements ITranslationDetails
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationDetails=} [properties] Properties to set
+                             */
+                            function TranslationDetails(properties) {
+                                this.sourceTargetMapping = [];
+                                this.targetReturnLiterals = [];
+                                this.targetTypes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TranslationDetails sourceTargetMapping.
+                             * @member {Array.<google.cloud.bigquery.migration.v2.ISourceTargetMapping>} sourceTargetMapping
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @instance
+                             */
+                            TranslationDetails.prototype.sourceTargetMapping = $util.emptyArray;
+    
+                            /**
+                             * TranslationDetails targetBaseUri.
+                             * @member {string} targetBaseUri
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @instance
+                             */
+                            TranslationDetails.prototype.targetBaseUri = "";
+    
+                            /**
+                             * TranslationDetails sourceEnvironment.
+                             * @member {google.cloud.bigquery.migration.v2.ISourceEnvironment|null|undefined} sourceEnvironment
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @instance
+                             */
+                            TranslationDetails.prototype.sourceEnvironment = null;
+    
+                            /**
+                             * TranslationDetails targetReturnLiterals.
+                             * @member {Array.<string>} targetReturnLiterals
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @instance
+                             */
+                            TranslationDetails.prototype.targetReturnLiterals = $util.emptyArray;
+    
+                            /**
+                             * TranslationDetails targetTypes.
+                             * @member {Array.<string>} targetTypes
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @instance
+                             */
+                            TranslationDetails.prototype.targetTypes = $util.emptyArray;
+    
+                            /**
+                             * Creates a new TranslationDetails instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationDetails=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationDetails} TranslationDetails instance
+                             */
+                            TranslationDetails.create = function create(properties) {
+                                return new TranslationDetails(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TranslationDetails message. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationDetails.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationDetails} message TranslationDetails message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TranslationDetails.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.sourceTargetMapping != null && message.sourceTargetMapping.length)
+                                    for (var i = 0; i < message.sourceTargetMapping.length; ++i)
+                                        $root.google.cloud.bigquery.migration.v2.SourceTargetMapping.encode(message.sourceTargetMapping[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.targetBaseUri != null && Object.hasOwnProperty.call(message, "targetBaseUri"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.targetBaseUri);
+                                if (message.sourceEnvironment != null && Object.hasOwnProperty.call(message, "sourceEnvironment"))
+                                    $root.google.cloud.bigquery.migration.v2.SourceEnvironment.encode(message.sourceEnvironment, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.targetReturnLiterals != null && message.targetReturnLiterals.length)
+                                    for (var i = 0; i < message.targetReturnLiterals.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.targetReturnLiterals[i]);
+                                if (message.targetTypes != null && message.targetTypes.length)
+                                    for (var i = 0; i < message.targetTypes.length; ++i)
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.targetTypes[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TranslationDetails message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationDetails.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationDetails} message TranslationDetails message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TranslationDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TranslationDetails message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationDetails} TranslationDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TranslationDetails.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.TranslationDetails();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.sourceTargetMapping && message.sourceTargetMapping.length))
+                                                message.sourceTargetMapping = [];
+                                            message.sourceTargetMapping.push($root.google.cloud.bigquery.migration.v2.SourceTargetMapping.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.targetBaseUri = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.sourceEnvironment = $root.google.cloud.bigquery.migration.v2.SourceEnvironment.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.targetReturnLiterals && message.targetReturnLiterals.length))
+                                                message.targetReturnLiterals = [];
+                                            message.targetReturnLiterals.push(reader.string());
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.targetTypes && message.targetTypes.length))
+                                                message.targetTypes = [];
+                                            message.targetTypes.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TranslationDetails message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationDetails} TranslationDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TranslationDetails.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TranslationDetails message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TranslationDetails.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.sourceTargetMapping != null && message.hasOwnProperty("sourceTargetMapping")) {
+                                    if (!Array.isArray(message.sourceTargetMapping))
+                                        return "sourceTargetMapping: array expected";
+                                    for (var i = 0; i < message.sourceTargetMapping.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.migration.v2.SourceTargetMapping.verify(message.sourceTargetMapping[i]);
+                                        if (error)
+                                            return "sourceTargetMapping." + error;
+                                    }
+                                }
+                                if (message.targetBaseUri != null && message.hasOwnProperty("targetBaseUri"))
+                                    if (!$util.isString(message.targetBaseUri))
+                                        return "targetBaseUri: string expected";
+                                if (message.sourceEnvironment != null && message.hasOwnProperty("sourceEnvironment")) {
+                                    var error = $root.google.cloud.bigquery.migration.v2.SourceEnvironment.verify(message.sourceEnvironment);
+                                    if (error)
+                                        return "sourceEnvironment." + error;
+                                }
+                                if (message.targetReturnLiterals != null && message.hasOwnProperty("targetReturnLiterals")) {
+                                    if (!Array.isArray(message.targetReturnLiterals))
+                                        return "targetReturnLiterals: array expected";
+                                    for (var i = 0; i < message.targetReturnLiterals.length; ++i)
+                                        if (!$util.isString(message.targetReturnLiterals[i]))
+                                            return "targetReturnLiterals: string[] expected";
+                                }
+                                if (message.targetTypes != null && message.hasOwnProperty("targetTypes")) {
+                                    if (!Array.isArray(message.targetTypes))
+                                        return "targetTypes: array expected";
+                                    for (var i = 0; i < message.targetTypes.length; ++i)
+                                        if (!$util.isString(message.targetTypes[i]))
+                                            return "targetTypes: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TranslationDetails message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationDetails} TranslationDetails
+                             */
+                            TranslationDetails.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.TranslationDetails)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.TranslationDetails();
+                                if (object.sourceTargetMapping) {
+                                    if (!Array.isArray(object.sourceTargetMapping))
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.TranslationDetails.sourceTargetMapping: array expected");
+                                    message.sourceTargetMapping = [];
+                                    for (var i = 0; i < object.sourceTargetMapping.length; ++i) {
+                                        if (typeof object.sourceTargetMapping[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.migration.v2.TranslationDetails.sourceTargetMapping: object expected");
+                                        message.sourceTargetMapping[i] = $root.google.cloud.bigquery.migration.v2.SourceTargetMapping.fromObject(object.sourceTargetMapping[i]);
+                                    }
+                                }
+                                if (object.targetBaseUri != null)
+                                    message.targetBaseUri = String(object.targetBaseUri);
+                                if (object.sourceEnvironment != null) {
+                                    if (typeof object.sourceEnvironment !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.TranslationDetails.sourceEnvironment: object expected");
+                                    message.sourceEnvironment = $root.google.cloud.bigquery.migration.v2.SourceEnvironment.fromObject(object.sourceEnvironment);
+                                }
+                                if (object.targetReturnLiterals) {
+                                    if (!Array.isArray(object.targetReturnLiterals))
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.TranslationDetails.targetReturnLiterals: array expected");
+                                    message.targetReturnLiterals = [];
+                                    for (var i = 0; i < object.targetReturnLiterals.length; ++i)
+                                        message.targetReturnLiterals[i] = String(object.targetReturnLiterals[i]);
+                                }
+                                if (object.targetTypes) {
+                                    if (!Array.isArray(object.targetTypes))
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.TranslationDetails.targetTypes: array expected");
+                                    message.targetTypes = [];
+                                    for (var i = 0; i < object.targetTypes.length; ++i)
+                                        message.targetTypes[i] = String(object.targetTypes[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TranslationDetails message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.TranslationDetails} message TranslationDetails
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TranslationDetails.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.sourceTargetMapping = [];
+                                    object.targetReturnLiterals = [];
+                                    object.targetTypes = [];
+                                }
+                                if (options.defaults) {
+                                    object.targetBaseUri = "";
+                                    object.sourceEnvironment = null;
+                                }
+                                if (message.sourceTargetMapping && message.sourceTargetMapping.length) {
+                                    object.sourceTargetMapping = [];
+                                    for (var j = 0; j < message.sourceTargetMapping.length; ++j)
+                                        object.sourceTargetMapping[j] = $root.google.cloud.bigquery.migration.v2.SourceTargetMapping.toObject(message.sourceTargetMapping[j], options);
+                                }
+                                if (message.targetBaseUri != null && message.hasOwnProperty("targetBaseUri"))
+                                    object.targetBaseUri = message.targetBaseUri;
+                                if (message.sourceEnvironment != null && message.hasOwnProperty("sourceEnvironment"))
+                                    object.sourceEnvironment = $root.google.cloud.bigquery.migration.v2.SourceEnvironment.toObject(message.sourceEnvironment, options);
+                                if (message.targetReturnLiterals && message.targetReturnLiterals.length) {
+                                    object.targetReturnLiterals = [];
+                                    for (var j = 0; j < message.targetReturnLiterals.length; ++j)
+                                        object.targetReturnLiterals[j] = message.targetReturnLiterals[j];
+                                }
+                                if (message.targetTypes && message.targetTypes.length) {
+                                    object.targetTypes = [];
+                                    for (var j = 0; j < message.targetTypes.length; ++j)
+                                        object.targetTypes[j] = message.targetTypes[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TranslationDetails to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TranslationDetails.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TranslationDetails
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationDetails
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TranslationDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.TranslationDetails";
+                            };
+    
+                            return TranslationDetails;
+                        })();
+    
+                        v2.SourceTargetMapping = (function() {
+    
+                            /**
+                             * Properties of a SourceTargetMapping.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface ISourceTargetMapping
+                             * @property {google.cloud.bigquery.migration.v2.ISourceSpec|null} [sourceSpec] SourceTargetMapping sourceSpec
+                             * @property {google.cloud.bigquery.migration.v2.ITargetSpec|null} [targetSpec] SourceTargetMapping targetSpec
+                             */
+    
+                            /**
+                             * Constructs a new SourceTargetMapping.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a SourceTargetMapping.
+                             * @implements ISourceTargetMapping
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.ISourceTargetMapping=} [properties] Properties to set
+                             */
+                            function SourceTargetMapping(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SourceTargetMapping sourceSpec.
+                             * @member {google.cloud.bigquery.migration.v2.ISourceSpec|null|undefined} sourceSpec
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @instance
+                             */
+                            SourceTargetMapping.prototype.sourceSpec = null;
+    
+                            /**
+                             * SourceTargetMapping targetSpec.
+                             * @member {google.cloud.bigquery.migration.v2.ITargetSpec|null|undefined} targetSpec
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @instance
+                             */
+                            SourceTargetMapping.prototype.targetSpec = null;
+    
+                            /**
+                             * Creates a new SourceTargetMapping instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISourceTargetMapping=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.SourceTargetMapping} SourceTargetMapping instance
+                             */
+                            SourceTargetMapping.create = function create(properties) {
+                                return new SourceTargetMapping(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SourceTargetMapping message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceTargetMapping.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISourceTargetMapping} message SourceTargetMapping message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceTargetMapping.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.sourceSpec != null && Object.hasOwnProperty.call(message, "sourceSpec"))
+                                    $root.google.cloud.bigquery.migration.v2.SourceSpec.encode(message.sourceSpec, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.targetSpec != null && Object.hasOwnProperty.call(message, "targetSpec"))
+                                    $root.google.cloud.bigquery.migration.v2.TargetSpec.encode(message.targetSpec, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SourceTargetMapping message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceTargetMapping.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISourceTargetMapping} message SourceTargetMapping message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceTargetMapping.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SourceTargetMapping message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.SourceTargetMapping} SourceTargetMapping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceTargetMapping.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.SourceTargetMapping();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.sourceSpec = $root.google.cloud.bigquery.migration.v2.SourceSpec.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.targetSpec = $root.google.cloud.bigquery.migration.v2.TargetSpec.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SourceTargetMapping message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.SourceTargetMapping} SourceTargetMapping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceTargetMapping.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SourceTargetMapping message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SourceTargetMapping.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.sourceSpec != null && message.hasOwnProperty("sourceSpec")) {
+                                    var error = $root.google.cloud.bigquery.migration.v2.SourceSpec.verify(message.sourceSpec);
+                                    if (error)
+                                        return "sourceSpec." + error;
+                                }
+                                if (message.targetSpec != null && message.hasOwnProperty("targetSpec")) {
+                                    var error = $root.google.cloud.bigquery.migration.v2.TargetSpec.verify(message.targetSpec);
+                                    if (error)
+                                        return "targetSpec." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SourceTargetMapping message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.SourceTargetMapping} SourceTargetMapping
+                             */
+                            SourceTargetMapping.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.SourceTargetMapping)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.SourceTargetMapping();
+                                if (object.sourceSpec != null) {
+                                    if (typeof object.sourceSpec !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.SourceTargetMapping.sourceSpec: object expected");
+                                    message.sourceSpec = $root.google.cloud.bigquery.migration.v2.SourceSpec.fromObject(object.sourceSpec);
+                                }
+                                if (object.targetSpec != null) {
+                                    if (typeof object.targetSpec !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.SourceTargetMapping.targetSpec: object expected");
+                                    message.targetSpec = $root.google.cloud.bigquery.migration.v2.TargetSpec.fromObject(object.targetSpec);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SourceTargetMapping message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.SourceTargetMapping} message SourceTargetMapping
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SourceTargetMapping.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.sourceSpec = null;
+                                    object.targetSpec = null;
+                                }
+                                if (message.sourceSpec != null && message.hasOwnProperty("sourceSpec"))
+                                    object.sourceSpec = $root.google.cloud.bigquery.migration.v2.SourceSpec.toObject(message.sourceSpec, options);
+                                if (message.targetSpec != null && message.hasOwnProperty("targetSpec"))
+                                    object.targetSpec = $root.google.cloud.bigquery.migration.v2.TargetSpec.toObject(message.targetSpec, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SourceTargetMapping to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SourceTargetMapping.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SourceTargetMapping
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.SourceTargetMapping
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SourceTargetMapping.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.SourceTargetMapping";
+                            };
+    
+                            return SourceTargetMapping;
+                        })();
+    
+                        v2.SourceSpec = (function() {
+    
+                            /**
+                             * Properties of a SourceSpec.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface ISourceSpec
+                             * @property {string|null} [baseUri] SourceSpec baseUri
+                             * @property {google.cloud.bigquery.migration.v2.ILiteral|null} [literal] SourceSpec literal
+                             * @property {string|null} [encoding] SourceSpec encoding
+                             */
+    
+                            /**
+                             * Constructs a new SourceSpec.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a SourceSpec.
+                             * @implements ISourceSpec
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.ISourceSpec=} [properties] Properties to set
+                             */
+                            function SourceSpec(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SourceSpec baseUri.
+                             * @member {string|null|undefined} baseUri
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @instance
+                             */
+                            SourceSpec.prototype.baseUri = null;
+    
+                            /**
+                             * SourceSpec literal.
+                             * @member {google.cloud.bigquery.migration.v2.ILiteral|null|undefined} literal
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @instance
+                             */
+                            SourceSpec.prototype.literal = null;
+    
+                            /**
+                             * SourceSpec encoding.
+                             * @member {string} encoding
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @instance
+                             */
+                            SourceSpec.prototype.encoding = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SourceSpec source.
+                             * @member {"baseUri"|"literal"|undefined} source
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @instance
+                             */
+                            Object.defineProperty(SourceSpec.prototype, "source", {
+                                get: $util.oneOfGetter($oneOfFields = ["baseUri", "literal"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SourceSpec instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISourceSpec=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.SourceSpec} SourceSpec instance
+                             */
+                            SourceSpec.create = function create(properties) {
+                                return new SourceSpec(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SourceSpec message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceSpec.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISourceSpec} message SourceSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceSpec.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.baseUri != null && Object.hasOwnProperty.call(message, "baseUri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.baseUri);
+                                if (message.literal != null && Object.hasOwnProperty.call(message, "literal"))
+                                    $root.google.cloud.bigquery.migration.v2.Literal.encode(message.literal, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.encoding != null && Object.hasOwnProperty.call(message, "encoding"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.encoding);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SourceSpec message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceSpec.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISourceSpec} message SourceSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SourceSpec message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.SourceSpec} SourceSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceSpec.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.SourceSpec();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.baseUri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.literal = $root.google.cloud.bigquery.migration.v2.Literal.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.encoding = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SourceSpec message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.SourceSpec} SourceSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceSpec.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SourceSpec message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SourceSpec.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.baseUri != null && message.hasOwnProperty("baseUri")) {
+                                    properties.source = 1;
+                                    if (!$util.isString(message.baseUri))
+                                        return "baseUri: string expected";
+                                }
+                                if (message.literal != null && message.hasOwnProperty("literal")) {
+                                    if (properties.source === 1)
+                                        return "source: multiple values";
+                                    properties.source = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.migration.v2.Literal.verify(message.literal);
+                                        if (error)
+                                            return "literal." + error;
+                                    }
+                                }
+                                if (message.encoding != null && message.hasOwnProperty("encoding"))
+                                    if (!$util.isString(message.encoding))
+                                        return "encoding: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SourceSpec message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.SourceSpec} SourceSpec
+                             */
+                            SourceSpec.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.SourceSpec)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.SourceSpec();
+                                if (object.baseUri != null)
+                                    message.baseUri = String(object.baseUri);
+                                if (object.literal != null) {
+                                    if (typeof object.literal !== "object")
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.SourceSpec.literal: object expected");
+                                    message.literal = $root.google.cloud.bigquery.migration.v2.Literal.fromObject(object.literal);
+                                }
+                                if (object.encoding != null)
+                                    message.encoding = String(object.encoding);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SourceSpec message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.SourceSpec} message SourceSpec
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SourceSpec.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.encoding = "";
+                                if (message.baseUri != null && message.hasOwnProperty("baseUri")) {
+                                    object.baseUri = message.baseUri;
+                                    if (options.oneofs)
+                                        object.source = "baseUri";
+                                }
+                                if (message.literal != null && message.hasOwnProperty("literal")) {
+                                    object.literal = $root.google.cloud.bigquery.migration.v2.Literal.toObject(message.literal, options);
+                                    if (options.oneofs)
+                                        object.source = "literal";
+                                }
+                                if (message.encoding != null && message.hasOwnProperty("encoding"))
+                                    object.encoding = message.encoding;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SourceSpec to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SourceSpec.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SourceSpec
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.SourceSpec
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SourceSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.SourceSpec";
+                            };
+    
+                            return SourceSpec;
+                        })();
+    
+                        v2.TargetSpec = (function() {
+    
+                            /**
+                             * Properties of a TargetSpec.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface ITargetSpec
+                             * @property {string|null} [relativePath] TargetSpec relativePath
+                             */
+    
+                            /**
+                             * Constructs a new TargetSpec.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a TargetSpec.
+                             * @implements ITargetSpec
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.ITargetSpec=} [properties] Properties to set
+                             */
+                            function TargetSpec(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TargetSpec relativePath.
+                             * @member {string} relativePath
+                             * @memberof google.cloud.bigquery.migration.v2.TargetSpec
+                             * @instance
+                             */
+                            TargetSpec.prototype.relativePath = "";
+    
+                            /**
+                             * Creates a new TargetSpec instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.TargetSpec
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITargetSpec=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.TargetSpec} TargetSpec instance
+                             */
+                            TargetSpec.create = function create(properties) {
+                                return new TargetSpec(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TargetSpec message. Does not implicitly {@link google.cloud.bigquery.migration.v2.TargetSpec.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.TargetSpec
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITargetSpec} message TargetSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TargetSpec.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.relativePath != null && Object.hasOwnProperty.call(message, "relativePath"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.relativePath);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TargetSpec message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.TargetSpec.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.TargetSpec
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITargetSpec} message TargetSpec message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TargetSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TargetSpec message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.TargetSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.TargetSpec} TargetSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TargetSpec.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.TargetSpec();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.relativePath = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TargetSpec message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.TargetSpec
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.TargetSpec} TargetSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TargetSpec.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TargetSpec message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.TargetSpec
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TargetSpec.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.relativePath != null && message.hasOwnProperty("relativePath"))
+                                    if (!$util.isString(message.relativePath))
+                                        return "relativePath: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TargetSpec message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.TargetSpec
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.TargetSpec} TargetSpec
+                             */
+                            TargetSpec.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.TargetSpec)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.TargetSpec();
+                                if (object.relativePath != null)
+                                    message.relativePath = String(object.relativePath);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TargetSpec message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.TargetSpec
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.TargetSpec} message TargetSpec
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TargetSpec.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.relativePath = "";
+                                if (message.relativePath != null && message.hasOwnProperty("relativePath"))
+                                    object.relativePath = message.relativePath;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TargetSpec to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.TargetSpec
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TargetSpec.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TargetSpec
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.TargetSpec
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TargetSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.TargetSpec";
+                            };
+    
+                            return TargetSpec;
+                        })();
+    
+                        v2.Literal = (function() {
+    
+                            /**
+                             * Properties of a Literal.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface ILiteral
+                             * @property {string|null} [literalString] Literal literalString
+                             * @property {Uint8Array|null} [literalBytes] Literal literalBytes
+                             * @property {string|null} [relativePath] Literal relativePath
+                             */
+    
+                            /**
+                             * Constructs a new Literal.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a Literal.
+                             * @implements ILiteral
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.ILiteral=} [properties] Properties to set
+                             */
+                            function Literal(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Literal literalString.
+                             * @member {string|null|undefined} literalString
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @instance
+                             */
+                            Literal.prototype.literalString = null;
+    
+                            /**
+                             * Literal literalBytes.
+                             * @member {Uint8Array|null|undefined} literalBytes
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @instance
+                             */
+                            Literal.prototype.literalBytes = null;
+    
+                            /**
+                             * Literal relativePath.
+                             * @member {string} relativePath
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @instance
+                             */
+                            Literal.prototype.relativePath = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Literal literalData.
+                             * @member {"literalString"|"literalBytes"|undefined} literalData
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @instance
+                             */
+                            Object.defineProperty(Literal.prototype, "literalData", {
+                                get: $util.oneOfGetter($oneOfFields = ["literalString", "literalBytes"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Literal instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ILiteral=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.Literal} Literal instance
+                             */
+                            Literal.create = function create(properties) {
+                                return new Literal(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Literal message. Does not implicitly {@link google.cloud.bigquery.migration.v2.Literal.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ILiteral} message Literal message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Literal.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.relativePath != null && Object.hasOwnProperty.call(message, "relativePath"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.relativePath);
+                                if (message.literalString != null && Object.hasOwnProperty.call(message, "literalString"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.literalString);
+                                if (message.literalBytes != null && Object.hasOwnProperty.call(message, "literalBytes"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.literalBytes);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Literal message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.Literal.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ILiteral} message Literal message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Literal.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Literal message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.Literal} Literal
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Literal.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.Literal();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.literalString = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.literalBytes = reader.bytes();
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.relativePath = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Literal message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.Literal} Literal
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Literal.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Literal message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Literal.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.literalString != null && message.hasOwnProperty("literalString")) {
+                                    properties.literalData = 1;
+                                    if (!$util.isString(message.literalString))
+                                        return "literalString: string expected";
+                                }
+                                if (message.literalBytes != null && message.hasOwnProperty("literalBytes")) {
+                                    if (properties.literalData === 1)
+                                        return "literalData: multiple values";
+                                    properties.literalData = 1;
+                                    if (!(message.literalBytes && typeof message.literalBytes.length === "number" || $util.isString(message.literalBytes)))
+                                        return "literalBytes: buffer expected";
+                                }
+                                if (message.relativePath != null && message.hasOwnProperty("relativePath"))
+                                    if (!$util.isString(message.relativePath))
+                                        return "relativePath: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Literal message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.Literal} Literal
+                             */
+                            Literal.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.Literal)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.Literal();
+                                if (object.literalString != null)
+                                    message.literalString = String(object.literalString);
+                                if (object.literalBytes != null)
+                                    if (typeof object.literalBytes === "string")
+                                        $util.base64.decode(object.literalBytes, message.literalBytes = $util.newBuffer($util.base64.length(object.literalBytes)), 0);
+                                    else if (object.literalBytes.length >= 0)
+                                        message.literalBytes = object.literalBytes;
+                                if (object.relativePath != null)
+                                    message.relativePath = String(object.relativePath);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Literal message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.Literal} message Literal
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Literal.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.relativePath = "";
+                                if (message.relativePath != null && message.hasOwnProperty("relativePath"))
+                                    object.relativePath = message.relativePath;
+                                if (message.literalString != null && message.hasOwnProperty("literalString")) {
+                                    object.literalString = message.literalString;
+                                    if (options.oneofs)
+                                        object.literalData = "literalString";
+                                }
+                                if (message.literalBytes != null && message.hasOwnProperty("literalBytes")) {
+                                    object.literalBytes = options.bytes === String ? $util.base64.encode(message.literalBytes, 0, message.literalBytes.length) : options.bytes === Array ? Array.prototype.slice.call(message.literalBytes) : message.literalBytes;
+                                    if (options.oneofs)
+                                        object.literalData = "literalBytes";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Literal to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Literal.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Literal
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.Literal
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Literal.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.Literal";
+                            };
+    
+                            return Literal;
+                        })();
+    
+                        v2.SourceEnvironment = (function() {
+    
+                            /**
+                             * Properties of a SourceEnvironment.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface ISourceEnvironment
+                             * @property {string|null} [defaultDatabase] SourceEnvironment defaultDatabase
+                             * @property {Array.<string>|null} [schemaSearchPath] SourceEnvironment schemaSearchPath
+                             * @property {string|null} [metadataStoreDataset] SourceEnvironment metadataStoreDataset
+                             */
+    
+                            /**
+                             * Constructs a new SourceEnvironment.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a SourceEnvironment.
+                             * @implements ISourceEnvironment
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.ISourceEnvironment=} [properties] Properties to set
+                             */
+                            function SourceEnvironment(properties) {
+                                this.schemaSearchPath = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SourceEnvironment defaultDatabase.
+                             * @member {string} defaultDatabase
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @instance
+                             */
+                            SourceEnvironment.prototype.defaultDatabase = "";
+    
+                            /**
+                             * SourceEnvironment schemaSearchPath.
+                             * @member {Array.<string>} schemaSearchPath
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @instance
+                             */
+                            SourceEnvironment.prototype.schemaSearchPath = $util.emptyArray;
+    
+                            /**
+                             * SourceEnvironment metadataStoreDataset.
+                             * @member {string} metadataStoreDataset
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @instance
+                             */
+                            SourceEnvironment.prototype.metadataStoreDataset = "";
+    
+                            /**
+                             * Creates a new SourceEnvironment instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISourceEnvironment=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.SourceEnvironment} SourceEnvironment instance
+                             */
+                            SourceEnvironment.create = function create(properties) {
+                                return new SourceEnvironment(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SourceEnvironment message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceEnvironment.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISourceEnvironment} message SourceEnvironment message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceEnvironment.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.defaultDatabase != null && Object.hasOwnProperty.call(message, "defaultDatabase"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.defaultDatabase);
+                                if (message.schemaSearchPath != null && message.schemaSearchPath.length)
+                                    for (var i = 0; i < message.schemaSearchPath.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.schemaSearchPath[i]);
+                                if (message.metadataStoreDataset != null && Object.hasOwnProperty.call(message, "metadataStoreDataset"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.metadataStoreDataset);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SourceEnvironment message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceEnvironment.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ISourceEnvironment} message SourceEnvironment message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SourceEnvironment.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SourceEnvironment message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.SourceEnvironment} SourceEnvironment
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceEnvironment.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.SourceEnvironment();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.defaultDatabase = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.schemaSearchPath && message.schemaSearchPath.length))
+                                                message.schemaSearchPath = [];
+                                            message.schemaSearchPath.push(reader.string());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.metadataStoreDataset = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SourceEnvironment message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.SourceEnvironment} SourceEnvironment
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SourceEnvironment.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SourceEnvironment message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SourceEnvironment.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.defaultDatabase != null && message.hasOwnProperty("defaultDatabase"))
+                                    if (!$util.isString(message.defaultDatabase))
+                                        return "defaultDatabase: string expected";
+                                if (message.schemaSearchPath != null && message.hasOwnProperty("schemaSearchPath")) {
+                                    if (!Array.isArray(message.schemaSearchPath))
+                                        return "schemaSearchPath: array expected";
+                                    for (var i = 0; i < message.schemaSearchPath.length; ++i)
+                                        if (!$util.isString(message.schemaSearchPath[i]))
+                                            return "schemaSearchPath: string[] expected";
+                                }
+                                if (message.metadataStoreDataset != null && message.hasOwnProperty("metadataStoreDataset"))
+                                    if (!$util.isString(message.metadataStoreDataset))
+                                        return "metadataStoreDataset: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SourceEnvironment message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.SourceEnvironment} SourceEnvironment
+                             */
+                            SourceEnvironment.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.SourceEnvironment)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.SourceEnvironment();
+                                if (object.defaultDatabase != null)
+                                    message.defaultDatabase = String(object.defaultDatabase);
+                                if (object.schemaSearchPath) {
+                                    if (!Array.isArray(object.schemaSearchPath))
+                                        throw TypeError(".google.cloud.bigquery.migration.v2.SourceEnvironment.schemaSearchPath: array expected");
+                                    message.schemaSearchPath = [];
+                                    for (var i = 0; i < object.schemaSearchPath.length; ++i)
+                                        message.schemaSearchPath[i] = String(object.schemaSearchPath[i]);
+                                }
+                                if (object.metadataStoreDataset != null)
+                                    message.metadataStoreDataset = String(object.metadataStoreDataset);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SourceEnvironment message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.SourceEnvironment} message SourceEnvironment
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SourceEnvironment.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.schemaSearchPath = [];
+                                if (options.defaults) {
+                                    object.defaultDatabase = "";
+                                    object.metadataStoreDataset = "";
+                                }
+                                if (message.defaultDatabase != null && message.hasOwnProperty("defaultDatabase"))
+                                    object.defaultDatabase = message.defaultDatabase;
+                                if (message.schemaSearchPath && message.schemaSearchPath.length) {
+                                    object.schemaSearchPath = [];
+                                    for (var j = 0; j < message.schemaSearchPath.length; ++j)
+                                        object.schemaSearchPath[j] = message.schemaSearchPath[j];
+                                }
+                                if (message.metadataStoreDataset != null && message.hasOwnProperty("metadataStoreDataset"))
+                                    object.metadataStoreDataset = message.metadataStoreDataset;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SourceEnvironment to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SourceEnvironment.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SourceEnvironment
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.SourceEnvironment
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SourceEnvironment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.SourceEnvironment";
+                            };
+    
+                            return SourceEnvironment;
+                        })();
+    
+                        v2.GcsReportLogMessage = (function() {
+    
+                            /**
+                             * Properties of a GcsReportLogMessage.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface IGcsReportLogMessage
+                             * @property {string|null} [severity] GcsReportLogMessage severity
+                             * @property {string|null} [category] GcsReportLogMessage category
+                             * @property {string|null} [filePath] GcsReportLogMessage filePath
+                             * @property {string|null} [filename] GcsReportLogMessage filename
+                             * @property {number|null} [sourceScriptLine] GcsReportLogMessage sourceScriptLine
+                             * @property {number|null} [sourceScriptColumn] GcsReportLogMessage sourceScriptColumn
+                             * @property {string|null} [message] GcsReportLogMessage message
+                             * @property {string|null} [scriptContext] GcsReportLogMessage scriptContext
+                             * @property {string|null} [action] GcsReportLogMessage action
+                             * @property {string|null} [effect] GcsReportLogMessage effect
+                             * @property {string|null} [objectName] GcsReportLogMessage objectName
+                             */
+    
+                            /**
+                             * Constructs a new GcsReportLogMessage.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a GcsReportLogMessage.
+                             * @implements IGcsReportLogMessage
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.IGcsReportLogMessage=} [properties] Properties to set
+                             */
+                            function GcsReportLogMessage(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GcsReportLogMessage severity.
+                             * @member {string} severity
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             */
+                            GcsReportLogMessage.prototype.severity = "";
+    
+                            /**
+                             * GcsReportLogMessage category.
+                             * @member {string} category
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             */
+                            GcsReportLogMessage.prototype.category = "";
+    
+                            /**
+                             * GcsReportLogMessage filePath.
+                             * @member {string} filePath
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             */
+                            GcsReportLogMessage.prototype.filePath = "";
+    
+                            /**
+                             * GcsReportLogMessage filename.
+                             * @member {string} filename
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             */
+                            GcsReportLogMessage.prototype.filename = "";
+    
+                            /**
+                             * GcsReportLogMessage sourceScriptLine.
+                             * @member {number} sourceScriptLine
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             */
+                            GcsReportLogMessage.prototype.sourceScriptLine = 0;
+    
+                            /**
+                             * GcsReportLogMessage sourceScriptColumn.
+                             * @member {number} sourceScriptColumn
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             */
+                            GcsReportLogMessage.prototype.sourceScriptColumn = 0;
+    
+                            /**
+                             * GcsReportLogMessage message.
+                             * @member {string} message
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             */
+                            GcsReportLogMessage.prototype.message = "";
+    
+                            /**
+                             * GcsReportLogMessage scriptContext.
+                             * @member {string} scriptContext
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             */
+                            GcsReportLogMessage.prototype.scriptContext = "";
+    
+                            /**
+                             * GcsReportLogMessage action.
+                             * @member {string} action
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             */
+                            GcsReportLogMessage.prototype.action = "";
+    
+                            /**
+                             * GcsReportLogMessage effect.
+                             * @member {string} effect
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             */
+                            GcsReportLogMessage.prototype.effect = "";
+    
+                            /**
+                             * GcsReportLogMessage objectName.
+                             * @member {string} objectName
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             */
+                            GcsReportLogMessage.prototype.objectName = "";
+    
+                            /**
+                             * Creates a new GcsReportLogMessage instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IGcsReportLogMessage=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.GcsReportLogMessage} GcsReportLogMessage instance
+                             */
+                            GcsReportLogMessage.create = function create(properties) {
+                                return new GcsReportLogMessage(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GcsReportLogMessage message. Does not implicitly {@link google.cloud.bigquery.migration.v2.GcsReportLogMessage.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IGcsReportLogMessage} message GcsReportLogMessage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsReportLogMessage.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.severity);
+                                if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.category);
+                                if (message.filePath != null && Object.hasOwnProperty.call(message, "filePath"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.filePath);
+                                if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.filename);
+                                if (message.sourceScriptLine != null && Object.hasOwnProperty.call(message, "sourceScriptLine"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.sourceScriptLine);
+                                if (message.sourceScriptColumn != null && Object.hasOwnProperty.call(message, "sourceScriptColumn"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.sourceScriptColumn);
+                                if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.message);
+                                if (message.scriptContext != null && Object.hasOwnProperty.call(message, "scriptContext"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.scriptContext);
+                                if (message.action != null && Object.hasOwnProperty.call(message, "action"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.action);
+                                if (message.effect != null && Object.hasOwnProperty.call(message, "effect"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.effect);
+                                if (message.objectName != null && Object.hasOwnProperty.call(message, "objectName"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.objectName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GcsReportLogMessage message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.GcsReportLogMessage.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.IGcsReportLogMessage} message GcsReportLogMessage message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsReportLogMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GcsReportLogMessage message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.GcsReportLogMessage} GcsReportLogMessage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsReportLogMessage.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.GcsReportLogMessage();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.severity = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.category = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.filePath = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.filename = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.sourceScriptLine = reader.int32();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.sourceScriptColumn = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.message = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.scriptContext = reader.string();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.action = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.effect = reader.string();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.objectName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GcsReportLogMessage message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.GcsReportLogMessage} GcsReportLogMessage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsReportLogMessage.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GcsReportLogMessage message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GcsReportLogMessage.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.severity != null && message.hasOwnProperty("severity"))
+                                    if (!$util.isString(message.severity))
+                                        return "severity: string expected";
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    if (!$util.isString(message.category))
+                                        return "category: string expected";
+                                if (message.filePath != null && message.hasOwnProperty("filePath"))
+                                    if (!$util.isString(message.filePath))
+                                        return "filePath: string expected";
+                                if (message.filename != null && message.hasOwnProperty("filename"))
+                                    if (!$util.isString(message.filename))
+                                        return "filename: string expected";
+                                if (message.sourceScriptLine != null && message.hasOwnProperty("sourceScriptLine"))
+                                    if (!$util.isInteger(message.sourceScriptLine))
+                                        return "sourceScriptLine: integer expected";
+                                if (message.sourceScriptColumn != null && message.hasOwnProperty("sourceScriptColumn"))
+                                    if (!$util.isInteger(message.sourceScriptColumn))
+                                        return "sourceScriptColumn: integer expected";
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    if (!$util.isString(message.message))
+                                        return "message: string expected";
+                                if (message.scriptContext != null && message.hasOwnProperty("scriptContext"))
+                                    if (!$util.isString(message.scriptContext))
+                                        return "scriptContext: string expected";
+                                if (message.action != null && message.hasOwnProperty("action"))
+                                    if (!$util.isString(message.action))
+                                        return "action: string expected";
+                                if (message.effect != null && message.hasOwnProperty("effect"))
+                                    if (!$util.isString(message.effect))
+                                        return "effect: string expected";
+                                if (message.objectName != null && message.hasOwnProperty("objectName"))
+                                    if (!$util.isString(message.objectName))
+                                        return "objectName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GcsReportLogMessage message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.GcsReportLogMessage} GcsReportLogMessage
+                             */
+                            GcsReportLogMessage.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.GcsReportLogMessage)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.GcsReportLogMessage();
+                                if (object.severity != null)
+                                    message.severity = String(object.severity);
+                                if (object.category != null)
+                                    message.category = String(object.category);
+                                if (object.filePath != null)
+                                    message.filePath = String(object.filePath);
+                                if (object.filename != null)
+                                    message.filename = String(object.filename);
+                                if (object.sourceScriptLine != null)
+                                    message.sourceScriptLine = object.sourceScriptLine | 0;
+                                if (object.sourceScriptColumn != null)
+                                    message.sourceScriptColumn = object.sourceScriptColumn | 0;
+                                if (object.message != null)
+                                    message.message = String(object.message);
+                                if (object.scriptContext != null)
+                                    message.scriptContext = String(object.scriptContext);
+                                if (object.action != null)
+                                    message.action = String(object.action);
+                                if (object.effect != null)
+                                    message.effect = String(object.effect);
+                                if (object.objectName != null)
+                                    message.objectName = String(object.objectName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GcsReportLogMessage message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.GcsReportLogMessage} message GcsReportLogMessage
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GcsReportLogMessage.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.severity = "";
+                                    object.category = "";
+                                    object.filePath = "";
+                                    object.filename = "";
+                                    object.sourceScriptLine = 0;
+                                    object.sourceScriptColumn = 0;
+                                    object.message = "";
+                                    object.scriptContext = "";
+                                    object.action = "";
+                                    object.effect = "";
+                                    object.objectName = "";
+                                }
+                                if (message.severity != null && message.hasOwnProperty("severity"))
+                                    object.severity = message.severity;
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    object.category = message.category;
+                                if (message.filePath != null && message.hasOwnProperty("filePath"))
+                                    object.filePath = message.filePath;
+                                if (message.filename != null && message.hasOwnProperty("filename"))
+                                    object.filename = message.filename;
+                                if (message.sourceScriptLine != null && message.hasOwnProperty("sourceScriptLine"))
+                                    object.sourceScriptLine = message.sourceScriptLine;
+                                if (message.sourceScriptColumn != null && message.hasOwnProperty("sourceScriptColumn"))
+                                    object.sourceScriptColumn = message.sourceScriptColumn;
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    object.message = message.message;
+                                if (message.scriptContext != null && message.hasOwnProperty("scriptContext"))
+                                    object.scriptContext = message.scriptContext;
+                                if (message.action != null && message.hasOwnProperty("action"))
+                                    object.action = message.action;
+                                if (message.effect != null && message.hasOwnProperty("effect"))
+                                    object.effect = message.effect;
+                                if (message.objectName != null && message.hasOwnProperty("objectName"))
+                                    object.objectName = message.objectName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GcsReportLogMessage to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GcsReportLogMessage.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GcsReportLogMessage
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.GcsReportLogMessage
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GcsReportLogMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.GcsReportLogMessage";
+                            };
+    
+                            return GcsReportLogMessage;
                         })();
     
                         v2.MigrationService = (function() {
@@ -10826,6 +14292,349 @@
                             };
     
                             return ListMigrationSubtasksResponse;
+                        })();
+    
+                        v2.TranslationReportRecord = (function() {
+    
+                            /**
+                             * Properties of a TranslationReportRecord.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @interface ITranslationReportRecord
+                             * @property {google.cloud.bigquery.migration.v2.TranslationReportRecord.Severity|null} [severity] TranslationReportRecord severity
+                             * @property {number|null} [scriptLine] TranslationReportRecord scriptLine
+                             * @property {number|null} [scriptColumn] TranslationReportRecord scriptColumn
+                             * @property {string|null} [category] TranslationReportRecord category
+                             * @property {string|null} [message] TranslationReportRecord message
+                             */
+    
+                            /**
+                             * Constructs a new TranslationReportRecord.
+                             * @memberof google.cloud.bigquery.migration.v2
+                             * @classdesc Represents a TranslationReportRecord.
+                             * @implements ITranslationReportRecord
+                             * @constructor
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationReportRecord=} [properties] Properties to set
+                             */
+                            function TranslationReportRecord(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TranslationReportRecord severity.
+                             * @member {google.cloud.bigquery.migration.v2.TranslationReportRecord.Severity} severity
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @instance
+                             */
+                            TranslationReportRecord.prototype.severity = 0;
+    
+                            /**
+                             * TranslationReportRecord scriptLine.
+                             * @member {number} scriptLine
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @instance
+                             */
+                            TranslationReportRecord.prototype.scriptLine = 0;
+    
+                            /**
+                             * TranslationReportRecord scriptColumn.
+                             * @member {number} scriptColumn
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @instance
+                             */
+                            TranslationReportRecord.prototype.scriptColumn = 0;
+    
+                            /**
+                             * TranslationReportRecord category.
+                             * @member {string} category
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @instance
+                             */
+                            TranslationReportRecord.prototype.category = "";
+    
+                            /**
+                             * TranslationReportRecord message.
+                             * @member {string} message
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @instance
+                             */
+                            TranslationReportRecord.prototype.message = "";
+    
+                            /**
+                             * Creates a new TranslationReportRecord instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationReportRecord=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationReportRecord} TranslationReportRecord instance
+                             */
+                            TranslationReportRecord.create = function create(properties) {
+                                return new TranslationReportRecord(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TranslationReportRecord message. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationReportRecord.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationReportRecord} message TranslationReportRecord message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TranslationReportRecord.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.severity);
+                                if (message.scriptLine != null && Object.hasOwnProperty.call(message, "scriptLine"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scriptLine);
+                                if (message.scriptColumn != null && Object.hasOwnProperty.call(message, "scriptColumn"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.scriptColumn);
+                                if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.category);
+                                if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.message);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TranslationReportRecord message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationReportRecord.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.ITranslationReportRecord} message TranslationReportRecord message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TranslationReportRecord.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TranslationReportRecord message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationReportRecord} TranslationReportRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TranslationReportRecord.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.migration.v2.TranslationReportRecord();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.severity = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.scriptLine = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.scriptColumn = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.category = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.message = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TranslationReportRecord message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationReportRecord} TranslationReportRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TranslationReportRecord.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TranslationReportRecord message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TranslationReportRecord.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.severity != null && message.hasOwnProperty("severity"))
+                                    switch (message.severity) {
+                                    default:
+                                        return "severity: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.scriptLine != null && message.hasOwnProperty("scriptLine"))
+                                    if (!$util.isInteger(message.scriptLine))
+                                        return "scriptLine: integer expected";
+                                if (message.scriptColumn != null && message.hasOwnProperty("scriptColumn"))
+                                    if (!$util.isInteger(message.scriptColumn))
+                                        return "scriptColumn: integer expected";
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    if (!$util.isString(message.category))
+                                        return "category: string expected";
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    if (!$util.isString(message.message))
+                                        return "message: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TranslationReportRecord message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.migration.v2.TranslationReportRecord} TranslationReportRecord
+                             */
+                            TranslationReportRecord.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.migration.v2.TranslationReportRecord)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.migration.v2.TranslationReportRecord();
+                                switch (object.severity) {
+                                default:
+                                    if (typeof object.severity === "number") {
+                                        message.severity = object.severity;
+                                        break;
+                                    }
+                                    break;
+                                case "SEVERITY_UNSPECIFIED":
+                                case 0:
+                                    message.severity = 0;
+                                    break;
+                                case "INFO":
+                                case 1:
+                                    message.severity = 1;
+                                    break;
+                                case "WARNING":
+                                case 2:
+                                    message.severity = 2;
+                                    break;
+                                case "ERROR":
+                                case 3:
+                                    message.severity = 3;
+                                    break;
+                                }
+                                if (object.scriptLine != null)
+                                    message.scriptLine = object.scriptLine | 0;
+                                if (object.scriptColumn != null)
+                                    message.scriptColumn = object.scriptColumn | 0;
+                                if (object.category != null)
+                                    message.category = String(object.category);
+                                if (object.message != null)
+                                    message.message = String(object.message);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TranslationReportRecord message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @static
+                             * @param {google.cloud.bigquery.migration.v2.TranslationReportRecord} message TranslationReportRecord
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TranslationReportRecord.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
+                                    object.scriptLine = 0;
+                                    object.scriptColumn = 0;
+                                    object.category = "";
+                                    object.message = "";
+                                }
+                                if (message.severity != null && message.hasOwnProperty("severity"))
+                                    object.severity = options.enums === String ? $root.google.cloud.bigquery.migration.v2.TranslationReportRecord.Severity[message.severity] === undefined ? message.severity : $root.google.cloud.bigquery.migration.v2.TranslationReportRecord.Severity[message.severity] : message.severity;
+                                if (message.scriptLine != null && message.hasOwnProperty("scriptLine"))
+                                    object.scriptLine = message.scriptLine;
+                                if (message.scriptColumn != null && message.hasOwnProperty("scriptColumn"))
+                                    object.scriptColumn = message.scriptColumn;
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    object.category = message.category;
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    object.message = message.message;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TranslationReportRecord to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TranslationReportRecord.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TranslationReportRecord
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.migration.v2.TranslationReportRecord
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TranslationReportRecord.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.migration.v2.TranslationReportRecord";
+                            };
+    
+                            /**
+                             * Severity enum.
+                             * @name google.cloud.bigquery.migration.v2.TranslationReportRecord.Severity
+                             * @enum {number}
+                             * @property {number} SEVERITY_UNSPECIFIED=0 SEVERITY_UNSPECIFIED value
+                             * @property {number} INFO=1 INFO value
+                             * @property {number} WARNING=2 WARNING value
+                             * @property {number} ERROR=3 ERROR value
+                             */
+                            TranslationReportRecord.Severity = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SEVERITY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INFO"] = 1;
+                                values[valuesById[2] = "WARNING"] = 2;
+                                values[valuesById[3] = "ERROR"] = 3;
+                                return values;
+                            })();
+    
+                            return TranslationReportRecord;
                         })();
     
                         return v2;
@@ -21015,6 +24824,7 @@
              * @property {number} IMMUTABLE=5 IMMUTABLE value
              * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
              * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             * @property {number} IDENTIFIER=8 IDENTIFIER value
              */
             api.FieldBehavior = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -21026,6 +24836,7 @@
                 values[valuesById[5] = "IMMUTABLE"] = 5;
                 values[valuesById[6] = "UNORDERED_LIST"] = 6;
                 values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                values[valuesById[8] = "IDENTIFIER"] = 8;
                 return values;
             })();
     
@@ -26969,6 +30780,7 @@
                  * @property {string|null} [docTagPrefix] Publishing docTagPrefix
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
+                 * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
                  */
     
                 /**
@@ -27062,6 +30874,14 @@
                 Publishing.prototype.librarySettings = $util.emptyArray;
     
                 /**
+                 * Publishing protoReferenceDocumentationUri.
+                 * @member {string} protoReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.protoReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -27106,6 +30926,8 @@
                     if (message.librarySettings != null && message.librarySettings.length)
                         for (var i = 0; i < message.librarySettings.length; ++i)
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
+                    if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
+                        writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -27180,6 +31002,10 @@
                                 if (!(message.librarySettings && message.librarySettings.length))
                                     message.librarySettings = [];
                                 message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 110: {
+                                message.protoReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -27257,6 +31083,9 @@
                         case 2:
                         case 3:
                         case 4:
+                        case 5:
+                        case 6:
+                        case 7:
                             break;
                         }
                     if (message.librarySettings != null && message.hasOwnProperty("librarySettings")) {
@@ -27268,6 +31097,9 @@
                                 return "librarySettings." + error;
                         }
                     }
+                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                        if (!$util.isString(message.protoReferenceDocumentationUri))
+                            return "protoReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -27337,6 +31169,18 @@
                     case 4:
                         message.organization = 4;
                         break;
+                    case "SHOPPING":
+                    case 5:
+                        message.organization = 5;
+                        break;
+                    case "GEO":
+                    case 6:
+                        message.organization = 6;
+                        break;
+                    case "GENERATIVE_AI":
+                    case 7:
+                        message.organization = 7;
+                        break;
                     }
                     if (object.librarySettings) {
                         if (!Array.isArray(object.librarySettings))
@@ -27348,6 +31192,8 @@
                             message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i]);
                         }
                     }
+                    if (object.protoReferenceDocumentationUri != null)
+                        message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
                     return message;
                 };
     
@@ -27376,6 +31222,7 @@
                         object.githubLabel = "";
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
+                        object.protoReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -27404,6 +31251,8 @@
                         for (var j = 0; j < message.librarySettings.length; ++j)
                             object.librarySettings[j] = $root.google.api.ClientLibrarySettings.toObject(message.librarySettings[j], options);
                     }
+                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                        object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
                     return object;
                 };
     
@@ -28566,6 +32415,11 @@
                  * @memberof google.api
                  * @interface IDotnetSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] DotnetSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] DotnetSettings renamedServices
+                 * @property {Object.<string,string>|null} [renamedResources] DotnetSettings renamedResources
+                 * @property {Array.<string>|null} [ignoredResources] DotnetSettings ignoredResources
+                 * @property {Array.<string>|null} [forcedNamespaceAliases] DotnetSettings forcedNamespaceAliases
+                 * @property {Array.<string>|null} [handwrittenSignatures] DotnetSettings handwrittenSignatures
                  */
     
                 /**
@@ -28577,6 +32431,11 @@
                  * @param {google.api.IDotnetSettings=} [properties] Properties to set
                  */
                 function DotnetSettings(properties) {
+                    this.renamedServices = {};
+                    this.renamedResources = {};
+                    this.ignoredResources = [];
+                    this.forcedNamespaceAliases = [];
+                    this.handwrittenSignatures = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -28590,6 +32449,46 @@
                  * @instance
                  */
                 DotnetSettings.prototype.common = null;
+    
+                /**
+                 * DotnetSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.renamedServices = $util.emptyObject;
+    
+                /**
+                 * DotnetSettings renamedResources.
+                 * @member {Object.<string,string>} renamedResources
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.renamedResources = $util.emptyObject;
+    
+                /**
+                 * DotnetSettings ignoredResources.
+                 * @member {Array.<string>} ignoredResources
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.ignoredResources = $util.emptyArray;
+    
+                /**
+                 * DotnetSettings forcedNamespaceAliases.
+                 * @member {Array.<string>} forcedNamespaceAliases
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.forcedNamespaceAliases = $util.emptyArray;
+    
+                /**
+                 * DotnetSettings handwrittenSignatures.
+                 * @member {Array.<string>} handwrittenSignatures
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.handwrittenSignatures = $util.emptyArray;
     
                 /**
                  * Creates a new DotnetSettings instance using the specified properties.
@@ -28617,6 +32516,21 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
+                    if (message.renamedResources != null && Object.hasOwnProperty.call(message, "renamedResources"))
+                        for (var keys = Object.keys(message.renamedResources), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedResources[keys[i]]).ldelim();
+                    if (message.ignoredResources != null && message.ignoredResources.length)
+                        for (var i = 0; i < message.ignoredResources.length; ++i)
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.ignoredResources[i]);
+                    if (message.forcedNamespaceAliases != null && message.forcedNamespaceAliases.length)
+                        for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.forcedNamespaceAliases[i]);
+                    if (message.handwrittenSignatures != null && message.handwrittenSignatures.length)
+                        for (var i = 0; i < message.handwrittenSignatures.length; ++i)
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.handwrittenSignatures[i]);
                     return writer;
                 };
     
@@ -28647,12 +32561,76 @@
                 DotnetSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
+                                break;
+                            }
+                        case 3: {
+                                if (message.renamedResources === $util.emptyObject)
+                                    message.renamedResources = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedResources[key] = value;
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.ignoredResources && message.ignoredResources.length))
+                                    message.ignoredResources = [];
+                                message.ignoredResources.push(reader.string());
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.forcedNamespaceAliases && message.forcedNamespaceAliases.length))
+                                    message.forcedNamespaceAliases = [];
+                                message.forcedNamespaceAliases.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.handwrittenSignatures && message.handwrittenSignatures.length))
+                                    message.handwrittenSignatures = [];
+                                message.handwrittenSignatures.push(reader.string());
                                 break;
                             }
                         default:
@@ -28695,6 +32673,43 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
+                    if (message.renamedResources != null && message.hasOwnProperty("renamedResources")) {
+                        if (!$util.isObject(message.renamedResources))
+                            return "renamedResources: object expected";
+                        var key = Object.keys(message.renamedResources);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedResources[key[i]]))
+                                return "renamedResources: string{k:string} expected";
+                    }
+                    if (message.ignoredResources != null && message.hasOwnProperty("ignoredResources")) {
+                        if (!Array.isArray(message.ignoredResources))
+                            return "ignoredResources: array expected";
+                        for (var i = 0; i < message.ignoredResources.length; ++i)
+                            if (!$util.isString(message.ignoredResources[i]))
+                                return "ignoredResources: string[] expected";
+                    }
+                    if (message.forcedNamespaceAliases != null && message.hasOwnProperty("forcedNamespaceAliases")) {
+                        if (!Array.isArray(message.forcedNamespaceAliases))
+                            return "forcedNamespaceAliases: array expected";
+                        for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
+                            if (!$util.isString(message.forcedNamespaceAliases[i]))
+                                return "forcedNamespaceAliases: string[] expected";
+                    }
+                    if (message.handwrittenSignatures != null && message.hasOwnProperty("handwrittenSignatures")) {
+                        if (!Array.isArray(message.handwrittenSignatures))
+                            return "handwrittenSignatures: array expected";
+                        for (var i = 0; i < message.handwrittenSignatures.length; ++i)
+                            if (!$util.isString(message.handwrittenSignatures[i]))
+                                return "handwrittenSignatures: string[] expected";
+                    }
                     return null;
                 };
     
@@ -28715,6 +32730,41 @@
                             throw TypeError(".google.api.DotnetSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.DotnetSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
+                    if (object.renamedResources) {
+                        if (typeof object.renamedResources !== "object")
+                            throw TypeError(".google.api.DotnetSettings.renamedResources: object expected");
+                        message.renamedResources = {};
+                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i)
+                            message.renamedResources[keys[i]] = String(object.renamedResources[keys[i]]);
+                    }
+                    if (object.ignoredResources) {
+                        if (!Array.isArray(object.ignoredResources))
+                            throw TypeError(".google.api.DotnetSettings.ignoredResources: array expected");
+                        message.ignoredResources = [];
+                        for (var i = 0; i < object.ignoredResources.length; ++i)
+                            message.ignoredResources[i] = String(object.ignoredResources[i]);
+                    }
+                    if (object.forcedNamespaceAliases) {
+                        if (!Array.isArray(object.forcedNamespaceAliases))
+                            throw TypeError(".google.api.DotnetSettings.forcedNamespaceAliases: array expected");
+                        message.forcedNamespaceAliases = [];
+                        for (var i = 0; i < object.forcedNamespaceAliases.length; ++i)
+                            message.forcedNamespaceAliases[i] = String(object.forcedNamespaceAliases[i]);
+                    }
+                    if (object.handwrittenSignatures) {
+                        if (!Array.isArray(object.handwrittenSignatures))
+                            throw TypeError(".google.api.DotnetSettings.handwrittenSignatures: array expected");
+                        message.handwrittenSignatures = [];
+                        for (var i = 0; i < object.handwrittenSignatures.length; ++i)
+                            message.handwrittenSignatures[i] = String(object.handwrittenSignatures[i]);
+                    }
                     return message;
                 };
     
@@ -28731,10 +32781,45 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.ignoredResources = [];
+                        object.forcedNamespaceAliases = [];
+                        object.handwrittenSignatures = [];
+                    }
+                    if (options.objects || options.defaults) {
+                        object.renamedServices = {};
+                        object.renamedResources = {};
+                    }
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
+                    if (message.renamedResources && (keys2 = Object.keys(message.renamedResources)).length) {
+                        object.renamedResources = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedResources[keys2[j]] = message.renamedResources[keys2[j]];
+                    }
+                    if (message.ignoredResources && message.ignoredResources.length) {
+                        object.ignoredResources = [];
+                        for (var j = 0; j < message.ignoredResources.length; ++j)
+                            object.ignoredResources[j] = message.ignoredResources[j];
+                    }
+                    if (message.forcedNamespaceAliases && message.forcedNamespaceAliases.length) {
+                        object.forcedNamespaceAliases = [];
+                        for (var j = 0; j < message.forcedNamespaceAliases.length; ++j)
+                            object.forcedNamespaceAliases[j] = message.forcedNamespaceAliases[j];
+                    }
+                    if (message.handwrittenSignatures && message.handwrittenSignatures.length) {
+                        object.handwrittenSignatures = [];
+                        for (var j = 0; j < message.handwrittenSignatures.length; ++j)
+                            object.handwrittenSignatures[j] = message.handwrittenSignatures[j];
+                    }
                     return object;
                 };
     
@@ -29191,6 +33276,7 @@
                  * @interface IMethodSettings
                  * @property {string|null} [selector] MethodSettings selector
                  * @property {google.api.MethodSettings.ILongRunning|null} [longRunning] MethodSettings longRunning
+                 * @property {Array.<string>|null} [autoPopulatedFields] MethodSettings autoPopulatedFields
                  */
     
                 /**
@@ -29202,6 +33288,7 @@
                  * @param {google.api.IMethodSettings=} [properties] Properties to set
                  */
                 function MethodSettings(properties) {
+                    this.autoPopulatedFields = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -29223,6 +33310,14 @@
                  * @instance
                  */
                 MethodSettings.prototype.longRunning = null;
+    
+                /**
+                 * MethodSettings autoPopulatedFields.
+                 * @member {Array.<string>} autoPopulatedFields
+                 * @memberof google.api.MethodSettings
+                 * @instance
+                 */
+                MethodSettings.prototype.autoPopulatedFields = $util.emptyArray;
     
                 /**
                  * Creates a new MethodSettings instance using the specified properties.
@@ -29252,6 +33347,9 @@
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
                     if (message.longRunning != null && Object.hasOwnProperty.call(message, "longRunning"))
                         $root.google.api.MethodSettings.LongRunning.encode(message.longRunning, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.autoPopulatedFields != null && message.autoPopulatedFields.length)
+                        for (var i = 0; i < message.autoPopulatedFields.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.autoPopulatedFields[i]);
                     return writer;
                 };
     
@@ -29292,6 +33390,12 @@
                             }
                         case 2: {
                                 message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.autoPopulatedFields && message.autoPopulatedFields.length))
+                                    message.autoPopulatedFields = [];
+                                message.autoPopulatedFields.push(reader.string());
                                 break;
                             }
                         default:
@@ -29337,6 +33441,13 @@
                         if (error)
                             return "longRunning." + error;
                     }
+                    if (message.autoPopulatedFields != null && message.hasOwnProperty("autoPopulatedFields")) {
+                        if (!Array.isArray(message.autoPopulatedFields))
+                            return "autoPopulatedFields: array expected";
+                        for (var i = 0; i < message.autoPopulatedFields.length; ++i)
+                            if (!$util.isString(message.autoPopulatedFields[i]))
+                                return "autoPopulatedFields: string[] expected";
+                    }
                     return null;
                 };
     
@@ -29359,6 +33470,13 @@
                             throw TypeError(".google.api.MethodSettings.longRunning: object expected");
                         message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning);
                     }
+                    if (object.autoPopulatedFields) {
+                        if (!Array.isArray(object.autoPopulatedFields))
+                            throw TypeError(".google.api.MethodSettings.autoPopulatedFields: array expected");
+                        message.autoPopulatedFields = [];
+                        for (var i = 0; i < object.autoPopulatedFields.length; ++i)
+                            message.autoPopulatedFields[i] = String(object.autoPopulatedFields[i]);
+                    }
                     return message;
                 };
     
@@ -29375,6 +33493,8 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.autoPopulatedFields = [];
                     if (options.defaults) {
                         object.selector = "";
                         object.longRunning = null;
@@ -29383,6 +33503,11 @@
                         object.selector = message.selector;
                     if (message.longRunning != null && message.hasOwnProperty("longRunning"))
                         object.longRunning = $root.google.api.MethodSettings.LongRunning.toObject(message.longRunning, options);
+                    if (message.autoPopulatedFields && message.autoPopulatedFields.length) {
+                        object.autoPopulatedFields = [];
+                        for (var j = 0; j < message.autoPopulatedFields.length; ++j)
+                            object.autoPopulatedFields[j] = message.autoPopulatedFields[j];
+                    }
                     return object;
                 };
     
@@ -29712,6 +33837,9 @@
              * @property {number} ADS=2 ADS value
              * @property {number} PHOTOS=3 PHOTOS value
              * @property {number} STREET_VIEW=4 STREET_VIEW value
+             * @property {number} SHOPPING=5 SHOPPING value
+             * @property {number} GEO=6 GEO value
+             * @property {number} GENERATIVE_AI=7 GENERATIVE_AI value
              */
             api.ClientLibraryOrganization = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -29720,6 +33848,9 @@
                 values[valuesById[2] = "ADS"] = 2;
                 values[valuesById[3] = "PHOTOS"] = 3;
                 values[valuesById[4] = "STREET_VIEW"] = 4;
+                values[valuesById[5] = "SHOPPING"] = 5;
+                values[valuesById[6] = "GEO"] = 6;
+                values[valuesById[7] = "GENERATIVE_AI"] = 7;
                 return values;
             })();
     
@@ -29975,6 +34106,38 @@
                 return FileDescriptorSet;
             })();
     
+            /**
+             * Edition enum.
+             * @name google.protobuf.Edition
+             * @enum {number}
+             * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
+             * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
+             * @property {number} EDITION_2023=1000 EDITION_2023 value
+             * @property {number} EDITION_2024=1001 EDITION_2024 value
+             * @property {number} EDITION_1_TEST_ONLY=1 EDITION_1_TEST_ONLY value
+             * @property {number} EDITION_2_TEST_ONLY=2 EDITION_2_TEST_ONLY value
+             * @property {number} EDITION_99997_TEST_ONLY=99997 EDITION_99997_TEST_ONLY value
+             * @property {number} EDITION_99998_TEST_ONLY=99998 EDITION_99998_TEST_ONLY value
+             * @property {number} EDITION_99999_TEST_ONLY=99999 EDITION_99999_TEST_ONLY value
+             * @property {number} EDITION_MAX=2147483647 EDITION_MAX value
+             */
+            protobuf.Edition = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[998] = "EDITION_PROTO2"] = 998;
+                values[valuesById[999] = "EDITION_PROTO3"] = 999;
+                values[valuesById[1000] = "EDITION_2023"] = 1000;
+                values[valuesById[1001] = "EDITION_2024"] = 1001;
+                values[valuesById[1] = "EDITION_1_TEST_ONLY"] = 1;
+                values[valuesById[2] = "EDITION_2_TEST_ONLY"] = 2;
+                values[valuesById[99997] = "EDITION_99997_TEST_ONLY"] = 99997;
+                values[valuesById[99998] = "EDITION_99998_TEST_ONLY"] = 99998;
+                values[valuesById[99999] = "EDITION_99999_TEST_ONLY"] = 99999;
+                values[valuesById[2147483647] = "EDITION_MAX"] = 2147483647;
+                return values;
+            })();
+    
             protobuf.FileDescriptorProto = (function() {
     
                 /**
@@ -29993,7 +34156,7 @@
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [sourceCodeInfo] FileDescriptorProto sourceCodeInfo
                  * @property {string|null} [syntax] FileDescriptorProto syntax
-                 * @property {string|null} [edition] FileDescriptorProto edition
+                 * @property {google.protobuf.Edition|null} [edition] FileDescriptorProto edition
                  */
     
                 /**
@@ -30116,11 +34279,11 @@
     
                 /**
                  * FileDescriptorProto edition.
-                 * @member {string} edition
+                 * @member {google.protobuf.Edition} edition
                  * @memberof google.protobuf.FileDescriptorProto
                  * @instance
                  */
-                FileDescriptorProto.prototype.edition = "";
+                FileDescriptorProto.prototype.edition = 0;
     
                 /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
@@ -30178,7 +34341,7 @@
                     if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
-                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.edition);
+                        writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
                     return writer;
                 };
     
@@ -30285,8 +34448,8 @@
                                 message.syntax = reader.string();
                                 break;
                             }
-                        case 13: {
-                                message.edition = reader.string();
+                        case 14: {
+                                message.edition = reader.int32();
                                 break;
                             }
                         default:
@@ -30401,8 +34564,22 @@
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
                     if (message.edition != null && message.hasOwnProperty("edition"))
-                        if (!$util.isString(message.edition))
-                            return "edition: string expected";
+                        switch (message.edition) {
+                        default:
+                            return "edition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
                     return null;
                 };
     
@@ -30495,8 +34672,58 @@
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
-                    if (object.edition != null)
-                        message.edition = String(object.edition);
+                    switch (object.edition) {
+                    default:
+                        if (typeof object.edition === "number") {
+                            message.edition = object.edition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.edition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.edition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.edition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.edition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.edition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.edition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.edition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.edition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.edition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.edition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.edition = 2147483647;
+                        break;
+                    }
                     return message;
                 };
     
@@ -30528,7 +34755,7 @@
                         object.options = null;
                         object.sourceCodeInfo = null;
                         object.syntax = "";
-                        object.edition = "";
+                        object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -30576,7 +34803,7 @@
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
-                        object.edition = message.edition;
+                        object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
                     return object;
                 };
     
@@ -31679,6 +35906,9 @@
                  * @memberof google.protobuf
                  * @interface IExtensionRangeOptions
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ExtensionRangeOptions uninterpretedOption
+                 * @property {Array.<google.protobuf.ExtensionRangeOptions.IDeclaration>|null} [declaration] ExtensionRangeOptions declaration
+                 * @property {google.protobuf.IFeatureSet|null} [features] ExtensionRangeOptions features
+                 * @property {google.protobuf.ExtensionRangeOptions.VerificationState|null} [verification] ExtensionRangeOptions verification
                  */
     
                 /**
@@ -31691,6 +35921,7 @@
                  */
                 function ExtensionRangeOptions(properties) {
                     this.uninterpretedOption = [];
+                    this.declaration = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -31704,6 +35935,30 @@
                  * @instance
                  */
                 ExtensionRangeOptions.prototype.uninterpretedOption = $util.emptyArray;
+    
+                /**
+                 * ExtensionRangeOptions declaration.
+                 * @member {Array.<google.protobuf.ExtensionRangeOptions.IDeclaration>} declaration
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.declaration = $util.emptyArray;
+    
+                /**
+                 * ExtensionRangeOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.features = null;
+    
+                /**
+                 * ExtensionRangeOptions verification.
+                 * @member {google.protobuf.ExtensionRangeOptions.VerificationState} verification
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.verification = 1;
     
                 /**
                  * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -31729,6 +35984,13 @@
                 ExtensionRangeOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (message.declaration != null && message.declaration.length)
+                        for (var i = 0; i < message.declaration.length; ++i)
+                            $root.google.protobuf.ExtensionRangeOptions.Declaration.encode(message.declaration[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.verification != null && Object.hasOwnProperty.call(message, "verification"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.verification);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -31770,6 +36032,20 @@
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.declaration && message.declaration.length))
+                                    message.declaration = [];
+                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 50: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.verification = reader.int32();
                                 break;
                             }
                         default:
@@ -31816,6 +36092,28 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message.declaration != null && message.hasOwnProperty("declaration")) {
+                        if (!Array.isArray(message.declaration))
+                            return "declaration: array expected";
+                        for (var i = 0; i < message.declaration.length; ++i) {
+                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i]);
+                            if (error)
+                                return "declaration." + error;
+                        }
+                    }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
+                    if (message.verification != null && message.hasOwnProperty("verification"))
+                        switch (message.verification) {
+                        default:
+                            return "verification: enum value expected";
+                        case 0:
+                        case 1:
+                            break;
+                        }
                     return null;
                 };
     
@@ -31841,6 +36139,37 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object.declaration) {
+                        if (!Array.isArray(object.declaration))
+                            throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: array expected");
+                        message.declaration = [];
+                        for (var i = 0; i < object.declaration.length; ++i) {
+                            if (typeof object.declaration[i] !== "object")
+                                throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: object expected");
+                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i]);
+                        }
+                    }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.ExtensionRangeOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
+                    switch (object.verification) {
+                    case "DECLARATION":
+                    case 0:
+                        message.verification = 0;
+                        break;
+                    default:
+                        if (typeof object.verification === "number") {
+                            message.verification = object.verification;
+                            break;
+                        }
+                        break;
+                    case "UNVERIFIED":
+                    case 1:
+                        message.verification = 1;
+                        break;
+                    }
                     return message;
                 };
     
@@ -31857,8 +36186,23 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
+                        object.declaration = [];
                         object.uninterpretedOption = [];
+                    }
+                    if (options.defaults) {
+                        object.verification = options.enums === String ? "UNVERIFIED" : 1;
+                        object.features = null;
+                    }
+                    if (message.declaration && message.declaration.length) {
+                        object.declaration = [];
+                        for (var j = 0; j < message.declaration.length; ++j)
+                            object.declaration[j] = $root.google.protobuf.ExtensionRangeOptions.Declaration.toObject(message.declaration[j], options);
+                    }
+                    if (message.verification != null && message.hasOwnProperty("verification"))
+                        object.verification = options.enums === String ? $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] === undefined ? message.verification : $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] : message.verification;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -31892,6 +36236,316 @@
                     }
                     return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions";
                 };
+    
+                ExtensionRangeOptions.Declaration = (function() {
+    
+                    /**
+                     * Properties of a Declaration.
+                     * @memberof google.protobuf.ExtensionRangeOptions
+                     * @interface IDeclaration
+                     * @property {number|null} [number] Declaration number
+                     * @property {string|null} [fullName] Declaration fullName
+                     * @property {string|null} [type] Declaration type
+                     * @property {boolean|null} [reserved] Declaration reserved
+                     * @property {boolean|null} [repeated] Declaration repeated
+                     */
+    
+                    /**
+                     * Constructs a new Declaration.
+                     * @memberof google.protobuf.ExtensionRangeOptions
+                     * @classdesc Represents a Declaration.
+                     * @implements IDeclaration
+                     * @constructor
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration=} [properties] Properties to set
+                     */
+                    function Declaration(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Declaration number.
+                     * @member {number} number
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.number = 0;
+    
+                    /**
+                     * Declaration fullName.
+                     * @member {string} fullName
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.fullName = "";
+    
+                    /**
+                     * Declaration type.
+                     * @member {string} type
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.type = "";
+    
+                    /**
+                     * Declaration reserved.
+                     * @member {boolean} reserved
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.reserved = false;
+    
+                    /**
+                     * Declaration repeated.
+                     * @member {boolean} repeated
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.repeated = false;
+    
+                    /**
+                     * Creates a new Declaration instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration=} [properties] Properties to set
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration instance
+                     */
+                    Declaration.create = function create(properties) {
+                        return new Declaration(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration} message Declaration message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Declaration.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.number);
+                        if (message.fullName != null && Object.hasOwnProperty.call(message, "fullName"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.fullName);
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
+                        if (message.reserved != null && Object.hasOwnProperty.call(message, "reserved"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.reserved);
+                        if (message.repeated != null && Object.hasOwnProperty.call(message, "repeated"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).bool(message.repeated);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration} message Declaration message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Declaration.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Declaration message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Declaration.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.number = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.fullName = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.type = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.reserved = reader.bool();
+                                    break;
+                                }
+                            case 6: {
+                                    message.repeated = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Declaration.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Declaration message.
+                     * @function verify
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Declaration.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.number != null && message.hasOwnProperty("number"))
+                            if (!$util.isInteger(message.number))
+                                return "number: integer expected";
+                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                            if (!$util.isString(message.fullName))
+                                return "fullName: string expected";
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            if (!$util.isString(message.type))
+                                return "type: string expected";
+                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                            if (typeof message.reserved !== "boolean")
+                                return "reserved: boolean expected";
+                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                            if (typeof message.repeated !== "boolean")
+                                return "repeated: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     */
+                    Declaration.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.ExtensionRangeOptions.Declaration)
+                            return object;
+                        var message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
+                        if (object.number != null)
+                            message.number = object.number | 0;
+                        if (object.fullName != null)
+                            message.fullName = String(object.fullName);
+                        if (object.type != null)
+                            message.type = String(object.type);
+                        if (object.reserved != null)
+                            message.reserved = Boolean(object.reserved);
+                        if (object.repeated != null)
+                            message.repeated = Boolean(object.repeated);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.Declaration} message Declaration
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Declaration.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.number = 0;
+                            object.fullName = "";
+                            object.type = "";
+                            object.reserved = false;
+                            object.repeated = false;
+                        }
+                        if (message.number != null && message.hasOwnProperty("number"))
+                            object.number = message.number;
+                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                            object.fullName = message.fullName;
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            object.type = message.type;
+                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                            object.reserved = message.reserved;
+                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                            object.repeated = message.repeated;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Declaration to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Declaration.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Declaration
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Declaration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions.Declaration";
+                    };
+    
+                    return Declaration;
+                })();
+    
+                /**
+                 * VerificationState enum.
+                 * @name google.protobuf.ExtensionRangeOptions.VerificationState
+                 * @enum {number}
+                 * @property {number} DECLARATION=0 DECLARATION value
+                 * @property {number} UNVERIFIED=1 UNVERIFIED value
+                 */
+                ExtensionRangeOptions.VerificationState = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "DECLARATION"] = 0;
+                    values[valuesById[1] = "UNVERIFIED"] = 1;
+                    return values;
+                })();
     
                 return ExtensionRangeOptions;
             })();
@@ -32188,8 +36842,8 @@
                         default:
                             return "label: enum value expected";
                         case 1:
-                        case 2:
                         case 3:
+                        case 2:
                             break;
                         }
                     if (message.type != null && message.hasOwnProperty("type"))
@@ -32269,13 +36923,13 @@
                     case 1:
                         message.label = 1;
                         break;
-                    case "LABEL_REQUIRED":
-                    case 2:
-                        message.label = 2;
-                        break;
                     case "LABEL_REPEATED":
                     case 3:
                         message.label = 3;
+                        break;
+                    case "LABEL_REQUIRED":
+                    case 2:
+                        message.label = 2;
                         break;
                     }
                     switch (object.type) {
@@ -32506,14 +37160,14 @@
                  * @name google.protobuf.FieldDescriptorProto.Label
                  * @enum {number}
                  * @property {number} LABEL_OPTIONAL=1 LABEL_OPTIONAL value
-                 * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  * @property {number} LABEL_REPEATED=3 LABEL_REPEATED value
+                 * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  */
                 FieldDescriptorProto.Label = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
                     values[valuesById[1] = "LABEL_OPTIONAL"] = 1;
-                    values[valuesById[2] = "LABEL_REQUIRED"] = 2;
                     values[valuesById[3] = "LABEL_REPEATED"] = 3;
+                    values[valuesById[2] = "LABEL_REQUIRED"] = 2;
                     return values;
                 })();
     
@@ -34212,7 +38866,6 @@
                  * @property {boolean|null} [ccGenericServices] FileOptions ccGenericServices
                  * @property {boolean|null} [javaGenericServices] FileOptions javaGenericServices
                  * @property {boolean|null} [pyGenericServices] FileOptions pyGenericServices
-                 * @property {boolean|null} [phpGenericServices] FileOptions phpGenericServices
                  * @property {boolean|null} [deprecated] FileOptions deprecated
                  * @property {boolean|null} [ccEnableArenas] FileOptions ccEnableArenas
                  * @property {string|null} [objcClassPrefix] FileOptions objcClassPrefix
@@ -34222,6 +38875,7 @@
                  * @property {string|null} [phpNamespace] FileOptions phpNamespace
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
+                 * @property {google.protobuf.IFeatureSet|null} [features] FileOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
                  * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
@@ -34324,14 +38978,6 @@
                 FileOptions.prototype.pyGenericServices = false;
     
                 /**
-                 * FileOptions phpGenericServices.
-                 * @member {boolean} phpGenericServices
-                 * @memberof google.protobuf.FileOptions
-                 * @instance
-                 */
-                FileOptions.prototype.phpGenericServices = false;
-    
-                /**
                  * FileOptions deprecated.
                  * @member {boolean} deprecated
                  * @memberof google.protobuf.FileOptions
@@ -34402,6 +39048,14 @@
                  * @instance
                  */
                 FileOptions.prototype.rubyPackage = "";
+    
+                /**
+                 * FileOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.features = null;
     
                 /**
                  * FileOptions uninterpretedOption.
@@ -34477,12 +39131,12 @@
                         writer.uint32(/* id 40, wireType 2 =*/322).string(message.phpClassPrefix);
                     if (message.phpNamespace != null && Object.hasOwnProperty.call(message, "phpNamespace"))
                         writer.uint32(/* id 41, wireType 2 =*/330).string(message.phpNamespace);
-                    if (message.phpGenericServices != null && Object.hasOwnProperty.call(message, "phpGenericServices"))
-                        writer.uint32(/* id 42, wireType 0 =*/336).bool(message.phpGenericServices);
                     if (message.phpMetadataNamespace != null && Object.hasOwnProperty.call(message, "phpMetadataNamespace"))
                         writer.uint32(/* id 44, wireType 2 =*/354).string(message.phpMetadataNamespace);
                     if (message.rubyPackage != null && Object.hasOwnProperty.call(message, "rubyPackage"))
                         writer.uint32(/* id 45, wireType 2 =*/362).string(message.rubyPackage);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -34563,10 +39217,6 @@
                                 message.pyGenericServices = reader.bool();
                                 break;
                             }
-                        case 42: {
-                                message.phpGenericServices = reader.bool();
-                                break;
-                            }
                         case 23: {
                                 message.deprecated = reader.bool();
                                 break;
@@ -34601,6 +39251,10 @@
                             }
                         case 45: {
                                 message.rubyPackage = reader.string();
+                                break;
+                            }
+                        case 50: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -34686,9 +39340,6 @@
                     if (message.pyGenericServices != null && message.hasOwnProperty("pyGenericServices"))
                         if (typeof message.pyGenericServices !== "boolean")
                             return "pyGenericServices: boolean expected";
-                    if (message.phpGenericServices != null && message.hasOwnProperty("phpGenericServices"))
-                        if (typeof message.phpGenericServices !== "boolean")
-                            return "phpGenericServices: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -34716,6 +39367,11 @@
                     if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
                         if (!$util.isString(message.rubyPackage))
                             return "rubyPackage: string expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -34787,8 +39443,6 @@
                         message.javaGenericServices = Boolean(object.javaGenericServices);
                     if (object.pyGenericServices != null)
                         message.pyGenericServices = Boolean(object.pyGenericServices);
-                    if (object.phpGenericServices != null)
-                        message.phpGenericServices = Boolean(object.phpGenericServices);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.ccEnableArenas != null)
@@ -34807,6 +39461,11 @@
                         message.phpMetadataNamespace = String(object.phpMetadataNamespace);
                     if (object.rubyPackage != null)
                         message.rubyPackage = String(object.rubyPackage);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.FileOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: array expected");
@@ -34865,9 +39524,9 @@
                         object.swiftPrefix = "";
                         object.phpClassPrefix = "";
                         object.phpNamespace = "";
-                        object.phpGenericServices = false;
                         object.phpMetadataNamespace = "";
                         object.rubyPackage = "";
+                        object.features = null;
                     }
                     if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
                         object.javaPackage = message.javaPackage;
@@ -34903,12 +39562,12 @@
                         object.phpClassPrefix = message.phpClassPrefix;
                     if (message.phpNamespace != null && message.hasOwnProperty("phpNamespace"))
                         object.phpNamespace = message.phpNamespace;
-                    if (message.phpGenericServices != null && message.hasOwnProperty("phpGenericServices"))
-                        object.phpGenericServices = message.phpGenericServices;
                     if (message.phpMetadataNamespace != null && message.hasOwnProperty("phpMetadataNamespace"))
                         object.phpMetadataNamespace = message.phpMetadataNamespace;
                     if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
                         object.rubyPackage = message.rubyPackage;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -34978,6 +39637,7 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] MessageOptions deprecatedLegacyJsonFieldConflicts
+                 * @property {google.protobuf.IFeatureSet|null} [features] MessageOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
                  * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
@@ -35039,6 +39699,14 @@
                 MessageOptions.prototype.deprecatedLegacyJsonFieldConflicts = false;
     
                 /**
+                 * MessageOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.features = null;
+    
+                /**
                  * MessageOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.MessageOptions
@@ -35088,6 +39756,8 @@
                         writer.uint32(/* id 7, wireType 0 =*/56).bool(message.mapEntry);
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 11, wireType 0 =*/88).bool(message.deprecatedLegacyJsonFieldConflicts);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -35145,6 +39815,10 @@
                             }
                         case 11: {
                                 message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+                                break;
+                            }
+                        case 12: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -35207,6 +39881,11 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -35246,6 +39925,11 @@
                         message.mapEntry = Boolean(object.mapEntry);
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: array expected");
@@ -35285,6 +39969,7 @@
                         object.deprecated = false;
                         object.mapEntry = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
+                        object.features = null;
                         object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
@@ -35297,6 +39982,8 @@
                         object.mapEntry = message.mapEntry;
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -35351,7 +40038,9 @@
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {boolean|null} [debugRedact] FieldOptions debugRedact
                  * @property {google.protobuf.FieldOptions.OptionRetention|null} [retention] FieldOptions retention
-                 * @property {google.protobuf.FieldOptions.OptionTargetType|null} [target] FieldOptions target
+                 * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
+                 * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
+                 * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -35366,6 +40055,8 @@
                  * @param {google.protobuf.IFieldOptions=} [properties] Properties to set
                  */
                 function FieldOptions(properties) {
+                    this.targets = [];
+                    this.editionDefaults = [];
                     this.uninterpretedOption = [];
                     this[".google.api.fieldBehavior"] = [];
                     if (properties)
@@ -35447,12 +40138,28 @@
                 FieldOptions.prototype.retention = 0;
     
                 /**
-                 * FieldOptions target.
-                 * @member {google.protobuf.FieldOptions.OptionTargetType} target
+                 * FieldOptions targets.
+                 * @member {Array.<google.protobuf.FieldOptions.OptionTargetType>} targets
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
-                FieldOptions.prototype.target = 0;
+                FieldOptions.prototype.targets = $util.emptyArray;
+    
+                /**
+                 * FieldOptions editionDefaults.
+                 * @member {Array.<google.protobuf.FieldOptions.IEditionDefault>} editionDefaults
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.editionDefaults = $util.emptyArray;
+    
+                /**
+                 * FieldOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.features = null;
     
                 /**
                  * FieldOptions uninterpretedOption.
@@ -35520,8 +40227,14 @@
                         writer.uint32(/* id 16, wireType 0 =*/128).bool(message.debugRedact);
                     if (message.retention != null && Object.hasOwnProperty.call(message, "retention"))
                         writer.uint32(/* id 17, wireType 0 =*/136).int32(message.retention);
-                    if (message.target != null && Object.hasOwnProperty.call(message, "target"))
-                        writer.uint32(/* id 18, wireType 0 =*/144).int32(message.target);
+                    if (message.targets != null && message.targets.length)
+                        for (var i = 0; i < message.targets.length; ++i)
+                            writer.uint32(/* id 19, wireType 0 =*/152).int32(message.targets[i]);
+                    if (message.editionDefaults != null && message.editionDefaults.length)
+                        for (var i = 0; i < message.editionDefaults.length; ++i)
+                            $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -35603,8 +40316,25 @@
                                 message.retention = reader.int32();
                                 break;
                             }
-                        case 18: {
-                                message.target = reader.int32();
+                        case 19: {
+                                if (!(message.targets && message.targets.length))
+                                    message.targets = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.targets.push(reader.int32());
+                                } else
+                                    message.targets.push(reader.int32());
+                                break;
+                            }
+                        case 20: {
+                                if (!(message.editionDefaults && message.editionDefaults.length))
+                                    message.editionDefaults = [];
+                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 21: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -35708,22 +40438,40 @@
                         case 2:
                             break;
                         }
-                    if (message.target != null && message.hasOwnProperty("target"))
-                        switch (message.target) {
-                        default:
-                            return "target: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                            break;
+                    if (message.targets != null && message.hasOwnProperty("targets")) {
+                        if (!Array.isArray(message.targets))
+                            return "targets: array expected";
+                        for (var i = 0; i < message.targets.length; ++i)
+                            switch (message.targets[i]) {
+                            default:
+                                return "targets: enum value[] expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                            case 7:
+                            case 8:
+                            case 9:
+                                break;
+                            }
+                    }
+                    if (message.editionDefaults != null && message.hasOwnProperty("editionDefaults")) {
+                        if (!Array.isArray(message.editionDefaults))
+                            return "editionDefaults: array expected";
+                        for (var i = 0; i < message.editionDefaults.length; ++i) {
+                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i]);
+                            if (error)
+                                return "editionDefaults." + error;
                         }
+                    }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -35748,6 +40496,7 @@
                             case 5:
                             case 6:
                             case 7:
+                            case 8:
                                 break;
                             }
                     }
@@ -35843,53 +40592,73 @@
                         message.retention = 2;
                         break;
                     }
-                    switch (object.target) {
-                    default:
-                        if (typeof object.target === "number") {
-                            message.target = object.target;
-                            break;
+                    if (object.targets) {
+                        if (!Array.isArray(object.targets))
+                            throw TypeError(".google.protobuf.FieldOptions.targets: array expected");
+                        message.targets = [];
+                        for (var i = 0; i < object.targets.length; ++i)
+                            switch (object.targets[i]) {
+                            default:
+                                if (typeof object.targets[i] === "number") {
+                                    message.targets[i] = object.targets[i];
+                                    break;
+                                }
+                            case "TARGET_TYPE_UNKNOWN":
+                            case 0:
+                                message.targets[i] = 0;
+                                break;
+                            case "TARGET_TYPE_FILE":
+                            case 1:
+                                message.targets[i] = 1;
+                                break;
+                            case "TARGET_TYPE_EXTENSION_RANGE":
+                            case 2:
+                                message.targets[i] = 2;
+                                break;
+                            case "TARGET_TYPE_MESSAGE":
+                            case 3:
+                                message.targets[i] = 3;
+                                break;
+                            case "TARGET_TYPE_FIELD":
+                            case 4:
+                                message.targets[i] = 4;
+                                break;
+                            case "TARGET_TYPE_ONEOF":
+                            case 5:
+                                message.targets[i] = 5;
+                                break;
+                            case "TARGET_TYPE_ENUM":
+                            case 6:
+                                message.targets[i] = 6;
+                                break;
+                            case "TARGET_TYPE_ENUM_ENTRY":
+                            case 7:
+                                message.targets[i] = 7;
+                                break;
+                            case "TARGET_TYPE_SERVICE":
+                            case 8:
+                                message.targets[i] = 8;
+                                break;
+                            case "TARGET_TYPE_METHOD":
+                            case 9:
+                                message.targets[i] = 9;
+                                break;
+                            }
+                    }
+                    if (object.editionDefaults) {
+                        if (!Array.isArray(object.editionDefaults))
+                            throw TypeError(".google.protobuf.FieldOptions.editionDefaults: array expected");
+                        message.editionDefaults = [];
+                        for (var i = 0; i < object.editionDefaults.length; ++i) {
+                            if (typeof object.editionDefaults[i] !== "object")
+                                throw TypeError(".google.protobuf.FieldOptions.editionDefaults: object expected");
+                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i]);
                         }
-                        break;
-                    case "TARGET_TYPE_UNKNOWN":
-                    case 0:
-                        message.target = 0;
-                        break;
-                    case "TARGET_TYPE_FILE":
-                    case 1:
-                        message.target = 1;
-                        break;
-                    case "TARGET_TYPE_EXTENSION_RANGE":
-                    case 2:
-                        message.target = 2;
-                        break;
-                    case "TARGET_TYPE_MESSAGE":
-                    case 3:
-                        message.target = 3;
-                        break;
-                    case "TARGET_TYPE_FIELD":
-                    case 4:
-                        message.target = 4;
-                        break;
-                    case "TARGET_TYPE_ONEOF":
-                    case 5:
-                        message.target = 5;
-                        break;
-                    case "TARGET_TYPE_ENUM":
-                    case 6:
-                        message.target = 6;
-                        break;
-                    case "TARGET_TYPE_ENUM_ENTRY":
-                    case 7:
-                        message.target = 7;
-                        break;
-                    case "TARGET_TYPE_SERVICE":
-                    case 8:
-                        message.target = 8;
-                        break;
-                    case "TARGET_TYPE_METHOD":
-                    case 9:
-                        message.target = 9;
-                        break;
+                    }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -35944,6 +40713,10 @@
                             case 7:
                                 message[".google.api.fieldBehavior"][i] = 7;
                                 break;
+                            case "IDENTIFIER":
+                            case 8:
+                                message[".google.api.fieldBehavior"][i] = 8;
+                                break;
                             }
                     }
                     if (object[".google.api.resourceReference"] != null) {
@@ -35968,6 +40741,8 @@
                         options = {};
                     var object = {};
                     if (options.arrays || options.defaults) {
+                        object.targets = [];
+                        object.editionDefaults = [];
                         object.uninterpretedOption = [];
                         object[".google.api.fieldBehavior"] = [];
                     }
@@ -35981,7 +40756,7 @@
                         object.unverifiedLazy = false;
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
-                        object.target = options.enums === String ? "TARGET_TYPE_UNKNOWN" : 0;
+                        object.features = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -36002,8 +40777,18 @@
                         object.debugRedact = message.debugRedact;
                     if (message.retention != null && message.hasOwnProperty("retention"))
                         object.retention = options.enums === String ? $root.google.protobuf.FieldOptions.OptionRetention[message.retention] === undefined ? message.retention : $root.google.protobuf.FieldOptions.OptionRetention[message.retention] : message.retention;
-                    if (message.target != null && message.hasOwnProperty("target"))
-                        object.target = options.enums === String ? $root.google.protobuf.FieldOptions.OptionTargetType[message.target] === undefined ? message.target : $root.google.protobuf.FieldOptions.OptionTargetType[message.target] : message.target;
+                    if (message.targets && message.targets.length) {
+                        object.targets = [];
+                        for (var j = 0; j < message.targets.length; ++j)
+                            object.targets[j] = options.enums === String ? $root.google.protobuf.FieldOptions.OptionTargetType[message.targets[j]] === undefined ? message.targets[j] : $root.google.protobuf.FieldOptions.OptionTargetType[message.targets[j]] : message.targets[j];
+                    }
+                    if (message.editionDefaults && message.editionDefaults.length) {
+                        object.editionDefaults = [];
+                        for (var j = 0; j < message.editionDefaults.length; ++j)
+                            object.editionDefaults[j] = $root.google.protobuf.FieldOptions.EditionDefault.toObject(message.editionDefaults[j], options);
+                    }
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -36123,6 +40908,297 @@
                     return values;
                 })();
     
+                FieldOptions.EditionDefault = (function() {
+    
+                    /**
+                     * Properties of an EditionDefault.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IEditionDefault
+                     * @property {google.protobuf.Edition|null} [edition] EditionDefault edition
+                     * @property {string|null} [value] EditionDefault value
+                     */
+    
+                    /**
+                     * Constructs a new EditionDefault.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents an EditionDefault.
+                     * @implements IEditionDefault
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IEditionDefault=} [properties] Properties to set
+                     */
+                    function EditionDefault(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * EditionDefault edition.
+                     * @member {google.protobuf.Edition} edition
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     */
+                    EditionDefault.prototype.edition = 0;
+    
+                    /**
+                     * EditionDefault value.
+                     * @member {string} value
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     */
+                    EditionDefault.prototype.value = "";
+    
+                    /**
+                     * Creates a new EditionDefault instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault instance
+                     */
+                    EditionDefault.create = function create(properties) {
+                        return new EditionDefault(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault} message EditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EditionDefault.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault} message EditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an EditionDefault message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EditionDefault.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 3: {
+                                    message.edition = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.value = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EditionDefault.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an EditionDefault message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    EditionDefault.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            switch (message.edition) {
+                            default:
+                                return "edition: enum value expected";
+                            case 0:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            if (!$util.isString(message.value))
+                                return "value: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     */
+                    EditionDefault.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.EditionDefault)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.EditionDefault();
+                        switch (object.edition) {
+                        default:
+                            if (typeof object.edition === "number") {
+                                message.edition = object.edition;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.edition = 0;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.edition = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.edition = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.edition = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.edition = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.edition = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.edition = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.edition = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.edition = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.edition = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.edition = 2147483647;
+                            break;
+                        }
+                        if (object.value != null)
+                            message.value = String(object.value);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.EditionDefault} message EditionDefault
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    EditionDefault.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.value = "";
+                            object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            object.value = message.value;
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this EditionDefault to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    EditionDefault.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EditionDefault
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EditionDefault.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.EditionDefault";
+                    };
+    
+                    return EditionDefault;
+                })();
+    
                 return FieldOptions;
             })();
     
@@ -36132,6 +41208,7 @@
                  * Properties of an OneofOptions.
                  * @memberof google.protobuf
                  * @interface IOneofOptions
+                 * @property {google.protobuf.IFeatureSet|null} [features] OneofOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] OneofOptions uninterpretedOption
                  */
     
@@ -36150,6 +41227,14 @@
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
+    
+                /**
+                 * OneofOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 */
+                OneofOptions.prototype.features = null;
     
                 /**
                  * OneofOptions uninterpretedOption.
@@ -36183,6 +41268,8 @@
                 OneofOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -36220,6 +41307,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
+                        case 1: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
@@ -36261,6 +41352,11 @@
                 OneofOptions.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -36285,6 +41381,11 @@
                     if (object instanceof $root.google.protobuf.OneofOptions)
                         return object;
                     var message = new $root.google.protobuf.OneofOptions();
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.OneofOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: array expected");
@@ -36313,6 +41414,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
+                    if (options.defaults)
+                        object.features = null;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -36359,6 +41464,7 @@
                  * @property {boolean|null} [allowAlias] EnumOptions allowAlias
                  * @property {boolean|null} [deprecated] EnumOptions deprecated
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] EnumOptions deprecatedLegacyJsonFieldConflicts
+                 * @property {google.protobuf.IFeatureSet|null} [features] EnumOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumOptions uninterpretedOption
                  */
     
@@ -36403,6 +41509,14 @@
                 EnumOptions.prototype.deprecatedLegacyJsonFieldConflicts = false;
     
                 /**
+                 * EnumOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.EnumOptions
+                 * @instance
+                 */
+                EnumOptions.prototype.features = null;
+    
+                /**
                  * EnumOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumOptions
@@ -36440,6 +41554,8 @@
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 6, wireType 0 =*/48).bool(message.deprecatedLegacyJsonFieldConflicts);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -36487,6 +41603,10 @@
                             }
                         case 6: {
                                 message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -36539,6 +41659,11 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -36569,6 +41694,11 @@
                         message.deprecated = Boolean(object.deprecated);
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.EnumOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: array expected");
@@ -36601,6 +41731,7 @@
                         object.allowAlias = false;
                         object.deprecated = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
+                        object.features = null;
                     }
                     if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
                         object.allowAlias = message.allowAlias;
@@ -36608,6 +41739,8 @@
                         object.deprecated = message.deprecated;
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -36652,6 +41785,8 @@
                  * @memberof google.protobuf
                  * @interface IEnumValueOptions
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
+                 * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
+                 * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -36678,6 +41813,22 @@
                  * @instance
                  */
                 EnumValueOptions.prototype.deprecated = false;
+    
+                /**
+                 * EnumValueOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.features = null;
+    
+                /**
+                 * EnumValueOptions debugRedact.
+                 * @member {boolean} debugRedact
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.debugRedact = false;
     
                 /**
                  * EnumValueOptions uninterpretedOption.
@@ -36713,6 +41864,10 @@
                         writer = $Writer.create();
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -36752,6 +41907,14 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 2: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.debugRedact = reader.bool();
                                 break;
                             }
                         case 999: {
@@ -36798,6 +41961,14 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
+                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                        if (typeof message.debugRedact !== "boolean")
+                            return "debugRedact: boolean expected";
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -36824,6 +41995,13 @@
                     var message = new $root.google.protobuf.EnumValueOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
+                    if (object.debugRedact != null)
+                        message.debugRedact = Boolean(object.debugRedact);
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -36852,10 +42030,17 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.deprecated = false;
+                        object.features = null;
+                        object.debugRedact = false;
+                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                        object.debugRedact = message.debugRedact;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -36899,6 +42084,7 @@
                  * Properties of a ServiceOptions.
                  * @memberof google.protobuf
                  * @interface IServiceOptions
+                 * @property {google.protobuf.IFeatureSet|null} [features] ServiceOptions features
                  * @property {boolean|null} [deprecated] ServiceOptions deprecated
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
@@ -36920,6 +42106,14 @@
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
+    
+                /**
+                 * ServiceOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype.features = null;
     
                 /**
                  * ServiceOptions deprecated.
@@ -36979,6 +42173,8 @@
                         writer = $Writer.create();
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -37020,6 +42216,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
+                        case 34: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
                         case 33: {
                                 message.deprecated = reader.bool();
                                 break;
@@ -37073,6 +42273,11 @@
                 ServiceOptions.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -37106,6 +42311,11 @@
                     if (object instanceof $root.google.protobuf.ServiceOptions)
                         return object;
                     var message = new $root.google.protobuf.ServiceOptions();
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.ServiceOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.uninterpretedOption) {
@@ -37142,11 +42352,14 @@
                         object.uninterpretedOption = [];
                     if (options.defaults) {
                         object.deprecated = false;
+                        object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -37196,6 +42409,7 @@
                  * @interface IMethodOptions
                  * @property {boolean|null} [deprecated] MethodOptions deprecated
                  * @property {google.protobuf.MethodOptions.IdempotencyLevel|null} [idempotencyLevel] MethodOptions idempotencyLevel
+                 * @property {google.protobuf.IFeatureSet|null} [features] MethodOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
@@ -37233,6 +42447,14 @@
                  * @instance
                  */
                 MethodOptions.prototype.idempotencyLevel = 0;
+    
+                /**
+                 * MethodOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype.features = null;
     
                 /**
                  * MethodOptions uninterpretedOption.
@@ -37286,6 +42508,8 @@
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.idempotencyLevel != null && Object.hasOwnProperty.call(message, "idempotencyLevel"))
                         writer.uint32(/* id 34, wireType 0 =*/272).int32(message.idempotencyLevel);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -37334,6 +42558,10 @@
                             }
                         case 34: {
                                 message.idempotencyLevel = reader.int32();
+                                break;
+                            }
+                        case 35: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -37399,6 +42627,11 @@
                         case 2:
                             break;
                         }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -37457,6 +42690,11 @@
                         message.idempotencyLevel = 2;
                         break;
                     }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.MethodOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: array expected");
@@ -37502,12 +42740,15 @@
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
+                        object.features = null;
                         object[".google.api.http"] = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
                         object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -38194,6 +43435,1268 @@
                 })();
     
                 return UninterpretedOption;
+            })();
+    
+            protobuf.FeatureSet = (function() {
+    
+                /**
+                 * Properties of a FeatureSet.
+                 * @memberof google.protobuf
+                 * @interface IFeatureSet
+                 * @property {google.protobuf.FeatureSet.FieldPresence|null} [fieldPresence] FeatureSet fieldPresence
+                 * @property {google.protobuf.FeatureSet.EnumType|null} [enumType] FeatureSet enumType
+                 * @property {google.protobuf.FeatureSet.RepeatedFieldEncoding|null} [repeatedFieldEncoding] FeatureSet repeatedFieldEncoding
+                 * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
+                 * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
+                 * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 */
+    
+                /**
+                 * Constructs a new FeatureSet.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FeatureSet.
+                 * @implements IFeatureSet
+                 * @constructor
+                 * @param {google.protobuf.IFeatureSet=} [properties] Properties to set
+                 */
+                function FeatureSet(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FeatureSet fieldPresence.
+                 * @member {google.protobuf.FeatureSet.FieldPresence} fieldPresence
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.fieldPresence = 0;
+    
+                /**
+                 * FeatureSet enumType.
+                 * @member {google.protobuf.FeatureSet.EnumType} enumType
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enumType = 0;
+    
+                /**
+                 * FeatureSet repeatedFieldEncoding.
+                 * @member {google.protobuf.FeatureSet.RepeatedFieldEncoding} repeatedFieldEncoding
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.repeatedFieldEncoding = 0;
+    
+                /**
+                 * FeatureSet utf8Validation.
+                 * @member {google.protobuf.FeatureSet.Utf8Validation} utf8Validation
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.utf8Validation = 0;
+    
+                /**
+                 * FeatureSet messageEncoding.
+                 * @member {google.protobuf.FeatureSet.MessageEncoding} messageEncoding
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.messageEncoding = 0;
+    
+                /**
+                 * FeatureSet jsonFormat.
+                 * @member {google.protobuf.FeatureSet.JsonFormat} jsonFormat
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.jsonFormat = 0;
+    
+                /**
+                 * Creates a new FeatureSet instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet=} [properties] Properties to set
+                 * @returns {google.protobuf.FeatureSet} FeatureSet instance
+                 */
+                FeatureSet.create = function create(properties) {
+                    return new FeatureSet(properties);
+                };
+    
+                /**
+                 * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet} message FeatureSet message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSet.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.fieldPresence);
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.enumType);
+                    if (message.repeatedFieldEncoding != null && Object.hasOwnProperty.call(message, "repeatedFieldEncoding"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.repeatedFieldEncoding);
+                    if (message.utf8Validation != null && Object.hasOwnProperty.call(message, "utf8Validation"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.utf8Validation);
+                    if (message.messageEncoding != null && Object.hasOwnProperty.call(message, "messageEncoding"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
+                    if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet} message FeatureSet message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSet.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FeatureSet message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSet.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.fieldPresence = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.enumType = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.repeatedFieldEncoding = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.utf8Validation = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.messageEncoding = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSet.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FeatureSet message.
+                 * @function verify
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FeatureSet.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                        switch (message.fieldPresence) {
+                        default:
+                            return "fieldPresence: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                        switch (message.enumType) {
+                        default:
+                            return "enumType: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                        switch (message.repeatedFieldEncoding) {
+                        default:
+                            return "repeatedFieldEncoding: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                        switch (message.utf8Validation) {
+                        default:
+                            return "utf8Validation: enum value expected";
+                        case 0:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                        switch (message.messageEncoding) {
+                        default:
+                            return "messageEncoding: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                        switch (message.jsonFormat) {
+                        default:
+                            return "jsonFormat: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 */
+                FeatureSet.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FeatureSet)
+                        return object;
+                    var message = new $root.google.protobuf.FeatureSet();
+                    switch (object.fieldPresence) {
+                    default:
+                        if (typeof object.fieldPresence === "number") {
+                            message.fieldPresence = object.fieldPresence;
+                            break;
+                        }
+                        break;
+                    case "FIELD_PRESENCE_UNKNOWN":
+                    case 0:
+                        message.fieldPresence = 0;
+                        break;
+                    case "EXPLICIT":
+                    case 1:
+                        message.fieldPresence = 1;
+                        break;
+                    case "IMPLICIT":
+                    case 2:
+                        message.fieldPresence = 2;
+                        break;
+                    case "LEGACY_REQUIRED":
+                    case 3:
+                        message.fieldPresence = 3;
+                        break;
+                    }
+                    switch (object.enumType) {
+                    default:
+                        if (typeof object.enumType === "number") {
+                            message.enumType = object.enumType;
+                            break;
+                        }
+                        break;
+                    case "ENUM_TYPE_UNKNOWN":
+                    case 0:
+                        message.enumType = 0;
+                        break;
+                    case "OPEN":
+                    case 1:
+                        message.enumType = 1;
+                        break;
+                    case "CLOSED":
+                    case 2:
+                        message.enumType = 2;
+                        break;
+                    }
+                    switch (object.repeatedFieldEncoding) {
+                    default:
+                        if (typeof object.repeatedFieldEncoding === "number") {
+                            message.repeatedFieldEncoding = object.repeatedFieldEncoding;
+                            break;
+                        }
+                        break;
+                    case "REPEATED_FIELD_ENCODING_UNKNOWN":
+                    case 0:
+                        message.repeatedFieldEncoding = 0;
+                        break;
+                    case "PACKED":
+                    case 1:
+                        message.repeatedFieldEncoding = 1;
+                        break;
+                    case "EXPANDED":
+                    case 2:
+                        message.repeatedFieldEncoding = 2;
+                        break;
+                    }
+                    switch (object.utf8Validation) {
+                    default:
+                        if (typeof object.utf8Validation === "number") {
+                            message.utf8Validation = object.utf8Validation;
+                            break;
+                        }
+                        break;
+                    case "UTF8_VALIDATION_UNKNOWN":
+                    case 0:
+                        message.utf8Validation = 0;
+                        break;
+                    case "VERIFY":
+                    case 2:
+                        message.utf8Validation = 2;
+                        break;
+                    case "NONE":
+                    case 3:
+                        message.utf8Validation = 3;
+                        break;
+                    }
+                    switch (object.messageEncoding) {
+                    default:
+                        if (typeof object.messageEncoding === "number") {
+                            message.messageEncoding = object.messageEncoding;
+                            break;
+                        }
+                        break;
+                    case "MESSAGE_ENCODING_UNKNOWN":
+                    case 0:
+                        message.messageEncoding = 0;
+                        break;
+                    case "LENGTH_PREFIXED":
+                    case 1:
+                        message.messageEncoding = 1;
+                        break;
+                    case "DELIMITED":
+                    case 2:
+                        message.messageEncoding = 2;
+                        break;
+                    }
+                    switch (object.jsonFormat) {
+                    default:
+                        if (typeof object.jsonFormat === "number") {
+                            message.jsonFormat = object.jsonFormat;
+                            break;
+                        }
+                        break;
+                    case "JSON_FORMAT_UNKNOWN":
+                    case 0:
+                        message.jsonFormat = 0;
+                        break;
+                    case "ALLOW":
+                    case 1:
+                        message.jsonFormat = 1;
+                        break;
+                    case "LEGACY_BEST_EFFORT":
+                    case 2:
+                        message.jsonFormat = 2;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.FeatureSet} message FeatureSet
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FeatureSet.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.fieldPresence = options.enums === String ? "FIELD_PRESENCE_UNKNOWN" : 0;
+                        object.enumType = options.enums === String ? "ENUM_TYPE_UNKNOWN" : 0;
+                        object.repeatedFieldEncoding = options.enums === String ? "REPEATED_FIELD_ENCODING_UNKNOWN" : 0;
+                        object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
+                        object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
+                        object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                    }
+                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                        object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
+                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                        object.enumType = options.enums === String ? $root.google.protobuf.FeatureSet.EnumType[message.enumType] === undefined ? message.enumType : $root.google.protobuf.FeatureSet.EnumType[message.enumType] : message.enumType;
+                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                        object.repeatedFieldEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] === undefined ? message.repeatedFieldEncoding : $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] : message.repeatedFieldEncoding;
+                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                        object.utf8Validation = options.enums === String ? $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] === undefined ? message.utf8Validation : $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] : message.utf8Validation;
+                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                        object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
+                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                        object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FeatureSet to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FeatureSet.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FeatureSet
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FeatureSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FeatureSet";
+                };
+    
+                /**
+                 * FieldPresence enum.
+                 * @name google.protobuf.FeatureSet.FieldPresence
+                 * @enum {number}
+                 * @property {number} FIELD_PRESENCE_UNKNOWN=0 FIELD_PRESENCE_UNKNOWN value
+                 * @property {number} EXPLICIT=1 EXPLICIT value
+                 * @property {number} IMPLICIT=2 IMPLICIT value
+                 * @property {number} LEGACY_REQUIRED=3 LEGACY_REQUIRED value
+                 */
+                FeatureSet.FieldPresence = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FIELD_PRESENCE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "EXPLICIT"] = 1;
+                    values[valuesById[2] = "IMPLICIT"] = 2;
+                    values[valuesById[3] = "LEGACY_REQUIRED"] = 3;
+                    return values;
+                })();
+    
+                /**
+                 * EnumType enum.
+                 * @name google.protobuf.FeatureSet.EnumType
+                 * @enum {number}
+                 * @property {number} ENUM_TYPE_UNKNOWN=0 ENUM_TYPE_UNKNOWN value
+                 * @property {number} OPEN=1 OPEN value
+                 * @property {number} CLOSED=2 CLOSED value
+                 */
+                FeatureSet.EnumType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENUM_TYPE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "OPEN"] = 1;
+                    values[valuesById[2] = "CLOSED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * RepeatedFieldEncoding enum.
+                 * @name google.protobuf.FeatureSet.RepeatedFieldEncoding
+                 * @enum {number}
+                 * @property {number} REPEATED_FIELD_ENCODING_UNKNOWN=0 REPEATED_FIELD_ENCODING_UNKNOWN value
+                 * @property {number} PACKED=1 PACKED value
+                 * @property {number} EXPANDED=2 EXPANDED value
+                 */
+                FeatureSet.RepeatedFieldEncoding = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "REPEATED_FIELD_ENCODING_UNKNOWN"] = 0;
+                    values[valuesById[1] = "PACKED"] = 1;
+                    values[valuesById[2] = "EXPANDED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Utf8Validation enum.
+                 * @name google.protobuf.FeatureSet.Utf8Validation
+                 * @enum {number}
+                 * @property {number} UTF8_VALIDATION_UNKNOWN=0 UTF8_VALIDATION_UNKNOWN value
+                 * @property {number} VERIFY=2 VERIFY value
+                 * @property {number} NONE=3 NONE value
+                 */
+                FeatureSet.Utf8Validation = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "UTF8_VALIDATION_UNKNOWN"] = 0;
+                    values[valuesById[2] = "VERIFY"] = 2;
+                    values[valuesById[3] = "NONE"] = 3;
+                    return values;
+                })();
+    
+                /**
+                 * MessageEncoding enum.
+                 * @name google.protobuf.FeatureSet.MessageEncoding
+                 * @enum {number}
+                 * @property {number} MESSAGE_ENCODING_UNKNOWN=0 MESSAGE_ENCODING_UNKNOWN value
+                 * @property {number} LENGTH_PREFIXED=1 LENGTH_PREFIXED value
+                 * @property {number} DELIMITED=2 DELIMITED value
+                 */
+                FeatureSet.MessageEncoding = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "MESSAGE_ENCODING_UNKNOWN"] = 0;
+                    values[valuesById[1] = "LENGTH_PREFIXED"] = 1;
+                    values[valuesById[2] = "DELIMITED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * JsonFormat enum.
+                 * @name google.protobuf.FeatureSet.JsonFormat
+                 * @enum {number}
+                 * @property {number} JSON_FORMAT_UNKNOWN=0 JSON_FORMAT_UNKNOWN value
+                 * @property {number} ALLOW=1 ALLOW value
+                 * @property {number} LEGACY_BEST_EFFORT=2 LEGACY_BEST_EFFORT value
+                 */
+                FeatureSet.JsonFormat = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "JSON_FORMAT_UNKNOWN"] = 0;
+                    values[valuesById[1] = "ALLOW"] = 1;
+                    values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
+                    return values;
+                })();
+    
+                return FeatureSet;
+            })();
+    
+            protobuf.FeatureSetDefaults = (function() {
+    
+                /**
+                 * Properties of a FeatureSetDefaults.
+                 * @memberof google.protobuf
+                 * @interface IFeatureSetDefaults
+                 * @property {Array.<google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault>|null} [defaults] FeatureSetDefaults defaults
+                 * @property {google.protobuf.Edition|null} [minimumEdition] FeatureSetDefaults minimumEdition
+                 * @property {google.protobuf.Edition|null} [maximumEdition] FeatureSetDefaults maximumEdition
+                 */
+    
+                /**
+                 * Constructs a new FeatureSetDefaults.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FeatureSetDefaults.
+                 * @implements IFeatureSetDefaults
+                 * @constructor
+                 * @param {google.protobuf.IFeatureSetDefaults=} [properties] Properties to set
+                 */
+                function FeatureSetDefaults(properties) {
+                    this.defaults = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FeatureSetDefaults defaults.
+                 * @member {Array.<google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault>} defaults
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.defaults = $util.emptyArray;
+    
+                /**
+                 * FeatureSetDefaults minimumEdition.
+                 * @member {google.protobuf.Edition} minimumEdition
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.minimumEdition = 0;
+    
+                /**
+                 * FeatureSetDefaults maximumEdition.
+                 * @member {google.protobuf.Edition} maximumEdition
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.maximumEdition = 0;
+    
+                /**
+                 * Creates a new FeatureSetDefaults instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults=} [properties] Properties to set
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults instance
+                 */
+                FeatureSetDefaults.create = function create(properties) {
+                    return new FeatureSetDefaults(properties);
+                };
+    
+                /**
+                 * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults} message FeatureSetDefaults message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSetDefaults.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.defaults != null && message.defaults.length)
+                        for (var i = 0; i < message.defaults.length; ++i)
+                            $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.encode(message.defaults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.minimumEdition != null && Object.hasOwnProperty.call(message, "minimumEdition"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.minimumEdition);
+                    if (message.maximumEdition != null && Object.hasOwnProperty.call(message, "maximumEdition"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.maximumEdition);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults} message FeatureSetDefaults message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSetDefaults.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSetDefaults.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.defaults && message.defaults.length))
+                                    message.defaults = [];
+                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                message.minimumEdition = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.maximumEdition = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSetDefaults.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FeatureSetDefaults message.
+                 * @function verify
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FeatureSetDefaults.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.defaults != null && message.hasOwnProperty("defaults")) {
+                        if (!Array.isArray(message.defaults))
+                            return "defaults: array expected";
+                        for (var i = 0; i < message.defaults.length; ++i) {
+                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i]);
+                            if (error)
+                                return "defaults." + error;
+                        }
+                    }
+                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                        switch (message.minimumEdition) {
+                        default:
+                            return "minimumEdition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
+                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                        switch (message.maximumEdition) {
+                        default:
+                            return "maximumEdition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 */
+                FeatureSetDefaults.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FeatureSetDefaults)
+                        return object;
+                    var message = new $root.google.protobuf.FeatureSetDefaults();
+                    if (object.defaults) {
+                        if (!Array.isArray(object.defaults))
+                            throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: array expected");
+                        message.defaults = [];
+                        for (var i = 0; i < object.defaults.length; ++i) {
+                            if (typeof object.defaults[i] !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: object expected");
+                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i]);
+                        }
+                    }
+                    switch (object.minimumEdition) {
+                    default:
+                        if (typeof object.minimumEdition === "number") {
+                            message.minimumEdition = object.minimumEdition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.minimumEdition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.minimumEdition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.minimumEdition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.minimumEdition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.minimumEdition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.minimumEdition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.minimumEdition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.minimumEdition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.minimumEdition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.minimumEdition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.minimumEdition = 2147483647;
+                        break;
+                    }
+                    switch (object.maximumEdition) {
+                    default:
+                        if (typeof object.maximumEdition === "number") {
+                            message.maximumEdition = object.maximumEdition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.maximumEdition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.maximumEdition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.maximumEdition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.maximumEdition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.maximumEdition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.maximumEdition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.maximumEdition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.maximumEdition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.maximumEdition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.maximumEdition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.maximumEdition = 2147483647;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.FeatureSetDefaults} message FeatureSetDefaults
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FeatureSetDefaults.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.defaults = [];
+                    if (options.defaults) {
+                        object.minimumEdition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        object.maximumEdition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                    }
+                    if (message.defaults && message.defaults.length) {
+                        object.defaults = [];
+                        for (var j = 0; j < message.defaults.length; ++j)
+                            object.defaults[j] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject(message.defaults[j], options);
+                    }
+                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                        object.minimumEdition = options.enums === String ? $root.google.protobuf.Edition[message.minimumEdition] === undefined ? message.minimumEdition : $root.google.protobuf.Edition[message.minimumEdition] : message.minimumEdition;
+                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                        object.maximumEdition = options.enums === String ? $root.google.protobuf.Edition[message.maximumEdition] === undefined ? message.maximumEdition : $root.google.protobuf.Edition[message.maximumEdition] : message.maximumEdition;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FeatureSetDefaults to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FeatureSetDefaults.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FeatureSetDefaults
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FeatureSetDefaults.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FeatureSetDefaults";
+                };
+    
+                FeatureSetDefaults.FeatureSetEditionDefault = (function() {
+    
+                    /**
+                     * Properties of a FeatureSetEditionDefault.
+                     * @memberof google.protobuf.FeatureSetDefaults
+                     * @interface IFeatureSetEditionDefault
+                     * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
+                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSetEditionDefault.
+                     * @memberof google.protobuf.FeatureSetDefaults
+                     * @classdesc Represents a FeatureSetEditionDefault.
+                     * @implements IFeatureSetEditionDefault
+                     * @constructor
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault=} [properties] Properties to set
+                     */
+                    function FeatureSetEditionDefault(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSetEditionDefault edition.
+                     * @member {google.protobuf.Edition} edition
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.edition = 0;
+    
+                    /**
+                     * FeatureSetEditionDefault features.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.features = null;
+    
+                    /**
+                     * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault instance
+                     */
+                    FeatureSetEditionDefault.create = function create(properties) {
+                        return new FeatureSetEditionDefault(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault} message FeatureSetEditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSetEditionDefault.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault} message FeatureSetEditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSetEditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 3: {
+                                    message.edition = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSetEditionDefault.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSetEditionDefault message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSetEditionDefault.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            switch (message.edition) {
+                            default:
+                                return "edition: enum value expected";
+                            case 0:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.features != null && message.hasOwnProperty("features")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                            if (error)
+                                return "features." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     */
+                    FeatureSetEditionDefault.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault)
+                            return object;
+                        var message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
+                        switch (object.edition) {
+                        default:
+                            if (typeof object.edition === "number") {
+                                message.edition = object.edition;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.edition = 0;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.edition = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.edition = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.edition = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.edition = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.edition = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.edition = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.edition = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.edition = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.edition = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.edition = 2147483647;
+                            break;
+                        }
+                        if (object.features != null) {
+                            if (typeof object.features !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
+                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} message FeatureSetEditionDefault
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSetEditionDefault.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.features = null;
+                            object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.features != null && message.hasOwnProperty("features"))
+                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSetEditionDefault to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSetEditionDefault.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSetEditionDefault
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSetEditionDefault.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault";
+                    };
+    
+                    return FeatureSetEditionDefault;
+                })();
+    
+                return FeatureSetDefaults;
             })();
     
             protobuf.SourceCodeInfo = (function() {

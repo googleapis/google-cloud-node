@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,10 +30,10 @@ function main(name) {
    */
   /**
    *  Required. Name of the effective custom module to get. Its format is
-   *  "organizations/{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}",
-   *  "folders/{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}",
+   *  `organizations/{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}`,
+   *  `folders/{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}`,
    *  or
-   *  "projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}"
+   *  `projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{customModule}`
    */
   // const name = 'abc123'
 

@@ -1,5 +1,48 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.5.0...storage-transfer-v3.6.0) (2025-01-23)
+
+
+### Features
+
+* [Many APIs] Reasoning Engine v1 GAPIC release ([#5965](https://github.com/googleapis/google-cloud-node/issues/5965)) ([050db4d](https://github.com/googleapis/google-cloud-node/commit/050db4d28f9a203ce2d41db21eb74b3ecb6b4a16))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.4.0...storage-transfer-v3.5.0) (2024-12-18)
+
+
+### Features
+
+* [storagetransfer] support cross-bucket replication ([#5891](https://github.com/googleapis/google-cloud-node/issues/5891)) ([ad37361](https://github.com/googleapis/google-cloud-node/commit/ad373612766920e82241e0ef609abc27be4ab9bb))
+
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.3.0...storage-transfer-v3.4.0) (2024-08-19)
+
+
+### Features
+
+* [storagetransfer] add HDFS configuration ([#5619](https://github.com/googleapis/google-cloud-node/issues/5619)) ([7500af4](https://github.com/googleapis/google-cloud-node/commit/7500af4746970169ea3edfbe6c8782e3bbf8c375))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.2.0...storage-transfer-v3.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.1.0...storage-transfer-v3.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5193](https://github.com/googleapis/google-cloud-node/issues/5193)) ([333b409](https://github.com/googleapis/google-cloud-node/commit/333b40951a255ecfab249bd6e7ace5877270ec85))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.0.1...storage-transfer-v3.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5029](https://github.com/googleapis/google-cloud-node/issues/5029)) ([09e59ad](https://github.com/googleapis/google-cloud-node/commit/09e59ad6e34001a33d01894ccd5a0643f1a84883))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.0.0...storage-transfer-v3.0.1) (2023-09-06)
 
 

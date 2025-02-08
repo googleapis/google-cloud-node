@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@
 const networkservices = require('@google-cloud/networkservices');
 
 function main() {
+  const depServiceClient = new networkservices.DepServiceClient();
   const networkServicesClient = new networkservices.NetworkServicesClient();
 }
 

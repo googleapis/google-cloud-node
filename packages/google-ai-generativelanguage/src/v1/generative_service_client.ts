@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import type {
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/generative_service_client_config.json`.
@@ -49,6 +50,8 @@ export class GenerativeServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -106,8 +109,27 @@ export class GenerativeServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof GenerativeServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'generativelanguage.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -122,7 +144,7 @@ export class GenerativeServiceClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -147,16 +169,16 @@ export class GenerativeServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -185,7 +207,7 @@ export class GenerativeServiceClient {
       streamGenerateContent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ true
+        !!opts.gaxServerStreamingRetries
       ),
     };
 
@@ -252,7 +274,7 @@ export class GenerativeServiceClient {
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough();
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -289,19 +311,50 @@ export class GenerativeServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'generativelanguage.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'generativelanguage.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -341,21 +394,27 @@ export class GenerativeServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Generates a response from the model given an input
-   * `GenerateContentRequest`.
+   * Generates a model response given an input `GenerateContentRequest`.
+   * Refer to the [text generation
+   * guide](https://ai.google.dev/gemini-api/docs/text-generation) for detailed
+   * usage information. Input capabilities differ between models, including
+   * tuned models. Refer to the [model
+   * guide](https://ai.google.dev/gemini-api/docs/models/gemini) and [tuning
+   * guide](https://ai.google.dev/gemini-api/docs/model-tuning) for details.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.model
    *   Required. The name of the `Model` to use for generating the completion.
    *
-   *   Format: `name=models/{model}`.
+   *   Format: `models/{model}`.
    * @param {number[]} request.contents
    *   Required. The content of the current conversation with the model.
    *
-   *   For single-turn queries, this is a single instance. For multi-turn queries,
-   *   this is a repeated field that contains conversation history + latest
-   *   request.
+   *   For single-turn queries, this is a single instance. For multi-turn queries
+   *   like [chat](https://ai.google.dev/gemini-api/docs/text-generation#chat),
+   *   this is a repeated field that contains the conversation history and the
+   *   latest request.
    * @param {number[]} [request.safetySettings]
    *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
    *   content.
@@ -369,7 +428,11 @@ export class GenerativeServiceClient {
    *   `SafetyCategory` provided in the list, the API will use the default safety
    *   setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
    *   HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
-   *   HARM_CATEGORY_HARASSMENT are supported.
+   *   HARM_CATEGORY_HARASSMENT, HARM_CATEGORY_CIVIC_INTEGRITY are supported.
+   *   Refer to the [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
+   *   for detailed information on available safety settings. Also refer to the
+   *   [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
+   *   learn how to incorporate safety considerations in your AI applications.
    * @param {google.ai.generativelanguage.v1.GenerationConfig} [request.generationConfig]
    *   Optional. Configuration options for model generation and outputs.
    * @param {object} [options]
@@ -462,7 +525,9 @@ export class GenerativeServiceClient {
     return this.innerApiCalls.generateContent(request, options, callback);
   }
   /**
-   * Generates an embedding from the model given an input `Content`.
+   * Generates a text embedding vector from the input `Content` using the
+   * specified [Gemini Embedding
+   * model](https://ai.google.dev/gemini-api/docs/models/gemini#text-embedding).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -485,6 +550,11 @@ export class GenerativeServiceClient {
    *
    *   Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality
    *   embeddings for retrieval.
+   * @param {number} [request.outputDimensionality]
+   *   Optional. Optional reduced dimension for the output embedding. If set,
+   *   excessive values in the output embedding are truncated from the end.
+   *   Supported by newer models since 2024 only. You cannot set this value if
+   *   using the earlier model (`models/embedding-001`).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -569,8 +639,9 @@ export class GenerativeServiceClient {
     return this.innerApiCalls.embedContent(request, options, callback);
   }
   /**
-   * Generates multiple embeddings from the model given input text in a
-   * synchronous call.
+   * Generates multiple embedding vectors from the input `Content` which
+   * consists of a batch of strings represented as `EmbedContentRequest`
+   * objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -674,7 +745,9 @@ export class GenerativeServiceClient {
     return this.innerApiCalls.batchEmbedContents(request, options, callback);
   }
   /**
-   * Runs a model's tokenizer on input content and returns the token count.
+   * Runs a model's tokenizer on input `Content` and returns the token count.
+   * Refer to the [tokens guide](https://ai.google.dev/gemini-api/docs/tokens)
+   * to learn more about tokens.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -685,8 +758,18 @@ export class GenerativeServiceClient {
    *   This name should match a model name returned by the `ListModels` method.
    *
    *   Format: `models/{model}`
-   * @param {number[]} request.contents
-   *   Required. The input given to the model as a prompt.
+   * @param {number[]} [request.contents]
+   *   Optional. The input given to the model as a prompt. This field is ignored
+   *   when `generate_content_request` is set.
+   * @param {google.ai.generativelanguage.v1.GenerateContentRequest} [request.generateContentRequest]
+   *   Optional. The overall input given to the `Model`. This includes the prompt
+   *   as well as other model steering information like [system
+   *   instructions](https://ai.google.dev/gemini-api/docs/system-instructions),
+   *   and/or function declarations for [function
+   *   calling](https://ai.google.dev/gemini-api/docs/function-calling).
+   *   `Model`s/`Content`s and `generate_content_request`s are mutually
+   *   exclusive. You can either send `Model` + `Content`s or a
+   *   `generate_content_request`, but never both.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -772,21 +855,23 @@ export class GenerativeServiceClient {
   }
 
   /**
-   * Generates a streamed response from the model given an input
-   * `GenerateContentRequest`.
+   * Generates a [streamed
+   * response](https://ai.google.dev/gemini-api/docs/text-generation?lang=python#generate-a-text-stream)
+   * from the model given an input `GenerateContentRequest`.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.model
    *   Required. The name of the `Model` to use for generating the completion.
    *
-   *   Format: `name=models/{model}`.
+   *   Format: `models/{model}`.
    * @param {number[]} request.contents
    *   Required. The content of the current conversation with the model.
    *
-   *   For single-turn queries, this is a single instance. For multi-turn queries,
-   *   this is a repeated field that contains conversation history + latest
-   *   request.
+   *   For single-turn queries, this is a single instance. For multi-turn queries
+   *   like [chat](https://ai.google.dev/gemini-api/docs/text-generation#chat),
+   *   this is a repeated field that contains the conversation history and the
+   *   latest request.
    * @param {number[]} [request.safetySettings]
    *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
    *   content.
@@ -800,7 +885,11 @@ export class GenerativeServiceClient {
    *   `SafetyCategory` provided in the list, the API will use the default safety
    *   setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
    *   HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
-   *   HARM_CATEGORY_HARASSMENT are supported.
+   *   HARM_CATEGORY_HARASSMENT, HARM_CATEGORY_CIVIC_INTEGRITY are supported.
+   *   Refer to the [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
+   *   for detailed information on available safety settings. Also refer to the
+   *   [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
+   *   learn how to incorporate safety considerations in your AI applications.
    * @param {google.ai.generativelanguage.v1.GenerationConfig} [request.generationConfig]
    *   Optional. Configuration options for model generation and outputs.
    * @param {object} [options]

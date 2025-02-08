@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -128,6 +128,12 @@ message IndexEndpoint {
   // set, this IndexEndpoint and all sub-resources of this IndexEndpoint will be
   // secured by this key.
   EncryptionSpec encryption_spec = 15 [(google.api.field_behavior) = IMMUTABLE];
+
+  // Output only. Reserved for future use.
+  bool satisfies_pzs = 17 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Reserved for future use.
+  bool satisfies_pzi = 18 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // A deployment of an Index. IndexEndpoints contain one or more DeployedIndexes.
@@ -254,6 +260,12 @@ message DeployedIndex {
   //
   // Note: we only support up to 5 deployment groups(not including 'default').
   string deployment_group = 11 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If set for PSC deployed index, PSC connection will be
+  // automatically created after deployment is done and the endpoint information
+  // is populated in private_endpoints.psc_automated_endpoints.
+  repeated PSCAutomationConfig psc_automation_configs = 19
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Used to set up the auth on the DeployedIndex's private endpoint.
@@ -291,4 +303,9 @@ message IndexPrivateEndpoints {
   // Output only. The name of the service attachment resource. Populated if
   // private service connect is enabled.
   string service_attachment = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. PscAutomatedEndpoints is populated if private service connect
+  // is enabled if PscAutomatedConfig is set.
+  repeated PscAutomatedEndpoints psc_automated_endpoints = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }

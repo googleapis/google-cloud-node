@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import "google/api/resource.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.Cx.V3Beta1";
 option go_package = "cloud.google.com/go/dialogflow/cx/apiv3beta1/cxpb;cxpb";
 option java_multiple_files = true;
@@ -105,8 +104,8 @@ service SecuritySettingsService {
 // [SecuritySettingsService.GetSecuritySettings][google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService.GetSecuritySettings].
 message GetSecuritySettingsRequest {
   // Required. Resource name of the settings.
-  // Format: `projects/<Project ID>/locations/<Location
-  // ID>/securitySettings/<security settings ID>`.
+  // Format:
+  // `projects/<ProjectID>/locations/<LocationID>/securitySettings/<securitysettingsID>`.
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -132,7 +131,7 @@ message UpdateSecuritySettingsRequest {
 // The request message for [SecuritySettings.ListSecuritySettings][].
 message ListSecuritySettingsRequest {
   // Required. The location to list all security settings for.
-  // Format: `projects/<Project ID>/locations/<Location ID>`.
+  // Format: `projects/<ProjectID>/locations/<LocationID>`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -162,7 +161,7 @@ message ListSecuritySettingsResponse {
 message CreateSecuritySettingsRequest {
   // Required. The location to create an
   // [SecuritySettings][google.cloud.dialogflow.cx.v3beta1.SecuritySettings]
-  // for. Format: `projects/<Project ID>/locations/<Location ID>`.
+  // for. Format: `projects/<ProjectID>/locations/<LocationID>`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -179,8 +178,8 @@ message CreateSecuritySettingsRequest {
 message DeleteSecuritySettingsRequest {
   // Required. The name of the
   // [SecuritySettings][google.cloud.dialogflow.cx.v3beta1.SecuritySettings] to
-  // delete. Format: `projects/<Project ID>/locations/<Location
-  // ID>/securitySettings/<Security Settings ID>`.
+  // delete. Format:
+  // `projects/<ProjectID>/locations/<LocationID>/securitySettings/<SecuritySettingsID>`.
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -223,7 +222,8 @@ message SecuritySettings {
     // Retains the persisted data with Dialogflow's internal default 365d TTLs.
     RETENTION_STRATEGY_UNSPECIFIED = 0;
 
-    // Removes data when the conversation ends. If there is no [Conversation][]
+    // Removes data when the conversation ends. If there is no
+    // [Conversation][google.cloud.dialogflow.cx.v3beta1.Conversation]
     // explicitly established, a default conversation ends when the
     // corresponding Dialogflow session ends.
     REMOVE_AFTER_CONVERSATION = 1;
@@ -268,11 +268,17 @@ message SecuritySettings {
     string audio_export_pattern = 2;
 
     // Enable audio redaction if it is true.
+    // Note that this only redacts end-user audio data;
+    // Synthesised audio from the virtual agent is not redacted.
     bool enable_audio_redaction = 3;
 
     // File format for exported audio file. Currently only in telephony
     // recordings.
     AudioFormat audio_format = 4;
+
+    // Whether to store TTS audio. By default, TTS audio from the virtual agent
+    // is not exported.
+    bool store_tts_audio = 6;
   }
 
   // Settings for exporting conversations to
@@ -288,8 +294,8 @@ message SecuritySettings {
   // [SecuritySettingsService.UpdateSecuritySettings][google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService.UpdateSecuritySettings]
   // method.
   // [SecuritySettingsService.CreateSecuritySettings][google.cloud.dialogflow.cx.v3beta1.SecuritySettingsService.CreateSecuritySettings]
-  // populates the name automatically. Format: `projects/<Project
-  // ID>/locations/<Location ID>/securitySettings/<Security Settings ID>`.
+  // populates the name automatically. Format:
+  // `projects/<ProjectID>/locations/<LocationID>/securitySettings/<SecuritySettingsID>`.
   string name = 1;
 
   // Required. The human-readable name of the security settings, unique within
@@ -315,9 +321,9 @@ message SecuritySettings {
   // If empty, we use the default DLP inspect config.
   //
   // The template name will have one of the following formats:
-  // `projects/<Project ID>/locations/<Location ID>/inspectTemplates/<Template
-  // ID>` OR `organizations/<Organization ID>/locations/<Location
-  // ID>/inspectTemplates/<Template ID>`
+  // `projects/<ProjectID>/locations/<LocationID>/inspectTemplates/<TemplateID>`
+  // OR
+  // `organizations/<OrganizationID>/locations/<LocationID>/inspectTemplates/<TemplateID>`
   //
   // Note: `inspect_template` must be located in the same region as the
   // `SecuritySettings`.
@@ -336,9 +342,9 @@ message SecuritySettings {
   // If empty, Dialogflow replaces sensitive info with `[redacted]` text.
   //
   // The template name will have one of the following formats:
-  // `projects/<Project ID>/locations/<Location
-  // ID>/deidentifyTemplates/<Template ID>` OR `organizations/<Organization
-  // ID>/locations/<Location ID>/deidentifyTemplates/<Template ID>`
+  // `projects/<ProjectID>/locations/<LocationID>/deidentifyTemplates/<TemplateID>`
+  // OR
+  // `organizations/<OrganizationID>/locations/<LocationID>/deidentifyTemplates/<TemplateID>`
   //
   // Note: `deidentify_template` must be located in the same region as the
   // `SecuritySettings`.
@@ -357,6 +363,9 @@ message SecuritySettings {
     // for Agent Assist traffic), higher value will be ignored and use default.
     // Setting a value higher than that has no effect. A missing value or
     // setting to 0 also means we use default TTL.
+    // When data retention configuration is changed, it only applies to the data
+    // created after the change; the TTL of existing data created before the
+    // change stays intact.
     int32 retention_window_days = 6;
 
     // Specifies the retention behavior defined by

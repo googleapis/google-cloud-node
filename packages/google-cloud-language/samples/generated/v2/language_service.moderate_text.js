@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,6 +32,10 @@ function main(document) {
    *  Required. Input document.
    */
   // const document = {}
+  /**
+   *  Optional. The model version to use for ModerateText.
+   */
+  // const modelVersion = {}
 
   // Imports the Language library
   const {LanguageServiceClient} = require('@google-cloud/language').v2;

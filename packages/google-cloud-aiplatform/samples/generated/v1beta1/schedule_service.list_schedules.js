@@ -105,7 +105,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listSchedulesAsync(request);
+    const iterable = aiplatformClient.listSchedulesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

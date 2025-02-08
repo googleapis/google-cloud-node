@@ -60,11 +60,11 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  A page token, received from a previous
-   *  FeatureGroupAdminService.ListFeatureGroups   call.
-   *  Provide this to retrieve the subsequent page.
+   *  FeatureRegistryService.ListFeatureGroups google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatureGroups 
+   *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  FeatureGroupAdminService.ListFeatureGroups   must
-   *  match the call that provided the page token.
+   *  FeatureRegistryService.ListFeatureGroups google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatureGroups 
+   *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**
@@ -89,7 +89,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listFeatureGroupsAsync(request);
+    const iterable = aiplatformClient.listFeatureGroupsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

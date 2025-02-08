@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ function main(conversation) {
    */
   // const conversation = 'abc123'
   /**
-   *  The name of the latest conversation message used as context for
+   *  Optional. The name of the latest conversation message used as context for
    *  compiling suggestion. If empty, the latest message of the conversation will
    *  be used.
    *  Format: `projects/<Project ID>/locations/<Location
@@ -43,13 +43,14 @@ function main(conversation) {
    */
   // const latestMessage = 'abc123'
   /**
-   *  Max number of messages prior to and including
+   *  Optional. Max number of messages prior to and including
    *  latest_message  to use as context when compiling the
    *  suggestion. By default 500 and at most 1000.
    */
   // const contextSize = 1234
   /**
-   *  Parameters for a human assist query. Only used for POC/demo purpose.
+   *  Optional. Parameters for a human assist query. Only used for POC/demo
+   *  purpose.
    */
   // const assistQueryParams = {}
 

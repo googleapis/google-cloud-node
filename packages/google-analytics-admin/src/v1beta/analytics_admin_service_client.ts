@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1beta/analytics_admin_service_client_config.json`.
@@ -38,7 +39,7 @@ import * as gapicConfig from './analytics_admin_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service Interface for the Analytics Admin API (GA4).
+ *  Service Interface for the Google Analytics Admin API.
  * @class
  * @memberof v1beta
  */
@@ -50,6 +51,8 @@ export class AnalyticsAdminServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -108,8 +111,27 @@ export class AnalyticsAdminServiceClient {
     // Ensure that options include all the required fields.
     const staticMembers = this
       .constructor as typeof AnalyticsAdminServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'analyticsadmin.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -124,7 +146,7 @@ export class AnalyticsAdminServiceClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -149,16 +171,16 @@ export class AnalyticsAdminServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -207,6 +229,9 @@ export class AnalyticsAdminServiceClient {
       ),
       googleAdsLinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/googleAdsLinks/{google_ads_link}'
+      ),
+      keyEventPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/keyEvents/{key_event}'
       ),
       measurementProtocolSecretPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/dataStreams/{data_stream}/measurementProtocolSecrets/{measurement_protocol_secret}'
@@ -259,6 +284,11 @@ export class AnalyticsAdminServiceClient {
         'pageToken',
         'nextPageToken',
         'conversionEvents'
+      ),
+      listKeyEvents: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'keyEvents'
       ),
       listCustomDimensions: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -359,6 +389,11 @@ export class AnalyticsAdminServiceClient {
       'getConversionEvent',
       'deleteConversionEvent',
       'listConversionEvents',
+      'createKeyEvent',
+      'updateKeyEvent',
+      'getKeyEvent',
+      'deleteKeyEvent',
+      'listKeyEvents',
       'createCustomDimension',
       'updateCustomDimension',
       'listCustomDimensions',
@@ -409,19 +444,50 @@ export class AnalyticsAdminServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'analyticsadmin.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'analyticsadmin.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -563,7 +629,7 @@ export class AnalyticsAdminServiceClient {
    *
    * If the accounts are not restored before the expiration time, the account
    * and all child resources (eg: Properties, GoogleAdsLinks, Streams,
-   * UserLinks) will be permanently purged.
+   * AccessBindings) will be permanently purged.
    * https://support.google.com/analytics/answer/6154772
    *
    * Returns an error if the target is not found.
@@ -853,7 +919,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   /**
-   * Lookup for a single "GA4" Property.
+   * Lookup for a single GA Property.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -945,7 +1011,8 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.getProperty(request, options, callback);
   }
   /**
-   * Creates an "GA4" property with the specified location and attributes.
+   * Creates a Google Analytics property with the specified location and
+   * attributes.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1038,11 +1105,11 @@ export class AnalyticsAdminServiceClient {
    * However, they can be restored using the Trash Can UI.
    *
    * If the properties are not restored before the expiration time, the Property
-   * and all child resources (eg: GoogleAdsLinks, Streams, UserLinks)
+   * and all child resources (eg: GoogleAdsLinks, Streams, AccessBindings)
    * will be permanently purged.
    * https://support.google.com/analytics/answer/6154772
    *
-   * Returns an error if the target is not found, or is not a GA4 Property.
+   * Returns an error if the target is not found.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1239,7 +1306,8 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Format: properties/{property_id}
-   *   Example: properties/1234
+   *
+   *   Example: `properties/1234`
    * @param {google.analytics.admin.v1beta.FirebaseLink} request.firebaseLink
    *   Required. The Firebase link to create.
    * @param {object} [options]
@@ -1338,7 +1406,8 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Format: properties/{property_id}/firebaseLinks/{firebase_link_id}
-   *   Example: properties/1234/firebaseLinks/5678
+   *
+   *   Example: `properties/1234/firebaseLinks/5678`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1732,7 +1801,8 @@ export class AnalyticsAdminServiceClient {
    * @param {string} request.name
    *   Required. The name of the settings to lookup.
    *   Format: accounts/{account}/dataSharingSettings
-   *   Example: "accounts/1000/dataSharingSettings"
+   *
+   *   Example: `accounts/1000/dataSharingSettings`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1827,7 +1897,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   /**
-   * Lookup for a single "GA4" MeasurementProtocolSecret.
+   * Lookup for a single MeasurementProtocolSecret.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2351,6 +2421,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   /**
+   * Deprecated: Use `CreateKeyEvent` instead.
    * Creates a conversion event with the specified attributes.
    *
    * @param {Object} request
@@ -2368,6 +2439,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/analytics_admin_service.create_conversion_event.js</caption>
    * region_tag:analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateConversionEvent_async
+   * @deprecated CreateConversionEvent is deprecated and may be removed in a future version.
    */
   createConversionEvent(
     request?: protos.google.analytics.admin.v1beta.ICreateConversionEventRequest,
@@ -2447,9 +2519,15 @@ export class AnalyticsAdminServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$AnalyticsAdminService-$CreateConversionEvent',
+      'CreateConversionEvent is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.createConversionEvent(request, options, callback);
   }
   /**
+   * Deprecated: Use `UpdateKeyEvent` instead.
    * Updates a conversion event with the specified attributes.
    *
    * @param {Object} request
@@ -2470,6 +2548,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/analytics_admin_service.update_conversion_event.js</caption>
    * region_tag:analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateConversionEvent_async
+   * @deprecated UpdateConversionEvent is deprecated and may be removed in a future version.
    */
   updateConversionEvent(
     request?: protos.google.analytics.admin.v1beta.IUpdateConversionEventRequest,
@@ -2549,9 +2628,15 @@ export class AnalyticsAdminServiceClient {
         'conversion_event.name': request.conversionEvent!.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$AnalyticsAdminService-$UpdateConversionEvent',
+      'UpdateConversionEvent is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.updateConversionEvent(request, options, callback);
   }
   /**
+   * Deprecated: Use `GetKeyEvent` instead.
    * Retrieve a single conversion event.
    *
    * @param {Object} request
@@ -2568,6 +2653,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/analytics_admin_service.get_conversion_event.js</caption>
    * region_tag:analyticsadmin_v1beta_generated_AnalyticsAdminService_GetConversionEvent_async
+   * @deprecated GetConversionEvent is deprecated and may be removed in a future version.
    */
   getConversionEvent(
     request?: protos.google.analytics.admin.v1beta.IGetConversionEventRequest,
@@ -2647,9 +2733,15 @@ export class AnalyticsAdminServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$AnalyticsAdminService-$GetConversionEvent',
+      'GetConversionEvent is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.getConversionEvent(request, options, callback);
   }
   /**
+   * Deprecated: Use `DeleteKeyEvent` instead.
    * Deletes a conversion event in a property.
    *
    * @param {Object} request
@@ -2666,6 +2758,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/analytics_admin_service.delete_conversion_event.js</caption>
    * region_tag:analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteConversionEvent_async
+   * @deprecated DeleteConversionEvent is deprecated and may be removed in a future version.
    */
   deleteConversionEvent(
     request?: protos.google.analytics.admin.v1beta.IDeleteConversionEventRequest,
@@ -2745,7 +2838,385 @@ export class AnalyticsAdminServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$AnalyticsAdminService-$DeleteConversionEvent',
+      'DeleteConversionEvent is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.deleteConversionEvent(request, options, callback);
+  }
+  /**
+   * Creates a Key Event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1beta.KeyEvent} request.keyEvent
+   *   Required. The Key Event to create.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent property where this Key Event
+   *   will be created. Format: properties/123
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1beta.KeyEvent|KeyEvent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/analytics_admin_service.create_key_event.js</caption>
+   * region_tag:analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateKeyEvent_async
+   */
+  createKeyEvent(
+    request?: protos.google.analytics.admin.v1beta.ICreateKeyEventRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      protos.google.analytics.admin.v1beta.ICreateKeyEventRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createKeyEvent(
+    request: protos.google.analytics.admin.v1beta.ICreateKeyEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      | protos.google.analytics.admin.v1beta.ICreateKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createKeyEvent(
+    request: protos.google.analytics.admin.v1beta.ICreateKeyEventRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      | protos.google.analytics.admin.v1beta.ICreateKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createKeyEvent(
+    request?: protos.google.analytics.admin.v1beta.ICreateKeyEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1beta.IKeyEvent,
+          | protos.google.analytics.admin.v1beta.ICreateKeyEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      | protos.google.analytics.admin.v1beta.ICreateKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      protos.google.analytics.admin.v1beta.ICreateKeyEventRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createKeyEvent(request, options, callback);
+  }
+  /**
+   * Updates a Key Event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1beta.KeyEvent} request.keyEvent
+   *   Required. The Key Event to update.
+   *   The `name` field is used to identify the settings to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1beta.KeyEvent|KeyEvent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/analytics_admin_service.update_key_event.js</caption>
+   * region_tag:analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateKeyEvent_async
+   */
+  updateKeyEvent(
+    request?: protos.google.analytics.admin.v1beta.IUpdateKeyEventRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      protos.google.analytics.admin.v1beta.IUpdateKeyEventRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateKeyEvent(
+    request: protos.google.analytics.admin.v1beta.IUpdateKeyEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      | protos.google.analytics.admin.v1beta.IUpdateKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateKeyEvent(
+    request: protos.google.analytics.admin.v1beta.IUpdateKeyEventRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      | protos.google.analytics.admin.v1beta.IUpdateKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateKeyEvent(
+    request?: protos.google.analytics.admin.v1beta.IUpdateKeyEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1beta.IKeyEvent,
+          | protos.google.analytics.admin.v1beta.IUpdateKeyEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      | protos.google.analytics.admin.v1beta.IUpdateKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      protos.google.analytics.admin.v1beta.IUpdateKeyEventRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'key_event.name': request.keyEvent!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateKeyEvent(request, options, callback);
+  }
+  /**
+   * Retrieve a single Key Event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Key Event to retrieve.
+   *   Format: properties/{property}/keyEvents/{key_event}
+   *   Example: "properties/123/keyEvents/456"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1beta.KeyEvent|KeyEvent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/analytics_admin_service.get_key_event.js</caption>
+   * region_tag:analyticsadmin_v1beta_generated_AnalyticsAdminService_GetKeyEvent_async
+   */
+  getKeyEvent(
+    request?: protos.google.analytics.admin.v1beta.IGetKeyEventRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      protos.google.analytics.admin.v1beta.IGetKeyEventRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getKeyEvent(
+    request: protos.google.analytics.admin.v1beta.IGetKeyEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      | protos.google.analytics.admin.v1beta.IGetKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getKeyEvent(
+    request: protos.google.analytics.admin.v1beta.IGetKeyEventRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      | protos.google.analytics.admin.v1beta.IGetKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getKeyEvent(
+    request?: protos.google.analytics.admin.v1beta.IGetKeyEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1beta.IKeyEvent,
+          | protos.google.analytics.admin.v1beta.IGetKeyEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      | protos.google.analytics.admin.v1beta.IGetKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1beta.IKeyEvent,
+      protos.google.analytics.admin.v1beta.IGetKeyEventRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getKeyEvent(request, options, callback);
+  }
+  /**
+   * Deletes a Key Event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Key Event to delete.
+   *   Format: properties/{property}/keyEvents/{key_event}
+   *   Example: "properties/123/keyEvents/456"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/analytics_admin_service.delete_key_event.js</caption>
+   * region_tag:analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteKeyEvent_async
+   */
+  deleteKeyEvent(
+    request?: protos.google.analytics.admin.v1beta.IDeleteKeyEventRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.analytics.admin.v1beta.IDeleteKeyEventRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteKeyEvent(
+    request: protos.google.analytics.admin.v1beta.IDeleteKeyEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1beta.IDeleteKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteKeyEvent(
+    request: protos.google.analytics.admin.v1beta.IDeleteKeyEventRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1beta.IDeleteKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteKeyEvent(
+    request?: protos.google.analytics.admin.v1beta.IDeleteKeyEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1beta.IDeleteKeyEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1beta.IDeleteKeyEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.analytics.admin.v1beta.IDeleteKeyEventRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteKeyEvent(request, options, callback);
   }
   /**
    * Creates a CustomDimension.
@@ -4112,15 +4583,22 @@ export class AnalyticsAdminServiceClient {
    * records of each time a user reads Google Analytics reporting data. Access
    * records are retained for up to 2 years.
    *
-   * Data Access Reports can be requested for a property. The property must be
-   * in Google Analytics 360. This method is only available to Administrators.
+   * Data Access Reports can be requested for a property. Reports may be
+   * requested for any property, but dimensions that aren't related to quota can
+   * only be requested on Google Analytics 360 properties. This method is only
+   * available to Administrators.
    *
-   * These data access records include GA4 UI Reporting, GA4 UI Explorations,
-   * GA4 Data API, and other products like Firebase & Admob that can retrieve
+   * These data access records include GA UI Reporting, GA UI Explorations,
+   * GA Data API, and other products like Firebase & Admob that can retrieve
    * data from Google Analytics through a linkage. These records don't include
    * property configuration changes like adding a stream or changing a
    * property's time zone. For configuration change history, see
    * [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
+   *
+   * To give your feedback on this API, complete the [Google Analytics Access
+   * Reports
+   * feedback](https://docs.google.com/forms/d/e/1FAIpQLSdmEBUrMzAEdiEKk5TV5dEHvDUZDRlgWYdQdAeSdtR4hVjEhw/viewform)
+   * form.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4130,9 +4608,9 @@ export class AnalyticsAdminServiceClient {
    *   access for all properties under that account.
    *
    *   To request at the property level, entity should be for example
-   *   'properties/123' if "123" is your GA4 property ID. To request at the
-   *   account level, entity should be for example 'accounts/1234' if "1234" is
-   *   your GA4 Account ID.
+   *   'properties/123' if "123" is your Google Analytics property ID. To request
+   *   at the account level, entity should be for example 'accounts/1234' if
+   *   "1234" is your Google Analytics Account ID.
    * @param {number[]} request.dimensions
    *   The dimensions requested and displayed in the response. Requests are
    *   allowed up to 9 dimensions.
@@ -4190,6 +4668,17 @@ export class AnalyticsAdminServiceClient {
    *   Toggles whether to return the current state of this Analytics Property's
    *   quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
    *   requests, this field must be false.
+   * @param {boolean} [request.includeAllUsers]
+   *   Optional. Determines whether to include users who have never made an API
+   *   call in the response. If true, all users with access to the specified
+   *   property or account are included in the response, regardless of whether
+   *   they have made an API call or not. If false, only the users who have made
+   *   an API call will be included.
+   * @param {boolean} [request.expandGroups]
+   *   Optional. Decides whether to return the users within user groups. This
+   *   field works only when include_all_users is set to true. If true, it will
+   *   return all users with access to the specified property or account.
+   *   If false, only the users with direct access will be returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4277,7 +4766,7 @@ export class AnalyticsAdminServiceClient {
   /**
    * Returns all accounts accessible by the caller.
    *
-   * Note that these accounts might not currently have GA4 properties.
+   * Note that these accounts might not currently have GA properties.
    * Soft-deleted (ie: "trashed") accounts are excluded by default.
    * Returns an empty list if no relevant accounts are found.
    *
@@ -4665,7 +5154,6 @@ export class AnalyticsAdminServiceClient {
   /**
    * Returns child Properties under the specified parent Account.
    *
-   * Only "GA4" properties will be returned.
    * Properties will be excluded if the caller does not have access.
    * Soft-deleted (ie: "trashed") properties are excluded by default.
    * Returns an empty list if no relevant properties are found.
@@ -4924,7 +5412,8 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Format: properties/{property_id}
-   *   Example: properties/1234
+   *
+   *   Example: `properties/1234`
    * @param {number} request.pageSize
    *   The maximum number of resources to return. The service may return
    *   fewer than this value, even if there are additional pages.
@@ -5028,7 +5517,8 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Format: properties/{property_id}
-   *   Example: properties/1234
+   *
+   *   Example: `properties/1234`
    * @param {number} request.pageSize
    *   The maximum number of resources to return. The service may return
    *   fewer than this value, even if there are additional pages.
@@ -5080,7 +5570,8 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Format: properties/{property_id}
-   *   Example: properties/1234
+   *
+   *   Example: `properties/1234`
    * @param {number} request.pageSize
    *   The maximum number of resources to return. The service may return
    *   fewer than this value, even if there are additional pages.
@@ -5546,14 +6037,22 @@ export class AnalyticsAdminServiceClient {
    * Searches through all changes to an account or its children given the
    * specified set of filters.
    *
+   * Only returns the subset of changes supported by the API. The UI may return
+   * additional changes.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
    *   Required. The account resource for which to return change history
-   *   resources.
+   *   resources. Format: accounts/{account}
+   *
+   *   Example: `accounts/100`
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
+   *   Format: properties/{propertyId}
+   *
+   *   Example: `properties/100`
    * @param {number[]} [request.resourceType]
    *   Optional. If set, only return changes if they are for a resource that
    *   matches at least one of these types.
@@ -5569,9 +6068,14 @@ export class AnalyticsAdminServiceClient {
    *   Optional. If set, only return changes made before this time (inclusive).
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of ChangeHistoryEvent items to return.
-   *   The service may return fewer than this value, even if there are additional
-   *   pages. If unspecified, at most 50 items will be returned.
-   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   *   If unspecified, at most 50 items will be returned. The maximum value is 200
+   *   (higher values will be coerced to the maximum).
+   *
+   *   Note that the service may return a page with fewer items than this value
+   *   specifies (potentially even zero), and that there still may be additional
+   *   pages. If you want a particular number of items, you'll need to continue
+   *   requesting additional pages using `page_token` until you get the needed
+   *   number.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
    *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
@@ -5675,10 +6179,15 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.account
    *   Required. The account resource for which to return change history
-   *   resources.
+   *   resources. Format: accounts/{account}
+   *
+   *   Example: `accounts/100`
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
+   *   Format: properties/{propertyId}
+   *
+   *   Example: `properties/100`
    * @param {number[]} [request.resourceType]
    *   Optional. If set, only return changes if they are for a resource that
    *   matches at least one of these types.
@@ -5694,9 +6203,14 @@ export class AnalyticsAdminServiceClient {
    *   Optional. If set, only return changes made before this time (inclusive).
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of ChangeHistoryEvent items to return.
-   *   The service may return fewer than this value, even if there are additional
-   *   pages. If unspecified, at most 50 items will be returned.
-   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   *   If unspecified, at most 50 items will be returned. The maximum value is 200
+   *   (higher values will be coerced to the maximum).
+   *
+   *   Note that the service may return a page with fewer items than this value
+   *   specifies (potentially even zero), and that there still may be additional
+   *   pages. If you want a particular number of items, you'll need to continue
+   *   requesting additional pages using `page_token` until you get the needed
+   *   number.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
    *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
@@ -5744,10 +6258,15 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.account
    *   Required. The account resource for which to return change history
-   *   resources.
+   *   resources. Format: accounts/{account}
+   *
+   *   Example: `accounts/100`
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
+   *   Format: properties/{propertyId}
+   *
+   *   Example: `properties/100`
    * @param {number[]} [request.resourceType]
    *   Optional. If set, only return changes if they are for a resource that
    *   matches at least one of these types.
@@ -5763,9 +6282,14 @@ export class AnalyticsAdminServiceClient {
    *   Optional. If set, only return changes made before this time (inclusive).
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of ChangeHistoryEvent items to return.
-   *   The service may return fewer than this value, even if there are additional
-   *   pages. If unspecified, at most 50 items will be returned.
-   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   *   If unspecified, at most 50 items will be returned. The maximum value is 200
+   *   (higher values will be coerced to the maximum).
+   *
+   *   Note that the service may return a page with fewer items than this value
+   *   specifies (potentially even zero), and that there still may be additional
+   *   pages. If you want a particular number of items, you'll need to continue
+   *   requesting additional pages using `page_token` until you get the needed
+   *   number.
    * @param {string} [request.pageToken]
    *   Optional. A page token, received from a previous
    *   `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
@@ -5806,6 +6330,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.IChangeHistoryEvent>;
   }
   /**
+   * Deprecated: Use `ListKeyEvents` instead.
    * Returns a list of conversion events in the specified parent property.
    *
    * Returns an empty list if no conversion events are found.
@@ -5835,6 +6360,7 @@ export class AnalyticsAdminServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListConversionEvents is deprecated and may be removed in a future version.
    */
   listConversionEvents(
     request?: protos.google.analytics.admin.v1beta.IListConversionEventsRequest,
@@ -5908,6 +6434,11 @@ export class AnalyticsAdminServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$AnalyticsAdminService-$ListConversionEvents',
+      'ListConversionEvents is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.listConversionEvents(request, options, callback);
   }
 
@@ -5937,6 +6468,7 @@ export class AnalyticsAdminServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListConversionEvents is deprecated and may be removed in a future version.
    */
   listConversionEventsStream(
     request?: protos.google.analytics.admin.v1beta.IListConversionEventsRequest,
@@ -5953,6 +6485,11 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings = this._defaults['listConversionEvents'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$AnalyticsAdminService-$ListConversionEvents',
+      'ListConversionEvents is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listConversionEvents.createStream(
       this.innerApiCalls.listConversionEvents as GaxCall,
       request,
@@ -5989,6 +6526,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/analytics_admin_service.list_conversion_events.js</caption>
    * region_tag:analyticsadmin_v1beta_generated_AnalyticsAdminService_ListConversionEvents_async
+   * @deprecated ListConversionEvents is deprecated and may be removed in a future version.
    */
   listConversionEventsAsync(
     request?: protos.google.analytics.admin.v1beta.IListConversionEventsRequest,
@@ -6005,11 +6543,221 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings = this._defaults['listConversionEvents'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$AnalyticsAdminService-$ListConversionEvents',
+      'ListConversionEvents is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listConversionEvents.asyncIterate(
       this.innerApiCalls['listConversionEvents'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1beta.IConversionEvent>;
+  }
+  /**
+   * Returns a list of Key Events in the specified parent property.
+   * Returns an empty list if no Key Events are found.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent property.
+   *   Example: 'properties/123'
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListKeyEvents` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListKeyEvents`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.analytics.admin.v1beta.KeyEvent|KeyEvent}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listKeyEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listKeyEvents(
+    request?: protos.google.analytics.admin.v1beta.IListKeyEventsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1beta.IKeyEvent[],
+      protos.google.analytics.admin.v1beta.IListKeyEventsRequest | null,
+      protos.google.analytics.admin.v1beta.IListKeyEventsResponse,
+    ]
+  >;
+  listKeyEvents(
+    request: protos.google.analytics.admin.v1beta.IListKeyEventsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1beta.IListKeyEventsRequest,
+      | protos.google.analytics.admin.v1beta.IListKeyEventsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1beta.IKeyEvent
+    >
+  ): void;
+  listKeyEvents(
+    request: protos.google.analytics.admin.v1beta.IListKeyEventsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1beta.IListKeyEventsRequest,
+      | protos.google.analytics.admin.v1beta.IListKeyEventsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1beta.IKeyEvent
+    >
+  ): void;
+  listKeyEvents(
+    request?: protos.google.analytics.admin.v1beta.IListKeyEventsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1beta.IListKeyEventsRequest,
+          | protos.google.analytics.admin.v1beta.IListKeyEventsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1beta.IKeyEvent
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1beta.IListKeyEventsRequest,
+      | protos.google.analytics.admin.v1beta.IListKeyEventsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1beta.IKeyEvent
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1beta.IKeyEvent[],
+      protos.google.analytics.admin.v1beta.IListKeyEventsRequest | null,
+      protos.google.analytics.admin.v1beta.IListKeyEventsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listKeyEvents(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent property.
+   *   Example: 'properties/123'
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListKeyEvents` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListKeyEvents`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1beta.KeyEvent|KeyEvent} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listKeyEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listKeyEventsStream(
+    request?: protos.google.analytics.admin.v1beta.IListKeyEventsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listKeyEvents'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listKeyEvents.createStream(
+      this.innerApiCalls.listKeyEvents as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listKeyEvents`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent property.
+   *   Example: 'properties/123'
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListKeyEvents` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListKeyEvents`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.analytics.admin.v1beta.KeyEvent|KeyEvent}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/analytics_admin_service.list_key_events.js</caption>
+   * region_tag:analyticsadmin_v1beta_generated_AnalyticsAdminService_ListKeyEvents_async
+   */
+  listKeyEventsAsync(
+    request?: protos.google.analytics.admin.v1beta.IListKeyEventsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1beta.IKeyEvent> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listKeyEvents'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listKeyEvents.asyncIterate(
+      this.innerApiCalls['listKeyEvents'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1beta.IKeyEvent>;
   }
   /**
    * Lists CustomDimensions on a property.
@@ -6957,6 +7705,43 @@ export class AnalyticsAdminServiceClient {
   matchGoogleAdsLinkFromGoogleAdsLinkName(googleAdsLinkName: string) {
     return this.pathTemplates.googleAdsLinkPathTemplate.match(googleAdsLinkName)
       .google_ads_link;
+  }
+
+  /**
+   * Return a fully-qualified keyEvent resource name string.
+   *
+   * @param {string} property
+   * @param {string} key_event
+   * @returns {string} Resource name string.
+   */
+  keyEventPath(property: string, keyEvent: string) {
+    return this.pathTemplates.keyEventPathTemplate.render({
+      property: property,
+      key_event: keyEvent,
+    });
+  }
+
+  /**
+   * Parse the property from KeyEvent resource.
+   *
+   * @param {string} keyEventName
+   *   A fully-qualified path representing KeyEvent resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromKeyEventName(keyEventName: string) {
+    return this.pathTemplates.keyEventPathTemplate.match(keyEventName).property;
+  }
+
+  /**
+   * Parse the key_event from KeyEvent resource.
+   *
+   * @param {string} keyEventName
+   *   A fully-qualified path representing KeyEvent resource.
+   * @returns {string} A string representing the key_event.
+   */
+  matchKeyEventFromKeyEventName(keyEventName: string) {
+    return this.pathTemplates.keyEventPathTemplate.match(keyEventName)
+      .key_event;
   }
 
   /**

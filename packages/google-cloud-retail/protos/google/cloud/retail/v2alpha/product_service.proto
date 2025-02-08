@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/retail/v2alpha/common.proto";
+import "google/cloud/retail/v2alpha/export_config.proto";
 import "google/cloud/retail/v2alpha/import_config.proto";
 import "google/cloud/retail/v2alpha/product.proto";
 import "google/cloud/retail/v2alpha/purge_config.proto";
@@ -135,6 +136,19 @@ service ProductService {
     };
   }
 
+  // Exports multiple [Product][google.cloud.retail.v2alpha.Product]s.
+  rpc ExportProducts(ExportProductsRequest)
+      returns (google.longrunning.Operation) {
+    option (google.api.http) = {
+      post: "/v2alpha/{parent=projects/*/locations/*/catalogs/*/branches/*}/products:export"
+      body: "*"
+    };
+    option (google.longrunning.operation_info) = {
+      response_type: "google.cloud.retail.v2alpha.ExportProductsResponse"
+      metadata_type: "google.cloud.retail.v2alpha.ExportMetadata"
+    };
+  }
+
   // Updates inventory information for a
   // [Product][google.cloud.retail.v2alpha.Product] while respecting the last
   // update timestamps of each inventory field.
@@ -196,10 +210,11 @@ service ProductService {
     };
   }
 
-  // It is recommended to use the
+  // We recommend that you use the
   // [ProductService.AddLocalInventories][google.cloud.retail.v2alpha.ProductService.AddLocalInventories]
-  // method instead of
-  // [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces].
+  // method instead of the
+  // [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces]
+  // method.
   // [ProductService.AddLocalInventories][google.cloud.retail.v2alpha.ProductService.AddLocalInventories]
   // achieves the same results but provides more fine-grained control over
   // ingesting local inventory data.
@@ -238,10 +253,11 @@ service ProductService {
     };
   }
 
-  // It is recommended to use the
+  // We recommend that you use the
   // [ProductService.RemoveLocalInventories][google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories]
-  // method instead of
-  // [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces].
+  // method instead of the
+  // [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces]
+  // method.
   // [ProductService.RemoveLocalInventories][google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories]
   // achieves the same results but provides more fine-grained control over
   // ingesting local inventory data.

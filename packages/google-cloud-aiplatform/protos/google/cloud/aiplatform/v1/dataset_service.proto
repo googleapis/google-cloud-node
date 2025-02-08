@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -52,6 +52,7 @@ service DatasetService {
     option (google.api.http) = {
       post: "/v1/{parent=projects/*/locations/*}/datasets"
       body: "dataset"
+      additional_bindings { post: "/v1/datasets" body: "dataset" }
     };
     option (google.api.method_signature) = "parent,dataset";
     option (google.longrunning.operation_info) = {
@@ -64,6 +65,7 @@ service DatasetService {
   rpc GetDataset(GetDatasetRequest) returns (Dataset) {
     option (google.api.http) = {
       get: "/v1/{name=projects/*/locations/*/datasets/*}"
+      additional_bindings { get: "/v1/{name=datasets/*}" }
     };
     option (google.api.method_signature) = "name";
   }
@@ -73,6 +75,10 @@ service DatasetService {
     option (google.api.http) = {
       patch: "/v1/{dataset.name=projects/*/locations/*/datasets/*}"
       body: "dataset"
+      additional_bindings {
+        patch: "/v1/{dataset.name=datasets/*}"
+        body: "dataset"
+      }
     };
     option (google.api.method_signature) = "dataset,update_mask";
   }
@@ -81,6 +87,7 @@ service DatasetService {
   rpc ListDatasets(ListDatasetsRequest) returns (ListDatasetsResponse) {
     option (google.api.http) = {
       get: "/v1/{parent=projects/*/locations/*}/datasets"
+      additional_bindings { get: "/v1/datasets" }
     };
     option (google.api.method_signature) = "parent";
   }
@@ -90,6 +97,7 @@ service DatasetService {
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
       delete: "/v1/{name=projects/*/locations/*/datasets/*}"
+      additional_bindings { delete: "/v1/{name=datasets/*}" }
     };
     option (google.api.method_signature) = "name";
     option (google.longrunning.operation_info) = {
@@ -130,6 +138,10 @@ service DatasetService {
     option (google.api.http) = {
       post: "/v1/{parent=projects/*/locations/*/datasets/*}/datasetVersions"
       body: "dataset_version"
+      additional_bindings {
+        post: "/v1/{parent=datasets/*}/datasetVersions"
+        body: "dataset_version"
+      }
     };
     option (google.api.method_signature) = "parent,dataset_version";
     option (google.longrunning.operation_info) = {
@@ -138,11 +150,26 @@ service DatasetService {
     };
   }
 
+  // Updates a DatasetVersion.
+  rpc UpdateDatasetVersion(UpdateDatasetVersionRequest)
+      returns (DatasetVersion) {
+    option (google.api.http) = {
+      patch: "/v1/{dataset_version.name=projects/*/locations/*/datasets/*/datasetVersions/*}"
+      body: "dataset_version"
+      additional_bindings {
+        patch: "/v1/{dataset_version.name=datasets/*/datasetVersions/*}"
+        body: "dataset_version"
+      }
+    };
+    option (google.api.method_signature) = "dataset_version,update_mask";
+  }
+
   // Deletes a Dataset version.
   rpc DeleteDatasetVersion(DeleteDatasetVersionRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
       delete: "/v1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}"
+      additional_bindings { delete: "/v1/{name=datasets/*/datasetVersions/*}" }
     };
     option (google.api.method_signature) = "name";
     option (google.longrunning.operation_info) = {
@@ -155,6 +182,7 @@ service DatasetService {
   rpc GetDatasetVersion(GetDatasetVersionRequest) returns (DatasetVersion) {
     option (google.api.http) = {
       get: "/v1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}"
+      additional_bindings { get: "/v1/{name=datasets/*/datasetVersions/*}" }
     };
     option (google.api.method_signature) = "name";
   }
@@ -164,6 +192,7 @@ service DatasetService {
       returns (ListDatasetVersionsResponse) {
     option (google.api.http) = {
       get: "/v1/{parent=projects/*/locations/*/datasets/*}/datasetVersions"
+      additional_bindings { get: "/v1/{parent=datasets/*}/datasetVersions" }
     };
     option (google.api.method_signature) = "parent";
   }
@@ -173,6 +202,9 @@ service DatasetService {
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
       get: "/v1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}:restore"
+      additional_bindings {
+        get: "/v1/{name=datasets/*/datasetVersions/*}:restore"
+      }
     };
     option (google.api.method_signature) = "name";
     option (google.longrunning.operation_info) = {
@@ -228,6 +260,8 @@ service DatasetService {
   }
 
   // Lists Annotations belongs to a dataitem
+  // This RPC is only available in InternalDatasetService. It is only used for
+  // exporting conversation data to CCAI Insights.
   rpc ListAnnotations(ListAnnotationsRequest)
       returns (ListAnnotationsResponse) {
     option (google.api.http) = {
@@ -262,6 +296,7 @@ message CreateDatasetOperationMetadata {
 
 // Request message for
 // [DatasetService.GetDataset][google.cloud.aiplatform.v1.DatasetService.GetDataset].
+// Next ID: 4
 message GetDatasetRequest {
   // Required. The name of the Dataset resource.
   string name = 1 [
@@ -288,6 +323,21 @@ message UpdateDatasetRequest {
   //   * `display_name`
   //   * `description`
   //   * `labels`
+  google.protobuf.FieldMask update_mask = 2
+      [(google.api.field_behavior) = REQUIRED];
+}
+
+// Request message for
+// [DatasetService.UpdateDatasetVersion][google.cloud.aiplatform.v1.DatasetService.UpdateDatasetVersion].
+message UpdateDatasetVersionRequest {
+  // Required. The DatasetVersion which replaces the resource on the server.
+  DatasetVersion dataset_version = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The update mask applies to the resource.
+  // For the `FieldMask` definition, see
+  // [google.protobuf.FieldMask][google.protobuf.FieldMask]. Updatable fields:
+  //
+  //   * `display_name`
   google.protobuf.FieldMask update_mask = 2
       [(google.api.field_behavior) = REQUIRED];
 }
@@ -478,6 +528,7 @@ message DeleteDatasetVersionRequest {
 
 // Request message for
 // [DatasetService.GetDatasetVersion][google.cloud.aiplatform.v1.DatasetService.GetDatasetVersion].
+// Next ID: 4
 message GetDatasetVersionRequest {
   // Required. The resource name of the Dataset version to delete.
   // Format:

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,7 +40,9 @@ service SqlInstancesService {
   // instance. Required to prepare for a certificate rotation. If a CA version
   // was previously added but never used in a certificate rotation, this
   // operation replaces that version. There cannot be more than one CA version
-  // waiting to be rotated in.
+  // waiting to be rotated in. For instances that have enabled Certificate
+  // Authority Service (CAS) based server CA, please use AddServerCertificate to
+  // add a new server certificate.
   rpc AddServerCa(SqlInstancesAddServerCaRequest) returns (Operation) {
     option (google.api.http) = {
       post: "/v1/projects/{project}/instances/{instance}/addServerCa"
@@ -165,7 +167,8 @@ service SqlInstancesService {
     };
   }
 
-  // Promotes the read replica instance to be a stand-alone Cloud SQL instance.
+  // Promotes the read replica instance to be an independent Cloud SQL
+  // primary instance.
   // Using this operation might cause your instance to restart.
   rpc PromoteReplica(SqlInstancesPromoteReplicaRequest) returns (Operation) {
     option (google.api.http) = {
@@ -173,7 +176,8 @@ service SqlInstancesService {
     };
   }
 
-  // Switches over from the primary instance to the replica instance.
+  // Switches over from the primary instance to the designated DR replica
+  // instance.
   rpc Switchover(SqlInstancesSwitchoverRequest) returns (Operation) {
     option (google.api.http) = {
       post: "/v1/projects/{project}/instances/{instance}/switchover"
@@ -205,7 +209,9 @@ service SqlInstancesService {
   }
 
   // Rotates the server certificate to one signed by the Certificate Authority
-  // (CA) version previously added with the addServerCA method.
+  // (CA) version previously added with the addServerCA method. For instances
+  // that have enabled Certificate Authority Service (CAS) based server CA,
+  // please use RotateServerCertificate to rotate the server certificate.
   rpc RotateServerCa(SqlInstancesRotateServerCaRequest) returns (Operation) {
     option (google.api.http) = {
       post: "/v1/projects/{project}/instances/{instance}/rotateServerCa"
@@ -315,6 +321,23 @@ service SqlInstancesService {
       returns (SqlInstancesGetLatestRecoveryTimeResponse) {
     option (google.api.http) = {
       get: "/v1/projects/{project}/instances/{instance}/getLatestRecoveryTime"
+    };
+  }
+
+  // Acquire a lease for the setup of SQL Server Reporting Services (SSRS).
+  rpc AcquireSsrsLease(SqlInstancesAcquireSsrsLeaseRequest)
+      returns (SqlInstancesAcquireSsrsLeaseResponse) {
+    option (google.api.http) = {
+      post: "/v1/projects/{project}/instances/{instance}/acquireSsrsLease"
+      body: "body"
+    };
+  }
+
+  // Release a lease for the setup of SQL Server Reporting Services (SSRS).
+  rpc ReleaseSsrsLease(SqlInstancesReleaseSsrsLeaseRequest)
+      returns (SqlInstancesReleaseSsrsLeaseResponse) {
+    option (google.api.http) = {
+      post: "/v1/projects/{project}/instances/{instance}/releaseSsrsLease"
     };
   }
 }
@@ -478,9 +501,13 @@ message SqlInstancesPromoteReplicaRequest {
   // ID of the project that contains the read replica.
   string project = 2;
 
-  // Set to true if the promote operation should attempt to re-add the original
-  // primary as a replica when it comes back online. Otherwise, if this value is
-  // false or not set, the original primary will be a standalone instance.
+  // Set to true to invoke a replica failover to the designated DR
+  // replica. As part of replica failover, the promote operation attempts
+  // to add the original primary instance as a replica of the promoted
+  // DR replica when the original primary instance comes back online.
+  // If set to false or not specified, then the original primary
+  // instance becomes an independent Cloud SQL primary instance.
+  // Only applicable to MySQL.
   bool failover = 3;
 }
 
@@ -680,6 +707,19 @@ message SqlInstancesVerifyExternalSyncSettingsRequest {
     OFFLINE = 2;
   }
 
+  // MigrationType determines whether the migration is a physical file-based
+  // migration or a logical dump file-based migration.
+  enum MigrationType {
+    // Default value is a logical dump file-based migration
+    MIGRATION_TYPE_UNSPECIFIED = 0;
+
+    // Logical dump file-based migration
+    LOGICAL = 1;
+
+    // Physical file-based migration
+    PHYSICAL = 2;
+  }
+
   // Cloud SQL instance ID. This does not include the project ID.
   string instance = 1;
 
@@ -700,6 +740,16 @@ message SqlInstancesVerifyExternalSyncSettingsRequest {
     MySqlSyncConfig mysql_sync_config = 6
         [(google.api.field_behavior) = OPTIONAL];
   }
+
+  // Optional. MigrationType configures the migration to use physical files or
+  // logical dump files. If not set, then the logical dump file configuration is
+  // used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
+  MigrationType migration_type = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Parallel level for initial data sync. Only applicable for
+  // PostgreSQL.
+  ExternalSyncParallelLevel sync_parallel_level = 8
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance start external sync request.
@@ -724,6 +774,12 @@ message SqlInstancesStartExternalSyncRequest {
   // Optional. Parallel level for initial data sync. Currently only applicable
   // for MySQL.
   ExternalSyncParallelLevel sync_parallel_level = 7
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. MigrationType configures the migration to use physical files or
+  // logical dump files. If not set, then the logical dump file configuration is
+  // used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
+  SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType migration_type = 8
       [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -838,6 +894,12 @@ message InstancesTruncateLogRequest {
   TruncateLogContext truncate_log_context = 1;
 }
 
+// Request to acquire a lease for SSRS.
+message InstancesAcquireSsrsLeaseRequest {
+  // Contains details about the acquire SSRS lease operation.
+  AcquireSsrsLeaseContext acquire_ssrs_lease_context = 1;
+}
+
 // Instance verify external sync settings response.
 message SqlInstancesVerifyExternalSyncSettingsResponse {
   // This is always `sql#migrationSettingErrorList`.
@@ -913,9 +975,9 @@ message CloneContext {
   // instance. Clone all databases if empty.
   repeated string database_names = 9;
 
-  // Optional. (Point-in-time recovery for PostgreSQL only) Clone to an instance
-  // in the specified zone. If no zone is specified, clone to the same zone as
-  // the source instance.
+  // Optional. Copy clone and point-in-time recovery clone of an instance to the
+  // specified zone. If no zone is specified, clone to the same primary zone as
+  // the source instance. This field applies to all DB types.
   optional string preferred_zone = 10 [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -1018,14 +1080,14 @@ message DatabaseInstance {
     optional int32 sql_min_recommended_increase_size_gb = 2;
   }
 
-  // The current SQL network architecture for the instance.
+  // The SQL network architecture for the instance.
   enum SqlNetworkArchitecture {
     SQL_NETWORK_ARCHITECTURE_UNSPECIFIED = 0;
 
-    // Instance is a Tenancy Unit (TU) instance.
+    // The instance uses the new network architecture.
     NEW_NETWORK_ARCHITECTURE = 1;
 
-    // Instance is an Umbrella instance.
+    // The instance uses the old network architecture.
     OLD_NETWORK_ARCHITECTURE = 2;
   }
 
@@ -1115,13 +1177,14 @@ message DatabaseInstance {
   // Name of the Cloud SQL instance. This does not include the project ID.
   string name = 23;
 
-  // The geographical region. Can be:
-  // *  `us-central` (`FIRST_GEN` instances only)
-  // *  `us-central1` (`SECOND_GEN` instances only)
-  // *  `asia-east1` or `europe-west1`.
+  // The geographical region of the Cloud SQL instance.
   //
-  // Defaults to `us-central` or `us-central1` depending on the instance
-  // type. The region cannot be changed after instance creation.
+  // It can be one of the
+  // [regions](https://cloud.google.com/sql/docs/mysql/locations#location-r)
+  // where Cloud SQL operates:
+  //
+  // For example,  `asia-east1`, `europe-west1`, and  `us-central1`.
+  // The default value is `us-central1`.
   string region = 24;
 
   // The Compute Engine zone that the instance is currently serving from. This
@@ -1149,8 +1212,9 @@ message DatabaseInstance {
   // The start time of any upcoming scheduled maintenance for this instance.
   SqlScheduledMaintenance scheduled_maintenance = 30;
 
-  // The status indicating if instance satisfiesPzs.
-  // Reserved for future use.
+  // This status indicates whether the instance satisfies PZS.
+  //
+  // The status is reserved for future use.
   google.protobuf.BoolValue satisfies_pzs = 35;
 
   // Output only. Stores the current database version running on the instance
@@ -1179,6 +1243,10 @@ message DatabaseInstance {
   // The current software version on the instance.
   string maintenance_version = 42;
 
+  // Output only. All database versions that are available for upgrade.
+  repeated AvailableDatabaseVersion upgradable_database_versions = 45
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
   optional SqlNetworkArchitecture sql_network_architecture = 47;
 
   // Output only. The link to service attachment of PSC instance.
@@ -1195,6 +1263,94 @@ message DatabaseInstance {
   // Output only. The dns name of the primary instance in a replication group.
   optional string write_endpoint = 52
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. A primary instance and disaster recovery (DR) replica pair.
+  // A DR replica is a cross-region replica that you designate
+  // for failover in the event that the primary instance
+  // experiences regional failure. Only applicable to MySQL.
+  ReplicationCluster replication_cluster = 54
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Gemini instance configuration.
+  optional GeminiInstanceConfig gemini_config = 55;
+
+  // Output only. This status indicates whether the instance satisfies PZI.
+  //
+  // The status is reserved for future use.
+  google.protobuf.BoolValue satisfies_pzi = 56
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Input only. Whether Cloud SQL is enabled to switch storing point-in-time
+  // recovery log files from a data disk to Cloud Storage.
+  optional google.protobuf.BoolValue
+      switch_transaction_logs_to_cloud_storage_enabled = 57
+      [(google.api.field_behavior) = INPUT_ONLY];
+}
+
+// Gemini instance configuration.
+message GeminiInstanceConfig {
+  // Output only. Whether Gemini is enabled.
+  optional bool entitled = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Whether the vacuum management is enabled.
+  optional bool google_vacuum_mgmt_enabled = 2
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Whether canceling the out-of-memory (OOM) session is enabled.
+  optional bool oom_session_cancel_enabled = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Whether the active query is enabled.
+  optional bool active_query_enabled = 4
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Whether the index advisor is enabled.
+  optional bool index_advisor_enabled = 5
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Whether the flag recommender is enabled.
+  optional bool flag_recommender_enabled = 6
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// A primary instance and disaster recovery (DR) replica pair.
+// A DR replica is a cross-region replica that you designate for failover in
+// the event that the primary instance experiences regional failure.
+// Only applicable to MySQL.
+message ReplicationCluster {
+  // Output only. If set, it indicates this instance has a private service
+  // access (PSA) dns endpoint that is pointing to the primary instance of the
+  // cluster. If this instance is the primary, the dns should be pointing to
+  // this instance. After Switchover or Replica failover, this DNS endpoint
+  // points to the promoted instance. This is a read-only field, returned to the
+  // user as information. This field can exist even if a standalone instance
+  // does not yet have a replica, or had a DR replica that was deleted.
+  string psa_write_endpoint = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. If the instance is a primary instance, then this field identifies
+  // the disaster recovery (DR) replica. A DR replica is an optional
+  // configuration for Enterprise Plus edition instances. If the instance is a
+  // read replica, then the field is not set. Set this field to a replica name
+  // to designate a DR replica for a primary instance. Remove the replica name
+  // to remove the DR replica designation.
+  string failover_dr_replica_name = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. Read-only field that indicates whether the replica is a DR
+  // replica. This field is not set if the instance is a primary instance.
+  bool dr_replica = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// An available database version. It can be a major or a minor version.
+message AvailableDatabaseVersion {
+  // The version's major version name.
+  optional string major_version = 3;
+
+  // The database version name. For MySQL 8.0, this string provides the database
+  // major and minor version.
+  optional string name = 8;
+
+  // The database version's display name.
+  optional string display_name = 9;
 }
 
 // Reschedule options for maintenance windows.
@@ -1439,6 +1595,48 @@ message SqlExternalSyncSettingError {
 
     // Unable to verify definers on the source for MySQL.
     UNABLE_TO_VERIFY_DEFINERS = 39;
+
+    // If a time out occurs while the subscription counts are calculated, then
+    // this value is set to 1. Otherwise, this value is set to 2.
+    SUBSCRIPTION_CALCULATION_STATUS = 40;
+
+    // Count of subscriptions needed to sync source data for PostgreSQL
+    // database.
+    PG_SUBSCRIPTION_COUNT = 41;
+
+    // Final parallel level that is used to do migration.
+    PG_SYNC_PARALLEL_LEVEL = 42;
+
+    // The disk size of the replica instance is smaller than the data size of
+    // the source instance.
+    INSUFFICIENT_DISK_SIZE = 43;
+
+    // The data size of the source instance is greater than 1 TB, the number of
+    // cores of the replica instance is less than 8, and the memory of the
+    // replica is less than 32 GB.
+    INSUFFICIENT_MACHINE_TIER = 44;
+
+    // The warning message indicates the unsupported extensions will not be
+    // migrated to the destination.
+    UNSUPPORTED_EXTENSIONS_NOT_MIGRATED = 45;
+
+    // The warning message indicates the pg_cron extension and settings will not
+    // be migrated to the destination.
+    EXTENSIONS_NOT_MIGRATED = 46;
+
+    // The error message indicates that pg_cron flags are enabled on the
+    // destination which is not supported during the migration.
+    PG_CRON_FLAG_ENABLED_IN_REPLICA = 47;
+
+    // This error message indicates that the specified extensions are not
+    // enabled on destination instance. For example, before you can migrate
+    // data to the destination instance, you must enable the PGAudit extension
+    // on the instance.
+    EXTENSIONS_NOT_ENABLED_IN_REPLICA = 48;
+
+    // The source database has generated columns that can't be migrated. Please
+    // change them to regular columns before migration.
+    UNSUPPORTED_COLUMNS = 49;
   }
 
   // Can be `sql#externalSyncSettingError` or
@@ -1508,6 +1706,47 @@ message ReplicaConfiguration {
   // replica(s) under it.
   google.protobuf.BoolValue cascadable_replica = 5
       [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Request to acquire a lease for SSRS.
+message SqlInstancesAcquireSsrsLeaseRequest {
+  // Required. Cloud SQL instance ID. This doesn't include the project ID. It's
+  // composed of lowercase letters, numbers, and hyphens, and it must start with
+  // a letter. The total length must be 98 characters or less (Example:
+  // instance-id).
+  string instance = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Project ID of the project that contains the instance (Example:
+  // project-id).
+  string project = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The request body.
+  InstancesAcquireSsrsLeaseRequest body = 100
+      [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response for the acquire SSRS lease request.
+message SqlInstancesAcquireSsrsLeaseResponse {
+  // The unique identifier for this operation.
+  string operation_id = 1;
+}
+
+// Request to release a lease for SSRS.
+message SqlInstancesReleaseSsrsLeaseRequest {
+  // Required. The Cloud SQL instance ID. This doesn't include the project ID.
+  // The instance ID contains lowercase letters, numbers, and hyphens, and it
+  // must start with a letter. This ID can have a maximum length of 98
+  // characters.
+  string instance = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The project ID that contains the instance.
+  string project = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response for the release SSRS lease request.
+message SqlInstancesReleaseSsrsLeaseResponse {
+  // The unique identifier for this operation.
+  string operation_id = 1;
 }
 
 enum SqlInstanceType {

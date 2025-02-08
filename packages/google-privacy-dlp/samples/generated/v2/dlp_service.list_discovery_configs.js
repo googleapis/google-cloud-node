@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ function main(parent) {
   /**
    *  Required. Parent resource name.
    *  The format of this value is as follows:
-   *  `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *  `projects/{project_id}/locations/{location_id}`
    *  The following example `parent` string specifies a parent project with the
    *  identifier `example-project`, and specifies the `europe-west3` location
    *  for processing data:
@@ -49,7 +49,7 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Comma separated list of config fields to order by,
+   *  Comma-separated list of config fields to order by,
    *  followed by `asc` or `desc` postfix. This list is case insensitive. The
    *  default sorting order is ascending. Redundant space characters are
    *  insignificant.
@@ -74,7 +74,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dlpClient.listDiscoveryConfigsAsync(request);
+    const iterable = dlpClient.listDiscoveryConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

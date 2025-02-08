@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -142,16 +142,94 @@ describe('v1.SecurityPoliciesClient', () => {
     sinon.restore();
   });
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        securitypoliciesModule.v1.SecurityPoliciesClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        securitypoliciesModule.v1.SecurityPoliciesClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          securitypoliciesModule.v1.SecurityPoliciesClient.servicePath;
+        assert.strictEqual(servicePath, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          securitypoliciesModule.v1.SecurityPoliciesClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new securitypoliciesModule.v1.SecurityPoliciesClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'compute.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'compute.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new securitypoliciesModule.v1.SecurityPoliciesClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -260,7 +338,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -296,7 +374,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -348,7 +426,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.addRule(request), expectedError);
@@ -407,7 +485,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -443,7 +521,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -495,7 +573,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
@@ -554,7 +632,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPolicy()
       );
@@ -589,7 +667,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPolicy()
       );
@@ -639,7 +717,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
@@ -697,7 +775,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPolicyRule()
       );
@@ -733,7 +811,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPolicyRule()
       );
@@ -785,7 +863,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRule(request), expectedError);
@@ -839,7 +917,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -870,7 +948,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -917,7 +995,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -966,7 +1044,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPoliciesListPreconfiguredExpressionSetsResponse()
       );
@@ -998,7 +1076,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPoliciesListPreconfiguredExpressionSetsResponse()
       );
@@ -1045,7 +1123,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPreconfiguredExpressionSets = stubSimpleCall(
         undefined,
@@ -1108,7 +1186,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1143,7 +1221,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1193,7 +1271,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patch(request), expectedError);
@@ -1251,7 +1329,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1287,7 +1365,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1339,7 +1417,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patchRule = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patchRule(request), expectedError);
@@ -1398,7 +1476,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1434,7 +1512,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1486,7 +1564,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&security_policy=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeRule = stubSimpleCall(
         undefined,
@@ -1548,7 +1626,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1584,7 +1662,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1636,7 +1714,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['resource']
       );
       request.resource = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&resource=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setLabels(request), expectedError);
@@ -1690,7 +1768,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         [
           'tuple_key_1',
@@ -1730,9 +1808,9 @@ describe('v1.SecurityPoliciesClient', () => {
       assert(
         (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1750,7 +1828,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.aggregatedList.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1772,9 +1850,9 @@ describe('v1.SecurityPoliciesClient', () => {
       assert(
         (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -1794,7 +1872,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SecurityPolicy()
@@ -1832,7 +1910,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SecurityPolicy()
@@ -1885,7 +1963,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
@@ -1912,7 +1990,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SecurityPolicy()
@@ -1952,9 +2030,9 @@ describe('v1.SecurityPoliciesClient', () => {
       assert(
         (client.descriptors.page.list.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1972,7 +2050,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -2003,9 +2081,9 @@ describe('v1.SecurityPoliciesClient', () => {
       assert(
         (client.descriptors.page.list.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2023,7 +2101,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.SecurityPolicy()
@@ -2051,9 +2129,9 @@ describe('v1.SecurityPoliciesClient', () => {
       assert(
         (client.descriptors.page.list.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2071,7 +2149,7 @@ describe('v1.SecurityPoliciesClient', () => {
         ['project']
       );
       request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2092,9 +2170,9 @@ describe('v1.SecurityPoliciesClient', () => {
       assert(
         (client.descriptors.page.list.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

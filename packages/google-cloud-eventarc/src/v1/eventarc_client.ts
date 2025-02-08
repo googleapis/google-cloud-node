@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/eventarc_client_config.json`.
@@ -57,6 +58,8 @@ export class EventarcClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -117,8 +120,27 @@ export class EventarcClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof EventarcClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'eventarc.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -133,7 +155,7 @@ export class EventarcClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -158,10 +180,10 @@ export class EventarcClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
@@ -173,7 +195,7 @@ export class EventarcClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -199,11 +221,23 @@ export class EventarcClient {
       channelConnectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/channelConnections/{channel_connection}'
       ),
+      enrollmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/enrollments/{enrollment}'
+      ),
+      googleApiSourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/googleApiSources/{google_api_source}'
+      ),
       googleChannelConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/googleChannelConfig'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      messageBusPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/messageBuses/{message_bus}'
+      ),
+      pipelinePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/pipelines/{pipeline}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -240,6 +274,31 @@ export class EventarcClient {
         'nextPageToken',
         'channelConnections'
       ),
+      listMessageBuses: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'messageBuses'
+      ),
+      listMessageBusEnrollments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'enrollments'
+      ),
+      listEnrollments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'enrollments'
+      ),
+      listPipelines: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'pipelines'
+      ),
+      listGoogleApiSources: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'googleApiSources'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -271,6 +330,18 @@ export class EventarcClient {
             {
               get: '/v1/{resource=projects/*/locations/*/channelConnections/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/messageBuses/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/enrollments/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/pipelines/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/googleApiSources/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -286,6 +357,22 @@ export class EventarcClient {
               post: '/v1/{resource=projects/*/locations/*/channelConnections/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/messageBuses/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/enrollments/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/pipelines/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/googleApiSources/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -299,6 +386,22 @@ export class EventarcClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/channelConnections/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/messageBuses/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/enrollments/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/pipelines/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/googleApiSources/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -373,6 +476,78 @@ export class EventarcClient {
     const deleteChannelConnectionMetadata = protoFilesRoot.lookup(
       '.google.cloud.eventarc.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createMessageBusResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.MessageBus'
+    ) as gax.protobuf.Type;
+    const createMessageBusMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateMessageBusResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.MessageBus'
+    ) as gax.protobuf.Type;
+    const updateMessageBusMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteMessageBusResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.MessageBus'
+    ) as gax.protobuf.Type;
+    const deleteMessageBusMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createEnrollmentResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.Enrollment'
+    ) as gax.protobuf.Type;
+    const createEnrollmentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateEnrollmentResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.Enrollment'
+    ) as gax.protobuf.Type;
+    const updateEnrollmentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteEnrollmentResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.Enrollment'
+    ) as gax.protobuf.Type;
+    const deleteEnrollmentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createPipelineResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.Pipeline'
+    ) as gax.protobuf.Type;
+    const createPipelineMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updatePipelineResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.Pipeline'
+    ) as gax.protobuf.Type;
+    const updatePipelineMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deletePipelineResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.Pipeline'
+    ) as gax.protobuf.Type;
+    const deletePipelineMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createGoogleApiSourceResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.GoogleApiSource'
+    ) as gax.protobuf.Type;
+    const createGoogleApiSourceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateGoogleApiSourceResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.GoogleApiSource'
+    ) as gax.protobuf.Type;
+    const updateGoogleApiSourceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteGoogleApiSourceResponse = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.GoogleApiSource'
+    ) as gax.protobuf.Type;
+    const deleteGoogleApiSourceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.eventarc.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createTrigger: new this._gaxModule.LongrunningDescriptor(
@@ -422,6 +597,72 @@ export class EventarcClient {
         deleteChannelConnectionMetadata.decode.bind(
           deleteChannelConnectionMetadata
         )
+      ),
+      createMessageBus: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createMessageBusResponse.decode.bind(createMessageBusResponse),
+        createMessageBusMetadata.decode.bind(createMessageBusMetadata)
+      ),
+      updateMessageBus: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateMessageBusResponse.decode.bind(updateMessageBusResponse),
+        updateMessageBusMetadata.decode.bind(updateMessageBusMetadata)
+      ),
+      deleteMessageBus: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteMessageBusResponse.decode.bind(deleteMessageBusResponse),
+        deleteMessageBusMetadata.decode.bind(deleteMessageBusMetadata)
+      ),
+      createEnrollment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createEnrollmentResponse.decode.bind(createEnrollmentResponse),
+        createEnrollmentMetadata.decode.bind(createEnrollmentMetadata)
+      ),
+      updateEnrollment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateEnrollmentResponse.decode.bind(updateEnrollmentResponse),
+        updateEnrollmentMetadata.decode.bind(updateEnrollmentMetadata)
+      ),
+      deleteEnrollment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteEnrollmentResponse.decode.bind(deleteEnrollmentResponse),
+        deleteEnrollmentMetadata.decode.bind(deleteEnrollmentMetadata)
+      ),
+      createPipeline: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createPipelineResponse.decode.bind(createPipelineResponse),
+        createPipelineMetadata.decode.bind(createPipelineMetadata)
+      ),
+      updatePipeline: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updatePipelineResponse.decode.bind(updatePipelineResponse),
+        updatePipelineMetadata.decode.bind(updatePipelineMetadata)
+      ),
+      deletePipeline: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deletePipelineResponse.decode.bind(deletePipelineResponse),
+        deletePipelineMetadata.decode.bind(deletePipelineMetadata)
+      ),
+      createGoogleApiSource: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createGoogleApiSourceResponse.decode.bind(
+          createGoogleApiSourceResponse
+        ),
+        createGoogleApiSourceMetadata.decode.bind(createGoogleApiSourceMetadata)
+      ),
+      updateGoogleApiSource: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateGoogleApiSourceResponse.decode.bind(
+          updateGoogleApiSourceResponse
+        ),
+        updateGoogleApiSourceMetadata.decode.bind(updateGoogleApiSourceMetadata)
+      ),
+      deleteGoogleApiSource: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteGoogleApiSourceResponse.decode.bind(
+          deleteGoogleApiSourceResponse
+        ),
+        deleteGoogleApiSourceMetadata.decode.bind(deleteGoogleApiSourceMetadata)
       ),
     };
 
@@ -493,6 +734,27 @@ export class EventarcClient {
       'deleteChannelConnection',
       'getGoogleChannelConfig',
       'updateGoogleChannelConfig',
+      'getMessageBus',
+      'listMessageBuses',
+      'listMessageBusEnrollments',
+      'createMessageBus',
+      'updateMessageBus',
+      'deleteMessageBus',
+      'getEnrollment',
+      'listEnrollments',
+      'createEnrollment',
+      'updateEnrollment',
+      'deleteEnrollment',
+      'getPipeline',
+      'listPipelines',
+      'createPipeline',
+      'updatePipeline',
+      'deletePipeline',
+      'getGoogleApiSource',
+      'listGoogleApiSources',
+      'createGoogleApiSource',
+      'updateGoogleApiSource',
+      'deleteGoogleApiSource',
     ];
     for (const methodName of eventarcStubMethods) {
       const callPromise = this.eventarcStub.then(
@@ -528,19 +790,50 @@ export class EventarcClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'eventarc.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'eventarc.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -1121,6 +1414,348 @@ export class EventarcClient {
       callback
     );
   }
+  /**
+   * Get a single MessageBus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the message bus to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.eventarc.v1.MessageBus|MessageBus}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.get_message_bus.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_GetMessageBus_async
+   */
+  getMessageBus(
+    request?: protos.google.cloud.eventarc.v1.IGetMessageBusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IMessageBus,
+      protos.google.cloud.eventarc.v1.IGetMessageBusRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getMessageBus(
+    request: protos.google.cloud.eventarc.v1.IGetMessageBusRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IMessageBus,
+      protos.google.cloud.eventarc.v1.IGetMessageBusRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMessageBus(
+    request: protos.google.cloud.eventarc.v1.IGetMessageBusRequest,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IMessageBus,
+      protos.google.cloud.eventarc.v1.IGetMessageBusRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMessageBus(
+    request?: protos.google.cloud.eventarc.v1.IGetMessageBusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.eventarc.v1.IMessageBus,
+          | protos.google.cloud.eventarc.v1.IGetMessageBusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.eventarc.v1.IMessageBus,
+      protos.google.cloud.eventarc.v1.IGetMessageBusRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IMessageBus,
+      protos.google.cloud.eventarc.v1.IGetMessageBusRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getMessageBus(request, options, callback);
+  }
+  /**
+   * Get a single Enrollment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Enrollment to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.eventarc.v1.Enrollment|Enrollment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.get_enrollment.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_GetEnrollment_async
+   */
+  getEnrollment(
+    request?: protos.google.cloud.eventarc.v1.IGetEnrollmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IEnrollment,
+      protos.google.cloud.eventarc.v1.IGetEnrollmentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getEnrollment(
+    request: protos.google.cloud.eventarc.v1.IGetEnrollmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IEnrollment,
+      protos.google.cloud.eventarc.v1.IGetEnrollmentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEnrollment(
+    request: protos.google.cloud.eventarc.v1.IGetEnrollmentRequest,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IEnrollment,
+      protos.google.cloud.eventarc.v1.IGetEnrollmentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEnrollment(
+    request?: protos.google.cloud.eventarc.v1.IGetEnrollmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.eventarc.v1.IEnrollment,
+          | protos.google.cloud.eventarc.v1.IGetEnrollmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.eventarc.v1.IEnrollment,
+      protos.google.cloud.eventarc.v1.IGetEnrollmentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IEnrollment,
+      protos.google.cloud.eventarc.v1.IGetEnrollmentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEnrollment(request, options, callback);
+  }
+  /**
+   * Get a single Pipeline.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the pipeline to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.eventarc.v1.Pipeline|Pipeline}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.get_pipeline.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_GetPipeline_async
+   */
+  getPipeline(
+    request?: protos.google.cloud.eventarc.v1.IGetPipelineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IPipeline,
+      protos.google.cloud.eventarc.v1.IGetPipelineRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getPipeline(
+    request: protos.google.cloud.eventarc.v1.IGetPipelineRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IPipeline,
+      protos.google.cloud.eventarc.v1.IGetPipelineRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPipeline(
+    request: protos.google.cloud.eventarc.v1.IGetPipelineRequest,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IPipeline,
+      protos.google.cloud.eventarc.v1.IGetPipelineRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPipeline(
+    request?: protos.google.cloud.eventarc.v1.IGetPipelineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.eventarc.v1.IPipeline,
+          | protos.google.cloud.eventarc.v1.IGetPipelineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.eventarc.v1.IPipeline,
+      protos.google.cloud.eventarc.v1.IGetPipelineRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IPipeline,
+      protos.google.cloud.eventarc.v1.IGetPipelineRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getPipeline(request, options, callback);
+  }
+  /**
+   * Get a single GoogleApiSource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the google api source to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.eventarc.v1.GoogleApiSource|GoogleApiSource}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.get_google_api_source.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_GetGoogleApiSource_async
+   */
+  getGoogleApiSource(
+    request?: protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IGoogleApiSource,
+      protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getGoogleApiSource(
+    request: protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IGoogleApiSource,
+      | protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getGoogleApiSource(
+    request: protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest,
+    callback: Callback<
+      protos.google.cloud.eventarc.v1.IGoogleApiSource,
+      | protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getGoogleApiSource(
+    request?: protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.eventarc.v1.IGoogleApiSource,
+          | protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.eventarc.v1.IGoogleApiSource,
+      | protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IGoogleApiSource,
+      protos.google.cloud.eventarc.v1.IGetGoogleApiSourceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getGoogleApiSource(request, options, callback);
+  }
 
   /**
    * Create a new trigger in a particular project and location.
@@ -1133,8 +1768,8 @@ export class EventarcClient {
    *   Required. The trigger to create.
    * @param {string} request.triggerId
    *   Required. The user-provided ID to be assigned to the trigger.
-   * @param {boolean} request.validateOnly
-   *   Required. If set, validate the request and preview the review, but do not
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
    *   post it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1279,8 +1914,8 @@ export class EventarcClient {
    * @param {boolean} request.allowMissing
    *   If set to true, and the trigger is not found, a new trigger will be
    *   created. In this situation, `update_mask` is ignored.
-   * @param {boolean} request.validateOnly
-   *   Required. If set, validate the request and preview the review, but do not
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
    *   post it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1424,8 +2059,8 @@ export class EventarcClient {
    * @param {boolean} request.allowMissing
    *   If set to true, and the trigger is not found, the request will succeed
    *   but no action will be taken on the server.
-   * @param {boolean} request.validateOnly
-   *   Required. If set, validate the request and preview the review, but do not
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
    *   post it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1567,8 +2202,8 @@ export class EventarcClient {
    *   Required. The channel to create.
    * @param {string} request.channelId
    *   Required. The user-provided ID to be assigned to the channel.
-   * @param {boolean} request.validateOnly
-   *   Required. If set, validate the request and preview the review, but do not
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
    *   post it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1710,8 +2345,8 @@ export class EventarcClient {
    *   The fields to be updated; only fields explicitly provided are updated.
    *   If no field mask is provided, all provided fields in the request are
    *   updated. To update all fields, provide a field mask of "*".
-   * @param {boolean} request.validateOnly
-   *   Required. If set, validate the request and preview the review, but do not
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
    *   post it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1849,8 +2484,8 @@ export class EventarcClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the channel to be deleted.
-   * @param {boolean} request.validateOnly
-   *   Required. If set, validate the request and preview the review, but do not
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
    *   post it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2266,6 +2901,1746 @@ export class EventarcClient {
     >;
   }
   /**
+   * Create a new MessageBus in a particular project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection in which to add this message bus.
+   * @param {google.cloud.eventarc.v1.MessageBus} request.messageBus
+   *   Required. The message bus to create.
+   * @param {string} request.messageBusId
+   *   Required. The user-provided ID to be assigned to the MessageBus. It should
+   *   match the format (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$)
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_message_bus.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreateMessageBus_async
+   */
+  createMessageBus(
+    request?: protos.google.cloud.eventarc.v1.ICreateMessageBusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createMessageBus(
+    request: protos.google.cloud.eventarc.v1.ICreateMessageBusRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMessageBus(
+    request: protos.google.cloud.eventarc.v1.ICreateMessageBusRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMessageBus(
+    request?: protos.google.cloud.eventarc.v1.ICreateMessageBusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IMessageBus,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createMessageBus(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createMessageBus()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_message_bus.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreateMessageBus_async
+   */
+  async checkCreateMessageBusProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.MessageBus,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMessageBus,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.MessageBus,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Update a single message bus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.eventarc.v1.MessageBus} request.messageBus
+   *   Required. The MessageBus to be updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The fields to be updated; only fields explicitly provided are
+   *   updated. If no field mask is provided, all provided fields in the request
+   *   are updated. To update all fields, provide a field mask of "*".
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the MessageBus is not found, a new MessageBus
+   *   will be created. In this situation, `update_mask` is ignored.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.update_message_bus.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_UpdateMessageBus_async
+   */
+  updateMessageBus(
+    request?: protos.google.cloud.eventarc.v1.IUpdateMessageBusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateMessageBus(
+    request: protos.google.cloud.eventarc.v1.IUpdateMessageBusRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMessageBus(
+    request: protos.google.cloud.eventarc.v1.IUpdateMessageBusRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMessageBus(
+    request?: protos.google.cloud.eventarc.v1.IUpdateMessageBusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IMessageBus,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'message_bus.name': request.messageBus!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateMessageBus(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateMessageBus()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.update_message_bus.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_UpdateMessageBus_async
+   */
+  async checkUpdateMessageBusProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.MessageBus,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMessageBus,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.MessageBus,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Delete a single message bus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the MessageBus to be deleted.
+   * @param {string} [request.etag]
+   *   Optional. If provided, the MessageBus will only be deleted if the etag
+   *   matches the current etag on the resource.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the MessageBus is not found, the request will
+   *   succeed but no action will be taken on the server.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_message_bus.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeleteMessageBus_async
+   */
+  deleteMessageBus(
+    request?: protos.google.cloud.eventarc.v1.IDeleteMessageBusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteMessageBus(
+    request: protos.google.cloud.eventarc.v1.IDeleteMessageBusRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteMessageBus(
+    request: protos.google.cloud.eventarc.v1.IDeleteMessageBusRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteMessageBus(
+    request?: protos.google.cloud.eventarc.v1.IDeleteMessageBusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IMessageBus,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IMessageBus,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteMessageBus(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteMessageBus()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_message_bus.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeleteMessageBus_async
+   */
+  async checkDeleteMessageBusProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.MessageBus,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteMessageBus,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.MessageBus,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Create a new Enrollment in a particular project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection in which to add this enrollment.
+   * @param {google.cloud.eventarc.v1.Enrollment} request.enrollment
+   *   Required. The enrollment to create.
+   * @param {string} request.enrollmentId
+   *   Required. The user-provided ID to be assigned to the Enrollment. It should
+   *   match the format (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_enrollment.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreateEnrollment_async
+   */
+  createEnrollment(
+    request?: protos.google.cloud.eventarc.v1.ICreateEnrollmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createEnrollment(
+    request: protos.google.cloud.eventarc.v1.ICreateEnrollmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createEnrollment(
+    request: protos.google.cloud.eventarc.v1.ICreateEnrollmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createEnrollment(
+    request?: protos.google.cloud.eventarc.v1.ICreateEnrollmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IEnrollment,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createEnrollment(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createEnrollment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_enrollment.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreateEnrollment_async
+   */
+  async checkCreateEnrollmentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.Enrollment,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createEnrollment,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.Enrollment,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Update a single Enrollment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.eventarc.v1.Enrollment} request.enrollment
+   *   Required. The Enrollment to be updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The fields to be updated; only fields explicitly provided are
+   *   updated. If no field mask is provided, all provided fields in the request
+   *   are updated. To update all fields, provide a field mask of "*".
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the Enrollment is not found, a new Enrollment
+   *   will be created. In this situation, `update_mask` is ignored.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.update_enrollment.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_UpdateEnrollment_async
+   */
+  updateEnrollment(
+    request?: protos.google.cloud.eventarc.v1.IUpdateEnrollmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateEnrollment(
+    request: protos.google.cloud.eventarc.v1.IUpdateEnrollmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEnrollment(
+    request: protos.google.cloud.eventarc.v1.IUpdateEnrollmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEnrollment(
+    request?: protos.google.cloud.eventarc.v1.IUpdateEnrollmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IEnrollment,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'enrollment.name': request.enrollment!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateEnrollment(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateEnrollment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.update_enrollment.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_UpdateEnrollment_async
+   */
+  async checkUpdateEnrollmentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.Enrollment,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateEnrollment,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.Enrollment,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Delete a single Enrollment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Enrollment to be deleted.
+   * @param {string} [request.etag]
+   *   Optional. If provided, the Enrollment will only be deleted if the etag
+   *   matches the current etag on the resource.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the Enrollment is not found, the request will
+   *   succeed but no action will be taken on the server.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_enrollment.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeleteEnrollment_async
+   */
+  deleteEnrollment(
+    request?: protos.google.cloud.eventarc.v1.IDeleteEnrollmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteEnrollment(
+    request: protos.google.cloud.eventarc.v1.IDeleteEnrollmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteEnrollment(
+    request: protos.google.cloud.eventarc.v1.IDeleteEnrollmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteEnrollment(
+    request?: protos.google.cloud.eventarc.v1.IDeleteEnrollmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IEnrollment,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IEnrollment,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteEnrollment(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteEnrollment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_enrollment.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeleteEnrollment_async
+   */
+  async checkDeleteEnrollmentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.Enrollment,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteEnrollment,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.Enrollment,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Create a new Pipeline in a particular project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection in which to add this pipeline.
+   * @param {google.cloud.eventarc.v1.Pipeline} request.pipeline
+   *   Required. The pipeline to create.
+   * @param {string} request.pipelineId
+   *   Required. The user-provided ID to be assigned to the Pipeline.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_pipeline.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreatePipeline_async
+   */
+  createPipeline(
+    request?: protos.google.cloud.eventarc.v1.ICreatePipelineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createPipeline(
+    request: protos.google.cloud.eventarc.v1.ICreatePipelineRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createPipeline(
+    request: protos.google.cloud.eventarc.v1.ICreatePipelineRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createPipeline(
+    request?: protos.google.cloud.eventarc.v1.ICreatePipelineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IPipeline,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createPipeline(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createPipeline()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_pipeline.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreatePipeline_async
+   */
+  async checkCreatePipelineProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.Pipeline,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createPipeline,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.Pipeline,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Update a single pipeline.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.eventarc.v1.Pipeline} request.pipeline
+   *   Required. The Pipeline to be updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The fields to be updated; only fields explicitly provided are
+   *   updated. If no field mask is provided, all provided fields in the request
+   *   are updated. To update all fields, provide a field mask of "*".
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the Pipeline is not found, a new Pipeline
+   *   will be created. In this situation, `update_mask` is ignored.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.update_pipeline.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_UpdatePipeline_async
+   */
+  updatePipeline(
+    request?: protos.google.cloud.eventarc.v1.IUpdatePipelineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updatePipeline(
+    request: protos.google.cloud.eventarc.v1.IUpdatePipelineRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updatePipeline(
+    request: protos.google.cloud.eventarc.v1.IUpdatePipelineRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updatePipeline(
+    request?: protos.google.cloud.eventarc.v1.IUpdatePipelineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IPipeline,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'pipeline.name': request.pipeline!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updatePipeline(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updatePipeline()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.update_pipeline.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_UpdatePipeline_async
+   */
+  async checkUpdatePipelineProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.Pipeline,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updatePipeline,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.Pipeline,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Delete a single pipeline.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Pipeline to be deleted.
+   * @param {string} [request.etag]
+   *   Optional. If provided, the Pipeline will only be deleted if the etag
+   *   matches the current etag on the resource.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the Pipeline is not found, the request will
+   *   succeed but no action will be taken on the server.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_pipeline.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeletePipeline_async
+   */
+  deletePipeline(
+    request?: protos.google.cloud.eventarc.v1.IDeletePipelineRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deletePipeline(
+    request: protos.google.cloud.eventarc.v1.IDeletePipelineRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deletePipeline(
+    request: protos.google.cloud.eventarc.v1.IDeletePipelineRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deletePipeline(
+    request?: protos.google.cloud.eventarc.v1.IDeletePipelineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IPipeline,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IPipeline,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deletePipeline(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deletePipeline()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_pipeline.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeletePipeline_async
+   */
+  async checkDeletePipelineProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.Pipeline,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deletePipeline,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.Pipeline,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Create a new GoogleApiSource in a particular project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection in which to add this google api source.
+   * @param {google.cloud.eventarc.v1.GoogleApiSource} request.googleApiSource
+   *   Required. The google api source to create.
+   * @param {string} request.googleApiSourceId
+   *   Required. The user-provided ID to be assigned to the GoogleApiSource. It
+   *   should match the format (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_google_api_source.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreateGoogleApiSource_async
+   */
+  createGoogleApiSource(
+    request?: protos.google.cloud.eventarc.v1.ICreateGoogleApiSourceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createGoogleApiSource(
+    request: protos.google.cloud.eventarc.v1.ICreateGoogleApiSourceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createGoogleApiSource(
+    request: protos.google.cloud.eventarc.v1.ICreateGoogleApiSourceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createGoogleApiSource(
+    request?: protos.google.cloud.eventarc.v1.ICreateGoogleApiSourceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IGoogleApiSource,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createGoogleApiSource(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createGoogleApiSource()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.create_google_api_source.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_CreateGoogleApiSource_async
+   */
+  async checkCreateGoogleApiSourceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.GoogleApiSource,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createGoogleApiSource,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.GoogleApiSource,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Update a single GoogleApiSource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.eventarc.v1.GoogleApiSource} request.googleApiSource
+   *   Required. The GoogleApiSource to be updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The fields to be updated; only fields explicitly provided are
+   *   updated. If no field mask is provided, all provided fields in the request
+   *   are updated. To update all fields, provide a field mask of "*".
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the GoogleApiSource is not found, a new
+   *   GoogleApiSource will be created. In this situation, `update_mask` is
+   *   ignored.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.update_google_api_source.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_UpdateGoogleApiSource_async
+   */
+  updateGoogleApiSource(
+    request?: protos.google.cloud.eventarc.v1.IUpdateGoogleApiSourceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateGoogleApiSource(
+    request: protos.google.cloud.eventarc.v1.IUpdateGoogleApiSourceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateGoogleApiSource(
+    request: protos.google.cloud.eventarc.v1.IUpdateGoogleApiSourceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateGoogleApiSource(
+    request?: protos.google.cloud.eventarc.v1.IUpdateGoogleApiSourceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IGoogleApiSource,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'google_api_source.name': request.googleApiSource!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateGoogleApiSource(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateGoogleApiSource()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.update_google_api_source.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_UpdateGoogleApiSource_async
+   */
+  async checkUpdateGoogleApiSourceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.GoogleApiSource,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateGoogleApiSource,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.GoogleApiSource,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Delete a single GoogleApiSource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the GoogleApiSource to be deleted.
+   * @param {string} [request.etag]
+   *   Optional. If provided, the MessageBus will only be deleted if the etag
+   *   matches the current etag on the resource.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the MessageBus is not found, the request will
+   *   succeed but no action will be taken on the server.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_google_api_source.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeleteGoogleApiSource_async
+   */
+  deleteGoogleApiSource(
+    request?: protos.google.cloud.eventarc.v1.IDeleteGoogleApiSourceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteGoogleApiSource(
+    request: protos.google.cloud.eventarc.v1.IDeleteGoogleApiSourceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteGoogleApiSource(
+    request: protos.google.cloud.eventarc.v1.IDeleteGoogleApiSourceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteGoogleApiSource(
+    request?: protos.google.cloud.eventarc.v1.IDeleteGoogleApiSourceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.eventarc.v1.IGoogleApiSource,
+            protos.google.cloud.eventarc.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.eventarc.v1.IGoogleApiSource,
+        protos.google.cloud.eventarc.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteGoogleApiSource(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteGoogleApiSource()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.delete_google_api_source.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_DeleteGoogleApiSource_async
+   */
+  async checkDeleteGoogleApiSourceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.eventarc.v1.GoogleApiSource,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteGoogleApiSource,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.eventarc.v1.GoogleApiSource,
+      protos.google.cloud.eventarc.v1.OperationMetadata
+    >;
+  }
+  /**
    * List triggers.
    *
    * @param {Object} request
@@ -2373,7 +4748,7 @@ export class EventarcClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTriggers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2594,7 +4969,7 @@ export class EventarcClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listChannels`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2807,7 +5182,7 @@ export class EventarcClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listProviders`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3025,7 +5400,7 @@ export class EventarcClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listChannelConnections`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3123,6 +5498,1120 @@ export class EventarcClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.eventarc.v1.IChannelConnection>;
+  }
+  /**
+   * List message buses.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list triggers on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filtersare described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.eventarc.v1.MessageBus|MessageBus}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMessageBusesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMessageBuses(
+    request?: protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IMessageBus[],
+      protos.google.cloud.eventarc.v1.IListMessageBusesRequest | null,
+      protos.google.cloud.eventarc.v1.IListMessageBusesResponse,
+    ]
+  >;
+  listMessageBuses(
+    request: protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
+      | protos.google.cloud.eventarc.v1.IListMessageBusesResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IMessageBus
+    >
+  ): void;
+  listMessageBuses(
+    request: protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
+      | protos.google.cloud.eventarc.v1.IListMessageBusesResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IMessageBus
+    >
+  ): void;
+  listMessageBuses(
+    request?: protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
+          | protos.google.cloud.eventarc.v1.IListMessageBusesResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IMessageBus
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
+      | protos.google.cloud.eventarc.v1.IListMessageBusesResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IMessageBus
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IMessageBus[],
+      protos.google.cloud.eventarc.v1.IListMessageBusesRequest | null,
+      protos.google.cloud.eventarc.v1.IListMessageBusesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listMessageBuses(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listMessageBuses`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list triggers on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filtersare described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.eventarc.v1.MessageBus|MessageBus} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMessageBusesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMessageBusesStream(
+    request?: protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMessageBuses'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMessageBuses.createStream(
+      this.innerApiCalls.listMessageBuses as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listMessageBuses`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list triggers on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filtersare described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.eventarc.v1.MessageBus|MessageBus}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.list_message_buses.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_ListMessageBuses_async
+   */
+  listMessageBusesAsync(
+    request?: protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.eventarc.v1.IMessageBus> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMessageBuses'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMessageBuses.asyncIterate(
+      this.innerApiCalls['listMessageBuses'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.eventarc.v1.IMessageBus>;
+  }
+  /**
+   * List message bus enrollments.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent message bus to list enrollments on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of string.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMessageBusEnrollmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMessageBusEnrollments(
+    request?: protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      string[],
+      protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest | null,
+      protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse,
+    ]
+  >;
+  listMessageBusEnrollments(
+    request: protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
+      | protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse
+      | null
+      | undefined,
+      string
+    >
+  ): void;
+  listMessageBusEnrollments(
+    request: protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
+      | protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse
+      | null
+      | undefined,
+      string
+    >
+  ): void;
+  listMessageBusEnrollments(
+    request?: protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
+          | protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse
+          | null
+          | undefined,
+          string
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
+      | protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse
+      | null
+      | undefined,
+      string
+    >
+  ): Promise<
+    [
+      string[],
+      protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest | null,
+      protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listMessageBusEnrollments(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `listMessageBusEnrollments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent message bus to list enrollments on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing string on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMessageBusEnrollmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMessageBusEnrollmentsStream(
+    request?: protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMessageBusEnrollments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMessageBusEnrollments.createStream(
+      this.innerApiCalls.listMessageBusEnrollments as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listMessageBusEnrollments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent message bus to list enrollments on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   string. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.list_message_bus_enrollments.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_ListMessageBusEnrollments_async
+   */
+  listMessageBusEnrollmentsAsync(
+    request?: protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
+    options?: CallOptions
+  ): AsyncIterable<string> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMessageBusEnrollments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMessageBusEnrollments.asyncIterate(
+      this.innerApiCalls['listMessageBusEnrollments'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<string>;
+  }
+  /**
+   * List Enrollments.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list triggers on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filtersare described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.eventarc.v1.Enrollment|Enrollment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEnrollmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listEnrollments(
+    request?: protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IEnrollment[],
+      protos.google.cloud.eventarc.v1.IListEnrollmentsRequest | null,
+      protos.google.cloud.eventarc.v1.IListEnrollmentsResponse,
+    ]
+  >;
+  listEnrollments(
+    request: protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
+      | protos.google.cloud.eventarc.v1.IListEnrollmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IEnrollment
+    >
+  ): void;
+  listEnrollments(
+    request: protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
+      | protos.google.cloud.eventarc.v1.IListEnrollmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IEnrollment
+    >
+  ): void;
+  listEnrollments(
+    request?: protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
+          | protos.google.cloud.eventarc.v1.IListEnrollmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IEnrollment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
+      | protos.google.cloud.eventarc.v1.IListEnrollmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IEnrollment
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IEnrollment[],
+      protos.google.cloud.eventarc.v1.IListEnrollmentsRequest | null,
+      protos.google.cloud.eventarc.v1.IListEnrollmentsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listEnrollments(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listEnrollments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list triggers on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filtersare described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.eventarc.v1.Enrollment|Enrollment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEnrollmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listEnrollmentsStream(
+    request?: protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listEnrollments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEnrollments.createStream(
+      this.innerApiCalls.listEnrollments as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listEnrollments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list triggers on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filtersare described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.eventarc.v1.Enrollment|Enrollment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.list_enrollments.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_ListEnrollments_async
+   */
+  listEnrollmentsAsync(
+    request?: protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.eventarc.v1.IEnrollment> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listEnrollments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listEnrollments.asyncIterate(
+      this.innerApiCalls['listEnrollments'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.eventarc.v1.IEnrollment>;
+  }
+  /**
+   * List pipelines.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list pipelines on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filters are described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.eventarc.v1.Pipeline|Pipeline}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPipelinesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listPipelines(
+    request?: protos.google.cloud.eventarc.v1.IListPipelinesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IPipeline[],
+      protos.google.cloud.eventarc.v1.IListPipelinesRequest | null,
+      protos.google.cloud.eventarc.v1.IListPipelinesResponse,
+    ]
+  >;
+  listPipelines(
+    request: protos.google.cloud.eventarc.v1.IListPipelinesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListPipelinesRequest,
+      protos.google.cloud.eventarc.v1.IListPipelinesResponse | null | undefined,
+      protos.google.cloud.eventarc.v1.IPipeline
+    >
+  ): void;
+  listPipelines(
+    request: protos.google.cloud.eventarc.v1.IListPipelinesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListPipelinesRequest,
+      protos.google.cloud.eventarc.v1.IListPipelinesResponse | null | undefined,
+      protos.google.cloud.eventarc.v1.IPipeline
+    >
+  ): void;
+  listPipelines(
+    request?: protos.google.cloud.eventarc.v1.IListPipelinesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListPipelinesRequest,
+          | protos.google.cloud.eventarc.v1.IListPipelinesResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IPipeline
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListPipelinesRequest,
+      protos.google.cloud.eventarc.v1.IListPipelinesResponse | null | undefined,
+      protos.google.cloud.eventarc.v1.IPipeline
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IPipeline[],
+      protos.google.cloud.eventarc.v1.IListPipelinesRequest | null,
+      protos.google.cloud.eventarc.v1.IListPipelinesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listPipelines(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listPipelines`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list pipelines on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filters are described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.eventarc.v1.Pipeline|Pipeline} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPipelinesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listPipelinesStream(
+    request?: protos.google.cloud.eventarc.v1.IListPipelinesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPipelines'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPipelines.createStream(
+      this.innerApiCalls.listPipelines as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listPipelines`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list pipelines on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filters are described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.eventarc.v1.Pipeline|Pipeline}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.list_pipelines.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_ListPipelines_async
+   */
+  listPipelinesAsync(
+    request?: protos.google.cloud.eventarc.v1.IListPipelinesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.eventarc.v1.IPipeline> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPipelines'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPipelines.asyncIterate(
+      this.innerApiCalls['listPipelines'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.eventarc.v1.IPipeline>;
+  }
+  /**
+   * List GoogleApiSources.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list GoogleApiSources on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filtersare described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.eventarc.v1.GoogleApiSource|GoogleApiSource}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGoogleApiSourcesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoogleApiSources(
+    request?: protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IGoogleApiSource[],
+      protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest | null,
+      protos.google.cloud.eventarc.v1.IListGoogleApiSourcesResponse,
+    ]
+  >;
+  listGoogleApiSources(
+    request: protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
+      | protos.google.cloud.eventarc.v1.IListGoogleApiSourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IGoogleApiSource
+    >
+  ): void;
+  listGoogleApiSources(
+    request: protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
+      | protos.google.cloud.eventarc.v1.IListGoogleApiSourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IGoogleApiSource
+    >
+  ): void;
+  listGoogleApiSources(
+    request?: protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
+          | protos.google.cloud.eventarc.v1.IListGoogleApiSourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.eventarc.v1.IGoogleApiSource
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
+      | protos.google.cloud.eventarc.v1.IListGoogleApiSourcesResponse
+      | null
+      | undefined,
+      protos.google.cloud.eventarc.v1.IGoogleApiSource
+    >
+  ): Promise<
+    [
+      protos.google.cloud.eventarc.v1.IGoogleApiSource[],
+      protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest | null,
+      protos.google.cloud.eventarc.v1.IListGoogleApiSourcesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listGoogleApiSources(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listGoogleApiSources`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list GoogleApiSources on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filtersare described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.eventarc.v1.GoogleApiSource|GoogleApiSource} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listGoogleApiSourcesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoogleApiSourcesStream(
+    request?: protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGoogleApiSources'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listGoogleApiSources.createStream(
+      this.innerApiCalls.listGoogleApiSources as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listGoogleApiSources`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent collection to list GoogleApiSources on.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return on each page.
+   *
+   *   Note: The service may send fewer.
+   * @param {string} [request.pageToken]
+   *   Optional. The page token; provide the value from the `next_page_token`
+   *   field in a previous call to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided must match
+   *   the previous call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. The sorting order of the resources returned. Value should be a
+   *   comma-separated list of fields. The default sorting order is ascending. To
+   *   specify descending order for a field, append a `desc` suffix; for example:
+   *   `name desc, update_time`.
+   * @param {string} [request.filter]
+   *   Optional. The filter field that the list request will filter on.
+   *   Possible filtersare described in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.eventarc.v1.GoogleApiSource|GoogleApiSource}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/eventarc.list_google_api_sources.js</caption>
+   * region_tag:eventarc_v1_generated_Eventarc_ListGoogleApiSources_async
+   */
+  listGoogleApiSourcesAsync(
+    request?: protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.eventarc.v1.IGoogleApiSource> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGoogleApiSources'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listGoogleApiSources.asyncIterate(
+      this.innerApiCalls['listGoogleApiSources'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.eventarc.v1.IGoogleApiSource>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -3372,7 +6861,7 @@ export class EventarcClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -3385,6 +6874,20 @@ export class EventarcClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3421,6 +6924,13 @@ export class EventarcClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3456,11 +6966,11 @@ export class EventarcClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -3469,6 +6979,20 @@ export class EventarcClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3499,7 +7023,7 @@ export class EventarcClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -3512,6 +7036,20 @@ export class EventarcClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3630,6 +7168,117 @@ export class EventarcClient {
   }
 
   /**
+   * Return a fully-qualified enrollment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} enrollment
+   * @returns {string} Resource name string.
+   */
+  enrollmentPath(project: string, location: string, enrollment: string) {
+    return this.pathTemplates.enrollmentPathTemplate.render({
+      project: project,
+      location: location,
+      enrollment: enrollment,
+    });
+  }
+
+  /**
+   * Parse the project from Enrollment resource.
+   *
+   * @param {string} enrollmentName
+   *   A fully-qualified path representing Enrollment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEnrollmentName(enrollmentName: string) {
+    return this.pathTemplates.enrollmentPathTemplate.match(enrollmentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Enrollment resource.
+   *
+   * @param {string} enrollmentName
+   *   A fully-qualified path representing Enrollment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEnrollmentName(enrollmentName: string) {
+    return this.pathTemplates.enrollmentPathTemplate.match(enrollmentName)
+      .location;
+  }
+
+  /**
+   * Parse the enrollment from Enrollment resource.
+   *
+   * @param {string} enrollmentName
+   *   A fully-qualified path representing Enrollment resource.
+   * @returns {string} A string representing the enrollment.
+   */
+  matchEnrollmentFromEnrollmentName(enrollmentName: string) {
+    return this.pathTemplates.enrollmentPathTemplate.match(enrollmentName)
+      .enrollment;
+  }
+
+  /**
+   * Return a fully-qualified googleApiSource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} google_api_source
+   * @returns {string} Resource name string.
+   */
+  googleApiSourcePath(
+    project: string,
+    location: string,
+    googleApiSource: string
+  ) {
+    return this.pathTemplates.googleApiSourcePathTemplate.render({
+      project: project,
+      location: location,
+      google_api_source: googleApiSource,
+    });
+  }
+
+  /**
+   * Parse the project from GoogleApiSource resource.
+   *
+   * @param {string} googleApiSourceName
+   *   A fully-qualified path representing GoogleApiSource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGoogleApiSourceName(googleApiSourceName: string) {
+    return this.pathTemplates.googleApiSourcePathTemplate.match(
+      googleApiSourceName
+    ).project;
+  }
+
+  /**
+   * Parse the location from GoogleApiSource resource.
+   *
+   * @param {string} googleApiSourceName
+   *   A fully-qualified path representing GoogleApiSource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGoogleApiSourceName(googleApiSourceName: string) {
+    return this.pathTemplates.googleApiSourcePathTemplate.match(
+      googleApiSourceName
+    ).location;
+  }
+
+  /**
+   * Parse the google_api_source from GoogleApiSource resource.
+   *
+   * @param {string} googleApiSourceName
+   *   A fully-qualified path representing GoogleApiSource resource.
+   * @returns {string} A string representing the google_api_source.
+   */
+  matchGoogleApiSourceFromGoogleApiSourceName(googleApiSourceName: string) {
+    return this.pathTemplates.googleApiSourcePathTemplate.match(
+      googleApiSourceName
+    ).google_api_source;
+  }
+
+  /**
    * Return a fully-qualified googleChannelConfig resource name string.
    *
    * @param {string} project
@@ -3703,6 +7352,107 @@ export class EventarcClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified messageBus resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} message_bus
+   * @returns {string} Resource name string.
+   */
+  messageBusPath(project: string, location: string, messageBus: string) {
+    return this.pathTemplates.messageBusPathTemplate.render({
+      project: project,
+      location: location,
+      message_bus: messageBus,
+    });
+  }
+
+  /**
+   * Parse the project from MessageBus resource.
+   *
+   * @param {string} messageBusName
+   *   A fully-qualified path representing MessageBus resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMessageBusName(messageBusName: string) {
+    return this.pathTemplates.messageBusPathTemplate.match(messageBusName)
+      .project;
+  }
+
+  /**
+   * Parse the location from MessageBus resource.
+   *
+   * @param {string} messageBusName
+   *   A fully-qualified path representing MessageBus resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMessageBusName(messageBusName: string) {
+    return this.pathTemplates.messageBusPathTemplate.match(messageBusName)
+      .location;
+  }
+
+  /**
+   * Parse the message_bus from MessageBus resource.
+   *
+   * @param {string} messageBusName
+   *   A fully-qualified path representing MessageBus resource.
+   * @returns {string} A string representing the message_bus.
+   */
+  matchMessageBusFromMessageBusName(messageBusName: string) {
+    return this.pathTemplates.messageBusPathTemplate.match(messageBusName)
+      .message_bus;
+  }
+
+  /**
+   * Return a fully-qualified pipeline resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} pipeline
+   * @returns {string} Resource name string.
+   */
+  pipelinePath(project: string, location: string, pipeline: string) {
+    return this.pathTemplates.pipelinePathTemplate.render({
+      project: project,
+      location: location,
+      pipeline: pipeline,
+    });
+  }
+
+  /**
+   * Parse the project from Pipeline resource.
+   *
+   * @param {string} pipelineName
+   *   A fully-qualified path representing Pipeline resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPipelineName(pipelineName: string) {
+    return this.pathTemplates.pipelinePathTemplate.match(pipelineName).project;
+  }
+
+  /**
+   * Parse the location from Pipeline resource.
+   *
+   * @param {string} pipelineName
+   *   A fully-qualified path representing Pipeline resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPipelineName(pipelineName: string) {
+    return this.pathTemplates.pipelinePathTemplate.match(pipelineName).location;
+  }
+
+  /**
+   * Parse the pipeline from Pipeline resource.
+   *
+   * @param {string} pipelineName
+   *   A fully-qualified path representing Pipeline resource.
+   * @returns {string} A string representing the pipeline.
+   */
+  matchPipelineFromPipelineName(pipelineName: string) {
+    return this.pathTemplates.pipelinePathTemplate.match(pipelineName).pipeline;
   }
 
   /**

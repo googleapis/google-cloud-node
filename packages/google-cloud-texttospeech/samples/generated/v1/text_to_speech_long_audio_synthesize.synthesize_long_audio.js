@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,7 +35,6 @@ function main(input, audioConfig, outputGcsUri, voice) {
   // const parent = 'abc123'
   /**
    *  Required. The Synthesizer requires either plain text or SSML as input.
-   *  While Long Audio is in preview, SSML is temporarily unsupported.
    */
   // const input = {}
   /**

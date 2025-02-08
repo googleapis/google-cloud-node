@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-channel",
-        "version": "3.2.1",
+        "version": "3.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -270,7 +270,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 59,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -285,6 +285,10 @@
                     },
                     {
                         "name": "domain",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "primary_admin_email",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -442,7 +446,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 92,
+                    "end": 97,
                     "type": "FULL"
                 }
             ],
@@ -457,6 +461,10 @@
                     },
                     {
                         "name": "cloud_identity_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "primary_admin_email",
                         "type": "TYPE_STRING"
                     },
                     {

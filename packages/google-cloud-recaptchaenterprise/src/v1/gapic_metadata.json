@@ -50,6 +50,16 @@
                 "migrateKey"
               ]
             },
+            "AddIpOverride": {
+              "methods": [
+                "addIpOverride"
+              ]
+            },
+            "RemoveIpOverride": {
+              "methods": [
+                "removeIpOverride"
+              ]
+            },
             "GetMetrics": {
               "methods": [
                 "getMetrics"
@@ -75,11 +85,23 @@
                 "deleteFirewallPolicy"
               ]
             },
+            "ReorderFirewallPolicies": {
+              "methods": [
+                "reorderFirewallPolicies"
+              ]
+            },
             "ListKeys": {
               "methods": [
                 "listKeys",
                 "listKeysStream",
                 "listKeysAsync"
+              ]
+            },
+            "ListIpOverrides": {
+              "methods": [
+                "listIpOverrides",
+                "listIpOverridesStream",
+                "listIpOverridesAsync"
               ]
             },
             "ListFirewallPolicies": {
@@ -155,6 +177,16 @@
                 "migrateKey"
               ]
             },
+            "AddIpOverride": {
+              "methods": [
+                "addIpOverride"
+              ]
+            },
+            "RemoveIpOverride": {
+              "methods": [
+                "removeIpOverride"
+              ]
+            },
             "GetMetrics": {
               "methods": [
                 "getMetrics"
@@ -180,11 +212,23 @@
                 "deleteFirewallPolicy"
               ]
             },
+            "ReorderFirewallPolicies": {
+              "methods": [
+                "reorderFirewallPolicies"
+              ]
+            },
             "ListKeys": {
               "methods": [
                 "listKeys",
                 "listKeysStream",
                 "listKeysAsync"
+              ]
+            },
+            "ListIpOverrides": {
+              "methods": [
+                "listIpOverrides",
+                "listIpOverridesStream",
+                "listIpOverridesAsync"
               ]
             },
             "ListFirewallPolicies": {

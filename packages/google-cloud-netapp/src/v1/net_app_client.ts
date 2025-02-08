@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/net_app_client_config.json`.
@@ -54,6 +55,8 @@ export class NetAppClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -113,8 +116,27 @@ export class NetAppClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof NetAppClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'netapp.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -129,7 +151,7 @@ export class NetAppClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -154,10 +176,10 @@ export class NetAppClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
@@ -167,7 +189,7 @@ export class NetAppClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -201,6 +223,9 @@ export class NetAppClient {
       ),
       kmsConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/kmsConfigs/{kms_config}'
+      ),
+      quotaRulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/volumes/{volume}/quotaRules/{quota_rule}'
       ),
       replicationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/volumes/{volume}/replications/{replication}'
@@ -265,6 +290,11 @@ export class NetAppClient {
         'nextPageToken',
         'backupPolicies'
       ),
+      listQuotaRules: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'quotaRules'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -324,6 +354,18 @@ export class NetAppClient {
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteStoragePoolMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const validateDirectoryServiceResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const validateDirectoryServiceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const switchActiveReplicaZoneResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.StoragePool'
+    ) as gax.protobuf.Type;
+    const switchActiveReplicaZoneMetadata = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const createVolumeResponse = protoFilesRoot.lookup(
@@ -446,6 +488,18 @@ export class NetAppClient {
     const reverseReplicationDirectionMetadata = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const establishPeeringResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.Replication'
+    ) as gax.protobuf.Type;
+    const establishPeeringMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const syncReplicationResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.Replication'
+    ) as gax.protobuf.Type;
+    const syncReplicationMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const createBackupVaultResponse = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.BackupVault'
     ) as gax.protobuf.Type;
@@ -500,6 +554,24 @@ export class NetAppClient {
     const deleteBackupPolicyMetadata = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createQuotaRuleResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.QuotaRule'
+    ) as gax.protobuf.Type;
+    const createQuotaRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateQuotaRuleResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.QuotaRule'
+    ) as gax.protobuf.Type;
+    const updateQuotaRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteQuotaRuleResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteQuotaRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createStoragePool: new this._gaxModule.LongrunningDescriptor(
@@ -516,6 +588,24 @@ export class NetAppClient {
         this.operationsClient,
         deleteStoragePoolResponse.decode.bind(deleteStoragePoolResponse),
         deleteStoragePoolMetadata.decode.bind(deleteStoragePoolMetadata)
+      ),
+      validateDirectoryService: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        validateDirectoryServiceResponse.decode.bind(
+          validateDirectoryServiceResponse
+        ),
+        validateDirectoryServiceMetadata.decode.bind(
+          validateDirectoryServiceMetadata
+        )
+      ),
+      switchActiveReplicaZone: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        switchActiveReplicaZoneResponse.decode.bind(
+          switchActiveReplicaZoneResponse
+        ),
+        switchActiveReplicaZoneMetadata.decode.bind(
+          switchActiveReplicaZoneMetadata
+        )
       ),
       createVolume: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -627,6 +717,16 @@ export class NetAppClient {
           reverseReplicationDirectionMetadata
         )
       ),
+      establishPeering: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        establishPeeringResponse.decode.bind(establishPeeringResponse),
+        establishPeeringMetadata.decode.bind(establishPeeringMetadata)
+      ),
+      syncReplication: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        syncReplicationResponse.decode.bind(syncReplicationResponse),
+        syncReplicationMetadata.decode.bind(syncReplicationMetadata)
+      ),
       createBackupVault: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createBackupVaultResponse.decode.bind(createBackupVaultResponse),
@@ -671,6 +771,21 @@ export class NetAppClient {
         this.operationsClient,
         deleteBackupPolicyResponse.decode.bind(deleteBackupPolicyResponse),
         deleteBackupPolicyMetadata.decode.bind(deleteBackupPolicyMetadata)
+      ),
+      createQuotaRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createQuotaRuleResponse.decode.bind(createQuotaRuleResponse),
+        createQuotaRuleMetadata.decode.bind(createQuotaRuleMetadata)
+      ),
+      updateQuotaRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateQuotaRuleResponse.decode.bind(updateQuotaRuleResponse),
+        updateQuotaRuleMetadata.decode.bind(updateQuotaRuleMetadata)
+      ),
+      deleteQuotaRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteQuotaRuleResponse.decode.bind(deleteQuotaRuleResponse),
+        deleteQuotaRuleMetadata.decode.bind(deleteQuotaRuleMetadata)
       ),
     };
 
@@ -729,6 +844,8 @@ export class NetAppClient {
       'getStoragePool',
       'updateStoragePool',
       'deleteStoragePool',
+      'validateDirectoryService',
+      'switchActiveReplicaZone',
       'listVolumes',
       'getVolume',
       'createVolume',
@@ -760,6 +877,8 @@ export class NetAppClient {
       'stopReplication',
       'resumeReplication',
       'reverseReplicationDirection',
+      'establishPeering',
+      'syncReplication',
       'createBackupVault',
       'getBackupVault',
       'listBackupVaults',
@@ -775,6 +894,11 @@ export class NetAppClient {
       'listBackupPolicies',
       'updateBackupPolicy',
       'deleteBackupPolicy',
+      'listQuotaRules',
+      'getQuotaRule',
+      'createQuotaRule',
+      'updateQuotaRule',
+      'deleteQuotaRule',
     ];
     for (const methodName of netAppStubMethods) {
       const callPromise = this.netAppStub.then(
@@ -810,19 +934,50 @@ export class NetAppClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'netapp.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'netapp.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -1704,6 +1859,88 @@ export class NetAppClient {
     this.initialize();
     return this.innerApiCalls.getBackupPolicy(request, options, callback);
   }
+  /**
+   * Returns details of the specified quota rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the quota rule
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.netapp.v1.QuotaRule|QuotaRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.get_quota_rule.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_GetQuotaRule_async
+   */
+  getQuotaRule(
+    request?: protos.google.cloud.netapp.v1.IGetQuotaRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.netapp.v1.IQuotaRule,
+      protos.google.cloud.netapp.v1.IGetQuotaRuleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getQuotaRule(
+    request: protos.google.cloud.netapp.v1.IGetQuotaRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.netapp.v1.IQuotaRule,
+      protos.google.cloud.netapp.v1.IGetQuotaRuleRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getQuotaRule(
+    request: protos.google.cloud.netapp.v1.IGetQuotaRuleRequest,
+    callback: Callback<
+      protos.google.cloud.netapp.v1.IQuotaRule,
+      protos.google.cloud.netapp.v1.IGetQuotaRuleRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getQuotaRule(
+    request?: protos.google.cloud.netapp.v1.IGetQuotaRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.netapp.v1.IQuotaRule,
+          protos.google.cloud.netapp.v1.IGetQuotaRuleRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.netapp.v1.IQuotaRule,
+      protos.google.cloud.netapp.v1.IGetQuotaRuleRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.netapp.v1.IQuotaRule,
+      protos.google.cloud.netapp.v1.IGetQuotaRuleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getQuotaRule(request, options, callback);
+  }
 
   /**
    * Creates a new storage pool.
@@ -1713,9 +1950,10 @@ export class NetAppClient {
    * @param {string} request.parent
    *   Required. Value for parent.
    * @param {string} request.storagePoolId
-   *   Required. Id of the requesting storage pool
-   *   If auto-generating Id server-side, remove this field and
-   *   id from the method_signature of Create RPC
+   *   Required. Id of the requesting storage pool. Must be unique within the
+   *   parent resource. Must contain only letters, numbers and hyphen, with the
+   *   first character a letter, the last a letter or a number, and a 63 character
+   *   maximum.
    * @param {google.cloud.netapp.v1.StoragePool} request.storagePool
    *   Required. The required parameters to create a new storage pool.
    * @param {object} [options]
@@ -2126,6 +2364,290 @@ export class NetAppClient {
     >;
   }
   /**
+   * ValidateDirectoryService does a connectivity check for a directory service
+   * policy attached to the storage pool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the storage pool
+   * @param {google.cloud.netapp.v1.DirectoryServiceType} request.directoryServiceType
+   *   Type of directory service policy attached to the storage pool.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.validate_directory_service.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_ValidateDirectoryService_async
+   */
+  validateDirectoryService(
+    request?: protos.google.cloud.netapp.v1.IValidateDirectoryServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  validateDirectoryService(
+    request: protos.google.cloud.netapp.v1.IValidateDirectoryServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  validateDirectoryService(
+    request: protos.google.cloud.netapp.v1.IValidateDirectoryServiceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  validateDirectoryService(
+    request?: protos.google.cloud.netapp.v1.IValidateDirectoryServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.validateDirectoryService(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `validateDirectoryService()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.validate_directory_service.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_ValidateDirectoryService_async
+   */
+  async checkValidateDirectoryServiceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.validateDirectoryService,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
+   * This operation will switch the active/replica zone for a regional
+   * storagePool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the storage pool
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.switch_active_replica_zone.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_SwitchActiveReplicaZone_async
+   */
+  switchActiveReplicaZone(
+    request?: protos.google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IStoragePool,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  switchActiveReplicaZone(
+    request: protos.google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IStoragePool,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  switchActiveReplicaZone(
+    request: protos.google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IStoragePool,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  switchActiveReplicaZone(
+    request?: protos.google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IStoragePool,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IStoragePool,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IStoragePool,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.switchActiveReplicaZone(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `switchActiveReplicaZone()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.switch_active_replica_zone.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_SwitchActiveReplicaZone_async
+   */
+  async checkSwitchActiveReplicaZoneProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.netapp.v1.StoragePool,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.switchActiveReplicaZone,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.netapp.v1.StoragePool,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
    * Creates a new Volume in a given project and location.
    *
    * @param {Object} request
@@ -2133,9 +2655,10 @@ export class NetAppClient {
    * @param {string} request.parent
    *   Required. Value for parent.
    * @param {string} request.volumeId
-   *   Required. Id of the requesting volume
-   *   If auto-generating Id server-side, remove this field and
-   *   Id from the method_signature of Create RPC
+   *   Required. Id of the requesting volume. Must be unique within the parent
+   *   resource. Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a number,
+   *   and a 63 character maximum.
    * @param {google.cloud.netapp.v1.Volume} request.volume
    *   Required. The volume being created.
    * @param {object} [options]
@@ -2703,9 +3226,10 @@ export class NetAppClient {
    * @param {google.cloud.netapp.v1.Snapshot} request.snapshot
    *   Required. A snapshot resource
    * @param {string} request.snapshotId
-   *   Required. ID of the snapshot to create.
-   *   This value must start with a lowercase letter followed by up to 62
-   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+   *   Required. ID of the snapshot to create. Must be unique within the parent
+   *   resource. Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
+   *   number, and a 63 character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3122,7 +3646,10 @@ export class NetAppClient {
    * @param {google.cloud.netapp.v1.ActiveDirectory} request.activeDirectory
    *   Required. Fields of the to be created active directory.
    * @param {string} request.activeDirectoryId
-   *   Required. ID of the active directory to create.
+   *   Required. ID of the active directory to create. Must be unique within the
+   *   parent resource. Must contain only letters, numbers and hyphen, with the
+   *   first character a letter , the last a letter or a number, and a 63
+   *   character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3538,9 +4065,10 @@ export class NetAppClient {
    * @param {string} request.parent
    *   Required. Value for parent.
    * @param {string} request.kmsConfigId
-   *   Required. Id of the requesting KmsConfig
-   *   If auto-generating Id server-side, remove this field and
-   *   id from the method_signature of Create RPC
+   *   Required. Id of the requesting KmsConfig. Must be unique within the parent
+   *   resource. Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
+   *   number, and a 63 character maximum.
    * @param {google.cloud.netapp.v1.KmsConfig} request.kmsConfig
    *   Required. The required parameters to create a new KmsConfig.
    * @param {object} [options]
@@ -4098,9 +4626,10 @@ export class NetAppClient {
    * @param {google.cloud.netapp.v1.Replication} request.replication
    *   Required. A replication resource
    * @param {string} request.replicationId
-   *   Required. ID of the replication to create.
-   *   This value must start with a lowercase letter followed by up to 62
-   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+   *   Required. ID of the replication to create. Must be unique within the parent
+   *   resource. Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
+   *   number, and a 63 character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4930,6 +5459,292 @@ export class NetAppClient {
     >;
   }
   /**
+   * Establish replication peering.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the replication, in the format of
+   *   projects/{project_id}/locations/{location}/volumes/{volume_id}/replications/{replication_id}.
+   * @param {string} request.peerClusterName
+   *   Required. Name of the user's local source cluster to be peered with the
+   *   destination cluster.
+   * @param {string} request.peerSvmName
+   *   Required. Name of the user's local source vserver svm to be peered with the
+   *   destination vserver svm.
+   * @param {string[]} [request.peerIpAddresses]
+   *   Optional. List of IPv4 ip addresses to be used for peering.
+   * @param {string} request.peerVolumeName
+   *   Required. Name of the user's local source volume to be peered with the
+   *   destination volume.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.establish_peering.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_EstablishPeering_async
+   */
+  establishPeering(
+    request?: protos.google.cloud.netapp.v1.IEstablishPeeringRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  establishPeering(
+    request: protos.google.cloud.netapp.v1.IEstablishPeeringRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  establishPeering(
+    request: protos.google.cloud.netapp.v1.IEstablishPeeringRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  establishPeering(
+    request?: protos.google.cloud.netapp.v1.IEstablishPeeringRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.establishPeering(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `establishPeering()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.establish_peering.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_EstablishPeering_async
+   */
+  async checkEstablishPeeringProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.netapp.v1.Replication,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.establishPeering,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.netapp.v1.Replication,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Syncs the replication. This will invoke one time volume data transfer from
+   * source to destination.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the replication, in the format of
+   *   projects/{project_id}/locations/{location}/volumes/{volume_id}/replications/{replication_id}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.sync_replication.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_SyncReplication_async
+   */
+  syncReplication(
+    request?: protos.google.cloud.netapp.v1.ISyncReplicationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  syncReplication(
+    request: protos.google.cloud.netapp.v1.ISyncReplicationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  syncReplication(
+    request: protos.google.cloud.netapp.v1.ISyncReplicationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  syncReplication(
+    request?: protos.google.cloud.netapp.v1.ISyncReplicationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IReplication,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IReplication,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.syncReplication(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `syncReplication()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.sync_replication.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_SyncReplication_async
+   */
+  async checkSyncReplicationProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.netapp.v1.Replication,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.syncReplication,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.netapp.v1.Replication,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
    * Creates new backup vault
    *
    * @param {Object} request
@@ -4940,11 +5755,9 @@ export class NetAppClient {
    * @param {string} request.backupVaultId
    *   Required. The ID to use for the backupVault.
    *   The ID must be unique within the specified location.
-   *   The max supported length is 63 characters.
-   *   This value must start with a lowercase letter followed by up to 62
-   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
-   *   Values that do not match this pattern will trigger an INVALID_ARGUMENT
-   *   error.
+   *   Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
+   *   number, and a 63 character maximum.
    * @param {google.cloud.netapp.v1.BackupVault} request.backupVault
    *   Required. A backupVault resource
    * @param {object} [options]
@@ -5369,10 +6182,9 @@ export class NetAppClient {
    * @param {string} request.backupId
    *   Required. The ID to use for the backup.
    *   The ID must be unique within the specified backupVault.
-   *   This value must start with a lowercase letter followed by up to 62
-   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
-   *   Values that do not match this pattern will trigger an INVALID_ARGUMENT
-   *   error.
+   *   Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
+   *   number, and a 63 character maximum.
    * @param {google.cloud.netapp.v1.Backup} request.backup
    *   Required. A backup resource
    * @param {object} [options]
@@ -5796,8 +6608,9 @@ export class NetAppClient {
    * @param {string} request.backupPolicyId
    *   Required. The ID to use for the backup policy.
    *   The ID must be unique within the specified location.
-   *   This value must start with a lowercase letter followed by up to 62
-   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+   *   Must contain only letters, numbers and hyphen, with the first
+   *   character a letter, the last a letter or a
+   *   number, and a 63 character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6207,21 +7020,443 @@ export class NetAppClient {
     >;
   }
   /**
+   * Creates a new quota rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for CreateQuotaRuleRequest
+   * @param {google.cloud.netapp.v1.QuotaRule} request.quotaRule
+   *   Required. Fields of the to be created quota rule.
+   * @param {string} request.quotaRuleId
+   *   Required. ID of the quota rule to create. Must be unique within the parent
+   *   resource. Must contain only letters, numbers, underscore and hyphen, with
+   *   the first character a letter or underscore, the last a letter or underscore
+   *   or a number, and a 63 character maximum.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.create_quota_rule.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_CreateQuotaRule_async
+   */
+  createQuotaRule(
+    request?: protos.google.cloud.netapp.v1.ICreateQuotaRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IQuotaRule,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createQuotaRule(
+    request: protos.google.cloud.netapp.v1.ICreateQuotaRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IQuotaRule,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createQuotaRule(
+    request: protos.google.cloud.netapp.v1.ICreateQuotaRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IQuotaRule,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createQuotaRule(
+    request?: protos.google.cloud.netapp.v1.ICreateQuotaRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IQuotaRule,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IQuotaRule,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IQuotaRule,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createQuotaRule(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createQuotaRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.create_quota_rule.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_CreateQuotaRule_async
+   */
+  async checkCreateQuotaRuleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.netapp.v1.QuotaRule,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createQuotaRule,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.netapp.v1.QuotaRule,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates a quota rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   Quota Rule resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.netapp.v1.QuotaRule} request.quotaRule
+   *   Required. The quota rule being updated
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.update_quota_rule.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_UpdateQuotaRule_async
+   */
+  updateQuotaRule(
+    request?: protos.google.cloud.netapp.v1.IUpdateQuotaRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IQuotaRule,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateQuotaRule(
+    request: protos.google.cloud.netapp.v1.IUpdateQuotaRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IQuotaRule,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateQuotaRule(
+    request: protos.google.cloud.netapp.v1.IUpdateQuotaRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IQuotaRule,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateQuotaRule(
+    request?: protos.google.cloud.netapp.v1.IUpdateQuotaRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IQuotaRule,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IQuotaRule,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IQuotaRule,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'quota_rule.name': request.quotaRule!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateQuotaRule(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateQuotaRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.update_quota_rule.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_UpdateQuotaRule_async
+   */
+  async checkUpdateQuotaRuleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.netapp.v1.QuotaRule,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateQuotaRule,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.netapp.v1.QuotaRule,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a quota rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the quota rule.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.delete_quota_rule.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_DeleteQuotaRule_async
+   */
+  deleteQuotaRule(
+    request?: protos.google.cloud.netapp.v1.IDeleteQuotaRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteQuotaRule(
+    request: protos.google.cloud.netapp.v1.IDeleteQuotaRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteQuotaRule(
+    request: protos.google.cloud.netapp.v1.IDeleteQuotaRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteQuotaRule(
+    request?: protos.google.cloud.netapp.v1.IDeleteQuotaRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteQuotaRule(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteQuotaRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.delete_quota_rule.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_DeleteQuotaRule_async
+   */
+  async checkDeleteQuotaRuleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteQuotaRule,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
    * Returns descriptions of all storage pools owned by the caller.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent value
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value to use if there are additional
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value to use if there are additional
    *   results to retrieve for this list request.
-   * @param {string} request.orderBy
-   *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
-   * @param {string} request.filter
-   *   List filter.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "name", "name desc" or ""
+   *   (unsorted).
+   * @param {string} [request.filter]
+   *   Optional. List filter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6310,20 +7545,21 @@ export class NetAppClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listStoragePools`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent value
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value to use if there are additional
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value to use if there are additional
    *   results to retrieve for this list request.
-   * @param {string} request.orderBy
-   *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
-   * @param {string} request.filter
-   *   List filter.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "name", "name desc" or ""
+   *   (unsorted).
+   * @param {string} [request.filter]
+   *   Optional. List filter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -6365,15 +7601,16 @@ export class NetAppClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent value
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value to use if there are additional
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value to use if there are additional
    *   results to retrieve for this list request.
-   * @param {string} request.orderBy
-   *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
-   * @param {string} request.filter
-   *   List filter.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "name", "name desc" or ""
+   *   (unsorted).
+   * @param {string} [request.filter]
+   *   Optional. List filter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -6503,7 +7740,7 @@ export class NetAppClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listVolumes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6700,7 +7937,7 @@ export class NetAppClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSnapshots`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6905,7 +8142,7 @@ export class NetAppClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listActiveDirectories`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7100,7 +8337,7 @@ export class NetAppClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listKmsConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7303,7 +8540,7 @@ export class NetAppClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listReplications`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7510,7 +8747,7 @@ export class NetAppClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listBackupVaults`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7720,7 +8957,7 @@ export class NetAppClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listBackups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7947,7 +9184,7 @@ export class NetAppClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listBackupPolicies`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -8043,6 +9280,201 @@ export class NetAppClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.netapp.v1.IBackupPolicy>;
+  }
+  /**
+   * Returns list of all quota rules in a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListQuotaRulesRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, the server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.netapp.v1.QuotaRule|QuotaRule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listQuotaRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listQuotaRules(
+    request?: protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.netapp.v1.IQuotaRule[],
+      protos.google.cloud.netapp.v1.IListQuotaRulesRequest | null,
+      protos.google.cloud.netapp.v1.IListQuotaRulesResponse,
+    ]
+  >;
+  listQuotaRules(
+    request: protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
+      protos.google.cloud.netapp.v1.IListQuotaRulesResponse | null | undefined,
+      protos.google.cloud.netapp.v1.IQuotaRule
+    >
+  ): void;
+  listQuotaRules(
+    request: protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
+      protos.google.cloud.netapp.v1.IListQuotaRulesResponse | null | undefined,
+      protos.google.cloud.netapp.v1.IQuotaRule
+    >
+  ): void;
+  listQuotaRules(
+    request?: protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
+          | protos.google.cloud.netapp.v1.IListQuotaRulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.netapp.v1.IQuotaRule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
+      protos.google.cloud.netapp.v1.IListQuotaRulesResponse | null | undefined,
+      protos.google.cloud.netapp.v1.IQuotaRule
+    >
+  ): Promise<
+    [
+      protos.google.cloud.netapp.v1.IQuotaRule[],
+      protos.google.cloud.netapp.v1.IListQuotaRulesRequest | null,
+      protos.google.cloud.netapp.v1.IListQuotaRulesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listQuotaRules(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listQuotaRules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListQuotaRulesRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, the server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.netapp.v1.QuotaRule|QuotaRule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listQuotaRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listQuotaRulesStream(
+    request?: protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listQuotaRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listQuotaRules.createStream(
+      this.innerApiCalls.listQuotaRules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listQuotaRules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListQuotaRulesRequest
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, the server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.netapp.v1.QuotaRule|QuotaRule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.list_quota_rules.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_ListQuotaRules_async
+   */
+  listQuotaRulesAsync(
+    request?: protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.netapp.v1.IQuotaRule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listQuotaRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listQuotaRules.asyncIterate(
+      this.innerApiCalls['listQuotaRules'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.netapp.v1.IQuotaRule>;
   }
   /**
    * Gets information about a location.
@@ -8154,7 +9586,7 @@ export class NetAppClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -8167,6 +9599,20 @@ export class NetAppClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -8203,6 +9649,13 @@ export class NetAppClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -8238,11 +9691,11 @@ export class NetAppClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -8251,6 +9704,20 @@ export class NetAppClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -8281,7 +9748,7 @@ export class NetAppClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -8294,6 +9761,20 @@ export class NetAppClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -8581,6 +10062,76 @@ export class NetAppClient {
   matchKmsConfigFromKmsConfigName(kmsConfigName: string) {
     return this.pathTemplates.kmsConfigPathTemplate.match(kmsConfigName)
       .kms_config;
+  }
+
+  /**
+   * Return a fully-qualified quotaRule resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} volume
+   * @param {string} quota_rule
+   * @returns {string} Resource name string.
+   */
+  quotaRulePath(
+    project: string,
+    location: string,
+    volume: string,
+    quotaRule: string
+  ) {
+    return this.pathTemplates.quotaRulePathTemplate.render({
+      project: project,
+      location: location,
+      volume: volume,
+      quota_rule: quotaRule,
+    });
+  }
+
+  /**
+   * Parse the project from QuotaRule resource.
+   *
+   * @param {string} quotaRuleName
+   *   A fully-qualified path representing QuotaRule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromQuotaRuleName(quotaRuleName: string) {
+    return this.pathTemplates.quotaRulePathTemplate.match(quotaRuleName)
+      .project;
+  }
+
+  /**
+   * Parse the location from QuotaRule resource.
+   *
+   * @param {string} quotaRuleName
+   *   A fully-qualified path representing QuotaRule resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromQuotaRuleName(quotaRuleName: string) {
+    return this.pathTemplates.quotaRulePathTemplate.match(quotaRuleName)
+      .location;
+  }
+
+  /**
+   * Parse the volume from QuotaRule resource.
+   *
+   * @param {string} quotaRuleName
+   *   A fully-qualified path representing QuotaRule resource.
+   * @returns {string} A string representing the volume.
+   */
+  matchVolumeFromQuotaRuleName(quotaRuleName: string) {
+    return this.pathTemplates.quotaRulePathTemplate.match(quotaRuleName).volume;
+  }
+
+  /**
+   * Parse the quota_rule from QuotaRule resource.
+   *
+   * @param {string} quotaRuleName
+   *   A fully-qualified path representing QuotaRule resource.
+   * @returns {string} A string representing the quota_rule.
+   */
+  matchQuotaRuleFromQuotaRuleName(quotaRuleName: string) {
+    return this.pathTemplates.quotaRulePathTemplate.match(quotaRuleName)
+      .quota_rule;
   }
 
   /**

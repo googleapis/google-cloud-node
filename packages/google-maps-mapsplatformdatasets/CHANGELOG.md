@@ -1,5 +1,45 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v2.0.0...maps-platform-datasets-v2.1.0) (2024-07-22)
+
+
+### Features
+
+* [mapsplatformdatasets] added a new API FetchDatasetErrors ([#5547](https://github.com/googleapis/google-cloud-node/issues/5547)) ([09bc034](https://github.com/googleapis/google-cloud-node/commit/09bc034537c6f2d5a8c3dc23c3d2efd207f01aac))
+
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v1.3.0...maps-platform-datasets-v2.0.0) (2024-06-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* [mapsplatformdatasets] make v1 stable/default version ([#5390](https://github.com/googleapis/google-cloud-node/issues/5390))
+
+### Features
+
+* [mapsplatformdatasets] make v1 stable/default version ([#5390](https://github.com/googleapis/google-cloud-node/issues/5390)) ([304acc9](https://github.com/googleapis/google-cloud-node/commit/304acc9821a8edf054952999b6e282d9d5affd8f))
+
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v1.2.0...maps-platform-datasets-v1.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v1.1.0...maps-platform-datasets-v1.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5192](https://github.com/googleapis/google-cloud-node/issues/5192)) ([b926f13](https://github.com/googleapis/google-cloud-node/commit/b926f1326ea4df73c411dbeb7e529f8d9ccc3642))
+
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v1.0.1...maps-platform-datasets-v1.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5029](https://github.com/googleapis/google-cloud-node/issues/5029)) ([09e59ad](https://github.com/googleapis/google-cloud-node/commit/09e59ad6e34001a33d01894ccd5a0643f1a84883))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v1.0.0...maps-platform-datasets-v1.0.1) (2023-09-06)
 
 

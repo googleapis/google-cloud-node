@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ function main(name) {
    *  Required. The name of the site tag to lookup.
    *  Note that site tags are singletons and do not have unique IDs.
    *  Format: properties/{property_id}/dataStreams/{stream_id}/globalSiteTag
-   *  Example: "properties/123/dataStreams/456/globalSiteTag"
+   *  Example: `properties/123/dataStreams/456/globalSiteTag`
    */
   // const name = 'abc123'
 

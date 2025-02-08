@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/edge_network_client_config.json`.
@@ -57,6 +58,8 @@ export class EdgeNetworkClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -116,8 +119,27 @@ export class EdgeNetworkClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof EdgeNetworkClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'edgenetwork.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -132,7 +154,7 @@ export class EdgeNetworkClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -157,10 +179,10 @@ export class EdgeNetworkClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
@@ -170,7 +192,7 @@ export class EdgeNetworkClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -526,19 +548,50 @@ export class EdgeNetworkClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'edgenetwork.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'edgenetwork.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -668,6 +721,7 @@ export class EdgeNetworkClient {
     return this.innerApiCalls.initializeZone(request, options, callback);
   }
   /**
+   * Deprecated: not implemented.
    * Gets details of a single Zone.
    *
    * @param {Object} request
@@ -682,6 +736,7 @@ export class EdgeNetworkClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/edge_network.get_zone.js</caption>
    * region_tag:edgenetwork_v1_generated_EdgeNetwork_GetZone_async
+   * @deprecated GetZone is deprecated and may be removed in a future version.
    */
   getZone(
     request?: protos.google.cloud.edgenetwork.v1.IGetZoneRequest,
@@ -747,6 +802,11 @@ export class EdgeNetworkClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$EdgeNetwork-$GetZone',
+      'GetZone is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.getZone(request, options, callback);
   }
   /**
@@ -3013,6 +3073,7 @@ export class EdgeNetworkClient {
     >;
   }
   /**
+   * Deprecated: not implemented.
    * Lists Zones in a given project and location.
    *
    * @param {Object} request
@@ -3039,6 +3100,7 @@ export class EdgeNetworkClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListZones is deprecated and may be removed in a future version.
    */
   listZones(
     request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
@@ -3106,6 +3168,11 @@ export class EdgeNetworkClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$EdgeNetwork-$ListZones',
+      'ListZones is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.listZones(request, options, callback);
   }
 
@@ -3134,6 +3201,7 @@ export class EdgeNetworkClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListZones is deprecated and may be removed in a future version.
    */
   listZonesStream(
     request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
@@ -3150,6 +3218,11 @@ export class EdgeNetworkClient {
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$EdgeNetwork-$ListZones',
+      'ListZones is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listZones.createStream(
       this.innerApiCalls.listZones as GaxCall,
       request,
@@ -3185,6 +3258,7 @@ export class EdgeNetworkClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/edge_network.list_zones.js</caption>
    * region_tag:edgenetwork_v1_generated_EdgeNetwork_ListZones_async
+   * @deprecated ListZones is deprecated and may be removed in a future version.
    */
   listZonesAsync(
     request?: protos.google.cloud.edgenetwork.v1.IListZonesRequest,
@@ -3201,6 +3275,11 @@ export class EdgeNetworkClient {
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$EdgeNetwork-$ListZones',
+      'ListZones is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.listZones.asyncIterate(
       this.innerApiCalls['listZones'] as GaxCall,
       request as {},

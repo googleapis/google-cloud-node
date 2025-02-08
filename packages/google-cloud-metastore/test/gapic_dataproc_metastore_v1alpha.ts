@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -167,16 +167,100 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1alpha.DataprocMetastoreClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        dataprocmetastoreModule.v1alpha.DataprocMetastoreClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new dataprocmetastoreModule.v1alpha.DataprocMetastoreClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'metastore.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        dataprocmetastoreModule.v1alpha.DataprocMetastoreClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new dataprocmetastoreModule.v1alpha.DataprocMetastoreClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          dataprocmetastoreModule.v1alpha.DataprocMetastoreClient.servicePath;
+        assert.strictEqual(servicePath, 'metastore.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          dataprocmetastoreModule.v1alpha.DataprocMetastoreClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'metastore.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new dataprocmetastoreModule.v1alpha.DataprocMetastoreClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'metastore.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new dataprocmetastoreModule.v1alpha.DataprocMetastoreClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'metastore.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new dataprocmetastoreModule.v1alpha.DataprocMetastoreClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'metastore.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new dataprocmetastoreModule.v1alpha.DataprocMetastoreClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'metastore.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new dataprocmetastoreModule.v1alpha.DataprocMetastoreClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -288,7 +372,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.Service()
       );
@@ -320,7 +404,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.Service()
       );
@@ -368,7 +452,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getService = stubSimpleCall(
         undefined,
@@ -422,7 +506,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.MetadataImport()
       );
@@ -454,7 +538,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.MetadataImport()
       );
@@ -502,7 +586,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMetadataImport = stubSimpleCall(
         undefined,
@@ -556,7 +640,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.Backup()
       );
@@ -588,7 +672,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.Backup()
       );
@@ -636,7 +720,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBackup = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getBackup(request), expectedError);
@@ -687,7 +771,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.RemoveIamPolicyResponse()
       );
@@ -719,7 +803,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.metastore.v1alpha.RemoveIamPolicyResponse()
       );
@@ -767,7 +851,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeIamPolicy = stubSimpleCall(
         undefined,
@@ -821,7 +905,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -855,7 +939,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -910,7 +994,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createService = stubLongRunningCall(
         undefined,
@@ -942,7 +1026,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createService = stubLongRunningCall(
         undefined,
@@ -1022,7 +1106,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service', 'name']
       );
       request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1057,7 +1141,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service', 'name']
       );
       request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1113,7 +1197,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service', 'name']
       );
       request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateService = stubLongRunningCall(
         undefined,
@@ -1146,7 +1230,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service', 'name']
       );
       request.service.name = defaultValue1;
-      const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateService = stubLongRunningCall(
         undefined,
@@ -1225,7 +1309,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1259,7 +1343,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1314,7 +1398,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteService = stubLongRunningCall(
         undefined,
@@ -1346,7 +1430,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteService = stubLongRunningCall(
         undefined,
@@ -1425,7 +1509,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1459,7 +1543,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1514,7 +1598,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMetadataImport = stubLongRunningCall(
         undefined,
@@ -1546,7 +1630,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMetadataImport = stubLongRunningCall(
         undefined,
@@ -1626,7 +1710,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['metadataImport', 'name']
       );
       request.metadataImport.name = defaultValue1;
-      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1661,7 +1745,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['metadataImport', 'name']
       );
       request.metadataImport.name = defaultValue1;
-      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1717,7 +1801,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['metadataImport', 'name']
       );
       request.metadataImport.name = defaultValue1;
-      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMetadataImport = stubLongRunningCall(
         undefined,
@@ -1750,7 +1834,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['metadataImport', 'name']
       );
       request.metadataImport.name = defaultValue1;
-      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `metadata_import.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMetadataImport = stubLongRunningCall(
         undefined,
@@ -1829,7 +1913,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1863,7 +1947,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1918,7 +2002,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportMetadata = stubLongRunningCall(
         undefined,
@@ -1950,7 +2034,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportMetadata = stubLongRunningCall(
         undefined,
@@ -2029,7 +2113,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2063,7 +2147,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2118,7 +2202,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restoreService = stubLongRunningCall(
         undefined,
@@ -2150,7 +2234,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restoreService = stubLongRunningCall(
         undefined,
@@ -2229,7 +2313,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2262,7 +2346,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2317,7 +2401,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBackup = stubLongRunningCall(
         undefined,
@@ -2349,7 +2433,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBackup = stubLongRunningCall(
         undefined,
@@ -2425,7 +2509,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2458,7 +2542,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2513,7 +2597,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBackup = stubLongRunningCall(
         undefined,
@@ -2545,7 +2629,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBackup = stubLongRunningCall(
         undefined,
@@ -2621,7 +2705,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2655,7 +2739,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2710,7 +2794,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryMetadata = stubLongRunningCall(
         undefined,
@@ -2742,7 +2826,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryMetadata = stubLongRunningCall(
         undefined,
@@ -2821,7 +2905,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2855,7 +2939,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2910,7 +2994,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.moveTableToDatabase = stubLongRunningCall(
         undefined,
@@ -2942,7 +3026,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.moveTableToDatabase = stubLongRunningCall(
         undefined,
@@ -3021,7 +3105,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3055,7 +3139,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3110,7 +3194,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.alterMetadataResourceLocation = stubLongRunningCall(
         undefined,
@@ -3145,7 +3229,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['service']
       );
       request.service = defaultValue1;
-      const expectedHeaderRequestParams = `service=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.alterMetadataResourceLocation = stubLongRunningCall(
         undefined,
@@ -3225,7 +3309,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.Service()
@@ -3265,7 +3349,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.Service()
@@ -3321,7 +3405,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServices = stubSimpleCall(
         undefined,
@@ -3353,7 +3437,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.Service()
@@ -3393,9 +3477,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3414,7 +3498,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServices.createStream = stubPageStreamingCall(
         undefined,
@@ -3445,9 +3529,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3466,7 +3550,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.Service()
@@ -3495,9 +3579,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3516,7 +3600,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServices.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3536,9 +3620,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3559,7 +3643,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.MetadataImport()
@@ -3600,7 +3684,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.MetadataImport()
@@ -3658,7 +3742,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMetadataImports = stubSimpleCall(
         undefined,
@@ -3690,7 +3774,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.MetadataImport()
@@ -3731,9 +3815,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listMetadataImports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3752,7 +3836,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMetadataImports.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3782,9 +3866,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listMetadataImports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3803,7 +3887,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.MetadataImport()
@@ -3833,9 +3917,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listMetadataImports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3854,7 +3938,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMetadataImports.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3875,9 +3959,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listMetadataImports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3898,7 +3982,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.Backup()
@@ -3938,7 +4022,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.Backup()
@@ -3994,7 +4078,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBackups = stubSimpleCall(
         undefined,
@@ -4026,7 +4110,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.Backup()
@@ -4066,9 +4150,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4087,7 +4171,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBackups.createStream = stubPageStreamingCall(
         undefined,
@@ -4118,9 +4202,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4139,7 +4223,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.metastore.v1alpha.Backup()
@@ -4168,9 +4252,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4189,7 +4273,7 @@ describe('v1alpha.DataprocMetastoreClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBackups.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -4211,9 +4295,9 @@ describe('v1alpha.DataprocMetastoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

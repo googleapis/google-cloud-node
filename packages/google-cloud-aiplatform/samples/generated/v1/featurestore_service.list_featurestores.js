@@ -96,7 +96,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listFeaturestoresAsync(request);
+    const iterable = aiplatformClient.listFeaturestoresAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

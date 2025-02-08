@@ -1,0 +1,8 @@
+[
+  "../../protos/google/cloud/apphub/v1/apphub_service.proto",
+  "../../protos/google/cloud/apphub/v1/application.proto",
+  "../../protos/google/cloud/apphub/v1/attributes.proto",
+  "../../protos/google/cloud/apphub/v1/service.proto",
+  "../../protos/google/cloud/apphub/v1/service_project_attachment.proto",
+  "../../protos/google/cloud/apphub/v1/workload.proto"
+]

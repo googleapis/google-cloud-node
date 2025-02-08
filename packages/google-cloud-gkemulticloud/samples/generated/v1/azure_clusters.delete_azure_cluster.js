@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -57,6 +57,13 @@ function main(name) {
    *  the request will fail and an ABORTED error will be returned.
    */
   // const etag = 'abc123'
+  /**
+   *  Optional. If set to true, the deletion of
+   *  AzureCluster google.cloud.gkemulticloud.v1.AzureCluster  resource will
+   *  succeed even if errors occur during deleting in cluster resources. Using
+   *  this parameter may result in orphaned resources in the cluster.
+   */
+  // const ignoreErrors = true
 
   // Imports the Gkemulticloud library
   const {AzureClustersClient} = require('@google-cloud/gkemulticloud').v1;

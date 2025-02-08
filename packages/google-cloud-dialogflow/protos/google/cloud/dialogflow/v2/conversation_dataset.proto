@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
 option go_package = "cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb";
 option java_multiple_files = true;
@@ -198,6 +197,14 @@ message ConversationDataset {
   // Output only. The number of conversations this conversation dataset
   // contains.
   int64 conversation_count = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. A read only boolean field reflecting Zone Isolation status of
+  // the dataset.
+  optional bool satisfies_pzi = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. A read only boolean field reflecting Zone Separation status of
+  // the dataset.
+  optional bool satisfies_pzs = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // The request message for
@@ -323,7 +330,7 @@ message ImportConversationDataOperationResponse {
   int32 import_count = 3;
 }
 
-// Metadata for [ConversationDatasets][CreateConversationDataset].
+// Metadata for [CreateConversationDataset][].
 message CreateConversationDatasetOperationMetadata {
   // The resource name of the conversation dataset that will be created. Format:
   // `projects/<Project ID>/locations/<Location
@@ -333,5 +340,5 @@ message CreateConversationDatasetOperationMetadata {
   }];
 }
 
-// Metadata for [ConversationDatasets][DeleteConversationDataset].
+// Metadata for [DeleteConversationDataset][].
 message DeleteConversationDatasetOperationMetadata {}

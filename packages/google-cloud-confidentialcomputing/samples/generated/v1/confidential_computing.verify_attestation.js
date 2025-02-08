@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,6 +28,14 @@ function main(challenge, tpmAttestation) {
    * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
+  /**
+   *  Optional. A TDX with CCEL and RTMR Attestation Quote.
+   */
+  // const tdCcel = {}
+  /**
+   *  Optional. An SEV-SNP Attestation Report.
+   */
+  // const sevSnpAttestation = {}
   /**
    *  Required. The name of the Challenge whose nonce was used to generate the
    *  attestation, in the format `projects/* /locations/* /challenges/*`. The

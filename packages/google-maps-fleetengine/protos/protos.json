@@ -1,0 +1,3922 @@
+{
+  "options": {
+    "syntax": "proto3"
+  },
+  "nested": {
+    "maps": {
+      "nested": {
+        "fleetengine": {
+          "nested": {
+            "v1": {
+              "options": {
+                "csharp_namespace": "Google.Maps.FleetEngine.V1",
+                "go_package": "cloud.google.com/go/maps/fleetengine/apiv1/fleetenginepb;fleetenginepb",
+                "java_multiple_files": true,
+                "java_outer_classname": "Vehicles",
+                "java_package": "com.google.maps.fleetengine.v1",
+                "objc_class_prefix": "CFE",
+                "php_namespace": "Google\\Maps\\FleetEngine\\V1",
+                "ruby_package": "Google::Maps::FleetEngine::V1"
+              },
+              "nested": {
+                "TerminalPointId": {
+                  "options": {
+                    "deprecated": true
+                  },
+                  "oneofs": {
+                    "Id": {
+                      "oneof": [
+                        "placeId",
+                        "generatedId"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "placeId": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "generatedId": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "value": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "deprecated": true
+                      }
+                    }
+                  }
+                },
+                "TerminalLocation": {
+                  "fields": {
+                    "point": {
+                      "type": "google.type.LatLng",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "terminalPointId": {
+                      "type": "TerminalPointId",
+                      "id": 2,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "accessPointId": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "tripId": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "terminalLocationType": {
+                      "type": "WaypointType",
+                      "id": 5,
+                      "options": {
+                        "deprecated": true
+                      }
+                    }
+                  }
+                },
+                "TripWaypoint": {
+                  "fields": {
+                    "location": {
+                      "type": "TerminalLocation",
+                      "id": 1
+                    },
+                    "tripId": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "waypointType": {
+                      "type": "WaypointType",
+                      "id": 3
+                    },
+                    "pathToWaypoint": {
+                      "rule": "repeated",
+                      "type": "google.type.LatLng",
+                      "id": 4
+                    },
+                    "encodedPathToWaypoint": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "trafficToWaypoint": {
+                      "type": "ConsumableTrafficPolyline",
+                      "id": 10
+                    },
+                    "distanceMeters": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 6
+                    },
+                    "eta": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 7
+                    },
+                    "duration": {
+                      "type": "google.protobuf.Duration",
+                      "id": 8
+                    }
+                  }
+                },
+                "TripType": {
+                  "values": {
+                    "UNKNOWN_TRIP_TYPE": 0,
+                    "SHARED": 1,
+                    "EXCLUSIVE": 2
+                  }
+                },
+                "WaypointType": {
+                  "values": {
+                    "UNKNOWN_WAYPOINT_TYPE": 0,
+                    "PICKUP_WAYPOINT_TYPE": 1,
+                    "DROP_OFF_WAYPOINT_TYPE": 2,
+                    "INTERMEDIATE_DESTINATION_WAYPOINT_TYPE": 3
+                  }
+                },
+                "PolylineFormatType": {
+                  "values": {
+                    "UNKNOWN_FORMAT_TYPE": 0,
+                    "LAT_LNG_LIST_TYPE": 1,
+                    "ENCODED_POLYLINE_TYPE": 2
+                  }
+                },
+                "NavigationStatus": {
+                  "values": {
+                    "UNKNOWN_NAVIGATION_STATUS": 0,
+                    "NO_GUIDANCE": 1,
+                    "ENROUTE_TO_DESTINATION": 2,
+                    "OFF_ROUTE": 3,
+                    "ARRIVED_AT_DESTINATION": 4
+                  }
+                },
+                "VehicleAttribute": {
+                  "oneofs": {
+                    "vehicleAttributeValue": {
+                      "oneof": [
+                        "stringValue",
+                        "boolValue",
+                        "numberValue"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "key": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "value": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "stringValue": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "boolValue": {
+                      "type": "bool",
+                      "id": 4
+                    },
+                    "numberValue": {
+                      "type": "double",
+                      "id": 5
+                    }
+                  }
+                },
+                "VehicleLocation": {
+                  "fields": {
+                    "location": {
+                      "type": "google.type.LatLng",
+                      "id": 1
+                    },
+                    "horizontalAccuracy": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 8,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "latlngAccuracy": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 22
+                    },
+                    "heading": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 2
+                    },
+                    "bearingAccuracy": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 10,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "headingAccuracy": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 23
+                    },
+                    "altitude": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 5
+                    },
+                    "verticalAccuracy": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 9,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "altitudeAccuracy": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 24
+                    },
+                    "speedKmph": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 3,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "speed": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 6
+                    },
+                    "speedAccuracy": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 7
+                    },
+                    "updateTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 4
+                    },
+                    "serverTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 13,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "locationSensor": {
+                      "type": "LocationSensor",
+                      "id": 11
+                    },
+                    "isRoadSnapped": {
+                      "type": "google.protobuf.BoolValue",
+                      "id": 27
+                    },
+                    "isGpsSensorEnabled": {
+                      "type": "google.protobuf.BoolValue",
+                      "id": 12,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    },
+                    "timeSinceUpdate": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 14,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    },
+                    "numStaleUpdates": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 15,
+                      "options": {
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    },
+                    "rawLocation": {
+                      "type": "google.type.LatLng",
+                      "id": 16
+                    },
+                    "rawLocationTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 17
+                    },
+                    "rawLocationSensor": {
+                      "type": "LocationSensor",
+                      "id": 28
+                    },
+                    "rawLocationAccuracy": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 25
+                    },
+                    "supplementalLocation": {
+                      "type": "google.type.LatLng",
+                      "id": 18
+                    },
+                    "supplementalLocationTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 19
+                    },
+                    "supplementalLocationSensor": {
+                      "type": "LocationSensor",
+                      "id": 20
+                    },
+                    "supplementalLocationAccuracy": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 21
+                    },
+                    "roadSnapped": {
+                      "type": "bool",
+                      "id": 26,
+                      "options": {
+                        "deprecated": true
+                      }
+                    }
+                  }
+                },
+                "LocationSensor": {
+                  "values": {
+                    "UNKNOWN_SENSOR": 0,
+                    "GPS": 1,
+                    "NETWORK": 2,
+                    "PASSIVE": 3,
+                    "ROAD_SNAPPED_LOCATION_PROVIDER": 4,
+                    "CUSTOMER_SUPPLIED_LOCATION": 5,
+                    "FLEET_ENGINE_LOCATION": 6,
+                    "FUSED_LOCATION_PROVIDER": 100,
+                    "CORE_LOCATION": 200
+                  }
+                },
+                "SpeedReadingInterval": {
+                  "fields": {
+                    "startPolylinePointIndex": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "endPolylinePointIndex": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "speed": {
+                      "type": "Speed",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "Speed": {
+                      "values": {
+                        "SPEED_UNSPECIFIED": 0,
+                        "NORMAL": 1,
+                        "SLOW": 2,
+                        "TRAFFIC_JAM": 3
+                      }
+                    }
+                  }
+                },
+                "ConsumableTrafficPolyline": {
+                  "fields": {
+                    "speedReadingInterval": {
+                      "rule": "repeated",
+                      "type": "SpeedReadingInterval",
+                      "id": 1
+                    },
+                    "encodedPathToWaypoint": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "RequestHeader": {
+                  "fields": {
+                    "languageCode": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "regionCode": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "sdkVersion": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "osVersion": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "deviceModel": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "sdkType": {
+                      "type": "SdkType",
+                      "id": 6
+                    },
+                    "mapsSdkVersion": {
+                      "type": "string",
+                      "id": 7
+                    },
+                    "navSdkVersion": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "platform": {
+                      "type": "Platform",
+                      "id": 9
+                    },
+                    "manufacturer": {
+                      "type": "string",
+                      "id": 10
+                    },
+                    "androidApiLevel": {
+                      "type": "int32",
+                      "id": 11
+                    },
+                    "traceId": {
+                      "type": "string",
+                      "id": 12
+                    }
+                  },
+                  "nested": {
+                    "SdkType": {
+                      "values": {
+                        "SDK_TYPE_UNSPECIFIED": 0,
+                        "CONSUMER": 1,
+                        "DRIVER": 2,
+                        "JAVASCRIPT": 3
+                      }
+                    },
+                    "Platform": {
+                      "values": {
+                        "PLATFORM_UNSPECIFIED": 0,
+                        "ANDROID": 1,
+                        "IOS": 2,
+                        "WEB": 3
+                      }
+                    }
+                  }
+                },
+                "TripService": {
+                  "options": {
+                    "(google.api.default_host)": "fleetengine.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                  },
+                  "methods": {
+                    "CreateTrip": {
+                      "requestType": "CreateTripRequest",
+                      "responseType": "Trip",
+                      "options": {
+                        "(google.api.http).post": "/v1/{parent=providers/*}/trips",
+                        "(google.api.http).body": "trip",
+                        "(google.api.routing).routing_parameters.field": "parent",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{parent=providers/*}/trips",
+                            "body": "trip"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "parent",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "GetTrip": {
+                      "requestType": "GetTripRequest",
+                      "responseType": "Trip",
+                      "options": {
+                        "(google.api.http).get": "/v1/{name=providers/*/trips/*}",
+                        "(google.api.routing).routing_parameters.field": "name",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{name=providers/*/trips/*}"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "name",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "ReportBillableTrip": {
+                      "requestType": "ReportBillableTripRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).post": "/v1/{name=providers/*/billableTrips/*}:report",
+                        "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "name",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{name=providers/*/billableTrips/*}:report",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "name",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "SearchTrips": {
+                      "requestType": "SearchTripsRequest",
+                      "responseType": "SearchTripsResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/{parent=providers/*}/trips:search",
+                        "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "parent",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{parent=providers/*}/trips:search",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "parent",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "UpdateTrip": {
+                      "requestType": "UpdateTripRequest",
+                      "responseType": "Trip",
+                      "options": {
+                        "(google.api.http).put": "/v1/{name=providers/*/trips/*}",
+                        "(google.api.http).body": "trip",
+                        "(google.api.routing).routing_parameters.field": "name",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "put": "/v1/{name=providers/*/trips/*}",
+                            "body": "trip"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "name",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "CreateTripRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 1
+                    },
+                    "parent": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "fleetengine.googleapis.com/Trip"
+                      }
+                    },
+                    "tripId": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "trip": {
+                      "type": "Trip",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "GetTripRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "fleetengine.googleapis.com/Trip"
+                      }
+                    },
+                    "view": {
+                      "type": "TripView",
+                      "id": 11
+                    },
+                    "currentRouteSegmentVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 6
+                    },
+                    "remainingWaypointsVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 7
+                    },
+                    "routeFormatType": {
+                      "type": "PolylineFormatType",
+                      "id": 8
+                    },
+                    "currentRouteSegmentTrafficVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 9
+                    },
+                    "remainingWaypointsRouteVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 10
+                    }
+                  }
+                },
+                "ReportBillableTripRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "countryCode": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "platform": {
+                      "type": "BillingPlatformIdentifier",
+                      "id": 5
+                    },
+                    "relatedIds": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    },
+                    "solutionType": {
+                      "type": "SolutionType",
+                      "id": 7
+                    }
+                  },
+                  "nested": {
+                    "SolutionType": {
+                      "values": {
+                        "SOLUTION_TYPE_UNSPECIFIED": 0,
+                        "ON_DEMAND_RIDESHARING_AND_DELIVERIES": 1
+                      }
+                    }
+                  }
+                },
+                "UpdateTripRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "trip": {
+                      "type": "Trip",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "SearchTripsRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 1
+                    },
+                    "parent": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "vehicleId": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "activeTripsOnly": {
+                      "type": "bool",
+                      "id": 5
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 6
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 7
+                    },
+                    "minimumStaleness": {
+                      "type": "google.protobuf.Duration",
+                      "id": 8
+                    }
+                  }
+                },
+                "SearchTripsResponse": {
+                  "fields": {
+                    "trips": {
+                      "rule": "repeated",
+                      "type": "Trip",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "Trip": {
+                  "options": {
+                    "(google.api.resource).type": "fleetengine.googleapis.com/Trip",
+                    "(google.api.resource).pattern": "providers/{provider}/trips/{trip}"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "vehicleId": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "tripStatus": {
+                      "type": "TripStatus",
+                      "id": 3
+                    },
+                    "tripType": {
+                      "type": "TripType",
+                      "id": 4
+                    },
+                    "pickupPoint": {
+                      "type": "TerminalLocation",
+                      "id": 5
+                    },
+                    "actualPickupPoint": {
+                      "type": "StopLocation",
+                      "id": 22,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    },
+                    "actualPickupArrivalPoint": {
+                      "type": "StopLocation",
+                      "id": 32,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    },
+                    "pickupTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "intermediateDestinations": {
+                      "rule": "repeated",
+                      "type": "TerminalLocation",
+                      "id": 14
+                    },
+                    "intermediateDestinationsVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 25
+                    },
+                    "intermediateDestinationIndex": {
+                      "type": "int32",
+                      "id": 15
+                    },
+                    "actualIntermediateDestinationArrivalPoints": {
+                      "rule": "repeated",
+                      "type": "StopLocation",
+                      "id": 33,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    },
+                    "actualIntermediateDestinations": {
+                      "rule": "repeated",
+                      "type": "StopLocation",
+                      "id": 34,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    },
+                    "dropoffPoint": {
+                      "type": "TerminalLocation",
+                      "id": 7
+                    },
+                    "actualDropoffPoint": {
+                      "type": "StopLocation",
+                      "id": 23,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    },
+                    "dropoffTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "remainingWaypoints": {
+                      "rule": "repeated",
+                      "type": "TripWaypoint",
+                      "id": 16,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "vehicleWaypoints": {
+                      "rule": "repeated",
+                      "type": "TripWaypoint",
+                      "id": 20
+                    },
+                    "route": {
+                      "rule": "repeated",
+                      "type": "google.type.LatLng",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "currentRouteSegment": {
+                      "type": "string",
+                      "id": 21,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "currentRouteSegmentVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 17,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "currentRouteSegmentTraffic": {
+                      "type": "ConsumableTrafficPolyline",
+                      "id": 28,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "currentRouteSegmentTrafficVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 30,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "currentRouteSegmentEndPoint": {
+                      "type": "TripWaypoint",
+                      "id": 24,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "remainingDistanceMeters": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 12,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "etaToFirstWaypoint": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 13,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "remainingTimeToFirstWaypoint": {
+                      "type": "google.protobuf.Duration",
+                      "id": 27,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "remainingWaypointsVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 19,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "remainingWaypointsRouteVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 29,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "numberOfPassengers": {
+                      "type": "int32",
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "IMMUTABLE"
+                      }
+                    },
+                    "lastLocation": {
+                      "type": "VehicleLocation",
+                      "id": 11,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "lastLocationSnappable": {
+                      "type": "bool",
+                      "id": 26,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "view": {
+                      "type": "TripView",
+                      "id": 31
+                    }
+                  }
+                },
+                "StopLocation": {
+                  "fields": {
+                    "point": {
+                      "type": "google.type.LatLng",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "timestamp": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    },
+                    "stopTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 3,
+                      "options": {
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    }
+                  }
+                },
+                "TripStatus": {
+                  "values": {
+                    "UNKNOWN_TRIP_STATUS": 0,
+                    "NEW": 1,
+                    "ENROUTE_TO_PICKUP": 2,
+                    "ARRIVED_AT_PICKUP": 3,
+                    "ARRIVED_AT_INTERMEDIATE_DESTINATION": 7,
+                    "ENROUTE_TO_INTERMEDIATE_DESTINATION": 8,
+                    "ENROUTE_TO_DROPOFF": 4,
+                    "COMPLETE": 5,
+                    "CANCELED": 6
+                  }
+                },
+                "BillingPlatformIdentifier": {
+                  "values": {
+                    "BILLING_PLATFORM_IDENTIFIER_UNSPECIFIED": 0,
+                    "SERVER": 1,
+                    "WEB": 2,
+                    "ANDROID": 3,
+                    "IOS": 4,
+                    "OTHERS": 5
+                  }
+                },
+                "TripView": {
+                  "values": {
+                    "TRIP_VIEW_UNSPECIFIED": 0,
+                    "SDK": 1,
+                    "JOURNEY_SHARING_V1S": 2
+                  }
+                },
+                "VehicleService": {
+                  "options": {
+                    "(google.api.default_host)": "fleetengine.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                  },
+                  "methods": {
+                    "CreateVehicle": {
+                      "requestType": "CreateVehicleRequest",
+                      "responseType": "Vehicle",
+                      "options": {
+                        "(google.api.http).post": "/v1/{parent=providers/*}/vehicles",
+                        "(google.api.http).body": "vehicle",
+                        "(google.api.routing).routing_parameters.field": "parent",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{parent=providers/*}/vehicles",
+                            "body": "vehicle"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "parent",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "GetVehicle": {
+                      "requestType": "GetVehicleRequest",
+                      "responseType": "Vehicle",
+                      "options": {
+                        "(google.api.http).get": "/v1/{name=providers/*/vehicles/*}",
+                        "(google.api.routing).routing_parameters.field": "name",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{name=providers/*/vehicles/*}"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "name",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "UpdateVehicle": {
+                      "requestType": "UpdateVehicleRequest",
+                      "responseType": "Vehicle",
+                      "options": {
+                        "(google.api.http).put": "/v1/{name=providers/*/vehicles/*}",
+                        "(google.api.http).body": "vehicle",
+                        "(google.api.routing).routing_parameters.field": "name",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "put": "/v1/{name=providers/*/vehicles/*}",
+                            "body": "vehicle"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "name",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "UpdateVehicleAttributes": {
+                      "requestType": "UpdateVehicleAttributesRequest",
+                      "responseType": "UpdateVehicleAttributesResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/{name=providers/*/vehicles/*}:updateAttributes",
+                        "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "name",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{name=providers/*/vehicles/*}:updateAttributes",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "name",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "ListVehicles": {
+                      "requestType": "ListVehiclesRequest",
+                      "responseType": "ListVehiclesResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1/{parent=providers/*}/vehicles",
+                        "(google.api.routing).routing_parameters.field": "parent",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{parent=providers/*}/vehicles"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "parent",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "SearchVehicles": {
+                      "requestType": "SearchVehiclesRequest",
+                      "responseType": "SearchVehiclesResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/{parent=providers/*}/vehicles:search",
+                        "(google.api.http).body": "*",
+                        "(google.api.routing).routing_parameters.field": "parent",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{parent=providers/*}/vehicles:search",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "parent",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "CreateVehicleRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 1
+                    },
+                    "parent": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "vehicleId": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "vehicle": {
+                      "type": "Vehicle",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "GetVehicleRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "fleetengine.googleapis.com/Vehicle"
+                      }
+                    },
+                    "currentRouteSegmentVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 4
+                    },
+                    "waypointsVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 5
+                    }
+                  }
+                },
+                "UpdateVehicleRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "vehicle": {
+                      "type": "Vehicle",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "UpdateVehicleAttributesRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "attributes": {
+                      "rule": "repeated",
+                      "type": "VehicleAttribute",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "UpdateVehicleAttributesResponse": {
+                  "fields": {
+                    "attributes": {
+                      "rule": "repeated",
+                      "type": "VehicleAttribute",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "SearchVehiclesRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 1
+                    },
+                    "parent": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "pickupPoint": {
+                      "type": "TerminalLocation",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "dropoffPoint": {
+                      "type": "TerminalLocation",
+                      "id": 5
+                    },
+                    "pickupRadiusMeters": {
+                      "type": "int32",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "count": {
+                      "type": "int32",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "minimumCapacity": {
+                      "type": "int32",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "tripTypes": {
+                      "rule": "repeated",
+                      "type": "TripType",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "maximumStaleness": {
+                      "type": "google.protobuf.Duration",
+                      "id": 10
+                    },
+                    "vehicleTypes": {
+                      "rule": "repeated",
+                      "type": "Vehicle.VehicleType",
+                      "id": 14,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "requiredAttributes": {
+                      "rule": "repeated",
+                      "type": "VehicleAttribute",
+                      "id": 12
+                    },
+                    "requiredOneOfAttributes": {
+                      "rule": "repeated",
+                      "type": "VehicleAttributeList",
+                      "id": 15
+                    },
+                    "requiredOneOfAttributeSets": {
+                      "rule": "repeated",
+                      "type": "VehicleAttributeList",
+                      "id": 20
+                    },
+                    "orderBy": {
+                      "type": "VehicleMatchOrder",
+                      "id": 13,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "includeBackToBack": {
+                      "type": "bool",
+                      "id": 18
+                    },
+                    "tripId": {
+                      "type": "string",
+                      "id": 19
+                    },
+                    "currentTripsPresent": {
+                      "type": "CurrentTripsPresent",
+                      "id": 21
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 22,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "VehicleMatchOrder": {
+                      "values": {
+                        "UNKNOWN_VEHICLE_MATCH_ORDER": 0,
+                        "PICKUP_POINT_ETA": 1,
+                        "PICKUP_POINT_DISTANCE": 2,
+                        "DROPOFF_POINT_ETA": 3,
+                        "PICKUP_POINT_STRAIGHT_DISTANCE": 4,
+                        "COST": 5
+                      }
+                    },
+                    "CurrentTripsPresent": {
+                      "values": {
+                        "CURRENT_TRIPS_PRESENT_UNSPECIFIED": 0,
+                        "NONE": 1,
+                        "ANY": 2
+                      }
+                    }
+                  }
+                },
+                "SearchVehiclesResponse": {
+                  "fields": {
+                    "matches": {
+                      "rule": "repeated",
+                      "type": "VehicleMatch",
+                      "id": 1
+                    }
+                  }
+                },
+                "ListVehiclesRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 12
+                    },
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "minimumCapacity": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 6
+                    },
+                    "tripTypes": {
+                      "rule": "repeated",
+                      "type": "TripType",
+                      "id": 7
+                    },
+                    "maximumStaleness": {
+                      "type": "google.protobuf.Duration",
+                      "id": 8
+                    },
+                    "vehicleTypeCategories": {
+                      "rule": "repeated",
+                      "type": "Vehicle.VehicleType.Category",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "requiredAttributes": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 10
+                    },
+                    "requiredOneOfAttributes": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 13
+                    },
+                    "requiredOneOfAttributeSets": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 15
+                    },
+                    "vehicleState": {
+                      "type": "VehicleState",
+                      "id": 11
+                    },
+                    "onTripOnly": {
+                      "type": "bool",
+                      "id": 14
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 16,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "viewport": {
+                      "type": "google.geo.type.Viewport",
+                      "id": 17,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ListVehiclesResponse": {
+                  "fields": {
+                    "vehicles": {
+                      "rule": "repeated",
+                      "type": "Vehicle",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "totalSize": {
+                      "type": "int64",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "Waypoint": {
+                  "fields": {
+                    "latLng": {
+                      "type": "google.type.LatLng",
+                      "id": 1
+                    },
+                    "eta": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    }
+                  }
+                },
+                "VehicleMatch": {
+                  "fields": {
+                    "vehicle": {
+                      "type": "Vehicle",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "vehiclePickupEta": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    },
+                    "vehiclePickupDistanceMeters": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 3
+                    },
+                    "vehiclePickupStraightLineDistanceMeters": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 11,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "vehicleDropoffEta": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 4
+                    },
+                    "vehiclePickupToDropoffDistanceMeters": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 5
+                    },
+                    "tripType": {
+                      "type": "TripType",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "vehicleTripsWaypoints": {
+                      "rule": "repeated",
+                      "type": "Waypoint",
+                      "id": 7
+                    },
+                    "vehicleMatchType": {
+                      "type": "VehicleMatchType",
+                      "id": 8
+                    },
+                    "requestedOrderedBy": {
+                      "type": "SearchVehiclesRequest.VehicleMatchOrder",
+                      "id": 9
+                    },
+                    "orderedBy": {
+                      "type": "SearchVehiclesRequest.VehicleMatchOrder",
+                      "id": 10
+                    }
+                  },
+                  "nested": {
+                    "VehicleMatchType": {
+                      "values": {
+                        "UNKNOWN": 0,
+                        "EXCLUSIVE": 1,
+                        "BACK_TO_BACK": 2,
+                        "CARPOOL": 3,
+                        "CARPOOL_BACK_TO_BACK": 4
+                      }
+                    }
+                  }
+                },
+                "VehicleAttributeList": {
+                  "fields": {
+                    "attributes": {
+                      "rule": "repeated",
+                      "type": "VehicleAttribute",
+                      "id": 1
+                    }
+                  }
+                },
+                "Vehicle": {
+                  "options": {
+                    "(google.api.resource).type": "fleetengine.googleapis.com/Vehicle",
+                    "(google.api.resource).pattern": "providers/{provider}/vehicles/{vehicle}"
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "vehicleState": {
+                      "type": "VehicleState",
+                      "id": 2
+                    },
+                    "supportedTripTypes": {
+                      "rule": "repeated",
+                      "type": "TripType",
+                      "id": 3
+                    },
+                    "currentTrips": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "lastLocation": {
+                      "type": "VehicleLocation",
+                      "id": 5
+                    },
+                    "maximumCapacity": {
+                      "type": "int32",
+                      "id": 6
+                    },
+                    "attributes": {
+                      "rule": "repeated",
+                      "type": "VehicleAttribute",
+                      "id": 8
+                    },
+                    "vehicleType": {
+                      "type": "VehicleType",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "licensePlate": {
+                      "type": "LicensePlate",
+                      "id": 10
+                    },
+                    "route": {
+                      "rule": "repeated",
+                      "type": "TerminalLocation",
+                      "id": 12,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "currentRouteSegment": {
+                      "type": "string",
+                      "id": 20
+                    },
+                    "currentRouteSegmentTraffic": {
+                      "type": "TrafficPolylineData",
+                      "id": 28,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    },
+                    "currentRouteSegmentVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 15,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "currentRouteSegmentEndPoint": {
+                      "type": "TripWaypoint",
+                      "id": 24
+                    },
+                    "remainingDistanceMeters": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 18
+                    },
+                    "etaToFirstWaypoint": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 19
+                    },
+                    "remainingTimeSeconds": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 25,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    },
+                    "waypoints": {
+                      "rule": "repeated",
+                      "type": "TripWaypoint",
+                      "id": 22
+                    },
+                    "waypointsVersion": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 16,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "backToBackEnabled": {
+                      "type": "bool",
+                      "id": 23
+                    },
+                    "navigationStatus": {
+                      "type": "NavigationStatus",
+                      "id": 26
+                    },
+                    "deviceSettings": {
+                      "type": "DeviceSettings",
+                      "id": 27,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "VehicleType": {
+                      "fields": {
+                        "category": {
+                          "type": "Category",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Category": {
+                          "values": {
+                            "UNKNOWN": 0,
+                            "AUTO": 1,
+                            "TAXI": 2,
+                            "TRUCK": 3,
+                            "TWO_WHEELER": 4,
+                            "BICYCLE": 5,
+                            "PEDESTRIAN": 6
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "BatteryInfo": {
+                  "fields": {
+                    "batteryStatus": {
+                      "type": "BatteryStatus",
+                      "id": 1
+                    },
+                    "powerSource": {
+                      "type": "PowerSource",
+                      "id": 2
+                    },
+                    "batteryPercentage": {
+                      "type": "float",
+                      "id": 3
+                    }
+                  }
+                },
+                "DeviceSettings": {
+                  "fields": {
+                    "locationPowerSaveMode": {
+                      "type": "LocationPowerSaveMode",
+                      "id": 1
+                    },
+                    "isPowerSaveMode": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "isInteractive": {
+                      "type": "bool",
+                      "id": 3
+                    },
+                    "batteryInfo": {
+                      "type": "BatteryInfo",
+                      "id": 4
+                    }
+                  }
+                },
+                "LicensePlate": {
+                  "fields": {
+                    "countryCode": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "lastCharacter": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "VisualTrafficReportPolylineRendering": {
+                  "fields": {
+                    "roadStretch": {
+                      "rule": "repeated",
+                      "type": "RoadStretch",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "RoadStretch": {
+                      "fields": {
+                        "style": {
+                          "type": "Style",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "offsetMeters": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "lengthMeters": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Style": {
+                          "values": {
+                            "STYLE_UNSPECIFIED": 0,
+                            "SLOWER_TRAFFIC": 1,
+                            "TRAFFIC_JAM": 2
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "TrafficPolylineData": {
+                  "fields": {
+                    "trafficRendering": {
+                      "type": "VisualTrafficReportPolylineRendering",
+                      "id": 1
+                    }
+                  }
+                },
+                "VehicleState": {
+                  "values": {
+                    "UNKNOWN_VEHICLE_STATE": 0,
+                    "OFFLINE": 1,
+                    "ONLINE": 2
+                  }
+                },
+                "LocationPowerSaveMode": {
+                  "values": {
+                    "UNKNOWN_LOCATION_POWER_SAVE_MODE": 0,
+                    "LOCATION_MODE_NO_CHANGE": 1,
+                    "LOCATION_MODE_GPS_DISABLED_WHEN_SCREEN_OFF": 2,
+                    "LOCATION_MODE_ALL_DISABLED_WHEN_SCREEN_OFF": 3,
+                    "LOCATION_MODE_FOREGROUND_ONLY": 4,
+                    "LOCATION_MODE_THROTTLE_REQUESTS_WHEN_SCREEN_OFF": 5
+                  }
+                },
+                "BatteryStatus": {
+                  "values": {
+                    "UNKNOWN_BATTERY_STATUS": 0,
+                    "BATTERY_STATUS_CHARGING": 1,
+                    "BATTERY_STATUS_DISCHARGING": 2,
+                    "BATTERY_STATUS_FULL": 3,
+                    "BATTERY_STATUS_NOT_CHARGING": 4,
+                    "BATTERY_STATUS_POWER_LOW": 5
+                  }
+                },
+                "PowerSource": {
+                  "values": {
+                    "UNKNOWN_POWER_SOURCE": 0,
+                    "POWER_SOURCE_AC": 1,
+                    "POWER_SOURCE_USB": 2,
+                    "POWER_SOURCE_WIRELESS": 3,
+                    "POWER_SOURCE_UNPLUGGED": 4
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "google": {
+      "nested": {
+        "geo": {
+          "nested": {
+            "type": {
+              "options": {
+                "go_package": "google.golang.org/genproto/googleapis/geo/type/viewport;viewport",
+                "java_multiple_files": true,
+                "java_outer_classname": "ViewportProto",
+                "java_package": "com.google.geo.type",
+                "objc_class_prefix": "GGTP"
+              },
+              "nested": {
+                "Viewport": {
+                  "fields": {
+                    "low": {
+                      "type": "google.type.LatLng",
+                      "id": 1
+                    },
+                    "high": {
+                      "type": "google.type.LatLng",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/latlng;latlng",
+            "java_multiple_files": true,
+            "java_outer_classname": "LatLngProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "LatLng": {
+              "fields": {
+                "latitude": {
+                  "type": "double",
+                  "id": 1
+                },
+                "longitude": {
+                  "type": "double",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "java_multiple_files": true,
+            "java_outer_classname": "RoutingProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
+              }
+            },
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "CommonLanguageSettings": {
+              "fields": {
+                "referenceDocsUri": {
+                  "type": "string",
+                  "id": 1,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "destinations": {
+                  "rule": "repeated",
+                  "type": "ClientLibraryDestination",
+                  "id": 2
+                }
+              }
+            },
+            "ClientLibrarySettings": {
+              "fields": {
+                "version": {
+                  "type": "string",
+                  "id": 1
+                },
+                "launchStage": {
+                  "type": "LaunchStage",
+                  "id": 2
+                },
+                "restNumericEnums": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "javaSettings": {
+                  "type": "JavaSettings",
+                  "id": 21
+                },
+                "cppSettings": {
+                  "type": "CppSettings",
+                  "id": 22
+                },
+                "phpSettings": {
+                  "type": "PhpSettings",
+                  "id": 23
+                },
+                "pythonSettings": {
+                  "type": "PythonSettings",
+                  "id": 24
+                },
+                "nodeSettings": {
+                  "type": "NodeSettings",
+                  "id": 25
+                },
+                "dotnetSettings": {
+                  "type": "DotnetSettings",
+                  "id": 26
+                },
+                "rubySettings": {
+                  "type": "RubySettings",
+                  "id": 27
+                },
+                "goSettings": {
+                  "type": "GoSettings",
+                  "id": 28
+                }
+              }
+            },
+            "Publishing": {
+              "fields": {
+                "methodSettings": {
+                  "rule": "repeated",
+                  "type": "MethodSettings",
+                  "id": 2
+                },
+                "newIssueUri": {
+                  "type": "string",
+                  "id": 101
+                },
+                "documentationUri": {
+                  "type": "string",
+                  "id": 102
+                },
+                "apiShortName": {
+                  "type": "string",
+                  "id": 103
+                },
+                "githubLabel": {
+                  "type": "string",
+                  "id": 104
+                },
+                "codeownerGithubTeams": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 105
+                },
+                "docTagPrefix": {
+                  "type": "string",
+                  "id": 106
+                },
+                "organization": {
+                  "type": "ClientLibraryOrganization",
+                  "id": 107
+                },
+                "librarySettings": {
+                  "rule": "repeated",
+                  "type": "ClientLibrarySettings",
+                  "id": 109
+                },
+                "protoReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 110
+                }
+              }
+            },
+            "JavaSettings": {
+              "fields": {
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "serviceClassNames": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 3
+                }
+              }
+            },
+            "CppSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PhpSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PythonSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "NodeSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "DotnetSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "renamedResources": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 3
+                },
+                "ignoredResources": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 4
+                },
+                "forcedNamespaceAliases": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                },
+                "handwrittenSignatures": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 6
+                }
+              }
+            },
+            "RubySettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "GoSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "MethodSettings": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "longRunning": {
+                  "type": "LongRunning",
+                  "id": 2
+                },
+                "autoPopulatedFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                }
+              },
+              "nested": {
+                "LongRunning": {
+                  "fields": {
+                    "initialPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 1
+                    },
+                    "pollDelayMultiplier": {
+                      "type": "float",
+                      "id": 2
+                    },
+                    "maxPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    },
+                    "totalPollTimeout": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            },
+            "ClientLibraryOrganization": {
+              "values": {
+                "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED": 0,
+                "CLOUD": 1,
+                "ADS": 2,
+                "PHOTOS": 3,
+                "STREET_VIEW": 4,
+                "SHOPPING": 5,
+                "GEO": 6,
+                "GENERATIVE_AI": 7
+              }
+            },
+            "ClientLibraryDestination": {
+              "values": {
+                "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
+                "GITHUB": 10,
+                "PACKAGE_MANAGER": 20
+              }
+            },
+            "LaunchStage": {
+              "values": {
+                "LAUNCH_STAGE_UNSPECIFIED": 0,
+                "UNIMPLEMENTED": 6,
+                "PRELAUNCH": 7,
+                "EARLY_ACCESS": 1,
+                "ALPHA": 2,
+                "BETA": 3,
+                "GA": 4,
+                "DEPRECATED": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "routing": {
+              "type": "google.api.RoutingRule",
+              "id": 72295729,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "RoutingRule": {
+              "fields": {
+                "routingParameters": {
+                  "rule": "repeated",
+                  "type": "RoutingParameter",
+                  "id": 2
+                }
+              }
+            },
+            "RoutingParameter": {
+              "fields": {
+                "field": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pathTemplate": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "protobuf": {
+          "options": {
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
+            "java_package": "com.google.protobuf",
+            "java_outer_classname": "DescriptorProtos",
+            "csharp_namespace": "Google.Protobuf.Reflection",
+            "objc_class_prefix": "GPB",
+            "cc_enable_arenas": true,
+            "optimize_for": "SPEED"
+          },
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "Edition": {
+              "values": {
+                "EDITION_UNKNOWN": 0,
+                "EDITION_PROTO2": 998,
+                "EDITION_PROTO3": 999,
+                "EDITION_2023": 1000,
+                "EDITION_2024": 1001,
+                "EDITION_1_TEST_ONLY": 1,
+                "EDITION_2_TEST_ONLY": 2,
+                "EDITION_99997_TEST_ONLY": 99997,
+                "EDITION_99998_TEST_ONLY": 99998,
+                "EDITION_99999_TEST_ONLY": 99999,
+                "EDITION_MAX": 2147483647
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "publicDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weakDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "messageType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "sourceCodeInfo": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                },
+                "edition": {
+                  "type": "Edition",
+                  "id": 14
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nestedType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extensionRange": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneofDecl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "options": {
+                      "type": "ExtensionRangeOptions",
+                      "id": 3
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "ExtensionRangeOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                },
+                "declaration": {
+                  "rule": "repeated",
+                  "type": "Declaration",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_SOURCE"
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
+                "verification": {
+                  "type": "VerificationState",
+                  "id": 3,
+                  "options": {
+                    "default": "UNVERIFIED",
+                    "retention": "RETENTION_SOURCE"
+                  }
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "nested": {
+                "Declaration": {
+                  "fields": {
+                    "number": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "fullName": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "type": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "reserved": {
+                      "type": "bool",
+                      "id": 5
+                    },
+                    "repeated": {
+                      "type": "bool",
+                      "id": 6
+                    }
+                  },
+                  "reserved": [
+                    [
+                      4,
+                      4
+                    ]
+                  ]
+                },
+                "VerificationState": {
+                  "values": {
+                    "DECLARATION": 0,
+                    "UNVERIFIED": 1
+                  }
+                }
+              }
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "typeName": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "defaultValue": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneofIndex": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "jsonName": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                },
+                "proto3Optional": {
+                  "type": "bool",
+                  "id": 17
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REPEATED": 3,
+                    "LABEL_REQUIRED": 2
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "EnumReservedRange",
+                  "id": 4
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "EnumReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "inputType": {
+                  "type": "string",
+                  "id": 2
+                },
+                "outputType": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "clientStreaming": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "serverStreaming": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "default": false
+                  }
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "javaPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "javaOuterClassname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "javaMultipleFiles": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenerateEqualsAndHash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "javaStringCheckUtf8": {
+                  "type": "bool",
+                  "id": 27,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "optimizeFor": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "goPackage": {
+                  "type": "string",
+                  "id": 11
+                },
+                "ccGenericServices": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenericServices": {
+                  "type": "bool",
+                  "id": 17,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "pyGenericServices": {
+                  "type": "bool",
+                  "id": 18,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "ccEnableArenas": {
+                  "type": "bool",
+                  "id": 31,
+                  "options": {
+                    "default": true
+                  }
+                },
+                "objcClassPrefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharpNamespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "swiftPrefix": {
+                  "type": "string",
+                  "id": 39
+                },
+                "phpClassPrefix": {
+                  "type": "string",
+                  "id": 40
+                },
+                "phpNamespace": {
+                  "type": "string",
+                  "id": 41
+                },
+                "phpMetadataNamespace": {
+                  "type": "string",
+                  "id": 44
+                },
+                "rubyPackage": {
+                  "type": "string",
+                  "id": 45
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  42,
+                  42
+                ],
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "messageSetWireFormat": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "noStandardDescriptorAccessor": {
+                  "type": "bool",
+                  "id": 2,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "mapEntry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 11,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 12
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
+                  8,
+                  8
+                ],
+                [
+                  9,
+                  9
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "unverifiedLazy": {
+                  "type": "bool",
+                  "id": 15,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "retention": {
+                  "type": "OptionRetention",
+                  "id": 17
+                },
+                "targets": {
+                  "rule": "repeated",
+                  "type": "OptionTargetType",
+                  "id": 19,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "editionDefaults": {
+                  "rule": "repeated",
+                  "type": "EditionDefault",
+                  "id": 20
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 21
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  18,
+                  18
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                },
+                "OptionRetention": {
+                  "values": {
+                    "RETENTION_UNKNOWN": 0,
+                    "RETENTION_RUNTIME": 1,
+                    "RETENTION_SOURCE": 2
+                  }
+                },
+                "OptionTargetType": {
+                  "values": {
+                    "TARGET_TYPE_UNKNOWN": 0,
+                    "TARGET_TYPE_FILE": 1,
+                    "TARGET_TYPE_EXTENSION_RANGE": 2,
+                    "TARGET_TYPE_MESSAGE": 3,
+                    "TARGET_TYPE_FIELD": 4,
+                    "TARGET_TYPE_ONEOF": 5,
+                    "TARGET_TYPE_ENUM": 6,
+                    "TARGET_TYPE_ENUM_ENTRY": 7,
+                    "TARGET_TYPE_SERVICE": 8,
+                    "TARGET_TYPE_METHOD": 9
+                  }
+                },
+                "EditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "value": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 1
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allowAlias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 7
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  5,
+                  5
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 2
+                },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 34
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "idempotencyLevel": {
+                  "type": "IdempotencyLevel",
+                  "id": 34,
+                  "options": {
+                    "default": "IDEMPOTENCY_UNKNOWN"
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 35
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "nested": {
+                "IdempotencyLevel": {
+                  "values": {
+                    "IDEMPOTENCY_UNKNOWN": 0,
+                    "NO_SIDE_EFFECTS": 1,
+                    "IDEMPOTENT": 2
+                  }
+                }
+              }
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifierValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positiveIntValue": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negativeIntValue": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "doubleValue": {
+                  "type": "double",
+                  "id": 6
+                },
+                "stringValue": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregateValue": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "namePart": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "isExtension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FeatureSet": {
+              "fields": {
+                "fieldPresence": {
+                  "type": "FieldPresence",
+                  "id": 1,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_2023",
+                    "edition_defaults.value": "EXPLICIT"
+                  }
+                },
+                "enumType": {
+                  "type": "EnumType",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "OPEN"
+                  }
+                },
+                "repeatedFieldEncoding": {
+                  "type": "RepeatedFieldEncoding",
+                  "id": 3,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "PACKED"
+                  }
+                },
+                "utf8Validation": {
+                  "type": "Utf8Validation",
+                  "id": 4,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "VERIFY"
+                  }
+                },
+                "messageEncoding": {
+                  "type": "MessageEncoding",
+                  "id": 5,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "edition_defaults.value": "LENGTH_PREFIXED"
+                  }
+                },
+                "jsonFormat": {
+                  "type": "JsonFormat",
+                  "id": 6,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "ALLOW"
+                  }
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  9995,
+                  9999
+                ]
+              ],
+              "reserved": [
+                [
+                  999,
+                  999
+                ]
+              ],
+              "nested": {
+                "FieldPresence": {
+                  "values": {
+                    "FIELD_PRESENCE_UNKNOWN": 0,
+                    "EXPLICIT": 1,
+                    "IMPLICIT": 2,
+                    "LEGACY_REQUIRED": 3
+                  }
+                },
+                "EnumType": {
+                  "values": {
+                    "ENUM_TYPE_UNKNOWN": 0,
+                    "OPEN": 1,
+                    "CLOSED": 2
+                  }
+                },
+                "RepeatedFieldEncoding": {
+                  "values": {
+                    "REPEATED_FIELD_ENCODING_UNKNOWN": 0,
+                    "PACKED": 1,
+                    "EXPANDED": 2
+                  }
+                },
+                "Utf8Validation": {
+                  "values": {
+                    "UTF8_VALIDATION_UNKNOWN": 0,
+                    "VERIFY": 2,
+                    "NONE": 3
+                  }
+                },
+                "MessageEncoding": {
+                  "values": {
+                    "MESSAGE_ENCODING_UNKNOWN": 0,
+                    "LENGTH_PREFIXED": 1,
+                    "DELIMITED": 2
+                  }
+                },
+                "JsonFormat": {
+                  "values": {
+                    "JSON_FORMAT_UNKNOWN": 0,
+                    "ALLOW": 1,
+                    "LEGACY_BEST_EFFORT": 2
+                  }
+                }
+              }
+            },
+            "FeatureSetDefaults": {
+              "fields": {
+                "defaults": {
+                  "rule": "repeated",
+                  "type": "FeatureSetEditionDefault",
+                  "id": 1
+                },
+                "minimumEdition": {
+                  "type": "Edition",
+                  "id": 4
+                },
+                "maximumEdition": {
+                  "type": "Edition",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "FeatureSetEditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "features": {
+                      "type": "FeatureSet",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leadingComments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailingComments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leadingDetachedComments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "sourceFile": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    },
+                    "semantic": {
+                      "type": "Semantic",
+                      "id": 5
+                    }
+                  },
+                  "nested": {
+                    "Semantic": {
+                      "values": {
+                        "NONE": 0,
+                        "SET": 1,
+                        "ALIAS": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "DoubleValue": {
+              "fields": {
+                "value": {
+                  "type": "double",
+                  "id": 1
+                }
+              }
+            },
+            "FloatValue": {
+              "fields": {
+                "value": {
+                  "type": "float",
+                  "id": 1
+                }
+              }
+            },
+            "Int64Value": {
+              "fields": {
+                "value": {
+                  "type": "int64",
+                  "id": 1
+                }
+              }
+            },
+            "UInt64Value": {
+              "fields": {
+                "value": {
+                  "type": "uint64",
+                  "id": 1
+                }
+              }
+            },
+            "Int32Value": {
+              "fields": {
+                "value": {
+                  "type": "int32",
+                  "id": 1
+                }
+              }
+            },
+            "UInt32Value": {
+              "fields": {
+                "value": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "BoolValue": {
+              "fields": {
+                "value": {
+                  "type": "bool",
+                  "id": 1
+                }
+              }
+            },
+            "StringValue": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BytesValue": {
+              "fields": {
+                "value": {
+                  "type": "bytes",
+                  "id": 1
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

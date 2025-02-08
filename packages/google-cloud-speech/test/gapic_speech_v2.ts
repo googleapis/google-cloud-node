@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -180,14 +180,92 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2.SpeechClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = speechModule.v2.SpeechClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new speechModule.v2.SpeechClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'speech.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = speechModule.v2.SpeechClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new speechModule.v2.SpeechClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = speechModule.v2.SpeechClient.servicePath;
+        assert.strictEqual(servicePath, 'speech.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = speechModule.v2.SpeechClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'speech.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new speechModule.v2.SpeechClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'speech.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new speechModule.v2.SpeechClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'speech.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new speechModule.v2.SpeechClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'speech.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new speechModule.v2.SpeechClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'speech.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new speechModule.v2.SpeechClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -291,7 +369,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.Recognizer()
       );
@@ -322,7 +400,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.Recognizer()
       );
@@ -369,7 +447,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRecognizer = stubSimpleCall(
         undefined,
@@ -421,7 +499,7 @@ describe('v2.SpeechClient', () => {
         ['recognizer']
       );
       request.recognizer = defaultValue1;
-      const expectedHeaderRequestParams = `recognizer=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recognizer=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.RecognizeResponse()
       );
@@ -452,7 +530,7 @@ describe('v2.SpeechClient', () => {
         ['recognizer']
       );
       request.recognizer = defaultValue1;
-      const expectedHeaderRequestParams = `recognizer=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recognizer=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.RecognizeResponse()
       );
@@ -499,7 +577,7 @@ describe('v2.SpeechClient', () => {
         ['recognizer']
       );
       request.recognizer = defaultValue1;
-      const expectedHeaderRequestParams = `recognizer=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recognizer=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.recognize = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.recognize(request), expectedError);
@@ -548,7 +626,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.Config()
       );
@@ -579,7 +657,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.Config()
       );
@@ -626,7 +704,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConfig = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getConfig(request), expectedError);
@@ -676,7 +754,7 @@ describe('v2.SpeechClient', () => {
         ['config', 'name']
       );
       request.config.name = defaultValue1;
-      const expectedHeaderRequestParams = `config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.Config()
       );
@@ -708,7 +786,7 @@ describe('v2.SpeechClient', () => {
         ['config', 'name']
       );
       request.config.name = defaultValue1;
-      const expectedHeaderRequestParams = `config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.Config()
       );
@@ -756,7 +834,7 @@ describe('v2.SpeechClient', () => {
         ['config', 'name']
       );
       request.config.name = defaultValue1;
-      const expectedHeaderRequestParams = `config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConfig = stubSimpleCall(
         undefined,
@@ -809,7 +887,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.CustomClass()
       );
@@ -840,7 +918,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.CustomClass()
       );
@@ -887,7 +965,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomClass = stubSimpleCall(
         undefined,
@@ -939,7 +1017,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.PhraseSet()
       );
@@ -970,7 +1048,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v2.PhraseSet()
       );
@@ -1017,7 +1095,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPhraseSet = stubSimpleCall(
         undefined,
@@ -1069,7 +1147,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1102,7 +1180,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1156,7 +1234,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRecognizer = stubLongRunningCall(
         undefined,
@@ -1187,7 +1265,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRecognizer = stubLongRunningCall(
         undefined,
@@ -1264,7 +1342,7 @@ describe('v2.SpeechClient', () => {
         ['recognizer', 'name']
       );
       request.recognizer.name = defaultValue1;
-      const expectedHeaderRequestParams = `recognizer.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recognizer.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1298,7 +1376,7 @@ describe('v2.SpeechClient', () => {
         ['recognizer', 'name']
       );
       request.recognizer.name = defaultValue1;
-      const expectedHeaderRequestParams = `recognizer.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recognizer.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1353,7 +1431,7 @@ describe('v2.SpeechClient', () => {
         ['recognizer', 'name']
       );
       request.recognizer.name = defaultValue1;
-      const expectedHeaderRequestParams = `recognizer.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recognizer.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRecognizer = stubLongRunningCall(
         undefined,
@@ -1385,7 +1463,7 @@ describe('v2.SpeechClient', () => {
         ['recognizer', 'name']
       );
       request.recognizer.name = defaultValue1;
-      const expectedHeaderRequestParams = `recognizer.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recognizer.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRecognizer = stubLongRunningCall(
         undefined,
@@ -1461,7 +1539,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1494,7 +1572,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1548,7 +1626,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRecognizer = stubLongRunningCall(
         undefined,
@@ -1579,7 +1657,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRecognizer = stubLongRunningCall(
         undefined,
@@ -1655,7 +1733,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1688,7 +1766,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1742,7 +1820,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteRecognizer = stubLongRunningCall(
         undefined,
@@ -1773,7 +1851,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteRecognizer = stubLongRunningCall(
         undefined,
@@ -1849,7 +1927,7 @@ describe('v2.SpeechClient', () => {
         ['recognizer']
       );
       request.recognizer = defaultValue1;
-      const expectedHeaderRequestParams = `recognizer=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recognizer=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1882,7 +1960,7 @@ describe('v2.SpeechClient', () => {
         ['recognizer']
       );
       request.recognizer = defaultValue1;
-      const expectedHeaderRequestParams = `recognizer=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recognizer=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1936,7 +2014,7 @@ describe('v2.SpeechClient', () => {
         ['recognizer']
       );
       request.recognizer = defaultValue1;
-      const expectedHeaderRequestParams = `recognizer=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recognizer=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchRecognize = stubLongRunningCall(
         undefined,
@@ -1967,7 +2045,7 @@ describe('v2.SpeechClient', () => {
         ['recognizer']
       );
       request.recognizer = defaultValue1;
-      const expectedHeaderRequestParams = `recognizer=${defaultValue1}`;
+      const expectedHeaderRequestParams = `recognizer=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchRecognize = stubLongRunningCall(
         undefined,
@@ -2043,7 +2121,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2076,7 +2154,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2130,7 +2208,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomClass = stubLongRunningCall(
         undefined,
@@ -2161,7 +2239,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomClass = stubLongRunningCall(
         undefined,
@@ -2238,7 +2316,7 @@ describe('v2.SpeechClient', () => {
         ['customClass', 'name']
       );
       request.customClass.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2272,7 +2350,7 @@ describe('v2.SpeechClient', () => {
         ['customClass', 'name']
       );
       request.customClass.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2327,7 +2405,7 @@ describe('v2.SpeechClient', () => {
         ['customClass', 'name']
       );
       request.customClass.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomClass = stubLongRunningCall(
         undefined,
@@ -2359,7 +2437,7 @@ describe('v2.SpeechClient', () => {
         ['customClass', 'name']
       );
       request.customClass.name = defaultValue1;
-      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomClass = stubLongRunningCall(
         undefined,
@@ -2435,7 +2513,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2468,7 +2546,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2522,7 +2600,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCustomClass = stubLongRunningCall(
         undefined,
@@ -2553,7 +2631,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCustomClass = stubLongRunningCall(
         undefined,
@@ -2629,7 +2707,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2662,7 +2740,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2716,7 +2794,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteCustomClass = stubLongRunningCall(
         undefined,
@@ -2747,7 +2825,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteCustomClass = stubLongRunningCall(
         undefined,
@@ -2823,7 +2901,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2856,7 +2934,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2910,7 +2988,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPhraseSet = stubLongRunningCall(
         undefined,
@@ -2941,7 +3019,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPhraseSet = stubLongRunningCall(
         undefined,
@@ -3018,7 +3096,7 @@ describe('v2.SpeechClient', () => {
         ['phraseSet', 'name']
       );
       request.phraseSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3052,7 +3130,7 @@ describe('v2.SpeechClient', () => {
         ['phraseSet', 'name']
       );
       request.phraseSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3107,7 +3185,7 @@ describe('v2.SpeechClient', () => {
         ['phraseSet', 'name']
       );
       request.phraseSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePhraseSet = stubLongRunningCall(
         undefined,
@@ -3139,7 +3217,7 @@ describe('v2.SpeechClient', () => {
         ['phraseSet', 'name']
       );
       request.phraseSet.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePhraseSet = stubLongRunningCall(
         undefined,
@@ -3215,7 +3293,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3248,7 +3326,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3302,7 +3380,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePhraseSet = stubLongRunningCall(
         undefined,
@@ -3333,7 +3411,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePhraseSet = stubLongRunningCall(
         undefined,
@@ -3409,7 +3487,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3442,7 +3520,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3496,7 +3574,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeletePhraseSet = stubLongRunningCall(
         undefined,
@@ -3527,7 +3605,7 @@ describe('v2.SpeechClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeletePhraseSet = stubLongRunningCall(
         undefined,
@@ -3693,7 +3771,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.Recognizer()),
         generateSampleMessage(new protos.google.cloud.speech.v2.Recognizer()),
@@ -3726,7 +3804,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.Recognizer()),
         generateSampleMessage(new protos.google.cloud.speech.v2.Recognizer()),
@@ -3775,7 +3853,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRecognizers = stubSimpleCall(
         undefined,
@@ -3806,7 +3884,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.Recognizer()),
         generateSampleMessage(new protos.google.cloud.speech.v2.Recognizer()),
@@ -3840,9 +3918,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listRecognizers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3860,7 +3938,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRecognizers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3889,9 +3967,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listRecognizers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3909,7 +3987,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.Recognizer()),
         generateSampleMessage(new protos.google.cloud.speech.v2.Recognizer()),
@@ -3932,9 +4010,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listRecognizers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3952,7 +4030,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRecognizers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3972,9 +4050,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listRecognizers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3994,7 +4072,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v2.CustomClass()),
@@ -4027,7 +4105,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v2.CustomClass()),
@@ -4076,7 +4154,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomClasses = stubSimpleCall(
         undefined,
@@ -4107,7 +4185,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v2.CustomClass()),
@@ -4141,9 +4219,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4161,7 +4239,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomClasses.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4190,9 +4268,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4210,7 +4288,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v2.CustomClass()),
@@ -4233,9 +4311,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4253,7 +4331,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomClasses.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4273,9 +4351,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listCustomClasses.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4295,7 +4373,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v2.PhraseSet()),
@@ -4328,7 +4406,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v2.PhraseSet()),
@@ -4377,7 +4455,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPhraseSets = stubSimpleCall(
         undefined,
@@ -4408,7 +4486,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v2.PhraseSet()),
@@ -4442,9 +4520,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listPhraseSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4462,7 +4540,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseSets.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4491,9 +4569,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listPhraseSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4511,7 +4589,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v2.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v2.PhraseSet()),
@@ -4534,9 +4612,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listPhraseSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4554,7 +4632,7 @@ describe('v2.SpeechClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseSets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4574,9 +4652,9 @@ describe('v2.SpeechClient', () => {
       assert(
         (client.descriptors.page.listPhraseSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

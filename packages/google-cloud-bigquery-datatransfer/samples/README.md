@@ -26,6 +26,7 @@
   * [Data_transfer_service.list_transfer_runs](#data_transfer_service.list_transfer_runs)
   * [Data_transfer_service.schedule_transfer_runs](#data_transfer_service.schedule_transfer_runs)
   * [Data_transfer_service.start_manual_transfer_runs](#data_transfer_service.start_manual_transfer_runs)
+  * [Data_transfer_service.unenroll_data_sources](#data_transfer_service.unenroll_data_sources)
   * [Data_transfer_service.update_transfer_config](#data_transfer_service.update_transfer_config)
   * [Quickstart](#quickstart)
 
@@ -275,6 +276,23 @@ __Usage:__
 
 
 `node packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.start_manual_transfer_runs.js`
+
+
+-----
+
+
+
+
+### Data_transfer_service.unenroll_data_sources
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.unenroll_data_sources.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.unenroll_data_sources.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.unenroll_data_sources.js`
 
 
 -----

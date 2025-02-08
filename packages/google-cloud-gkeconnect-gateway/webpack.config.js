@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'GatewayService',
-    filename: './gateway-service.js',
+    library: 'GatewayControl',
+    filename: './gateway-control.js',
   },
   node: {
     child_process: 'empty',

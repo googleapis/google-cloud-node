@@ -1,5 +1,70 @@
 # Changelog
 
+## [1.16.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.15.0...batch-v1.16.0) (2025-01-29)
+
+
+### Features
+
+* [batch] Update Ruby version requirement to 3.0 ([#5983](https://github.com/googleapis/google-cloud-node/issues/5983)) ([8d63de7](https://github.com/googleapis/google-cloud-node/commit/8d63de785cdab8bab9ce870a6e5adbd007d04dd5))
+
+## [1.15.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.14.0...batch-v1.15.0) (2024-09-13)
+
+
+### Features
+
+* [batch] A new value `CANCELLATION_IN_PROGRESS` is added to enum `State` ([#5670](https://github.com/googleapis/google-cloud-node/issues/5670)) ([ce99894](https://github.com/googleapis/google-cloud-node/commit/ce998945ad320a493c5aef5bc7fdc7474777b21e))
+
+## [1.14.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.13.0...batch-v1.14.0) (2024-09-10)
+
+
+### Features
+
+* **v1:** [batch] promote block_project_ssh_keys support to batch v1 API ([#5653](https://github.com/googleapis/google-cloud-node/issues/5653)) ([de5b8c0](https://github.com/googleapis/google-cloud-node/commit/de5b8c0911b0a4f6e1cd7dfc96602a2c22dee40f))
+
+## [1.13.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.12.0...batch-v1.13.0) (2024-08-09)
+
+
+### Features
+
+* [batch] add block_project_ssh_keys field to the v1alpha job API to block project level ssh keys access to Batch created VMs ([#5604](https://github.com/googleapis/google-cloud-node/issues/5604)) ([238579a](https://github.com/googleapis/google-cloud-node/commit/238579a0a879085d12a6dafdee42fc80a733a269))
+
+## [1.12.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.11.0...batch-v1.12.0) (2024-06-26)
+
+
+### Features
+
+* [batch] add a install_ops_agent field to InstancePolicyOrTemplate for Ops Agent support ([#5500](https://github.com/googleapis/google-cloud-node/issues/5500)) ([f42b77d](https://github.com/googleapis/google-cloud-node/commit/f42b77d76efc700ade152faf7e42b3abf3fb8f44))
+
+## [1.11.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.10.0...batch-v1.11.0) (2024-06-05)
+
+
+### Features
+
+* [batch] add a install_ops_agent field to InstancePolicyOrTemplate for Ops Agent support ([#5426](https://github.com/googleapis/google-cloud-node/issues/5426)) ([6481ff4](https://github.com/googleapis/google-cloud-node/commit/6481ff45908281cbb91d9212918222bcbd1b2981))
+
+## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.9.0...batch-v1.10.0) (2024-05-21)
+
+
+### Features
+
+* [batch] update Nodejs generator to send API versions in headers for GAPICs ([#5336](https://github.com/googleapis/google-cloud-node/issues/5336)) ([d89a145](https://github.com/googleapis/google-cloud-node/commit/d89a1456582c1123dc788d064487802917be2564))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.9.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.8.0...batch-v1.9.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5022](https://github.com/googleapis/google-cloud-node/issues/5022)) ([b6498d8](https://github.com/googleapis/google-cloud-node/commit/b6498d8580d056817981dedbaa0ea5d82e9dccc2))
+
+## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.7.0...batch-v1.8.0) (2024-02-07)
+
+
+### Features
+
+* [batch] Add `run_as_non_root` field to allow user's runnable be executed as non root ([#4982](https://github.com/googleapis/google-cloud-node/issues/4982)) ([4527adf](https://github.com/googleapis/google-cloud-node/commit/4527adfad0856acc0fe27aec36bc16cb845ccc95))
+
 ## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.6.0...batch-v1.7.0) (2024-01-15)
 
 

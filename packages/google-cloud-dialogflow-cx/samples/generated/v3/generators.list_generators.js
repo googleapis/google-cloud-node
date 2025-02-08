@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The agent to list all generators for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+   *  Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
    */
   // const parent = 'abc123'
   /**
@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listGeneratorsAsync(request);
+    const iterable = cxClient.listGeneratorsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

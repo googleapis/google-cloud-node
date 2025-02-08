@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -650,6 +650,9 @@ export namespace google {
 
                     /** BackupRun timeZone */
                     timeZone?: (string|null);
+
+                    /** BackupRun maxChargeableBytes */
+                    maxChargeableBytes?: (number|Long|string|null);
                 }
 
                 /** Represents a BackupRun. */
@@ -711,6 +714,12 @@ export namespace google {
 
                     /** BackupRun timeZone. */
                     public timeZone: string;
+
+                    /** BackupRun maxChargeableBytes. */
+                    public maxChargeableBytes?: (number|Long|string|null);
+
+                    /** BackupRun _maxChargeableBytes. */
+                    public _maxChargeableBytes?: "maxChargeableBytes";
 
                     /**
                      * Creates a new BackupRun instance using the specified properties.
@@ -1304,6 +1313,9 @@ export namespace google {
 
                     /** BackupConfiguration transactionLogRetentionDays */
                     transactionLogRetentionDays?: (google.protobuf.IInt32Value|null);
+
+                    /** BackupConfiguration transactionalLogStorageState */
+                    transactionalLogStorageState?: (google.cloud.sql.v1.BackupConfiguration.TransactionalLogStorageState|keyof typeof google.cloud.sql.v1.BackupConfiguration.TransactionalLogStorageState|null);
                 }
 
                 /** Represents a BackupConfiguration. */
@@ -1341,6 +1353,12 @@ export namespace google {
 
                     /** BackupConfiguration transactionLogRetentionDays. */
                     public transactionLogRetentionDays?: (google.protobuf.IInt32Value|null);
+
+                    /** BackupConfiguration transactionalLogStorageState. */
+                    public transactionalLogStorageState?: (google.cloud.sql.v1.BackupConfiguration.TransactionalLogStorageState|keyof typeof google.cloud.sql.v1.BackupConfiguration.TransactionalLogStorageState|null);
+
+                    /** BackupConfiguration _transactionalLogStorageState. */
+                    public _transactionalLogStorageState?: "transactionalLogStorageState";
 
                     /**
                      * Creates a new BackupConfiguration instance using the specified properties.
@@ -1418,6 +1436,18 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BackupConfiguration {
+
+                    /** TransactionalLogStorageState enum. */
+                    enum TransactionalLogStorageState {
+                        TRANSACTIONAL_LOG_STORAGE_STATE_UNSPECIFIED = 0,
+                        DISK = 1,
+                        SWITCHING_TO_CLOUD_STORAGE = 2,
+                        SWITCHED_TO_CLOUD_STORAGE = 3,
+                        CLOUD_STORAGE = 4
+                    }
                 }
 
                 /** Properties of a PerformDiskShrinkContext. */
@@ -2794,6 +2824,15 @@ export namespace google {
 
                         /** SqlExportOptions mysqlExportOptions */
                         mysqlExportOptions?: (google.cloud.sql.v1.ExportContext.SqlExportOptions.IMysqlExportOptions|null);
+
+                        /** SqlExportOptions threads */
+                        threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlExportOptions parallel */
+                        parallel?: (google.protobuf.IBoolValue|null);
+
+                        /** SqlExportOptions postgresExportOptions */
+                        postgresExportOptions?: (google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions|null);
                     }
 
                     /** Represents a SqlExportOptions. */
@@ -2813,6 +2852,15 @@ export namespace google {
 
                         /** SqlExportOptions mysqlExportOptions. */
                         public mysqlExportOptions?: (google.cloud.sql.v1.ExportContext.SqlExportOptions.IMysqlExportOptions|null);
+
+                        /** SqlExportOptions threads. */
+                        public threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlExportOptions parallel. */
+                        public parallel?: (google.protobuf.IBoolValue|null);
+
+                        /** SqlExportOptions postgresExportOptions. */
+                        public postgresExportOptions?: (google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions|null);
 
                         /**
                          * Creates a new SqlExportOptions instance using the specified properties.
@@ -2990,6 +3038,109 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+
+                        /** Properties of a PostgresExportOptions. */
+                        interface IPostgresExportOptions {
+
+                            /** PostgresExportOptions clean */
+                            clean?: (google.protobuf.IBoolValue|null);
+
+                            /** PostgresExportOptions ifExists */
+                            ifExists?: (google.protobuf.IBoolValue|null);
+                        }
+
+                        /** Represents a PostgresExportOptions. */
+                        class PostgresExportOptions implements IPostgresExportOptions {
+
+                            /**
+                             * Constructs a new PostgresExportOptions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions);
+
+                            /** PostgresExportOptions clean. */
+                            public clean?: (google.protobuf.IBoolValue|null);
+
+                            /** PostgresExportOptions ifExists. */
+                            public ifExists?: (google.protobuf.IBoolValue|null);
+
+                            /**
+                             * Creates a new PostgresExportOptions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PostgresExportOptions instance
+                             */
+                            public static create(properties?: google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions): google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions;
+
+                            /**
+                             * Encodes the specified PostgresExportOptions message. Does not implicitly {@link google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions.verify|verify} messages.
+                             * @param message PostgresExportOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PostgresExportOptions message, length delimited. Does not implicitly {@link google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions.verify|verify} messages.
+                             * @param message PostgresExportOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PostgresExportOptions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PostgresExportOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions;
+
+                            /**
+                             * Decodes a PostgresExportOptions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PostgresExportOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions;
+
+                            /**
+                             * Verifies a PostgresExportOptions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PostgresExportOptions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PostgresExportOptions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions;
+
+                            /**
+                             * Creates a plain object from a PostgresExportOptions message. Also converts values to other types if specified.
+                             * @param message PostgresExportOptions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PostgresExportOptions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PostgresExportOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a SqlBakExportOptions. */
@@ -3137,6 +3288,9 @@ export namespace google {
 
                     /** ImportContext bakImportOptions */
                     bakImportOptions?: (google.cloud.sql.v1.ImportContext.ISqlBakImportOptions|null);
+
+                    /** ImportContext sqlImportOptions */
+                    sqlImportOptions?: (google.cloud.sql.v1.ImportContext.ISqlImportOptions|null);
                 }
 
                 /** Represents an ImportContext. */
@@ -3168,6 +3322,9 @@ export namespace google {
 
                     /** ImportContext bakImportOptions. */
                     public bakImportOptions?: (google.cloud.sql.v1.ImportContext.ISqlBakImportOptions|null);
+
+                    /** ImportContext sqlImportOptions. */
+                    public sqlImportOptions?: (google.cloud.sql.v1.ImportContext.ISqlImportOptions|null);
 
                     /**
                      * Creates a new ImportContext instance using the specified properties.
@@ -3248,6 +3405,221 @@ export namespace google {
                 }
 
                 namespace ImportContext {
+
+                    /** Properties of a SqlImportOptions. */
+                    interface ISqlImportOptions {
+
+                        /** SqlImportOptions threads */
+                        threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlImportOptions parallel */
+                        parallel?: (google.protobuf.IBoolValue|null);
+
+                        /** SqlImportOptions postgresImportOptions */
+                        postgresImportOptions?: (google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions|null);
+                    }
+
+                    /** Represents a SqlImportOptions. */
+                    class SqlImportOptions implements ISqlImportOptions {
+
+                        /**
+                         * Constructs a new SqlImportOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.sql.v1.ImportContext.ISqlImportOptions);
+
+                        /** SqlImportOptions threads. */
+                        public threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlImportOptions parallel. */
+                        public parallel?: (google.protobuf.IBoolValue|null);
+
+                        /** SqlImportOptions postgresImportOptions. */
+                        public postgresImportOptions?: (google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions|null);
+
+                        /**
+                         * Creates a new SqlImportOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SqlImportOptions instance
+                         */
+                        public static create(properties?: google.cloud.sql.v1.ImportContext.ISqlImportOptions): google.cloud.sql.v1.ImportContext.SqlImportOptions;
+
+                        /**
+                         * Encodes the specified SqlImportOptions message. Does not implicitly {@link google.cloud.sql.v1.ImportContext.SqlImportOptions.verify|verify} messages.
+                         * @param message SqlImportOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.sql.v1.ImportContext.ISqlImportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SqlImportOptions message, length delimited. Does not implicitly {@link google.cloud.sql.v1.ImportContext.SqlImportOptions.verify|verify} messages.
+                         * @param message SqlImportOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.sql.v1.ImportContext.ISqlImportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SqlImportOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SqlImportOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.ImportContext.SqlImportOptions;
+
+                        /**
+                         * Decodes a SqlImportOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SqlImportOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.ImportContext.SqlImportOptions;
+
+                        /**
+                         * Verifies a SqlImportOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SqlImportOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SqlImportOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.ImportContext.SqlImportOptions;
+
+                        /**
+                         * Creates a plain object from a SqlImportOptions message. Also converts values to other types if specified.
+                         * @param message SqlImportOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.sql.v1.ImportContext.SqlImportOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SqlImportOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SqlImportOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SqlImportOptions {
+
+                        /** Properties of a PostgresImportOptions. */
+                        interface IPostgresImportOptions {
+
+                            /** PostgresImportOptions clean */
+                            clean?: (google.protobuf.IBoolValue|null);
+
+                            /** PostgresImportOptions ifExists */
+                            ifExists?: (google.protobuf.IBoolValue|null);
+                        }
+
+                        /** Represents a PostgresImportOptions. */
+                        class PostgresImportOptions implements IPostgresImportOptions {
+
+                            /**
+                             * Constructs a new PostgresImportOptions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions);
+
+                            /** PostgresImportOptions clean. */
+                            public clean?: (google.protobuf.IBoolValue|null);
+
+                            /** PostgresImportOptions ifExists. */
+                            public ifExists?: (google.protobuf.IBoolValue|null);
+
+                            /**
+                             * Creates a new PostgresImportOptions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PostgresImportOptions instance
+                             */
+                            public static create(properties?: google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions): google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions;
+
+                            /**
+                             * Encodes the specified PostgresImportOptions message. Does not implicitly {@link google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions.verify|verify} messages.
+                             * @param message PostgresImportOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PostgresImportOptions message, length delimited. Does not implicitly {@link google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions.verify|verify} messages.
+                             * @param message PostgresImportOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PostgresImportOptions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PostgresImportOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions;
+
+                            /**
+                             * Decodes a PostgresImportOptions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PostgresImportOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions;
+
+                            /**
+                             * Verifies a PostgresImportOptions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PostgresImportOptions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PostgresImportOptions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions;
+
+                            /**
+                             * Creates a plain object from a PostgresImportOptions message. Also converts values to other types if specified.
+                             * @param message PostgresImportOptions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PostgresImportOptions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PostgresImportOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
 
                     /** Properties of a SqlCsvImportOptions. */
                     interface ISqlCsvImportOptions {
@@ -3656,6 +4028,9 @@ export namespace google {
 
                     /** IpConfiguration pscConfig */
                     pscConfig?: (google.cloud.sql.v1.IPscConfig|null);
+
+                    /** IpConfiguration serverCaMode */
+                    serverCaMode?: (google.cloud.sql.v1.IpConfiguration.CaMode|keyof typeof google.cloud.sql.v1.IpConfiguration.CaMode|null);
                 }
 
                 /** Represents an IpConfiguration. */
@@ -3691,8 +4066,14 @@ export namespace google {
                     /** IpConfiguration pscConfig. */
                     public pscConfig?: (google.cloud.sql.v1.IPscConfig|null);
 
+                    /** IpConfiguration serverCaMode. */
+                    public serverCaMode?: (google.cloud.sql.v1.IpConfiguration.CaMode|keyof typeof google.cloud.sql.v1.IpConfiguration.CaMode|null);
+
                     /** IpConfiguration _pscConfig. */
                     public _pscConfig?: "pscConfig";
+
+                    /** IpConfiguration _serverCaMode. */
+                    public _serverCaMode?: "serverCaMode";
 
                     /**
                      * Creates a new IpConfiguration instance using the specified properties.
@@ -3780,6 +4161,13 @@ export namespace google {
                         ALLOW_UNENCRYPTED_AND_ENCRYPTED = 1,
                         ENCRYPTED_ONLY = 2,
                         TRUSTED_CLIENT_CERTIFICATE_REQUIRED = 3
+                    }
+
+                    /** CaMode enum. */
+                    enum CaMode {
+                        CA_MODE_UNSPECIFIED = 0,
+                        GOOGLE_MANAGED_INTERNAL_CA = 1,
+                        GOOGLE_MANAGED_CAS_CA = 2
                     }
                 }
 
@@ -4874,6 +5262,9 @@ export namespace google {
 
                     /** Operation targetProject */
                     targetProject?: (string|null);
+
+                    /** Operation acquireSsrsLeaseContext */
+                    acquireSsrsLeaseContext?: (google.cloud.sql.v1.IAcquireSsrsLeaseContext|null);
                 }
 
                 /** Represents an Operation. */
@@ -4935,6 +5326,9 @@ export namespace google {
 
                     /** Operation targetProject. */
                     public targetProject: string;
+
+                    /** Operation acquireSsrsLeaseContext. */
+                    public acquireSsrsLeaseContext?: (google.cloud.sql.v1.IAcquireSsrsLeaseContext|null);
 
                     /**
                      * Creates a new Operation instance using the specified properties.
@@ -5056,7 +5450,14 @@ export namespace google {
                         LOG_CLEANUP = 36,
                         AUTO_RESTART = 37,
                         REENCRYPT = 38,
-                        SWITCHOVER = 39
+                        SWITCHOVER = 39,
+                        ACQUIRE_SSRS_LEASE = 42,
+                        RELEASE_SSRS_LEASE = 43,
+                        RECONFIGURE_OLD_PRIMARY = 44,
+                        CLUSTER_MAINTENANCE = 45,
+                        SELF_SERVICE_MAINTENANCE = 46,
+                        SWITCHOVER_TO_REPLICA = 47,
+                        MAJOR_VERSION_UPGRADE = 48
                     }
 
                     /** SqlOperationStatus enum. */
@@ -5617,6 +6018,12 @@ export namespace google {
 
                     /** Settings dataCacheConfig */
                     dataCacheConfig?: (google.cloud.sql.v1.IDataCacheConfig|null);
+
+                    /** Settings enableGoogleMlIntegration */
+                    enableGoogleMlIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings enableDataplexIntegration */
+                    enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a Settings. */
@@ -5723,6 +6130,12 @@ export namespace google {
 
                     /** Settings dataCacheConfig. */
                     public dataCacheConfig?: (google.cloud.sql.v1.IDataCacheConfig|null);
+
+                    /** Settings enableGoogleMlIntegration. */
+                    public enableGoogleMlIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings enableDataplexIntegration. */
+                    public enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new Settings instance using the specified properties.
@@ -6425,6 +6838,7 @@ export namespace google {
                     POSTGRES_13 = 23,
                     POSTGRES_14 = 110,
                     POSTGRES_15 = 172,
+                    POSTGRES_16 = 272,
                     MYSQL_8_0 = 20,
                     MYSQL_8_0_18 = 41,
                     MYSQL_8_0_26 = 85,
@@ -6438,6 +6852,12 @@ export namespace google {
                     MYSQL_8_0_34 = 239,
                     MYSQL_8_0_35 = 240,
                     MYSQL_8_0_36 = 241,
+                    MYSQL_8_0_37 = 355,
+                    MYSQL_8_0_38 = 356,
+                    MYSQL_8_0_39 = 357,
+                    MYSQL_8_0_40 = 358,
+                    MYSQL_8_4 = 398,
+                    MYSQL_8_4_0 = 399,
                     SQLSERVER_2019_STANDARD = 26,
                     SQLSERVER_2019_ENTERPRISE = 27,
                     SQLSERVER_2019_EXPRESS = 28,
@@ -6483,6 +6903,133 @@ export namespace google {
                     canary = 1,
                     stable = 2,
                     week5 = 3
+                }
+
+                /** Properties of an AcquireSsrsLeaseContext. */
+                interface IAcquireSsrsLeaseContext {
+
+                    /** AcquireSsrsLeaseContext setupLogin */
+                    setupLogin?: (string|null);
+
+                    /** AcquireSsrsLeaseContext serviceLogin */
+                    serviceLogin?: (string|null);
+
+                    /** AcquireSsrsLeaseContext reportDatabase */
+                    reportDatabase?: (string|null);
+
+                    /** AcquireSsrsLeaseContext duration */
+                    duration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents an AcquireSsrsLeaseContext. */
+                class AcquireSsrsLeaseContext implements IAcquireSsrsLeaseContext {
+
+                    /**
+                     * Constructs a new AcquireSsrsLeaseContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IAcquireSsrsLeaseContext);
+
+                    /** AcquireSsrsLeaseContext setupLogin. */
+                    public setupLogin?: (string|null);
+
+                    /** AcquireSsrsLeaseContext serviceLogin. */
+                    public serviceLogin?: (string|null);
+
+                    /** AcquireSsrsLeaseContext reportDatabase. */
+                    public reportDatabase?: (string|null);
+
+                    /** AcquireSsrsLeaseContext duration. */
+                    public duration?: (google.protobuf.IDuration|null);
+
+                    /** AcquireSsrsLeaseContext _setupLogin. */
+                    public _setupLogin?: "setupLogin";
+
+                    /** AcquireSsrsLeaseContext _serviceLogin. */
+                    public _serviceLogin?: "serviceLogin";
+
+                    /** AcquireSsrsLeaseContext _reportDatabase. */
+                    public _reportDatabase?: "reportDatabase";
+
+                    /** AcquireSsrsLeaseContext _duration. */
+                    public _duration?: "duration";
+
+                    /**
+                     * Creates a new AcquireSsrsLeaseContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcquireSsrsLeaseContext instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IAcquireSsrsLeaseContext): google.cloud.sql.v1.AcquireSsrsLeaseContext;
+
+                    /**
+                     * Encodes the specified AcquireSsrsLeaseContext message. Does not implicitly {@link google.cloud.sql.v1.AcquireSsrsLeaseContext.verify|verify} messages.
+                     * @param message AcquireSsrsLeaseContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IAcquireSsrsLeaseContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcquireSsrsLeaseContext message, length delimited. Does not implicitly {@link google.cloud.sql.v1.AcquireSsrsLeaseContext.verify|verify} messages.
+                     * @param message AcquireSsrsLeaseContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IAcquireSsrsLeaseContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcquireSsrsLeaseContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcquireSsrsLeaseContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.AcquireSsrsLeaseContext;
+
+                    /**
+                     * Decodes an AcquireSsrsLeaseContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcquireSsrsLeaseContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.AcquireSsrsLeaseContext;
+
+                    /**
+                     * Verifies an AcquireSsrsLeaseContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcquireSsrsLeaseContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcquireSsrsLeaseContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.AcquireSsrsLeaseContext;
+
+                    /**
+                     * Creates a plain object from an AcquireSsrsLeaseContext message. Also converts values to other types if specified.
+                     * @param message AcquireSsrsLeaseContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.AcquireSsrsLeaseContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcquireSsrsLeaseContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AcquireSsrsLeaseContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a SqlConnectService */
@@ -6686,6 +7233,9 @@ export namespace google {
 
                     /** ConnectSettings dnsName */
                     dnsName?: (string|null);
+
+                    /** ConnectSettings serverCaMode */
+                    serverCaMode?: (google.cloud.sql.v1.ConnectSettings.CaMode|keyof typeof google.cloud.sql.v1.ConnectSettings.CaMode|null);
                 }
 
                 /** Represents a ConnectSettings. */
@@ -6720,6 +7270,9 @@ export namespace google {
 
                     /** ConnectSettings dnsName. */
                     public dnsName: string;
+
+                    /** ConnectSettings serverCaMode. */
+                    public serverCaMode: (google.cloud.sql.v1.ConnectSettings.CaMode|keyof typeof google.cloud.sql.v1.ConnectSettings.CaMode);
 
                     /**
                      * Creates a new ConnectSettings instance using the specified properties.
@@ -6797,6 +7350,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConnectSettings {
+
+                    /** CaMode enum. */
+                    enum CaMode {
+                        CA_MODE_UNSPECIFIED = 0,
+                        GOOGLE_MANAGED_INTERNAL_CA = 1,
+                        GOOGLE_MANAGED_CAS_CA = 2
+                    }
                 }
 
                 /** Properties of a GenerateEphemeralCertRequest. */
@@ -8759,6 +9322,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public getLatestRecoveryTime(request: google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest): Promise<google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse>;
+
+                    /**
+                     * Calls AcquireSsrsLease.
+                     * @param request SqlInstancesAcquireSsrsLeaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SqlInstancesAcquireSsrsLeaseResponse
+                     */
+                    public acquireSsrsLease(request: google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseRequest, callback: google.cloud.sql.v1.SqlInstancesService.AcquireSsrsLeaseCallback): void;
+
+                    /**
+                     * Calls AcquireSsrsLease.
+                     * @param request SqlInstancesAcquireSsrsLeaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public acquireSsrsLease(request: google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseRequest): Promise<google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseResponse>;
+
+                    /**
+                     * Calls ReleaseSsrsLease.
+                     * @param request SqlInstancesReleaseSsrsLeaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SqlInstancesReleaseSsrsLeaseResponse
+                     */
+                    public releaseSsrsLease(request: google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseRequest, callback: google.cloud.sql.v1.SqlInstancesService.ReleaseSsrsLeaseCallback): void;
+
+                    /**
+                     * Calls ReleaseSsrsLease.
+                     * @param request SqlInstancesReleaseSsrsLeaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public releaseSsrsLease(request: google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseRequest): Promise<google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseResponse>;
                 }
 
                 namespace SqlInstancesService {
@@ -8986,6 +9577,20 @@ export namespace google {
                      * @param [response] SqlInstancesGetLatestRecoveryTimeResponse
                      */
                     type GetLatestRecoveryTimeCallback = (error: (Error|null), response?: google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|acquireSsrsLease}.
+                     * @param error Error, if any
+                     * @param [response] SqlInstancesAcquireSsrsLeaseResponse
+                     */
+                    type AcquireSsrsLeaseCallback = (error: (Error|null), response?: google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|releaseSsrsLease}.
+                     * @param error Error, if any
+                     * @param [response] SqlInstancesReleaseSsrsLeaseResponse
+                     */
+                    type ReleaseSsrsLeaseCallback = (error: (Error|null), response?: google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseResponse) => void;
                 }
 
                 /** Properties of a SqlInstancesAddServerCaRequest. */
@@ -12124,6 +12729,12 @@ export namespace google {
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest mysqlSyncConfig */
                     mysqlSyncConfig?: (google.cloud.sql.v1.IMySqlSyncConfig|null);
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest migrationType */
+                    migrationType?: (google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|keyof typeof google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|null);
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest syncParallelLevel */
+                    syncParallelLevel?: (google.cloud.sql.v1.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.ExternalSyncParallelLevel|null);
                 }
 
                 /** Represents a SqlInstancesVerifyExternalSyncSettingsRequest. */
@@ -12152,6 +12763,12 @@ export namespace google {
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest mysqlSyncConfig. */
                     public mysqlSyncConfig?: (google.cloud.sql.v1.IMySqlSyncConfig|null);
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest migrationType. */
+                    public migrationType: (google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|keyof typeof google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType);
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest syncParallelLevel. */
+                    public syncParallelLevel: (google.cloud.sql.v1.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.ExternalSyncParallelLevel);
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -12242,6 +12859,13 @@ export namespace google {
                         ONLINE = 1,
                         OFFLINE = 2
                     }
+
+                    /** MigrationType enum. */
+                    enum MigrationType {
+                        MIGRATION_TYPE_UNSPECIFIED = 0,
+                        LOGICAL = 1,
+                        PHYSICAL = 2
+                    }
                 }
 
                 /** Properties of a SqlInstancesStartExternalSyncRequest. */
@@ -12264,6 +12888,9 @@ export namespace google {
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel */
                     syncParallelLevel?: (google.cloud.sql.v1.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.ExternalSyncParallelLevel|null);
+
+                    /** SqlInstancesStartExternalSyncRequest migrationType */
+                    migrationType?: (google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|keyof typeof google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|null);
                 }
 
                 /** Represents a SqlInstancesStartExternalSyncRequest. */
@@ -12292,6 +12919,9 @@ export namespace google {
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel. */
                     public syncParallelLevel: (google.cloud.sql.v1.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.ExternalSyncParallelLevel);
+
+                    /** SqlInstancesStartExternalSyncRequest migrationType. */
+                    public migrationType: (google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|keyof typeof google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType);
 
                     /** SqlInstancesStartExternalSyncRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -13786,6 +14416,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an InstancesAcquireSsrsLeaseRequest. */
+                interface IInstancesAcquireSsrsLeaseRequest {
+
+                    /** InstancesAcquireSsrsLeaseRequest acquireSsrsLeaseContext */
+                    acquireSsrsLeaseContext?: (google.cloud.sql.v1.IAcquireSsrsLeaseContext|null);
+                }
+
+                /** Represents an InstancesAcquireSsrsLeaseRequest. */
+                class InstancesAcquireSsrsLeaseRequest implements IInstancesAcquireSsrsLeaseRequest {
+
+                    /**
+                     * Constructs a new InstancesAcquireSsrsLeaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IInstancesAcquireSsrsLeaseRequest);
+
+                    /** InstancesAcquireSsrsLeaseRequest acquireSsrsLeaseContext. */
+                    public acquireSsrsLeaseContext?: (google.cloud.sql.v1.IAcquireSsrsLeaseContext|null);
+
+                    /**
+                     * Creates a new InstancesAcquireSsrsLeaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstancesAcquireSsrsLeaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IInstancesAcquireSsrsLeaseRequest): google.cloud.sql.v1.InstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Encodes the specified InstancesAcquireSsrsLeaseRequest message. Does not implicitly {@link google.cloud.sql.v1.InstancesAcquireSsrsLeaseRequest.verify|verify} messages.
+                     * @param message InstancesAcquireSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IInstancesAcquireSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstancesAcquireSsrsLeaseRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.InstancesAcquireSsrsLeaseRequest.verify|verify} messages.
+                     * @param message InstancesAcquireSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IInstancesAcquireSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstancesAcquireSsrsLeaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstancesAcquireSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.InstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Decodes an InstancesAcquireSsrsLeaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstancesAcquireSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.InstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Verifies an InstancesAcquireSsrsLeaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstancesAcquireSsrsLeaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstancesAcquireSsrsLeaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.InstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Creates a plain object from an InstancesAcquireSsrsLeaseRequest message. Also converts values to other types if specified.
+                     * @param message InstancesAcquireSsrsLeaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.InstancesAcquireSsrsLeaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstancesAcquireSsrsLeaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstancesAcquireSsrsLeaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SqlInstancesVerifyExternalSyncSettingsResponse. */
                 interface ISqlInstancesVerifyExternalSyncSettingsResponse {
 
@@ -14572,6 +15299,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion */
                     maintenanceVersion?: (string|null);
 
+                    /** DatabaseInstance upgradableDatabaseVersions */
+                    upgradableDatabaseVersions?: (google.cloud.sql.v1.IAvailableDatabaseVersion[]|null);
+
                     /** DatabaseInstance sqlNetworkArchitecture */
                     sqlNetworkArchitecture?: (google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|null);
 
@@ -14586,6 +15316,18 @@ export namespace google {
 
                     /** DatabaseInstance writeEndpoint */
                     writeEndpoint?: (string|null);
+
+                    /** DatabaseInstance replicationCluster */
+                    replicationCluster?: (google.cloud.sql.v1.IReplicationCluster|null);
+
+                    /** DatabaseInstance geminiConfig */
+                    geminiConfig?: (google.cloud.sql.v1.IGeminiInstanceConfig|null);
+
+                    /** DatabaseInstance satisfiesPzi */
+                    satisfiesPzi?: (google.protobuf.IBoolValue|null);
+
+                    /** DatabaseInstance switchTransactionLogsToCloudStorageEnabled */
+                    switchTransactionLogsToCloudStorageEnabled?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -14705,6 +15447,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion. */
                     public maintenanceVersion: string;
 
+                    /** DatabaseInstance upgradableDatabaseVersions. */
+                    public upgradableDatabaseVersions: google.cloud.sql.v1.IAvailableDatabaseVersion[];
+
                     /** DatabaseInstance sqlNetworkArchitecture. */
                     public sqlNetworkArchitecture?: (google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|null);
 
@@ -14719,6 +15464,18 @@ export namespace google {
 
                     /** DatabaseInstance writeEndpoint. */
                     public writeEndpoint?: (string|null);
+
+                    /** DatabaseInstance replicationCluster. */
+                    public replicationCluster?: (google.cloud.sql.v1.IReplicationCluster|null);
+
+                    /** DatabaseInstance geminiConfig. */
+                    public geminiConfig?: (google.cloud.sql.v1.IGeminiInstanceConfig|null);
+
+                    /** DatabaseInstance satisfiesPzi. */
+                    public satisfiesPzi?: (google.protobuf.IBoolValue|null);
+
+                    /** DatabaseInstance switchTransactionLogsToCloudStorageEnabled. */
+                    public switchTransactionLogsToCloudStorageEnabled?: (google.protobuf.IBoolValue|null);
 
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
@@ -14737,6 +15494,12 @@ export namespace google {
 
                     /** DatabaseInstance _writeEndpoint. */
                     public _writeEndpoint?: "writeEndpoint";
+
+                    /** DatabaseInstance _geminiConfig. */
+                    public _geminiConfig?: "geminiConfig";
+
+                    /** DatabaseInstance _switchTransactionLogsToCloudStorageEnabled. */
+                    public _switchTransactionLogsToCloudStorageEnabled?: "switchTransactionLogsToCloudStorageEnabled";
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -15176,6 +15939,378 @@ export namespace google {
                         NEW_NETWORK_ARCHITECTURE = 1,
                         OLD_NETWORK_ARCHITECTURE = 2
                     }
+                }
+
+                /** Properties of a GeminiInstanceConfig. */
+                interface IGeminiInstanceConfig {
+
+                    /** GeminiInstanceConfig entitled */
+                    entitled?: (boolean|null);
+
+                    /** GeminiInstanceConfig googleVacuumMgmtEnabled */
+                    googleVacuumMgmtEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig oomSessionCancelEnabled */
+                    oomSessionCancelEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig activeQueryEnabled */
+                    activeQueryEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig indexAdvisorEnabled */
+                    indexAdvisorEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig flagRecommenderEnabled */
+                    flagRecommenderEnabled?: (boolean|null);
+                }
+
+                /** Represents a GeminiInstanceConfig. */
+                class GeminiInstanceConfig implements IGeminiInstanceConfig {
+
+                    /**
+                     * Constructs a new GeminiInstanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IGeminiInstanceConfig);
+
+                    /** GeminiInstanceConfig entitled. */
+                    public entitled?: (boolean|null);
+
+                    /** GeminiInstanceConfig googleVacuumMgmtEnabled. */
+                    public googleVacuumMgmtEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig oomSessionCancelEnabled. */
+                    public oomSessionCancelEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig activeQueryEnabled. */
+                    public activeQueryEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig indexAdvisorEnabled. */
+                    public indexAdvisorEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig flagRecommenderEnabled. */
+                    public flagRecommenderEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig _entitled. */
+                    public _entitled?: "entitled";
+
+                    /** GeminiInstanceConfig _googleVacuumMgmtEnabled. */
+                    public _googleVacuumMgmtEnabled?: "googleVacuumMgmtEnabled";
+
+                    /** GeminiInstanceConfig _oomSessionCancelEnabled. */
+                    public _oomSessionCancelEnabled?: "oomSessionCancelEnabled";
+
+                    /** GeminiInstanceConfig _activeQueryEnabled. */
+                    public _activeQueryEnabled?: "activeQueryEnabled";
+
+                    /** GeminiInstanceConfig _indexAdvisorEnabled. */
+                    public _indexAdvisorEnabled?: "indexAdvisorEnabled";
+
+                    /** GeminiInstanceConfig _flagRecommenderEnabled. */
+                    public _flagRecommenderEnabled?: "flagRecommenderEnabled";
+
+                    /**
+                     * Creates a new GeminiInstanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GeminiInstanceConfig instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IGeminiInstanceConfig): google.cloud.sql.v1.GeminiInstanceConfig;
+
+                    /**
+                     * Encodes the specified GeminiInstanceConfig message. Does not implicitly {@link google.cloud.sql.v1.GeminiInstanceConfig.verify|verify} messages.
+                     * @param message GeminiInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IGeminiInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GeminiInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.sql.v1.GeminiInstanceConfig.verify|verify} messages.
+                     * @param message GeminiInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IGeminiInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GeminiInstanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GeminiInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.GeminiInstanceConfig;
+
+                    /**
+                     * Decodes a GeminiInstanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GeminiInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.GeminiInstanceConfig;
+
+                    /**
+                     * Verifies a GeminiInstanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GeminiInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GeminiInstanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.GeminiInstanceConfig;
+
+                    /**
+                     * Creates a plain object from a GeminiInstanceConfig message. Also converts values to other types if specified.
+                     * @param message GeminiInstanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.GeminiInstanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GeminiInstanceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GeminiInstanceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReplicationCluster. */
+                interface IReplicationCluster {
+
+                    /** ReplicationCluster psaWriteEndpoint */
+                    psaWriteEndpoint?: (string|null);
+
+                    /** ReplicationCluster failoverDrReplicaName */
+                    failoverDrReplicaName?: (string|null);
+
+                    /** ReplicationCluster drReplica */
+                    drReplica?: (boolean|null);
+                }
+
+                /** Represents a ReplicationCluster. */
+                class ReplicationCluster implements IReplicationCluster {
+
+                    /**
+                     * Constructs a new ReplicationCluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IReplicationCluster);
+
+                    /** ReplicationCluster psaWriteEndpoint. */
+                    public psaWriteEndpoint: string;
+
+                    /** ReplicationCluster failoverDrReplicaName. */
+                    public failoverDrReplicaName: string;
+
+                    /** ReplicationCluster drReplica. */
+                    public drReplica: boolean;
+
+                    /**
+                     * Creates a new ReplicationCluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReplicationCluster instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IReplicationCluster): google.cloud.sql.v1.ReplicationCluster;
+
+                    /**
+                     * Encodes the specified ReplicationCluster message. Does not implicitly {@link google.cloud.sql.v1.ReplicationCluster.verify|verify} messages.
+                     * @param message ReplicationCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IReplicationCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReplicationCluster message, length delimited. Does not implicitly {@link google.cloud.sql.v1.ReplicationCluster.verify|verify} messages.
+                     * @param message ReplicationCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IReplicationCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReplicationCluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReplicationCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.ReplicationCluster;
+
+                    /**
+                     * Decodes a ReplicationCluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReplicationCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.ReplicationCluster;
+
+                    /**
+                     * Verifies a ReplicationCluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReplicationCluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReplicationCluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.ReplicationCluster;
+
+                    /**
+                     * Creates a plain object from a ReplicationCluster message. Also converts values to other types if specified.
+                     * @param message ReplicationCluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.ReplicationCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReplicationCluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReplicationCluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AvailableDatabaseVersion. */
+                interface IAvailableDatabaseVersion {
+
+                    /** AvailableDatabaseVersion majorVersion */
+                    majorVersion?: (string|null);
+
+                    /** AvailableDatabaseVersion name */
+                    name?: (string|null);
+
+                    /** AvailableDatabaseVersion displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents an AvailableDatabaseVersion. */
+                class AvailableDatabaseVersion implements IAvailableDatabaseVersion {
+
+                    /**
+                     * Constructs a new AvailableDatabaseVersion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IAvailableDatabaseVersion);
+
+                    /** AvailableDatabaseVersion majorVersion. */
+                    public majorVersion?: (string|null);
+
+                    /** AvailableDatabaseVersion name. */
+                    public name?: (string|null);
+
+                    /** AvailableDatabaseVersion displayName. */
+                    public displayName?: (string|null);
+
+                    /** AvailableDatabaseVersion _majorVersion. */
+                    public _majorVersion?: "majorVersion";
+
+                    /** AvailableDatabaseVersion _name. */
+                    public _name?: "name";
+
+                    /** AvailableDatabaseVersion _displayName. */
+                    public _displayName?: "displayName";
+
+                    /**
+                     * Creates a new AvailableDatabaseVersion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AvailableDatabaseVersion instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IAvailableDatabaseVersion): google.cloud.sql.v1.AvailableDatabaseVersion;
+
+                    /**
+                     * Encodes the specified AvailableDatabaseVersion message. Does not implicitly {@link google.cloud.sql.v1.AvailableDatabaseVersion.verify|verify} messages.
+                     * @param message AvailableDatabaseVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IAvailableDatabaseVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AvailableDatabaseVersion message, length delimited. Does not implicitly {@link google.cloud.sql.v1.AvailableDatabaseVersion.verify|verify} messages.
+                     * @param message AvailableDatabaseVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IAvailableDatabaseVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AvailableDatabaseVersion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AvailableDatabaseVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.AvailableDatabaseVersion;
+
+                    /**
+                     * Decodes an AvailableDatabaseVersion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AvailableDatabaseVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.AvailableDatabaseVersion;
+
+                    /**
+                     * Verifies an AvailableDatabaseVersion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AvailableDatabaseVersion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AvailableDatabaseVersion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.AvailableDatabaseVersion;
+
+                    /**
+                     * Creates a plain object from an AvailableDatabaseVersion message. Also converts values to other types if specified.
+                     * @param message AvailableDatabaseVersion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.AvailableDatabaseVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AvailableDatabaseVersion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AvailableDatabaseVersion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a SqlInstancesRescheduleMaintenanceRequestBody. */
@@ -16189,7 +17324,17 @@ export namespace google {
                         TURN_ON_PITR_AFTER_PROMOTE = 36,
                         INCOMPATIBLE_DATABASE_MINOR_VERSION = 37,
                         SOURCE_MAX_SUBSCRIPTIONS = 38,
-                        UNABLE_TO_VERIFY_DEFINERS = 39
+                        UNABLE_TO_VERIFY_DEFINERS = 39,
+                        SUBSCRIPTION_CALCULATION_STATUS = 40,
+                        PG_SUBSCRIPTION_COUNT = 41,
+                        PG_SYNC_PARALLEL_LEVEL = 42,
+                        INSUFFICIENT_DISK_SIZE = 43,
+                        INSUFFICIENT_MACHINE_TIER = 44,
+                        UNSUPPORTED_EXTENSIONS_NOT_MIGRATED = 45,
+                        EXTENSIONS_NOT_MIGRATED = 46,
+                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47,
+                        EXTENSIONS_NOT_ENABLED_IN_REPLICA = 48,
+                        UNSUPPORTED_COLUMNS = 49
                     }
                 }
 
@@ -16447,6 +17592,412 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ReplicaConfiguration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesAcquireSsrsLeaseRequest. */
+                interface ISqlInstancesAcquireSsrsLeaseRequest {
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest project */
+                    project?: (string|null);
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest body */
+                    body?: (google.cloud.sql.v1.IInstancesAcquireSsrsLeaseRequest|null);
+                }
+
+                /** Represents a SqlInstancesAcquireSsrsLeaseRequest. */
+                class SqlInstancesAcquireSsrsLeaseRequest implements ISqlInstancesAcquireSsrsLeaseRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesAcquireSsrsLeaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseRequest);
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest project. */
+                    public project: string;
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest body. */
+                    public body?: (google.cloud.sql.v1.IInstancesAcquireSsrsLeaseRequest|null);
+
+                    /**
+                     * Creates a new SqlInstancesAcquireSsrsLeaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesAcquireSsrsLeaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseRequest): google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesAcquireSsrsLeaseRequest message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest.verify|verify} messages.
+                     * @param message SqlInstancesAcquireSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesAcquireSsrsLeaseRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest.verify|verify} messages.
+                     * @param message SqlInstancesAcquireSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesAcquireSsrsLeaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesAcquireSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Decodes a SqlInstancesAcquireSsrsLeaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesAcquireSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Verifies a SqlInstancesAcquireSsrsLeaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesAcquireSsrsLeaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesAcquireSsrsLeaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesAcquireSsrsLeaseRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesAcquireSsrsLeaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesAcquireSsrsLeaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesAcquireSsrsLeaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesAcquireSsrsLeaseResponse. */
+                interface ISqlInstancesAcquireSsrsLeaseResponse {
+
+                    /** SqlInstancesAcquireSsrsLeaseResponse operationId */
+                    operationId?: (string|null);
+                }
+
+                /** Represents a SqlInstancesAcquireSsrsLeaseResponse. */
+                class SqlInstancesAcquireSsrsLeaseResponse implements ISqlInstancesAcquireSsrsLeaseResponse {
+
+                    /**
+                     * Constructs a new SqlInstancesAcquireSsrsLeaseResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseResponse);
+
+                    /** SqlInstancesAcquireSsrsLeaseResponse operationId. */
+                    public operationId: string;
+
+                    /**
+                     * Creates a new SqlInstancesAcquireSsrsLeaseResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesAcquireSsrsLeaseResponse instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseResponse): google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseResponse;
+
+                    /**
+                     * Encodes the specified SqlInstancesAcquireSsrsLeaseResponse message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseResponse.verify|verify} messages.
+                     * @param message SqlInstancesAcquireSsrsLeaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesAcquireSsrsLeaseResponse message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseResponse.verify|verify} messages.
+                     * @param message SqlInstancesAcquireSsrsLeaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.ISqlInstancesAcquireSsrsLeaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesAcquireSsrsLeaseResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesAcquireSsrsLeaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseResponse;
+
+                    /**
+                     * Decodes a SqlInstancesAcquireSsrsLeaseResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesAcquireSsrsLeaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseResponse;
+
+                    /**
+                     * Verifies a SqlInstancesAcquireSsrsLeaseResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesAcquireSsrsLeaseResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesAcquireSsrsLeaseResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseResponse;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesAcquireSsrsLeaseResponse message. Also converts values to other types if specified.
+                     * @param message SqlInstancesAcquireSsrsLeaseResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesAcquireSsrsLeaseResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesAcquireSsrsLeaseResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesReleaseSsrsLeaseRequest. */
+                interface ISqlInstancesReleaseSsrsLeaseRequest {
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest project */
+                    project?: (string|null);
+                }
+
+                /** Represents a SqlInstancesReleaseSsrsLeaseRequest. */
+                class SqlInstancesReleaseSsrsLeaseRequest implements ISqlInstancesReleaseSsrsLeaseRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesReleaseSsrsLeaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseRequest);
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest project. */
+                    public project: string;
+
+                    /**
+                     * Creates a new SqlInstancesReleaseSsrsLeaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesReleaseSsrsLeaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseRequest): google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesReleaseSsrsLeaseRequest message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest.verify|verify} messages.
+                     * @param message SqlInstancesReleaseSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesReleaseSsrsLeaseRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest.verify|verify} messages.
+                     * @param message SqlInstancesReleaseSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesReleaseSsrsLeaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesReleaseSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest;
+
+                    /**
+                     * Decodes a SqlInstancesReleaseSsrsLeaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesReleaseSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest;
+
+                    /**
+                     * Verifies a SqlInstancesReleaseSsrsLeaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesReleaseSsrsLeaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesReleaseSsrsLeaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesReleaseSsrsLeaseRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesReleaseSsrsLeaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesReleaseSsrsLeaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesReleaseSsrsLeaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesReleaseSsrsLeaseResponse. */
+                interface ISqlInstancesReleaseSsrsLeaseResponse {
+
+                    /** SqlInstancesReleaseSsrsLeaseResponse operationId */
+                    operationId?: (string|null);
+                }
+
+                /** Represents a SqlInstancesReleaseSsrsLeaseResponse. */
+                class SqlInstancesReleaseSsrsLeaseResponse implements ISqlInstancesReleaseSsrsLeaseResponse {
+
+                    /**
+                     * Constructs a new SqlInstancesReleaseSsrsLeaseResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseResponse);
+
+                    /** SqlInstancesReleaseSsrsLeaseResponse operationId. */
+                    public operationId: string;
+
+                    /**
+                     * Creates a new SqlInstancesReleaseSsrsLeaseResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesReleaseSsrsLeaseResponse instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseResponse): google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseResponse;
+
+                    /**
+                     * Encodes the specified SqlInstancesReleaseSsrsLeaseResponse message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseResponse.verify|verify} messages.
+                     * @param message SqlInstancesReleaseSsrsLeaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesReleaseSsrsLeaseResponse message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseResponse.verify|verify} messages.
+                     * @param message SqlInstancesReleaseSsrsLeaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.ISqlInstancesReleaseSsrsLeaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesReleaseSsrsLeaseResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesReleaseSsrsLeaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseResponse;
+
+                    /**
+                     * Decodes a SqlInstancesReleaseSsrsLeaseResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesReleaseSsrsLeaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseResponse;
+
+                    /**
+                     * Verifies a SqlInstancesReleaseSsrsLeaseResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesReleaseSsrsLeaseResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesReleaseSsrsLeaseResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseResponse;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesReleaseSsrsLeaseResponse message. Also converts values to other types if specified.
+                     * @param message SqlInstancesReleaseSsrsLeaseResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesReleaseSsrsLeaseResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesReleaseSsrsLeaseResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -20313,6 +21864,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public getLatestRecoveryTime(request: google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest): Promise<google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse>;
+
+                    /**
+                     * Calls AcquireSsrsLease.
+                     * @param request SqlInstancesAcquireSsrsLeaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SqlInstancesAcquireSsrsLeaseResponse
+                     */
+                    public acquireSsrsLease(request: google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest, callback: google.cloud.sql.v1beta4.SqlInstancesService.AcquireSsrsLeaseCallback): void;
+
+                    /**
+                     * Calls AcquireSsrsLease.
+                     * @param request SqlInstancesAcquireSsrsLeaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public acquireSsrsLease(request: google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest): Promise<google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse>;
+
+                    /**
+                     * Calls ReleaseSsrsLease.
+                     * @param request SqlInstancesReleaseSsrsLeaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SqlInstancesReleaseSsrsLeaseResponse
+                     */
+                    public releaseSsrsLease(request: google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest, callback: google.cloud.sql.v1beta4.SqlInstancesService.ReleaseSsrsLeaseCallback): void;
+
+                    /**
+                     * Calls ReleaseSsrsLease.
+                     * @param request SqlInstancesReleaseSsrsLeaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public releaseSsrsLease(request: google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest): Promise<google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse>;
                 }
 
                 namespace SqlInstancesService {
@@ -20540,6 +22119,20 @@ export namespace google {
                      * @param [response] SqlInstancesGetLatestRecoveryTimeResponse
                      */
                     type GetLatestRecoveryTimeCallback = (error: (Error|null), response?: google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.sql.v1beta4.SqlInstancesService|acquireSsrsLease}.
+                     * @param error Error, if any
+                     * @param [response] SqlInstancesAcquireSsrsLeaseResponse
+                     */
+                    type AcquireSsrsLeaseCallback = (error: (Error|null), response?: google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.sql.v1beta4.SqlInstancesService|releaseSsrsLease}.
+                     * @param error Error, if any
+                     * @param [response] SqlInstancesReleaseSsrsLeaseResponse
+                     */
+                    type ReleaseSsrsLeaseCallback = (error: (Error|null), response?: google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse) => void;
                 }
 
                 /** Represents a SqlOperationsService */
@@ -24854,6 +26447,12 @@ export namespace google {
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest mysqlSyncConfig */
                     mysqlSyncConfig?: (google.cloud.sql.v1beta4.IMySqlSyncConfig|null);
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest migrationType */
+                    migrationType?: (google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|keyof typeof google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|null);
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest syncParallelLevel */
+                    syncParallelLevel?: (google.cloud.sql.v1beta4.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.ExternalSyncParallelLevel|null);
                 }
 
                 /** Represents a SqlInstancesVerifyExternalSyncSettingsRequest. */
@@ -24882,6 +26481,12 @@ export namespace google {
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest mysqlSyncConfig. */
                     public mysqlSyncConfig?: (google.cloud.sql.v1beta4.IMySqlSyncConfig|null);
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest migrationType. */
+                    public migrationType: (google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|keyof typeof google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType);
+
+                    /** SqlInstancesVerifyExternalSyncSettingsRequest syncParallelLevel. */
+                    public syncParallelLevel: (google.cloud.sql.v1beta4.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.ExternalSyncParallelLevel);
 
                     /** SqlInstancesVerifyExternalSyncSettingsRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -24972,6 +26577,13 @@ export namespace google {
                         ONLINE = 1,
                         OFFLINE = 2
                     }
+
+                    /** MigrationType enum. */
+                    enum MigrationType {
+                        MIGRATION_TYPE_UNSPECIFIED = 0,
+                        LOGICAL = 1,
+                        PHYSICAL = 2
+                    }
                 }
 
                 /** Properties of a SqlInstancesStartExternalSyncRequest. */
@@ -24994,6 +26606,9 @@ export namespace google {
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel */
                     syncParallelLevel?: (google.cloud.sql.v1beta4.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.ExternalSyncParallelLevel|null);
+
+                    /** SqlInstancesStartExternalSyncRequest migrationType */
+                    migrationType?: (google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|keyof typeof google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|null);
                 }
 
                 /** Represents a SqlInstancesStartExternalSyncRequest. */
@@ -25022,6 +26637,9 @@ export namespace google {
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel. */
                     public syncParallelLevel: (google.cloud.sql.v1beta4.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.ExternalSyncParallelLevel);
+
+                    /** SqlInstancesStartExternalSyncRequest migrationType. */
+                    public migrationType: (google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType|keyof typeof google.cloud.sql.v1beta4.SqlInstancesVerifyExternalSyncSettingsRequest.MigrationType);
 
                     /** SqlInstancesStartExternalSyncRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -26376,6 +27994,415 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SqlInstancesReleaseSsrsLeaseRequest. */
+                interface ISqlInstancesReleaseSsrsLeaseRequest {
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest project */
+                    project?: (string|null);
+                }
+
+                /** Represents a SqlInstancesReleaseSsrsLeaseRequest. */
+                class SqlInstancesReleaseSsrsLeaseRequest implements ISqlInstancesReleaseSsrsLeaseRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesReleaseSsrsLeaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest);
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesReleaseSsrsLeaseRequest project. */
+                    public project: string;
+
+                    /**
+                     * Creates a new SqlInstancesReleaseSsrsLeaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesReleaseSsrsLeaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest): google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesReleaseSsrsLeaseRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseRequest.verify|verify} messages.
+                     * @param message SqlInstancesReleaseSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesReleaseSsrsLeaseRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseRequest.verify|verify} messages.
+                     * @param message SqlInstancesReleaseSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesReleaseSsrsLeaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesReleaseSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseRequest;
+
+                    /**
+                     * Decodes a SqlInstancesReleaseSsrsLeaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesReleaseSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseRequest;
+
+                    /**
+                     * Verifies a SqlInstancesReleaseSsrsLeaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesReleaseSsrsLeaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesReleaseSsrsLeaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesReleaseSsrsLeaseRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesReleaseSsrsLeaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesReleaseSsrsLeaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesReleaseSsrsLeaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesReleaseSsrsLeaseResponse. */
+                interface ISqlInstancesReleaseSsrsLeaseResponse {
+
+                    /** SqlInstancesReleaseSsrsLeaseResponse operationId */
+                    operationId?: (string|null);
+                }
+
+                /** Represents a SqlInstancesReleaseSsrsLeaseResponse. */
+                class SqlInstancesReleaseSsrsLeaseResponse implements ISqlInstancesReleaseSsrsLeaseResponse {
+
+                    /**
+                     * Constructs a new SqlInstancesReleaseSsrsLeaseResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse);
+
+                    /** SqlInstancesReleaseSsrsLeaseResponse operationId. */
+                    public operationId: string;
+
+                    /**
+                     * Creates a new SqlInstancesReleaseSsrsLeaseResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesReleaseSsrsLeaseResponse instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse): google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse;
+
+                    /**
+                     * Encodes the specified SqlInstancesReleaseSsrsLeaseResponse message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse.verify|verify} messages.
+                     * @param message SqlInstancesReleaseSsrsLeaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesReleaseSsrsLeaseResponse message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse.verify|verify} messages.
+                     * @param message SqlInstancesReleaseSsrsLeaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlInstancesReleaseSsrsLeaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesReleaseSsrsLeaseResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesReleaseSsrsLeaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse;
+
+                    /**
+                     * Decodes a SqlInstancesReleaseSsrsLeaseResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesReleaseSsrsLeaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse;
+
+                    /**
+                     * Verifies a SqlInstancesReleaseSsrsLeaseResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesReleaseSsrsLeaseResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesReleaseSsrsLeaseResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesReleaseSsrsLeaseResponse message. Also converts values to other types if specified.
+                     * @param message SqlInstancesReleaseSsrsLeaseResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.SqlInstancesReleaseSsrsLeaseResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesReleaseSsrsLeaseResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesReleaseSsrsLeaseResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesAcquireSsrsLeaseRequest. */
+                interface ISqlInstancesAcquireSsrsLeaseRequest {
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest project */
+                    project?: (string|null);
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest body */
+                    body?: (google.cloud.sql.v1beta4.IInstancesAcquireSsrsLeaseRequest|null);
+                }
+
+                /** Represents a SqlInstancesAcquireSsrsLeaseRequest. */
+                class SqlInstancesAcquireSsrsLeaseRequest implements ISqlInstancesAcquireSsrsLeaseRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesAcquireSsrsLeaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest);
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest project. */
+                    public project: string;
+
+                    /** SqlInstancesAcquireSsrsLeaseRequest body. */
+                    public body?: (google.cloud.sql.v1beta4.IInstancesAcquireSsrsLeaseRequest|null);
+
+                    /**
+                     * Creates a new SqlInstancesAcquireSsrsLeaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesAcquireSsrsLeaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest): google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesAcquireSsrsLeaseRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseRequest.verify|verify} messages.
+                     * @param message SqlInstancesAcquireSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesAcquireSsrsLeaseRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseRequest.verify|verify} messages.
+                     * @param message SqlInstancesAcquireSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesAcquireSsrsLeaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesAcquireSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Decodes a SqlInstancesAcquireSsrsLeaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesAcquireSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Verifies a SqlInstancesAcquireSsrsLeaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesAcquireSsrsLeaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesAcquireSsrsLeaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesAcquireSsrsLeaseRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesAcquireSsrsLeaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesAcquireSsrsLeaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesAcquireSsrsLeaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesAcquireSsrsLeaseResponse. */
+                interface ISqlInstancesAcquireSsrsLeaseResponse {
+
+                    /** SqlInstancesAcquireSsrsLeaseResponse operationId */
+                    operationId?: (string|null);
+                }
+
+                /** Represents a SqlInstancesAcquireSsrsLeaseResponse. */
+                class SqlInstancesAcquireSsrsLeaseResponse implements ISqlInstancesAcquireSsrsLeaseResponse {
+
+                    /**
+                     * Constructs a new SqlInstancesAcquireSsrsLeaseResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse);
+
+                    /** SqlInstancesAcquireSsrsLeaseResponse operationId. */
+                    public operationId?: (string|null);
+
+                    /** SqlInstancesAcquireSsrsLeaseResponse _operationId. */
+                    public _operationId?: "operationId";
+
+                    /**
+                     * Creates a new SqlInstancesAcquireSsrsLeaseResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesAcquireSsrsLeaseResponse instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse): google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse;
+
+                    /**
+                     * Encodes the specified SqlInstancesAcquireSsrsLeaseResponse message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse.verify|verify} messages.
+                     * @param message SqlInstancesAcquireSsrsLeaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesAcquireSsrsLeaseResponse message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse.verify|verify} messages.
+                     * @param message SqlInstancesAcquireSsrsLeaseResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlInstancesAcquireSsrsLeaseResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesAcquireSsrsLeaseResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesAcquireSsrsLeaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse;
+
+                    /**
+                     * Decodes a SqlInstancesAcquireSsrsLeaseResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesAcquireSsrsLeaseResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse;
+
+                    /**
+                     * Verifies a SqlInstancesAcquireSsrsLeaseResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesAcquireSsrsLeaseResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesAcquireSsrsLeaseResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesAcquireSsrsLeaseResponse message. Also converts values to other types if specified.
+                     * @param message SqlInstancesAcquireSsrsLeaseResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.SqlInstancesAcquireSsrsLeaseResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesAcquireSsrsLeaseResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesAcquireSsrsLeaseResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an AclEntry. */
                 interface IAclEntry {
 
@@ -26753,6 +28780,9 @@ export namespace google {
 
                     /** BackupConfiguration backupRetentionSettings */
                     backupRetentionSettings?: (google.cloud.sql.v1beta4.IBackupRetentionSettings|null);
+
+                    /** BackupConfiguration transactionalLogStorageState */
+                    transactionalLogStorageState?: (google.cloud.sql.v1beta4.BackupConfiguration.TransactionalLogStorageState|keyof typeof google.cloud.sql.v1beta4.BackupConfiguration.TransactionalLogStorageState|null);
                 }
 
                 /** Represents a BackupConfiguration. */
@@ -26790,6 +28820,12 @@ export namespace google {
 
                     /** BackupConfiguration backupRetentionSettings. */
                     public backupRetentionSettings?: (google.cloud.sql.v1beta4.IBackupRetentionSettings|null);
+
+                    /** BackupConfiguration transactionalLogStorageState. */
+                    public transactionalLogStorageState?: (google.cloud.sql.v1beta4.BackupConfiguration.TransactionalLogStorageState|keyof typeof google.cloud.sql.v1beta4.BackupConfiguration.TransactionalLogStorageState|null);
+
+                    /** BackupConfiguration _transactionalLogStorageState. */
+                    public _transactionalLogStorageState?: "transactionalLogStorageState";
 
                     /**
                      * Creates a new BackupConfiguration instance using the specified properties.
@@ -26867,6 +28903,18 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BackupConfiguration {
+
+                    /** TransactionalLogStorageState enum. */
+                    enum TransactionalLogStorageState {
+                        TRANSACTIONAL_LOG_STORAGE_STATE_UNSPECIFIED = 0,
+                        DISK = 1,
+                        SWITCHING_TO_CLOUD_STORAGE = 2,
+                        SWITCHED_TO_CLOUD_STORAGE = 3,
+                        CLOUD_STORAGE = 4
+                    }
                 }
 
                 /** Properties of a BackupRun. */
@@ -27409,6 +29457,9 @@ export namespace google {
 
                     /** CloneContext preferredZone */
                     preferredZone?: (string|null);
+
+                    /** CloneContext preferredSecondaryZone */
+                    preferredSecondaryZone?: (string|null);
                 }
 
                 /** Represents a CloneContext. */
@@ -27444,8 +29495,14 @@ export namespace google {
                     /** CloneContext preferredZone. */
                     public preferredZone?: (string|null);
 
+                    /** CloneContext preferredSecondaryZone. */
+                    public preferredSecondaryZone?: (string|null);
+
                     /** CloneContext _preferredZone. */
                     public _preferredZone?: "preferredZone";
+
+                    /** CloneContext _preferredSecondaryZone. */
+                    public _preferredSecondaryZone?: "preferredSecondaryZone";
 
                     /**
                      * Creates a new CloneContext instance using the specified properties.
@@ -28202,6 +30259,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion */
                     maintenanceVersion?: (string|null);
 
+                    /** DatabaseInstance upgradableDatabaseVersions */
+                    upgradableDatabaseVersions?: (google.cloud.sql.v1beta4.IAvailableDatabaseVersion[]|null);
+
                     /** DatabaseInstance sqlNetworkArchitecture */
                     sqlNetworkArchitecture?: (google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|null);
 
@@ -28216,6 +30276,12 @@ export namespace google {
 
                     /** DatabaseInstance writeEndpoint */
                     writeEndpoint?: (string|null);
+
+                    /** DatabaseInstance replicationCluster */
+                    replicationCluster?: (google.cloud.sql.v1beta4.IReplicationCluster|null);
+
+                    /** DatabaseInstance geminiConfig */
+                    geminiConfig?: (google.cloud.sql.v1beta4.IGeminiInstanceConfig|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -28335,6 +30401,9 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion. */
                     public maintenanceVersion: string;
 
+                    /** DatabaseInstance upgradableDatabaseVersions. */
+                    public upgradableDatabaseVersions: google.cloud.sql.v1beta4.IAvailableDatabaseVersion[];
+
                     /** DatabaseInstance sqlNetworkArchitecture. */
                     public sqlNetworkArchitecture?: (google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|null);
 
@@ -28349,6 +30418,12 @@ export namespace google {
 
                     /** DatabaseInstance writeEndpoint. */
                     public writeEndpoint?: (string|null);
+
+                    /** DatabaseInstance replicationCluster. */
+                    public replicationCluster?: (google.cloud.sql.v1beta4.IReplicationCluster|null);
+
+                    /** DatabaseInstance geminiConfig. */
+                    public geminiConfig?: (google.cloud.sql.v1beta4.IGeminiInstanceConfig|null);
 
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
@@ -28367,6 +30442,12 @@ export namespace google {
 
                     /** DatabaseInstance _writeEndpoint. */
                     public _writeEndpoint?: "writeEndpoint";
+
+                    /** DatabaseInstance _replicationCluster. */
+                    public _replicationCluster?: "replicationCluster";
+
+                    /** DatabaseInstance _geminiConfig. */
+                    public _geminiConfig?: "geminiConfig";
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -28806,6 +30887,387 @@ export namespace google {
                         NEW_NETWORK_ARCHITECTURE = 1,
                         OLD_NETWORK_ARCHITECTURE = 2
                     }
+                }
+
+                /** Properties of a GeminiInstanceConfig. */
+                interface IGeminiInstanceConfig {
+
+                    /** GeminiInstanceConfig entitled */
+                    entitled?: (boolean|null);
+
+                    /** GeminiInstanceConfig googleVacuumMgmtEnabled */
+                    googleVacuumMgmtEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig oomSessionCancelEnabled */
+                    oomSessionCancelEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig activeQueryEnabled */
+                    activeQueryEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig indexAdvisorEnabled */
+                    indexAdvisorEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig flagRecommenderEnabled */
+                    flagRecommenderEnabled?: (boolean|null);
+                }
+
+                /** Represents a GeminiInstanceConfig. */
+                class GeminiInstanceConfig implements IGeminiInstanceConfig {
+
+                    /**
+                     * Constructs a new GeminiInstanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.IGeminiInstanceConfig);
+
+                    /** GeminiInstanceConfig entitled. */
+                    public entitled?: (boolean|null);
+
+                    /** GeminiInstanceConfig googleVacuumMgmtEnabled. */
+                    public googleVacuumMgmtEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig oomSessionCancelEnabled. */
+                    public oomSessionCancelEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig activeQueryEnabled. */
+                    public activeQueryEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig indexAdvisorEnabled. */
+                    public indexAdvisorEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig flagRecommenderEnabled. */
+                    public flagRecommenderEnabled?: (boolean|null);
+
+                    /** GeminiInstanceConfig _entitled. */
+                    public _entitled?: "entitled";
+
+                    /** GeminiInstanceConfig _googleVacuumMgmtEnabled. */
+                    public _googleVacuumMgmtEnabled?: "googleVacuumMgmtEnabled";
+
+                    /** GeminiInstanceConfig _oomSessionCancelEnabled. */
+                    public _oomSessionCancelEnabled?: "oomSessionCancelEnabled";
+
+                    /** GeminiInstanceConfig _activeQueryEnabled. */
+                    public _activeQueryEnabled?: "activeQueryEnabled";
+
+                    /** GeminiInstanceConfig _indexAdvisorEnabled. */
+                    public _indexAdvisorEnabled?: "indexAdvisorEnabled";
+
+                    /** GeminiInstanceConfig _flagRecommenderEnabled. */
+                    public _flagRecommenderEnabled?: "flagRecommenderEnabled";
+
+                    /**
+                     * Creates a new GeminiInstanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GeminiInstanceConfig instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.IGeminiInstanceConfig): google.cloud.sql.v1beta4.GeminiInstanceConfig;
+
+                    /**
+                     * Encodes the specified GeminiInstanceConfig message. Does not implicitly {@link google.cloud.sql.v1beta4.GeminiInstanceConfig.verify|verify} messages.
+                     * @param message GeminiInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.IGeminiInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GeminiInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.GeminiInstanceConfig.verify|verify} messages.
+                     * @param message GeminiInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IGeminiInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GeminiInstanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GeminiInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.GeminiInstanceConfig;
+
+                    /**
+                     * Decodes a GeminiInstanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GeminiInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.GeminiInstanceConfig;
+
+                    /**
+                     * Verifies a GeminiInstanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GeminiInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GeminiInstanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.GeminiInstanceConfig;
+
+                    /**
+                     * Creates a plain object from a GeminiInstanceConfig message. Also converts values to other types if specified.
+                     * @param message GeminiInstanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.GeminiInstanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GeminiInstanceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GeminiInstanceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReplicationCluster. */
+                interface IReplicationCluster {
+
+                    /** ReplicationCluster psaWriteEndpoint */
+                    psaWriteEndpoint?: (string|null);
+
+                    /** ReplicationCluster failoverDrReplicaName */
+                    failoverDrReplicaName?: (string|null);
+
+                    /** ReplicationCluster drReplica */
+                    drReplica?: (boolean|null);
+                }
+
+                /** Represents a ReplicationCluster. */
+                class ReplicationCluster implements IReplicationCluster {
+
+                    /**
+                     * Constructs a new ReplicationCluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.IReplicationCluster);
+
+                    /** ReplicationCluster psaWriteEndpoint. */
+                    public psaWriteEndpoint?: (string|null);
+
+                    /** ReplicationCluster failoverDrReplicaName. */
+                    public failoverDrReplicaName?: (string|null);
+
+                    /** ReplicationCluster drReplica. */
+                    public drReplica?: (boolean|null);
+
+                    /** ReplicationCluster _psaWriteEndpoint. */
+                    public _psaWriteEndpoint?: "psaWriteEndpoint";
+
+                    /** ReplicationCluster _failoverDrReplicaName. */
+                    public _failoverDrReplicaName?: "failoverDrReplicaName";
+
+                    /** ReplicationCluster _drReplica. */
+                    public _drReplica?: "drReplica";
+
+                    /**
+                     * Creates a new ReplicationCluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReplicationCluster instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.IReplicationCluster): google.cloud.sql.v1beta4.ReplicationCluster;
+
+                    /**
+                     * Encodes the specified ReplicationCluster message. Does not implicitly {@link google.cloud.sql.v1beta4.ReplicationCluster.verify|verify} messages.
+                     * @param message ReplicationCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.IReplicationCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReplicationCluster message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.ReplicationCluster.verify|verify} messages.
+                     * @param message ReplicationCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IReplicationCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReplicationCluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReplicationCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.ReplicationCluster;
+
+                    /**
+                     * Decodes a ReplicationCluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReplicationCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.ReplicationCluster;
+
+                    /**
+                     * Verifies a ReplicationCluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReplicationCluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReplicationCluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.ReplicationCluster;
+
+                    /**
+                     * Creates a plain object from a ReplicationCluster message. Also converts values to other types if specified.
+                     * @param message ReplicationCluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.ReplicationCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReplicationCluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReplicationCluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AvailableDatabaseVersion. */
+                interface IAvailableDatabaseVersion {
+
+                    /** AvailableDatabaseVersion majorVersion */
+                    majorVersion?: (string|null);
+
+                    /** AvailableDatabaseVersion name */
+                    name?: (string|null);
+
+                    /** AvailableDatabaseVersion displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents an AvailableDatabaseVersion. */
+                class AvailableDatabaseVersion implements IAvailableDatabaseVersion {
+
+                    /**
+                     * Constructs a new AvailableDatabaseVersion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.IAvailableDatabaseVersion);
+
+                    /** AvailableDatabaseVersion majorVersion. */
+                    public majorVersion?: (string|null);
+
+                    /** AvailableDatabaseVersion name. */
+                    public name?: (string|null);
+
+                    /** AvailableDatabaseVersion displayName. */
+                    public displayName?: (string|null);
+
+                    /** AvailableDatabaseVersion _majorVersion. */
+                    public _majorVersion?: "majorVersion";
+
+                    /** AvailableDatabaseVersion _name. */
+                    public _name?: "name";
+
+                    /** AvailableDatabaseVersion _displayName. */
+                    public _displayName?: "displayName";
+
+                    /**
+                     * Creates a new AvailableDatabaseVersion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AvailableDatabaseVersion instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.IAvailableDatabaseVersion): google.cloud.sql.v1beta4.AvailableDatabaseVersion;
+
+                    /**
+                     * Encodes the specified AvailableDatabaseVersion message. Does not implicitly {@link google.cloud.sql.v1beta4.AvailableDatabaseVersion.verify|verify} messages.
+                     * @param message AvailableDatabaseVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.IAvailableDatabaseVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AvailableDatabaseVersion message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.AvailableDatabaseVersion.verify|verify} messages.
+                     * @param message AvailableDatabaseVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IAvailableDatabaseVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AvailableDatabaseVersion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AvailableDatabaseVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.AvailableDatabaseVersion;
+
+                    /**
+                     * Decodes an AvailableDatabaseVersion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AvailableDatabaseVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.AvailableDatabaseVersion;
+
+                    /**
+                     * Verifies an AvailableDatabaseVersion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AvailableDatabaseVersion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AvailableDatabaseVersion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.AvailableDatabaseVersion;
+
+                    /**
+                     * Creates a plain object from an AvailableDatabaseVersion message. Also converts values to other types if specified.
+                     * @param message AvailableDatabaseVersion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.AvailableDatabaseVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AvailableDatabaseVersion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AvailableDatabaseVersion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DatabasesListResponse. */
@@ -29646,6 +32108,12 @@ export namespace google {
 
                         /** SqlExportOptions mysqlExportOptions */
                         mysqlExportOptions?: (google.cloud.sql.v1beta4.ExportContext.SqlExportOptions.IMysqlExportOptions|null);
+
+                        /** SqlExportOptions threads */
+                        threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlExportOptions parallel */
+                        parallel?: (google.protobuf.IBoolValue|null);
                     }
 
                     /** Represents a SqlExportOptions. */
@@ -29665,6 +32133,12 @@ export namespace google {
 
                         /** SqlExportOptions mysqlExportOptions. */
                         public mysqlExportOptions?: (google.cloud.sql.v1beta4.ExportContext.SqlExportOptions.IMysqlExportOptions|null);
+
+                        /** SqlExportOptions threads. */
+                        public threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlExportOptions parallel. */
+                        public parallel?: (google.protobuf.IBoolValue|null);
 
                         /**
                          * Creates a new SqlExportOptions instance using the specified properties.
@@ -30346,6 +32820,9 @@ export namespace google {
 
                     /** ImportContext bakImportOptions */
                     bakImportOptions?: (google.cloud.sql.v1beta4.ImportContext.ISqlBakImportOptions|null);
+
+                    /** ImportContext sqlImportOptions */
+                    sqlImportOptions?: (google.cloud.sql.v1beta4.ImportContext.ISqlImportOptions|null);
                 }
 
                 /** Represents an ImportContext. */
@@ -30377,6 +32854,9 @@ export namespace google {
 
                     /** ImportContext bakImportOptions. */
                     public bakImportOptions?: (google.cloud.sql.v1beta4.ImportContext.ISqlBakImportOptions|null);
+
+                    /** ImportContext sqlImportOptions. */
+                    public sqlImportOptions?: (google.cloud.sql.v1beta4.ImportContext.ISqlImportOptions|null);
 
                     /**
                      * Creates a new ImportContext instance using the specified properties.
@@ -30457,6 +32937,109 @@ export namespace google {
                 }
 
                 namespace ImportContext {
+
+                    /** Properties of a SqlImportOptions. */
+                    interface ISqlImportOptions {
+
+                        /** SqlImportOptions threads */
+                        threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlImportOptions parallel */
+                        parallel?: (google.protobuf.IBoolValue|null);
+                    }
+
+                    /** Represents a SqlImportOptions. */
+                    class SqlImportOptions implements ISqlImportOptions {
+
+                        /**
+                         * Constructs a new SqlImportOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.sql.v1beta4.ImportContext.ISqlImportOptions);
+
+                        /** SqlImportOptions threads. */
+                        public threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlImportOptions parallel. */
+                        public parallel?: (google.protobuf.IBoolValue|null);
+
+                        /**
+                         * Creates a new SqlImportOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SqlImportOptions instance
+                         */
+                        public static create(properties?: google.cloud.sql.v1beta4.ImportContext.ISqlImportOptions): google.cloud.sql.v1beta4.ImportContext.SqlImportOptions;
+
+                        /**
+                         * Encodes the specified SqlImportOptions message. Does not implicitly {@link google.cloud.sql.v1beta4.ImportContext.SqlImportOptions.verify|verify} messages.
+                         * @param message SqlImportOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.sql.v1beta4.ImportContext.ISqlImportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SqlImportOptions message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.ImportContext.SqlImportOptions.verify|verify} messages.
+                         * @param message SqlImportOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.sql.v1beta4.ImportContext.ISqlImportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SqlImportOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SqlImportOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.ImportContext.SqlImportOptions;
+
+                        /**
+                         * Decodes a SqlImportOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SqlImportOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.ImportContext.SqlImportOptions;
+
+                        /**
+                         * Verifies a SqlImportOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SqlImportOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SqlImportOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.ImportContext.SqlImportOptions;
+
+                        /**
+                         * Creates a plain object from a SqlImportOptions message. Also converts values to other types if specified.
+                         * @param message SqlImportOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.sql.v1beta4.ImportContext.SqlImportOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SqlImportOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SqlImportOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** Properties of a SqlCsvImportOptions. */
                     interface ISqlCsvImportOptions {
@@ -32033,6 +34616,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an InstancesAcquireSsrsLeaseRequest. */
+                interface IInstancesAcquireSsrsLeaseRequest {
+
+                    /** InstancesAcquireSsrsLeaseRequest acquireSsrsLeaseContext */
+                    acquireSsrsLeaseContext?: (google.cloud.sql.v1beta4.IAcquireSsrsLeaseContext|null);
+                }
+
+                /** Represents an InstancesAcquireSsrsLeaseRequest. */
+                class InstancesAcquireSsrsLeaseRequest implements IInstancesAcquireSsrsLeaseRequest {
+
+                    /**
+                     * Constructs a new InstancesAcquireSsrsLeaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.IInstancesAcquireSsrsLeaseRequest);
+
+                    /** InstancesAcquireSsrsLeaseRequest acquireSsrsLeaseContext. */
+                    public acquireSsrsLeaseContext?: (google.cloud.sql.v1beta4.IAcquireSsrsLeaseContext|null);
+
+                    /**
+                     * Creates a new InstancesAcquireSsrsLeaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstancesAcquireSsrsLeaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.IInstancesAcquireSsrsLeaseRequest): google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Encodes the specified InstancesAcquireSsrsLeaseRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest.verify|verify} messages.
+                     * @param message InstancesAcquireSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.IInstancesAcquireSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstancesAcquireSsrsLeaseRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest.verify|verify} messages.
+                     * @param message InstancesAcquireSsrsLeaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IInstancesAcquireSsrsLeaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstancesAcquireSsrsLeaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstancesAcquireSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Decodes an InstancesAcquireSsrsLeaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstancesAcquireSsrsLeaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Verifies an InstancesAcquireSsrsLeaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstancesAcquireSsrsLeaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstancesAcquireSsrsLeaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest;
+
+                    /**
+                     * Creates a plain object from an InstancesAcquireSsrsLeaseRequest message. Also converts values to other types if specified.
+                     * @param message InstancesAcquireSsrsLeaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.InstancesAcquireSsrsLeaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstancesAcquireSsrsLeaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstancesAcquireSsrsLeaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a PerformDiskShrinkContext. */
                 interface IPerformDiskShrinkContext {
 
@@ -32500,7 +35180,16 @@ export namespace google {
                         TURN_ON_PITR_AFTER_PROMOTE = 36,
                         INCOMPATIBLE_DATABASE_MINOR_VERSION = 37,
                         SOURCE_MAX_SUBSCRIPTIONS = 38,
-                        UNABLE_TO_VERIFY_DEFINERS = 39
+                        UNABLE_TO_VERIFY_DEFINERS = 39,
+                        SUBSCRIPTION_CALCULATION_STATUS = 40,
+                        PG_SUBSCRIPTION_COUNT = 41,
+                        PG_SYNC_PARALLEL_LEVEL = 42,
+                        INSUFFICIENT_DISK_SIZE = 43,
+                        INSUFFICIENT_MACHINE_TIER = 44,
+                        UNSUPPORTED_EXTENSIONS_NOT_MIGRATED = 45,
+                        EXTENSIONS_NOT_MIGRATED = 46,
+                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47,
+                        EXTENSIONS_NOT_ENABLED_IN_REPLICA = 48
                     }
                 }
 
@@ -33893,6 +36582,9 @@ export namespace google {
 
                     /** Operation targetProject */
                     targetProject?: (string|null);
+
+                    /** Operation acquireSsrsLeaseContext */
+                    acquireSsrsLeaseContext?: (google.cloud.sql.v1beta4.IAcquireSsrsLeaseContext|null);
                 }
 
                 /** Represents an Operation. */
@@ -33954,6 +36646,9 @@ export namespace google {
 
                     /** Operation targetProject. */
                     public targetProject: string;
+
+                    /** Operation acquireSsrsLeaseContext. */
+                    public acquireSsrsLeaseContext?: (google.cloud.sql.v1beta4.IAcquireSsrsLeaseContext|null);
 
                     /**
                      * Creates a new Operation instance using the specified properties.
@@ -34075,7 +36770,13 @@ export namespace google {
                         LOG_CLEANUP = 36,
                         AUTO_RESTART = 37,
                         REENCRYPT = 38,
-                        SWITCHOVER = 39
+                        SWITCHOVER = 39,
+                        ACQUIRE_SSRS_LEASE = 42,
+                        RELEASE_SSRS_LEASE = 43,
+                        RECONFIGURE_OLD_PRIMARY = 44,
+                        CLUSTER_MAINTENANCE = 45,
+                        SELF_SERVICE_MAINTENANCE = 46,
+                        SWITCHOVER_TO_REPLICA = 47
                     }
 
                     /** SqlOperationStatus enum. */
@@ -35078,6 +37779,12 @@ export namespace google {
 
                     /** Settings dataCacheConfig */
                     dataCacheConfig?: (google.cloud.sql.v1beta4.IDataCacheConfig|null);
+
+                    /** Settings enableGoogleMlIntegration */
+                    enableGoogleMlIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings enableDataplexIntegration */
+                    enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a Settings. */
@@ -35184,6 +37891,12 @@ export namespace google {
 
                     /** Settings dataCacheConfig. */
                     public dataCacheConfig?: (google.cloud.sql.v1beta4.IDataCacheConfig|null);
+
+                    /** Settings enableGoogleMlIntegration. */
+                    public enableGoogleMlIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings enableDataplexIntegration. */
+                    public enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new Settings instance using the specified properties.
@@ -36654,6 +39367,7 @@ export namespace google {
                     POSTGRES_13 = 23,
                     POSTGRES_14 = 110,
                     POSTGRES_15 = 172,
+                    POSTGRES_16 = 272,
                     MYSQL_8_0 = 20,
                     MYSQL_8_0_18 = 41,
                     MYSQL_8_0_26 = 85,
@@ -36667,6 +39381,12 @@ export namespace google {
                     MYSQL_8_0_34 = 239,
                     MYSQL_8_0_35 = 240,
                     MYSQL_8_0_36 = 241,
+                    MYSQL_8_0_37 = 355,
+                    MYSQL_8_0_38 = 356,
+                    MYSQL_8_0_39 = 357,
+                    MYSQL_8_0_40 = 358,
+                    MYSQL_8_4 = 398,
+                    MYSQL_8_4_0 = 399,
                     SQLSERVER_2019_STANDARD = 26,
                     SQLSERVER_2019_ENTERPRISE = 27,
                     SQLSERVER_2019_EXPRESS = 28,
@@ -36721,6 +39441,133 @@ export namespace google {
                     canary = 1,
                     stable = 2,
                     week5 = 3
+                }
+
+                /** Properties of an AcquireSsrsLeaseContext. */
+                interface IAcquireSsrsLeaseContext {
+
+                    /** AcquireSsrsLeaseContext setupLogin */
+                    setupLogin?: (string|null);
+
+                    /** AcquireSsrsLeaseContext serviceLogin */
+                    serviceLogin?: (string|null);
+
+                    /** AcquireSsrsLeaseContext reportDatabase */
+                    reportDatabase?: (string|null);
+
+                    /** AcquireSsrsLeaseContext duration */
+                    duration?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents an AcquireSsrsLeaseContext. */
+                class AcquireSsrsLeaseContext implements IAcquireSsrsLeaseContext {
+
+                    /**
+                     * Constructs a new AcquireSsrsLeaseContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.IAcquireSsrsLeaseContext);
+
+                    /** AcquireSsrsLeaseContext setupLogin. */
+                    public setupLogin?: (string|null);
+
+                    /** AcquireSsrsLeaseContext serviceLogin. */
+                    public serviceLogin?: (string|null);
+
+                    /** AcquireSsrsLeaseContext reportDatabase. */
+                    public reportDatabase?: (string|null);
+
+                    /** AcquireSsrsLeaseContext duration. */
+                    public duration?: (google.protobuf.IDuration|null);
+
+                    /** AcquireSsrsLeaseContext _setupLogin. */
+                    public _setupLogin?: "setupLogin";
+
+                    /** AcquireSsrsLeaseContext _serviceLogin. */
+                    public _serviceLogin?: "serviceLogin";
+
+                    /** AcquireSsrsLeaseContext _reportDatabase. */
+                    public _reportDatabase?: "reportDatabase";
+
+                    /** AcquireSsrsLeaseContext _duration. */
+                    public _duration?: "duration";
+
+                    /**
+                     * Creates a new AcquireSsrsLeaseContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcquireSsrsLeaseContext instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.IAcquireSsrsLeaseContext): google.cloud.sql.v1beta4.AcquireSsrsLeaseContext;
+
+                    /**
+                     * Encodes the specified AcquireSsrsLeaseContext message. Does not implicitly {@link google.cloud.sql.v1beta4.AcquireSsrsLeaseContext.verify|verify} messages.
+                     * @param message AcquireSsrsLeaseContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.IAcquireSsrsLeaseContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcquireSsrsLeaseContext message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.AcquireSsrsLeaseContext.verify|verify} messages.
+                     * @param message AcquireSsrsLeaseContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IAcquireSsrsLeaseContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcquireSsrsLeaseContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcquireSsrsLeaseContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.AcquireSsrsLeaseContext;
+
+                    /**
+                     * Decodes an AcquireSsrsLeaseContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcquireSsrsLeaseContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.AcquireSsrsLeaseContext;
+
+                    /**
+                     * Verifies an AcquireSsrsLeaseContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcquireSsrsLeaseContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcquireSsrsLeaseContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.AcquireSsrsLeaseContext;
+
+                    /**
+                     * Creates a plain object from an AcquireSsrsLeaseContext message. Also converts values to other types if specified.
+                     * @param message AcquireSsrsLeaseContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.AcquireSsrsLeaseContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcquireSsrsLeaseContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AcquireSsrsLeaseContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** SqlFlagType enum. */
@@ -39627,6 +42474,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -39664,6 +42514,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -40245,6 +43098,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -40258,6 +43126,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -40539,6 +43422,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -40555,6 +43441,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -40758,7 +43647,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */
@@ -40789,7 +43681,8 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
     }
 
@@ -40893,6 +43786,21 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
         /** Properties of a FileDescriptorProto. */
         interface IFileDescriptorProto {
 
@@ -40933,7 +43841,7 @@ export namespace google {
             syntax?: (string|null);
 
             /** FileDescriptorProto edition */
-            edition?: (string|null);
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -40982,7 +43890,7 @@ export namespace google {
             public syntax: string;
 
             /** FileDescriptorProto edition. */
-            public edition: string;
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -41433,6 +44341,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -41446,6 +44363,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -41523,6 +44449,136 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -41709,8 +44765,8 @@ export namespace google {
             /** Label enum. */
             enum Label {
                 LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
             }
         }
 
@@ -42422,9 +45478,6 @@ export namespace google {
             /** FileOptions pyGenericServices */
             pyGenericServices?: (boolean|null);
 
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
             /** FileOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -42451,6 +45504,9 @@ export namespace google {
 
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -42495,9 +45551,6 @@ export namespace google {
             /** FileOptions pyGenericServices. */
             public pyGenericServices: boolean;
 
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
             /** FileOptions deprecated. */
             public deprecated: boolean;
 
@@ -42524,6 +45577,9 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -42634,6 +45690,9 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -42661,6 +45720,9 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -42773,8 +45835,14 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -42819,8 +45887,14 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -42939,10 +46013,116 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -42956,6 +46136,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -43050,6 +46233,9 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -43071,6 +46257,9 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -43159,6 +46348,12 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -43174,6 +46369,12 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -43259,6 +46460,9 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -43280,6 +46484,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -43374,6 +46581,9 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -43398,6 +46608,9 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -43722,6 +46935,394 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

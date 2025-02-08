@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v2alpha/search_service_client_config.json`.
@@ -56,6 +57,8 @@ export class SearchServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -115,8 +118,27 @@ export class SearchServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SearchServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'retail.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -131,7 +153,7 @@ export class SearchServiceClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -156,10 +178,10 @@ export class SearchServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
@@ -169,7 +191,7 @@ export class SearchServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -189,6 +211,9 @@ export class SearchServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      alertConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/alertConfig'
+      ),
       attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
       ),
@@ -207,6 +232,9 @@ export class SearchServiceClient {
       experimentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/experiments/{experiment}'
       ),
+      loggingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/loggingConfig'
+      ),
       merchantCenterAccountLinkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/merchantCenterAccountLinks/{merchant_center_account_link}'
       ),
@@ -215,6 +243,9 @@ export class SearchServiceClient {
       ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
+      ),
+      retailProjectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/retailProject'
       ),
       servingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}'
@@ -354,19 +385,50 @@ export class SearchServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'retail.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'retail.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -420,7 +482,7 @@ export class SearchServiceClient {
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
    *   This field is used to identify the serving config name and the set
-   *   of models that will be used to make the search.
+   *   of models that are used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as
    *   `projects/* /locations/global/catalogs/default_catalog/branches/0`.
@@ -476,8 +538,8 @@ export class SearchServiceClient {
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the products being filtered. Filter
-   *   expression is case-sensitive. See more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/filter-and-order#filter).
+   *   expression is case-sensitive. For more information, see
+   *   [Filter](https://cloud.google.com/retail/docs/filter-and-order#filter).
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
@@ -485,21 +547,20 @@ export class SearchServiceClient {
    *   checking any filters on the search page.
    *
    *   The filter applied to every search request when quality improvement such as
-   *   query expansion is needed. For example, if a query does not have enough
-   *   results, an expanded query with
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.canonical_filter|SearchRequest.canonical_filter}
-   *   will be returned as a supplement of the original query. This field is
-   *   strongly recommended to achieve high search quality.
+   *   query expansion is needed. In the case a query does not have a sufficient
+   *   amount of results this filter will be used to determine whether or not to
+   *   enable the query expansion flow. The original filter will still be used for
+   *   the query expanded search.
+   *   This field is strongly recommended to achieve high search quality.
    *
-   *   See
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}
-   *   for more details about filter syntax.
+   *   For more information about filter syntax, see
+   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}.
    * @param {string} request.orderBy
    *   The order in which products are returned. Products can be ordered by
    *   a field in an {@link protos.google.cloud.retail.v2alpha.Product|Product} object. Leave
-   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. See
-   *   more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/filter-and-order#order).
+   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. For
+   *   more information, see
+   *   [Order](https://cloud.google.com/retail/docs/filter-and-order#order).
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {number[]} request.facetSpecs
@@ -514,8 +575,8 @@ export class SearchServiceClient {
    *   The specification for dynamically generated facets. Notice that only
    *   textual facets can be dynamically generated.
    * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain products. See more details at this
-   *   [user guide](https://cloud.google.com/retail/docs/boosting).
+   *   Boost specification to boost certain products. For more information, see
+   *   [Boost results](https://cloud.google.com/retail/docs/boosting).
    *
    *   Notice that if both
    *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
@@ -526,16 +587,16 @@ export class SearchServiceClient {
    *   to the sum of the boost scores from all matched boost conditions.
    * @param {google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
-   *   query expansion will occur. See more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/result-size#query_expansion).
+   *   query expansion occurs. For more information, see [Query
+   *   expansion](https://cloud.google.com/retail/docs/result-size#query_expansion).
    * @param {google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold} request.relevanceThreshold
    *   The relevance threshold of the search results.
    *
    *   Defaults to
    *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold.HIGH|RelevanceThreshold.HIGH},
    *   which means only the most relevant results are shown, and the least number
-   *   of results are returned. See more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
+   *   of results are returned. For more information, see [Adjust result
+   *   size](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
@@ -658,9 +719,9 @@ export class SearchServiceClient {
    *     key with multiple resources.
    *   * Keys must start with a lowercase letter or international character.
    *
-   *   See [Google Cloud
-   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-   *   for more details.
+   *   For more information, see [Requirements for
+   *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   in the Resource Manager documentation.
    * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
@@ -671,6 +732,11 @@ export class SearchServiceClient {
    *   If this is set, it should be exactly matched with
    *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
    *   search results boosted by entity.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+   *   Optional. This field specifies all conversational related parameters
+   *   addition to traditional retail search.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+   *   Optional. This field specifies tile navigation related parameters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -751,7 +817,7 @@ export class SearchServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `search`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.placement
@@ -760,7 +826,7 @@ export class SearchServiceClient {
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
    *   This field is used to identify the serving config name and the set
-   *   of models that will be used to make the search.
+   *   of models that are used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as
    *   `projects/* /locations/global/catalogs/default_catalog/branches/0`.
@@ -816,8 +882,8 @@ export class SearchServiceClient {
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the products being filtered. Filter
-   *   expression is case-sensitive. See more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/filter-and-order#filter).
+   *   expression is case-sensitive. For more information, see
+   *   [Filter](https://cloud.google.com/retail/docs/filter-and-order#filter).
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
@@ -825,21 +891,20 @@ export class SearchServiceClient {
    *   checking any filters on the search page.
    *
    *   The filter applied to every search request when quality improvement such as
-   *   query expansion is needed. For example, if a query does not have enough
-   *   results, an expanded query with
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.canonical_filter|SearchRequest.canonical_filter}
-   *   will be returned as a supplement of the original query. This field is
-   *   strongly recommended to achieve high search quality.
+   *   query expansion is needed. In the case a query does not have a sufficient
+   *   amount of results this filter will be used to determine whether or not to
+   *   enable the query expansion flow. The original filter will still be used for
+   *   the query expanded search.
+   *   This field is strongly recommended to achieve high search quality.
    *
-   *   See
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}
-   *   for more details about filter syntax.
+   *   For more information about filter syntax, see
+   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}.
    * @param {string} request.orderBy
    *   The order in which products are returned. Products can be ordered by
    *   a field in an {@link protos.google.cloud.retail.v2alpha.Product|Product} object. Leave
-   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. See
-   *   more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/filter-and-order#order).
+   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. For
+   *   more information, see
+   *   [Order](https://cloud.google.com/retail/docs/filter-and-order#order).
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {number[]} request.facetSpecs
@@ -854,8 +919,8 @@ export class SearchServiceClient {
    *   The specification for dynamically generated facets. Notice that only
    *   textual facets can be dynamically generated.
    * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain products. See more details at this
-   *   [user guide](https://cloud.google.com/retail/docs/boosting).
+   *   Boost specification to boost certain products. For more information, see
+   *   [Boost results](https://cloud.google.com/retail/docs/boosting).
    *
    *   Notice that if both
    *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
@@ -866,16 +931,16 @@ export class SearchServiceClient {
    *   to the sum of the boost scores from all matched boost conditions.
    * @param {google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
-   *   query expansion will occur. See more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/result-size#query_expansion).
+   *   query expansion occurs. For more information, see [Query
+   *   expansion](https://cloud.google.com/retail/docs/result-size#query_expansion).
    * @param {google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold} request.relevanceThreshold
    *   The relevance threshold of the search results.
    *
    *   Defaults to
    *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold.HIGH|RelevanceThreshold.HIGH},
    *   which means only the most relevant results are shown, and the least number
-   *   of results are returned. See more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
+   *   of results are returned. For more information, see [Adjust result
+   *   size](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
@@ -998,9 +1063,9 @@ export class SearchServiceClient {
    *     key with multiple resources.
    *   * Keys must start with a lowercase letter or international character.
    *
-   *   See [Google Cloud
-   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-   *   for more details.
+   *   For more information, see [Requirements for
+   *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   in the Resource Manager documentation.
    * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
@@ -1011,6 +1076,11 @@ export class SearchServiceClient {
    *   If this is set, it should be exactly matched with
    *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
    *   search results boosted by entity.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+   *   Optional. This field specifies all conversational related parameters
+   *   addition to traditional retail search.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+   *   Optional. This field specifies tile navigation related parameters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1056,7 +1126,7 @@ export class SearchServiceClient {
    *   or the name of the legacy placement resource, such as
    *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`.
    *   This field is used to identify the serving config name and the set
-   *   of models that will be used to make the search.
+   *   of models that are used to make the search.
    * @param {string} request.branch
    *   The branch resource name, such as
    *   `projects/* /locations/global/catalogs/default_catalog/branches/0`.
@@ -1112,8 +1182,8 @@ export class SearchServiceClient {
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the products being filtered. Filter
-   *   expression is case-sensitive. See more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/filter-and-order#filter).
+   *   expression is case-sensitive. For more information, see
+   *   [Filter](https://cloud.google.com/retail/docs/filter-and-order#filter).
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
@@ -1121,21 +1191,20 @@ export class SearchServiceClient {
    *   checking any filters on the search page.
    *
    *   The filter applied to every search request when quality improvement such as
-   *   query expansion is needed. For example, if a query does not have enough
-   *   results, an expanded query with
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.canonical_filter|SearchRequest.canonical_filter}
-   *   will be returned as a supplement of the original query. This field is
-   *   strongly recommended to achieve high search quality.
+   *   query expansion is needed. In the case a query does not have a sufficient
+   *   amount of results this filter will be used to determine whether or not to
+   *   enable the query expansion flow. The original filter will still be used for
+   *   the query expanded search.
+   *   This field is strongly recommended to achieve high search quality.
    *
-   *   See
-   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}
-   *   for more details about filter syntax.
+   *   For more information about filter syntax, see
+   *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.filter|SearchRequest.filter}.
    * @param {string} request.orderBy
    *   The order in which products are returned. Products can be ordered by
    *   a field in an {@link protos.google.cloud.retail.v2alpha.Product|Product} object. Leave
-   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. See
-   *   more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/filter-and-order#order).
+   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. For
+   *   more information, see
+   *   [Order](https://cloud.google.com/retail/docs/filter-and-order#order).
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {number[]} request.facetSpecs
@@ -1150,8 +1219,8 @@ export class SearchServiceClient {
    *   The specification for dynamically generated facets. Notice that only
    *   textual facets can be dynamically generated.
    * @param {google.cloud.retail.v2alpha.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain products. See more details at this
-   *   [user guide](https://cloud.google.com/retail/docs/boosting).
+   *   Boost specification to boost certain products. For more information, see
+   *   [Boost results](https://cloud.google.com/retail/docs/boosting).
    *
    *   Notice that if both
    *   {@link protos.google.cloud.retail.v2alpha.ServingConfig.boost_control_ids|ServingConfig.boost_control_ids}
@@ -1162,16 +1231,16 @@ export class SearchServiceClient {
    *   to the sum of the boost scores from all matched boost conditions.
    * @param {google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
-   *   query expansion will occur. See more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/result-size#query_expansion).
+   *   query expansion occurs. For more information, see [Query
+   *   expansion](https://cloud.google.com/retail/docs/result-size#query_expansion).
    * @param {google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold} request.relevanceThreshold
    *   The relevance threshold of the search results.
    *
    *   Defaults to
    *   {@link protos.google.cloud.retail.v2alpha.SearchRequest.RelevanceThreshold.HIGH|RelevanceThreshold.HIGH},
    *   which means only the most relevant results are shown, and the least number
-   *   of results are returned. See more details at this [user
-   *   guide](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
+   *   of results are returned. For more information, see [Adjust result
+   *   size](https://cloud.google.com/retail/docs/result-size#relevance_thresholding).
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link protos.google.cloud.retail.v2alpha.Product.Type.VARIANT|variant}
@@ -1294,9 +1363,9 @@ export class SearchServiceClient {
    *     key with multiple resources.
    *   * Keys must start with a lowercase letter or international character.
    *
-   *   See [Google Cloud
-   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-   *   for more details.
+   *   For more information, see [Requirements for
+   *   labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   in the Resource Manager documentation.
    * @param {google.cloud.retail.v2alpha.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction will take effect.
@@ -1307,6 +1376,11 @@ export class SearchServiceClient {
    *   If this is set, it should be exactly matched with
    *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
    *   search results boosted by entity.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+   *   Optional. This field specifies all conversational related parameters
+   *   addition to traditional retail search.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+   *   Optional. This field specifies tile navigation related parameters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1450,7 +1524,7 @@ export class SearchServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1463,6 +1537,20 @@ export class SearchServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1499,6 +1587,13 @@ export class SearchServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1534,11 +1629,11 @@ export class SearchServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1547,6 +1642,20 @@ export class SearchServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1577,7 +1686,7 @@ export class SearchServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1590,12 +1699,50 @@ export class SearchServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified alertConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  alertConfigPath(project: string) {
+    return this.pathTemplates.alertConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from AlertConfig resource.
+   *
+   * @param {string} alertConfigName
+   *   A fully-qualified path representing AlertConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAlertConfigName(alertConfigName: string) {
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
+      .project;
+  }
 
   /**
    * Return a fully-qualified attributesConfig resource name string.
@@ -1962,6 +2109,30 @@ export class SearchServiceClient {
   }
 
   /**
+   * Return a fully-qualified loggingConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  loggingConfigPath(project: string) {
+    return this.pathTemplates.loggingConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from LoggingConfig resource.
+   *
+   * @param {string} loggingConfigName
+   *   A fully-qualified path representing LoggingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLoggingConfigName(loggingConfigName: string) {
+    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName)
+      .project;
+  }
+
+  /**
    * Return a fully-qualified merchantCenterAccountLink resource name string.
    *
    * @param {string} project
@@ -2185,6 +2356,30 @@ export class SearchServiceClient {
    */
   matchProductFromProductName(productName: string) {
     return this.pathTemplates.productPathTemplate.match(productName).product;
+  }
+
+  /**
+   * Return a fully-qualified retailProject resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  retailProjectPath(project: string) {
+    return this.pathTemplates.retailProjectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from RetailProject resource.
+   *
+   * @param {string} retailProjectName
+   *   A fully-qualified path representing RetailProject resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRetailProjectName(retailProjectName: string) {
+    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName)
+      .project;
   }
 
   /**

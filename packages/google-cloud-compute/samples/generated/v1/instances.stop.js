@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ function main(instance, project, zone) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  If true, discard the contents of any attached localSSD partitions. Default value is false.
+   *  This property is required if the instance has any attached Local SSD disks. If false, Local SSD data will be preserved when the instance is suspended. If true, the contents of any attached Local SSD disks will be discarded.
    */
   // const discardLocalSsd = true
   /**

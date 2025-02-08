@@ -92,6 +92,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "PerformMaintenance": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "RemoveResourcePolicies": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

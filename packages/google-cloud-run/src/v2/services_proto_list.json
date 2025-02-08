@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/run/v2/build.proto",
   "../../protos/google/cloud/run/v2/condition.proto",
   "../../protos/google/cloud/run/v2/execution.proto",
   "../../protos/google/cloud/run/v2/execution_template.proto",
@@ -7,6 +8,7 @@
   "../../protos/google/cloud/run/v2/revision.proto",
   "../../protos/google/cloud/run/v2/revision_template.proto",
   "../../protos/google/cloud/run/v2/service.proto",
+  "../../protos/google/cloud/run/v2/status.proto",
   "../../protos/google/cloud/run/v2/task.proto",
   "../../protos/google/cloud/run/v2/task_template.proto",
   "../../protos/google/cloud/run/v2/traffic_target.proto",

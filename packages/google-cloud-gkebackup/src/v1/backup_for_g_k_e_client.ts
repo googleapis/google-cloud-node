@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/backup_for_g_k_e_client_config.json`.
@@ -57,6 +58,8 @@ export class BackupForGKEClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -117,8 +120,27 @@ export class BackupForGKEClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof BackupForGKEClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'gkebackup.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -133,7 +155,7 @@ export class BackupForGKEClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -158,10 +180,10 @@ export class BackupForGKEClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
@@ -173,7 +195,7 @@ export class BackupForGKEClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -353,7 +375,7 @@ export class BackupForGKEClient {
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*}/operations',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
@@ -578,6 +600,7 @@ export class BackupForGKEClient {
       'deleteRestore',
       'listVolumeRestores',
       'getVolumeRestore',
+      'getBackupIndexDownloadUrl',
     ];
     for (const methodName of backupForGKEStubMethods) {
       const callPromise = this.backupForGKEStub.then(
@@ -613,19 +636,50 @@ export class BackupForGKEClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'gkebackup.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'gkebackup.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -1190,6 +1244,108 @@ export class BackupForGKEClient {
     this.initialize();
     return this.innerApiCalls.getVolumeRestore(request, options, callback);
   }
+  /**
+   * Retrieve the link to the backupIndex.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.backup
+   *   Required. Full name of Backup resource.
+   *   Format:
+   *   projects/{project}/locations/{location}/backupPlans/{backup_plan}/backups/{backup}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlResponse|GetBackupIndexDownloadUrlResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backup_for_g_k_e.get_backup_index_download_url.js</caption>
+   * region_tag:gkebackup_v1_generated_BackupForGKE_GetBackupIndexDownloadUrl_async
+   */
+  getBackupIndexDownloadUrl(
+    request?: protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlResponse,
+      (
+        | protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getBackupIndexDownloadUrl(
+    request: protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlResponse,
+      | protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBackupIndexDownloadUrl(
+    request: protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest,
+    callback: Callback<
+      protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlResponse,
+      | protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBackupIndexDownloadUrl(
+    request?: protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlResponse,
+          | protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlResponse,
+      | protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlResponse,
+      (
+        | protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        backup: request.backup ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getBackupIndexDownloadUrl(
+      request,
+      options,
+      callback
+    );
+  }
 
   /**
    * Creates a new BackupPlan in a given location.
@@ -1347,8 +1503,8 @@ export class BackupForGKEClient {
    * @param {google.cloud.gkebackup.v1.BackupPlan} request.backupPlan
    *   Required. A new version of the BackupPlan resource that contains updated
    *   fields. This may be sparsely populated if an `update_mask` is provided.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   This is used to specify the fields to be overwritten in the
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. This is used to specify the fields to be overwritten in the
    *   BackupPlan targeted for update. The values for each of these
    *   updated fields will be taken from the `backup_plan` provided
    *   with this request. Field names are relative to the root of the resource
@@ -1494,8 +1650,8 @@ export class BackupForGKEClient {
    * @param {string} request.name
    *   Required. Fully qualified BackupPlan name.
    *   Format: `projects/* /locations/* /backupPlans/*`
-   * @param {string} request.etag
-   *   If provided, this value must match the current value of the
+   * @param {string} [request.etag]
+   *   Optional. If provided, this value must match the current value of the
    *   target BackupPlan's {@link protos.google.cloud.gkebackup.v1.BackupPlan.etag|etag} field
    *   or the request is rejected.
    * @param {object} [options]
@@ -1635,10 +1791,10 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The BackupPlan within which to create the Backup.
    *   Format: `projects/* /locations/* /backupPlans/*`
-   * @param {google.cloud.gkebackup.v1.Backup} request.backup
-   *   The Backup resource to create.
-   * @param {string} request.backupId
-   *   The client-provided short name for the Backup resource.
+   * @param {google.cloud.gkebackup.v1.Backup} [request.backup]
+   *   Optional. The Backup resource to create.
+   * @param {string} [request.backupId]
+   *   Optional. The client-provided short name for the Backup resource.
    *   This name must:
    *
    *   - be between 1 and 63 characters long (inclusive)
@@ -1783,8 +1939,8 @@ export class BackupForGKEClient {
    * @param {google.cloud.gkebackup.v1.Backup} request.backup
    *   Required. A new version of the Backup resource that contains updated
    *   fields. This may be sparsely populated if an `update_mask` is provided.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   This is used to specify the fields to be overwritten in the
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. This is used to specify the fields to be overwritten in the
    *   Backup targeted for update. The values for each of these
    *   updated fields will be taken from the `backup_plan` provided
    *   with this request. Field names are relative to the root of the resource.
@@ -1929,13 +2085,13 @@ export class BackupForGKEClient {
    * @param {string} request.name
    *   Required. Name of the Backup resource.
    *   Format: `projects/* /locations/* /backupPlans/* /backups/*`
-   * @param {string} request.etag
-   *   If provided, this value must match the current value of the
+   * @param {string} [request.etag]
+   *   Optional. If provided, this value must match the current value of the
    *   target Backup's {@link protos.google.cloud.gkebackup.v1.Backup.etag|etag} field or the
    *   request is rejected.
-   * @param {boolean} request.force
-   *   If set to true, any VolumeBackups below this Backup will also be deleted.
-   *   Otherwise, the request will only succeed if the Backup has no
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any VolumeBackups below this Backup will also be
+   *   deleted. Otherwise, the request will only succeed if the Backup has no
    *   VolumeBackups.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2222,8 +2378,8 @@ export class BackupForGKEClient {
    * @param {google.cloud.gkebackup.v1.RestorePlan} request.restorePlan
    *   Required. A new version of the RestorePlan resource that contains updated
    *   fields. This may be sparsely populated if an `update_mask` is provided.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   This is used to specify the fields to be overwritten in the
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. This is used to specify the fields to be overwritten in the
    *   RestorePlan targeted for update. The values for each of these
    *   updated fields will be taken from the `restore_plan` provided
    *   with this request. Field names are relative to the root of the resource.
@@ -2368,13 +2524,13 @@ export class BackupForGKEClient {
    * @param {string} request.name
    *   Required. Fully qualified RestorePlan name.
    *   Format: `projects/* /locations/* /restorePlans/*`
-   * @param {string} request.etag
-   *   If provided, this value must match the current value of the
+   * @param {string} [request.etag]
+   *   Optional. If provided, this value must match the current value of the
    *   target RestorePlan's {@link protos.google.cloud.gkebackup.v1.RestorePlan.etag|etag}
    *   field or the request is rejected.
-   * @param {boolean} request.force
-   *   If set to true, any Restores below this RestorePlan will also be deleted.
-   *   Otherwise, the request will only succeed if the RestorePlan has no
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any Restores below this RestorePlan will also be
+   *   deleted. Otherwise, the request will only succeed if the RestorePlan has no
    *   Restores.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2661,8 +2817,8 @@ export class BackupForGKEClient {
    * @param {google.cloud.gkebackup.v1.Restore} request.restore
    *   Required. A new version of the Restore resource that contains updated
    *   fields. This may be sparsely populated if an `update_mask` is provided.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   This is used to specify the fields to be overwritten in the
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. This is used to specify the fields to be overwritten in the
    *   Restore targeted for update. The values for each of these
    *   updated fields will be taken from the `restore` provided
    *   with this request. Field names are relative to the root of the resource.
@@ -2807,13 +2963,13 @@ export class BackupForGKEClient {
    * @param {string} request.name
    *   Required. Full name of the Restore
    *   Format: `projects/* /locations/* /restorePlans/* /restores/*`
-   * @param {string} request.etag
-   *   If provided, this value must match the current value of the
+   * @param {string} [request.etag]
+   *   Optional. If provided, this value must match the current value of the
    *   target Restore's {@link protos.google.cloud.gkebackup.v1.Restore.etag|etag} field or
    *   the request is rejected.
-   * @param {boolean} request.force
-   *   If set to true, any VolumeRestores below this restore will also be deleted.
-   *   Otherwise, the request will only succeed if the restore has no
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any VolumeRestores below this restore will also
+   *   be deleted. Otherwise, the request will only succeed if the restore has no
    *   VolumeRestores.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2952,24 +3108,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The location that contains the BackupPlans to list.
    *   Format: `projects/* /locations/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackupPlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListBackupPlans` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3058,30 +3214,30 @@ export class BackupForGKEClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listBackupPlans`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that contains the BackupPlans to list.
    *   Format: `projects/* /locations/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackupPlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListBackupPlans` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3124,24 +3280,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The location that contains the BackupPlans to list.
    *   Format: `projects/* /locations/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackupPlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListBackupPlans` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3183,24 +3339,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The BackupPlan that contains the Backups to list.
    *   Format: `projects/* /locations/* /backupPlans/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListBackups` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3283,30 +3439,30 @@ export class BackupForGKEClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listBackups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The BackupPlan that contains the Backups to list.
    *   Format: `projects/* /locations/* /backupPlans/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListBackups` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3349,24 +3505,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The BackupPlan that contains the Backups to list.
    *   Format: `projects/* /locations/* /backupPlans/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListBackups` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3408,24 +3564,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The Backup that contains the VolumeBackups to list.
    *   Format: `projects/* /locations/* /backupPlans/* /backups/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListVolumeBackups` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3514,30 +3670,30 @@ export class BackupForGKEClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listVolumeBackups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The Backup that contains the VolumeBackups to list.
    *   Format: `projects/* /locations/* /backupPlans/* /backups/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListVolumeBackups` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3580,24 +3736,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The Backup that contains the VolumeBackups to list.
    *   Format: `projects/* /locations/* /backupPlans/* /backups/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListVolumeBackups` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3639,24 +3795,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The location that contains the RestorePlans to list.
    *   Format: `projects/* /locations/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestorePlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListRestorePlans` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3745,30 +3901,30 @@ export class BackupForGKEClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRestorePlans`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that contains the RestorePlans to list.
    *   Format: `projects/* /locations/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestorePlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListRestorePlans` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3811,24 +3967,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The location that contains the RestorePlans to list.
    *   Format: `projects/* /locations/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestorePlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListRestorePlans` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3870,24 +4026,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The RestorePlan that contains the Restores to list.
    *   Format: `projects/* /locations/* /restorePlans/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to `ListRestores`
    *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3970,30 +4126,30 @@ export class BackupForGKEClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRestores`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The RestorePlan that contains the Restores to list.
    *   Format: `projects/* /locations/* /restorePlans/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to `ListRestores`
    *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4036,24 +4192,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The RestorePlan that contains the Restores to list.
    *   Format: `projects/* /locations/* /restorePlans/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to `ListRestores`
    *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4095,24 +4251,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The Restore that contains the VolumeRestores to list.
    *   Format: `projects/* /locations/* /restorePlans/* /restores/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListVolumeRestores` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4201,30 +4357,30 @@ export class BackupForGKEClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listVolumeRestores`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The Restore that contains the VolumeRestores to list.
    *   Format: `projects/* /locations/* /restorePlans/* /restores/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListVolumeRestores` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4267,24 +4423,24 @@ export class BackupForGKEClient {
    * @param {string} request.parent
    *   Required. The Restore that contains the VolumeRestores to list.
    *   Format: `projects/* /locations/* /restorePlans/* /restores/*`
-   * @param {number} request.pageSize
-   *   The target number of results to return in a single response.
+   * @param {number} [request.pageSize]
+   *   Optional. The target number of results to return in a single response.
    *   If not specified, a default value will be chosen by the service.
-   *   Note that the response may inclue a partial list and a caller should
+   *   Note that the response may include a partial list and a caller should
    *   only rely on the response's
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
-   * @param {string} request.pageToken
-   *   The value of
+   * @param {string} [request.pageToken]
+   *   Optional. The value of
    *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
    *   `ListVolumeRestores` must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Field match expression used to filter the results.
-   * @param {string} request.orderBy
-   *   Field by which to sort the results.
+   * @param {string} [request.filter]
+   *   Optional. Field match expression used to filter the results.
+   * @param {string} [request.orderBy]
+   *   Optional. Field by which to sort the results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4566,7 +4722,7 @@ export class BackupForGKEClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -4579,6 +4735,20 @@ export class BackupForGKEClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4615,6 +4785,13 @@ export class BackupForGKEClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4650,11 +4827,11 @@ export class BackupForGKEClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -4663,6 +4840,20 @@ export class BackupForGKEClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -4693,7 +4884,7 @@ export class BackupForGKEClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -4706,6 +4897,20 @@ export class BackupForGKEClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

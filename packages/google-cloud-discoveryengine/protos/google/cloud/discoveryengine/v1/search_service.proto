@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
+import "google/cloud/discoveryengine/v1/chunk.proto";
 import "google/cloud/discoveryengine/v1/common.proto";
 import "google/cloud/discoveryengine/v1/document.proto";
 import "google/protobuf/struct.proto";
@@ -48,6 +49,10 @@ service SearchService {
         post: "/v1/{serving_config=projects/*/locations/*/collections/*/dataStores/*/servingConfigs/*}:search"
         body: "*"
       }
+      additional_bindings {
+        post: "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:search"
+        body: "*"
+      }
     };
   }
 }
@@ -63,6 +68,21 @@ message SearchRequest {
       // BMP.
       string image_bytes = 1;
     }
+  }
+
+  // A struct to define data stores to filter on in a search call and
+  // configurations for those data stores. Otherwise, an `INVALID_ARGUMENT`
+  // error is returned.
+  message DataStoreSpec {
+    // Required. Full resource name of
+    // [DataStore][google.cloud.discoveryengine.v1.DataStore], such as
+    // `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`.
+    string data_store = 1 [
+      (google.api.field_behavior) = REQUIRED,
+      (google.api.resource_reference) = {
+        type: "discoveryengine.googleapis.com/DataStore"
+      }
+    ];
   }
 
   // A facet specification to perform faceted search.
@@ -94,7 +114,7 @@ message SearchRequest {
       // Only supported on textual fields. Maximum is 10.
       repeated string prefixes = 4;
 
-      // Only get facet values that contains the given strings. For example,
+      // Only get facet values that contain the given strings. For example,
       // suppose "category" has three values "Action > 2022",
       // "Action > 2021" and "Sci-Fi > 2022". If set "contains" to "2022", the
       // "category" facet only contains "Action > 2022" and "Sci-Fi > 2022".
@@ -128,9 +148,12 @@ message SearchRequest {
     // Required. The facet key specification.
     FacetKey facet_key = 1 [(google.api.field_behavior) = REQUIRED];
 
-    // Maximum of facet values that should be returned for this facet. If
+    // Maximum facet values that are returned for this facet. If
     // unspecified, defaults to 20. The maximum allowed value is 300. Values
     // above 300 are coerced to 300.
+    // For aggregation in healthcare search, when the [FacetKey.key] is
+    // "healthcare_aggregation_key", the limit will be overridden to
+    // 10,000 internally, regardless of the value set here.
     //
     // If this field is negative, an  `INVALID_ARGUMENT`  is returned.
     int32 limit = 2;
@@ -208,28 +231,29 @@ message SearchRequest {
       // Examples:
       //
       // * To boost documents with document ID "doc_1" or "doc_2", and
-      // color
-      //   "Red" or "Blue":
-      //     * (id: ANY("doc_1", "doc_2")) AND (color: ANY("Red","Blue"))
+      // color "Red" or "Blue":
+      // `(document_id: ANY("doc_1", "doc_2")) AND (color: ANY("Red", "Blue"))`
       string condition = 1;
 
       // Strength of the condition boost, which should be in [-1, 1]. Negative
       // boost means demotion. Default is 0.0.
       //
-      // Setting to 1.0 gives the document a big promotion. However, it does not
-      // necessarily mean that the boosted document will be the top result at
-      // all times, nor that other documents will be excluded. Results could
-      // still be shown even when none of them matches the condition. And
-      // results that are significantly more relevant to the search query can
-      // still trump your heavily favored but irrelevant documents.
+      // Setting to 1.0 gives the document a big promotion. However, it does
+      // not necessarily mean that the boosted document will be the top result
+      // at all times, nor that other documents will be excluded. Results
+      // could still be shown even when none of them matches the condition.
+      // And results that are significantly more relevant to the search query
+      // can still trump your heavily favored but irrelevant documents.
       //
       // Setting to -1.0 gives the document a big demotion. However, results
       // that are deeply relevant might still be shown. The document will have
-      // an upstream battle to get a fairly high ranking, but it is not blocked
-      // out completely.
+      // an upstream battle to get a fairly high ranking, but it is not
+      // blocked out completely.
       //
       // Setting to 0.0 means no boost applied. The boosting condition is
-      // ignored.
+      // ignored. Only one of the (condition, boost) combination or the
+      // boost_control_spec below are set. If both are set then the global boost
+      // is ignored and the more fine-grained boost_control_spec is applied.
       float boost = 2;
     }
 
@@ -278,10 +302,10 @@ message SearchRequest {
       // [Mode.AUTO][google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.Mode.AUTO].
       MODE_UNSPECIFIED = 0;
 
-      // Search API will try to find a spell suggestion if there
-      // is any and put in the
+      // Search API tries to find a spelling suggestion. If a suggestion is
+      // found, it is put in the
       // [SearchResponse.corrected_query][google.cloud.discoveryengine.v1.SearchResponse.corrected_query].
-      // The spell suggestion will not be used as the search query.
+      // The spelling suggestion won't be used as the search query.
       SUGGESTION_ONLY = 1;
 
       // Automatic spell correction built by the Search API. Search will
@@ -289,8 +313,8 @@ message SearchRequest {
       AUTO = 2;
     }
 
-    // The mode under which spell correction should take effect to
-    // replace the original search query. Default to
+    // The mode under which spell correction
+    // replaces the original search query. Defaults to
     // [Mode.AUTO][google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.Mode.AUTO].
     Mode mode = 1;
   }
@@ -317,11 +341,39 @@ message SearchRequest {
     // A specification for configuring a summary returned in a search
     // response.
     message SummarySpec {
+      // Specification of the prompt to use with the model.
+      message ModelPromptSpec {
+        // Text at the beginning of the prompt that instructs the assistant.
+        // Examples are available in the user guide.
+        string preamble = 1;
+      }
+
+      // Specification of the model.
+      message ModelSpec {
+        // The model version used to generate the summary.
+        //
+        // Supported values are:
+        //
+        // * `stable`: string. Default value when no value is specified. Uses a
+        //    generally available, fine-tuned model. For more information, see
+        //    [Answer generation model versions and
+        //    lifecycle](https://cloud.google.com/generative-ai-app-builder/docs/answer-generation-models).
+        // * `preview`: string. (Public preview) Uses a preview model. For more
+        //    information, see
+        //    [Answer generation model versions and
+        //    lifecycle](https://cloud.google.com/generative-ai-app-builder/docs/answer-generation-models).
+        string version = 1;
+      }
+
       // The number of top results to generate the summary from. If the number
       // of results returned is less than `summaryResultCount`, the summary is
       // generated from all of the results.
       //
-      // At most five results can be used to generate a summary.
+      // At most 10 results for documents mode, or 50 for chunks mode, can be
+      // used to generate a summary. The chunks mode is used when
+      // [SearchRequest.ContentSearchSpec.search_result_mode][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.search_result_mode]
+      // is set to
+      // [CHUNKS][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SearchResultMode.CHUNKS].
       int32 summary_result_count = 1;
 
       // Specifies whether to include citations in the summary. The default
@@ -368,9 +420,119 @@ message SearchRequest {
       // fallback messages instead.
       bool ignore_non_summary_seeking_query = 4;
 
+      // Specifies whether to filter out queries that have low relevance. The
+      // default value is `false`.
+      //
+      // If this field is set to `false`, all search results are used regardless
+      // of relevance to generate answers. If set to `true`, only queries with
+      // high relevance search results will generate answers.
+      bool ignore_low_relevant_content = 9;
+
+      // If specified, the spec will be used to modify the prompt provided to
+      // the LLM.
+      ModelPromptSpec model_prompt_spec = 5;
+
       // Language code for Summary. Use language tags defined by
-      // [BCP47][https://www.rfc-editor.org/rfc/bcp/bcp47.txt].
+      // [BCP47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+      // Note: This is an experimental feature.
       string language_code = 6;
+
+      // If specified, the spec will be used to modify the model specification
+      // provided to the LLM.
+      ModelSpec model_spec = 7;
+
+      // If true, answer will be generated from most relevant chunks from top
+      // search results. This feature will improve summary quality.
+      // Note that with this feature enabled, not all top search results
+      // will be referenced and included in the reference list, so the citation
+      // source index only points to the search results listed in the reference
+      // list.
+      bool use_semantic_chunks = 8;
+    }
+
+    // A specification for configuring the extractive content in a search
+    // response.
+    message ExtractiveContentSpec {
+      // The maximum number of extractive answers returned in each search
+      // result.
+      //
+      // An extractive answer is a verbatim answer extracted from the original
+      // document, which provides a precise and contextually relevant answer to
+      // the search query.
+      //
+      // If the number of matching answers is less than the
+      // `max_extractive_answer_count`, return all of the answers. Otherwise,
+      // return the `max_extractive_answer_count`.
+      //
+      // At most five answers are returned for each
+      // [SearchResult][google.cloud.discoveryengine.v1.SearchResponse.SearchResult].
+      int32 max_extractive_answer_count = 1;
+
+      // The max number of extractive segments returned in each search result.
+      // Only applied if the
+      // [DataStore][google.cloud.discoveryengine.v1.DataStore] is set to
+      // [DataStore.ContentConfig.CONTENT_REQUIRED][google.cloud.discoveryengine.v1.DataStore.ContentConfig.CONTENT_REQUIRED]
+      // or
+      // [DataStore.solution_types][google.cloud.discoveryengine.v1.DataStore.solution_types]
+      // is
+      // [SOLUTION_TYPE_CHAT][google.cloud.discoveryengine.v1.SolutionType.SOLUTION_TYPE_CHAT].
+      //
+      // An extractive segment is a text segment extracted from the original
+      // document that is relevant to the search query, and, in general, more
+      // verbose than an extractive answer. The segment could then be used as
+      // input for LLMs to generate summaries and answers.
+      //
+      // If the number of matching segments is less than
+      // `max_extractive_segment_count`, return all of the segments. Otherwise,
+      // return the `max_extractive_segment_count`.
+      int32 max_extractive_segment_count = 2;
+
+      // Specifies whether to return the confidence score from the extractive
+      // segments in each search result. This feature is available only for new
+      // or allowlisted data stores. To allowlist your data store,
+      // contact your Customer Engineer. The default value is `false`.
+      bool return_extractive_segment_score = 3;
+
+      // Specifies whether to also include the adjacent from each selected
+      // segments.
+      // Return at most `num_previous_segments` segments before each selected
+      // segments.
+      int32 num_previous_segments = 4;
+
+      // Return at most `num_next_segments` segments after each selected
+      // segments.
+      int32 num_next_segments = 5;
+    }
+
+    // Specifies the chunk spec to be returned from the search response.
+    // Only available if the
+    // [SearchRequest.ContentSearchSpec.search_result_mode][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.search_result_mode]
+    // is set to
+    // [CHUNKS][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SearchResultMode.CHUNKS]
+    message ChunkSpec {
+      // The number of previous chunks to be returned of the current chunk. The
+      // maximum allowed value is 3.
+      // If not specified, no previous chunks will be returned.
+      int32 num_previous_chunks = 1;
+
+      // The number of next chunks to be returned of the current chunk. The
+      // maximum allowed value is 3.
+      // If not specified, no next chunks will be returned.
+      int32 num_next_chunks = 2;
+    }
+
+    // Specifies the search result mode. If unspecified, the
+    // search result mode defaults to `DOCUMENTS`.
+    enum SearchResultMode {
+      // Default value.
+      SEARCH_RESULT_MODE_UNSPECIFIED = 0;
+
+      // Returns documents in the search result.
+      DOCUMENTS = 1;
+
+      // Returns chunks in the search result. Only available if the
+      // [DataStore.DocumentProcessingConfig.chunking_config][] is specified.
+      CHUNKS = 2;
     }
 
     // If `snippetSpec` is not specified, snippets are not included in the
@@ -380,9 +542,90 @@ message SearchRequest {
     // If `summarySpec` is not specified, summaries are not included in the
     // search response.
     SummarySpec summary_spec = 2;
+
+    // If there is no extractive_content_spec provided, there will be no
+    // extractive answer in the search response.
+    ExtractiveContentSpec extractive_content_spec = 3;
+
+    // Specifies the search result mode. If unspecified, the
+    // search result mode defaults to `DOCUMENTS`.
+    SearchResultMode search_result_mode = 4;
+
+    // Specifies the chunk spec to be returned from the search response.
+    // Only available if the
+    // [SearchRequest.ContentSearchSpec.search_result_mode][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.search_result_mode]
+    // is set to
+    // [CHUNKS][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SearchResultMode.CHUNKS]
+    ChunkSpec chunk_spec = 5;
+  }
+
+  // Specification for search as you type in search requests.
+  message SearchAsYouTypeSpec {
+    // Enum describing under which condition search as you type should occur.
+    enum Condition {
+      // Server behavior defaults to
+      // [Condition.DISABLED][google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Condition.DISABLED].
+      CONDITION_UNSPECIFIED = 0;
+
+      // Disables Search As You Type.
+      DISABLED = 1;
+
+      // Enables Search As You Type.
+      ENABLED = 2;
+    }
+
+    // The condition under which search as you type should occur.
+    // Default to
+    // [Condition.DISABLED][google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec.Condition.DISABLED].
+    Condition condition = 1;
+  }
+
+  // Session specification.
+  //
+  // Multi-turn Search feature is currently at private GA stage. Please use
+  // v1alpha or v1beta version instead before we launch this feature to public
+  // GA. Or ask for allowlisting through Google Support team.
+  message SessionSpec {
+    // If set, the search result gets stored to the "turn" specified by this
+    // query ID.
+    //
+    // Example: Let's say the session looks like this:
+    //   session {
+    //     name: ".../sessions/xxx"
+    //     turns {
+    //       query { text: "What is foo?" query_id: ".../questions/yyy" }
+    //       answer: "Foo is ..."
+    //     }
+    //     turns {
+    //       query { text: "How about bar then?" query_id: ".../questions/zzz" }
+    //     }
+    //   }
+    //
+    // The user can call /search API with a request like this:
+    //
+    //    session: ".../sessions/xxx"
+    //    session_spec { query_id: ".../questions/zzz" }
+    //
+    // Then, the API stores the search result, associated with the last turn.
+    // The stored search result can be used by a subsequent /answer API call
+    // (with the session ID and the query ID specified). Also, it is possible
+    // to call /search and /answer in parallel with the same session ID & query
+    // ID.
+    string query_id = 1;
+
+    // The number of top search results to persist. The persisted search results
+    // can be used for the subsequent /answer api call.
+    //
+    // This field is simliar to the `summary_result_count` field in
+    // [SearchRequest.ContentSearchSpec.SummarySpec.summary_result_count][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec.summary_result_count].
+    //
+    // At most 10 results for documents mode, or 50 for chunks mode.
+    optional int32 search_result_persistence_count = 2;
   }
 
   // Required. The resource name of the Search serving config, such as
+  // `projects/*/locations/global/collections/default_collection/engines/*/servingConfigs/default_serving_config`,
+  // or
   // `projects/*/locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`.
   // This field is used to identify the serving configuration name, set
   // of models used to make the search.
@@ -409,10 +652,14 @@ message SearchRequest {
   ImageQuery image_query = 19;
 
   // Maximum number of [Document][google.cloud.discoveryengine.v1.Document]s to
-  // return. If unspecified, defaults to a reasonable value. The maximum allowed
-  // value is 100. Values above 100 are coerced to 100.
+  // return. The maximum allowed value depends on the data type. Values above
+  // the maximum value are coerced to the maximum value.
   //
-  // If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+  // * Websites with basic indexing: Default `10`, Maximum `25`.
+  // * Websites with advanced indexing: Default `25`, Maximum `50`.
+  // * Other: Default `50`, Maximum `100`.
+  //
+  // If this field is negative, an  `INVALID_ARGUMENT` is returned.
   int32 page_size = 4;
 
   // A page token received from a previous
@@ -435,18 +682,54 @@ message SearchRequest {
   // If this field is negative, an  `INVALID_ARGUMENT`  is returned.
   int32 offset = 6;
 
+  // Specs defining dataStores to filter on in a search call and configurations
+  // for those dataStores. This is only considered for engines with multiple
+  // dataStores use case. For single dataStore within an engine, they should
+  // use the specs at the top level.
+  repeated DataStoreSpec data_store_specs = 32;
+
   // The filter syntax consists of an expression language for constructing a
   // predicate from one or more fields of the documents being filtered. Filter
   // expression is case-sensitive.
   //
   // If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+  //
+  // Filtering in Vertex AI Search is done by mapping the LHS filter key to a
+  // key property defined in the Vertex AI Search backend -- this mapping is
+  // defined by the customer in their schema. For example a media customer might
+  // have a field 'name' in their schema. In this case the filter would look
+  // like this: filter --> name:'ANY("king kong")'
+  //
+  // For more information about filtering including syntax and filter
+  // operators, see
+  // [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
   string filter = 7;
+
+  // The default filter that is applied when a user performs a search without
+  // checking any filters on the search page.
+  //
+  // The filter applied to every search request when quality improvement such as
+  // query expansion is needed. In the case a query does not have a sufficient
+  // amount of results this filter will be used to determine whether or not to
+  // enable the query expansion flow. The original filter will still be used for
+  // the query expanded search.
+  // This field is strongly recommended to achieve high search quality.
+  //
+  // For more information about filter syntax, see
+  // [SearchRequest.filter][google.cloud.discoveryengine.v1.SearchRequest.filter].
+  string canonical_filter = 29;
 
   // The order in which documents are returned. Documents can be ordered by
   // a field in an [Document][google.cloud.discoveryengine.v1.Document] object.
   // Leave it unset if ordered by relevance. `order_by` expression is
   // case-sensitive.
   //
+  // For more information on ordering the website search results, see
+  // [Order web search
+  // results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+  // For more information on ordering the healthcare search results, see
+  // [Order healthcare search
+  // results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
   // If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
   string order_by = 8;
 
@@ -456,6 +739,13 @@ message SearchRequest {
   // is used to deduce `device_type` for analytics.
   UserInfo user_info = 21;
 
+  // The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+  // information, see [Standard
+  // fields](https://cloud.google.com/apis/design/standard_fields). This field
+  // helps to better interpret the query. If a value isn't specified, the query
+  // language code is automatically detected, which may not be accurate.
+  string language_code = 35;
+
   // Facet specifications for faceted search. If empty, no facets are returned.
   //
   // A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
@@ -463,6 +753,8 @@ message SearchRequest {
   repeated FacetSpec facet_specs = 9;
 
   // Boost specification to boost certain documents.
+  // For more information on boosting, see
+  // [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
   BoostSpec boost_spec = 10;
 
   // Additional search parameters.
@@ -471,9 +763,15 @@ message SearchRequest {
   //
   // * `user_country_code`: string. Default empty. If set to non-empty, results
   //    are restricted or boosted based on the location provided.
+  //    For example, `user_country_code: "au"`
+  //
+  //    For available codes see [Country
+  //    Codes](https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
+  //
   // * `search_type`: double. Default empty. Enables non-webpage searching
-  //   depending on the value. The only valid non-default value is 1,
-  //   which enables image searching.
+  //    depending on the value. The only valid non-default value is 1,
+  //    which enables image searching.
+  //    For example, `search_type: 1`
   map<string, google.protobuf.Value> params = 11;
 
   // The query expansion specification that specifies the conditions under which
@@ -525,6 +823,46 @@ message SearchRequest {
   // Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
   // for more details.
   map<string, string> user_labels = 22;
+
+  // Search as you type configuration. Only supported for the
+  // [IndustryVertical.MEDIA][google.cloud.discoveryengine.v1.IndustryVertical.MEDIA]
+  // vertical.
+  SearchAsYouTypeSpec search_as_you_type_spec = 31;
+
+  // The session resource name. Optional.
+  //
+  // Session allows users to do multi-turn /search API calls or coordination
+  // between /search API calls and /answer API calls.
+  //
+  // Example #1 (multi-turn /search API calls):
+  //   1. Call /search API with the auto-session mode (see below).
+  //   2. Call /search API with the session ID generated in the first call.
+  //      Here, the previous search query gets considered in query
+  //      standing. I.e., if the first query is "How did Alphabet do in 2022?"
+  //      and the current query is "How about 2023?", the current query will
+  //      be interpreted as "How did Alphabet do in 2023?".
+  //
+  // Example #2 (coordination between /search API calls and /answer API calls):
+  //   1. Call /search API with the auto-session mode (see below).
+  //   2. Call /answer API with the session ID generated in the first call.
+  //      Here, the answer generation happens in the context of the search
+  //      results from the first search call.
+  //
+  // Auto-session mode: when `projects/.../sessions/-` is used, a new session
+  // gets automatically created. Otherwise, users can use the create-session API
+  // to create a session manually.
+  //
+  // Multi-turn Search feature is currently at private GA stage. Please use
+  // v1alpha or v1beta version instead before we launch this feature to public
+  // GA. Or ask for allowlisting through Google Support team.
+  string session = 41 [(google.api.resource_reference) = {
+    type: "discoveryengine.googleapis.com/Session"
+  }];
+
+  // Session specification.
+  //
+  // Can be used only when `session` is set.
+  SessionSpec session_spec = 42;
 }
 
 // Response message for
@@ -538,8 +876,14 @@ message SearchResponse {
     string id = 1;
 
     // The document data snippet in the search response. Only fields that are
-    // marked as retrievable are populated.
+    // marked as `retrievable` are populated.
     Document document = 2;
+
+    // The chunk data in the search response if the
+    // [SearchRequest.ContentSearchSpec.search_result_mode][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.search_result_mode]
+    // is set to
+    // [CHUNKS][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SearchResultMode.CHUNKS].
+    Chunk chunk = 18;
   }
 
   // A facet result.
@@ -561,7 +905,7 @@ message SearchResponse {
       int64 count = 3;
     }
 
-    // The key for this facet. E.g., "colors" or "price". It matches
+    // The key for this facet. For example, `"colors"` or `"price"`. It matches
     // [SearchRequest.FacetSpec.FacetKey.key][google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.FacetKey.key].
     string key = 1;
 
@@ -572,7 +916,7 @@ message SearchResponse {
     bool dynamic_facet = 3;
   }
 
-  // Summary of the top N search result specified by the summary spec.
+  // Summary of the top N search results specified by the summary spec.
   message Summary {
     // Safety Attribute categories and their associated confidence scores.
     message SafetyAttributes {
@@ -585,6 +929,76 @@ message SearchResponse {
       repeated float scores = 2;
     }
 
+    // Citation metadata.
+    message CitationMetadata {
+      // Citations for segments.
+      repeated Citation citations = 1;
+    }
+
+    // Citation info for a segment.
+    message Citation {
+      // Index indicates the start of the segment, measured in bytes/unicode.
+      int64 start_index = 1;
+
+      // End of the attributed segment, exclusive.
+      int64 end_index = 2;
+
+      // Citation sources for the attributed segment.
+      repeated CitationSource sources = 3;
+    }
+
+    // Citation source.
+    message CitationSource {
+      // Document reference index from SummaryWithMetadata.references.
+      // It is 0-indexed and the value will be zero if the reference_index is
+      // not set explicitly.
+      int64 reference_index = 4;
+    }
+
+    // Document reference.
+    message Reference {
+      // Chunk content.
+      message ChunkContent {
+        // Chunk textual content.
+        string content = 1;
+
+        // Page identifier.
+        string page_identifier = 2;
+      }
+
+      // Title of the document.
+      string title = 1;
+
+      // Required.
+      // [Document.name][google.cloud.discoveryengine.v1.Document.name] of the
+      // document. Full resource name of the referenced document, in the format
+      // `projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*`.
+      string document = 2 [
+        (google.api.field_behavior) = REQUIRED,
+        (google.api.resource_reference) = {
+          type: "discoveryengine.googleapis.com/Document"
+        }
+      ];
+
+      // Cloud Storage or HTTP uri for the document.
+      string uri = 3;
+
+      // List of cited chunk contents derived from document content.
+      repeated ChunkContent chunk_contents = 4;
+    }
+
+    // Summary with metadata information.
+    message SummaryWithMetadata {
+      // Summary text with no citation information.
+      string summary = 1;
+
+      // Citation metadata for given summary.
+      CitationMetadata citation_metadata = 2;
+
+      // Document References.
+      repeated Reference references = 3;
+    }
+
     // An Enum for summary-skipped reasons.
     enum SummarySkippedReason {
       // Default value. The summary skipped reason is not specified.
@@ -592,14 +1006,14 @@ message SearchResponse {
 
       // The adversarial query ignored case.
       //
-      // Only populated when
+      // Only used when
       // [SummarySpec.ignore_adversarial_query][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec.ignore_adversarial_query]
       // is set to `true`.
       ADVERSARIAL_QUERY_IGNORED = 1;
 
       // The non-summary seeking query ignored case.
       //
-      // Only populated when
+      // Only used when
       // [SummarySpec.ignore_non_summary_seeking_query][google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec.ignore_non_summary_seeking_query]
       // is set to `true`.
       NON_SUMMARY_SEEKING_QUERY_IGNORED = 2;
@@ -621,6 +1035,26 @@ message SearchResponse {
       //
       // Google skips the summary if the LLM addon is not enabled.
       LLM_ADDON_NOT_ENABLED = 5;
+
+      // The no relevant content case.
+      //
+      // Google skips the summary if there is no relevant content in the
+      // retrieved search results.
+      NO_RELEVANT_CONTENT = 6;
+
+      // The jail-breaking query ignored case.
+      //
+      // For example, "Reply in the tone of a competing company's CEO".
+      // Only used when
+      // [SearchRequest.ContentSearchSpec.SummarySpec.ignore_jail_breaking_query]
+      // is set to `true`.
+      JAIL_BREAKING_QUERY_IGNORED = 7;
+
+      // The customer policy violation case.
+      //
+      // Google skips the summary if there is a customer policy violation
+      // detected. The policy is defined by the customer.
+      CUSTOMER_POLICY_VIOLATION = 8;
     }
 
     // The summary content.
@@ -633,6 +1067,9 @@ message SearchResponse {
     // A collection of Safety Attribute categories and their associated
     // confidence scores.
     SafetyAttributes safety_attributes = 3;
+
+    // Summary with metadata information.
+    SummaryWithMetadata summary_with_metadata = 4;
   }
 
   // Information describing query expansion including whether expansion has
@@ -646,6 +1083,23 @@ message SearchResponse {
     // [SearchRequest.QueryExpansionSpec.pin_unexpanded_results][google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.pin_unexpanded_results]
     // is set to true.
     int64 pinned_result_count = 2;
+  }
+
+  // Information about the session.
+  message SessionInfo {
+    // Name of the session.
+    // If the auto-session mode is used (when
+    // [SearchRequest.session][google.cloud.discoveryengine.v1.SearchRequest.session]
+    // ends with "-"), this field holds the newly generated session name.
+    string name = 1;
+
+    // Query ID that corresponds to this search API call.
+    // One session can have multiple turns, each with a unique query ID.
+    //
+    // By specifying the session name and this query ID in the Answer API call,
+    // the answer generation happens in the context of the search results from
+    // this search call.
+    string query_id = 2;
   }
 
   // A list of matched documents. The order represents the ranking.
@@ -664,7 +1118,8 @@ message SearchResponse {
   // A unique search token. This should be included in the
   // [UserEvent][google.cloud.discoveryengine.v1.UserEvent] logs resulting from
   // this search, which enables accurate attribution of search model
-  // performance.
+  // performance. This also helps to identify a request during the customer
+  // support scenarios.
   string attribution_token = 4;
 
   // The URI of a customer-defined redirect page. If redirect action is
@@ -694,4 +1149,11 @@ message SearchResponse {
 
   // Query expansion information for the returned results.
   QueryExpansionInfo query_expansion_info = 14;
+
+  // Session information.
+  //
+  // Only set if
+  // [SearchRequest.session][google.cloud.discoveryengine.v1.SearchRequest.session]
+  // is provided. See its description for more details.
+  SessionInfo session_info = 19;
 }

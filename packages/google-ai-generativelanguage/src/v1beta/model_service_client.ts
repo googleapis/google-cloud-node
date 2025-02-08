@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1beta/model_service_client_config.json`.
@@ -52,6 +53,8 @@ export class ModelServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -110,8 +113,27 @@ export class ModelServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ModelServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'generativelanguage.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -126,7 +148,7 @@ export class ModelServiceClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -151,16 +173,16 @@ export class ModelServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -180,6 +202,9 @@ export class ModelServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      cachedContentPathTemplate: new this._gaxModule.PathTemplate(
+        'cachedContents/{id}'
+      ),
       chunkPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}/chunks/{chunk}'
       ),
@@ -190,6 +215,7 @@ export class ModelServiceClient {
       documentPathTemplate: new this._gaxModule.PathTemplate(
         'corpora/{corpus}/documents/{document}'
       ),
+      filePathTemplate: new this._gaxModule.PathTemplate('files/{file}'),
       modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
       tunedModelPathTemplate: new this._gaxModule.PathTemplate(
         'tunedModels/{tuned_model}'
@@ -225,7 +251,21 @@ export class ModelServiceClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1beta/{name=tunedModels/*/operations/*}',
+          additional_bindings: [
+            {get: '/v1beta/{name=generatedFiles/*/operations/*}'},
+            {get: '/v1beta/{name=models/*/operations/*}'},
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1beta/{name=tunedModels/*}/operations',
+          additional_bindings: [{get: '/v1beta/{name=models/*}/operations'}],
+        },
+      ];
     }
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
@@ -338,19 +378,50 @@ export class ModelServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'generativelanguage.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'generativelanguage.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -390,7 +461,12 @@ export class ModelServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets information about a specific Model.
+   * Gets information about a specific `Model` such as its version number, token
+   * limits,
+   * [parameters](https://ai.google.dev/gemini-api/docs/models/generative-models#model-parameters)
+   * and other metadata. Refer to the [Gemini models
+   * guide](https://ai.google.dev/gemini-api/docs/models/gemini) for detailed
+   * model information.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -588,8 +664,8 @@ export class ModelServiceClient {
    *   The request object that will be sent.
    * @param {google.ai.generativelanguage.v1beta.TunedModel} request.tunedModel
    *   Required. The tuned model to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -779,10 +855,10 @@ export class ModelServiceClient {
 
   /**
    * Creates a tuned model.
-   * Intermediate tuning progress (if any) is accessed through the
+   * Check intermediate tuning progress (if any) through the
    * [google.longrunning.Operations] service.
    *
-   * Status and results can be accessed through the Operations service.
+   * Access status and results through the Operations service.
    * Example:
    *   GET /v1/tunedModels/az2mb0bpw6i/operations/000-111-222
    *
@@ -792,7 +868,7 @@ export class ModelServiceClient {
    *   Optional. The unique id for the tuned model if specified.
    *   This value should be up to 40 characters, the first character must be a
    *   letter, the last could be a letter or a number. The id must match the
-   *   regular expression: [a-z]([a-z0-9-]{0,38}[a-z0-9])?.
+   *   regular expression: `[a-z]([a-z0-9-]{0,38}[a-z0-9])?`.
    * @param {google.ai.generativelanguage.v1beta.TunedModel} request.tunedModel
    *   Required. The tuned model to create.
    * @param {object} [options]
@@ -921,15 +997,15 @@ export class ModelServiceClient {
     >;
   }
   /**
-   * Lists models available through the API.
+   * Lists the [`Model`s](https://ai.google.dev/gemini-api/docs/models/gemini)
+   * available through the Gemini API.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} request.pageSize
    *   The maximum number of `Models` to return (per page).
    *
-   *   The service may return fewer models.
-   *   If unspecified, at most 50 models will be returned per page.
+   *   If unspecified, 50 models will be returned per page.
    *   This method returns at most 1000 models per page, even if you pass a larger
    *   page_size.
    * @param {string} request.pageToken
@@ -1024,14 +1100,13 @@ export class ModelServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listModels`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} request.pageSize
    *   The maximum number of `Models` to return (per page).
    *
-   *   The service may return fewer models.
-   *   If unspecified, at most 50 models will be returned per page.
+   *   If unspecified, 50 models will be returned per page.
    *   This method returns at most 1000 models per page, even if you pass a larger
    *   page_size.
    * @param {string} request.pageToken
@@ -1080,8 +1155,7 @@ export class ModelServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of `Models` to return (per page).
    *
-   *   The service may return fewer models.
-   *   If unspecified, at most 50 models will be returned per page.
+   *   If unspecified, 50 models will be returned per page.
    *   This method returns at most 1000 models per page, even if you pass a larger
    *   page_size.
    * @param {string} request.pageToken
@@ -1122,7 +1196,7 @@ export class ModelServiceClient {
     ) as AsyncIterable<protos.google.ai.generativelanguage.v1beta.IModel>;
   }
   /**
-   * Lists tuned models owned by the user.
+   * Lists created tuned models.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1240,7 +1314,7 @@ export class ModelServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTunedModels`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} [request.pageSize]
@@ -1399,7 +1473,7 @@ export class ModelServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1412,6 +1486,20 @@ export class ModelServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1448,6 +1536,13 @@ export class ModelServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1483,11 +1578,11 @@ export class ModelServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1496,6 +1591,20 @@ export class ModelServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1526,7 +1635,7 @@ export class ModelServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1539,12 +1648,50 @@ export class ModelServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified cachedContent resource name string.
+   *
+   * @param {string} id
+   * @returns {string} Resource name string.
+   */
+  cachedContentPath(id: string) {
+    return this.pathTemplates.cachedContentPathTemplate.render({
+      id: id,
+    });
+  }
+
+  /**
+   * Parse the id from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the id.
+   */
+  matchIdFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .id;
+  }
 
   /**
    * Return a fully-qualified chunk resource name string.
@@ -1692,6 +1839,29 @@ export class ModelServiceClient {
    */
   matchDocumentFromDocumentName(documentName: string) {
     return this.pathTemplates.documentPathTemplate.match(documentName).document;
+  }
+
+  /**
+   * Return a fully-qualified file resource name string.
+   *
+   * @param {string} file
+   * @returns {string} Resource name string.
+   */
+  filePath(file: string) {
+    return this.pathTemplates.filePathTemplate.render({
+      file: file,
+    });
+  }
+
+  /**
+   * Parse the file from File resource.
+   *
+   * @param {string} fileName
+   *   A fully-qualified path representing File resource.
+   * @returns {string} A string representing the file.
+   */
+  matchFileFromFileName(fileName: string) {
+    return this.pathTemplates.filePathTemplate.match(fileName).file;
   }
 
   /**

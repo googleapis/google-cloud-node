@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/cloud_redis_cluster_client_config.json`.
@@ -57,12 +58,6 @@ const version = require('../../../package.json').version;
  *
  *  Note that location_id must be a GCP `region`; for example:
  *  * `projects/redpepper-1290/locations/us-central1/clusters/my-redis`
- *
- *  We use API version selector for Flex APIs
- *  * The versioning strategy is release-based versioning
- *  * Our backend CLH only deals with the superset version (called v1main)
- *  * Existing backend for Redis Gen1 and MRR is not touched.
- *  * More details in go/redis-flex-api-versioning
  * @class
  * @memberof v1
  */
@@ -74,6 +69,8 @@ export class CloudRedisClusterClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -133,8 +130,27 @@ export class CloudRedisClusterClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CloudRedisClusterClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'redis.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -149,7 +165,7 @@ export class CloudRedisClusterClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -174,10 +190,10 @@ export class CloudRedisClusterClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
@@ -187,7 +203,7 @@ export class CloudRedisClusterClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -207,11 +223,38 @@ export class CloudRedisClusterClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      backupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/backupCollections/{backup_collection}/backups/{backup}'
+      ),
+      backupCollectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/backupCollections/{backup_collection}'
+      ),
+      certificateAuthorityPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/clusters/{cluster}/certificateAuthority'
+      ),
       clusterPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}'
       ),
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
+      ),
+      cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
+      ),
+      forwardingRulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/forwardingRules/{forwarding_rule}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      networkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/global/networks/{network}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      serviceAttachmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/serviceAttachments/{service_attachment}'
       ),
     };
 
@@ -223,6 +266,16 @@ export class CloudRedisClusterClient {
         'pageToken',
         'nextPageToken',
         'clusters'
+      ),
+      listBackupCollections: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'backupCollections'
+      ),
+      listBackups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'backups'
       ),
     };
 
@@ -284,6 +337,30 @@ export class CloudRedisClusterClient {
     const createClusterMetadata = protoFilesRoot.lookup(
       '.google.protobuf.Any'
     ) as gax.protobuf.Type;
+    const rescheduleClusterMaintenanceResponse = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1.Cluster'
+    ) as gax.protobuf.Type;
+    const rescheduleClusterMaintenanceMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Any'
+    ) as gax.protobuf.Type;
+    const deleteBackupResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteBackupMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Any'
+    ) as gax.protobuf.Type;
+    const exportBackupResponse = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1.Backup'
+    ) as gax.protobuf.Type;
+    const exportBackupMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Any'
+    ) as gax.protobuf.Type;
+    const backupClusterResponse = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1.Cluster'
+    ) as gax.protobuf.Type;
+    const backupClusterMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Any'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       updateCluster: new this._gaxModule.LongrunningDescriptor(
@@ -300,6 +377,30 @@ export class CloudRedisClusterClient {
         this.operationsClient,
         createClusterResponse.decode.bind(createClusterResponse),
         createClusterMetadata.decode.bind(createClusterMetadata)
+      ),
+      rescheduleClusterMaintenance: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        rescheduleClusterMaintenanceResponse.decode.bind(
+          rescheduleClusterMaintenanceResponse
+        ),
+        rescheduleClusterMaintenanceMetadata.decode.bind(
+          rescheduleClusterMaintenanceMetadata
+        )
+      ),
+      deleteBackup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteBackupResponse.decode.bind(deleteBackupResponse),
+        deleteBackupMetadata.decode.bind(deleteBackupMetadata)
+      ),
+      exportBackup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportBackupResponse.decode.bind(exportBackupResponse),
+        exportBackupMetadata.decode.bind(exportBackupMetadata)
+      ),
+      backupCluster: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        backupClusterResponse.decode.bind(backupClusterResponse),
+        backupClusterMetadata.decode.bind(backupClusterMetadata)
       ),
     };
 
@@ -358,6 +459,15 @@ export class CloudRedisClusterClient {
       'updateCluster',
       'deleteCluster',
       'createCluster',
+      'getClusterCertificateAuthority',
+      'rescheduleClusterMaintenance',
+      'listBackupCollections',
+      'getBackupCollection',
+      'listBackups',
+      'getBackup',
+      'deleteBackup',
+      'exportBackup',
+      'backupCluster',
     ];
     for (const methodName of cloudRedisClusterStubMethods) {
       const callPromise = this.cloudRedisClusterStub.then(
@@ -393,19 +503,50 @@ export class CloudRedisClusterClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'redis.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'redis.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -535,6 +676,291 @@ export class CloudRedisClusterClient {
       });
     this.initialize();
     return this.innerApiCalls.getCluster(request, options, callback);
+  }
+  /**
+   * Gets the details of certificate authority information for Redis cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis cluster certificate authority resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}/certificateAuthority`
+   *   where `location_id` refers to a GCP region.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.redis.cluster.v1.CertificateAuthority|CertificateAuthority}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.get_cluster_certificate_authority.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_GetClusterCertificateAuthority_async
+   */
+  getClusterCertificateAuthority(
+    request?: protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+      (
+        | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getClusterCertificateAuthority(
+    request: protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+      | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getClusterCertificateAuthority(
+    request: protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+      | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getClusterCertificateAuthority(
+    request?: protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+          | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+      | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.ICertificateAuthority,
+      (
+        | protos.google.cloud.redis.cluster.v1.IGetClusterCertificateAuthorityRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getClusterCertificateAuthority(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Get a backup collection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis backupCollection resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.redis.cluster.v1.BackupCollection|BackupCollection}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.get_backup_collection.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_GetBackupCollection_async
+   */
+  getBackupCollection(
+    request?: protos.google.cloud.redis.cluster.v1.IGetBackupCollectionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.IBackupCollection,
+      (
+        | protos.google.cloud.redis.cluster.v1.IGetBackupCollectionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getBackupCollection(
+    request: protos.google.cloud.redis.cluster.v1.IGetBackupCollectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1.IBackupCollection,
+      | protos.google.cloud.redis.cluster.v1.IGetBackupCollectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBackupCollection(
+    request: protos.google.cloud.redis.cluster.v1.IGetBackupCollectionRequest,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1.IBackupCollection,
+      | protos.google.cloud.redis.cluster.v1.IGetBackupCollectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBackupCollection(
+    request?: protos.google.cloud.redis.cluster.v1.IGetBackupCollectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.redis.cluster.v1.IBackupCollection,
+          | protos.google.cloud.redis.cluster.v1.IGetBackupCollectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.redis.cluster.v1.IBackupCollection,
+      | protos.google.cloud.redis.cluster.v1.IGetBackupCollectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.IBackupCollection,
+      (
+        | protos.google.cloud.redis.cluster.v1.IGetBackupCollectionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getBackupCollection(request, options, callback);
+  }
+  /**
+   * Gets the details of a specific backup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis backup resource name using the form:
+   *   `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.redis.cluster.v1.Backup|Backup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.get_backup.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_GetBackup_async
+   */
+  getBackup(
+    request?: protos.google.cloud.redis.cluster.v1.IGetBackupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.IBackup,
+      protos.google.cloud.redis.cluster.v1.IGetBackupRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getBackup(
+    request: protos.google.cloud.redis.cluster.v1.IGetBackupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1.IBackup,
+      protos.google.cloud.redis.cluster.v1.IGetBackupRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBackup(
+    request: protos.google.cloud.redis.cluster.v1.IGetBackupRequest,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1.IBackup,
+      protos.google.cloud.redis.cluster.v1.IGetBackupRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBackup(
+    request?: protos.google.cloud.redis.cluster.v1.IGetBackupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.redis.cluster.v1.IBackup,
+          | protos.google.cloud.redis.cluster.v1.IGetBackupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.redis.cluster.v1.IBackup,
+      protos.google.cloud.redis.cluster.v1.IGetBackupRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.IBackup,
+      protos.google.cloud.redis.cluster.v1.IGetBackupRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getBackup(request, options, callback);
   }
 
   /**
@@ -969,6 +1395,570 @@ export class CloudRedisClusterClient {
     >;
   }
   /**
+   * Reschedules upcoming maintenance event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis Cluster instance resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {google.cloud.redis.cluster.v1.RescheduleClusterMaintenanceRequest.RescheduleType} request.rescheduleType
+   *   Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as
+   *   well.
+   * @param {google.protobuf.Timestamp} [request.scheduleTime]
+   *   Optional. Timestamp when the maintenance shall be rescheduled to if
+   *   reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
+   *   example `2012-11-15T16:19:00.094Z`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.reschedule_cluster_maintenance.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_RescheduleClusterMaintenance_async
+   */
+  rescheduleClusterMaintenance(
+    request?: protos.google.cloud.redis.cluster.v1.IRescheduleClusterMaintenanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.ICluster,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  rescheduleClusterMaintenance(
+    request: protos.google.cloud.redis.cluster.v1.IRescheduleClusterMaintenanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.ICluster,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rescheduleClusterMaintenance(
+    request: protos.google.cloud.redis.cluster.v1.IRescheduleClusterMaintenanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.ICluster,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rescheduleClusterMaintenance(
+    request?: protos.google.cloud.redis.cluster.v1.IRescheduleClusterMaintenanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.cluster.v1.ICluster,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.ICluster,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.ICluster,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.rescheduleClusterMaintenance(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `rescheduleClusterMaintenance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.reschedule_cluster_maintenance.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_RescheduleClusterMaintenance_async
+   */
+  async checkRescheduleClusterMaintenanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.cluster.v1.Cluster,
+      protos.google.protobuf.Any
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.rescheduleClusterMaintenance,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.cluster.v1.Cluster,
+      protos.google.protobuf.Any
+    >;
+  }
+  /**
+   * Deletes a specific backup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis backup resource name using the form:
+   *   `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+   * @param {string} [request.requestId]
+   *   Optional. Idempotent request UUID.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.delete_backup.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_DeleteBackup_async
+   */
+  deleteBackup(
+    request?: protos.google.cloud.redis.cluster.v1.IDeleteBackupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteBackup(
+    request: protos.google.cloud.redis.cluster.v1.IDeleteBackupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteBackup(
+    request: protos.google.cloud.redis.cluster.v1.IDeleteBackupRequest,
+    callback: Callback<
+      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteBackup(
+    request?: protos.google.cloud.redis.cluster.v1.IDeleteBackupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IAny>,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteBackup(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteBackup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.delete_backup.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_DeleteBackup_async
+   */
+  async checkDeleteBackupProgress(
+    name: string
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Any>
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteBackup,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Any
+    >;
+  }
+  /**
+   * Exports a specific backup to a customer target Cloud Storage URI.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.gcsBucket
+   *   Google Cloud Storage bucket, like "my-bucket".
+   * @param {string} request.name
+   *   Required. Redis backup resource name using the form:
+   *   `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.export_backup.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_ExportBackup_async
+   */
+  exportBackup(
+    request?: protos.google.cloud.redis.cluster.v1.IExportBackupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.IBackup,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportBackup(
+    request: protos.google.cloud.redis.cluster.v1.IExportBackupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.IBackup,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportBackup(
+    request: protos.google.cloud.redis.cluster.v1.IExportBackupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.IBackup,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportBackup(
+    request?: protos.google.cloud.redis.cluster.v1.IExportBackupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.cluster.v1.IBackup,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.IBackup,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.IBackup,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.exportBackup(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `exportBackup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.export_backup.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_ExportBackup_async
+   */
+  async checkExportBackupProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.cluster.v1.Backup,
+      protos.google.protobuf.Any
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportBackup,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.cluster.v1.Backup,
+      protos.google.protobuf.Any
+    >;
+  }
+  /**
+   * Backup Redis Cluster.
+   * If this is the first time a backup is being created, a backup collection
+   * will be created at the backend, and this backup belongs to this collection.
+   * Both collection and backup will have a resource name. Backup will be
+   * executed for each shard. A replica (primary if nonHA) will be selected to
+   * perform the execution. Backup call will be rejected if there is an ongoing
+   * backup or update operation. Be aware that during preview, if the cluster's
+   * internal software version is too old, critical update will be performed
+   * before actual backup. Once the internal software version is updated to the
+   * minimum version required by the backup feature, subsequent backups will not
+   * require critical update. After preview, there will be no critical update
+   * needed for backup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis cluster resource name using the form:
+   *    `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {google.protobuf.Duration} [request.ttl]
+   *   Optional. TTL for the backup to expire. Value range is 1 day to 100 years.
+   *   If not specified, the default value is 100 years.
+   * @param {string} [request.backupId]
+   *   Optional. The id of the backup to be created. If not specified, the
+   *   default value ([YYYYMMDDHHMMSS]_[Shortened Cluster UID] is used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.backup_cluster.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_BackupCluster_async
+   */
+  backupCluster(
+    request?: protos.google.cloud.redis.cluster.v1.IBackupClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.ICluster,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  backupCluster(
+    request: protos.google.cloud.redis.cluster.v1.IBackupClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.ICluster,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  backupCluster(
+    request: protos.google.cloud.redis.cluster.v1.IBackupClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.ICluster,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  backupCluster(
+    request?: protos.google.cloud.redis.cluster.v1.IBackupClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.cluster.v1.ICluster,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.ICluster,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1.ICluster,
+        protos.google.protobuf.IAny
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.backupCluster(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `backupCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.backup_cluster.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_BackupCluster_async
+   */
+  async checkBackupClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.cluster.v1.Cluster,
+      protos.google.protobuf.Any
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.backupCluster,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.cluster.v1.Cluster,
+      protos.google.protobuf.Any
+    >;
+  }
+  /**
    * Lists all Redis clusters owned by a project in either the specified
    * location (region) or all locations.
    *
@@ -1084,7 +2074,7 @@ export class CloudRedisClusterClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listClusters`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1188,6 +2178,436 @@ export class CloudRedisClusterClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.redis.cluster.v1.ICluster>;
+  }
+  /**
+   * Lists all backup collections owned by a consumer project in either the
+   * specified location (region) or all locations.
+   *
+   * If `location_id` is specified as `-` (wildcard), then all regions
+   * available to the project are queried, and the results are aggregated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the backupCollection location using the
+   *   form:
+   *       `projects/{project_id}/locations/{location_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1.ListBackupCollectionsResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListBackupCollections] request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.redis.cluster.v1.BackupCollection|BackupCollection}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBackupCollectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listBackupCollections(
+    request?: protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.IBackupCollection[],
+      protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest | null,
+      protos.google.cloud.redis.cluster.v1.IListBackupCollectionsResponse,
+    ]
+  >;
+  listBackupCollections(
+    request: protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest,
+      | protos.google.cloud.redis.cluster.v1.IListBackupCollectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1.IBackupCollection
+    >
+  ): void;
+  listBackupCollections(
+    request: protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest,
+      | protos.google.cloud.redis.cluster.v1.IListBackupCollectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1.IBackupCollection
+    >
+  ): void;
+  listBackupCollections(
+    request?: protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest,
+          | protos.google.cloud.redis.cluster.v1.IListBackupCollectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.redis.cluster.v1.IBackupCollection
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest,
+      | protos.google.cloud.redis.cluster.v1.IListBackupCollectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1.IBackupCollection
+    >
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.IBackupCollection[],
+      protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest | null,
+      protos.google.cloud.redis.cluster.v1.IListBackupCollectionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listBackupCollections(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listBackupCollections`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the backupCollection location using the
+   *   form:
+   *       `projects/{project_id}/locations/{location_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1.ListBackupCollectionsResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListBackupCollections] request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.redis.cluster.v1.BackupCollection|BackupCollection} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBackupCollectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listBackupCollectionsStream(
+    request?: protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBackupCollections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listBackupCollections.createStream(
+      this.innerApiCalls.listBackupCollections as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listBackupCollections`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the backupCollection location using the
+   *   form:
+   *       `projects/{project_id}/locations/{location_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1.ListBackupCollectionsResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListBackupCollections] request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.redis.cluster.v1.BackupCollection|BackupCollection}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.list_backup_collections.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_ListBackupCollections_async
+   */
+  listBackupCollectionsAsync(
+    request?: protos.google.cloud.redis.cluster.v1.IListBackupCollectionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.redis.cluster.v1.IBackupCollection> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBackupCollections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listBackupCollections.asyncIterate(
+      this.innerApiCalls['listBackupCollections'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.redis.cluster.v1.IBackupCollection>;
+  }
+  /**
+   * Lists all backups owned by a backup collection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the backupCollection using the form:
+   *   `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1.ListBackupsResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListBackupCollections] request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.redis.cluster.v1.Backup|Backup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBackupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listBackups(
+    request?: protos.google.cloud.redis.cluster.v1.IListBackupsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.IBackup[],
+      protos.google.cloud.redis.cluster.v1.IListBackupsRequest | null,
+      protos.google.cloud.redis.cluster.v1.IListBackupsResponse,
+    ]
+  >;
+  listBackups(
+    request: protos.google.cloud.redis.cluster.v1.IListBackupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1.IListBackupsRequest,
+      | protos.google.cloud.redis.cluster.v1.IListBackupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1.IBackup
+    >
+  ): void;
+  listBackups(
+    request: protos.google.cloud.redis.cluster.v1.IListBackupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1.IListBackupsRequest,
+      | protos.google.cloud.redis.cluster.v1.IListBackupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1.IBackup
+    >
+  ): void;
+  listBackups(
+    request?: protos.google.cloud.redis.cluster.v1.IListBackupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.redis.cluster.v1.IListBackupsRequest,
+          | protos.google.cloud.redis.cluster.v1.IListBackupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.redis.cluster.v1.IBackup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1.IListBackupsRequest,
+      | protos.google.cloud.redis.cluster.v1.IListBackupsResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1.IBackup
+    >
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1.IBackup[],
+      protos.google.cloud.redis.cluster.v1.IListBackupsRequest | null,
+      protos.google.cloud.redis.cluster.v1.IListBackupsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listBackups(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listBackups`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the backupCollection using the form:
+   *   `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1.ListBackupsResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListBackupCollections] request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.redis.cluster.v1.Backup|Backup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBackupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listBackupsStream(
+    request?: protos.google.cloud.redis.cluster.v1.IListBackupsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBackups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listBackups.createStream(
+      this.innerApiCalls.listBackups as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listBackups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the backupCollection using the form:
+   *   `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1.ListBackupsResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more clusters left to be queried.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   [ListBackupCollections] request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.redis.cluster.v1.Backup|Backup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_redis_cluster.list_backups.js</caption>
+   * region_tag:redis_v1_generated_CloudRedisCluster_ListBackups_async
+   */
+  listBackupsAsync(
+    request?: protos.google.cloud.redis.cluster.v1.IListBackupsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.redis.cluster.v1.IBackup> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBackups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listBackups.asyncIterate(
+      this.innerApiCalls['listBackups'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.redis.cluster.v1.IBackup>;
   }
   /**
    * Gets information about a location.
@@ -1299,7 +2719,7 @@ export class CloudRedisClusterClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1312,6 +2732,20 @@ export class CloudRedisClusterClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1348,6 +2782,13 @@ export class CloudRedisClusterClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1383,11 +2824,11 @@ export class CloudRedisClusterClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1396,6 +2837,20 @@ export class CloudRedisClusterClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1426,7 +2881,7 @@ export class CloudRedisClusterClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1439,12 +2894,208 @@ export class CloudRedisClusterClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified backup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} backup_collection
+   * @param {string} backup
+   * @returns {string} Resource name string.
+   */
+  backupPath(
+    project: string,
+    location: string,
+    backupCollection: string,
+    backup: string
+  ) {
+    return this.pathTemplates.backupPathTemplate.render({
+      project: project,
+      location: location,
+      backup_collection: backupCollection,
+      backup: backup,
+    });
+  }
+
+  /**
+   * Parse the project from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).project;
+  }
+
+  /**
+   * Parse the location from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).location;
+  }
+
+  /**
+   * Parse the backup_collection from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the backup_collection.
+   */
+  matchBackupCollectionFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName)
+      .backup_collection;
+  }
+
+  /**
+   * Parse the backup from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the backup.
+   */
+  matchBackupFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).backup;
+  }
+
+  /**
+   * Return a fully-qualified backupCollection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} backup_collection
+   * @returns {string} Resource name string.
+   */
+  backupCollectionPath(
+    project: string,
+    location: string,
+    backupCollection: string
+  ) {
+    return this.pathTemplates.backupCollectionPathTemplate.render({
+      project: project,
+      location: location,
+      backup_collection: backupCollection,
+    });
+  }
+
+  /**
+   * Parse the project from BackupCollection resource.
+   *
+   * @param {string} backupCollectionName
+   *   A fully-qualified path representing BackupCollection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBackupCollectionName(backupCollectionName: string) {
+    return this.pathTemplates.backupCollectionPathTemplate.match(
+      backupCollectionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from BackupCollection resource.
+   *
+   * @param {string} backupCollectionName
+   *   A fully-qualified path representing BackupCollection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBackupCollectionName(backupCollectionName: string) {
+    return this.pathTemplates.backupCollectionPathTemplate.match(
+      backupCollectionName
+    ).location;
+  }
+
+  /**
+   * Parse the backup_collection from BackupCollection resource.
+   *
+   * @param {string} backupCollectionName
+   *   A fully-qualified path representing BackupCollection resource.
+   * @returns {string} A string representing the backup_collection.
+   */
+  matchBackupCollectionFromBackupCollectionName(backupCollectionName: string) {
+    return this.pathTemplates.backupCollectionPathTemplate.match(
+      backupCollectionName
+    ).backup_collection;
+  }
+
+  /**
+   * Return a fully-qualified certificateAuthority resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cluster
+   * @returns {string} Resource name string.
+   */
+  certificateAuthorityPath(project: string, location: string, cluster: string) {
+    return this.pathTemplates.certificateAuthorityPathTemplate.render({
+      project: project,
+      location: location,
+      cluster: cluster,
+    });
+  }
+
+  /**
+   * Parse the project from CertificateAuthority resource.
+   *
+   * @param {string} certificateAuthorityName
+   *   A fully-qualified path representing CertificateAuthority resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCertificateAuthorityName(certificateAuthorityName: string) {
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(
+      certificateAuthorityName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CertificateAuthority resource.
+   *
+   * @param {string} certificateAuthorityName
+   *   A fully-qualified path representing CertificateAuthority resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCertificateAuthorityName(certificateAuthorityName: string) {
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(
+      certificateAuthorityName
+    ).location;
+  }
+
+  /**
+   * Parse the cluster from CertificateAuthority resource.
+   *
+   * @param {string} certificateAuthorityName
+   *   A fully-qualified path representing CertificateAuthority resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromCertificateAuthorityName(certificateAuthorityName: string) {
+    return this.pathTemplates.certificateAuthorityPathTemplate.match(
+      certificateAuthorityName
+    ).cluster;
+  }
 
   /**
    * Return a fully-qualified cluster resource name string.
@@ -1496,6 +3147,223 @@ export class CloudRedisClusterClient {
   }
 
   /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
+  }
+
+  /**
+   * Return a fully-qualified cryptoKeyVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @param {string} crypto_key_version
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyVersionPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+    cryptoKeyVersion: string
+  ) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+      crypto_key_version: cryptoKeyVersion,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).crypto_key;
+  }
+
+  /**
+   * Parse the crypto_key_version from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the crypto_key_version.
+   */
+  matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified forwardingRule resource name string.
+   *
+   * @param {string} project
+   * @param {string} region
+   * @param {string} forwarding_rule
+   * @returns {string} Resource name string.
+   */
+  forwardingRulePath(project: string, region: string, forwardingRule: string) {
+    return this.pathTemplates.forwardingRulePathTemplate.render({
+      project: project,
+      region: region,
+      forwarding_rule: forwardingRule,
+    });
+  }
+
+  /**
+   * Parse the project from ForwardingRule resource.
+   *
+   * @param {string} forwardingRuleName
+   *   A fully-qualified path representing ForwardingRule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromForwardingRuleName(forwardingRuleName: string) {
+    return this.pathTemplates.forwardingRulePathTemplate.match(
+      forwardingRuleName
+    ).project;
+  }
+
+  /**
+   * Parse the region from ForwardingRule resource.
+   *
+   * @param {string} forwardingRuleName
+   *   A fully-qualified path representing ForwardingRule resource.
+   * @returns {string} A string representing the region.
+   */
+  matchRegionFromForwardingRuleName(forwardingRuleName: string) {
+    return this.pathTemplates.forwardingRulePathTemplate.match(
+      forwardingRuleName
+    ).region;
+  }
+
+  /**
+   * Parse the forwarding_rule from ForwardingRule resource.
+   *
+   * @param {string} forwardingRuleName
+   *   A fully-qualified path representing ForwardingRule resource.
+   * @returns {string} A string representing the forwarding_rule.
+   */
+  matchForwardingRuleFromForwardingRuleName(forwardingRuleName: string) {
+    return this.pathTemplates.forwardingRulePathTemplate.match(
+      forwardingRuleName
+    ).forwarding_rule;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -1529,6 +3397,126 @@ export class CloudRedisClusterClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified network resource name string.
+   *
+   * @param {string} project
+   * @param {string} network
+   * @returns {string} Resource name string.
+   */
+  networkPath(project: string, network: string) {
+    return this.pathTemplates.networkPathTemplate.render({
+      project: project,
+      network: network,
+    });
+  }
+
+  /**
+   * Parse the project from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).project;
+  }
+
+  /**
+   * Parse the network from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the network.
+   */
+  matchNetworkFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).network;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified serviceAttachment resource name string.
+   *
+   * @param {string} project
+   * @param {string} region
+   * @param {string} service_attachment
+   * @returns {string} Resource name string.
+   */
+  serviceAttachmentPath(
+    project: string,
+    region: string,
+    serviceAttachment: string
+  ) {
+    return this.pathTemplates.serviceAttachmentPathTemplate.render({
+      project: project,
+      region: region,
+      service_attachment: serviceAttachment,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceAttachment resource.
+   *
+   * @param {string} serviceAttachmentName
+   *   A fully-qualified path representing ServiceAttachment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceAttachmentName(serviceAttachmentName: string) {
+    return this.pathTemplates.serviceAttachmentPathTemplate.match(
+      serviceAttachmentName
+    ).project;
+  }
+
+  /**
+   * Parse the region from ServiceAttachment resource.
+   *
+   * @param {string} serviceAttachmentName
+   *   A fully-qualified path representing ServiceAttachment resource.
+   * @returns {string} A string representing the region.
+   */
+  matchRegionFromServiceAttachmentName(serviceAttachmentName: string) {
+    return this.pathTemplates.serviceAttachmentPathTemplate.match(
+      serviceAttachmentName
+    ).region;
+  }
+
+  /**
+   * Parse the service_attachment from ServiceAttachment resource.
+   *
+   * @param {string} serviceAttachmentName
+   *   A fully-qualified path representing ServiceAttachment resource.
+   * @returns {string} A string representing the service_attachment.
+   */
+  matchServiceAttachmentFromServiceAttachmentName(
+    serviceAttachmentName: string
+  ) {
+    return this.pathTemplates.serviceAttachmentPathTemplate.match(
+      serviceAttachmentName
+    ).service_attachment;
   }
 
   /**

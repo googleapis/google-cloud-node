@@ -39,6 +39,10 @@
         "UpdatePersistentResource": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "RebootPersistentResource": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

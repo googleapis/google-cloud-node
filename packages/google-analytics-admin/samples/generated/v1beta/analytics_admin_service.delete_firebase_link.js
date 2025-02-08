@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Format: properties/{property_id}/firebaseLinks/{firebase_link_id}
-   *  Example: properties/1234/firebaseLinks/5678
+   *  Example: `properties/1234/firebaseLinks/5678`
    */
   // const name = 'abc123'
 

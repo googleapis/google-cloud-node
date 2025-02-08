@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listMetadataStoresAsync(request);
+    const iterable = aiplatformClient.listMetadataStoresAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

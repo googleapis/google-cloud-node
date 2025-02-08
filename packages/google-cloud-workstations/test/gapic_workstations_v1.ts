@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -167,14 +167,97 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.WorkstationsClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = workstationsModule.v1.WorkstationsClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new workstationsModule.v1.WorkstationsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'workstations.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = workstationsModule.v1.WorkstationsClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new workstationsModule.v1.WorkstationsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          workstationsModule.v1.WorkstationsClient.servicePath;
+        assert.strictEqual(servicePath, 'workstations.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          workstationsModule.v1.WorkstationsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'workstations.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new workstationsModule.v1.WorkstationsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'workstations.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new workstationsModule.v1.WorkstationsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'workstations.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new workstationsModule.v1.WorkstationsClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'workstations.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new workstationsModule.v1.WorkstationsClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'workstations.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new workstationsModule.v1.WorkstationsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -278,7 +361,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.workstations.v1.WorkstationCluster()
       );
@@ -310,7 +393,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.workstations.v1.WorkstationCluster()
       );
@@ -357,7 +440,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkstationCluster = stubSimpleCall(
         undefined,
@@ -415,7 +498,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.workstations.v1.WorkstationConfig()
       );
@@ -447,7 +530,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.workstations.v1.WorkstationConfig()
       );
@@ -494,7 +577,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkstationConfig = stubSimpleCall(
         undefined,
@@ -546,7 +629,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.workstations.v1.Workstation()
       );
@@ -577,7 +660,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.workstations.v1.Workstation()
       );
@@ -624,7 +707,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkstation = stubSimpleCall(
         undefined,
@@ -676,7 +759,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstation']
       );
       request.workstation = defaultValue1;
-      const expectedHeaderRequestParams = `workstation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.workstations.v1.GenerateAccessTokenResponse()
       );
@@ -708,7 +791,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstation']
       );
       request.workstation = defaultValue1;
-      const expectedHeaderRequestParams = `workstation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.workstations.v1.GenerateAccessTokenResponse()
       );
@@ -755,7 +838,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstation']
       );
       request.workstation = defaultValue1;
-      const expectedHeaderRequestParams = `workstation=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateAccessToken = stubSimpleCall(
         undefined,
@@ -807,7 +890,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -840,7 +923,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -894,7 +977,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkstationCluster = stubLongRunningCall(
         undefined,
@@ -928,7 +1011,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkstationCluster = stubLongRunningCall(
         undefined,
@@ -1006,7 +1089,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstationCluster', 'name']
       );
       request.workstationCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation_cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1040,7 +1123,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstationCluster', 'name']
       );
       request.workstationCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation_cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1095,7 +1178,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstationCluster', 'name']
       );
       request.workstationCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation_cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkstationCluster = stubLongRunningCall(
         undefined,
@@ -1130,7 +1213,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstationCluster', 'name']
       );
       request.workstationCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation_cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkstationCluster = stubLongRunningCall(
         undefined,
@@ -1207,7 +1290,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1240,7 +1323,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1294,7 +1377,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkstationCluster = stubLongRunningCall(
         undefined,
@@ -1328,7 +1411,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkstationCluster = stubLongRunningCall(
         undefined,
@@ -1405,7 +1488,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1438,7 +1521,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1492,7 +1575,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkstationConfig = stubLongRunningCall(
         undefined,
@@ -1526,7 +1609,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkstationConfig = stubLongRunningCall(
         undefined,
@@ -1604,7 +1687,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstationConfig', 'name']
       );
       request.workstationConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1638,7 +1721,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstationConfig', 'name']
       );
       request.workstationConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1693,7 +1776,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstationConfig', 'name']
       );
       request.workstationConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkstationConfig = stubLongRunningCall(
         undefined,
@@ -1728,7 +1811,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstationConfig', 'name']
       );
       request.workstationConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkstationConfig = stubLongRunningCall(
         undefined,
@@ -1805,7 +1888,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1838,7 +1921,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1892,7 +1975,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkstationConfig = stubLongRunningCall(
         undefined,
@@ -1926,7 +2009,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkstationConfig = stubLongRunningCall(
         undefined,
@@ -2003,7 +2086,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2036,7 +2119,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2090,7 +2173,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkstation = stubLongRunningCall(
         undefined,
@@ -2121,7 +2204,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkstation = stubLongRunningCall(
         undefined,
@@ -2198,7 +2281,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstation', 'name']
       );
       request.workstation.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2232,7 +2315,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstation', 'name']
       );
       request.workstation.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2287,7 +2370,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstation', 'name']
       );
       request.workstation.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkstation = stubLongRunningCall(
         undefined,
@@ -2319,7 +2402,7 @@ describe('v1.WorkstationsClient', () => {
         ['workstation', 'name']
       );
       request.workstation.name = defaultValue1;
-      const expectedHeaderRequestParams = `workstation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `workstation.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkstation = stubLongRunningCall(
         undefined,
@@ -2395,7 +2478,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2428,7 +2511,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2482,7 +2565,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkstation = stubLongRunningCall(
         undefined,
@@ -2513,7 +2596,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkstation = stubLongRunningCall(
         undefined,
@@ -2589,7 +2672,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2622,7 +2705,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2676,7 +2759,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startWorkstation = stubLongRunningCall(
         undefined,
@@ -2707,7 +2790,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startWorkstation = stubLongRunningCall(
         undefined,
@@ -2783,7 +2866,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2816,7 +2899,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2870,7 +2953,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopWorkstation = stubLongRunningCall(
         undefined,
@@ -2901,7 +2984,7 @@ describe('v1.WorkstationsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopWorkstation = stubLongRunningCall(
         undefined,
@@ -2977,7 +3060,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationCluster()
@@ -3017,7 +3100,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationCluster()
@@ -3074,7 +3157,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkstationClusters = stubSimpleCall(
         undefined,
@@ -3108,7 +3191,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationCluster()
@@ -3177,7 +3260,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkstationClusters.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3235,7 +3318,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationCluster()
@@ -3289,7 +3372,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkstationClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3336,7 +3419,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationConfig()
@@ -3376,7 +3459,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationConfig()
@@ -3433,7 +3516,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkstationConfigs = stubSimpleCall(
         undefined,
@@ -3467,7 +3550,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationConfig()
@@ -3534,7 +3617,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkstationConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3590,7 +3673,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationConfig()
@@ -3644,7 +3727,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkstationConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3691,7 +3774,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationConfig()
@@ -3731,7 +3814,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationConfig()
@@ -3788,7 +3871,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listUsableWorkstationConfigs = stubSimpleCall(
         undefined,
@@ -3822,7 +3905,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationConfig()
@@ -3892,7 +3975,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUsableWorkstationConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3951,7 +4034,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.WorkstationConfig()
@@ -4005,7 +4088,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUsableWorkstationConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4052,7 +4135,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.Workstation()
@@ -4091,7 +4174,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.Workstation()
@@ -4146,7 +4229,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkstations = stubSimpleCall(
         undefined,
@@ -4177,7 +4260,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.Workstation()
@@ -4217,9 +4300,9 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4237,7 +4320,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkstations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4266,9 +4349,9 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4286,7 +4369,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.Workstation()
@@ -4315,9 +4398,9 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4335,7 +4418,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkstations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4356,9 +4439,9 @@ describe('v1.WorkstationsClient', () => {
       assert(
         (client.descriptors.page.listWorkstations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4378,7 +4461,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.Workstation()
@@ -4418,7 +4501,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.Workstation()
@@ -4473,7 +4556,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listUsableWorkstations = stubSimpleCall(
         undefined,
@@ -4507,7 +4590,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.Workstation()
@@ -4573,7 +4656,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUsableWorkstations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4628,7 +4711,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workstations.v1.Workstation()
@@ -4681,7 +4764,7 @@ describe('v1.WorkstationsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUsableWorkstations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'NetworkServices',
-    filename: './network-services.js',
+    library: 'DepService',
+    filename: './dep-service.js',
   },
   node: {
     child_process: 'empty',

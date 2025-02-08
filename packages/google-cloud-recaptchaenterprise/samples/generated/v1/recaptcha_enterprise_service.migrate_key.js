@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,11 +37,11 @@ function main(name) {
    *  Optional. If true, skips the billing check.
    *  A reCAPTCHA Enterprise key or migrated key behaves differently than a
    *  reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
-   *  https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid
+   *  https://cloud.google.com/recaptcha/quotas#quota_limit). To avoid
    *  any disruption of your usage, we check that a billing account is present.
    *  If your usage of reCAPTCHA is under the free quota, you can safely skip the
    *  billing check and proceed with the migration. See
-   *  https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
+   *  https://cloud.google.com/recaptcha/docs/billing-information.
    */
   // const skipBillingCheck = true
 

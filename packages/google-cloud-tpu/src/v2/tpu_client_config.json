@@ -55,6 +55,31 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListQueuedResources": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetQueuedResource": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateQueuedResource": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteQueuedResource": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ResetQueuedResource": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GenerateServiceIdentity": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",

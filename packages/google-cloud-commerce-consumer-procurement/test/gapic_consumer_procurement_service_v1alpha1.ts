@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -161,18 +161,122 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1alpha1.ConsumerProcurementServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        consumerprocurementserviceModule.v1alpha1
-          .ConsumerProcurementServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(
+        apiEndpoint,
+        'cloudcommerceconsumerprocurement.googleapis.com'
+      );
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        consumerprocurementserviceModule.v1alpha1
-          .ConsumerProcurementServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          consumerprocurementserviceModule.v1alpha1
+            .ConsumerProcurementServiceClient.servicePath;
+        assert.strictEqual(
+          servicePath,
+          'cloudcommerceconsumerprocurement.googleapis.com'
+        );
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          consumerprocurementserviceModule.v1alpha1
+            .ConsumerProcurementServiceClient.apiEndpoint;
+        assert.strictEqual(
+          apiEndpoint,
+          'cloudcommerceconsumerprocurement.googleapis.com'
+        );
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(
+        servicePath,
+        'cloudcommerceconsumerprocurement.example.com'
+      );
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(
+        servicePath,
+        'cloudcommerceconsumerprocurement.example.com'
+      );
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'cloudcommerceconsumerprocurement.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient(
+              {universeDomain: 'configured.example.com'}
+            );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'cloudcommerceconsumerprocurement.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {
@@ -826,9 +930,9 @@ describe('v1alpha1.ConsumerProcurementServiceClient', () => {
       assert(
         (client.descriptors.page.listOrders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -883,9 +987,9 @@ describe('v1alpha1.ConsumerProcurementServiceClient', () => {
       assert(
         (client.descriptors.page.listOrders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -936,9 +1040,9 @@ describe('v1alpha1.ConsumerProcurementServiceClient', () => {
       assert(
         (client.descriptors.page.listOrders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -982,9 +1086,9 @@ describe('v1alpha1.ConsumerProcurementServiceClient', () => {
       assert(
         (client.descriptors.page.listOrders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

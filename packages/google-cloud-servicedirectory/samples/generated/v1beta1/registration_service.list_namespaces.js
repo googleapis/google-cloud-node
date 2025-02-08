@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of items to return.
+   *  Optional. The maximum number of items to return. The default value is 100.
    */
   // const pageSize = 1234
   /**
@@ -94,7 +94,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await servicedirectoryClient.listNamespacesAsync(request);
+    const iterable = servicedirectoryClient.listNamespacesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

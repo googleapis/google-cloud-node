@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,12 +30,12 @@ function main(parent, groupBy) {
    */
   /**
    *  Required. Name of the source to groupBy. Its format is
-   *  "organizations/[organization_id]/sources/[source_id]",
-   *  folders/[folder_id]/sources/[source_id], or
-   *  projects/[project_id]/sources/[source_id]. To groupBy across all sources
+   *  `organizations/[organization_id]/sources/[source_id]`,
+   *  `folders/[folder_id]/sources/[source_id]`, or
+   *  `projects/[project_id]/sources/[source_id]`. To groupBy across all sources
    *  provide a source_id of `-`. For example:
-   *  organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-,
-   *  or projects/{project_id}/sources/-
+   *  `organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-`,
+   *  or `projects/{project_id}/sources/-`
    */
   // const parent = 'abc123'
   /**
@@ -90,12 +90,6 @@ function main(parent, groupBy) {
    *  Required. Expression that defines what assets fields to use for grouping
    *  (including `state_change`). The string value should follow SQL syntax:
    *  comma separated list of fields. For example: "parent,resource_name".
-   *  The following fields are supported:
-   *  * resource_name
-   *  * category
-   *  * state
-   *  * parent
-   *  * severity
    *  The following fields are supported when compare_duration is set:
    *  * state_change
    */
@@ -163,7 +157,7 @@ function main(parent, groupBy) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.groupFindingsAsync(request);
+    const iterable = securitycenterClient.groupFindingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

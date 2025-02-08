@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,14 +30,15 @@ function main(model, contents) {
    */
   /**
    *  Required. The name of the `Model` to use for generating the completion.
-   *  Format: `name=models/{model}`.
+   *  Format: `models/{model}`.
    */
   // const model = 'abc123'
   /**
    *  Required. The content of the current conversation with the model.
-   *  For single-turn queries, this is a single instance. For multi-turn queries,
-   *  this is a repeated field that contains conversation history + latest
-   *  request.
+   *  For single-turn queries, this is a single instance. For multi-turn queries
+   *  like chat (https://ai.google.dev/gemini-api/docs/text-generation#chat),
+   *  this is a repeated field that contains the conversation history and the
+   *  latest request.
    */
   // const contents = [1,2,3,4]
   /**
@@ -52,7 +53,11 @@ function main(model, contents) {
    *  `SafetyCategory` provided in the list, the API will use the default safety
    *  setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
    *  HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
-   *  HARM_CATEGORY_HARASSMENT are supported.
+   *  HARM_CATEGORY_HARASSMENT, HARM_CATEGORY_CIVIC_INTEGRITY are supported.
+   *  Refer to the guide (https://ai.google.dev/gemini-api/docs/safety-settings)
+   *  for detailed information on available safety settings. Also refer to the
+   *  Safety guidance (https://ai.google.dev/gemini-api/docs/safety-guidance) to
+   *  learn how to incorporate safety considerations in your AI applications.
    */
   // const safetySettings = [1,2,3,4]
   /**

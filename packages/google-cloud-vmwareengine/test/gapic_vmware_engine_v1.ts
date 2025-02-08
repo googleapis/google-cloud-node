@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -167,14 +167,97 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.VmwareEngineClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = vmwareengineModule.v1.VmwareEngineClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'vmwareengine.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = vmwareengineModule.v1.VmwareEngineClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          vmwareengineModule.v1.VmwareEngineClient.servicePath;
+        assert.strictEqual(servicePath, 'vmwareengine.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          vmwareengineModule.v1.VmwareEngineClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'vmwareengine.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'vmwareengine.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'vmwareengine.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new vmwareengineModule.v1.VmwareEngineClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'vmwareengine.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new vmwareengineModule.v1.VmwareEngineClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'vmwareengine.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new vmwareengineModule.v1.VmwareEngineClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -278,7 +361,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.PrivateCloud()
       );
@@ -309,7 +392,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.PrivateCloud()
       );
@@ -356,7 +439,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPrivateCloud = stubSimpleCall(
         undefined,
@@ -408,7 +491,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.Cluster()
       );
@@ -439,7 +522,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.Cluster()
       );
@@ -486,7 +569,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCluster = stubSimpleCall(
         undefined,
@@ -538,7 +621,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.Node()
       );
@@ -569,7 +652,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.Node()
       );
@@ -616,7 +699,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNode = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getNode(request), expectedError);
@@ -665,7 +748,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ExternalAddress()
       );
@@ -697,7 +780,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ExternalAddress()
       );
@@ -744,7 +827,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getExternalAddress = stubSimpleCall(
         undefined,
@@ -796,7 +879,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.Subnet()
       );
@@ -827,7 +910,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.Subnet()
       );
@@ -874,7 +957,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSubnet = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSubnet(request), expectedError);
@@ -923,7 +1006,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
       );
@@ -955,7 +1038,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
       );
@@ -1002,7 +1085,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getExternalAccessRule = stubSimpleCall(
         undefined,
@@ -1060,7 +1143,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.LoggingServer()
       );
@@ -1091,7 +1174,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.LoggingServer()
       );
@@ -1138,7 +1221,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLoggingServer = stubSimpleCall(
         undefined,
@@ -1190,7 +1273,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.NodeType()
       );
@@ -1221,7 +1304,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.NodeType()
       );
@@ -1268,7 +1351,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNodeType = stubSimpleCall(
         undefined,
@@ -1320,7 +1403,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.Credentials()
       );
@@ -1352,7 +1435,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.Credentials()
       );
@@ -1399,7 +1482,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.showNsxCredentials = stubSimpleCall(
         undefined,
@@ -1451,7 +1534,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.Credentials()
       );
@@ -1483,7 +1566,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.Credentials()
       );
@@ -1530,7 +1613,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.showVcenterCredentials = stubSimpleCall(
         undefined,
@@ -1588,7 +1671,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DnsForwarding()
       );
@@ -1619,7 +1702,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DnsForwarding()
       );
@@ -1666,7 +1749,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDnsForwarding = stubSimpleCall(
         undefined,
@@ -1718,7 +1801,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.NetworkPeering()
       );
@@ -1749,7 +1832,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.NetworkPeering()
       );
@@ -1796,7 +1879,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNetworkPeering = stubSimpleCall(
         undefined,
@@ -1848,7 +1931,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.HcxActivationKey()
       );
@@ -1880,7 +1963,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.HcxActivationKey()
       );
@@ -1927,7 +2010,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getHcxActivationKey = stubSimpleCall(
         undefined,
@@ -1979,7 +2062,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.NetworkPolicy()
       );
@@ -2010,7 +2093,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.NetworkPolicy()
       );
@@ -2057,7 +2140,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNetworkPolicy = stubSimpleCall(
         undefined,
@@ -2109,7 +2192,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
       );
@@ -2141,7 +2224,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
       );
@@ -2188,7 +2271,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getManagementDnsZoneBinding = stubSimpleCall(
         undefined,
@@ -2246,7 +2329,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.VmwareEngineNetwork()
       );
@@ -2278,7 +2361,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.VmwareEngineNetwork()
       );
@@ -2325,7 +2408,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVmwareEngineNetwork = stubSimpleCall(
         undefined,
@@ -2383,7 +2466,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.PrivateConnection()
       );
@@ -2415,7 +2498,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.PrivateConnection()
       );
@@ -2462,7 +2545,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPrivateConnection = stubSimpleCall(
         undefined,
@@ -2514,7 +2597,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DnsBindPermission()
       );
@@ -2546,7 +2629,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DnsBindPermission()
       );
@@ -2593,7 +2676,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDnsBindPermission = stubSimpleCall(
         undefined,
@@ -2645,7 +2728,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2678,7 +2761,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2732,7 +2815,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrivateCloud = stubLongRunningCall(
         undefined,
@@ -2763,7 +2846,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrivateCloud = stubLongRunningCall(
         undefined,
@@ -2840,7 +2923,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud', 'name']
       );
       request.privateCloud.name = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2874,7 +2957,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud', 'name']
       );
       request.privateCloud.name = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2929,7 +3012,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud', 'name']
       );
       request.privateCloud.name = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePrivateCloud = stubLongRunningCall(
         undefined,
@@ -2961,7 +3044,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud', 'name']
       );
       request.privateCloud.name = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePrivateCloud = stubLongRunningCall(
         undefined,
@@ -3037,7 +3120,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3070,7 +3153,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3124,7 +3207,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrivateCloud = stubLongRunningCall(
         undefined,
@@ -3155,7 +3238,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrivateCloud = stubLongRunningCall(
         undefined,
@@ -3231,7 +3314,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3264,7 +3347,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3318,7 +3401,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeletePrivateCloud = stubLongRunningCall(
         undefined,
@@ -3349,7 +3432,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeletePrivateCloud = stubLongRunningCall(
         undefined,
@@ -3425,7 +3508,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3458,7 +3541,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3512,7 +3595,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -3543,7 +3626,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -3620,7 +3703,7 @@ describe('v1.VmwareEngineClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3654,7 +3737,7 @@ describe('v1.VmwareEngineClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3709,7 +3792,7 @@ describe('v1.VmwareEngineClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -3741,7 +3824,7 @@ describe('v1.VmwareEngineClient', () => {
         ['cluster', 'name']
       );
       request.cluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -3817,7 +3900,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3850,7 +3933,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3904,7 +3987,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -3935,7 +4018,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -4011,7 +4094,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4044,7 +4127,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4098,7 +4181,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createExternalAddress = stubLongRunningCall(
         undefined,
@@ -4132,7 +4215,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createExternalAddress = stubLongRunningCall(
         undefined,
@@ -4209,7 +4292,7 @@ describe('v1.VmwareEngineClient', () => {
         ['externalAddress', 'name']
       );
       request.externalAddress.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_address.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_address.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4243,7 +4326,7 @@ describe('v1.VmwareEngineClient', () => {
         ['externalAddress', 'name']
       );
       request.externalAddress.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_address.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_address.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4298,7 +4381,7 @@ describe('v1.VmwareEngineClient', () => {
         ['externalAddress', 'name']
       );
       request.externalAddress.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_address.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_address.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExternalAddress = stubLongRunningCall(
         undefined,
@@ -4333,7 +4416,7 @@ describe('v1.VmwareEngineClient', () => {
         ['externalAddress', 'name']
       );
       request.externalAddress.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_address.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_address.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExternalAddress = stubLongRunningCall(
         undefined,
@@ -4409,7 +4492,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4442,7 +4525,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4496,7 +4579,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExternalAddress = stubLongRunningCall(
         undefined,
@@ -4530,7 +4613,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExternalAddress = stubLongRunningCall(
         undefined,
@@ -4607,7 +4690,7 @@ describe('v1.VmwareEngineClient', () => {
         ['subnet', 'name']
       );
       request.subnet.name = defaultValue1;
-      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4640,7 +4723,7 @@ describe('v1.VmwareEngineClient', () => {
         ['subnet', 'name']
       );
       request.subnet.name = defaultValue1;
-      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4695,7 +4778,7 @@ describe('v1.VmwareEngineClient', () => {
         ['subnet', 'name']
       );
       request.subnet.name = defaultValue1;
-      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSubnet = stubLongRunningCall(
         undefined,
@@ -4727,7 +4810,7 @@ describe('v1.VmwareEngineClient', () => {
         ['subnet', 'name']
       );
       request.subnet.name = defaultValue1;
-      const expectedHeaderRequestParams = `subnet.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `subnet.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSubnet = stubLongRunningCall(
         undefined,
@@ -4800,7 +4883,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4833,7 +4916,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4887,7 +4970,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createExternalAccessRule = stubLongRunningCall(
         undefined,
@@ -4921,7 +5004,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createExternalAccessRule = stubLongRunningCall(
         undefined,
@@ -4999,7 +5082,7 @@ describe('v1.VmwareEngineClient', () => {
         ['externalAccessRule', 'name']
       );
       request.externalAccessRule.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5033,7 +5116,7 @@ describe('v1.VmwareEngineClient', () => {
         ['externalAccessRule', 'name']
       );
       request.externalAccessRule.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5088,7 +5171,7 @@ describe('v1.VmwareEngineClient', () => {
         ['externalAccessRule', 'name']
       );
       request.externalAccessRule.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExternalAccessRule = stubLongRunningCall(
         undefined,
@@ -5123,7 +5206,7 @@ describe('v1.VmwareEngineClient', () => {
         ['externalAccessRule', 'name']
       );
       request.externalAccessRule.name = defaultValue1;
-      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExternalAccessRule = stubLongRunningCall(
         undefined,
@@ -5200,7 +5283,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5233,7 +5316,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5287,7 +5370,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExternalAccessRule = stubLongRunningCall(
         undefined,
@@ -5321,7 +5404,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExternalAccessRule = stubLongRunningCall(
         undefined,
@@ -5398,7 +5481,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5431,7 +5514,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5485,7 +5568,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createLoggingServer = stubLongRunningCall(
         undefined,
@@ -5516,7 +5599,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createLoggingServer = stubLongRunningCall(
         undefined,
@@ -5593,7 +5676,7 @@ describe('v1.VmwareEngineClient', () => {
         ['loggingServer', 'name']
       );
       request.loggingServer.name = defaultValue1;
-      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5627,7 +5710,7 @@ describe('v1.VmwareEngineClient', () => {
         ['loggingServer', 'name']
       );
       request.loggingServer.name = defaultValue1;
-      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5682,7 +5765,7 @@ describe('v1.VmwareEngineClient', () => {
         ['loggingServer', 'name']
       );
       request.loggingServer.name = defaultValue1;
-      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateLoggingServer = stubLongRunningCall(
         undefined,
@@ -5714,7 +5797,7 @@ describe('v1.VmwareEngineClient', () => {
         ['loggingServer', 'name']
       );
       request.loggingServer.name = defaultValue1;
-      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateLoggingServer = stubLongRunningCall(
         undefined,
@@ -5790,7 +5873,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5823,7 +5906,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5877,7 +5960,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLoggingServer = stubLongRunningCall(
         undefined,
@@ -5908,7 +5991,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLoggingServer = stubLongRunningCall(
         undefined,
@@ -5984,7 +6067,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6017,7 +6100,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6071,7 +6154,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetNsxCredentials = stubLongRunningCall(
         undefined,
@@ -6102,7 +6185,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetNsxCredentials = stubLongRunningCall(
         undefined,
@@ -6178,7 +6261,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6211,7 +6294,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6265,7 +6348,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetVcenterCredentials = stubLongRunningCall(
         undefined,
@@ -6299,7 +6382,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateCloud']
       );
       request.privateCloud = defaultValue1;
-      const expectedHeaderRequestParams = `private_cloud=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_cloud=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetVcenterCredentials = stubLongRunningCall(
         undefined,
@@ -6377,7 +6460,7 @@ describe('v1.VmwareEngineClient', () => {
         ['dnsForwarding', 'name']
       );
       request.dnsForwarding.name = defaultValue1;
-      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6411,7 +6494,7 @@ describe('v1.VmwareEngineClient', () => {
         ['dnsForwarding', 'name']
       );
       request.dnsForwarding.name = defaultValue1;
-      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6466,7 +6549,7 @@ describe('v1.VmwareEngineClient', () => {
         ['dnsForwarding', 'name']
       );
       request.dnsForwarding.name = defaultValue1;
-      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDnsForwarding = stubLongRunningCall(
         undefined,
@@ -6498,7 +6581,7 @@ describe('v1.VmwareEngineClient', () => {
         ['dnsForwarding', 'name']
       );
       request.dnsForwarding.name = defaultValue1;
-      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDnsForwarding = stubLongRunningCall(
         undefined,
@@ -6574,7 +6657,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6607,7 +6690,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6661,7 +6744,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNetworkPeering = stubLongRunningCall(
         undefined,
@@ -6692,7 +6775,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNetworkPeering = stubLongRunningCall(
         undefined,
@@ -6768,7 +6851,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6801,7 +6884,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6855,7 +6938,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNetworkPeering = stubLongRunningCall(
         undefined,
@@ -6886,7 +6969,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNetworkPeering = stubLongRunningCall(
         undefined,
@@ -6963,7 +7046,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPeering', 'name']
       );
       request.networkPeering.name = defaultValue1;
-      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6997,7 +7080,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPeering', 'name']
       );
       request.networkPeering.name = defaultValue1;
-      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7052,7 +7135,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPeering', 'name']
       );
       request.networkPeering.name = defaultValue1;
-      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNetworkPeering = stubLongRunningCall(
         undefined,
@@ -7084,7 +7167,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPeering', 'name']
       );
       request.networkPeering.name = defaultValue1;
-      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNetworkPeering = stubLongRunningCall(
         undefined,
@@ -7160,7 +7243,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7193,7 +7276,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7247,7 +7330,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createHcxActivationKey = stubLongRunningCall(
         undefined,
@@ -7281,7 +7364,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createHcxActivationKey = stubLongRunningCall(
         undefined,
@@ -7357,7 +7440,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7390,7 +7473,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7444,7 +7527,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNetworkPolicy = stubLongRunningCall(
         undefined,
@@ -7475,7 +7558,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNetworkPolicy = stubLongRunningCall(
         undefined,
@@ -7552,7 +7635,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPolicy', 'name']
       );
       request.networkPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `network_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7586,7 +7669,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPolicy', 'name']
       );
       request.networkPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `network_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7641,7 +7724,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPolicy', 'name']
       );
       request.networkPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `network_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNetworkPolicy = stubLongRunningCall(
         undefined,
@@ -7673,7 +7756,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPolicy', 'name']
       );
       request.networkPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `network_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNetworkPolicy = stubLongRunningCall(
         undefined,
@@ -7749,7 +7832,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7782,7 +7865,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7836,7 +7919,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNetworkPolicy = stubLongRunningCall(
         undefined,
@@ -7867,7 +7950,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNetworkPolicy = stubLongRunningCall(
         undefined,
@@ -7943,7 +8026,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7976,7 +8059,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8030,7 +8113,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createManagementDnsZoneBinding = stubLongRunningCall(
         undefined,
@@ -8064,7 +8147,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createManagementDnsZoneBinding = stubLongRunningCall(
         undefined,
@@ -8142,7 +8225,7 @@ describe('v1.VmwareEngineClient', () => {
         ['managementDnsZoneBinding', 'name']
       );
       request.managementDnsZoneBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8176,7 +8259,7 @@ describe('v1.VmwareEngineClient', () => {
         ['managementDnsZoneBinding', 'name']
       );
       request.managementDnsZoneBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8231,7 +8314,7 @@ describe('v1.VmwareEngineClient', () => {
         ['managementDnsZoneBinding', 'name']
       );
       request.managementDnsZoneBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateManagementDnsZoneBinding = stubLongRunningCall(
         undefined,
@@ -8266,7 +8349,7 @@ describe('v1.VmwareEngineClient', () => {
         ['managementDnsZoneBinding', 'name']
       );
       request.managementDnsZoneBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateManagementDnsZoneBinding = stubLongRunningCall(
         undefined,
@@ -8343,7 +8426,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8376,7 +8459,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8430,7 +8513,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteManagementDnsZoneBinding = stubLongRunningCall(
         undefined,
@@ -8464,7 +8547,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteManagementDnsZoneBinding = stubLongRunningCall(
         undefined,
@@ -8541,7 +8624,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8574,7 +8657,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8628,7 +8711,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.repairManagementDnsZoneBinding = stubLongRunningCall(
         undefined,
@@ -8662,7 +8745,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.repairManagementDnsZoneBinding = stubLongRunningCall(
         undefined,
@@ -8739,7 +8822,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8772,7 +8855,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8826,7 +8909,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVmwareEngineNetwork = stubLongRunningCall(
         undefined,
@@ -8860,7 +8943,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVmwareEngineNetwork = stubLongRunningCall(
         undefined,
@@ -8938,7 +9021,7 @@ describe('v1.VmwareEngineClient', () => {
         ['vmwareEngineNetwork', 'name']
       );
       request.vmwareEngineNetwork.name = defaultValue1;
-      const expectedHeaderRequestParams = `vmware_engine_network.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vmware_engine_network.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8972,7 +9055,7 @@ describe('v1.VmwareEngineClient', () => {
         ['vmwareEngineNetwork', 'name']
       );
       request.vmwareEngineNetwork.name = defaultValue1;
-      const expectedHeaderRequestParams = `vmware_engine_network.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vmware_engine_network.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9027,7 +9110,7 @@ describe('v1.VmwareEngineClient', () => {
         ['vmwareEngineNetwork', 'name']
       );
       request.vmwareEngineNetwork.name = defaultValue1;
-      const expectedHeaderRequestParams = `vmware_engine_network.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vmware_engine_network.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVmwareEngineNetwork = stubLongRunningCall(
         undefined,
@@ -9062,7 +9145,7 @@ describe('v1.VmwareEngineClient', () => {
         ['vmwareEngineNetwork', 'name']
       );
       request.vmwareEngineNetwork.name = defaultValue1;
-      const expectedHeaderRequestParams = `vmware_engine_network.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `vmware_engine_network.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVmwareEngineNetwork = stubLongRunningCall(
         undefined,
@@ -9139,7 +9222,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9172,7 +9255,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9226,7 +9309,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVmwareEngineNetwork = stubLongRunningCall(
         undefined,
@@ -9260,7 +9343,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVmwareEngineNetwork = stubLongRunningCall(
         undefined,
@@ -9337,7 +9420,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9370,7 +9453,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9424,7 +9507,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrivateConnection = stubLongRunningCall(
         undefined,
@@ -9458,7 +9541,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrivateConnection = stubLongRunningCall(
         undefined,
@@ -9536,7 +9619,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateConnection', 'name']
       );
       request.privateConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9570,7 +9653,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateConnection', 'name']
       );
       request.privateConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9625,7 +9708,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateConnection', 'name']
       );
       request.privateConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePrivateConnection = stubLongRunningCall(
         undefined,
@@ -9660,7 +9743,7 @@ describe('v1.VmwareEngineClient', () => {
         ['privateConnection', 'name']
       );
       request.privateConnection.name = defaultValue1;
-      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `private_connection.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePrivateConnection = stubLongRunningCall(
         undefined,
@@ -9737,7 +9820,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9770,7 +9853,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9824,7 +9907,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrivateConnection = stubLongRunningCall(
         undefined,
@@ -9858,7 +9941,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrivateConnection = stubLongRunningCall(
         undefined,
@@ -9935,7 +10018,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9968,7 +10051,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -10022,7 +10105,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.grantDnsBindPermission = stubLongRunningCall(
         undefined,
@@ -10056,7 +10139,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.grantDnsBindPermission = stubLongRunningCall(
         undefined,
@@ -10132,7 +10215,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -10165,7 +10248,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -10219,7 +10302,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.revokeDnsBindPermission = stubLongRunningCall(
         undefined,
@@ -10253,7 +10336,7 @@ describe('v1.VmwareEngineClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.revokeDnsBindPermission = stubLongRunningCall(
         undefined,
@@ -10330,7 +10413,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PrivateCloud()
@@ -10369,7 +10452,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PrivateCloud()
@@ -10424,7 +10507,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPrivateClouds = stubSimpleCall(
         undefined,
@@ -10455,7 +10538,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PrivateCloud()
@@ -10496,9 +10579,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -10516,7 +10599,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateClouds.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -10546,9 +10629,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -10566,7 +10649,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PrivateCloud()
@@ -10595,9 +10678,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -10615,7 +10698,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateClouds.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10636,9 +10719,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPrivateClouds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -10658,7 +10741,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.Cluster()
@@ -10697,7 +10780,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.Cluster()
@@ -10752,7 +10835,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listClusters = stubSimpleCall(
         undefined,
@@ -10783,7 +10866,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.Cluster()
@@ -10823,9 +10906,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -10843,7 +10926,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
         undefined,
@@ -10874,9 +10957,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -10894,7 +10977,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.Cluster()
@@ -10923,9 +11006,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -10943,7 +11026,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10963,9 +11046,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -10985,7 +11068,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
@@ -11018,7 +11101,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
@@ -11067,7 +11150,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNodes = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listNodes(request), expectedError);
@@ -11095,7 +11178,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
@@ -11129,9 +11212,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -11149,7 +11232,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNodes.createStream = stubPageStreamingCall(
         undefined,
@@ -11180,9 +11263,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -11200,7 +11283,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
@@ -11222,9 +11305,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -11242,7 +11325,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNodes.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -11263,9 +11346,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -11285,7 +11368,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAddress()
@@ -11325,7 +11408,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAddress()
@@ -11382,7 +11465,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listExternalAddresses = stubSimpleCall(
         undefined,
@@ -11416,7 +11499,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAddress()
@@ -11483,7 +11566,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExternalAddresses.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11539,7 +11622,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAddress()
@@ -11593,7 +11676,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExternalAddresses.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -11640,7 +11723,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPolicy']
       );
       request.networkPolicy = defaultValue1;
-      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAddress()
@@ -11681,7 +11764,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPolicy']
       );
       request.networkPolicy = defaultValue1;
-      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAddress()
@@ -11738,7 +11821,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPolicy']
       );
       request.networkPolicy = defaultValue1;
-      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchNetworkPolicyExternalAddresses = stubSimpleCall(
         undefined,
@@ -11772,7 +11855,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPolicy']
       );
       request.networkPolicy = defaultValue1;
-      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAddress()
@@ -11842,7 +11925,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPolicy']
       );
       request.networkPolicy = defaultValue1;
-      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchNetworkPolicyExternalAddresses.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11901,7 +11984,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPolicy']
       );
       request.networkPolicy = defaultValue1;
-      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAddress()
@@ -11955,7 +12038,7 @@ describe('v1.VmwareEngineClient', () => {
         ['networkPolicy']
       );
       request.networkPolicy = defaultValue1;
-      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchNetworkPolicyExternalAddresses.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12002,7 +12085,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Subnet()),
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Subnet()),
@@ -12035,7 +12118,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Subnet()),
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Subnet()),
@@ -12084,7 +12167,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSubnets = stubSimpleCall(
         undefined,
@@ -12115,7 +12198,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Subnet()),
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Subnet()),
@@ -12149,9 +12232,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -12169,7 +12252,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSubnets.createStream = stubPageStreamingCall(
         undefined,
@@ -12200,9 +12283,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -12220,7 +12303,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Subnet()),
         generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Subnet()),
@@ -12243,9 +12326,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -12263,7 +12346,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSubnets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -12285,9 +12368,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -12307,7 +12390,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
@@ -12347,7 +12430,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
@@ -12404,7 +12487,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listExternalAccessRules = stubSimpleCall(
         undefined,
@@ -12438,7 +12521,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
@@ -12507,7 +12590,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExternalAccessRules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12565,7 +12648,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
@@ -12619,7 +12702,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExternalAccessRules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12666,7 +12749,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.LoggingServer()
@@ -12706,7 +12789,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.LoggingServer()
@@ -12761,7 +12844,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLoggingServers = stubSimpleCall(
         undefined,
@@ -12792,7 +12875,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.LoggingServer()
@@ -12833,9 +12916,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -12853,7 +12936,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLoggingServers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12883,9 +12966,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -12903,7 +12986,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.LoggingServer()
@@ -12933,9 +13016,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -12953,7 +13036,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLoggingServers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12974,9 +13057,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listLoggingServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -12996,7 +13079,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NodeType()
@@ -13035,7 +13118,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NodeType()
@@ -13090,7 +13173,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNodeTypes = stubSimpleCall(
         undefined,
@@ -13121,7 +13204,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NodeType()
@@ -13161,9 +13244,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -13181,7 +13264,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNodeTypes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -13210,9 +13293,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -13230,7 +13313,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NodeType()
@@ -13259,9 +13342,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -13279,7 +13362,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNodeTypes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -13299,9 +13382,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNodeTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -13321,7 +13404,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NetworkPeering()
@@ -13361,7 +13444,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NetworkPeering()
@@ -13418,7 +13501,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNetworkPeerings = stubSimpleCall(
         undefined,
@@ -13449,7 +13532,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NetworkPeering()
@@ -13490,9 +13573,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -13510,7 +13593,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNetworkPeerings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -13540,9 +13623,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -13560,7 +13643,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NetworkPeering()
@@ -13590,9 +13673,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -13610,7 +13693,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNetworkPeerings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -13631,9 +13714,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPeerings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -13653,7 +13736,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PeeringRoute()
@@ -13692,7 +13775,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PeeringRoute()
@@ -13747,7 +13830,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPeeringRoutes = stubSimpleCall(
         undefined,
@@ -13778,7 +13861,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PeeringRoute()
@@ -13819,9 +13902,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -13839,7 +13922,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPeeringRoutes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -13869,9 +13952,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -13889,7 +13972,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PeeringRoute()
@@ -13918,9 +14001,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -13938,7 +14021,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPeeringRoutes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -13959,9 +14042,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -13981,7 +14064,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.HcxActivationKey()
@@ -14021,7 +14104,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.HcxActivationKey()
@@ -14078,7 +14161,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listHcxActivationKeys = stubSimpleCall(
         undefined,
@@ -14112,7 +14195,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.HcxActivationKey()
@@ -14179,7 +14262,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listHcxActivationKeys.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -14235,7 +14318,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.HcxActivationKey()
@@ -14289,7 +14372,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listHcxActivationKeys.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -14336,7 +14419,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NetworkPolicy()
@@ -14376,7 +14459,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NetworkPolicy()
@@ -14431,7 +14514,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNetworkPolicies = stubSimpleCall(
         undefined,
@@ -14462,7 +14545,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NetworkPolicy()
@@ -14503,9 +14586,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -14523,7 +14606,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNetworkPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -14553,9 +14636,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -14573,7 +14656,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.NetworkPolicy()
@@ -14603,9 +14686,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -14623,7 +14706,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNetworkPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -14644,9 +14727,9 @@ describe('v1.VmwareEngineClient', () => {
       assert(
         (client.descriptors.page.listNetworkPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -14666,7 +14749,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
@@ -14706,7 +14789,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
@@ -14763,7 +14846,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listManagementDnsZoneBindings = stubSimpleCall(
         undefined,
@@ -14797,7 +14880,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
@@ -14869,7 +14952,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listManagementDnsZoneBindings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -14930,7 +15013,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
@@ -14984,7 +15067,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listManagementDnsZoneBindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -15031,7 +15114,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.VmwareEngineNetwork()
@@ -15071,7 +15154,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.VmwareEngineNetwork()
@@ -15128,7 +15211,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVmwareEngineNetworks = stubSimpleCall(
         undefined,
@@ -15162,7 +15245,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.VmwareEngineNetwork()
@@ -15231,7 +15314,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVmwareEngineNetworks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -15289,7 +15372,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.VmwareEngineNetwork()
@@ -15343,7 +15426,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVmwareEngineNetworks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -15390,7 +15473,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PrivateConnection()
@@ -15430,7 +15513,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PrivateConnection()
@@ -15487,7 +15570,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPrivateConnections = stubSimpleCall(
         undefined,
@@ -15521,7 +15604,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PrivateConnection()
@@ -15588,7 +15671,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -15644,7 +15727,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PrivateConnection()
@@ -15698,7 +15781,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -15745,7 +15828,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PeeringRoute()
@@ -15786,7 +15869,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PeeringRoute()
@@ -15841,7 +15924,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPrivateConnectionPeeringRoutes = stubSimpleCall(
         undefined,
@@ -15875,7 +15958,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PeeringRoute()
@@ -15945,7 +16028,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateConnectionPeeringRoutes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -16004,7 +16087,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmwareengine.v1.PeeringRoute()
@@ -16057,7 +16140,7 @@ describe('v1.VmwareEngineClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrivateConnectionPeeringRoutes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

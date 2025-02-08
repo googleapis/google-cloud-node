@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,14 +40,14 @@ function main(statelessConversation, conversationProfile) {
    */
   // const conversationProfile = {}
   /**
-   *  The name of the latest conversation message used as context for
+   *  Optional. The name of the latest conversation message used as context for
    *  generating a Summary. If empty, the latest message of the conversation will
    *  be used. The format is specific to the user and the names of the messages
    *  provided.
    */
   // const latestMessage = 'abc123'
   /**
-   *  Max number of messages prior to and including
+   *  Optional. Max number of messages prior to and including
    *  latest_message  to use as context when compiling the
    *  suggestion. By default 500 and at most 1000.
    */

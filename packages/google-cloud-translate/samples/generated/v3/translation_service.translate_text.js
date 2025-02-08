@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -72,6 +72,8 @@ function main(contents, targetLanguageCode, parent) {
    *    `projects/{project-number-or-id}/locations/{location-id}/models/{model-id}`
    *  - General (built-in) models:
    *    `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
+   *  - Translation LLM models:
+   *    `projects/{project-number-or-id}/locations/{location-id}/models/general/translation-llm`,
    *  For global (non-regionalized) requests, use `location-id` `global`.
    *  For example,
    *  `projects/{project-number-or-id}/locations/global/models/general/nmt`.
@@ -84,6 +86,10 @@ function main(contents, targetLanguageCode, parent) {
    *  an INVALID_ARGUMENT (400) error is returned.
    */
   // const glossaryConfig = {}
+  /**
+   *  Optional. Transliteration to be applied.
+   */
+  // const transliterationConfig = {}
   /**
    *  Optional. The labels with user-defined metadata for the request.
    *  Label keys and values can be no longer than 63 characters

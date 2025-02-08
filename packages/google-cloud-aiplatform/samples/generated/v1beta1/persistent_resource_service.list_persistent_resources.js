@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listPersistentResourcesAsync(request);
+    const iterable = aiplatformClient.listPersistentResourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

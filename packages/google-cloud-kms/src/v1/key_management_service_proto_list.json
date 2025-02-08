@@ -1,4 +1,6 @@
 [
+  "../../protos/google/cloud/kms/v1/autokey.proto",
+  "../../protos/google/cloud/kms/v1/autokey_admin.proto",
   "../../protos/google/cloud/kms/v1/ekm_service.proto",
   "../../protos/google/cloud/kms/v1/resources.proto",
   "../../protos/google/cloud/kms/v1/service.proto"

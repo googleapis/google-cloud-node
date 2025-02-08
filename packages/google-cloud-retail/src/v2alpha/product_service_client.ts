@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v2alpha/product_service_client_config.json`.
@@ -55,6 +56,8 @@ export class ProductServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -114,8 +117,27 @@ export class ProductServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ProductServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'retail.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -130,7 +152,7 @@ export class ProductServiceClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -155,10 +177,10 @@ export class ProductServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
@@ -168,7 +190,7 @@ export class ProductServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -188,6 +210,9 @@ export class ProductServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      alertConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/alertConfig'
+      ),
       attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
       ),
@@ -203,6 +228,9 @@ export class ProductServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      loggingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/loggingConfig'
+      ),
       merchantCenterAccountLinkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/merchantCenterAccountLinks/{merchant_center_account_link}'
       ),
@@ -211,6 +239,9 @@ export class ProductServiceClient {
       ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
+      ),
+      retailProjectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/retailProject'
       ),
       servingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}'
@@ -278,6 +309,12 @@ export class ProductServiceClient {
     const importProductsMetadata = protoFilesRoot.lookup(
       '.google.cloud.retail.v2alpha.ImportMetadata'
     ) as gax.protobuf.Type;
+    const exportProductsResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.ExportProductsResponse'
+    ) as gax.protobuf.Type;
+    const exportProductsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.ExportMetadata'
+    ) as gax.protobuf.Type;
     const setInventoryResponse = protoFilesRoot.lookup(
       '.google.cloud.retail.v2alpha.SetInventoryResponse'
     ) as gax.protobuf.Type;
@@ -319,6 +356,11 @@ export class ProductServiceClient {
         this.operationsClient,
         importProductsResponse.decode.bind(importProductsResponse),
         importProductsMetadata.decode.bind(importProductsMetadata)
+      ),
+      exportProducts: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportProductsResponse.decode.bind(exportProductsResponse),
+        exportProductsMetadata.decode.bind(exportProductsMetadata)
       ),
       setInventory: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -412,6 +454,7 @@ export class ProductServiceClient {
       'deleteProduct',
       'purgeProducts',
       'importProducts',
+      'exportProducts',
       'setInventory',
       'addFulfillmentPlaces',
       'removeFulfillmentPlaces',
@@ -452,19 +495,50 @@ export class ProductServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'retail.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'retail.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -1166,7 +1240,8 @@ export class ProductServiceClient {
    *   The desired location of errors incurred during the Import.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Indicates which fields in the provided imported `products` to update. If
-   *   not set, all fields are updated.
+   *   not set, all fields are updated. If provided, only the existing product
+   *   fields are updated. Missing products will not be created.
    * @param {google.cloud.retail.v2alpha.ImportProductsRequest.ReconciliationMode} request.reconciliationMode
    *   The mode of reconciliation between existing products and the products to be
    *   imported. Defaults to
@@ -1180,9 +1255,14 @@ export class ProductServiceClient {
    *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
    *   to be within the same project as
    *   {@link protos.google.cloud.retail.v2alpha.ImportProductsRequest.parent|ImportProductsRequest.parent}.
-   *   Make sure that `service-<project
-   *   number>@gcp-sa-retail.iam.gserviceaccount.com` has the
-   *   `pubsub.topics.publish` IAM permission on the topic.
+   *   Make sure that both
+   *   `cloud-retail-customer-data-access@system.gserviceaccount.com` and
+   *   `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
+   *   have the `pubsub.topics.publish` IAM permission on the topic.
+   *
+   *   Only supported when
+   *   {@link protos.google.cloud.retail.v2alpha.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
+   *   is set to `FULL`.
    * @param {boolean} request.skipDefaultBranchProtection
    *   If true, this performs the FULL import even if it would delete a large
    *   proportion of the products in the default branch, which could potentially
@@ -1318,6 +1398,191 @@ export class ProductServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.retail.v2alpha.ImportProductsResponse,
       protos.google.cloud.retail.v2alpha.ImportMetadata
+    >;
+  }
+  /**
+   * Exports multiple {@link protos.google.cloud.retail.v2alpha.Product|Product}s.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of a {@link protos.google.cloud.retail.v2alpha.Branch|Branch},
+   *   and `default_branch` for branch_id component is supported. For example
+   *    `projects/1234/locations/global/catalogs/default_catalog/branches/default_branch`
+   * @param {google.cloud.retail.v2alpha.OutputConfig} request.outputConfig
+   *   Required. The output location of the data.
+   * @param {string} request.filter
+   *   A filtering expression to specify restrictions on returned events.
+   *   The expression is a sequence of terms. Each term applies a restriction to
+   *   the returned products. Use this expression to restrict results to a
+   *   specific time range, tag, or stock state or to filter products by product
+   *   type.
+   *   For example, `lastModifiedTime > "2012-04-23T18:25:43.511Z"
+   *   lastModifiedTime<"2012-04-23T18:25:43.511Z" productType=primary`
+   *
+   *     We expect only four types of fields:
+   *
+   *      * `lastModifiedTime`: This can be specified twice, once with a
+   *        less than operator and once with a greater than operator. The
+   *        `lastModifiedTime` restriction should result in one, contiguous,
+   *        valid, last-modified, time range.
+   *
+   *      * `productType`: Supported values are `primary` and `variant`. The
+   *      Boolean operators `OR` and `NOT` are supported if the expression is
+   *      enclosed in parentheses and must be separated from the
+   *        `productType` values by a space.
+   *
+   *      * `availability`: Supported values are `IN_STOCK`, `OUT_OF_STOCK`,
+   *      `PREORDER`, and `BACKORDER`. Boolean operators `OR` and `NOT` are
+   *      supported if the expression is enclosed in parentheses and must be
+   *      separated from the `availability` values by a space.
+   *
+   *      * `Tag expressions`: Restricts output to products that match all of the
+   *        specified tags. Boolean operators `OR` and `NOT` are supported if the
+   *        expression is enclosed in parentheses and the operators are separated
+   *        from the tag values by a space. Also supported is '`-"tagA"`', which
+   *        is equivalent to '`NOT "tagA"`'. Tag values must be double-quoted,
+   *        UTF-8 encoded strings and have a size limit of 1,000 characters.
+   *
+   *     Some examples of valid filters expressions:
+   *
+   *     * Example 1: `lastModifiedTime > "2012-04-23T18:25:43.511Z"
+   *               lastModifiedTime < "2012-04-23T18:30:43.511Z"`
+   *     * Example 2: `lastModifiedTime > "2012-04-23T18:25:43.511Z"
+   *               productType = "variant"`
+   *     * Example 3: `tag=("Red" OR "Blue") tag="New-Arrival"
+   *               tag=(NOT "promotional")
+   *               productType = "primary" lastModifiedTime <
+   *               "2018-04-23T18:30:43.511Z"`
+   *     * Example 4: `lastModifiedTime > "2012-04-23T18:25:43.511Z"`
+   *     * Example 5: `availability = (IN_STOCK OR BACKORDER)`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha/product_service.export_products.js</caption>
+   * region_tag:retail_v2alpha_generated_ProductService_ExportProducts_async
+   */
+  exportProducts(
+    request?: protos.google.cloud.retail.v2alpha.IExportProductsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IExportProductsResponse,
+        protos.google.cloud.retail.v2alpha.IExportMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportProducts(
+    request: protos.google.cloud.retail.v2alpha.IExportProductsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IExportProductsResponse,
+        protos.google.cloud.retail.v2alpha.IExportMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportProducts(
+    request: protos.google.cloud.retail.v2alpha.IExportProductsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IExportProductsResponse,
+        protos.google.cloud.retail.v2alpha.IExportMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportProducts(
+    request?: protos.google.cloud.retail.v2alpha.IExportProductsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IExportProductsResponse,
+            protos.google.cloud.retail.v2alpha.IExportMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IExportProductsResponse,
+        protos.google.cloud.retail.v2alpha.IExportMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IExportProductsResponse,
+        protos.google.cloud.retail.v2alpha.IExportMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.exportProducts(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `exportProducts()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha/product_service.export_products.js</caption>
+   * region_tag:retail_v2alpha_generated_ProductService_ExportProducts_async
+   */
+  async checkExportProductsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2alpha.ExportProductsResponse,
+      protos.google.cloud.retail.v2alpha.ExportMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportProducts,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2alpha.ExportProductsResponse,
+      protos.google.cloud.retail.v2alpha.ExportMetadata
     >;
   }
   /**
@@ -1581,10 +1846,11 @@ export class ProductServiceClient {
     >;
   }
   /**
-   * It is recommended to use the
+   * We recommend that you use the
    * {@link protos.google.cloud.retail.v2alpha.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
-   * method instead of
-   * {@link protos.google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces}.
+   * method instead of the
+   * {@link protos.google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces|ProductService.AddFulfillmentPlaces}
+   * method.
    * {@link protos.google.cloud.retail.v2alpha.ProductService.AddLocalInventories|ProductService.AddLocalInventories}
    * achieves the same results but provides more fine-grained control over
    * ingesting local inventory data.
@@ -1799,10 +2065,11 @@ export class ProductServiceClient {
     >;
   }
   /**
-   * It is recommended to use the
+   * We recommend that you use the
    * {@link protos.google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
-   * method instead of
-   * {@link protos.google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
+   * method instead of the
+   * {@link protos.google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}
+   * method.
    * {@link protos.google.cloud.retail.v2alpha.ProductService.RemoveLocalInventories|ProductService.RemoveLocalInventories}
    * achieves the same results but provides more fine-grained control over
    * ingesting local inventory data.
@@ -2576,7 +2843,7 @@ export class ProductServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listProducts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2927,7 +3194,7 @@ export class ProductServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -2940,6 +3207,20 @@ export class ProductServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2976,6 +3257,13 @@ export class ProductServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3011,11 +3299,11 @@ export class ProductServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -3024,6 +3312,20 @@ export class ProductServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -3054,7 +3356,7 @@ export class ProductServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -3067,12 +3369,50 @@ export class ProductServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified alertConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  alertConfigPath(project: string) {
+    return this.pathTemplates.alertConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from AlertConfig resource.
+   *
+   * @param {string} alertConfigName
+   *   A fully-qualified path representing AlertConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAlertConfigName(alertConfigName: string) {
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
+      .project;
+  }
 
   /**
    * Return a fully-qualified attributesConfig resource name string.
@@ -3368,6 +3708,30 @@ export class ProductServiceClient {
   }
 
   /**
+   * Return a fully-qualified loggingConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  loggingConfigPath(project: string) {
+    return this.pathTemplates.loggingConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from LoggingConfig resource.
+   *
+   * @param {string} loggingConfigName
+   *   A fully-qualified path representing LoggingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLoggingConfigName(loggingConfigName: string) {
+    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName)
+      .project;
+  }
+
+  /**
    * Return a fully-qualified merchantCenterAccountLink resource name string.
    *
    * @param {string} project
@@ -3591,6 +3955,30 @@ export class ProductServiceClient {
    */
   matchProductFromProductName(productName: string) {
     return this.pathTemplates.productPathTemplate.match(productName).product;
+  }
+
+  /**
+   * Return a fully-qualified retailProject resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  retailProjectPath(project: string) {
+    return this.pathTemplates.retailProjectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from RetailProject resource.
+   *
+   * @param {string} retailProjectName
+   *   A fully-qualified path representing RetailProject resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRetailProjectName(retailProjectName: string) {
+    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName)
+      .project;
   }
 
   /**

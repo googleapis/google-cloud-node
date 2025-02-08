@@ -1,0 +1,17 @@
+{
+  "name": "marketingplatformadminapi",
+  "name_pretty": "Google Marketing Platform Admin API",
+  "product_documentation": "https://developers.google.com/analytics/devguides/config/gmp/v1",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/marketingplatformadminapi/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-ads/marketing-platform-admin",
+  "api_id": "marketingplatformadmin.googleapis.com",
+  "default_version": "v1alpha",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "marketingplatformadminapi"
+}
+

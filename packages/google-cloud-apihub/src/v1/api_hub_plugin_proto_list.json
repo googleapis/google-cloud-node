@@ -1,0 +1,9 @@
+[
+  "../../protos/google/cloud/apihub/v1/apihub_service.proto",
+  "../../protos/google/cloud/apihub/v1/common_fields.proto",
+  "../../protos/google/cloud/apihub/v1/host_project_registration_service.proto",
+  "../../protos/google/cloud/apihub/v1/linting_service.proto",
+  "../../protos/google/cloud/apihub/v1/plugin_service.proto",
+  "../../protos/google/cloud/apihub/v1/provisioning_service.proto",
+  "../../protos/google/cloud/apihub/v1/runtime_project_attachment_service.proto"
+]

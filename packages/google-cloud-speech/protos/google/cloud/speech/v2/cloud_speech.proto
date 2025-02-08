@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package google.cloud.speech.v2;
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
+import "google/api/field_info.proto";
 import "google/api/resource.proto";
 import "google/longrunning/operations.proto";
 import "google/protobuf/duration.proto";
@@ -574,9 +575,12 @@ message Recognizer {
     DELETED = 4;
   }
 
-  // Output only. The resource name of the Recognizer.
+  // Output only. Identifier. The resource name of the Recognizer.
   // Format: `projects/{project}/locations/{location}/recognizers/{recognizer}`.
-  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string name = 1 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.field_behavior) = IDENTIFIER
+  ];
 
   // Output only. System-assigned unique identifier for the Recognizer.
   string uid = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
@@ -703,7 +707,11 @@ message Recognizer {
 //
 // * WEBM_OPUS: Opus audio frames in a WebM container.
 //
-// * M4A: M4A audio format.
+// * MP4_AAC: AAC audio frames in an MP4 container.
+//
+// * M4A_AAC: AAC audio frames in an M4A container.
+//
+// * MOV_AAC: AAC audio frames in an MOV container.
 message AutoDetectDecodingConfig {}
 
 // Explicitly specified decoding parameters.
@@ -721,35 +729,52 @@ message ExplicitDecodingConfig {
 
     // Headerless 8-bit companded alaw samples.
     ALAW = 3;
+
+    // AMR frames with an rfc4867.5 header.
+    AMR = 4;
+
+    // AMR-WB frames with an rfc4867.5 header.
+    AMR_WB = 5;
+
+    // FLAC frames in the "native FLAC" container format.
+    FLAC = 6;
+
+    // MPEG audio frames with optional (ignored) ID3 metadata.
+    MP3 = 7;
+
+    // Opus audio frames in an Ogg container.
+    OGG_OPUS = 8;
+
+    // Opus audio frames in a WebM container.
+    WEBM_OPUS = 9;
+
+    // AAC audio frames in an MP4 container.
+    MP4_AAC = 10;
+
+    // AAC audio frames in an M4A container.
+    M4A_AAC = 11;
+
+    // AAC audio frames in an MOV container.
+    MOV_AAC = 12;
   }
 
   // Required. Encoding of the audio data sent for recognition.
   AudioEncoding encoding = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // Sample rate in Hertz of the audio data sent for recognition. Valid
-  // values are: 8000-48000. 16000 is optimal. For best results, set the
+  // Optional. Sample rate in Hertz of the audio data sent for recognition.
+  // Valid values are: 8000-48000. 16000 is optimal. For best results, set the
   // sampling rate of the audio source to 16000 Hz. If that's not possible, use
   // the native sample rate of the audio source (instead of re-sampling).
-  // Supported for the following encodings:
-  //
-  // * LINEAR16: Headerless 16-bit signed little-endian PCM samples.
-  //
-  // * MULAW: Headerless 8-bit companded mulaw samples.
-  //
-  // * ALAW: Headerless 8-bit companded alaw samples.
-  int32 sample_rate_hertz = 2;
+  // Note that this field is marked as OPTIONAL for backward compatibility
+  // reasons. It is (and has always been) effectively REQUIRED.
+  int32 sample_rate_hertz = 2 [(google.api.field_behavior) = OPTIONAL];
 
-  // Number of channels present in the audio data sent for recognition.
-  // Supported for the following encodings:
-  //
-  // * LINEAR16: Headerless 16-bit signed little-endian PCM samples.
-  //
-  // * MULAW: Headerless 8-bit companded mulaw samples.
-  //
-  // * ALAW: Headerless 8-bit companded alaw samples.
+  // Optional. Number of channels present in the audio data sent for
+  // recognition. Note that this field is marked as OPTIONAL for backward
+  // compatibility reasons. It is (and has always been) effectively REQUIRED.
   //
   // The maximum allowed value is 8.
-  int32 audio_channel_count = 3;
+  int32 audio_channel_count = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Configuration to enable speaker diarization.
@@ -862,6 +887,13 @@ message TranscriptNormalization {
   repeated Entry entries = 1;
 }
 
+// Translation configuration. Use to translate the given audio into text for the
+// desired language.
+message TranslationConfig {
+  // Required. The language code to translate to.
+  string target_language = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
 // Provides "hints" to the speech recognizer to favor specific words and phrases
 // in the results. PhraseSets can be specified as an inline resource, or a
 // reference to an existing PhraseSet resource.
@@ -940,6 +972,11 @@ message RecognitionConfig {
   // and final transcripts.
   TranscriptNormalization transcript_normalization = 11
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Optional configuration used to automatically run translation on
+  // the given audio to the desired language for supported models.
+  TranslationConfig translation_config = 15
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Request message for the
@@ -1005,6 +1042,9 @@ message RecognizeRequest {
 
 // Metadata about the recognition request and response.
 message RecognitionResponseMetadata {
+  // Global request identifier auto-generated by the API.
+  string request_id = 9 [(google.api.field_info).format = UUID4];
+
   // When available, billed audio seconds for the corresponding request.
   google.protobuf.Duration total_billed_duration = 6;
 }
@@ -1258,7 +1298,7 @@ message BatchRecognizeRequest {
   google.protobuf.FieldMask config_mask = 5;
 
   // Audio files with file metadata for ASR.
-  // The maximum number of files allowed to be specified is 5.
+  // The maximum number of files allowed to be specified is 15.
   repeated BatchRecognizeFileMetadata files = 3;
 
   // Configuration options for where to output the transcripts of each file.
@@ -1278,6 +1318,34 @@ message GcsOutputConfig {
 // Output configurations for inline response.
 message InlineOutputConfig {}
 
+// Output configurations for serialized `BatchRecognizeResults` protos.
+message NativeOutputFileFormatConfig {}
+
+// Output configurations for [WebVTT](https://www.w3.org/TR/webvtt1/) formatted
+// subtitle file.
+message VttOutputFileFormatConfig {}
+
+// Output configurations [SubRip
+// Text](https://www.matroska.org/technical/subtitles.html#srt-subtitles)
+// formatted subtitle file.
+message SrtOutputFileFormatConfig {}
+
+// Configuration for the format of the results stored to `output`.
+message OutputFormatConfig {
+  // Configuration for the native output format. If this field is set or if no
+  // other output format field is set, then transcripts will be written to the
+  // sink in the native format.
+  NativeOutputFileFormatConfig native = 1;
+
+  // Configuration for the VTT output format. If this field is set, then
+  // transcripts will be written to the sink in the VTT format.
+  VttOutputFileFormatConfig vtt = 2;
+
+  // Configuration for the SRT output format. If this field is set, then
+  // transcripts will be written to the sink in the SRT format.
+  SrtOutputFileFormatConfig srt = 3;
+}
+
 // Configuration options for the output(s) of recognition.
 message RecognitionOutputConfig {
   oneof output {
@@ -1292,6 +1360,11 @@ message RecognitionOutputConfig {
     // with just one audio file.
     InlineOutputConfig inline_response_config = 2;
   }
+
+  // Optional. Configuration for the format of the results stored to `output`.
+  // If unspecified transcripts will be written in the `NATIVE` format only.
+  OutputFormatConfig output_format_config = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for
@@ -1321,12 +1394,28 @@ message BatchRecognizeResults {
 message CloudStorageResult {
   // The Cloud Storage URI to which recognition results were written.
   string uri = 1;
+
+  // The Cloud Storage URI to which recognition results were written as VTT
+  // formatted captions. This is populated only when `VTT` output is requested.
+  string vtt_format_uri = 2;
+
+  // The Cloud Storage URI to which recognition results were written as SRT
+  // formatted captions. This is populated only when `SRT` output is requested.
+  string srt_format_uri = 3;
 }
 
 // Final results returned inline in the recognition response.
 message InlineResult {
   // The transcript for the audio file.
   BatchRecognizeResults transcript = 1;
+
+  // The transcript for the audio file as VTT formatted captions. This is
+  // populated only when `VTT` output is requested.
+  string vtt_captions = 2;
+
+  // The transcript for the audio file as SRT formatted captions. This is
+  // populated only when `SRT` output is requested.
+  string srt_captions = 3;
 }
 
 // Final results for a single file.
@@ -1555,10 +1644,13 @@ message Config {
     pattern: "projects/{project}/locations/{location}/config"
   };
 
-  // Output only. The name of the config resource. There is exactly one config
-  // resource per project per location. The expected format is
+  // Output only. Identifier. The name of the config resource. There is exactly
+  // one config resource per project per location. The expected format is
   // `projects/{project}/locations/{location}/config`.
-  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string name = 1 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.field_behavior) = IDENTIFIER
+  ];
 
   // Optional. An optional [KMS key
   // name](https://cloud.google.com/kms/docs/resource-hierarchy#keys) that if
@@ -1632,17 +1724,20 @@ message CustomClass {
     DELETED = 4;
   }
 
-  // Output only. The resource name of the CustomClass.
+  // Output only. Identifier. The resource name of the CustomClass.
   // Format:
   // `projects/{project}/locations/{location}/customClasses/{custom_class}`.
-  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string name = 1 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.field_behavior) = IDENTIFIER
+  ];
 
   // Output only. System-assigned unique identifier for the CustomClass.
   string uid = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // User-settable, human-readable name for the CustomClass. Must be 63
-  // characters or less.
-  string display_name = 4;
+  // Optional. User-settable, human-readable name for the CustomClass. Must be
+  // 63 characters or less.
+  string display_name = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // A collection of class items.
   repeated ClassItem items = 5;
@@ -1666,10 +1761,10 @@ message CustomClass {
   google.protobuf.Timestamp expire_time = 9
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Allows users to store small amounts of arbitrary data.
+  // Optional. Allows users to store small amounts of arbitrary data.
   // Both the key and the value must be 63 characters or less each.
   // At most 100 annotations.
-  map<string, string> annotations = 10;
+  map<string, string> annotations = 10 [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. This checksum is computed by the server based on the value of
   // other fields. This may be sent on update, undelete, and delete requests to
@@ -1751,9 +1846,12 @@ message PhraseSet {
     DELETED = 4;
   }
 
-  // Output only. The resource name of the PhraseSet.
+  // Output only. Identifier. The resource name of the PhraseSet.
   // Format: `projects/{project}/locations/{location}/phraseSets/{phrase_set}`.
-  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string name = 1 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.field_behavior) = IDENTIFIER
+  ];
 
   // Output only. System-assigned unique identifier for the PhraseSet.
   string uid = 2 [(google.api.field_behavior) = OUTPUT_ONLY];

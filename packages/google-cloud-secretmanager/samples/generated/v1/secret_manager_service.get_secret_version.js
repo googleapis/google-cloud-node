@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,10 +29,14 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the SecretVersion google.cloud.secretmanager.v1.SecretVersion  in the format
-   *  `projects/* /secrets/* /versions/*`.
-   *  `projects/* /secrets/* /versions/latest` is an alias to the most recently
-   *  created SecretVersion google.cloud.secretmanager.v1.SecretVersion.
+   *  Required. The resource name of the
+   *  SecretVersion google.cloud.secretmanager.v1.SecretVersion  in the format
+   *  `projects/* /secrets/* /versions/*` or
+   *  `projects/* /locations/* /secrets/* /versions/*`.
+   *  `projects/* /secrets/* /versions/latest` or
+   *  `projects/* /locations/* /secrets/* /versions/latest` is an alias to the most
+   *  recently created
+   *  SecretVersion google.cloud.secretmanager.v1.SecretVersion.
    */
   // const name = 'abc123'
 

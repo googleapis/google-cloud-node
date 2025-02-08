@@ -4,6 +4,79 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [4.11.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.10.0...compute-v4.11.0) (2025-01-23)
+
+
+### Features
+
+* [compute] Update Compute Engine API to revision 20250107 ([#975](https://github.com/googleapis/google-cloud-node/issues/975)) ([#5976](https://github.com/googleapis/google-cloud-node/issues/5976)) ([752d41e](https://github.com/googleapis/google-cloud-node/commit/752d41e737c1dd7c5ace18ceae4bf215b60e728f))
+
+## [4.10.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.9.0...compute-v4.10.0) (2025-01-16)
+
+
+### Features
+
+* [compute] add Model Armor API ([#5953](https://github.com/googleapis/google-cloud-node/issues/5953)) ([50ecc13](https://github.com/googleapis/google-cloud-node/commit/50ecc133ebdda28636068abfe7e38d4d2666f7d8))
+
+## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.8.0...compute-v4.9.0) (2024-12-18)
+
+
+### Features
+
+* [compute] Update Compute Engine API to revision 20241201 ([#966](https://github.com/googleapis/google-cloud-node/issues/966)) ([#5873](https://github.com/googleapis/google-cloud-node/issues/5873)) ([8bb5b1d](https://github.com/googleapis/google-cloud-node/commit/8bb5b1df5980f9f5ac5f30c2ee0e2bc9d825d73e))
+* [compute] Update Compute Engine API to revision 20241201 ([#971](https://github.com/googleapis/google-cloud-node/issues/971)) ([#5880](https://github.com/googleapis/google-cloud-node/issues/5880)) ([21a7622](https://github.com/googleapis/google-cloud-node/commit/21a76226793b5eaf5ef222dd8abb273fdf62d8be))
+
+## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.7.0...compute-v4.8.0) (2024-11-14)
+
+
+### Features
+
+* [compute] Update Compute Engine API to revision 20241105 ([#954](https://github.com/googleapis/google-cloud-node/issues/954)) ([#5808](https://github.com/googleapis/google-cloud-node/issues/5808)) ([058967a](https://github.com/googleapis/google-cloud-node/commit/058967a909f5a98f1872e52d7397ed4e6bbeb6b4))
+
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.6.0...compute-v4.7.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.5.0...compute-v4.6.0) (2024-05-08)
+
+
+### Features
+
+* Update Compute Engine API to revision 20240430 ([#5321](https://github.com/googleapis/google-cloud-node/issues/5321)) ([7f22a19](https://github.com/googleapis/google-cloud-node/commit/7f22a197fbb5c377bf0d0404f64ad6c0a56f803a))
+
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.4.0...compute-v4.5.0) (2024-05-02)
+
+
+### Features
+
+* [compute] Update Compute Engine API to revision 20240421 ([#899](https://github.com/googleapis/google-cloud-node/issues/899)) ([#5294](https://github.com/googleapis/google-cloud-node/issues/5294)) ([f3e0606](https://github.com/googleapis/google-cloud-node/commit/f3e0606bf7df59eb2c87b1d6743fa6a176235882))
+
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.3.0...compute-v4.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5187](https://github.com/googleapis/google-cloud-node/issues/5187)) ([1952fbe](https://github.com/googleapis/google-cloud-node/commit/1952fbe432b96115278d42e5c1dbdbc7de39036b))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.2.0...compute-v4.3.0) (2024-03-07)
+
+
+### Features
+
+* [compute] Update Compute Engine API to revision 20240220 ([#886](https://github.com/googleapis/google-cloud-node/issues/886)) ([#5100](https://github.com/googleapis/google-cloud-node/issues/5100)) ([7e4ae75](https://github.com/googleapis/google-cloud-node/commit/7e4ae75f404ce899eef0d05f99ff6879d7920aae))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.1.0...compute-v4.2.0) (2024-02-09)
+
+
+### Features
+
+* [compute] Trusted Private Cloud support, use the universeDomain parameter ([#5016](https://github.com/googleapis/google-cloud-node/issues/5016)) ([5a79fd0](https://github.com/googleapis/google-cloud-node/commit/5a79fd0e0631be19230d5ff2abae7d5ed847ab55))
+* [compute] Update Compute Engine API to revision 20240130 ([#881](https://github.com/googleapis/google-cloud-node/issues/881)) ([#5031](https://github.com/googleapis/google-cloud-node/issues/5031)) ([bf847d0](https://github.com/googleapis/google-cloud-node/commit/bf847d019292cce75292ff8d06d1897858462c97))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.0.1...compute-v4.1.0) (2023-12-11)
 
 

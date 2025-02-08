@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,7 +36,8 @@ function main(parent, processor) {
   /**
    *  Required. The processor to be created, requires
    *  Processor.type google.cloud.documentai.v1.Processor.type  and
-   *  Processor.display_name    to be set. Also, the
+   *  Processor.display_name google.cloud.documentai.v1.Processor.display_name 
+   *  to be set. Also, the
    *  Processor.kms_key_name google.cloud.documentai.v1.Processor.kms_key_name 
    *  field must be set if the processor is under CMEK.
    */

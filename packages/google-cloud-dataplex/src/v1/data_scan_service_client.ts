@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/data_scan_service_client_config.json`.
@@ -56,6 +57,8 @@ export class DataScanServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -115,8 +118,27 @@ export class DataScanServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataScanServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'dataplex.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -131,7 +153,7 @@ export class DataScanServiceClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -156,10 +178,10 @@ export class DataScanServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
@@ -169,7 +191,7 @@ export class DataScanServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -189,6 +211,9 @@ export class DataScanServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aspectTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aspectTypes/{aspect_type}'
+      ),
       assetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}'
       ),
@@ -213,6 +238,15 @@ export class DataScanServiceClient {
       entityPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
       ),
+      entryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
+      ),
+      entryGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}'
+      ),
+      entryTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryTypes/{entry_type}'
+      ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}'
       ),
@@ -224,6 +258,9 @@ export class DataScanServiceClient {
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      metadataJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataJobs/{metadataJob}'
       ),
       partitionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}'
@@ -317,6 +354,9 @@ export class DataScanServiceClient {
               get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
             },
             {
+              get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',
+            },
+            {
               get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
             },
             {
@@ -324,6 +364,18 @@ export class DataScanServiceClient {
             },
             {
               get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
             },
           ],
         },
@@ -369,6 +421,10 @@ export class DataScanServiceClient {
               body: '*',
             },
             {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
               body: '*',
             },
@@ -378,6 +434,22 @@ export class DataScanServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -424,6 +496,10 @@ export class DataScanServiceClient {
               body: '*',
             },
             {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
               post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
               body: '*',
             },
@@ -435,24 +511,55 @@ export class DataScanServiceClient {
               post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',
+              body: '*',
+            },
           ],
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
           body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
       ];
     }
@@ -554,6 +661,7 @@ export class DataScanServiceClient {
       'runDataScan',
       'getDataScanJob',
       'listDataScanJobs',
+      'generateDataQualityRules',
     ];
     for (const methodName of dataScanServiceStubMethods) {
       const callPromise = this.dataScanServiceStub.then(
@@ -589,19 +697,50 @@ export class DataScanServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'dataplex.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'dataplex.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -907,6 +1046,114 @@ export class DataScanServiceClient {
     this.initialize();
     return this.innerApiCalls.getDataScanJob(request, options, callback);
   }
+  /**
+   * Generates recommended data quality rules based on the results of a data
+   * profiling scan.
+   *
+   * Use the recommendations to build rules for a data quality scan.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name must be one of the following:
+   *
+   *   * The name of a data scan with at least one successful, completed data
+   *   profiling job
+   *   * The name of a successful, completed data profiling job (a data scan job
+   *   where the job type is data profiling)
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.GenerateDataQualityRulesResponse|GenerateDataQualityRulesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.generate_data_quality_rules.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_GenerateDataQualityRules_async
+   */
+  generateDataQualityRules(
+    request?: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      (
+        | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  generateDataQualityRules(
+    request: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateDataQualityRules(
+    request: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateDataQualityRules(
+    request?: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+          | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      (
+        | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.generateDataQualityRules(
+      request,
+      options,
+      callback
+    );
+  }
 
   /**
    * Creates a DataScan resource.
@@ -1069,8 +1316,8 @@ export class DataScanServiceClient {
    *   Required. DataScan resource to be updated.
    *
    *   Only fields specified in `update_mask` are updated.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Mask of fields to update.
    * @param {boolean} [request.validateOnly]
    *   Optional. Only validate the request, but do not perform mutations.
    *   The default is `false`.
@@ -1213,6 +1460,10 @@ export class DataScanServiceClient {
    *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
    *   where `project` refers to a *project_id* or *project_number* and
    *   `location_id` refers to a GCP region.
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any child resources of this data scan will also
+   *   be deleted. (Otherwise, the request will only work if the data scan has no
+   *   child resources.)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2086,6 +2337,58 @@ export class DataScanServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified aspectType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} aspect_type
+   * @returns {string} Resource name string.
+   */
+  aspectTypePath(project: string, location: string, aspectType: string) {
+    return this.pathTemplates.aspectTypePathTemplate.render({
+      project: project,
+      location: location,
+      aspect_type: aspectType,
+    });
+  }
+
+  /**
+   * Parse the project from AspectType resource.
+   *
+   * @param {string} aspectTypeName
+   *   A fully-qualified path representing AspectType resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAspectTypeName(aspectTypeName: string) {
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AspectType resource.
+   *
+   * @param {string} aspectTypeName
+   *   A fully-qualified path representing AspectType resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAspectTypeName(aspectTypeName: string) {
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .location;
+  }
+
+  /**
+   * Parse the aspect_type from AspectType resource.
+   *
+   * @param {string} aspectTypeName
+   *   A fully-qualified path representing AspectType resource.
+   * @returns {string} A string representing the aspect_type.
+   */
+  matchAspectTypeFromAspectTypeName(aspectTypeName: string) {
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .aspect_type;
+  }
+
+  /**
    * Return a fully-qualified asset resource name string.
    *
    * @param {string} project
@@ -2619,6 +2922,177 @@ export class DataScanServiceClient {
   }
 
   /**
+   * Return a fully-qualified entry resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_group
+   * @param {string} entry
+   * @returns {string} Resource name string.
+   */
+  entryPath(
+    project: string,
+    location: string,
+    entryGroup: string,
+    entry: string
+  ) {
+    return this.pathTemplates.entryPathTemplate.render({
+      project: project,
+      location: location,
+      entry_group: entryGroup,
+      entry: entry,
+    });
+  }
+
+  /**
+   * Parse the project from Entry resource.
+   *
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntryName(entryName: string) {
+    return this.pathTemplates.entryPathTemplate.match(entryName).project;
+  }
+
+  /**
+   * Parse the location from Entry resource.
+   *
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryName(entryName: string) {
+    return this.pathTemplates.entryPathTemplate.match(entryName).location;
+  }
+
+  /**
+   * Parse the entry_group from Entry resource.
+   *
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
+   * @returns {string} A string representing the entry_group.
+   */
+  matchEntryGroupFromEntryName(entryName: string) {
+    return this.pathTemplates.entryPathTemplate.match(entryName).entry_group;
+  }
+
+  /**
+   * Parse the entry from Entry resource.
+   *
+   * @param {string} entryName
+   *   A fully-qualified path representing Entry resource.
+   * @returns {string} A string representing the entry.
+   */
+  matchEntryFromEntryName(entryName: string) {
+    return this.pathTemplates.entryPathTemplate.match(entryName).entry;
+  }
+
+  /**
+   * Return a fully-qualified entryGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_group
+   * @returns {string} Resource name string.
+   */
+  entryGroupPath(project: string, location: string, entryGroup: string) {
+    return this.pathTemplates.entryGroupPathTemplate.render({
+      project: project,
+      location: location,
+      entry_group: entryGroup,
+    });
+  }
+
+  /**
+   * Parse the project from EntryGroup resource.
+   *
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntryGroupName(entryGroupName: string) {
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .project;
+  }
+
+  /**
+   * Parse the location from EntryGroup resource.
+   *
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryGroupName(entryGroupName: string) {
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .location;
+  }
+
+  /**
+   * Parse the entry_group from EntryGroup resource.
+   *
+   * @param {string} entryGroupName
+   *   A fully-qualified path representing EntryGroup resource.
+   * @returns {string} A string representing the entry_group.
+   */
+  matchEntryGroupFromEntryGroupName(entryGroupName: string) {
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .entry_group;
+  }
+
+  /**
+   * Return a fully-qualified entryType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_type
+   * @returns {string} Resource name string.
+   */
+  entryTypePath(project: string, location: string, entryType: string) {
+    return this.pathTemplates.entryTypePathTemplate.render({
+      project: project,
+      location: location,
+      entry_type: entryType,
+    });
+  }
+
+  /**
+   * Parse the project from EntryType resource.
+   *
+   * @param {string} entryTypeName
+   *   A fully-qualified path representing EntryType resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntryTypeName(entryTypeName: string) {
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .project;
+  }
+
+  /**
+   * Parse the location from EntryType resource.
+   *
+   * @param {string} entryTypeName
+   *   A fully-qualified path representing EntryType resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryTypeName(entryTypeName: string) {
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .location;
+  }
+
+  /**
+   * Parse the entry_type from EntryType resource.
+   *
+   * @param {string} entryTypeName
+   *   A fully-qualified path representing EntryType resource.
+   * @returns {string} A string representing the entry_type.
+   */
+  matchEntryTypeFromEntryTypeName(entryTypeName: string) {
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .entry_type;
+  }
+
+  /**
    * Return a fully-qualified environment resource name string.
    *
    * @param {string} project
@@ -2853,6 +3327,58 @@ export class DataScanServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified metadataJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadataJob
+   * @returns {string} Resource name string.
+   */
+  metadataJobPath(project: string, location: string, metadataJob: string) {
+    return this.pathTemplates.metadataJobPathTemplate.render({
+      project: project,
+      location: location,
+      metadataJob: metadataJob,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataJob resource.
+   *
+   * @param {string} metadataJobName
+   *   A fully-qualified path representing MetadataJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataJobName(metadataJobName: string) {
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .project;
+  }
+
+  /**
+   * Parse the location from MetadataJob resource.
+   *
+   * @param {string} metadataJobName
+   *   A fully-qualified path representing MetadataJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataJobName(metadataJobName: string) {
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .location;
+  }
+
+  /**
+   * Parse the metadataJob from MetadataJob resource.
+   *
+   * @param {string} metadataJobName
+   *   A fully-qualified path representing MetadataJob resource.
+   * @returns {string} A string representing the metadataJob.
+   */
+  matchMetadataJobFromMetadataJobName(metadataJobName: string) {
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .metadataJob;
   }
 
   /**

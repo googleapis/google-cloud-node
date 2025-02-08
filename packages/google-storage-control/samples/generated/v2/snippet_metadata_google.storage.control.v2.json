@@ -1,0 +1,563 @@
+{
+    "clientLibrary": {
+        "name": "nodejs-control",
+        "version": "0.2.0",
+        "language": "TYPESCRIPT",
+        "apis": [
+            {
+                "id": "google.storage.control.v2",
+                "version": "v2"
+            }
+        ]
+    },
+    "snippets": [
+        {
+            "regionTag": "storage_v2_generated_StorageControl_CreateFolder_async",
+            "title": "StorageControl createFolder Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new folder. This operation is only applicable to a hierarchical namespace enabled bucket.",
+            "canonical": true,
+            "file": "storage_control.create_folder.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 81,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateFolder",
+                "fullName": "google.storage.control.v2.StorageControl.CreateFolder",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "folder",
+                        "type": ".google.storage.control.v2.Folder"
+                    },
+                    {
+                        "name": "folder_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "recursive",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.storage.control.v2.Folder",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "CreateFolder",
+                    "fullName": "google.storage.control.v2.StorageControl.CreateFolder",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_DeleteFolder_async",
+            "title": "StorageControl deleteFolder Sample",
+            "origin": "API_DEFINITION",
+            "description": " Permanently deletes an empty folder. This operation is only applicable to a hierarchical namespace enabled bucket.",
+            "canonical": true,
+            "file": "storage_control.delete_folder.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteFolder",
+                "fullName": "google.storage.control.v2.StorageControl.DeleteFolder",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "if_metageneration_match",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "if_metageneration_not_match",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "DeleteFolder",
+                    "fullName": "google.storage.control.v2.StorageControl.DeleteFolder",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_GetFolder_async",
+            "title": "StorageControl getFolder Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns metadata for the specified folder. This operation is only applicable to a hierarchical namespace enabled bucket.",
+            "canonical": true,
+            "file": "storage_control.get_folder.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetFolder",
+                "fullName": "google.storage.control.v2.StorageControl.GetFolder",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "if_metageneration_match",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "if_metageneration_not_match",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.storage.control.v2.Folder",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "GetFolder",
+                    "fullName": "google.storage.control.v2.StorageControl.GetFolder",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_ListFolders_async",
+            "title": "StorageControl listFolders Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves a list of folders. This operation is only applicable to a hierarchical namespace enabled bucket.",
+            "canonical": true,
+            "file": "storage_control.list_folders.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 96,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListFolders",
+                "fullName": "google.storage.control.v2.StorageControl.ListFolders",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "prefix",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "delimiter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "lexicographic_start",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "lexicographic_end",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.storage.control.v2.ListFoldersResponse",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "ListFolders",
+                    "fullName": "google.storage.control.v2.StorageControl.ListFolders",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_RenameFolder_async",
+            "title": "StorageControl renameFolder Sample",
+            "origin": "API_DEFINITION",
+            "description": " Renames a source folder to a destination folder. This operation is only applicable to a hierarchical namespace enabled bucket. During a rename, the source and destination folders are locked until the long running operation completes.",
+            "canonical": true,
+            "file": "storage_control.rename_folder.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 76,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RenameFolder",
+                "fullName": "google.storage.control.v2.StorageControl.RenameFolder",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "destination_folder_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "if_metageneration_match",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "if_metageneration_not_match",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "RenameFolder",
+                    "fullName": "google.storage.control.v2.StorageControl.RenameFolder",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_GetStorageLayout_async",
+            "title": "StorageControl getStorageLayout Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the storage layout configuration for a given bucket.",
+            "canonical": true,
+            "file": "storage_control.get_storage_layout.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetStorageLayout",
+                "fullName": "google.storage.control.v2.StorageControl.GetStorageLayout",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "prefix",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.storage.control.v2.StorageLayout",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "GetStorageLayout",
+                    "fullName": "google.storage.control.v2.StorageControl.GetStorageLayout",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_CreateManagedFolder_async",
+            "title": "StorageControl createManagedFolder Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new managed folder.",
+            "canonical": true,
+            "file": "storage_control.create_managed_folder.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateManagedFolder",
+                "fullName": "google.storage.control.v2.StorageControl.CreateManagedFolder",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "managed_folder",
+                        "type": ".google.storage.control.v2.ManagedFolder"
+                    },
+                    {
+                        "name": "managed_folder_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.storage.control.v2.ManagedFolder",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "CreateManagedFolder",
+                    "fullName": "google.storage.control.v2.StorageControl.CreateManagedFolder",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_DeleteManagedFolder_async",
+            "title": "StorageControl deleteManagedFolder Sample",
+            "origin": "API_DEFINITION",
+            "description": " Permanently deletes an empty managed folder.",
+            "canonical": true,
+            "file": "storage_control.delete_managed_folder.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 77,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteManagedFolder",
+                "fullName": "google.storage.control.v2.StorageControl.DeleteManagedFolder",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "if_metageneration_match",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "if_metageneration_not_match",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "allow_non_empty",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "DeleteManagedFolder",
+                    "fullName": "google.storage.control.v2.StorageControl.DeleteManagedFolder",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_GetManagedFolder_async",
+            "title": "StorageControl getManagedFolder Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns metadata for the specified managed folder.",
+            "canonical": true,
+            "file": "storage_control.get_managed_folder.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetManagedFolder",
+                "fullName": "google.storage.control.v2.StorageControl.GetManagedFolder",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "if_metageneration_match",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "if_metageneration_not_match",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.storage.control.v2.ManagedFolder",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "GetManagedFolder",
+                    "fullName": "google.storage.control.v2.StorageControl.GetManagedFolder",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "storage_v2_generated_StorageControl_ListManagedFolders_async",
+            "title": "StorageControl listManagedFolders Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves a list of managed folders for a given bucket.",
+            "canonical": true,
+            "file": "storage_control.list_managed_folders.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListManagedFolders",
+                "fullName": "google.storage.control.v2.StorageControl.ListManagedFolders",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "prefix",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.storage.control.v2.ListManagedFoldersResponse",
+                "client": {
+                    "shortName": "StorageControlClient",
+                    "fullName": "google.storage.control.v2.StorageControlClient"
+                },
+                "method": {
+                    "shortName": "ListManagedFolders",
+                    "fullName": "google.storage.control.v2.StorageControl.ListManagedFolders",
+                    "service": {
+                        "shortName": "StorageControl",
+                        "fullName": "google.storage.control.v2.StorageControl"
+                    }
+                }
+            }
+        }
+    ]
+}

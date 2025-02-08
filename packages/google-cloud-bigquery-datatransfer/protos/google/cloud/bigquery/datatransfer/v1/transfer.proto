@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -87,15 +87,79 @@ message ScheduleOptions {
   // Specifies time to start scheduling transfer runs. The first run will be
   // scheduled at or after the start time according to a recurrence pattern
   // defined in the schedule string. The start time can be changed at any
-  // moment. The time when a data transfer can be trigerred manually is not
+  // moment. The time when a data transfer can be triggered manually is not
   // limited by this option.
   google.protobuf.Timestamp start_time = 1;
 
   // Defines time to stop scheduling transfer runs. A transfer run cannot be
   // scheduled at or after the end time. The end time can be changed at any
-  // moment. The time when a data transfer can be trigerred manually is not
+  // moment. The time when a data transfer can be triggered manually is not
   // limited by this option.
   google.protobuf.Timestamp end_time = 2;
+}
+
+// V2 options customizing different types of data transfer schedule.
+// This field supports existing time-based and manual transfer schedule. Also
+// supports Event-Driven transfer schedule. ScheduleOptionsV2 cannot be used
+// together with ScheduleOptions/Schedule.
+message ScheduleOptionsV2 {
+  // Data transfer schedules.
+  oneof schedule {
+    // Time based transfer schedule options. This is the default schedule
+    // option.
+    TimeBasedSchedule time_based_schedule = 1;
+
+    // Manual transfer schedule. If set, the transfer run will not be
+    // auto-scheduled by the system, unless the client invokes
+    // StartManualTransferRuns.  This is equivalent to
+    // disable_auto_scheduling = true.
+    ManualSchedule manual_schedule = 2;
+
+    // Event driven transfer schedule options. If set, the transfer will be
+    // scheduled upon events arrial.
+    EventDrivenSchedule event_driven_schedule = 3;
+  }
+}
+
+// Options customizing the time based transfer schedule.
+// Options are migrated from the original ScheduleOptions message.
+message TimeBasedSchedule {
+  // Data transfer schedule.
+  // If the data source does not support a custom schedule, this should be
+  // empty. If it is empty, the default value for the data source will be used.
+  // The specified times are in UTC.
+  // Examples of valid format:
+  // `1st,3rd monday of month 15:30`,
+  // `every wed,fri of jan,jun 13:15`, and
+  // `first sunday of quarter 00:00`.
+  // See more explanation about the format here:
+  // https://cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#the_schedule_format
+  //
+  // NOTE: The minimum interval time between recurring transfers depends on the
+  // data source; refer to the documentation for your data source.
+  string schedule = 1;
+
+  // Specifies time to start scheduling transfer runs. The first run will be
+  // scheduled at or after the start time according to a recurrence pattern
+  // defined in the schedule string. The start time can be changed at any
+  // moment.
+  google.protobuf.Timestamp start_time = 2;
+
+  // Defines time to stop scheduling transfer runs. A transfer run cannot be
+  // scheduled at or after the end time. The end time can be changed at any
+  // moment.
+  google.protobuf.Timestamp end_time = 3;
+}
+
+// Options customizing manual transfers schedule.
+message ManualSchedule {}
+
+// Options customizing EventDriven transfers schedule.
+message EventDrivenSchedule {
+  // Pub/Sub subscription name used to receive events.
+  // Only Google Cloud Storage data source support this option.
+  // Format: projects/{project}/subscriptions/{subscription}
+  string pubsub_subscription = 1;
 }
 
 // Information about a user.
@@ -117,14 +181,14 @@ message TransferConfig {
     pattern: "projects/{project}/locations/{location}/transferConfigs/{transfer_config}"
   };
 
-  // The resource name of the transfer config.
+  // Identifier. The resource name of the transfer config.
   // Transfer config names have the form either
   // `projects/{project_id}/locations/{region}/transferConfigs/{config_id}` or
   // `projects/{project_id}/transferConfigs/{config_id}`,
   // where `config_id` is usually a UUID, even though it is not
   // guaranteed or required. The name is ignored when creating a transfer
   // config.
-  string name = 1;
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
   // The desination of the transfer config.
   oneof destination {
@@ -148,8 +212,7 @@ message TransferConfig {
 
   // Data transfer schedule.
   // If the data source does not support a custom schedule, this should be
-  // empty. If it is empty, the default value for the data source will be
-  // used.
+  // empty. If it is empty, the default value for the data source will be used.
   // The specified times are in UTC.
   // Examples of valid format:
   // `1st,3rd monday of month 15:30`,
@@ -165,16 +228,21 @@ message TransferConfig {
   // Options customizing the data transfer schedule.
   ScheduleOptions schedule_options = 24;
 
+  // Options customizing different types of data transfer schedule.
+  // This field replaces "schedule" and "schedule_options" fields.
+  // ScheduleOptionsV2 cannot be used together with ScheduleOptions/Schedule.
+  ScheduleOptionsV2 schedule_options_v2 = 31;
+
   // The number of days to look back to automatically refresh the data.
   // For example, if `data_refresh_window_days = 10`, then every day
   // BigQuery reingests data for [today-10, today-1], rather than ingesting data
   // for just [today-1].
-  // Only valid if the data source supports the feature. Set the value to  0
+  // Only valid if the data source supports the feature. Set the value to 0
   // to use the default value.
   int32 data_refresh_window_days = 12;
 
-  // Is this config disabled. When set to true, no runs are scheduled
-  // for a given transfer.
+  // Is this config disabled. When set to true, no runs will be scheduled for
+  // this transfer config.
   bool disabled = 13;
 
   // Output only. Data transfer modification time. Ignored by server on input.
@@ -198,7 +266,7 @@ message TransferConfig {
   // associated with this transfer config finish.
   //
   // The format for specifying a pubsub topic is:
-  // `projects/{project}/topics/{topic}`
+  // `projects/{project_id}/topics/{topic_id}`
   string notification_pubsub_topic = 15;
 
   // Email notifications will be sent according to these preferences
@@ -216,6 +284,10 @@ message TransferConfig {
   // applied in effect. Write methods will apply the key if it is present, or
   // otherwise try to apply project default keys if it is absent.
   EncryptionConfiguration encryption_configuration = 28;
+
+  // Output only. Error code with detailed information about reason of the
+  // latest config failure.
+  google.rpc.Status error = 32 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Represents the encryption configuration for a transfer.
@@ -232,11 +304,11 @@ message TransferRun {
     pattern: "projects/{project}/locations/{location}/transferConfigs/{transfer_config}/runs/{run}"
   };
 
-  // The resource name of the transfer run.
+  // Identifier. The resource name of the transfer run.
   // Transfer run names have the form
   // `projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}`.
   // The name is ignored when creating a transfer run.
-  string name = 1;
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
   // Minimum time after which a transfer run can be started.
   google.protobuf.Timestamp schedule_time = 3;
@@ -296,7 +368,7 @@ message TransferRun {
   // transfer run finishes.
   //
   // The format for specifying a pubsub topic is:
-  // `projects/{project}/topics/{topic}`
+  // `projects/{project_id}/topics/{topic_id}`
   string notification_pubsub_topic = 23
       [(google.api.field_behavior) = OUTPUT_ONLY];
 

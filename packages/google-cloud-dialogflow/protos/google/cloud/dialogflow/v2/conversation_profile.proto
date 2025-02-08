@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
 option go_package = "cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb";
 option java_multiple_files = true;
@@ -74,7 +73,9 @@ service ConversationProfiles {
 
   // Creates a conversation profile in the specified project.
   //
-  // [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][]
+  // [ConversationProfile.create_time][google.cloud.dialogflow.v2.ConversationProfile.create_time]
+  // and
+  // [ConversationProfile.update_time][google.cloud.dialogflow.v2.ConversationProfile.update_time]
   // aren't populated in the response. You can retrieve them via
   // [GetConversationProfile][google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile]
   // API.
@@ -93,7 +94,9 @@ service ConversationProfiles {
 
   // Updates the specified conversation profile.
   //
-  // [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][]
+  // [ConversationProfile.create_time][google.cloud.dialogflow.v2.ConversationProfile.create_time]
+  // and
+  // [ConversationProfile.update_time][google.cloud.dialogflow.v2.ConversationProfile.update_time]
   // aren't populated in the response. You can retrieve them via
   // [GetConversationProfile][google.cloud.dialogflow.v2.ConversationProfiles.GetConversationProfile]
   // API.
@@ -235,6 +238,18 @@ message ConversationProfile {
   // Configuration for publishing new message events. Event will be sent in
   // format of [ConversationEvent][google.cloud.dialogflow.v2.ConversationEvent]
   NotificationConfig new_message_event_notification_config = 8;
+
+  // Optional. Configuration for publishing transcription intermediate results.
+  // Event will be sent in format of
+  // [ConversationEvent][google.cloud.dialogflow.v2.ConversationEvent]. If
+  // configured, the following information will be populated as
+  // [ConversationEvent][google.cloud.dialogflow.v2.ConversationEvent] Pub/Sub
+  // message attributes:
+  // - "participant_id"
+  // - "participant_role"
+  // - "message_id"
+  NotificationConfig new_recognition_result_notification_config = 21
+      [(google.api.field_behavior) = OPTIONAL];
 
   // Settings for speech transcription.
   SpeechToTextConfig stt_config = 9;
@@ -422,9 +437,20 @@ message HumanAgentAssistantConfig {
     bool disable_agent_query_logging = 14
         [(google.api.field_behavior) = OPTIONAL];
 
+    // Optional. Enable query suggestion even if we can't find its answer.
+    // By default, queries are suggested only if we find its answer.
+    // Supported features: KNOWLEDGE_ASSIST
+    bool enable_query_suggestion_when_no_answer = 15
+        [(google.api.field_behavior) = OPTIONAL];
+
     // Optional. Enable including conversation context during query answer
     // generation. Supported features: KNOWLEDGE_SEARCH.
     bool enable_conversation_augmented_query = 16
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Enable query suggestion only.
+    // Supported features: KNOWLEDGE_ASSIST
+    bool enable_query_suggestion_only = 17
         [(google.api.field_behavior) = OPTIONAL];
 
     // Settings of suggestion trigger.
@@ -459,6 +485,25 @@ message HumanAgentAssistantConfig {
     // same participant based on the same context will be grouped into a single
     // Pub/Sub event or StreamingAnalyzeContentResponse.
     bool group_suggestion_responses = 3;
+
+    // Optional. List of various generator resource names used in the
+    // conversation profile.
+    repeated string generators = 4 [
+      (google.api.field_behavior) = OPTIONAL,
+      (google.api.resource_reference) = {
+        type: "dialogflow.googleapis.com/Generator"
+      }
+    ];
+
+    // Optional. When disable_high_latency_features_sync_delivery is true and
+    // using the AnalyzeContent API, we will not deliver the responses from high
+    // latency features in the API response. The
+    // human_agent_assistant_config.notification_config must be configured and
+    // enable_event_based_suggestion must be set to true to receive the
+    // responses from high latency features in Pub/Sub. High latency feature(s):
+    // KNOWLEDGE_ASSIST
+    bool disable_high_latency_features_sync_delivery = 5
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Config for suggestion query.
@@ -638,6 +683,10 @@ message HumanAgentAssistantConfig {
     // Optional. The customized sections chosen to return when requesting a
     // summary of a conversation.
     Sections sections = 8 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The number of recent messages to include in the context.
+    // Supported features: KNOWLEDGE_ASSIST.
+    int32 context_size = 9 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Custom conversation models used in agent assist feature.
@@ -724,7 +773,7 @@ message HumanAgentAssistantConfig {
 // Currently, this feature is not general available, please contact Google
 // to get access.
 message HumanAgentHandoffConfig {
-  // Configuration specific to LivePerson (https://www.liveperson.com).
+  // Configuration specific to [LivePerson](https://www.liveperson.com).
   message LivePersonConfig {
     // Required. Account number of the LivePerson account to connect. This is
     // the account number you input at the login page.
@@ -751,7 +800,7 @@ message HumanAgentHandoffConfig {
 
   // Required. Specifies which agent service to connect for human agent handoff.
   oneof agent_service {
-    // Uses LivePerson (https://www.liveperson.com).
+    // Uses [LivePerson](https://www.liveperson.com).
     LivePersonConfig live_person_config = 1;
 
     // Uses Salesforce Live Agent.
@@ -824,6 +873,9 @@ message SuggestionFeature {
 
     // Run knowledge search with text input from agent or text generated query.
     KNOWLEDGE_SEARCH = 14;
+
+    // Run knowledge assist with automatic query generation.
+    KNOWLEDGE_ASSIST = 15;
   }
 
   // Type of Human Agent Assistant API feature to request.
@@ -831,7 +883,7 @@ message SuggestionFeature {
 }
 
 // The request message for
-// [ConversationProfiles.SetSuggestionFeature][].
+// [ConversationProfiles.SetSuggestionFeatureConfig][google.cloud.dialogflow.v2.ConversationProfiles.SetSuggestionFeatureConfig].
 message SetSuggestionFeatureConfigRequest {
   // Required. The Conversation Profile to add or update the suggestion feature
   // config. Format: `projects/<Project ID>/locations/<Location
@@ -848,7 +900,8 @@ message SetSuggestionFeatureConfigRequest {
       3 [(google.api.field_behavior) = REQUIRED];
 }
 
-// The request message for [ConversationProfiles.ClearFeature][].
+// The request message for
+// [ConversationProfiles.ClearSuggestionFeatureConfig][google.cloud.dialogflow.v2.ConversationProfiles.ClearSuggestionFeatureConfig].
 message ClearSuggestionFeatureConfigRequest {
   // Required. The Conversation Profile to add or update the suggestion feature
   // config. Format: `projects/<Project ID>/locations/<Location
@@ -865,7 +918,8 @@ message ClearSuggestionFeatureConfigRequest {
       [(google.api.field_behavior) = REQUIRED];
 }
 
-// Metadata for a [ConversationProfile.SetSuggestionFeatureConfig][]
+// Metadata for a
+// [ConversationProfiles.SetSuggestionFeatureConfig][google.cloud.dialogflow.v2.ConversationProfiles.SetSuggestionFeatureConfig]
 // operation.
 message SetSuggestionFeatureConfigOperationMetadata {
   // The resource name of the conversation profile. Format:
@@ -886,7 +940,8 @@ message SetSuggestionFeatureConfigOperationMetadata {
   google.protobuf.Timestamp create_time = 4;
 }
 
-// Metadata for a [ConversationProfile.ClearSuggestionFeatureConfig][]
+// Metadata for a
+// [ConversationProfiles.ClearSuggestionFeatureConfig][google.cloud.dialogflow.v2.ConversationProfiles.ClearSuggestionFeatureConfig]
 // operation.
 message ClearSuggestionFeatureConfigOperationMetadata {
   // The resource name of the conversation profile. Format:

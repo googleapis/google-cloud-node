@@ -5,6 +5,30 @@
   "protoPackage": "google.cloud.retail.v2",
   "libraryPackage": "@google-cloud/retail",
   "services": {
+    "AnalyticsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AnalyticsServiceClient",
+          "rpcs": {
+            "ExportAnalyticsMetrics": {
+              "methods": [
+                "exportAnalyticsMetrics"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AnalyticsServiceClient",
+          "rpcs": {
+            "ExportAnalyticsMetrics": {
+              "methods": [
+                "exportAnalyticsMetrics"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CatalogService": {
       "clients": {
         "grpc": {
@@ -235,6 +259,70 @@
         }
       }
     },
+    "GenerativeQuestionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GenerativeQuestionServiceClient",
+          "rpcs": {
+            "UpdateGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "updateGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "GetGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "getGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "ListGenerativeQuestionConfigs": {
+              "methods": [
+                "listGenerativeQuestionConfigs"
+              ]
+            },
+            "UpdateGenerativeQuestionConfig": {
+              "methods": [
+                "updateGenerativeQuestionConfig"
+              ]
+            },
+            "BatchUpdateGenerativeQuestionConfigs": {
+              "methods": [
+                "batchUpdateGenerativeQuestionConfigs"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GenerativeQuestionServiceClient",
+          "rpcs": {
+            "UpdateGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "updateGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "GetGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "getGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "ListGenerativeQuestionConfigs": {
+              "methods": [
+                "listGenerativeQuestionConfigs"
+              ]
+            },
+            "UpdateGenerativeQuestionConfig": {
+              "methods": [
+                "updateGenerativeQuestionConfig"
+              ]
+            },
+            "BatchUpdateGenerativeQuestionConfigs": {
+              "methods": [
+                "batchUpdateGenerativeQuestionConfigs"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ModelService": {
       "clients": {
         "grpc": {
@@ -382,6 +470,11 @@
                 "deleteProduct"
               ]
             },
+            "PurgeProducts": {
+              "methods": [
+                "purgeProducts"
+              ]
+            },
             "ImportProducts": {
               "methods": [
                 "importProducts"
@@ -442,6 +535,11 @@
             "DeleteProduct": {
               "methods": [
                 "deleteProduct"
+              ]
+            },
+            "PurgeProducts": {
+              "methods": [
+                "purgeProducts"
               ]
             },
             "ImportProducts": {

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ function main(parent, query) {
   // const query = 'abc123'
   /**
    *  Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
-   *  the maximum of 1000. Values above 1000 are coerced to 1000.
+   *  1000. Values above 5000 are coerced to 5000.
    */
   // const pageSize = 1234
   /**
@@ -67,7 +67,7 @@ function main(parent, query) {
     };
 
     // Run request
-    const iterable = await reportsClient.searchAsync(request);
+    const iterable = reportsClient.searchAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

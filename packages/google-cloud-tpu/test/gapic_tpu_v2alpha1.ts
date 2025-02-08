@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -166,14 +166,92 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2alpha1.TpuClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = tpuModule.v2alpha1.TpuClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new tpuModule.v2alpha1.TpuClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'tpu.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = tpuModule.v2alpha1.TpuClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new tpuModule.v2alpha1.TpuClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = tpuModule.v2alpha1.TpuClient.servicePath;
+        assert.strictEqual(servicePath, 'tpu.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = tpuModule.v2alpha1.TpuClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'tpu.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'tpu.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'tpu.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new tpuModule.v2alpha1.TpuClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'tpu.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new tpuModule.v2alpha1.TpuClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'tpu.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new tpuModule.v2alpha1.TpuClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -277,7 +355,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.Node()
       );
@@ -308,7 +386,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.Node()
       );
@@ -355,7 +433,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNode = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getNode(request), expectedError);
@@ -404,7 +482,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.QueuedResource()
       );
@@ -435,7 +513,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.QueuedResource()
       );
@@ -482,7 +560,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQueuedResource = stubSimpleCall(
         undefined,
@@ -534,7 +612,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityResponse()
       );
@@ -566,7 +644,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityResponse()
       );
@@ -613,7 +691,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateServiceIdentity = stubSimpleCall(
         undefined,
@@ -671,7 +749,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.AcceleratorType()
       );
@@ -703,7 +781,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.AcceleratorType()
       );
@@ -750,7 +828,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAcceleratorType = stubSimpleCall(
         undefined,
@@ -802,7 +880,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.RuntimeVersion()
       );
@@ -833,7 +911,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.RuntimeVersion()
       );
@@ -880,7 +958,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRuntimeVersion = stubSimpleCall(
         undefined,
@@ -932,7 +1010,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetGuestAttributesResponse()
       );
@@ -964,7 +1042,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetGuestAttributesResponse()
       );
@@ -1011,7 +1089,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGuestAttributes = stubSimpleCall(
         undefined,
@@ -1063,7 +1141,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1095,7 +1173,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1149,7 +1227,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNode = stubLongRunningCall(
         undefined,
@@ -1180,7 +1258,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNode = stubLongRunningCall(
         undefined,
@@ -1253,7 +1331,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1285,7 +1363,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1339,7 +1417,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNode = stubLongRunningCall(
         undefined,
@@ -1370,7 +1448,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNode = stubLongRunningCall(
         undefined,
@@ -1443,7 +1521,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1475,7 +1553,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1529,7 +1607,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopNode = stubLongRunningCall(
         undefined,
@@ -1560,7 +1638,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopNode = stubLongRunningCall(
         undefined,
@@ -1633,7 +1711,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1665,7 +1743,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1719,7 +1797,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startNode = stubLongRunningCall(
         undefined,
@@ -1750,7 +1828,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startNode = stubLongRunningCall(
         undefined,
@@ -1824,7 +1902,7 @@ describe('v2alpha1.TpuClient', () => {
         ['node', 'name']
       );
       request.node.name = defaultValue1;
-      const expectedHeaderRequestParams = `node.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `node.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1857,7 +1935,7 @@ describe('v2alpha1.TpuClient', () => {
         ['node', 'name']
       );
       request.node.name = defaultValue1;
-      const expectedHeaderRequestParams = `node.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `node.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1912,7 +1990,7 @@ describe('v2alpha1.TpuClient', () => {
         ['node', 'name']
       );
       request.node.name = defaultValue1;
-      const expectedHeaderRequestParams = `node.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `node.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNode = stubLongRunningCall(
         undefined,
@@ -1944,7 +2022,7 @@ describe('v2alpha1.TpuClient', () => {
         ['node', 'name']
       );
       request.node.name = defaultValue1;
-      const expectedHeaderRequestParams = `node.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `node.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNode = stubLongRunningCall(
         undefined,
@@ -2002,6 +2080,200 @@ describe('v2alpha1.TpuClient', () => {
     });
   });
 
+  describe('performMaintenance', () => {
+    it('invokes performMaintenance without error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.performMaintenance =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.performMaintenance(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes performMaintenance without error using callback', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.performMaintenance =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.performMaintenance(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.tpu.v2alpha1.INode,
+              protos.google.cloud.tpu.v2alpha1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.tpu.v2alpha1.INode,
+        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes performMaintenance with call error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.performMaintenance = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.performMaintenance(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes performMaintenance with LRO error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.performMaintenance = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.performMaintenance(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkPerformMaintenanceProgress without error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkPerformMaintenanceProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkPerformMaintenanceProgress with error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkPerformMaintenanceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('createQueuedResource', () => {
     it('invokes createQueuedResource without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
@@ -2017,7 +2289,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2050,7 +2322,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2104,7 +2376,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQueuedResource = stubLongRunningCall(
         undefined,
@@ -2135,7 +2407,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQueuedResource = stubLongRunningCall(
         undefined,
@@ -2211,7 +2483,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2244,7 +2516,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2298,7 +2570,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteQueuedResource = stubLongRunningCall(
         undefined,
@@ -2329,7 +2601,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteQueuedResource = stubLongRunningCall(
         undefined,
@@ -2405,7 +2677,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2438,7 +2710,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2492,7 +2764,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetQueuedResource = stubLongRunningCall(
         undefined,
@@ -2523,7 +2795,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetQueuedResource = stubLongRunningCall(
         undefined,
@@ -2584,6 +2856,201 @@ describe('v2alpha1.TpuClient', () => {
     });
   });
 
+  describe('performMaintenanceQueuedResource', () => {
+    it('invokes performMaintenanceQueuedResource without error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.performMaintenanceQueuedResource =
+        stubLongRunningCall(expectedResponse);
+      const [operation] =
+        await client.performMaintenanceQueuedResource(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.performMaintenanceQueuedResource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.performMaintenanceQueuedResource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes performMaintenanceQueuedResource without error using callback', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.performMaintenanceQueuedResource =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.performMaintenanceQueuedResource(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.tpu.v2alpha1.IQueuedResource,
+              protos.google.cloud.tpu.v2alpha1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.tpu.v2alpha1.IQueuedResource,
+        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.performMaintenanceQueuedResource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.performMaintenanceQueuedResource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes performMaintenanceQueuedResource with call error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.performMaintenanceQueuedResource =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.performMaintenanceQueuedResource(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.performMaintenanceQueuedResource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.performMaintenanceQueuedResource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes performMaintenanceQueuedResource with LRO error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.performMaintenanceQueuedResource =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] =
+        await client.performMaintenanceQueuedResource(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.performMaintenanceQueuedResource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.performMaintenanceQueuedResource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkPerformMaintenanceQueuedResourceProgress without error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkPerformMaintenanceQueuedResourceProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkPerformMaintenanceQueuedResourceProgress with error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkPerformMaintenanceQueuedResourceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('simulateMaintenanceEvent', () => {
     it('invokes simulateMaintenanceEvent without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
@@ -2599,7 +3066,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2632,7 +3099,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2686,7 +3153,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.simulateMaintenanceEvent = stubLongRunningCall(
         undefined,
@@ -2720,7 +3187,7 @@ describe('v2alpha1.TpuClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.simulateMaintenanceEvent = stubLongRunningCall(
         undefined,
@@ -2797,7 +3264,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tpu.v2alpha1.Node()),
         generateSampleMessage(new protos.google.cloud.tpu.v2alpha1.Node()),
@@ -2830,7 +3297,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tpu.v2alpha1.Node()),
         generateSampleMessage(new protos.google.cloud.tpu.v2alpha1.Node()),
@@ -2879,7 +3346,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNodes = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listNodes(request), expectedError);
@@ -2907,7 +3374,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tpu.v2alpha1.Node()),
         generateSampleMessage(new protos.google.cloud.tpu.v2alpha1.Node()),
@@ -2938,9 +3405,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2958,7 +3425,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNodes.createStream = stubPageStreamingCall(
         undefined,
@@ -2986,9 +3453,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3006,7 +3473,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tpu.v2alpha1.Node()),
         generateSampleMessage(new protos.google.cloud.tpu.v2alpha1.Node()),
@@ -3028,9 +3495,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3048,7 +3515,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNodes.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3069,9 +3536,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3091,7 +3558,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.QueuedResource()
@@ -3131,7 +3598,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.QueuedResource()
@@ -3186,7 +3653,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQueuedResources = stubSimpleCall(
         undefined,
@@ -3217,7 +3684,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.QueuedResource()
@@ -3257,9 +3724,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listQueuedResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3277,7 +3744,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQueuedResources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3306,9 +3773,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listQueuedResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3326,7 +3793,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.QueuedResource()
@@ -3355,9 +3822,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listQueuedResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3375,7 +3842,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQueuedResources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3396,9 +3863,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listQueuedResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3418,7 +3885,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.AcceleratorType()
@@ -3458,7 +3925,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.AcceleratorType()
@@ -3513,7 +3980,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAcceleratorTypes = stubSimpleCall(
         undefined,
@@ -3544,7 +4011,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.AcceleratorType()
@@ -3585,9 +4052,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listAcceleratorTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3605,7 +4072,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAcceleratorTypes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3635,9 +4102,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listAcceleratorTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3655,7 +4122,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.AcceleratorType()
@@ -3684,9 +4151,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listAcceleratorTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3704,7 +4171,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAcceleratorTypes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3725,9 +4192,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listAcceleratorTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3747,7 +4214,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.RuntimeVersion()
@@ -3787,7 +4254,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.RuntimeVersion()
@@ -3842,7 +4309,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRuntimeVersions = stubSimpleCall(
         undefined,
@@ -3873,7 +4340,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.RuntimeVersion()
@@ -3913,9 +4380,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listRuntimeVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3933,7 +4400,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuntimeVersions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3962,9 +4429,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listRuntimeVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3982,7 +4449,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.tpu.v2alpha1.RuntimeVersion()
@@ -4011,9 +4478,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listRuntimeVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4031,7 +4498,7 @@ describe('v2alpha1.TpuClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuntimeVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4052,9 +4519,334 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listRuntimeVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listReservations', () => {
+    it('invokes listReservations without error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListReservationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+      ];
+      client.innerApiCalls.listReservations = stubSimpleCall(expectedResponse);
+      const [response] = await client.listReservations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listReservations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReservations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReservations without error using callback', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListReservationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+      ];
+      client.innerApiCalls.listReservations =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listReservations(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.tpu.v2alpha1.IReservation[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listReservations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReservations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReservations with error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListReservationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listReservations = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listReservations(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listReservations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReservations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReservationsStream without error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListReservationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+      ];
+      client.descriptors.page.listReservations.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listReservationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.tpu.v2alpha1.Reservation[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.tpu.v2alpha1.Reservation) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listReservations.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listReservations, request)
+      );
+      assert(
+        (client.descriptors.page.listReservations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listReservationsStream with error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListReservationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listReservations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listReservationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.tpu.v2alpha1.Reservation[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.tpu.v2alpha1.Reservation) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listReservations.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listReservations, request)
+      );
+      assert(
+        (client.descriptors.page.listReservations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listReservations without error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListReservationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.tpu.v2alpha1.Reservation()
+        ),
+      ];
+      client.descriptors.page.listReservations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.tpu.v2alpha1.IReservation[] = [];
+      const iterable = client.listReservationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listReservations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listReservations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listReservations with error', async () => {
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListReservationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listReservations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listReservationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.tpu.v2alpha1.IReservation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listReservations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listReservations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4838,6 +5630,70 @@ describe('v2alpha1.TpuClient', () => {
         assert.strictEqual(result, 'queuedResourceValue');
         assert(
           (client.pathTemplates.queuedResourcePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('reservation', () => {
+      const fakePath = '/rendered/path/reservation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        reservation: 'reservationValue',
+      };
+      const client = new tpuModule.v2alpha1.TpuClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.reservationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.reservationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('reservationPath', () => {
+        const result = client.reservationPath(
+          'projectValue',
+          'locationValue',
+          'reservationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.reservationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromReservationName', () => {
+        const result = client.matchProjectFromReservationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.reservationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromReservationName', () => {
+        const result = client.matchLocationFromReservationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.reservationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchReservationFromReservationName', () => {
+        const result = client.matchReservationFromReservationName(fakePath);
+        assert.strictEqual(result, 'reservationValue');
+        assert(
+          (client.pathTemplates.reservationPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v2/participants_client_config.json`.
@@ -52,6 +53,8 @@ export class ParticipantsClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -110,8 +113,27 @@ export class ParticipantsClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ParticipantsClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'dialogflow.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -126,7 +148,7 @@ export class ParticipantsClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -151,10 +173,10 @@ export class ParticipantsClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
@@ -164,7 +186,7 @@ export class ParticipantsClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -186,6 +208,12 @@ export class ParticipantsClient {
     this.pathTemplates = {
       conversationDatasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversationDatasets/{conversation_dataset}'
+      ),
+      encryptionSpecPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/encryptionSpec'
+      ),
+      generatorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/generators/{generator}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -343,7 +371,7 @@ export class ParticipantsClient {
       streamingAnalyzeContent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
-        /* gaxStreamingRetries: */ true
+        !!opts.gaxServerStreamingRetries
       ),
     };
 
@@ -406,6 +434,7 @@ export class ParticipantsClient {
       'suggestArticles',
       'suggestFaqAnswers',
       'suggestSmartReplies',
+      'suggestKnowledgeAssist',
     ];
     for (const methodName of participantsStubMethods) {
       const callPromise = this.participantsStub.then(
@@ -453,19 +482,50 @@ export class ParticipantsClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'dialogflow.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'dialogflow.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -1227,6 +1287,123 @@ export class ParticipantsClient {
     this.initialize();
     return this.innerApiCalls.suggestSmartReplies(request, options, callback);
   }
+  /**
+   * Gets knowledge assist suggestions based on historical messages.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the participant to fetch suggestions for.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
+   * @param {string} [request.latestMessage]
+   *   Optional. The name of the latest conversation message to compile
+   *   suggestions for. If empty, it will be the latest message of the
+   *   conversation. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+   * @param {number} [request.contextSize]
+   *   Optional. Max number of messages prior to and including
+   *   {@link protos.google.cloud.dialogflow.v2.SuggestKnowledgeAssistRequest.latest_message|latest_message}
+   *   to use as context when compiling the suggestion. The context size is by
+   *   default 100 and at most 100.
+   * @param {string} [request.previousSuggestedQuery]
+   *   Optional. The previously suggested query for the given conversation. This
+   *   helps identify whether the next suggestion we generate is resonably
+   *   different from the previous one. This is useful to avoid similar
+   *   suggestions within the conversation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.SuggestKnowledgeAssistResponse|SuggestKnowledgeAssistResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/participants.suggest_knowledge_assist.js</caption>
+   * region_tag:dialogflow_v2_generated_Participants_SuggestKnowledgeAssist_async
+   */
+  suggestKnowledgeAssist(
+    request?: protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistResponse,
+      (
+        | protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  suggestKnowledgeAssist(
+    request: protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistResponse,
+      | protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  suggestKnowledgeAssist(
+    request: protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistResponse,
+      | protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  suggestKnowledgeAssist(
+    request?: protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistResponse,
+          | protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistResponse,
+      | protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistResponse,
+      (
+        | protos.google.cloud.dialogflow.v2.ISuggestKnowledgeAssistRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.suggestKnowledgeAssist(
+      request,
+      options,
+      callback
+    );
+  }
 
   /**
    * Adds a text (chat, for example), or audio (phone recording, for example)
@@ -1597,6 +1774,98 @@ export class ParticipantsClient {
     return this.pathTemplates.conversationDatasetPathTemplate.match(
       conversationDatasetName
     ).conversation_dataset;
+  }
+
+  /**
+   * Return a fully-qualified encryptionSpec resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  encryptionSpecPath(project: string, location: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from EncryptionSpec resource.
+   *
+   * @param {string} encryptionSpecName
+   *   A fully-qualified path representing EncryptionSpec resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEncryptionSpecName(encryptionSpecName: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName
+    ).project;
+  }
+
+  /**
+   * Parse the location from EncryptionSpec resource.
+   *
+   * @param {string} encryptionSpecName
+   *   A fully-qualified path representing EncryptionSpec resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEncryptionSpecName(encryptionSpecName: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified generator resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} generator
+   * @returns {string} Resource name string.
+   */
+  generatorPath(project: string, location: string, generator: string) {
+    return this.pathTemplates.generatorPathTemplate.render({
+      project: project,
+      location: location,
+      generator: generator,
+    });
+  }
+
+  /**
+   * Parse the project from Generator resource.
+   *
+   * @param {string} generatorName
+   *   A fully-qualified path representing Generator resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGeneratorName(generatorName: string) {
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Generator resource.
+   *
+   * @param {string} generatorName
+   *   A fully-qualified path representing Generator resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGeneratorName(generatorName: string) {
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .location;
+  }
+
+  /**
+   * Parse the generator from Generator resource.
+   *
+   * @param {string} generatorName
+   *   A fully-qualified path representing Generator resource.
+   * @returns {string} A string representing the generator.
+   */
+  matchGeneratorFromGeneratorName(generatorName: string) {
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .generator;
   }
 
   /**

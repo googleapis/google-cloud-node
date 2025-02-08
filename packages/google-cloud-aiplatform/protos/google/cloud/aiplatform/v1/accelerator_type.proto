@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,9 @@ enum AcceleratorType {
   // Unspecified accelerator type, which means no accelerator.
   ACCELERATOR_TYPE_UNSPECIFIED = 0;
 
-  // Nvidia Tesla K80 GPU.
-  NVIDIA_TESLA_K80 = 1;
+  // Deprecated: Nvidia Tesla K80 GPU has reached end of support,
+  // see https://cloud.google.com/compute/docs/eol/k80-eol.
+  NVIDIA_TESLA_K80 = 1 [deprecated = true];
 
   // Nvidia Tesla P100 GPU.
   NVIDIA_TESLA_P100 = 2;
@@ -53,6 +54,9 @@ enum AcceleratorType {
   // Nvidia L4 GPU.
   NVIDIA_L4 = 11;
 
+  // Nvidia H100 80Gb GPU.
+  NVIDIA_H100_80GB = 13;
+
   // TPU v2.
   TPU_V2 = 6;
 
@@ -61,4 +65,7 @@ enum AcceleratorType {
 
   // TPU v4.
   TPU_V4_POD = 10;
+
+  // TPU v5.
+  TPU_V5_LITEPOD = 12;
 }

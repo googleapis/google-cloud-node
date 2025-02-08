@@ -75,6 +75,11 @@
                 "deleteSpoke"
               ]
             },
+            "UpdateGroup": {
+              "methods": [
+                "updateGroup"
+              ]
+            },
             "ListHubs": {
               "methods": [
                 "listHubs",
@@ -87,6 +92,13 @@
                 "listHubSpokes",
                 "listHubSpokesStream",
                 "listHubSpokesAsync"
+              ]
+            },
+            "QueryHubStatus": {
+              "methods": [
+                "queryHubStatus",
+                "queryHubStatusStream",
+                "queryHubStatusAsync"
               ]
             },
             "ListSpokes": {
@@ -187,6 +199,11 @@
                 "deleteSpoke"
               ]
             },
+            "UpdateGroup": {
+              "methods": [
+                "updateGroup"
+              ]
+            },
             "ListHubs": {
               "methods": [
                 "listHubs",
@@ -199,6 +216,13 @@
                 "listHubSpokes",
                 "listHubSpokesStream",
                 "listHubSpokesAsync"
+              ]
+            },
+            "QueryHubStatus": {
+              "methods": [
+                "queryHubStatus",
+                "queryHubStatusStream",
+                "queryHubStatusAsync"
               ]
             },
             "ListSpokes": {

@@ -29,7 +29,7 @@ function main(dataStore) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Gcs training input.
+   *  Cloud Storage training input.
    */
   // const gcsTrainingInput = {}
   /**
@@ -48,6 +48,10 @@ function main(dataStore) {
    *  training.
    */
   // const errorConfig = {}
+  /**
+   *  If not provided, a UUID will be generated.
+   */
+  // const modelId = 'abc123'
 
   // Imports the Discoveryengine library
   const {SearchTuningServiceClient} = require('@google-cloud/discoveryengine').v1alpha;

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,10 +30,10 @@ function main(name) {
    */
   /**
    *  Required. Name of the custom module to delete. Its format is
-   *  "organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}",
-   *  "folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}",
+   *  `organizations/{organization}/securityHealthAnalyticsSettings/customModules/{customModule}`,
+   *  `folders/{folder}/securityHealthAnalyticsSettings/customModules/{customModule}`,
    *  or
-   *  "projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}"
+   *  `projects/{project}/securityHealthAnalyticsSettings/customModules/{customModule}`
    */
   // const name = 'abc123'
 

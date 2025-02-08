@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ function main(firewallPolicy) {
   // const firewallPolicy = {}
   /**
    *  Optional. The mask to control which fields of the policy get updated. If
-   *  the mask is not present, all fields will be updated.
+   *  the mask is not present, all fields are updated.
    */
   // const updateMask = {}
 

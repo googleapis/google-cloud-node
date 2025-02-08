@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,7 +37,10 @@ function main(parent, activeDirectory, activeDirectoryId) {
    */
   // const activeDirectory = {}
   /**
-   *  Required. ID of the active directory to create.
+   *  Required. ID of the active directory to create. Must be unique within the
+   *  parent resource. Must contain only letters, numbers and hyphen, with the
+   *  first character a letter , the last a letter or a number, and a 63
+   *  character maximum.
    */
   // const activeDirectoryId = 'abc123'
 

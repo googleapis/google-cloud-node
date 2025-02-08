@@ -20,11 +20,13 @@ import {
   DatasetServiceClient,
   DeploymentResourcePoolServiceClient,
   EndpointServiceClient,
+  EvaluationServiceClient,
   FeatureOnlineStoreAdminServiceClient,
   FeatureOnlineStoreServiceClient,
   FeatureRegistryServiceClient,
   FeaturestoreOnlineServingServiceClient,
   FeaturestoreServiceClient,
+  GenAiTuningServiceClient,
   IndexEndpointServiceClient,
   IndexServiceClient,
   JobServiceClient,
@@ -34,6 +36,8 @@ import {
   MigrationServiceClient,
   ModelGardenServiceClient,
   ModelServiceClient,
+  NotebookServiceClient,
+  PersistentResourceServiceClient,
   PipelineServiceClient,
   PredictionServiceClient,
   ScheduleServiceClient,
@@ -52,6 +56,9 @@ function doStuffWithDeploymentResourcePoolServiceClient(
   client.close();
 }
 function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
+  client.close();
+}
+function doStuffWithEvaluationServiceClient(client: EvaluationServiceClient) {
   client.close();
 }
 function doStuffWithFeatureOnlineStoreAdminServiceClient(
@@ -77,6 +84,9 @@ function doStuffWithFeaturestoreOnlineServingServiceClient(
 function doStuffWithFeaturestoreServiceClient(
   client: FeaturestoreServiceClient
 ) {
+  client.close();
+}
+function doStuffWithGenAiTuningServiceClient(client: GenAiTuningServiceClient) {
   client.close();
 }
 function doStuffWithIndexEndpointServiceClient(
@@ -106,6 +116,14 @@ function doStuffWithModelGardenServiceClient(client: ModelGardenServiceClient) {
   client.close();
 }
 function doStuffWithModelServiceClient(client: ModelServiceClient) {
+  client.close();
+}
+function doStuffWithNotebookServiceClient(client: NotebookServiceClient) {
+  client.close();
+}
+function doStuffWithPersistentResourceServiceClient(
+  client: PersistentResourceServiceClient
+) {
   client.close();
 }
 function doStuffWithPipelineServiceClient(client: PipelineServiceClient) {
@@ -143,6 +161,9 @@ function main() {
   const endpointServiceClient = new EndpointServiceClient();
   doStuffWithEndpointServiceClient(endpointServiceClient);
   // check that the client instance can be created
+  const evaluationServiceClient = new EvaluationServiceClient();
+  doStuffWithEvaluationServiceClient(evaluationServiceClient);
+  // check that the client instance can be created
   const featureOnlineStoreAdminServiceClient =
     new FeatureOnlineStoreAdminServiceClient();
   doStuffWithFeatureOnlineStoreAdminServiceClient(
@@ -163,6 +184,9 @@ function main() {
   // check that the client instance can be created
   const featurestoreServiceClient = new FeaturestoreServiceClient();
   doStuffWithFeaturestoreServiceClient(featurestoreServiceClient);
+  // check that the client instance can be created
+  const genAiTuningServiceClient = new GenAiTuningServiceClient();
+  doStuffWithGenAiTuningServiceClient(genAiTuningServiceClient);
   // check that the client instance can be created
   const indexEndpointServiceClient = new IndexEndpointServiceClient();
   doStuffWithIndexEndpointServiceClient(indexEndpointServiceClient);
@@ -190,6 +214,12 @@ function main() {
   // check that the client instance can be created
   const modelServiceClient = new ModelServiceClient();
   doStuffWithModelServiceClient(modelServiceClient);
+  // check that the client instance can be created
+  const notebookServiceClient = new NotebookServiceClient();
+  doStuffWithNotebookServiceClient(notebookServiceClient);
+  // check that the client instance can be created
+  const persistentResourceServiceClient = new PersistentResourceServiceClient();
+  doStuffWithPersistentResourceServiceClient(persistentResourceServiceClient);
   // check that the client instance can be created
   const pipelineServiceClient = new PipelineServiceClient();
   doStuffWithPipelineServiceClient(pipelineServiceClient);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -167,16 +167,98 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2.BareMetalSolutionClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        baremetalsolutionModule.v2.BareMetalSolutionClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'baremetalsolution.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        baremetalsolutionModule.v2.BareMetalSolutionClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          baremetalsolutionModule.v2.BareMetalSolutionClient.servicePath;
+        assert.strictEqual(servicePath, 'baremetalsolution.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          baremetalsolutionModule.v2.BareMetalSolutionClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'baremetalsolution.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'baremetalsolution.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'baremetalsolution.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new baremetalsolutionModule.v2.BareMetalSolutionClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'baremetalsolution.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new baremetalsolutionModule.v2.BareMetalSolutionClient(
+            {universeDomain: 'configured.example.com'}
+          );
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'baremetalsolution.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new baremetalsolutionModule.v2.BareMetalSolutionClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -280,7 +362,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Instance()
       );
@@ -311,7 +393,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Instance()
       );
@@ -358,7 +440,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInstance = stubSimpleCall(
         undefined,
@@ -410,7 +492,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Instance()
       );
@@ -441,7 +523,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Instance()
       );
@@ -488,7 +570,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.renameInstance = stubSimpleCall(
         undefined,
@@ -540,7 +622,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.SSHKey()
       );
@@ -571,7 +653,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.SSHKey()
       );
@@ -618,7 +700,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSshKey = stubSimpleCall(
         undefined,
@@ -670,7 +752,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -701,7 +783,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -748,7 +830,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSshKey = stubSimpleCall(
         undefined,
@@ -800,7 +882,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Volume()
       );
@@ -831,7 +913,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Volume()
       );
@@ -878,7 +960,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVolume = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getVolume(request), expectedError);
@@ -927,7 +1009,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Volume()
       );
@@ -958,7 +1040,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Volume()
       );
@@ -1005,7 +1087,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.renameVolume = stubSimpleCall(
         undefined,
@@ -1057,7 +1139,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageResponse()
       );
@@ -1088,7 +1170,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageResponse()
       );
@@ -1135,7 +1217,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNetworkUsage = stubSimpleCall(
         undefined,
@@ -1187,7 +1269,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Network()
       );
@@ -1218,7 +1300,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Network()
       );
@@ -1265,7 +1347,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNetwork = stubSimpleCall(
         undefined,
@@ -1317,7 +1399,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
       );
@@ -1349,7 +1431,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
       );
@@ -1396,7 +1478,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createVolumeSnapshot = stubSimpleCall(
         undefined,
@@ -1448,7 +1530,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1480,7 +1562,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1527,7 +1609,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteVolumeSnapshot = stubSimpleCall(
         undefined,
@@ -1579,7 +1661,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
       );
@@ -1610,7 +1692,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
       );
@@ -1657,7 +1739,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getVolumeSnapshot = stubSimpleCall(
         undefined,
@@ -1709,7 +1791,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Lun()
       );
@@ -1740,7 +1822,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Lun()
       );
@@ -1787,7 +1869,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLun = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getLun(request), expectedError);
@@ -1836,7 +1918,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.NfsShare()
       );
@@ -1867,7 +1949,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.NfsShare()
       );
@@ -1914,7 +1996,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getNfsShare = stubSimpleCall(
         undefined,
@@ -1966,7 +2048,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.NfsShare()
       );
@@ -1997,7 +2079,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.NfsShare()
       );
@@ -2044,7 +2126,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.renameNfsShare = stubSimpleCall(
         undefined,
@@ -2096,7 +2178,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse()
       );
@@ -2128,7 +2210,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse()
       );
@@ -2175,7 +2257,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.submitProvisioningConfig = stubSimpleCall(
         undefined,
@@ -2233,7 +2315,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
       );
@@ -2265,7 +2347,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
       );
@@ -2312,7 +2394,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProvisioningConfig = stubSimpleCall(
         undefined,
@@ -2370,7 +2452,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
       );
@@ -2402,7 +2484,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
       );
@@ -2449,7 +2531,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createProvisioningConfig = stubSimpleCall(
         undefined,
@@ -2508,7 +2590,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['provisioningConfig', 'name']
       );
       request.provisioningConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
       );
@@ -2541,7 +2623,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['provisioningConfig', 'name']
       );
       request.provisioningConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ProvisioningConfig()
       );
@@ -2589,7 +2671,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['provisioningConfig', 'name']
       );
       request.provisioningConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `provisioning_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProvisioningConfig = stubSimpleCall(
         undefined,
@@ -2648,7 +2730,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Network()
       );
@@ -2679,7 +2761,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.Network()
       );
@@ -2726,7 +2808,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.renameNetwork = stubSimpleCall(
         undefined,
@@ -2779,7 +2861,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2813,7 +2895,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2868,7 +2950,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateInstance = stubLongRunningCall(
         undefined,
@@ -2900,7 +2982,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateInstance = stubLongRunningCall(
         undefined,
@@ -2976,7 +3058,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3009,7 +3091,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3063,7 +3145,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetInstance = stubLongRunningCall(
         undefined,
@@ -3094,7 +3176,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetInstance = stubLongRunningCall(
         undefined,
@@ -3170,7 +3252,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3203,7 +3285,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3257,7 +3339,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startInstance = stubLongRunningCall(
         undefined,
@@ -3288,7 +3370,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startInstance = stubLongRunningCall(
         undefined,
@@ -3364,7 +3446,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3396,7 +3478,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3450,7 +3532,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopInstance = stubLongRunningCall(
         undefined,
@@ -3481,7 +3563,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopInstance = stubLongRunningCall(
         undefined,
@@ -3554,7 +3636,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3587,7 +3669,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3641,7 +3723,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableInteractiveSerialConsole = stubLongRunningCall(
         undefined,
@@ -3675,7 +3757,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableInteractiveSerialConsole = stubLongRunningCall(
         undefined,
@@ -3752,7 +3834,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3785,7 +3867,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3839,7 +3921,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableInteractiveSerialConsole =
         stubLongRunningCall(undefined, expectedError);
@@ -3871,7 +3953,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableInteractiveSerialConsole =
         stubLongRunningCall(undefined, undefined, expectedError);
@@ -3945,7 +4027,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['instance']
       );
       request.instance = defaultValue1;
-      const expectedHeaderRequestParams = `instance=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3977,7 +4059,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['instance']
       );
       request.instance = defaultValue1;
-      const expectedHeaderRequestParams = `instance=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4031,7 +4113,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['instance']
       );
       request.instance = defaultValue1;
-      const expectedHeaderRequestParams = `instance=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detachLun = stubLongRunningCall(
         undefined,
@@ -4062,7 +4144,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['instance']
       );
       request.instance = defaultValue1;
-      const expectedHeaderRequestParams = `instance=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detachLun = stubLongRunningCall(
         undefined,
@@ -4136,7 +4218,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volume', 'name']
       );
       request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4169,7 +4251,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volume', 'name']
       );
       request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4224,7 +4306,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volume', 'name']
       );
       request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVolume = stubLongRunningCall(
         undefined,
@@ -4256,7 +4338,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volume', 'name']
       );
       request.volume.name = defaultValue1;
-      const expectedHeaderRequestParams = `volume.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateVolume = stubLongRunningCall(
         undefined,
@@ -4329,7 +4411,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4361,7 +4443,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4415,7 +4497,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.evictVolume = stubLongRunningCall(
         undefined,
@@ -4446,7 +4528,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.evictVolume = stubLongRunningCall(
         undefined,
@@ -4519,7 +4601,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volume']
       );
       request.volume = defaultValue1;
-      const expectedHeaderRequestParams = `volume=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4551,7 +4633,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volume']
       );
       request.volume = defaultValue1;
-      const expectedHeaderRequestParams = `volume=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4605,7 +4687,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volume']
       );
       request.volume = defaultValue1;
-      const expectedHeaderRequestParams = `volume=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resizeVolume = stubLongRunningCall(
         undefined,
@@ -4636,7 +4718,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volume']
       );
       request.volume = defaultValue1;
-      const expectedHeaderRequestParams = `volume=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resizeVolume = stubLongRunningCall(
         undefined,
@@ -4710,7 +4792,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['network', 'name']
       );
       request.network.name = defaultValue1;
-      const expectedHeaderRequestParams = `network.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4744,7 +4826,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['network', 'name']
       );
       request.network.name = defaultValue1;
-      const expectedHeaderRequestParams = `network.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4799,7 +4881,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['network', 'name']
       );
       request.network.name = defaultValue1;
-      const expectedHeaderRequestParams = `network.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNetwork = stubLongRunningCall(
         undefined,
@@ -4831,7 +4913,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['network', 'name']
       );
       request.network.name = defaultValue1;
-      const expectedHeaderRequestParams = `network.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `network.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNetwork = stubLongRunningCall(
         undefined,
@@ -4907,7 +4989,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volumeSnapshot']
       );
       request.volumeSnapshot = defaultValue1;
-      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4940,7 +5022,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volumeSnapshot']
       );
       request.volumeSnapshot = defaultValue1;
-      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4994,7 +5076,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volumeSnapshot']
       );
       request.volumeSnapshot = defaultValue1;
-      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restoreVolumeSnapshot = stubLongRunningCall(
         undefined,
@@ -5028,7 +5110,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['volumeSnapshot']
       );
       request.volumeSnapshot = defaultValue1;
-      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1}`;
+      const expectedHeaderRequestParams = `volume_snapshot=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restoreVolumeSnapshot = stubLongRunningCall(
         undefined,
@@ -5104,7 +5186,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5136,7 +5218,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5190,7 +5272,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.evictLun = stubLongRunningCall(
         undefined,
@@ -5221,7 +5303,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.evictLun = stubLongRunningCall(
         undefined,
@@ -5295,7 +5377,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['nfsShare', 'name']
       );
       request.nfsShare.name = defaultValue1;
-      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5329,7 +5411,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['nfsShare', 'name']
       );
       request.nfsShare.name = defaultValue1;
-      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5384,7 +5466,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['nfsShare', 'name']
       );
       request.nfsShare.name = defaultValue1;
-      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNfsShare = stubLongRunningCall(
         undefined,
@@ -5416,7 +5498,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['nfsShare', 'name']
       );
       request.nfsShare.name = defaultValue1;
-      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `nfs_share.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNfsShare = stubLongRunningCall(
         undefined,
@@ -5492,7 +5574,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5525,7 +5607,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5579,7 +5661,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNfsShare = stubLongRunningCall(
         undefined,
@@ -5610,7 +5692,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createNfsShare = stubLongRunningCall(
         undefined,
@@ -5686,7 +5768,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5719,7 +5801,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5773,7 +5855,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNfsShare = stubLongRunningCall(
         undefined,
@@ -5804,7 +5886,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteNfsShare = stubLongRunningCall(
         undefined,
@@ -5880,7 +5962,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Instance()
@@ -5919,7 +6001,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Instance()
@@ -5974,7 +6056,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInstances = stubSimpleCall(
         undefined,
@@ -6005,7 +6087,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Instance()
@@ -6046,9 +6128,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6066,7 +6148,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInstances.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6096,9 +6178,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6116,7 +6198,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Instance()
@@ -6146,9 +6228,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6166,7 +6248,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInstances.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6187,9 +6269,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6209,7 +6291,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.SSHKey()
@@ -6248,7 +6330,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.SSHKey()
@@ -6303,7 +6385,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSshKeys = stubSimpleCall(
         undefined,
@@ -6334,7 +6416,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.SSHKey()
@@ -6374,9 +6456,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6394,7 +6476,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSSHKeys.createStream = stubPageStreamingCall(
         undefined,
@@ -6425,9 +6507,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6445,7 +6527,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.SSHKey()
@@ -6474,9 +6556,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6494,7 +6576,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSSHKeys.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -6517,9 +6599,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6539,7 +6621,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Volume()
@@ -6578,7 +6660,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Volume()
@@ -6633,7 +6715,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVolumes = stubSimpleCall(
         undefined,
@@ -6664,7 +6746,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Volume()
@@ -6704,9 +6786,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6724,7 +6806,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVolumes.createStream = stubPageStreamingCall(
         undefined,
@@ -6755,9 +6837,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6775,7 +6857,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Volume()
@@ -6804,9 +6886,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6824,7 +6906,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVolumes.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -6847,9 +6929,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6869,7 +6951,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Network()
@@ -6908,7 +6990,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Network()
@@ -6963,7 +7045,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNetworks = stubSimpleCall(
         undefined,
@@ -6994,7 +7076,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Network()
@@ -7035,9 +7117,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7055,7 +7137,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNetworks.createStream = stubPageStreamingCall(
         undefined,
@@ -7087,9 +7169,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7107,7 +7189,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Network()
@@ -7136,9 +7218,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7156,7 +7238,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNetworks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7177,9 +7259,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7199,7 +7281,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
@@ -7239,7 +7321,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
@@ -7296,7 +7378,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listVolumeSnapshots = stubSimpleCall(
         undefined,
@@ -7327,7 +7409,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
@@ -7370,9 +7452,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7390,7 +7472,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVolumeSnapshots.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7422,9 +7504,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7442,7 +7524,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.VolumeSnapshot()
@@ -7472,9 +7554,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7492,7 +7574,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listVolumeSnapshots.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7513,9 +7595,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7535,7 +7617,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Lun()
@@ -7574,7 +7656,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Lun()
@@ -7629,7 +7711,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLuns = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listLuns(request), expectedError);
@@ -7657,7 +7739,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Lun()
@@ -7697,9 +7779,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7717,7 +7799,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLuns.createStream = stubPageStreamingCall(
         undefined,
@@ -7748,9 +7830,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7768,7 +7850,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.Lun()
@@ -7796,9 +7878,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7816,7 +7898,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLuns.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -7837,9 +7919,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7859,7 +7941,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.NfsShare()
@@ -7898,7 +7980,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.NfsShare()
@@ -7953,7 +8035,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listNfsShares = stubSimpleCall(
         undefined,
@@ -7984,7 +8066,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.NfsShare()
@@ -8025,9 +8107,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8045,7 +8127,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNfsShares.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8075,9 +8157,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8095,7 +8177,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.NfsShare()
@@ -8125,9 +8207,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8145,7 +8227,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listNfsShares.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8166,9 +8248,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -8188,7 +8270,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
@@ -8228,7 +8310,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
@@ -8285,7 +8367,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProvisioningQuotas = stubSimpleCall(
         undefined,
@@ -8319,7 +8401,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
@@ -8388,7 +8470,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProvisioningQuotas.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8446,7 +8528,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.ProvisioningQuota()
@@ -8500,7 +8582,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProvisioningQuotas.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8547,7 +8629,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.OSImage()
@@ -8586,7 +8668,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.OSImage()
@@ -8641,7 +8723,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOsImages = stubSimpleCall(
         undefined,
@@ -8672,7 +8754,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.OSImage()
@@ -8713,9 +8795,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8733,7 +8815,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOSImages.createStream = stubPageStreamingCall(
         undefined,
@@ -8765,9 +8847,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8785,7 +8867,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.baremetalsolution.v2.OSImage()
@@ -8814,9 +8896,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8834,7 +8916,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOSImages.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8855,9 +8937,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

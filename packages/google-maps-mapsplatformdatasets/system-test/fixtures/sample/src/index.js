@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 const mapsplatformdatasets = require('@googlemaps/maps-platform-datasets');
 
 function main() {
-  const mapsPlatformDatasetsV1AlphaClient =
-    new mapsplatformdatasets.MapsPlatformDatasetsV1AlphaClient();
+  const mapsPlatformDatasetsClient =
+    new mapsplatformdatasets.MapsPlatformDatasetsClient();
 }
 
 main();

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,10 @@ package google.cloud.securitycenter.v1;
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/securitycenter/v1/access.proto";
+import "google/cloud/securitycenter/v1/application.proto";
+import "google/cloud/securitycenter/v1/attack_exposure.proto";
+import "google/cloud/securitycenter/v1/backup_disaster_recovery.proto";
+import "google/cloud/securitycenter/v1/cloud_armor.proto";
 import "google/cloud/securitycenter/v1/cloud_dlp_data_profile.proto";
 import "google/cloud/securitycenter/v1/cloud_dlp_inspection.proto";
 import "google/cloud/securitycenter/v1/compliance.proto";
@@ -29,13 +33,20 @@ import "google/cloud/securitycenter/v1/database.proto";
 import "google/cloud/securitycenter/v1/exfiltration.proto";
 import "google/cloud/securitycenter/v1/external_system.proto";
 import "google/cloud/securitycenter/v1/file.proto";
+import "google/cloud/securitycenter/v1/group_membership.proto";
 import "google/cloud/securitycenter/v1/iam_binding.proto";
 import "google/cloud/securitycenter/v1/indicator.proto";
 import "google/cloud/securitycenter/v1/kernel_rootkit.proto";
 import "google/cloud/securitycenter/v1/kubernetes.proto";
+import "google/cloud/securitycenter/v1/load_balancer.proto";
+import "google/cloud/securitycenter/v1/log_entry.proto";
 import "google/cloud/securitycenter/v1/mitre_attack.proto";
+import "google/cloud/securitycenter/v1/notebook.proto";
+import "google/cloud/securitycenter/v1/org_policy.proto";
 import "google/cloud/securitycenter/v1/process.proto";
 import "google/cloud/securitycenter/v1/security_marks.proto";
+import "google/cloud/securitycenter/v1/security_posture.proto";
+import "google/cloud/securitycenter/v1/toxic_combination.proto";
 import "google/cloud/securitycenter/v1/vulnerability.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
@@ -60,6 +71,8 @@ message Finding {
     pattern: "organizations/{organization}/sources/{source}/findings/{finding}"
     pattern: "folders/{folder}/sources/{source}/findings/{finding}"
     pattern: "projects/{project}/sources/{source}/findings/{finding}"
+    plural: "findings"
+    singular: "finding"
   };
 
   // The state of the finding.
@@ -171,6 +184,51 @@ message Finding {
 
     // Describes an error that prevents some SCC functionality.
     SCC_ERROR = 5;
+
+    // Describes a potential security risk due to a change in the security
+    // posture.
+    POSTURE_VIOLATION = 6;
+
+    // Describes a group of security issues that, when the issues
+    // occur together, represent a greater risk than when the issues occur
+    // independently. A group of such issues is referred to as a toxic
+    // combination.
+    TOXIC_COMBINATION = 7;
+  }
+
+  // Mute information about the finding, including whether the finding has a
+  // static mute or any matching dynamic mute rules.
+  message MuteInfo {
+    // Information about the static mute state. A static mute state overrides
+    // any dynamic mute rules that apply to this finding. The static mute state
+    // can be set by a static mute rule or by muting the finding directly.
+    message StaticMute {
+      // The static mute state. If the value is `MUTED` or `UNMUTED`, then the
+      // finding's overall mute state will have the same value.
+      Mute state = 1;
+
+      // When the static mute was applied.
+      google.protobuf.Timestamp apply_time = 2;
+    }
+
+    // The record of a dynamic mute rule that matches the finding.
+    message DynamicMuteRecord {
+      // The relative resource name of the mute rule, represented by a mute
+      // config, that created this record, for example
+      // `organizations/123/muteConfigs/mymuteconfig` or
+      // `organizations/123/locations/global/muteConfigs/mymuteconfig`.
+      string mute_config = 1;
+
+      // When the dynamic mute rule first matched the finding.
+      google.protobuf.Timestamp match_time = 2;
+    }
+
+    // If set, the static mute applied to this finding. Static mutes override
+    // dynamic mutes. If unset, there is no static mute.
+    StaticMute static_mute = 1;
+
+    // The list of dynamic mute rules that currently match the finding.
+    repeated DynamicMuteRecord dynamic_mute_records = 2;
   }
 
   // The [relative resource
@@ -289,6 +347,9 @@ message Finding {
   // that muted the finding and the user who muted the finding.
   string mute_initiator = 28;
 
+  // Output only. The mute information regarding this finding.
+  MuteInfo mute_info = 61 [(google.api.field_behavior) = OUTPUT_ONLY];
+
   // Represents operating system processes associated with the Finding.
   repeated Process processes = 30;
 
@@ -347,6 +408,9 @@ message Finding {
   // Database associated with the finding.
   Database database = 44;
 
+  // The results of an attack path simulation relevant to this finding.
+  AttackExposure attack_exposure = 45;
+
   // File associated with the finding.
   repeated File files = 46;
 
@@ -359,4 +423,40 @@ message Finding {
 
   // Signature of the kernel rootkit.
   KernelRootkit kernel_rootkit = 50;
+
+  // Contains information about the org policies associated with the finding.
+  repeated OrgPolicy org_policies = 51;
+
+  // Represents an application associated with the finding.
+  Application application = 53;
+
+  // Fields related to Backup and DR findings.
+  BackupDisasterRecovery backup_disaster_recovery = 55;
+
+  // The security posture associated with the finding.
+  SecurityPosture security_posture = 56;
+
+  // Log entries that are relevant to the finding.
+  repeated LogEntry log_entries = 57;
+
+  // The load balancers associated with the finding.
+  repeated LoadBalancer load_balancers = 58;
+
+  // Fields related to Cloud Armor findings.
+  CloudArmor cloud_armor = 59;
+
+  // Notebook associated with the finding.
+  Notebook notebook = 63;
+
+  // Contains details about a group of security issues that, when the issues
+  // occur together, represent a greater risk than when the issues occur
+  // independently. A group of such issues is referred to as a toxic
+  // combination.
+  // This field cannot be updated. Its value is ignored in all update requests.
+  ToxicCombination toxic_combination = 64;
+
+  // Contains details about groups of which this finding is a member. A group is
+  // a collection of findings that are related in some way.
+  // This field cannot be updated. Its value is ignored in all update requests.
+  repeated GroupMembership group_memberships = 65;
 }

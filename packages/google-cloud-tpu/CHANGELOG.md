@@ -1,5 +1,48 @@
 # Changelog
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.7.0...tpu-v3.8.0) (2025-01-23)
+
+
+### Features
+
+* [tpu] Introduce PerformMaintenance API ([#5956](https://github.com/googleapis/google-cloud-node/issues/5956)) ([03232b3](https://github.com/googleapis/google-cloud-node/commit/03232b371a770205d488791bfcb3631f2291d9fb))
+
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.6.0...tpu-v3.7.0) (2025-01-16)
+
+
+### Features
+
+* [tpu] Promote network_configs field to v2 API ([#5945](https://github.com/googleapis/google-cloud-node/issues/5945)) ([df0d206](https://github.com/googleapis/google-cloud-node/commit/df0d2064ff860da7c2029de9dd3f9a1aab41b5c8))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.5.0...tpu-v3.6.0) (2025-01-11)
+
+
+### Features
+
+* [tpu] Add UNKNOWN to TPU node state, This state will be used to prevent a node from being marked as READY during diagnose after it has failed repair ([#5941](https://github.com/googleapis/google-cloud-node/issues/5941)) ([e575e15](https://github.com/googleapis/google-cloud-node/commit/e575e15101e34887731c4bab60e81bac504d7683))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.4.0...tpu-v3.5.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.3.0...tpu-v3.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.2.1...tpu-v3.3.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5028](https://github.com/googleapis/google-cloud-node/issues/5028)) ([852f3eb](https://github.com/googleapis/google-cloud-node/commit/852f3ebf065ee24e910580b9a1fc365acb3a744a))
+
 ## [3.2.1](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.2.0...tpu-v3.2.1) (2024-01-23)
 
 

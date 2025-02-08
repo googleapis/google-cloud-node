@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ message Engine {
     // The search feature tier of this engine.
     //
     // Different tiers might have different
-    // pricing. To learn more, please check the pricing documentation.
+    // pricing. To learn more, check the pricing documentation.
     //
     // Defaults to
     // [SearchTier.SEARCH_TIER_STANDARD][google.cloud.discoveryengine.v1alpha.SearchTier.SEARCH_TIER_STANDARD]
@@ -82,7 +82,7 @@ message Engine {
       TRAINING = 2;
     }
 
-    // Required. The type of engine e.g. `recommended-for-you`.
+    // Required. The type of engine. e.g., `recommended-for-you`.
     //
     // This field together with
     // [optimization_objective][Engine.optimization_objective] describe engine
@@ -92,7 +92,7 @@ message Engine {
     // `more-like-this`, `most-popular-items`.
     string type = 1 [(google.api.field_behavior) = REQUIRED];
 
-    // The optimization objective e.g. `cvr`.
+    // The optimization objective. e.g., `cvr`.
     //
     // This field together with
     // [optimization_objective][google.cloud.discoveryengine.v1alpha.Engine.MediaRecommendationEngineConfig.type]
@@ -155,6 +155,11 @@ message Engine {
       // database](https://www.iana.org/time-zones), e.g., America/New_York,
       // Europe/Paris.
       string time_zone = 3 [(google.api.field_behavior) = REQUIRED];
+
+      // Agent location for Agent creation, supported values: global/us/eu.
+      // If not provided, us Engine will create Agent using us-central-1 by
+      // default; eu Engine will create Agent using eu-west-1 by default.
+      string location = 4;
     }
 
     // The configurationt generate the Dialogflow agent that is associated to
@@ -180,9 +185,9 @@ message Engine {
     // [EngineService.GetEngine][google.cloud.discoveryengine.v1alpha.EngineService.GetEngine]
     // or
     // [EngineService.ListEngines][google.cloud.discoveryengine.v1alpha.EngineService.ListEngines]
-    // API after engine creation. Please use
-    // [chat_engine_metadata.dialogflow_agent][] for actual agent
-    // association after Engine is created.
+    // API after engine creation. Use
+    // [ChatEngineMetadata.dialogflow_agent][google.cloud.discoveryengine.v1alpha.Engine.ChatEngineMetadata.dialogflow_agent]
+    // for actual agent association after Engine is created.
     string dialogflow_agent_to_link = 2;
   }
 
@@ -352,7 +357,7 @@ message Engine {
   // Note that when used in
   // [CreateEngineRequest][google.cloud.discoveryengine.v1alpha.CreateEngineRequest],
   // one DataStore id must be provided as the system will use it for necessary
-  // intializations.
+  // initializations.
   repeated string data_store_ids = 5;
 
   // Required. The solutions of the engine.
@@ -362,7 +367,7 @@ message Engine {
   // The restriction of the Engine industry vertical is based on
   // [DataStore][google.cloud.discoveryengine.v1alpha.DataStore]: If
   // unspecified, default to `GENERIC`. Vertical on Engine has to match vertical
-  // of the DataStore liniked to the engine.
+  // of the DataStore linked to the engine.
   IndustryVertical industry_vertical = 16;
 
   // Common config spec that specifies the metadata of the engine.

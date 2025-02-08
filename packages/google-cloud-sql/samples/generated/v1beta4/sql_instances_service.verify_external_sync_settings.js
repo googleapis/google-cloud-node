@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -52,6 +52,17 @@ function main() {
    *  Optional. MySQL-specific settings for start external sync.
    */
   // const mysqlSyncConfig = {}
+  /**
+   *  Optional. MigrationType configures the migration to use physical files or
+   *  logical dump files. If not set, then the logical dump file configuration is
+   *  used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
+   */
+  // const migrationType = {}
+  /**
+   *  Optional. Parallel level for initial data sync. Only applicable for
+   *  PostgreSQL.
+   */
+  // const syncParallelLevel = {}
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

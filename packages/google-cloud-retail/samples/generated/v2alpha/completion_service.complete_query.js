@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -94,15 +94,15 @@ function main(catalog, query) {
    */
   // const maxSuggestions = 1234
   /**
-   *  If true, attribute suggestions are enabled and provided in response.
-   *  This field is only available for "cloud-retail" dataset.
+   *  If true, attribute suggestions are enabled and provided in the response.
+   *  This field is only available for the "cloud-retail" dataset.
    */
   // const enableAttributeSuggestions = true
   /**
-   *  The entity for customers that may run multiple different entities, domains,
-   *  sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+   *  The entity for customers who run multiple entities, domains, sites, or
+   *  regions, for example, `Google US`, `Google Ads`, `Waymo`,
    *  `google.com`, `youtube.com`, etc.
-   *  If this is set, it should be exactly matched with
+   *  If this is set, it must be an exact match with
    *  UserEvent.entity google.cloud.retail.v2alpha.UserEvent.entity  to get
    *  per-entity autocomplete results.
    */

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,10 +30,11 @@ function main(parent) {
    */
   /**
    *  Required. The name of the project to list all the datasets for.
+   *  Format: projects/{project}
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of versions to return per page.
+   *  The maximum number of datasets to return per page.
    *  If unspecified (or zero), all datasets will be returned.
    */
   // const pageSize = 1234
@@ -42,6 +43,16 @@ function main(parent) {
    *  Provide this to retrieve the subsequent page.
    */
   // const pageToken = 'abc123'
+  /**
+   *  The tag that specifies the desired version for each dataset.
+   *  Note that when pagination is also specified, some filtering can happen
+   *  after pagination, which may cause the response to contain fewer datasets
+   *  than the page size, even if it's not the last page.
+   *  Tag "active": Each dataset in the response will include the info of its
+   *  latest completed version, and the dataset will be skipped if it does not
+   *  have one.
+   */
+  // const tag = 'abc123'
 
   // Imports the Mapsplatformdatasets library
   const {MapsPlatformDatasetsClient} = require('@googlemaps/maps-platform-datasets').v1;
@@ -56,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await mapsplatformdatasetsClient.listDatasetsAsync(request);
+    const iterable = mapsplatformdatasetsClient.listDatasetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

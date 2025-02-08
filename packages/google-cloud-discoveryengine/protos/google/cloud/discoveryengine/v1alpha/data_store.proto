@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ package google.cloud.discoveryengine.v1alpha;
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/discoveryengine/v1alpha/common.proto";
+import "google/cloud/discoveryengine/v1alpha/document_processing_config.proto";
+import "google/cloud/discoveryengine/v1alpha/schema.proto";
 import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Cloud.DiscoveryEngine.V1Alpha";
@@ -53,6 +55,11 @@ message DataStore {
 
     // The data store is used for public website search.
     PUBLIC_WEBSITE = 3;
+
+    // The data store is used for workspace search. Details of workspace
+    // data store are specified in the
+    // [WorkspaceConfig][google.cloud.discoveryengine.v1alpha.WorkspaceConfig].
+    GOOGLE_WORKSPACE = 4;
   }
 
   // Immutable. The full resource name of the data store.
@@ -95,4 +102,112 @@ message DataStore {
   // [DataStore][google.cloud.discoveryengine.v1alpha.DataStore] was created at.
   google.protobuf.Timestamp create_time = 4
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Language info for DataStore.
+  LanguageInfo language_info = 14;
+
+  // Output only. Data store level identity provider config.
+  IdpConfig idp_config = 21 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Immutable. Whether data in the
+  // [DataStore][google.cloud.discoveryengine.v1alpha.DataStore] has ACL
+  // information. If set to `true`, the source data must have ACL. ACL will be
+  // ingested when data is ingested by
+  // [DocumentService.ImportDocuments][google.cloud.discoveryengine.v1alpha.DocumentService.ImportDocuments]
+  // methods.
+  //
+  // When ACL is enabled for the
+  // [DataStore][google.cloud.discoveryengine.v1alpha.DataStore],
+  // [Document][google.cloud.discoveryengine.v1alpha.Document] can't be accessed
+  // by calling
+  // [DocumentService.GetDocument][google.cloud.discoveryengine.v1alpha.DocumentService.GetDocument]
+  // or
+  // [DocumentService.ListDocuments][google.cloud.discoveryengine.v1alpha.DocumentService.ListDocuments].
+  //
+  // Currently ACL is only supported in `GENERIC` industry vertical with
+  // non-`PUBLIC_WEBSITE` content config.
+  bool acl_enabled = 24 [(google.api.field_behavior) = IMMUTABLE];
+
+  // Config to store data store type configuration for workspace data. This
+  // must be set when
+  // [DataStore.content_config][google.cloud.discoveryengine.v1alpha.DataStore.content_config]
+  // is set as
+  // [DataStore.ContentConfig.GOOGLE_WORKSPACE][google.cloud.discoveryengine.v1alpha.DataStore.ContentConfig.GOOGLE_WORKSPACE].
+  WorkspaceConfig workspace_config = 25;
+
+  // Configuration for Document understanding and enrichment.
+  DocumentProcessingConfig document_processing_config = 27;
+
+  // The start schema to use for this
+  // [DataStore][google.cloud.discoveryengine.v1alpha.DataStore] when
+  // provisioning it. If unset, a default vertical specialized schema will be
+  // used.
+  //
+  // This field is only used by [CreateDataStore][] API, and will be ignored if
+  // used in other APIs. This field will be omitted from all API responses
+  // including [CreateDataStore][] API. To retrieve a schema of a
+  // [DataStore][google.cloud.discoveryengine.v1alpha.DataStore], use
+  // [SchemaService.GetSchema][google.cloud.discoveryengine.v1alpha.SchemaService.GetSchema]
+  // API instead.
+  //
+  // The provided schema will be validated against certain rules on schema.
+  // Learn more from [this
+  // doc](https://cloud.google.com/generative-ai-app-builder/docs/provide-schema).
+  Schema starting_schema = 28;
+}
+
+// Language info for DataStore.
+message LanguageInfo {
+  // The language code for the DataStore.
+  string language_code = 1;
+
+  // Output only. This is the normalized form of language_code.
+  // E.g.: language_code of `en-GB`, `en_GB`, `en-UK` or `en-gb`
+  // will have normalized_language_code of `en-GB`.
+  string normalized_language_code = 2
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Language part of normalized_language_code.
+  // E.g.: `en-US` -> `en`, `zh-Hans-HK` -> `zh`, `en` -> `en`.
+  string language = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Region part of normalized_language_code, if present.
+  // E.g.: `en-US` -> `US`, `zh-Hans-HK` -> `HK`, `en` -> ``.
+  string region = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Config to store data store type configuration for workspace data
+message WorkspaceConfig {
+  // Specifies the type of Workspace App supported by this DataStore
+  enum Type {
+    // Defaults to an unspecified Workspace type.
+    TYPE_UNSPECIFIED = 0;
+
+    // Workspace Data Store contains Drive data
+    GOOGLE_DRIVE = 1;
+
+    // Workspace Data Store contains Mail data
+    GOOGLE_MAIL = 2;
+
+    // Workspace Data Store contains Sites data
+    GOOGLE_SITES = 3;
+
+    // Workspace Data Store contains Calendar data
+    GOOGLE_CALENDAR = 4;
+
+    // Workspace Data Store contains Chat data
+    GOOGLE_CHAT = 5;
+
+    // Workspace Data Store contains Groups data
+    GOOGLE_GROUPS = 6;
+
+    // Workspace Data Store contains Keep data
+    GOOGLE_KEEP = 7;
+  }
+
+  // The Google Workspace data source.
+  Type type = 1;
+
+  // Obfuscated Dasher customer ID.
+  string dasher_customer_id = 2;
 }

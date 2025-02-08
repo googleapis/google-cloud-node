@@ -1,5 +1,69 @@
 # Changelog
 
+## [4.12.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.11.0...data-v4.12.0) (2024-12-18)
+
+
+### Features
+
+* [analytics-data] add the `EmptyFilter` type to the Data API v1alpha ([#5845](https://github.com/googleapis/google-cloud-node/issues/5845)) ([1bcd241](https://github.com/googleapis/google-cloud-node/commit/1bcd2412bd72ce3c3d9b03128c44138964c8a0e6))
+
+## [4.11.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.10.0...data-v4.11.0) (2024-11-21)
+
+
+### Features
+
+* [analytics-data] add `EmptyFilter` type to the Data API v1beta ([#5831](https://github.com/googleapis/google-cloud-node/issues/5831)) ([ced8054](https://github.com/googleapis/google-cloud-node/commit/ced80544ee74321deb881ee42dc5c2db05fbd0a4))
+
+## [4.10.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.9.0...data-v4.10.0) (2024-10-30)
+
+
+### Features
+
+* [analytics-data] add `SamplingLevel` type to Data API v1alpha ([#5759](https://github.com/googleapis/google-cloud-node/issues/5759)) ([96bb1b5](https://github.com/googleapis/google-cloud-node/commit/96bb1b51a7d1481cb16d2d9ca6bc984b3258688d))
+
+## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.8.0...data-v4.9.0) (2024-09-24)
+
+
+### Features
+
+* [analytics-data] add `GetPropertyQuotasSnapshot` method to the Data API v1alpha ([#5692](https://github.com/googleapis/google-cloud-node/issues/5692)) ([a143a79](https://github.com/googleapis/google-cloud-node/commit/a143a7926ab91dce75a2db2d831d498d3f3524d8))
+
+## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.7.0...data-v4.8.0) (2024-08-09)
+
+
+### Features
+
+* [analytics-data] add the `comparisons` field to the `Metadata` resource ([#5600](https://github.com/googleapis/google-cloud-node/issues/5600)) ([e77b934](https://github.com/googleapis/google-cloud-node/commit/e77b9348a198e3a3e60e71474ac3320273d17f6e))
+
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.6.0...data-v4.7.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.5.0...data-v4.6.0) (2024-05-08)
+
+
+### Features
+
+* Add `ReportTask`, `Metric`, `OrderBy`, `Cohort`, `CohortsRange`, `CohortReportSettings`, `ResponseMetaData`, `MetricAggregation`, `RestrictedMetricType` types to the Data API v1alpha ([#5318](https://github.com/googleapis/google-cloud-node/issues/5318)) ([76ae561](https://github.com/googleapis/google-cloud-node/commit/76ae561ee40d66cbba815cd7c9c964a6b92cc00c))
+
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.4.0...data-v4.5.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] support GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable ([#5185](https://github.com/googleapis/google-cloud-node/issues/5185)) ([cc54e98](https://github.com/googleapis/google-cloud-node/commit/cc54e98f7f51598e88277ac50310b07b778acbc7))
+
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.3.0...data-v4.4.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5022](https://github.com/googleapis/google-cloud-node/issues/5022)) ([b6498d8](https://github.com/googleapis/google-cloud-node/commit/b6498d8580d056817981dedbaa0ea5d82e9dccc2))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.2.0...data-v4.3.0) (2023-12-11)
 
 

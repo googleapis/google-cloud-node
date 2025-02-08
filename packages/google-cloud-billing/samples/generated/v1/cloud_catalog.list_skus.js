@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The name of the service.
-   *  Example: "services/DA34-426B-A397"
+   *  Example: "services/6F81-5844-456A"
    */
   // const parent = 'abc123'
   /**
@@ -81,7 +81,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await billingClient.listSkusAsync(request);
+    const iterable = billingClient.listSkusAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -71,6 +71,15 @@ const DeploymentResourcePoolServiceClient =
   v1.DeploymentResourcePoolServiceClient;
 type DeploymentResourcePoolServiceClient =
   v1.DeploymentResourcePoolServiceClient;
+const GenAiTuningServiceClient = v1.GenAiTuningServiceClient;
+type GenAiTuningServiceClient = v1.GenAiTuningServiceClient;
+const NotebookServiceClient = v1.NotebookServiceClient;
+type NotebookServiceClient = v1.NotebookServiceClient;
+const PersistentResourceServiceClient = v1.PersistentResourceServiceClient;
+type PersistentResourceServiceClient = v1.PersistentResourceServiceClient;
+const EvaluationServiceClient = v1.EvaluationServiceClient;
+type EvaluationServiceClient = v1.EvaluationServiceClient;
+
 export {
   v1beta1,
   v1,
@@ -97,6 +106,10 @@ export {
   FeatureRegistryServiceClient,
   LlmUtilityServiceClient,
   DeploymentResourcePoolServiceClient,
+  GenAiTuningServiceClient,
+  NotebookServiceClient,
+  PersistentResourceServiceClient,
+  EvaluationServiceClient,
 };
 export default {
   v1beta1,
@@ -124,6 +137,10 @@ export default {
   FeatureRegistryServiceClient,
   LlmUtilityServiceClient,
   DeploymentResourcePoolServiceClient,
+  GenAiTuningServiceClient,
+  NotebookServiceClient,
+  PersistentResourceServiceClient,
+  EvaluationServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};

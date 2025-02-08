@@ -69,7 +69,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listSavedQueriesAsync(request);
+    const iterable = aiplatformClient.listSavedQueriesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

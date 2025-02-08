@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await inventoryClient.listCryptoKeysAsync(request);
+    const iterable = inventoryClient.listCryptoKeysAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

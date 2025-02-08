@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,6 +38,10 @@ option ruby_package = "Google::Cloud::Bigquery::AnalyticsHub::V1";
 option (google.api.resource_definition) = {
   type: "bigquery.googleapis.com/Dataset"
   pattern: "projects/{project}/datasets/{dataset}"
+};
+option (google.api.resource_definition) = {
+  type: "bigquery.googleapis.com/Table"
+  pattern: "projects/{project}/datasets/{dataset}/tables/{table}"
 };
 
 // The `AnalyticsHubService` API facilitates data sharing within and across
@@ -256,6 +260,10 @@ service AnalyticsHubService {
         post: "/v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:getIamPolicy"
         body: "*"
       }
+      additional_bindings {
+        post: "/v1/{resource=projects/*/locations/*/subscriptions/*}:getIamPolicy"
+        body: "*"
+      }
     };
   }
 
@@ -267,6 +275,10 @@ service AnalyticsHubService {
       body: "*"
       additional_bindings {
         post: "/v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:setIamPolicy"
+        body: "*"
+      }
+      additional_bindings {
+        post: "/v1/{resource=projects/*/locations/*/subscriptions/*}:setIamPolicy"
         body: "*"
       }
     };
@@ -284,6 +296,22 @@ service AnalyticsHubService {
       }
     };
   }
+}
+
+// Specifies the type of discovery on the discovery page. Note that
+// this does not control the visibility of the exchange/listing which is
+// defined by IAM permission.
+enum DiscoveryType {
+  // Unspecified. Defaults to DISCOVERY_TYPE_PRIVATE.
+  DISCOVERY_TYPE_UNSPECIFIED = 0;
+
+  // The Data exchange/listing can be discovered in the 'Private' results
+  // list.
+  DISCOVERY_TYPE_PRIVATE = 1;
+
+  // The Data exchange/listing can be discovered in the 'Public' results
+  // list.
+  DISCOVERY_TYPE_PUBLIC = 2;
 }
 
 // A data exchange is a container that lets you share data. Along with the
@@ -332,6 +360,12 @@ message DataExchange {
   // Optional. Configurable data sharing environment option for a data exchange.
   SharingEnvironmentConfig sharing_environment_config = 8
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Type of discovery on the discovery page for all the listings
+  // under this exchange. Updating this field also updates (overwrites) the
+  // discovery_type field for all the listings under this exchange.
+  optional DiscoveryType discovery_type = 9
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Sharing environment is a behavior model for sharing data within a
@@ -341,7 +375,24 @@ message SharingEnvironmentConfig {
   message DefaultExchangeConfig {}
 
   // Data Clean Room (DCR), used for privacy-safe and secured data sharing.
-  message DcrExchangeConfig {}
+  message DcrExchangeConfig {
+    // Output only. If True, this DCR restricts the contributors to sharing
+    // only a single resource in a Listing. And no two resources should have the
+    // same IDs. So if a contributor adds a view with a conflicting name, the
+    // CreateListing API will reject the request. if False, the data contributor
+    // can publish an entire dataset (as before). This is not configurable, and
+    // by default, all new DCRs will have the restriction set to True.
+    optional bool single_selected_resource_sharing_restriction = 1
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. If True, when subscribing to this DCR, it will create only
+    // one linked dataset containing all resources shared within the
+    // cleanroom. If False, when subscribing to this DCR, it will
+    // create 1 linked dataset per listing. This is not configurable, and by
+    // default, all new DCRs will have the restriction set to True.
+    optional bool single_linked_dataset_per_cleanroom = 2
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
 
   oneof environment {
     // Default Analytics Hub data exchange, used for secured data sharing.
@@ -428,11 +479,56 @@ message Listing {
   // the subscriber's project. A Linked dataset is an opaque, read-only BigQuery
   // dataset that serves as a _symbolic link_ to a shared dataset.
   message BigQueryDatasetSource {
+    // Resource in this dataset that are selectively shared.
+    message SelectedResource {
+      oneof resource {
+        // Optional. Format:
+        // For table:
+        // `projects/{projectId}/datasets/{datasetId}/tables/{tableId}`
+        // Example:"projects/test_project/datasets/test_dataset/tables/test_table"
+        string table = 1 [
+          (google.api.field_behavior) = OPTIONAL,
+          (google.api.resource_reference) = {
+            type: "bigquery.googleapis.com/Table"
+          }
+        ];
+      }
+    }
+
+    // Restricted export policy used to configure restricted export on linked
+    // dataset.
+    message RestrictedExportPolicy {
+      // Optional. If true, enable restricted export.
+      google.protobuf.BoolValue enabled = 1
+          [(google.api.field_behavior) = OPTIONAL];
+
+      // Optional. If true, restrict direct table access (read
+      // api/tabledata.list) on linked table.
+      google.protobuf.BoolValue restrict_direct_table_access = 2
+          [(google.api.field_behavior) = OPTIONAL];
+
+      // Optional. If true, restrict export of query result derived from
+      // restricted linked dataset table.
+      google.protobuf.BoolValue restrict_query_result = 3
+          [(google.api.field_behavior) = OPTIONAL];
+    }
+
     // Resource name of the dataset source for this listing.
     // e.g. `projects/myproject/datasets/123`
     string dataset = 1 [(google.api.resource_reference) = {
       type: "bigquery.googleapis.com/Dataset"
     }];
+
+    // Optional. Resources in this dataset that are selectively shared.
+    // If this field is empty, then the entire dataset (all resources) are
+    // shared. This field is only valid for data clean room exchanges.
+    repeated SelectedResource selected_resources = 2
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. If set, restricted export policy will be propagated and
+    // enforced on the linked dataset.
+    RestrictedExportPolicy restricted_export_policy = 3
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Restricted export config, used to configure restricted export on linked
@@ -562,6 +658,10 @@ message Listing {
   // Optional. If set, restricted export configuration will be propagated and
   // enforced on the linked dataset.
   RestrictedExportConfig restricted_export_config = 13
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Type of discovery of the listing on the discovery page.
+  optional DiscoveryType discovery_type = 14
       [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -850,8 +950,9 @@ message DeleteListingRequest {
 message SubscribeListingRequest {
   // Resulting destination of the listing that you subscribed to.
   oneof destination {
-    // BigQuery destination dataset to create for the subscriber.
-    DestinationDataset destination_dataset = 3;
+    // Input only. BigQuery destination dataset to create for the subscriber.
+    DestinationDataset destination_dataset = 3
+        [(google.api.field_behavior) = INPUT_ONLY];
   }
 
   // Required. Resource name of the listing that you want to subscribe to.
@@ -945,7 +1046,21 @@ message ListSubscriptionsRequest {
     }
   ];
 
-  // The filter expression may be used to filter by Data Exchange or Listing.
+  // An expression for filtering the results of the request. Eligible
+  // fields for filtering are:
+  //
+  //  * `listing`
+  //  * `data_exchange`
+  //
+  // Alternatively, a literal wrapped in double quotes may be provided.
+  // This will be checked for an exact match against both fields above.
+  //
+  // In all cases, the full Data Exchange or Listing resource name must
+  // be provided. Some example of using filters:
+  //
+  //  * data_exchange="projects/myproject/locations/us/dataExchanges/123"
+  //  * listing="projects/123/locations/us/dataExchanges/456/listings/789"
+  //  * "projects/myproject/locations/us/dataExchanges/123"
   string filter = 2;
 
   // The maximum number of results to return in a single response page.

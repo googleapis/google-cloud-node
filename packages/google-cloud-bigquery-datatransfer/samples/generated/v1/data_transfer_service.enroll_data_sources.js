@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main() {
+function main(name) {
   // [START bigquerydatatransfer_v1_generated_DataTransferService_EnrollDataSources_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,8 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the project resource in the form: `projects/{project_id}`
+   *  Required. The name of the project resource in the form:
+   *  `projects/{project_id}`
    */
   // const name = 'abc123'
   /**
@@ -47,6 +48,7 @@ function main() {
   async function callEnrollDataSources() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request

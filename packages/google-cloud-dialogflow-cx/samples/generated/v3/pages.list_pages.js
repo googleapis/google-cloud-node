@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The flow to list all pages for.
-   *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/flows/<Flow ID>`.
+   *  Format:
+   *  `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
    */
   // const parent = 'abc123'
   /**
@@ -79,7 +79,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listPagesAsync(request);
+    const iterable = cxClient.listPagesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

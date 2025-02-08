@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,10 +33,7 @@ function main() {
    */
   // const sshPublicKey = 'abc123'
   /**
-   *  The parent project and zone for the signing request. This is needed to
-   *  properly ensure per-organization ISS processing and potentially to provide
-   *  for the possibility of zone-specific certificates used in the signing
-   *  process.
+   *  The parent project and region for the signing request.
    */
   // const parent = 'abc123'
 

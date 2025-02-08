@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,7 +35,8 @@ function main(name, product) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The resource name for the Product to be removed from this ProductSet.
+   *  Required. The resource name for the Product to be removed from this
+   *  ProductSet.
    *  Format is:
    *  `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
    */

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/places_client_config.json`.
@@ -37,11 +38,10 @@ const version = require('../../../package.json').version;
 
 /**
  *  Service definition for the Places API.
- *  Note: every request actually requires a field mask set outside of
- *  the request proto (all/'*', is not assumed).  That can be set via either a
- *  side channel (SystemParameterContext) over RPC, or a header
- *  (X-Goog-FieldMask) over HTTP. See:
- *  https://cloud.google.com/apis/docs/system-parameters
+ *  Note: every request (except for Autocomplete requests) requires a field mask
+ *  set outside of the request proto (`all/*`, is not assumed). The field mask
+ *  can be set via the HTTP header `X-Goog-FieldMask`. See:
+ *  https://developers.google.com/maps/documentation/places/web-service/choose-fields
  * @class
  * @memberof v1
  */
@@ -53,6 +53,8 @@ export class PlacesClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -110,8 +112,27 @@ export class PlacesClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PlacesClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'places.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -126,7 +147,7 @@ export class PlacesClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -151,16 +172,16 @@ export class PlacesClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -246,6 +267,7 @@ export class PlacesClient {
       'searchText',
       'getPhotoMedia',
       'getPlace',
+      'autocompletePlaces',
     ];
     for (const methodName of placesStubMethods) {
       const callPromise = this.placesStub.then(
@@ -278,19 +300,50 @@ export class PlacesClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'places.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'places.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -307,7 +360,7 @@ export class PlacesClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -436,6 +489,8 @@ export class PlacesClient {
    *   Required. The region to search.
    * @param {google.maps.places.v1.SearchNearbyRequest.RankPreference} request.rankPreference
    *   How results will be ranked in the response.
+   * @param {google.maps.places.v1.RoutingParameters} [request.routingParameters]
+   *   Optional. Parameters that affect the routing to the search results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -568,6 +623,20 @@ export class PlacesClient {
    *   The region to search. This location serves as a restriction which means
    *   results outside given location will not be returned. Cannot be set along
    *   with location_bias.
+   * @param {google.maps.places.v1.SearchTextRequest.EVOptions} [request.evOptions]
+   *   Optional. Set the searchable EV options of a place search request.
+   * @param {google.maps.places.v1.RoutingParameters} [request.routingParameters]
+   *   Optional. Additional parameters for routing to results.
+   * @param {google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters} [request.searchAlongRouteParameters]
+   *   Optional. Additional parameters proto for searching along a route.
+   * @param {boolean} [request.includePureServiceAreaBusinesses]
+   *   Optional. Include pure service area businesses if the field is set to true.
+   *   Pure service area business is a business that visits or delivers to
+   *   customers directly but does not serve customers at their business address.
+   *   For example, businesses like cleaning services or plumbers. Those
+   *   businesses do not have a physical address or location on Google Maps.
+   *   Places will not return fields including `location`, `plus_code`, and other
+   *   location related fields for these businesses.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -757,14 +826,13 @@ export class PlacesClient {
     return this.innerApiCalls.getPhotoMedia(request, options, callback);
   }
   /**
-   * Get place details with a place id (in a name) string.
+   * Get the details of a place based on its resource name, which is a string
+   * in the `places/{place_id}` format.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. A place ID returned in a Place (with "places/" prefix), or
-   *   equivalently the name in the same Place. Format:
-   *   `places/{place_id}`.
+   *   Required. The resource name of a place, in the `places/{place_id}` format.
    * @param {string} [request.languageCode]
    *   Optional. Place details will be displayed with the preferred language if
    *   available.
@@ -781,6 +849,33 @@ export class PlacesClient {
    *
    *
    *   Note that 3-digit region codes are not currently supported.
+   * @param {string} [request.sessionToken]
+   *   Optional. A string which identifies an Autocomplete session for billing
+   *   purposes. Must be a URL and filename safe base64 string with at most 36
+   *   ASCII characters in length. Otherwise an INVALID_ARGUMENT error is
+   *   returned.
+   *
+   *   The session begins when the user starts typing a query, and concludes when
+   *   they select a place and a call to Place Details or Address Validation is
+   *   made. Each session can have multiple queries, followed by one Place Details
+   *   or Address Validation request. The credentials used for each request within
+   *   a session must belong to the same Google Cloud Console project. Once a
+   *   session has concluded, the token is no longer valid; your app must generate
+   *   a fresh token for each session. If the `session_token` parameter is
+   *   omitted, or if you reuse a session token, the session is charged as if no
+   *   session token was provided (each request is billed separately).
+   *
+   *   We recommend the following guidelines:
+   *
+   *   * Use session tokens for all Place Autocomplete calls.
+   *   * Generate a fresh token for each session. Using a version 4 UUID is
+   *     recommended.
+   *   * Ensure that the credentials used for all Place Autocomplete, Place
+   *     Details, and Address Validation requests within a session belong to the
+   *     same Cloud Console project.
+   *   * Be sure to pass a unique session token for each new session. Using the
+   *     same token for more than one session will result in each request being
+   *     billed individually.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -855,6 +950,176 @@ export class PlacesClient {
       });
     this.initialize();
     return this.innerApiCalls.getPlace(request, options, callback);
+  }
+  /**
+   * Returns predictions for the given input.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.input
+   *   Required. The text string on which to search.
+   * @param {google.maps.places.v1.AutocompletePlacesRequest.LocationBias} [request.locationBias]
+   *   Optional. Bias results to a specified location.
+   *
+   *   At most one of `location_bias` or `location_restriction` should be set. If
+   *   neither are set, the results will be biased by IP address, meaning the IP
+   *   address will be mapped to an imprecise location and used as a biasing
+   *   signal.
+   * @param {google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction} [request.locationRestriction]
+   *   Optional. Restrict results to a specified location.
+   *
+   *   At most one of `location_bias` or `location_restriction` should be set. If
+   *   neither are set, the results will be biased by IP address, meaning the IP
+   *   address will be mapped to an imprecise location and used as a biasing
+   *   signal.
+   * @param {string[]} [request.includedPrimaryTypes]
+   *   Optional. Included primary Place type (for example, "restaurant" or
+   *   "gas_station") in Place Types
+   *   (https://developers.google.com/maps/documentation/places/web-service/place-types),
+   *   or only `(regions)`, or only `(cities)`. A Place is only returned if its
+   *   primary type is included in this list. Up to 5 values can be specified. If
+   *   no types are specified, all Place types are returned.
+   * @param {string[]} [request.includedRegionCodes]
+   *   Optional. Only include results in the specified regions, specified as up to
+   *   15 CLDR two-character region codes. An empty set will not restrict the
+   *   results. If both `location_restriction` and `included_region_codes` are
+   *   set, the results will be located in the area of intersection.
+   * @param {string} [request.languageCode]
+   *   Optional. The language in which to return results. Defaults to en-US. The
+   *   results may be in mixed languages if the language used in `input` is
+   *   different from `language_code` or if the returned Place does not have a
+   *   translation from the local language to `language_code`.
+   * @param {string} [request.regionCode]
+   *   Optional. The region code, specified as a CLDR two-character region code.
+   *   This affects address formatting, result ranking, and may influence what
+   *   results are returned. This does not restrict results to the specified
+   *   region. To restrict results to a region, use `region_code_restriction`.
+   * @param {google.type.LatLng} [request.origin]
+   *   Optional. The origin point from which to calculate geodesic distance to the
+   *   destination (returned as `distance_meters`). If this value is omitted,
+   *   geodesic distance will not be returned.
+   * @param {number} [request.inputOffset]
+   *   Optional. A zero-based Unicode character offset of `input` indicating the
+   *   cursor position in `input`. The cursor position may influence what
+   *   predictions are returned.
+   *
+   *   If empty, defaults to the length of `input`.
+   * @param {boolean} [request.includeQueryPredictions]
+   *   Optional. If true, the response will include both Place and query
+   *   predictions. Otherwise the response will only return Place predictions.
+   * @param {string} [request.sessionToken]
+   *   Optional. A string which identifies an Autocomplete session for billing
+   *   purposes. Must be a URL and filename safe base64 string with at most 36
+   *   ASCII characters in length. Otherwise an INVALID_ARGUMENT error is
+   *   returned.
+   *
+   *   The session begins when the user starts typing a query, and concludes when
+   *   they select a place and a call to Place Details or Address Validation is
+   *   made. Each session can have multiple queries, followed by one Place Details
+   *   or Address Validation request. The credentials used for each request within
+   *   a session must belong to the same Google Cloud Console project. Once a
+   *   session has concluded, the token is no longer valid; your app must generate
+   *   a fresh token for each session. If the `session_token` parameter is
+   *   omitted, or if you reuse a session token, the session is charged as if no
+   *   session token was provided (each request is billed separately).
+   *
+   *   We recommend the following guidelines:
+   *
+   *   * Use session tokens for all Place Autocomplete calls.
+   *   * Generate a fresh token for each session. Using a version 4 UUID is
+   *     recommended.
+   *   * Ensure that the credentials used for all Place Autocomplete, Place
+   *     Details, and Address Validation requests within a session belong to the
+   *     same Cloud Console project.
+   *   * Be sure to pass a unique session token for each new session. Using the
+   *     same token for more than one session will result in each request being
+   *     billed individually.
+   * @param {boolean} [request.includePureServiceAreaBusinesses]
+   *   Optional. Include pure service area businesses if the field is set to true.
+   *   Pure service area business is a business that visits or delivers to
+   *   customers directly but does not serve customers at their business address.
+   *   For example, businesses like cleaning services or plumbers. Those
+   *   businesses do not have a physical address or location on Google Maps.
+   *   Places will not return fields including `location`, `plus_code`, and other
+   *   location related fields for these businesses.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.places.v1.AutocompletePlacesResponse|AutocompletePlacesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/places.autocomplete_places.js</caption>
+   * region_tag:places_v1_generated_Places_AutocompletePlaces_async
+   */
+  autocompletePlaces(
+    request?: protos.google.maps.places.v1.IAutocompletePlacesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.maps.places.v1.IAutocompletePlacesResponse,
+      protos.google.maps.places.v1.IAutocompletePlacesRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  autocompletePlaces(
+    request: protos.google.maps.places.v1.IAutocompletePlacesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.places.v1.IAutocompletePlacesResponse,
+      | protos.google.maps.places.v1.IAutocompletePlacesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  autocompletePlaces(
+    request: protos.google.maps.places.v1.IAutocompletePlacesRequest,
+    callback: Callback<
+      protos.google.maps.places.v1.IAutocompletePlacesResponse,
+      | protos.google.maps.places.v1.IAutocompletePlacesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  autocompletePlaces(
+    request?: protos.google.maps.places.v1.IAutocompletePlacesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.maps.places.v1.IAutocompletePlacesResponse,
+          | protos.google.maps.places.v1.IAutocompletePlacesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.places.v1.IAutocompletePlacesResponse,
+      | protos.google.maps.places.v1.IAutocompletePlacesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.maps.places.v1.IAutocompletePlacesResponse,
+      protos.google.maps.places.v1.IAutocompletePlacesRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize();
+    return this.innerApiCalls.autocompletePlaces(request, options, callback);
   }
 
   // --------------------

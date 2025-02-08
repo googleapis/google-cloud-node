@@ -1,4 +1,7 @@
 [
+  "../../protos/google/cloud/alloydb/v1alpha/csql_resources.proto",
+  "../../protos/google/cloud/alloydb/v1alpha/data_model.proto",
+  "../../protos/google/cloud/alloydb/v1alpha/gemini.proto",
   "../../protos/google/cloud/alloydb/v1alpha/resources.proto",
   "../../protos/google/cloud/alloydb/v1alpha/service.proto"
 ]

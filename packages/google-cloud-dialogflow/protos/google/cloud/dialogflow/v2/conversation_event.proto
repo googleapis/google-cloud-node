@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@ syntax = "proto3";
 package google.cloud.dialogflow.v2;
 
 import "google/cloud/dialogflow/v2/participant.proto";
+import "google/cloud/dialogflow/v2/session.proto";
 import "google/rpc/status.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
 option go_package = "cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb";
 option java_multiple_files = true;
@@ -52,6 +52,12 @@ message ConversationEvent {
     // [ConversationProfile.new_message_event_notification_config][google.cloud.dialogflow.v2.ConversationProfile.new_message_event_notification_config]
     NEW_MESSAGE = 5;
 
+    // An existing conversation has received a new speech recognition result.
+    // This is mainly for delivering intermediate transcripts. The notification
+    // is configured in
+    // [ConversationProfile.new_recognition_event_notification_config][].
+    NEW_RECOGNITION_RESULT = 7;
+
     // Unrecoverable error during a telephone call.
     //
     // In general non-recoverable errors only occur if something was
@@ -81,5 +87,8 @@ message ConversationEvent {
   oneof payload {
     // Payload of NEW_MESSAGE event.
     Message new_message_payload = 4;
+
+    // Payload of NEW_RECOGNITION_RESULT event.
+    StreamingRecognitionResult new_recognition_result_payload = 5;
   }
 }

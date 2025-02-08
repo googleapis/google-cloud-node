@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/aiplatform/v1beta1/encryption_spec.proto";
 import "google/cloud/aiplatform/v1beta1/machine_resources.proto";
+import "google/cloud/aiplatform/v1beta1/service_networking.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 
@@ -60,6 +61,13 @@ message PersistentResource {
     // The ERROR state indicates the persistent resource may be unusable.
     // Details can be found in the `error` field.
     ERROR = 5;
+
+    // The REBOOTING state indicates the persistent resource is being rebooted
+    // (PR is not available right now but is expected to be ready again later).
+    REBOOTING = 6;
+
+    // The UPDATING state indicates the persistent resource is being updated.
+    UPDATING = 7;
   }
 
   // Immutable. Resource name of a PersistentResource.
@@ -124,6 +132,10 @@ message PersistentResource {
     (google.api.resource_reference) = { type: "compute.googleapis.com/Network" }
   ];
 
+  // Optional. Configuration for PSC-I for PersistentResource.
+  PscInterfaceConfig psc_interface_config = 17
+      [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. Customer-managed encryption key spec for a PersistentResource.
   // If set, this PersistentResource and all sub-resources of this
   // PersistentResource will be secured by this key.
@@ -148,6 +160,12 @@ message PersistentResource {
   // Example: ['vertex-ai-ip-range'].
   repeated string reserved_ip_ranges = 15
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. Reserved for future use.
+  bool satisfies_pzs = 18 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Reserved for future use.
+  bool satisfies_pzi = 19 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Represents the spec of a group of resources of the same type,
@@ -156,7 +174,13 @@ message ResourcePool {
   // The min/max number of replicas allowed if enabling autoscaling
   message AutoscalingSpec {
     // Optional. min replicas in the node pool,
-    // must be ≤ replica_count and < max_replica_count or will throw error
+    // must be ≤ replica_count and < max_replica_count or will throw error.
+    // For autoscaling enabled Ray-on-Vertex, we allow min_replica_count of a
+    // resource_pool to be 0 to match the OSS Ray
+    // behavior(https://docs.ray.io/en/latest/cluster/vms/user-guides/configuring-autoscaling.html#cluster-config-parameters).
+    // As for Persistent Resource, the min_replica_count must be > 0, we added
+    // a corresponding validation inside
+    // CreatePersistentResourceRequestValidator.java.
     optional int64 min_replica_count = 1
         [(google.api.field_behavior) = OPTIONAL];
 
@@ -187,7 +211,7 @@ message ResourcePool {
   // this resource pool. Will replace idle_replica_count.
   int64 used_replica_count = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Optional. Optional spec to configure GKE autoscaling
+  // Optional. Optional spec to configure GKE or Ray-on-Vertex autoscaling
   AutoscalingSpec autoscaling_spec = 7 [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -219,6 +243,9 @@ message RaySpec {
   // the {@code resource_pool_images} field.
   string image_uri = 1 [(google.api.field_behavior) = OPTIONAL];
 
+  // Optional. Use if you want to mount to any NFS storages.
+  repeated NfsMount nfs_mounts = 11 [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. Required if image_uri isn't set. A map of resource_pool_id to
   // prebuild Ray image if user need to use different images for different
   // head/worker pools. This map needs to cover all the resource pool ids.
@@ -237,6 +264,12 @@ message RaySpec {
   // set.
   string head_node_resource_pool_id = 7
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Ray metrics configurations.
+  RayMetricSpec ray_metric_spec = 8 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. OSS Ray logging configurations.
+  RayLogsSpec ray_logs_spec = 10 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Persistent Cluster runtime information as output
@@ -249,6 +282,19 @@ message ResourceRuntime {
   // }
   map<string, string> access_uris = 1
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The resource name of NotebookRuntimeTemplate for the RoV
+  // Persistent Cluster The NotebokRuntimeTemplate is created in the same VPC
+  // (if set), and with the same Ray and Python version as the Persistent
+  // Cluster. Example:
+  //   "projects/1000/locations/us-central1/notebookRuntimeTemplates/abc123"
+  string notebook_runtime_template = 2 [
+    deprecated = true,
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/NotebookRuntimeTemplate"
+    }
+  ];
 }
 
 // Configuration for the use of custom service account to run the workloads.
@@ -260,17 +306,28 @@ message ServiceAccountSpec {
   bool enable_custom_service_account = 1
       [(google.api.field_behavior) = REQUIRED];
 
-  // Optional. Default service account that this PersistentResource's workloads
-  // run as. The workloads include:
+  // Optional. Required when all below conditions are met
+  //  * `enable_custom_service_account` is true;
+  //  * any runtime is specified via `ResourceRuntimeSpec` on creation time,
+  //    for example, Ray
   //
-  //  * Any runtime specified via `ResourceRuntimeSpec` on creation time,
-  //    for example, Ray.
-  //  * Jobs submitted to PersistentResource, if no other service account
-  //    specified in the job specs.
+  // The users must have `iam.serviceAccounts.actAs` permission on this service
+  // account and then the specified runtime containers will run as it.
   //
-  // Only works when custom service account is enabled and users have the
-  // `iam.serviceAccounts.actAs` permission on this service account.
-  //
-  // Required if any containers are specified in `ResourceRuntimeSpec`.
+  // Do not set this field if you want to submit jobs using custom service
+  // account to this PersistentResource after creation, but only specify the
+  // `service_account` inside the job.
   string service_account = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Configuration for the Ray metrics.
+message RayMetricSpec {
+  // Optional. Flag to disable the Ray metrics collection.
+  bool disabled = 1 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Configuration for the Ray OSS Logs.
+message RayLogsSpec {
+  // Optional. Flag to disable the export of Ray OSS logs to Cloud Logging.
+  bool disabled = 1 [(google.api.field_behavior) = OPTIONAL];
 }

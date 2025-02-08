@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package google.maps.places.v1;
 import "google/protobuf/timestamp.proto";
 import "google/type/money.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Maps.Places.V1";
 option go_package = "cloud.google.com/go/maps/places/apiv1/placespb;placespb";
 option java_multiple_files = true;
@@ -40,6 +39,9 @@ message FuelOptions {
 
       // Diesel fuel.
       DIESEL = 1;
+
+      // Diesel plus fuel.
+      DIESEL_PLUS = 19;
 
       // Regular unleaded.
       REGULAR_UNLEADED = 2;
@@ -74,7 +76,7 @@ message FuelOptions {
       // SP 100.
       SP100 = 12;
 
-      // LPG.
+      // Liquefied Petroleum Gas.
       LPG = 13;
 
       // E 80.
@@ -82,6 +84,9 @@ message FuelOptions {
 
       // E 85.
       E85 = 15;
+
+      // E 100.
+      E100 = 20;
 
       // Methane.
       METHANE = 16;

@@ -57,7 +57,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await mapsplatformdatasetsClient.listDatasetVersionsAsync(request);
+    const iterable = mapsplatformdatasetsClient.listDatasetVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

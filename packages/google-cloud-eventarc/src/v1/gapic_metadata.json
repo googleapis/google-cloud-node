@@ -40,6 +40,26 @@
                 "updateGoogleChannelConfig"
               ]
             },
+            "GetMessageBus": {
+              "methods": [
+                "getMessageBus"
+              ]
+            },
+            "GetEnrollment": {
+              "methods": [
+                "getEnrollment"
+              ]
+            },
+            "GetPipeline": {
+              "methods": [
+                "getPipeline"
+              ]
+            },
+            "GetGoogleApiSource": {
+              "methods": [
+                "getGoogleApiSource"
+              ]
+            },
             "CreateTrigger": {
               "methods": [
                 "createTrigger"
@@ -80,6 +100,66 @@
                 "deleteChannelConnection"
               ]
             },
+            "CreateMessageBus": {
+              "methods": [
+                "createMessageBus"
+              ]
+            },
+            "UpdateMessageBus": {
+              "methods": [
+                "updateMessageBus"
+              ]
+            },
+            "DeleteMessageBus": {
+              "methods": [
+                "deleteMessageBus"
+              ]
+            },
+            "CreateEnrollment": {
+              "methods": [
+                "createEnrollment"
+              ]
+            },
+            "UpdateEnrollment": {
+              "methods": [
+                "updateEnrollment"
+              ]
+            },
+            "DeleteEnrollment": {
+              "methods": [
+                "deleteEnrollment"
+              ]
+            },
+            "CreatePipeline": {
+              "methods": [
+                "createPipeline"
+              ]
+            },
+            "UpdatePipeline": {
+              "methods": [
+                "updatePipeline"
+              ]
+            },
+            "DeletePipeline": {
+              "methods": [
+                "deletePipeline"
+              ]
+            },
+            "CreateGoogleApiSource": {
+              "methods": [
+                "createGoogleApiSource"
+              ]
+            },
+            "UpdateGoogleApiSource": {
+              "methods": [
+                "updateGoogleApiSource"
+              ]
+            },
+            "DeleteGoogleApiSource": {
+              "methods": [
+                "deleteGoogleApiSource"
+              ]
+            },
             "ListTriggers": {
               "methods": [
                 "listTriggers",
@@ -106,6 +186,41 @@
                 "listChannelConnections",
                 "listChannelConnectionsStream",
                 "listChannelConnectionsAsync"
+              ]
+            },
+            "ListMessageBuses": {
+              "methods": [
+                "listMessageBuses",
+                "listMessageBusesStream",
+                "listMessageBusesAsync"
+              ]
+            },
+            "ListMessageBusEnrollments": {
+              "methods": [
+                "listMessageBusEnrollments",
+                "listMessageBusEnrollmentsStream",
+                "listMessageBusEnrollmentsAsync"
+              ]
+            },
+            "ListEnrollments": {
+              "methods": [
+                "listEnrollments",
+                "listEnrollmentsStream",
+                "listEnrollmentsAsync"
+              ]
+            },
+            "ListPipelines": {
+              "methods": [
+                "listPipelines",
+                "listPipelinesStream",
+                "listPipelinesAsync"
+              ]
+            },
+            "ListGoogleApiSources": {
+              "methods": [
+                "listGoogleApiSources",
+                "listGoogleApiSourcesStream",
+                "listGoogleApiSourcesAsync"
               ]
             }
           }
@@ -143,6 +258,26 @@
                 "updateGoogleChannelConfig"
               ]
             },
+            "GetMessageBus": {
+              "methods": [
+                "getMessageBus"
+              ]
+            },
+            "GetEnrollment": {
+              "methods": [
+                "getEnrollment"
+              ]
+            },
+            "GetPipeline": {
+              "methods": [
+                "getPipeline"
+              ]
+            },
+            "GetGoogleApiSource": {
+              "methods": [
+                "getGoogleApiSource"
+              ]
+            },
             "CreateTrigger": {
               "methods": [
                 "createTrigger"
@@ -183,6 +318,66 @@
                 "deleteChannelConnection"
               ]
             },
+            "CreateMessageBus": {
+              "methods": [
+                "createMessageBus"
+              ]
+            },
+            "UpdateMessageBus": {
+              "methods": [
+                "updateMessageBus"
+              ]
+            },
+            "DeleteMessageBus": {
+              "methods": [
+                "deleteMessageBus"
+              ]
+            },
+            "CreateEnrollment": {
+              "methods": [
+                "createEnrollment"
+              ]
+            },
+            "UpdateEnrollment": {
+              "methods": [
+                "updateEnrollment"
+              ]
+            },
+            "DeleteEnrollment": {
+              "methods": [
+                "deleteEnrollment"
+              ]
+            },
+            "CreatePipeline": {
+              "methods": [
+                "createPipeline"
+              ]
+            },
+            "UpdatePipeline": {
+              "methods": [
+                "updatePipeline"
+              ]
+            },
+            "DeletePipeline": {
+              "methods": [
+                "deletePipeline"
+              ]
+            },
+            "CreateGoogleApiSource": {
+              "methods": [
+                "createGoogleApiSource"
+              ]
+            },
+            "UpdateGoogleApiSource": {
+              "methods": [
+                "updateGoogleApiSource"
+              ]
+            },
+            "DeleteGoogleApiSource": {
+              "methods": [
+                "deleteGoogleApiSource"
+              ]
+            },
             "ListTriggers": {
               "methods": [
                 "listTriggers",
@@ -209,6 +404,41 @@
                 "listChannelConnections",
                 "listChannelConnectionsStream",
                 "listChannelConnectionsAsync"
+              ]
+            },
+            "ListMessageBuses": {
+              "methods": [
+                "listMessageBuses",
+                "listMessageBusesStream",
+                "listMessageBusesAsync"
+              ]
+            },
+            "ListMessageBusEnrollments": {
+              "methods": [
+                "listMessageBusEnrollments",
+                "listMessageBusEnrollmentsStream",
+                "listMessageBusEnrollmentsAsync"
+              ]
+            },
+            "ListEnrollments": {
+              "methods": [
+                "listEnrollments",
+                "listEnrollmentsStream",
+                "listEnrollmentsAsync"
+              ]
+            },
+            "ListPipelines": {
+              "methods": [
+                "listPipelines",
+                "listPipelinesStream",
+                "listPipelinesAsync"
+              ]
+            },
+            "ListGoogleApiSources": {
+              "methods": [
+                "listGoogleApiSources",
+                "listGoogleApiSourcesStream",
+                "listGoogleApiSourcesAsync"
               ]
             }
           }

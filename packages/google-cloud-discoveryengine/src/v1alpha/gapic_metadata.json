@@ -5,6 +5,78 @@
   "protoPackage": "google.cloud.discoveryengine.v1alpha",
   "libraryPackage": "@google-cloud/discoveryengine",
   "services": {
+    "AclConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AclConfigServiceClient",
+          "rpcs": {
+            "UpdateAclConfig": {
+              "methods": [
+                "updateAclConfig"
+              ]
+            },
+            "GetAclConfig": {
+              "methods": [
+                "getAclConfig"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AclConfigServiceClient",
+          "rpcs": {
+            "UpdateAclConfig": {
+              "methods": [
+                "updateAclConfig"
+              ]
+            },
+            "GetAclConfig": {
+              "methods": [
+                "getAclConfig"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ChunkService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ChunkServiceClient",
+          "rpcs": {
+            "GetChunk": {
+              "methods": [
+                "getChunk"
+              ]
+            },
+            "ListChunks": {
+              "methods": [
+                "listChunks",
+                "listChunksStream",
+                "listChunksAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ChunkServiceClient",
+          "rpcs": {
+            "GetChunk": {
+              "methods": [
+                "getChunk"
+              ]
+            },
+            "ListChunks": {
+              "methods": [
+                "listChunks",
+                "listChunksStream",
+                "listChunksAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CompletionService": {
       "clients": {
         "grpc": {
@@ -13,6 +85,26 @@
             "CompleteQuery": {
               "methods": [
                 "completeQuery"
+              ]
+            },
+            "ImportSuggestionDenyListEntries": {
+              "methods": [
+                "importSuggestionDenyListEntries"
+              ]
+            },
+            "PurgeSuggestionDenyListEntries": {
+              "methods": [
+                "purgeSuggestionDenyListEntries"
+              ]
+            },
+            "ImportCompletionSuggestions": {
+              "methods": [
+                "importCompletionSuggestions"
+              ]
+            },
+            "PurgeCompletionSuggestions": {
+              "methods": [
+                "purgeCompletionSuggestions"
               ]
             }
           }
@@ -23,6 +115,94 @@
             "CompleteQuery": {
               "methods": [
                 "completeQuery"
+              ]
+            },
+            "ImportSuggestionDenyListEntries": {
+              "methods": [
+                "importSuggestionDenyListEntries"
+              ]
+            },
+            "PurgeSuggestionDenyListEntries": {
+              "methods": [
+                "purgeSuggestionDenyListEntries"
+              ]
+            },
+            "ImportCompletionSuggestions": {
+              "methods": [
+                "importCompletionSuggestions"
+              ]
+            },
+            "PurgeCompletionSuggestions": {
+              "methods": [
+                "purgeCompletionSuggestions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ControlService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ControlServiceClient",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "createControl"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "deleteControl"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "updateControl"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "getControl"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "listControls",
+                "listControlsStream",
+                "listControlsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ControlServiceClient",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "createControl"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "deleteControl"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "updateControl"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "getControl"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "listControls",
+                "listControlsStream",
+                "listControlsAsync"
               ]
             }
           }
@@ -59,11 +239,48 @@
                 "getConversation"
               ]
             },
+            "AnswerQuery": {
+              "methods": [
+                "answerQuery"
+              ]
+            },
+            "GetAnswer": {
+              "methods": [
+                "getAnswer"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
                 "listConversationsStream",
                 "listConversationsAsync"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
               ]
             }
           }
@@ -96,11 +313,48 @@
                 "getConversation"
               ]
             },
+            "AnswerQuery": {
+              "methods": [
+                "answerQuery"
+              ]
+            },
+            "GetAnswer": {
+              "methods": [
+                "getAnswer"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
                 "listConversationsStream",
                 "listConversationsAsync"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
               ]
             }
           }
@@ -120,6 +374,16 @@
             "UpdateDataStore": {
               "methods": [
                 "updateDataStore"
+              ]
+            },
+            "GetDocumentProcessingConfig": {
+              "methods": [
+                "getDocumentProcessingConfig"
+              ]
+            },
+            "UpdateDocumentProcessingConfig": {
+              "methods": [
+                "updateDocumentProcessingConfig"
               ]
             },
             "CreateDataStore": {
@@ -152,6 +416,16 @@
             "UpdateDataStore": {
               "methods": [
                 "updateDataStore"
+              ]
+            },
+            "GetDocumentProcessingConfig": {
+              "methods": [
+                "getDocumentProcessingConfig"
+              ]
+            },
+            "UpdateDocumentProcessingConfig": {
+              "methods": [
+                "updateDocumentProcessingConfig"
               ]
             },
             "CreateDataStore": {
@@ -200,6 +474,16 @@
                 "deleteDocument"
               ]
             },
+            "GetProcessedDocument": {
+              "methods": [
+                "getProcessedDocument"
+              ]
+            },
+            "BatchGetDocumentsMetadata": {
+              "methods": [
+                "batchGetDocumentsMetadata"
+              ]
+            },
             "ImportDocuments": {
               "methods": [
                 "importDocuments"
@@ -240,6 +524,16 @@
             "DeleteDocument": {
               "methods": [
                 "deleteDocument"
+              ]
+            },
+            "GetProcessedDocument": {
+              "methods": [
+                "getProcessedDocument"
+              ]
+            },
+            "BatchGetDocumentsMetadata": {
+              "methods": [
+                "batchGetDocumentsMetadata"
               ]
             },
             "ImportDocuments": {
@@ -361,6 +655,184 @@
         }
       }
     },
+    "EstimateBillingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EstimateBillingServiceClient",
+          "rpcs": {
+            "EstimateDataSize": {
+              "methods": [
+                "estimateDataSize"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EstimateBillingServiceClient",
+          "rpcs": {
+            "EstimateDataSize": {
+              "methods": [
+                "estimateDataSize"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "EvaluationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EvaluationServiceClient",
+          "rpcs": {
+            "GetEvaluation": {
+              "methods": [
+                "getEvaluation"
+              ]
+            },
+            "CreateEvaluation": {
+              "methods": [
+                "createEvaluation"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "listEvaluations",
+                "listEvaluationsStream",
+                "listEvaluationsAsync"
+              ]
+            },
+            "ListEvaluationResults": {
+              "methods": [
+                "listEvaluationResults",
+                "listEvaluationResultsStream",
+                "listEvaluationResultsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EvaluationServiceClient",
+          "rpcs": {
+            "GetEvaluation": {
+              "methods": [
+                "getEvaluation"
+              ]
+            },
+            "CreateEvaluation": {
+              "methods": [
+                "createEvaluation"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "listEvaluations",
+                "listEvaluationsStream",
+                "listEvaluationsAsync"
+              ]
+            },
+            "ListEvaluationResults": {
+              "methods": [
+                "listEvaluationResults",
+                "listEvaluationResultsStream",
+                "listEvaluationResultsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GroundedGenerationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GroundedGenerationServiceClient",
+          "rpcs": {
+            "CheckGrounding": {
+              "methods": [
+                "checkGrounding"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GroundedGenerationServiceClient",
+          "rpcs": {
+            "CheckGrounding": {
+              "methods": [
+                "checkGrounding"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProjectService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProjectServiceClient",
+          "rpcs": {
+            "GetProject": {
+              "methods": [
+                "getProject"
+              ]
+            },
+            "ReportConsentChange": {
+              "methods": [
+                "reportConsentChange"
+              ]
+            },
+            "ProvisionProject": {
+              "methods": [
+                "provisionProject"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProjectServiceClient",
+          "rpcs": {
+            "GetProject": {
+              "methods": [
+                "getProject"
+              ]
+            },
+            "ReportConsentChange": {
+              "methods": [
+                "reportConsentChange"
+              ]
+            },
+            "ProvisionProject": {
+              "methods": [
+                "provisionProject"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RankService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RankServiceClient",
+          "rpcs": {
+            "Rank": {
+              "methods": [
+                "rank"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RankServiceClient",
+          "rpcs": {
+            "Rank": {
+              "methods": [
+                "rank"
+              ]
+            }
+          }
+        }
+      }
+    },
     "RecommendationService": {
       "clients": {
         "grpc": {
@@ -379,6 +851,152 @@
             "Recommend": {
               "methods": [
                 "recommend"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SampleQueryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SampleQueryServiceClient",
+          "rpcs": {
+            "GetSampleQuery": {
+              "methods": [
+                "getSampleQuery"
+              ]
+            },
+            "CreateSampleQuery": {
+              "methods": [
+                "createSampleQuery"
+              ]
+            },
+            "UpdateSampleQuery": {
+              "methods": [
+                "updateSampleQuery"
+              ]
+            },
+            "DeleteSampleQuery": {
+              "methods": [
+                "deleteSampleQuery"
+              ]
+            },
+            "ImportSampleQueries": {
+              "methods": [
+                "importSampleQueries"
+              ]
+            },
+            "ListSampleQueries": {
+              "methods": [
+                "listSampleQueries",
+                "listSampleQueriesStream",
+                "listSampleQueriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SampleQueryServiceClient",
+          "rpcs": {
+            "GetSampleQuery": {
+              "methods": [
+                "getSampleQuery"
+              ]
+            },
+            "CreateSampleQuery": {
+              "methods": [
+                "createSampleQuery"
+              ]
+            },
+            "UpdateSampleQuery": {
+              "methods": [
+                "updateSampleQuery"
+              ]
+            },
+            "DeleteSampleQuery": {
+              "methods": [
+                "deleteSampleQuery"
+              ]
+            },
+            "ImportSampleQueries": {
+              "methods": [
+                "importSampleQueries"
+              ]
+            },
+            "ListSampleQueries": {
+              "methods": [
+                "listSampleQueries",
+                "listSampleQueriesStream",
+                "listSampleQueriesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SampleQuerySetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SampleQuerySetServiceClient",
+          "rpcs": {
+            "GetSampleQuerySet": {
+              "methods": [
+                "getSampleQuerySet"
+              ]
+            },
+            "CreateSampleQuerySet": {
+              "methods": [
+                "createSampleQuerySet"
+              ]
+            },
+            "UpdateSampleQuerySet": {
+              "methods": [
+                "updateSampleQuerySet"
+              ]
+            },
+            "DeleteSampleQuerySet": {
+              "methods": [
+                "deleteSampleQuerySet"
+              ]
+            },
+            "ListSampleQuerySets": {
+              "methods": [
+                "listSampleQuerySets",
+                "listSampleQuerySetsStream",
+                "listSampleQuerySetsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SampleQuerySetServiceClient",
+          "rpcs": {
+            "GetSampleQuerySet": {
+              "methods": [
+                "getSampleQuerySet"
+              ]
+            },
+            "CreateSampleQuerySet": {
+              "methods": [
+                "createSampleQuerySet"
+              ]
+            },
+            "UpdateSampleQuerySet": {
+              "methods": [
+                "updateSampleQuerySet"
+              ]
+            },
+            "DeleteSampleQuerySet": {
+              "methods": [
+                "deleteSampleQuerySet"
+              ]
+            },
+            "ListSampleQuerySets": {
+              "methods": [
+                "listSampleQuerySets",
+                "listSampleQuerySetsStream",
+                "listSampleQuerySetsAsync"
               ]
             }
           }
@@ -486,6 +1104,11 @@
         "grpc": {
           "libraryClient": "SearchTuningServiceClient",
           "rpcs": {
+            "ListCustomModels": {
+              "methods": [
+                "listCustomModels"
+              ]
+            },
             "TrainCustomModel": {
               "methods": [
                 "trainCustomModel"
@@ -496,9 +1119,62 @@
         "grpc-fallback": {
           "libraryClient": "SearchTuningServiceClient",
           "rpcs": {
+            "ListCustomModels": {
+              "methods": [
+                "listCustomModels"
+              ]
+            },
             "TrainCustomModel": {
               "methods": [
                 "trainCustomModel"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ServingConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ServingConfigServiceClient",
+          "rpcs": {
+            "UpdateServingConfig": {
+              "methods": [
+                "updateServingConfig"
+              ]
+            },
+            "GetServingConfig": {
+              "methods": [
+                "getServingConfig"
+              ]
+            },
+            "ListServingConfigs": {
+              "methods": [
+                "listServingConfigs",
+                "listServingConfigsStream",
+                "listServingConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ServingConfigServiceClient",
+          "rpcs": {
+            "UpdateServingConfig": {
+              "methods": [
+                "updateServingConfig"
+              ]
+            },
+            "GetServingConfig": {
+              "methods": [
+                "getServingConfig"
+              ]
+            },
+            "ListServingConfigs": {
+              "methods": [
+                "listServingConfigs",
+                "listServingConfigsStream",
+                "listServingConfigsAsync"
               ]
             }
           }
@@ -518,6 +1194,11 @@
             "GetTargetSite": {
               "methods": [
                 "getTargetSite"
+              ]
+            },
+            "GetUriPatternDocumentData": {
+              "methods": [
+                "getUriPatternDocumentData"
               ]
             },
             "CreateTargetSite": {
@@ -558,6 +1239,11 @@
             "BatchVerifyTargetSites": {
               "methods": [
                 "batchVerifyTargetSites"
+              ]
+            },
+            "SetUriPatternDocumentData": {
+              "methods": [
+                "setUriPatternDocumentData"
               ]
             },
             "ListTargetSites": {
@@ -589,6 +1275,11 @@
                 "getTargetSite"
               ]
             },
+            "GetUriPatternDocumentData": {
+              "methods": [
+                "getUriPatternDocumentData"
+              ]
+            },
             "CreateTargetSite": {
               "methods": [
                 "createTargetSite"
@@ -627,6 +1318,11 @@
             "BatchVerifyTargetSites": {
               "methods": [
                 "batchVerifyTargetSites"
+              ]
+            },
+            "SetUriPatternDocumentData": {
+              "methods": [
+                "setUriPatternDocumentData"
               ]
             },
             "ListTargetSites": {

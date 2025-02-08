@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,16 +34,16 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The target number of results to return in a single response.
+   *  Optional. The target number of results to return in a single response.
    *  If not specified, a default value will be chosen by the service.
-   *  Note that the response may inclue a partial list and a caller should
+   *  Note that the response may include a partial list and a caller should
    *  only rely on the response's
    *  next_page_token google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token 
    *  to determine if there are more instances left to be queried.
    */
   // const pageSize = 1234
   /**
-   *  The value of
+   *  Optional. The value of
    *  next_page_token google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token 
    *  received from a previous `ListBackupPlans` call.
    *  Provide this to retrieve the subsequent page in a multi-page list of
@@ -52,11 +52,11 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Field match expression used to filter the results.
+   *  Optional. Field match expression used to filter the results.
    */
   // const filter = 'abc123'
   /**
-   *  Field by which to sort the results.
+   *  Optional. Field by which to sort the results.
    */
   // const orderBy = 'abc123'
 
@@ -73,7 +73,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await gkebackupClient.listBackupPlansAsync(request);
+    const iterable = gkebackupClient.listBackupPlansAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

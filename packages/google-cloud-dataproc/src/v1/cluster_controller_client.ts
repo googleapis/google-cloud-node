@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/cluster_controller_client_config.json`.
@@ -55,6 +56,8 @@ export class ClusterControllerClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -114,8 +117,27 @@ export class ClusterControllerClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ClusterControllerClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'dataproc.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -130,7 +152,7 @@ export class ClusterControllerClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -155,17 +177,17 @@ export class ClusterControllerClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -187,6 +209,9 @@ export class ClusterControllerClient {
     this.pathTemplates = {
       batchPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batches/{batch}'
+      ),
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
       nodeGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{node_group}'
@@ -529,19 +554,50 @@ export class ClusterControllerClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'dataproc.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'dataproc.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -1552,9 +1608,12 @@ export class ClusterControllerClient {
    * @param {string} request.clusterName
    *   Required. The cluster name.
    * @param {string} [request.tarballGcsDir]
-   *   Optional. The output Cloud Storage directory for the diagnostic
+   *   Optional. (Optional) The output Cloud Storage directory for the diagnostic
    *   tarball. If not specified, a task-specific directory in the cluster's
    *   staging bucket will be used.
+   * @param {google.cloud.dataproc.v1.DiagnoseClusterRequest.TarballAccess} [request.tarballAccess]
+   *   Optional. (Optional) The access type to the diagnostic tarball. If not
+   *   specified, falls back to default access of the bucket
    * @param {google.type.Interval} [request.diagnosisInterval]
    *   Optional. Time interval in which diagnosis should be carried out on the
    *   cluster.
@@ -1714,12 +1773,12 @@ export class ClusterControllerClient {
    *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
    *   and `[KEY]` is a label key. **value** can be `*` to match all values.
    *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
-   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
-   *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
-   *   contains the `DELETING` and `ERROR` states.
-   *   `clusterName` is the name of the cluster provided at creation time.
-   *   Only the logical `AND` operator is supported; space-separated items are
-   *   treated as having an implicit `AND` operator.
+   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, `UPDATING`, `STOPPING`, or
+   *   `STOPPED`. `ACTIVE` contains the `CREATING`, `UPDATING`, and `RUNNING`
+   *   states. `INACTIVE` contains the `DELETING`, `ERROR`, `STOPPING`, and
+   *   `STOPPED` states. `clusterName` is the name of the cluster provided at
+   *   creation time. Only the logical `AND` operator is supported;
+   *   space-separated items are treated as having an implicit `AND` operator.
    *
    *   Example filter:
    *
@@ -1829,12 +1888,12 @@ export class ClusterControllerClient {
    *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
    *   and `[KEY]` is a label key. **value** can be `*` to match all values.
    *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
-   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
-   *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
-   *   contains the `DELETING` and `ERROR` states.
-   *   `clusterName` is the name of the cluster provided at creation time.
-   *   Only the logical `AND` operator is supported; space-separated items are
-   *   treated as having an implicit `AND` operator.
+   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, `UPDATING`, `STOPPING`, or
+   *   `STOPPED`. `ACTIVE` contains the `CREATING`, `UPDATING`, and `RUNNING`
+   *   states. `INACTIVE` contains the `DELETING`, `ERROR`, `STOPPING`, and
+   *   `STOPPED` states. `clusterName` is the name of the cluster provided at
+   *   creation time. Only the logical `AND` operator is supported;
+   *   space-separated items are treated as having an implicit `AND` operator.
    *
    *   Example filter:
    *
@@ -1898,12 +1957,12 @@ export class ClusterControllerClient {
    *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
    *   and `[KEY]` is a label key. **value** can be `*` to match all values.
    *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
-   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
-   *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
-   *   contains the `DELETING` and `ERROR` states.
-   *   `clusterName` is the name of the cluster provided at creation time.
-   *   Only the logical `AND` operator is supported; space-separated items are
-   *   treated as having an implicit `AND` operator.
+   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, `UPDATING`, `STOPPING`, or
+   *   `STOPPED`. `ACTIVE` contains the `CREATING`, `UPDATING`, and `RUNNING`
+   *   states. `INACTIVE` contains the `DELETING`, `ERROR`, `STOPPING`, and
+   *   `STOPPED` states. `clusterName` is the name of the cluster provided at
+   *   creation time. Only the logical `AND` operator is supported;
+   *   space-separated items are treated as having an implicit `AND` operator.
    *
    *   Example filter:
    *
@@ -2311,6 +2370,77 @@ export class ClusterControllerClient {
    */
   matchBatchFromBatchName(batchName: string) {
     return this.pathTemplates.batchPathTemplate.match(batchName).batch;
+  }
+
+  /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
   }
 
   /**

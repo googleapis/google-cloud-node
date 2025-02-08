@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -161,16 +161,97 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.AttachedClustersClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        attachedclustersModule.v1.AttachedClustersClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new attachedclustersModule.v1.AttachedClustersClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'gkemulticloud.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        attachedclustersModule.v1.AttachedClustersClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new attachedclustersModule.v1.AttachedClustersClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          attachedclustersModule.v1.AttachedClustersClient.servicePath;
+        assert.strictEqual(servicePath, 'gkemulticloud.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          attachedclustersModule.v1.AttachedClustersClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'gkemulticloud.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new attachedclustersModule.v1.AttachedClustersClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'gkemulticloud.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new attachedclustersModule.v1.AttachedClustersClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'gkemulticloud.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new attachedclustersModule.v1.AttachedClustersClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'gkemulticloud.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new attachedclustersModule.v1.AttachedClustersClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'gkemulticloud.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new attachedclustersModule.v1.AttachedClustersClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -274,7 +355,7 @@ describe('v1.AttachedClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AttachedCluster()
       );
@@ -306,7 +387,7 @@ describe('v1.AttachedClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AttachedCluster()
       );
@@ -353,7 +434,7 @@ describe('v1.AttachedClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAttachedCluster = stubSimpleCall(
         undefined,
@@ -405,7 +486,7 @@ describe('v1.AttachedClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AttachedServerConfig()
       );
@@ -437,7 +518,7 @@ describe('v1.AttachedClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.AttachedServerConfig()
       );
@@ -484,7 +565,7 @@ describe('v1.AttachedClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAttachedServerConfig = stubSimpleCall(
         undefined,
@@ -542,7 +623,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterInstallManifestResponse()
       );
@@ -575,7 +656,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterInstallManifestResponse()
       );
@@ -622,7 +703,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateAttachedClusterInstallManifest =
         stubSimpleCall(undefined, expectedError);
@@ -678,7 +759,7 @@ describe('v1.AttachedClustersClient', () => {
         ['attachedCluster']
       );
       request.attachedCluster = defaultValue1;
-      const expectedHeaderRequestParams = `attached_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attached_cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenResponse()
       );
@@ -711,7 +792,7 @@ describe('v1.AttachedClustersClient', () => {
         ['attachedCluster']
       );
       request.attachedCluster = defaultValue1;
-      const expectedHeaderRequestParams = `attached_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attached_cluster=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenResponse()
       );
@@ -758,7 +839,7 @@ describe('v1.AttachedClustersClient', () => {
         ['attachedCluster']
       );
       request.attachedCluster = defaultValue1;
-      const expectedHeaderRequestParams = `attached_cluster=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attached_cluster=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateAttachedClusterAgentToken = stubSimpleCall(
         undefined,
@@ -816,7 +897,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -849,7 +930,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -903,7 +984,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAttachedCluster = stubLongRunningCall(
         undefined,
@@ -937,7 +1018,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAttachedCluster = stubLongRunningCall(
         undefined,
@@ -1014,7 +1095,7 @@ describe('v1.AttachedClustersClient', () => {
         ['attachedCluster', 'name']
       );
       request.attachedCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `attached_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attached_cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1048,7 +1129,7 @@ describe('v1.AttachedClustersClient', () => {
         ['attachedCluster', 'name']
       );
       request.attachedCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `attached_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attached_cluster.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1103,7 +1184,7 @@ describe('v1.AttachedClustersClient', () => {
         ['attachedCluster', 'name']
       );
       request.attachedCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `attached_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attached_cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAttachedCluster = stubLongRunningCall(
         undefined,
@@ -1138,7 +1219,7 @@ describe('v1.AttachedClustersClient', () => {
         ['attachedCluster', 'name']
       );
       request.attachedCluster.name = defaultValue1;
-      const expectedHeaderRequestParams = `attached_cluster.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attached_cluster.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAttachedCluster = stubLongRunningCall(
         undefined,
@@ -1214,7 +1295,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1247,7 +1328,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1301,7 +1382,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importAttachedCluster = stubLongRunningCall(
         undefined,
@@ -1335,7 +1416,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importAttachedCluster = stubLongRunningCall(
         undefined,
@@ -1411,7 +1492,7 @@ describe('v1.AttachedClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1444,7 +1525,7 @@ describe('v1.AttachedClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1498,7 +1579,7 @@ describe('v1.AttachedClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAttachedCluster = stubLongRunningCall(
         undefined,
@@ -1532,7 +1613,7 @@ describe('v1.AttachedClustersClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAttachedCluster = stubLongRunningCall(
         undefined,
@@ -1608,7 +1689,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AttachedCluster()
@@ -1648,7 +1729,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AttachedCluster()
@@ -1705,7 +1786,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAttachedClusters = stubSimpleCall(
         undefined,
@@ -1736,7 +1817,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AttachedCluster()
@@ -1777,9 +1858,9 @@ describe('v1.AttachedClustersClient', () => {
       assert(
         (client.descriptors.page.listAttachedClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1797,7 +1878,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttachedClusters.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1827,9 +1908,9 @@ describe('v1.AttachedClustersClient', () => {
       assert(
         (client.descriptors.page.listAttachedClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1847,7 +1928,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gkemulticloud.v1.AttachedCluster()
@@ -1877,9 +1958,9 @@ describe('v1.AttachedClustersClient', () => {
       assert(
         (client.descriptors.page.listAttachedClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1897,7 +1978,7 @@ describe('v1.AttachedClustersClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttachedClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1918,9 +1999,9 @@ describe('v1.AttachedClustersClient', () => {
       assert(
         (client.descriptors.page.listAttachedClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

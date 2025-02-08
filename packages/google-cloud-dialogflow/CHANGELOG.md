@@ -4,6 +4,87 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.14.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.13.0...dialogflow-v6.14.0) (2025-01-23)
+
+
+### Features
+
+* [dialogflow] add Model Armor API ([#5952](https://github.com/googleapis/google-cloud-node/issues/5952)) ([d765c81](https://github.com/googleapis/google-cloud-node/commit/d765c81cca8ce084f5a9505e717962e8ed649dfd))
+
+## [6.13.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.12.0...dialogflow-v6.13.0) (2024-12-18)
+
+
+### Features
+
+* [dialogflow] add new fields for delivering intermediate transcriptions through PubSub ([#5881](https://github.com/googleapis/google-cloud-node/issues/5881)) ([7c8a115](https://github.com/googleapis/google-cloud-node/commit/7c8a115c88865b3aadfa649b3b2a89207d5502c2))
+* [dialogflow] make TrainingPhrase name field output-only ([#5861](https://github.com/googleapis/google-cloud-node/issues/5861)) ([7238530](https://github.com/googleapis/google-cloud-node/commit/72385303b7b0d8f3f5462d05c490f0200415fc20))
+* [dialogflow] properly mark TrainingPhrase name field output-only ([#5862](https://github.com/googleapis/google-cloud-node/issues/5862)) ([522c389](https://github.com/googleapis/google-cloud-node/commit/522c389d50d175c26afcbe513e98824eb9e190e9))
+
+## [6.12.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.11.0...dialogflow-v6.12.0) (2024-11-21)
+
+
+### Features
+
+* [dialogflow] add options of query_source, search_config, end_user_metadata and exact_search ([#5813](https://github.com/googleapis/google-cloud-node/issues/5813)) ([b0358c6](https://github.com/googleapis/google-cloud-node/commit/b0358c61fa5a644681d922a4de1de405d0fddc28))
+
+## [6.11.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.10.0...dialogflow-v6.11.0) (2024-11-14)
+
+
+### Features
+
+* [dialogflow] add options of query_source, search_config, end_user_metadata and exact_search ([#5789](https://github.com/googleapis/google-cloud-node/issues/5789)) ([25a2241](https://github.com/googleapis/google-cloud-node/commit/25a2241eac52e8e501d81021f227387a08197ad1))
+
+## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.9.0...dialogflow-v6.10.0) (2024-10-10)
+
+
+### Features
+
+* [dialogflow] created new boolean fields in conversation dataset for zone isolation and zone separation compliance status ([#5710](https://github.com/googleapis/google-cloud-node/issues/5710)) ([fd737ec](https://github.com/googleapis/google-cloud-node/commit/fd737ecc5e6681fbd97d7a20e39cbbdb4ec0595a))
+
+## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.8.0...dialogflow-v6.9.0) (2024-09-24)
+
+
+### Features
+
+* [dialogflow] created new boolean fields in conversation model for zone isolation and zone separation compliance status ([#5693](https://github.com/googleapis/google-cloud-node/issues/5693)) ([0d37602](https://github.com/googleapis/google-cloud-node/commit/0d37602ddd7aa47895a44838e01e4476ce91d1cf))
+
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.7.0...dialogflow-v6.8.0) (2024-08-09)
+
+
+### Features
+
+* [dialogflow] Add Proactive Generative Knowledge Assist endpoints and types ([#5601](https://github.com/googleapis/google-cloud-node/issues/5601)) ([041f681](https://github.com/googleapis/google-cloud-node/commit/041f68140326c2cea686e73e5ed7025ce1ca897d))
+
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.6.0...dialogflow-v6.7.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5352](https://github.com/googleapis/google-cloud-node/issues/5352)) ([8c165ca](https://github.com/googleapis/google-cloud-node/commit/8c165ca4ae387bb13610e93b1ef4db6017033a7a))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.5.0...dialogflow-v6.6.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.4.0...dialogflow-v6.5.0) (2024-03-23)
+
+
+### Features
+
+* [dialogflow] added text sections to the submitted summary ([#5130](https://github.com/googleapis/google-cloud-node/issues/5130)) ([f930cd2](https://github.com/googleapis/google-cloud-node/commit/f930cd21e4f3dba436281a1db4f65714d795fb6c))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.3.1...dialogflow-v6.4.0) (2024-03-12)
+
+
+### Features
+
+* [dialogflow] added text sections to the submitted summary ([#5121](https://github.com/googleapis/google-cloud-node/issues/5121)) ([2eb27fb](https://github.com/googleapis/google-cloud-node/commit/2eb27fb603d97e43eca3968eeaab13d6280dec97))
+
 ## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.3.0...dialogflow-v6.3.1) (2024-01-23)
 
 

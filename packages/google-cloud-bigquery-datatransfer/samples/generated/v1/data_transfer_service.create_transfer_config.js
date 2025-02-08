@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,30 +41,15 @@ function main(parent, transferConfig) {
    */
   // const transferConfig = {}
   /**
-   *  Optional OAuth2 authorization code to use with this transfer configuration.
-   *  This is required only if `transferConfig.dataSourceId` is 'youtube_channel'
-   *  and new credentials are needed, as indicated by `CheckValidCreds`. In order
-   *  to obtain authorization_code, make a request to the following URL:
-   *  <pre class="prettyprint" suppresswarning="true">
-   *  https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
-   *  </pre>
-   *  * The <var>client_id</var> is the OAuth client_id of the a data source as
-   *  returned by ListDataSources method.
-   *  * <var>data_source_scopes</var> are the scopes returned by ListDataSources
-   *  method.
-   *  Note that this should not be set when `service_account_name` is used to
-   *  create the transfer config.
-   */
-  // const authorizationCode = 'abc123'
-  /**
-   *  Optional version info. This is required only if
-   *  `transferConfig.dataSourceId` is not 'youtube_channel' and new credentials
+   *  Optional version info. This parameter replaces `authorization_code` which
+   *  is no longer used in any data sources. This is required only if
+   *  `transferConfig.dataSourceId` is 'youtube_channel' *or* new credentials
    *  are needed, as indicated by `CheckValidCreds`. In order to obtain version
    *  info, make a request to the following URL:
    *  <pre class="prettyprint" suppresswarning="true">
-   *  https://www.gstatic.com/bigquerydatatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
+   *  https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *  </pre>
-   *  * The <var>client_id</var> is the OAuth client_id of the a data source as
+   *  * The <var>client_id</var> is the OAuth client_id of the data source as
    *  returned by ListDataSources method.
    *  * <var>data_source_scopes</var> are the scopes returned by ListDataSources
    *  method.

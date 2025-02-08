@@ -1,5 +1,62 @@
 # Changelog
 
+## [3.13.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.12.0...dataplex-v3.13.0) (2025-01-11)
+
+
+### Features
+
+* [dataplex] A new field `force` is added to message `.google.cloud.dataplex.v1.DeleteDataScanRequest` ([#5902](https://github.com/googleapis/google-cloud-node/issues/5902)) ([cb0f5d4](https://github.com/googleapis/google-cloud-node/commit/cb0f5d4d13496f147d057c23fc7926bf4a133b7b))
+
+## [3.12.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.11.0...dataplex-v3.12.0) (2024-11-21)
+
+
+### Features
+
+* [dataplex] update Go Datastore import path ([#5818](https://github.com/googleapis/google-cloud-node/issues/5818)) ([020c59a](https://github.com/googleapis/google-cloud-node/commit/020c59a19460baff4ea7bbabef5d00d9becead94))
+
+## [3.11.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.10.0...dataplex-v3.11.0) (2024-06-27)
+
+
+### Features
+
+* [dataplex] expose data scan execution create time to customers ([#5510](https://github.com/googleapis/google-cloud-node/issues/5510)) ([03bfa5d](https://github.com/googleapis/google-cloud-node/commit/03bfa5d4314e3c2e97e50d0c09b98cffe3669d9b))
+
+## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.9.0...dataplex-v3.10.0) (2024-06-21)
+
+
+### Features
+
+* [dataplex] exposing EntrySource.location field that contains location of a resource in the source system ([#5483](https://github.com/googleapis/google-cloud-node/issues/5483)) ([00ad685](https://github.com/googleapis/google-cloud-node/commit/00ad68517838b0e231cac523dc0cc4adbf20621e))
+
+## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.8.0...dataplex-v3.9.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.7.0...dataplex-v3.8.0) (2024-05-08)
+
+
+### Features
+
+* [dataplex] updated client libraries for Dataplex Catalog: removed deprecated fields, updated comments ([#5306](https://github.com/googleapis/google-cloud-node/issues/5306)) ([3db1ac8](https://github.com/googleapis/google-cloud-node/commit/3db1ac8ff587a919b35bd1131c495ce50f315d85))
+
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.6.0...dataplex-v3.7.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.5.1...dataplex-v3.6.0) (2024-03-26)
+
+
+### Features
+
+* [dataplex] added client side library for the followings: ([#5149](https://github.com/googleapis/google-cloud-node/issues/5149)) ([8c2c43c](https://github.com/googleapis/google-cloud-node/commit/8c2c43c19b148b0e95874a1d24261c9b962020f0))
+
 ## [3.5.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.5.0...dataplex-v3.5.1) (2024-01-23)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,6 +37,14 @@ option ruby_package = "Google::Cloud::Container::V1";
 option (google.api.resource_definition) = {
   type: "pubsub.googleapis.com/Topic"
   pattern: "projects/{project}/topics/{topic}"
+};
+option (google.api.resource_definition) = {
+  type: "privateca.googleapis.com/CaPool"
+  pattern: "projects/{project}/locations/{location}/caPools/{ca_pool}"
+};
+option (google.api.resource_definition) = {
+  type: "cloudkms.googleapis.com/CryptoKeyVersion"
+  pattern: "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
 };
 
 // Google Kubernetes Engine Cluster Manager v1
@@ -258,6 +266,7 @@ service ClusterManager {
       }
     };
     option (google.api.method_signature) = "project_id,zone";
+    option (google.api.method_signature) = "parent";
   }
 
   // Gets the specified operation.
@@ -531,6 +540,15 @@ message LinuxNodeConfig {
     CGROUP_MODE_V2 = 2;
   }
 
+  // Hugepages amount in both 2m and 1g size
+  message HugepagesConfig {
+    // Optional. Amount of 2M hugepages
+    optional int32 hugepage_size2m = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Amount of 1G hugepages
+    optional int32 hugepage_size1g = 2 [(google.api.field_behavior) = OPTIONAL];
+  }
+
   // The Linux kernel parameters to be applied to the nodes and all pods running
   // on the nodes.
   //
@@ -547,10 +565,17 @@ message LinuxNodeConfig {
   // net.ipv4.tcp_rmem
   // net.ipv4.tcp_wmem
   // net.ipv4.tcp_tw_reuse
+  // kernel.shmmni
+  // kernel.shmmax
+  // kernel.shmall
   map<string, string> sysctls = 1;
 
   // cgroup_mode specifies the cgroup mode to be used on the node.
   CgroupMode cgroup_mode = 2;
+
+  // Optional. Amounts for 2M and 1G hugepages
+  optional HugepagesConfig hugepages = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Parameters that can be configured on Windows nodes.
@@ -625,6 +650,41 @@ message NodeKubeletConfig {
 // [AutoprovisioningNodePoolDefaults][google.container.v1.AutoprovisioningNodePoolDefaults]
 // instead.
 message NodeConfig {
+  // LocalSsdEncryptionMode specifies the method used for encrypting the Local
+  // SSDs attached to the node.
+  enum LocalSsdEncryptionMode {
+    // The given node will be encrypted using keys managed by Google
+    // infrastructure and the keys will be deleted when the node is
+    // deleted.
+    LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED = 0;
+
+    // The given node will be encrypted using keys managed by Google
+    // infrastructure and the keys will be deleted when the node is
+    // deleted.
+    STANDARD_ENCRYPTION = 1;
+
+    // The given node will opt-in for using ephemeral key for
+    // encryption of Local SSDs.
+    // The Local SSDs will not be able to recover data in case of node
+    // crash.
+    EPHEMERAL_KEY_ENCRYPTION = 2;
+  }
+
+  // Possible effective cgroup modes for the node.
+  enum EffectiveCgroupMode {
+    // EFFECTIVE_CGROUP_MODE_UNSPECIFIED means the cgroup configuration for the
+    // node pool is unspecified, i.e. the node pool is a Windows node pool.
+    EFFECTIVE_CGROUP_MODE_UNSPECIFIED = 0;
+
+    // CGROUP_MODE_V1 means the node pool is configured to use cgroupv1 for the
+    // cgroup configuration.
+    EFFECTIVE_CGROUP_MODE_V1 = 1;
+
+    // CGROUP_MODE_V2 means the node pool is configured to use cgroupv2 for the
+    // cgroup configuration.
+    EFFECTIVE_CGROUP_MODE_V2 = 2;
+  }
+
   // The name of a Google Compute Engine [machine
   // type](https://cloud.google.com/compute/docs/machine-types)
   //
@@ -830,8 +890,36 @@ message NodeConfig {
   // Parameters for node pools to be backed by shared sole tenant node groups.
   SoleTenantConfig sole_tenant_config = 42;
 
+  // Parameters for containerd customization.
+  ContainerdConfig containerd_config = 43;
+
   // A map of resource manager tag keys and values to be attached to the nodes.
   ResourceManagerTags resource_manager_tags = 45;
+
+  // Optional. Reserved for future use.
+  bool enable_confidential_storage = 46
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // List of secondary boot disks attached to the nodes.
+  repeated SecondaryBootDisk secondary_boot_disks = 48;
+
+  // List of Storage Pools where boot disks are provisioned.
+  repeated string storage_pools = 49;
+
+  // Secondary boot disk update strategy.
+  optional SecondaryBootDiskUpdateStrategy secondary_boot_disk_update_strategy =
+      50;
+
+  // Specifies which method should be used for encrypting the
+  // Local SSDs attahced to the node.
+  optional LocalSsdEncryptionMode local_ssd_encryption_mode = 54;
+
+  // Output only. effective_cgroup_mode is the cgroup mode actually used by the
+  // node pool. It is determined by the cgroup mode specified in the
+  // LinuxNodeConfig or the default cgroup mode based on the cluster creation
+  // version.
+  EffectiveCgroupMode effective_cgroup_mode = 55
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Specifies options for controlling advanced machine features.
@@ -840,6 +928,9 @@ message AdvancedMachineFeatures {
   // multithreading (SMT) set this to 1. If unset, the maximum number of threads
   // supported per core by the underlying processor is assumed.
   optional int64 threads_per_core = 1;
+
+  // Whether or not to enable nested virtualization (defaults to false).
+  optional bool enable_nested_virtualization = 2;
 }
 
 // Parameters for node pool-level network config.
@@ -902,7 +993,7 @@ message NodeNetworkConfig {
 
   // Whether nodes have internal IP addresses only.
   // If enable_private_nodes is not specified, then the value is derived from
-  // [cluster.privateClusterConfig.enablePrivateNodes][google.container.v1beta1.PrivateClusterConfig.enablePrivateNodes]
+  // [Cluster.NetworkConfig.default_enable_private_nodes][]
   optional bool enable_private_nodes = 9;
 
   // Network bandwidth tier configuration.
@@ -930,7 +1021,7 @@ message NodeNetworkConfig {
   // Each pod network corresponds to an additional alias IP range for the node
   repeated AdditionalPodNetworkConfig additional_pod_network_configs = 15;
 
-  // Output only. [Output only] The utilization of the IPv4 range for the pod.
+  // Output only. The utilization of the IPv4 range for the pod.
   // The ratio is Usage/[Total number of IPs in the secondary range],
   // Usage=numNodes*numZones*podIPsPerNode.
   double pod_ipv4_range_utilization = 16
@@ -950,14 +1041,14 @@ message AdditionalNodeNetworkConfig {
 // AdditionalPodNetworkConfig is the configuration for additional pod networks
 // within the NodeNetworkConfig message
 message AdditionalPodNetworkConfig {
-  // Name of the subnetwork where the additional pod network belongs
+  // Name of the subnetwork where the additional pod network belongs.
   string subnetwork = 1;
 
   // The name of the secondary range on the subnet which provides IP address for
-  // this pod range
+  // this pod range.
   string secondary_pod_range = 2;
 
-  // The maximum number of pods per node which use this pod network
+  // The maximum number of pods per node which use this pod network.
   optional MaxPodsConstraint max_pods_per_node = 3;
 }
 
@@ -1068,6 +1159,53 @@ message SoleTenantConfig {
   repeated NodeAffinity node_affinities = 1;
 }
 
+// ContainerdConfig contains configuration to customize containerd.
+message ContainerdConfig {
+  // PrivateRegistryAccessConfig contains access configuration for
+  // private container registries.
+  message PrivateRegistryAccessConfig {
+    // CertificateAuthorityDomainConfig configures one or more fully qualified
+    // domain names (FQDN) to a specific certificate.
+    message CertificateAuthorityDomainConfig {
+      // GCPSecretManagerCertificateConfig configures a secret from
+      // [Google Secret Manager](https://cloud.google.com/secret-manager).
+      message GCPSecretManagerCertificateConfig {
+        // Secret URI, in the form
+        // "projects/$PROJECT_ID/secrets/$SECRET_NAME/versions/$VERSION".
+        // Version can be fixed (e.g. "2") or "latest"
+        string secret_uri = 1;
+      }
+
+      // List of fully qualified domain names (FQDN).
+      // Specifying port is supported.
+      // Wilcards are NOT supported.
+      // Examples:
+      // - my.customdomain.com
+      // - 10.0.1.2:5000
+      repeated string fqdns = 1;
+
+      // Certificate access config. The following are supported:
+      // - GCPSecretManagerCertificateConfig
+      oneof certificate_config {
+        // Google Secret Manager (GCP) certificate configuration.
+        GCPSecretManagerCertificateConfig
+            gcp_secret_manager_certificate_config = 2;
+      }
+    }
+
+    // Private registry access is enabled.
+    bool enabled = 1;
+
+    // Private registry access configuration.
+    repeated CertificateAuthorityDomainConfig
+        certificate_authority_domain_config = 2;
+  }
+
+  // PrivateRegistryAccessConfig is used to configure access configuration
+  // for private container registries.
+  PrivateRegistryAccessConfig private_registry_access_config = 1;
+}
+
 // Kubernetes taint is composed of three fields: key, value, and effect. Effect
 // can only be one of three types:  NoSchedule, PreferNoSchedule or NoExecute.
 //
@@ -1158,17 +1296,19 @@ message MasterAuth {
   // certificate is issued.
   ClientCertificateConfig client_certificate_config = 3;
 
-  // [Output only] Base64-encoded public certificate that is the root of
+  // Output only. Base64-encoded public certificate that is the root of
   // trust for the cluster.
-  string cluster_ca_certificate = 100;
+  string cluster_ca_certificate = 100
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] Base64-encoded public certificate used by clients to
-  // authenticate to the cluster endpoint.
-  string client_certificate = 101;
+  // Output only. Base64-encoded public certificate used by clients to
+  // authenticate to the cluster endpoint. Issued only if
+  // client_certificate_config is set.
+  string client_certificate = 101 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] Base64-encoded private key used by clients to authenticate
+  // Output only. Base64-encoded private key used by clients to authenticate
   // to the cluster endpoint.
-  string client_key = 102;
+  string client_key = 102 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Configuration for client certificates on the cluster.
@@ -1223,6 +1363,17 @@ message AddonsConfig {
 
   // Configuration for the Cloud Storage Fuse CSI driver.
   GcsFuseCsiDriverConfig gcs_fuse_csi_driver_config = 17;
+
+  // Optional. Configuration for the StatefulHA add-on.
+  StatefulHAConfig stateful_ha_config = 18
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Configuration for the Cloud Storage Parallelstore CSI driver.
+  ParallelstoreCsiDriverConfig parallelstore_csi_driver_config = 19;
+
+  // Optional. Configuration for Ray Operator addon.
+  RayOperatorConfig ray_operator_config = 21
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Configuration options for the HTTP (L7) load balancing controller addon,
@@ -1275,10 +1426,19 @@ message PrivateClusterConfig {
   // Whether nodes have internal IP addresses only. If enabled, all nodes are
   // given only RFC 1918 private addresses and communicate with the master via
   // private networking.
-  bool enable_private_nodes = 1;
+  //
+  // Deprecated: Use
+  // [NetworkConfig.default_enable_private_nodes][google.container.v1.NetworkConfig.default_enable_private_nodes]
+  // instead.
+  bool enable_private_nodes = 1 [deprecated = true];
 
   // Whether the master's internal IP address is used as the cluster endpoint.
-  bool enable_private_endpoint = 2;
+  //
+  // Deprecated: Use
+  // [ControlPlaneEndpointsConfig.IPEndpointsConfig.enable_public_endpoint][google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.enable_public_endpoint]
+  // instead. Note that the value of enable_public_endpoint is reversed: if
+  // enable_private_endpoint is false, then enable_public_endpoint will be true.
+  bool enable_private_endpoint = 2 [deprecated = true];
 
   // The IP range in CIDR notation to use for the hosted master network. This
   // range will be used for assigning internal IP addresses to the master or
@@ -1287,20 +1447,39 @@ message PrivateClusterConfig {
   string master_ipv4_cidr_block = 3;
 
   // Output only. The internal IP address of this cluster's master endpoint.
-  string private_endpoint = 4;
+  //
+  // Deprecated: Use
+  // [ControlPlaneEndpointsConfig.IPEndpointsConfig.private_endpoint][google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.private_endpoint]
+  // instead.
+  string private_endpoint = 4
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The external IP address of this cluster's master endpoint.
-  string public_endpoint = 5;
+  //
+  // Deprecated:Use
+  // [ControlPlaneEndpointsConfig.IPEndpointsConfig.public_endpoint][google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.public_endpoint]
+  // instead.
+  string public_endpoint = 5
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The peering name in the customer VPC used by this cluster.
-  string peering_name = 7;
+  string peering_name = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Controls master global access settings.
-  PrivateClusterMasterGlobalAccessConfig master_global_access_config = 8;
+  //
+  // Deprecated: Use
+  // [ControlPlaneEndpointsConfig.IPEndpointsConfig.enable_global_access][]
+  // instead.
+  PrivateClusterMasterGlobalAccessConfig master_global_access_config = 8
+      [deprecated = true];
 
   // Subnet to provision the master's private endpoint during cluster creation.
   // Specified in projects/*/regions/*/subnetworks/* format.
-  string private_endpoint_subnetwork = 10;
+  //
+  // Deprecated: Use
+  // [ControlPlaneEndpointsConfig.IPEndpointsConfig.private_endpoint_subnetwork][google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.private_endpoint_subnetwork]
+  // instead.
+  string private_endpoint_subnetwork = 10 [deprecated = true];
 }
 
 // Configuration for returning group information from authenticators.
@@ -1359,9 +1538,36 @@ message GcsFuseCsiDriverConfig {
   bool enabled = 1;
 }
 
+// Configuration for the Cloud Storage Parallelstore CSI driver.
+message ParallelstoreCsiDriverConfig {
+  // Whether the Cloud Storage Parallelstore CSI driver is enabled for this
+  // cluster.
+  bool enabled = 1;
+}
+
+// Configuration options for the Ray Operator add-on.
+message RayOperatorConfig {
+  // Whether the Ray Operator addon is enabled for this cluster.
+  bool enabled = 1;
+
+  // Optional. Logging configuration for Ray clusters.
+  RayClusterLoggingConfig ray_cluster_logging_config = 2
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Monitoring configuration for Ray clusters.
+  RayClusterMonitoringConfig ray_cluster_monitoring_config = 3
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
 // Configuration for the Backup for GKE Agent.
 message GkeBackupAgentConfig {
   // Whether the Backup for GKE agent is enabled for this cluster.
+  bool enabled = 1;
+}
+
+// Configuration for the Stateful HA add-on.
+message StatefulHAConfig {
+  // Whether the Stateful HA add-on is enabled for this cluster.
   bool enabled = 1;
 }
 
@@ -1388,6 +1594,9 @@ message MasterAuthorizedNetworksConfig {
 
   // Whether master is accessbile via Google Compute Engine Public IP addresses.
   optional bool gcp_public_cidrs_access_enabled = 3;
+
+  // Whether master authorized networks is enforced on private endpoint or not.
+  optional bool private_endpoint_enforcement_enabled = 5;
 }
 
 // Configuration for the legacy Attribute Based Access Control authorization
@@ -1591,25 +1800,24 @@ message IPAllocationPolicy {
   // overprovisioning is disabled.
   PodCIDROverprovisionConfig pod_cidr_overprovision_config = 21;
 
-  // Output only. [Output only] The subnet's IPv6 CIDR block used by nodes and
-  // pods.
+  // Output only. The subnet's IPv6 CIDR block used by nodes and pods.
   string subnet_ipv6_cidr_block = 22
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. [Output only] The services IPv6 CIDR block for the cluster.
+  // Output only. The services IPv6 CIDR block for the cluster.
   string services_ipv6_cidr_block = 23
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. [Output only] The additional pod ranges that are added to the
-  // cluster. These pod ranges can be used by new node pools to allocate pod IPs
+  // Output only. The additional pod ranges that are added to the cluster.
+  // These pod ranges can be used by new node pools to allocate pod IPs
   // automatically. Once the range is removed it will not show up in
   // IPAllocationPolicy.
   AdditionalPodRangesConfig additional_pod_ranges_config = 24
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. [Output only] The utilization of the cluster default IPv4
-  // range for the pod. The ratio is Usage/[Total number of IPs in the secondary
-  // range], Usage=numNodes*numZones*podIPsPerNode.
+  // Output only. The utilization of the cluster default IPv4 range for the
+  // pod. The ratio is Usage/[Total number of IPs in the secondary range],
+  // Usage=numNodes*numZones*podIPsPerNode.
   double default_pod_ipv4_range_utilization = 25
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }
@@ -1778,7 +1986,12 @@ message Cluster {
   IPAllocationPolicy ip_allocation_policy = 20;
 
   // The configuration options for master authorized networks feature.
-  MasterAuthorizedNetworksConfig master_authorized_networks_config = 22;
+  //
+  // Deprecated: Use
+  // [ControlPlaneEndpointsConfig.IPEndpointsConfig.authorized_networks_config][google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig.authorized_networks_config]
+  // instead.
+  MasterAuthorizedNetworksConfig master_authorized_networks_config = 22
+      [deprecated = true];
 
   // Configure the maintenance policy for this cluster.
   MaintenancePolicy maintenance_policy = 23;
@@ -1845,21 +2058,22 @@ message Cluster {
   // Configuration for Identity Service component.
   IdentityServiceConfig identity_service_config = 54;
 
-  // [Output only] Server-defined URL for the resource.
-  string self_link = 100;
+  // Output only. Server-defined URL for the resource.
+  string self_link = 100 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The name of the Google Compute Engine
+  // Output only. The name of the Google Compute Engine
   // [zone](https://cloud.google.com/compute/docs/zones#available) in which the
   // cluster resides. This field is deprecated, use location instead.
-  string zone = 101 [deprecated = true];
+  string zone = 101
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The IP address of this cluster's master endpoint.
+  // Output only. The IP address of this cluster's master endpoint.
   // The endpoint can be accessed from the internet at
   // `https://username:password@endpoint/`.
   //
   // See the `masterAuth` property of this resource for username and
   // password information.
-  string endpoint = 102;
+  string endpoint = 102 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // The initial Kubernetes version for this cluster.  Valid versions are those
   // found in validMasterVersions returned by getServerConfig.  The version can
@@ -1876,66 +2090,71 @@ message Cluster {
   // - "","-": picks the default Kubernetes version
   string initial_cluster_version = 103;
 
-  // [Output only] The current software version of the master endpoint.
-  string current_master_version = 104;
+  // Output only. The current software version of the master endpoint.
+  string current_master_version = 104
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] Deprecated, use
+  // Output only. Deprecated, use
   // [NodePools.version](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters.nodePools)
   // instead. The current version of the node software components. If they are
   // currently at multiple versions because they're in the process of being
   // upgraded, this reflects the minimum version of all nodes.
-  string current_node_version = 105 [deprecated = true];
+  string current_node_version = 105
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The time the cluster was created, in
+  // Output only. The time the cluster was created, in
   // [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-  string create_time = 106;
+  string create_time = 106 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The current status of this cluster.
-  Status status = 107;
+  // Output only. The current status of this cluster.
+  Status status = 107 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] Deprecated. Use conditions instead.
+  // Output only. Deprecated. Use conditions instead.
   // Additional information about the current status of this
   // cluster, if available.
-  string status_message = 108 [deprecated = true];
+  string status_message = 108
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The size of the address space on each node for hosting
+  // Output only. The size of the address space on each node for hosting
   // containers. This is provisioned from within the `container_ipv4_cidr`
   // range. This field will only be set when cluster is in route-based network
   // mode.
-  int32 node_ipv4_cidr_size = 109;
+  int32 node_ipv4_cidr_size = 109 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The IP address range of the Kubernetes services in
+  // Output only. The IP address range of the Kubernetes services in
   // this cluster, in
   // [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
   // notation (e.g. `1.2.3.4/29`). Service addresses are
   // typically put in the last `/16` from the container CIDR.
-  string services_ipv4_cidr = 110;
+  string services_ipv4_cidr = 110 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Deprecated. Use node_pools.instance_group_urls.
-  repeated string instance_group_urls = 111 [deprecated = true];
+  // Output only. Deprecated. Use node_pools.instance_group_urls.
+  repeated string instance_group_urls = 111
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only]  The number of nodes currently in the cluster. Deprecated.
+  // Output only. The number of nodes currently in the cluster. Deprecated.
   // Call Kubernetes API directly to retrieve node information.
-  int32 current_node_count = 112 [deprecated = true];
+  int32 current_node_count = 112
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The time the cluster will be automatically
+  // Output only. The time the cluster will be automatically
   // deleted in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-  string expire_time = 113;
+  string expire_time = 113 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The name of the Google Compute Engine
+  // Output only. The name of the Google Compute Engine
   // [zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
   // or
   // [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
   // in which the cluster resides.
-  string location = 114;
+  string location = 114 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Enable the ability to use Cloud TPUs in this cluster.
   bool enable_tpu = 115;
 
-  // [Output only] The IP address range of the Cloud TPUs in this cluster, in
+  // Output only. The IP address range of the Cloud TPUs in this cluster, in
   // [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
   // notation (e.g. `1.2.3.4/29`).
-  string tpu_ipv4_cidr_block = 116;
+  string tpu_ipv4_cidr_block = 116 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Which conditions caused the current cluster state.
   repeated StatusCondition conditions = 118;
@@ -1971,11 +2190,135 @@ message Cluster {
   // Enable/Disable Security Posture API features for the cluster.
   SecurityPostureConfig security_posture_config = 145;
 
+  // Configuration for all cluster's control plane endpoints.
+  ControlPlaneEndpointsConfig control_plane_endpoints_config = 146;
+
   // Beta APIs Config
   K8sBetaAPIConfig enable_k8s_beta_apis = 143;
 
   // GKE Enterprise Configuration.
   EnterpriseConfig enterprise_config = 149;
+
+  // Secret CSI driver configuration.
+  SecretManagerConfig secret_manager_config = 150;
+
+  // Enable/Disable Compliance Posture features for the cluster.
+  CompliancePostureConfig compliance_posture_config = 151;
+
+  // Output only. Reserved for future use.
+  optional bool satisfies_pzs = 152 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Reserved for future use.
+  optional bool satisfies_pzi = 153 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // The Custom keys configuration for the cluster.
+  optional UserManagedKeysConfig user_managed_keys_config = 154;
+
+  // RBACBindingConfig allows user to restrict ClusterRoleBindings an
+  // RoleBindings that can be created.
+  optional RBACBindingConfig rbac_binding_config = 156;
+}
+
+// RBACBindingConfig allows user to restrict ClusterRoleBindings an RoleBindings
+// that can be created.
+message RBACBindingConfig {
+  // Setting this to true will allow any ClusterRoleBinding and RoleBinding
+  // with subjets system:anonymous or system:unauthenticated.
+  optional bool enable_insecure_binding_system_unauthenticated = 1;
+
+  // Setting this to true will allow any ClusterRoleBinding and RoleBinding
+  // with subjects system:authenticated.
+  optional bool enable_insecure_binding_system_authenticated = 2;
+}
+
+// UserManagedKeysConfig holds the resource address to Keys which are used
+// for signing certs and token that are used for communication within cluster.
+message UserManagedKeysConfig {
+  // The Certificate Authority Service caPool to use for the cluster CA in this
+  // cluster.
+  string cluster_ca = 10 [(google.api.resource_reference) = {
+    type: "privateca.googleapis.com/CaPool"
+  }];
+
+  // Resource path of the Certificate Authority Service caPool to use for the
+  // etcd API CA in this cluster.
+  string etcd_api_ca = 11 [(google.api.resource_reference) = {
+    type: "privateca.googleapis.com/CaPool"
+  }];
+
+  // Resource path of the Certificate Authority Service caPool to use for the
+  // etcd peer CA in this cluster.
+  string etcd_peer_ca = 12 [(google.api.resource_reference) = {
+    type: "privateca.googleapis.com/CaPool"
+  }];
+
+  // The Cloud KMS cryptoKeyVersions to use for signing service account JWTs
+  // issued by this cluster.
+  //
+  // Format:
+  // `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{cryptoKey}/cryptoKeyVersions/{cryptoKeyVersion}`
+  repeated string service_account_signing_keys = 13
+      [(google.api.resource_reference) = {
+        type: "cloudkms.googleapis.com/CryptoKeyVersion"
+      }];
+
+  // The Cloud KMS cryptoKeyVersions to use for verifying service account JWTs
+  // issued by this cluster.
+  //
+  // Format:
+  // `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{cryptoKey}/cryptoKeyVersions/{cryptoKeyVersion}`
+  repeated string service_account_verification_keys = 14
+      [(google.api.resource_reference) = {
+        type: "cloudkms.googleapis.com/CryptoKeyVersion"
+      }];
+
+  // The Certificate Authority Service caPool to use for the aggregation CA in
+  // this cluster.
+  string aggregation_ca = 15 [(google.api.resource_reference) = {
+    type: "privateca.googleapis.com/CaPool"
+  }];
+
+  // The Cloud KMS cryptoKey to use for Confidential Hyperdisk on the control
+  // plane nodes.
+  string control_plane_disk_encryption_key = 16
+      [(google.api.resource_reference) = {
+        type: "cloudkms.googleapis.com/CryptoKeyVersion"
+      }];
+
+  // Resource path of the Cloud KMS cryptoKey to use for encryption of internal
+  // etcd backups.
+  string gkeops_etcd_backup_encryption_key = 17
+      [(google.api.resource_reference) = {
+        type: "cloudkms.googleapis.com/CryptoKeyVersion"
+      }];
+}
+
+// CompliancePostureConfig defines the settings needed to enable/disable
+// features for the Compliance Posture.
+message CompliancePostureConfig {
+  // Mode defines enablement mode for Compliance Posture.
+  enum Mode {
+    // Default value not specified.
+    MODE_UNSPECIFIED = 0;
+
+    // Disables Compliance Posture features on the cluster.
+    DISABLED = 1;
+
+    // Enables Compliance Posture features on the cluster.
+    ENABLED = 2;
+  }
+
+  // Defines the details of a compliance standard.
+  message ComplianceStandard {
+    // Name of the compliance standard.
+    optional string standard = 1;
+  }
+
+  // Defines the enablement mode for Compliance Posture.
+  optional Mode mode = 1;
+
+  // List of enabled compliance standards.
+  repeated ComplianceStandard compliance_standards = 2;
 }
 
 // K8sBetaAPIConfig , configuration for beta APIs
@@ -1997,6 +2340,9 @@ message SecurityPostureConfig {
 
     // Applies Security Posture features on the cluster.
     BASIC = 2;
+
+    // Applies the Security Posture off cluster Enterprise level features.
+    ENTERPRISE = 3;
   }
 
   // VulnerabilityMode defines enablement mode for vulnerability scanning.
@@ -2034,6 +2380,15 @@ message NodePoolAutoConfig {
   // Resource manager tag keys and values to be attached to the nodes
   // for managing Compute Engine firewalls using Network Firewall Policies.
   ResourceManagerTags resource_manager_tags = 2;
+
+  // NodeKubeletConfig controls the defaults for autoprovisioned node-pools.
+  //
+  // Currently only `insecure_kubelet_readonly_port_enabled` can be set here.
+  NodeKubeletConfig node_kubelet_config = 3;
+
+  // Output only. Configuration options for Linux nodes.
+  LinuxNodeConfig linux_node_config = 4
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Subset of Nodepool message that has defaults.
@@ -2049,6 +2404,14 @@ message NodeConfigDefaults {
 
   // Logging configuration for node pools.
   NodePoolLoggingConfig logging_config = 3;
+
+  // Parameters for containerd customization.
+  ContainerdConfig containerd_config = 4;
+
+  // NodeKubeletConfig controls the defaults for new node-pools.
+  //
+  // Currently only `insecure_kubelet_readonly_port_enabled` can be set here.
+  NodeKubeletConfig node_kubelet_config = 6;
 }
 
 // ClusterUpdate describes an update to the cluster. Exactly one update can
@@ -2130,7 +2493,12 @@ message ClusterUpdate {
   repeated string desired_locations = 10;
 
   // The desired configuration options for master authorized networks feature.
-  MasterAuthorizedNetworksConfig desired_master_authorized_networks_config = 12;
+  //
+  // Deprecated: Use
+  // desired_control_plane_endpoints_config.ip_endpoints_config.authorized_networks_config
+  // instead.
+  MasterAuthorizedNetworksConfig desired_master_authorized_networks_config = 12
+      [deprecated = true];
 
   // Cluster-level autoscaling configuration.
   ClusterAutoscaling desired_cluster_autoscaling = 15;
@@ -2157,8 +2525,17 @@ message ClusterUpdate {
   // Cluster-level Vertical Pod Autoscaling configuration.
   VerticalPodAutoscaling desired_vertical_pod_autoscaling = 22;
 
-  // The desired private cluster configuration.
-  PrivateClusterConfig desired_private_cluster_config = 25;
+  // The desired private cluster configuration. master_global_access_config is
+  // the only field that can be changed via this field.
+  // See also
+  // [ClusterUpdate.desired_enable_private_endpoint][google.container.v1.ClusterUpdate.desired_enable_private_endpoint]
+  // for modifying other fields within
+  // [PrivateClusterConfig][google.container.v1.PrivateClusterConfig].
+  //
+  // Deprecated: Use
+  // desired_control_plane_endpoints_config.ip_endpoints_config.global_access
+  // instead.
+  PrivateClusterConfig desired_private_cluster_config = 25 [deprecated = true];
 
   // The desired config of Intra-node visibility.
   IntraNodeVisibilityConfig desired_intra_node_visibility_config = 26;
@@ -2198,7 +2575,22 @@ message ClusterUpdate {
   ServiceExternalIPsConfig desired_service_external_ips_config = 60;
 
   // Enable/Disable private endpoint for the cluster's master.
-  optional bool desired_enable_private_endpoint = 71;
+  //
+  // Deprecated: Use
+  // desired_control_plane_endpoints_config.ip_endpoints_config.enable_public_endpoint
+  // instead. Note that the value of enable_public_endpoint is reversed: if
+  // enable_private_endpoint is false, then enable_public_endpoint will be true.
+  optional bool desired_enable_private_endpoint = 71 [deprecated = true];
+
+  // Override the default setting of whether future created
+  // nodes have private IP addresses only, namely
+  // [NetworkConfig.default_enable_private_nodes][google.container.v1.NetworkConfig.default_enable_private_nodes]
+  optional bool desired_default_enable_private_nodes = 72;
+
+  // [Control plane
+  // endpoints][google.container.v1.Cluster.control_plane_endpoints_config]
+  // configuration.
+  ControlPlaneEndpointsConfig desired_control_plane_endpoints_config = 73;
 
   // The Kubernetes version to change the master to.
   //
@@ -2266,12 +2658,50 @@ message ClusterUpdate {
   // Desired Beta APIs to be enabled for cluster.
   K8sBetaAPIConfig desired_k8s_beta_apis = 131;
 
+  // The desired containerd config for the cluster.
+  ContainerdConfig desired_containerd_config = 134;
+
+  // Enable/Disable Multi-Networking for the cluster
+  optional bool desired_enable_multi_networking = 135;
+
   // The desired resource manager tags that apply to all auto-provisioned node
   // pools in autopilot clusters and node auto-provisioning enabled clusters.
   ResourceManagerTags desired_node_pool_auto_config_resource_manager_tags = 136;
 
   // Specify the details of in-transit encryption.
   optional InTransitEncryptionConfig desired_in_transit_encryption_config = 137;
+
+  // Enable/Disable Cilium Clusterwide Network Policy for the cluster.
+  optional bool desired_enable_cilium_clusterwide_network_policy = 138;
+
+  // Enable/Disable Secret Manager Config.
+  optional SecretManagerConfig desired_secret_manager_config = 139;
+
+  // Enable/Disable Compliance Posture features for the cluster.
+  optional CompliancePostureConfig desired_compliance_posture_config = 140;
+
+  // The desired node kubelet config for the cluster.
+  NodeKubeletConfig desired_node_kubelet_config = 141;
+
+  // The desired node kubelet config for all auto-provisioned node pools
+  // in autopilot clusters and node auto-provisioning enabled clusters.
+  NodeKubeletConfig desired_node_pool_auto_config_kubelet_config = 142;
+
+  // The Custom keys configuration for the cluster.
+  UserManagedKeysConfig user_managed_keys_config = 143;
+
+  // RBACBindingConfig allows user to restrict ClusterRoleBindings an
+  // RoleBindings that can be created.
+  optional RBACBindingConfig desired_rbac_binding_config = 144;
+
+  // The desired enterprise configuration for the cluster.
+  DesiredEnterpriseConfig desired_enterprise_config = 147;
+
+  // The desired Linux node config for all auto-provisioned node pools
+  // in autopilot clusters and node auto-provisioning enabled clusters.
+  //
+  // Currently only `cgroup_mode` can be set here.
+  LinuxNodeConfig desired_node_pool_auto_config_linux_node_config = 150;
 }
 
 // AdditionalPodRangesConfig is the configuration for additional pod secondary
@@ -2280,18 +2710,24 @@ message AdditionalPodRangesConfig {
   // Name for pod secondary ipv4 range which has the actual range defined ahead.
   repeated string pod_range_names = 1;
 
-  // Output only. [Output only] Information for additional pod range.
+  // Output only. Information for additional pod range.
   repeated RangeInfo pod_range_info = 2
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // RangeInfo contains the range name and the range utilization by this cluster.
 message RangeInfo {
-  // Output only. [Output only] Name of a range.
+  // Output only. Name of a range.
   string range_name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. [Output only] The utilization of the range.
+  // Output only. The utilization of the range.
   double utilization = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// DesiredEnterpriseConfig is a wrapper used for updating enterprise_config.
+message DesiredEnterpriseConfig {
+  // desired_tier specifies the desired tier of the cluster.
+  EnterpriseConfig.ClusterTier desired_tier = 1;
 }
 
 // This operation resource represents operations that may have happened or are
@@ -2440,36 +2876,37 @@ message Operation {
     FLEET_FEATURE_UPGRADE = 19;
   }
 
-  // The server-assigned ID for the operation.
-  string name = 1;
+  // Output only. The server-assigned ID for the operation.
+  string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The name of the Google Compute Engine
+  // Output only. The name of the Google Compute Engine
   // [zone](https://cloud.google.com/compute/docs/zones#available) in which the
   // operation is taking place. This field is deprecated, use location instead.
-  string zone = 2 [deprecated = true];
+  string zone = 2
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The operation type.
-  Type operation_type = 3;
+  // Output only. The operation type.
+  Type operation_type = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The current status of the operation.
-  Status status = 4;
+  // Output only. The current status of the operation.
+  Status status = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Detailed operation progress, if available.
-  string detail = 8;
+  // Output only. Detailed operation progress, if available.
+  string detail = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. If an error has occurred, a textual description of the error.
   // Deprecated. Use the field error instead.
   string status_message = 5
       [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Server-defined URI for the operation. Example:
+  // Output only. Server-defined URI for the operation. Example:
   // `https://container.googleapis.com/v1alpha1/projects/123/locations/us-central1/operations/operation-123`.
-  string self_link = 6;
+  string self_link = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Server-defined URI for the target of the operation. The format of this is a
-  // URI to the resource being modified (such as a cluster, node pool, or node).
-  // For node pool repairs, there may be multiple nodes being repaired, but only
-  // one will be the target.
+  // Output only. Server-defined URI for the target of the operation. The format
+  // of this is a URI to the resource being modified (such as a cluster, node
+  // pool, or node). For node pool repairs, there may be multiple nodes being
+  // repaired, but only one will be the target.
   //
   // Examples:
   //
@@ -2481,24 +2918,24 @@ message Operation {
   // `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np`
   //
   // `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`
-  string target_link = 7;
+  string target_link = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The name of the Google Compute Engine
+  // Output only. The name of the Google Compute Engine
   // [zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
   // or
   // [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
   // in which the cluster resides.
-  string location = 9;
+  string location = 9 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The time the operation started, in
+  // Output only. The time the operation started, in
   // [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-  string start_time = 10;
+  string start_time = 10 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The time the operation completed, in
+  // Output only. The time the operation completed, in
   // [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-  string end_time = 11;
+  string end_time = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. [Output only] Progress information for an operation.
+  // Output only. Progress information for an operation.
   OperationProgress progress = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Which conditions caused the current cluster state.
@@ -2731,6 +3168,11 @@ message UpdateNodePoolRequest {
   // Parameters that can be configured on Windows nodes.
   WindowsNodeConfig windows_node_config = 34;
 
+  // A list of hardware accelerators to be attached to each node.
+  // See https://cloud.google.com/compute/docs/gpus for more information about
+  // support for GPUs.
+  repeated AcceleratorConfig accelerators = 35;
+
   // Optional. The desired [Google Compute Engine machine
   // type](https://cloud.google.com/compute/docs/machine-types) for nodes in the
   // node pool. Initiates an upgrade operation that migrates the nodes in the
@@ -2753,6 +3195,18 @@ message UpdateNodePoolRequest {
   // for managing Compute Engine firewalls using Network Firewall Policies.
   // Existing tags will be replaced with new values.
   ResourceManagerTags resource_manager_tags = 39;
+
+  // The desired containerd config for nodes in the node pool.
+  // Initiates an upgrade operation that recreates the nodes with the new
+  // config.
+  ContainerdConfig containerd_config = 40;
+
+  // Specifies the configuration of queued provisioning.
+  NodePool.QueuedProvisioning queued_provisioning = 42;
+
+  // List of Storage Pools where boot disks are provisioned.
+  // Existing Storage Pools will be replaced with storage-pools.
+  repeated string storage_pools = 43;
 }
 
 // SetNodePoolAutoscalingRequest sets the autoscaler settings of a node pool.
@@ -3147,6 +3601,9 @@ message ServerConfig {
 
     // List of valid versions for the channel.
     repeated string valid_versions = 4;
+
+    // The auto upgrade target version for clusters on the channel.
+    string upgrade_target_version = 5;
   }
 
   // Version of Kubernetes the service deploys by default.
@@ -3519,28 +3976,30 @@ message NodePool {
   // cluster-level defaults.
   NodeNetworkConfig network_config = 14;
 
-  // [Output only] Server-defined URL for the resource.
-  string self_link = 100;
+  // Output only. Server-defined URL for the resource.
+  string self_link = 100 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // The version of Kubernetes running on this NodePool's nodes. If unspecified,
   // it defaults as described
   // [here](https://cloud.google.com/kubernetes-engine/versioning#specifying_node_version).
   string version = 101;
 
-  // [Output only] The resource URLs of the [managed instance
+  // Output only. The resource URLs of the [managed instance
   // groups](https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances)
   // associated with this node pool.
   // During the node pool blue-green upgrade operation, the URLs contain both
   // blue and green resources.
-  repeated string instance_group_urls = 102;
+  repeated string instance_group_urls = 102
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] The status of the nodes in this pool instance.
-  Status status = 103;
+  // Output only. The status of the nodes in this pool instance.
+  Status status = 103 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] Deprecated. Use conditions instead.
+  // Output only. Deprecated. Use conditions instead.
   // Additional information about the current status of this
   // node pool instance, if available.
-  string status_message = 104 [deprecated = true];
+  string status_message = 104
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
   // Autoscaler configuration for this NodePool. Autoscaler is enabled
   // only if a valid configuration is present.
@@ -3556,8 +4015,8 @@ message NodePool {
   // Which conditions caused the current node pool state.
   repeated StatusCondition conditions = 105;
 
-  // [Output only] The pod CIDR block size per node in this node pool.
-  int32 pod_ipv4_cidr_size = 7;
+  // Output only. The pod CIDR block size per node in this node pool.
+  int32 pod_ipv4_cidr_size = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Upgrade settings control disruption and speed of the upgrade.
   UpgradeSettings upgrade_settings = 107;
@@ -3565,8 +4024,8 @@ message NodePool {
   // Specifies the node placement policy.
   PlacementPolicy placement_policy = 108;
 
-  // Output only. [Output only] Update info contains relevant information during
-  // a node pool update.
+  // Output only. Update info contains relevant information during a node
+  // pool update.
   UpdateInfo update_info = 109 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // This checksum is computed by the server based on the value of node pool
@@ -3615,14 +4074,15 @@ message BestEffortProvisioning {
 // AutoUpgradeOptions defines the set of options for the user to control how
 // the Auto Upgrades will proceed.
 message AutoUpgradeOptions {
-  // [Output only] This field is set when upgrades are about to commence
+  // Output only. This field is set when upgrades are about to commence
   // with the approximate start time for the upgrades, in
   // [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-  string auto_upgrade_start_time = 1;
+  string auto_upgrade_start_time = 1
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] This field is set when upgrades are about to commence
+  // Output only. This field is set when upgrades are about to commence
   // with the description of the upgrade.
-  string description = 2;
+  string description = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // MaintenancePolicy defines the maintenance policy to be used for the cluster.
@@ -3742,11 +4202,11 @@ message DailyMaintenanceWindow {
   // format "HH:MM", where HH : [00-23] and MM : [00-59] GMT.
   string start_time = 2;
 
-  // [Output only] Duration of the time window, automatically chosen to be
+  // Output only. Duration of the time window, automatically chosen to be
   // smallest possible in the given scenario.
   // Duration will be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
   // format "PTnHnMnS".
-  string duration = 3;
+  string duration = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // SetNodePoolManagementRequest sets the node management properties of a node
@@ -3988,11 +4448,11 @@ message NodePoolAutoscaling {
   // Is autoscaling enabled for this node pool.
   bool enabled = 1;
 
-  // Minimum number of nodes for one location in the NodePool. Must be >= 1 and
-  // <= max_node_count.
+  // Minimum number of nodes for one location in the node pool. Must be greater
+  // than or equal to 0 and less than or equal to max_node_count.
   int32 min_node_count = 2;
 
-  // Maximum number of nodes for one location in the NodePool. Must be >=
+  // Maximum number of nodes for one location in the node pool. Must be >=
   // min_node_count. There has to be enough quota to scale up the cluster.
   int32 max_node_count = 3;
 
@@ -4002,13 +4462,13 @@ message NodePoolAutoscaling {
   // Location policy used when scaling up a nodepool.
   LocationPolicy location_policy = 5;
 
-  // Minimum number of nodes in the node pool. Must be greater than 1 less than
-  // total_max_node_count.
+  // Minimum number of nodes in the node pool. Must be greater than or equal
+  // to 0 and less than or equal to total_max_node_count.
   // The total_*_node_count fields are mutually exclusive with the *_node_count
   // fields.
   int32 total_min_node_count = 6;
 
-  // Maximum number of nodes in the node pool. Must be greater than
+  // Maximum number of nodes in the node pool. Must be greater than or equal to
   // total_min_node_count. There has to be enough quota to scale up the cluster.
   // The total_*_node_count fields are mutually exclusive with the *_node_count
   // fields.
@@ -4156,6 +4616,9 @@ message GPUSharingConfig {
 
     // GPUs are time-shared between containers.
     TIME_SHARING = 1;
+
+    // GPUs are shared between containers with NVIDIA MPS.
+    MPS = 2;
   }
 
   // The max number of containers that can share a physical GPU.
@@ -4321,16 +4784,16 @@ message NetworkConfig {
   }
 
   // Output only. The relative name of the Google Compute Engine
-  // [network][google.container.v1.NetworkConfig.network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks)
+  // [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks)
   // to which the cluster is connected. Example:
   // projects/my-project/global/networks/my-network
-  string network = 1;
+  string network = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The relative name of the Google Compute Engine
   // [subnetwork](https://cloud.google.com/compute/docs/vpc) to which the
   // cluster is connected. Example:
   // projects/my-project/regions/us-central1/subnetworks/my-subnet
-  string subnetwork = 2;
+  string subnetwork = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Whether Intra-node visibility is enabled for this cluster.
   // This makes same node pod to pod traffic visible for VPC network.
@@ -4375,7 +4838,18 @@ message NetworkConfig {
   optional bool enable_fqdn_network_policy = 19;
 
   // Specify the details of in-transit encryption.
+  // Now named inter-node transparent encryption.
   optional InTransitEncryptionConfig in_transit_encryption_config = 20;
+
+  // Whether CiliumClusterwideNetworkPolicy is enabled on this cluster.
+  optional bool enable_cilium_clusterwide_network_policy = 21;
+
+  // Controls whether by default nodes have private IP addresses only.
+  // It is invalid to specify both [PrivateClusterConfig.enablePrivateNodes][]
+  // and this field at the same time.
+  // To update the default setting, use
+  // [ClusterUpdate.desired_default_enable_private_nodes][google.container.v1.ClusterUpdate.desired_default_enable_private_nodes]
+  optional bool default_enable_private_nodes = 22;
 }
 
 // GatewayAPIConfig contains the desired config of Gateway API on this cluster.
@@ -4389,8 +4863,9 @@ message GatewayAPIConfig {
     // Gateway API support is disabled
     CHANNEL_DISABLED = 1;
 
+    // Deprecated: use CHANNEL_STANDARD instead.
     // Gateway API support is enabled, experimental CRDs are installed
-    CHANNEL_EXPERIMENTAL = 3;
+    CHANNEL_EXPERIMENTAL = 3 [deprecated = true];
 
     // Gateway API support is enabled, standard CRDs are installed
     CHANNEL_STANDARD = 4;
@@ -4572,6 +5047,10 @@ message ReleaseChannel {
     // Clusters subscribed to STABLE receive versions that are known to be
     // stable and reliable in production.
     STABLE = 3;
+
+    // Clusters subscribed to EXTENDED receive extended support and availability
+    // for versions which are known to be stable and reliable in production.
+    EXTENDED = 4;
   }
 
   // channel specifies which release channel the cluster is subscribed to.
@@ -4635,6 +5114,10 @@ message DNSConfig {
 
   // cluster_dns_domain is the suffix used for all cluster service records.
   string cluster_dns_domain = 3;
+
+  // Optional. The domain used in Additive VPC scope.
+  string additive_vpc_scope_dns_domain = 5
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Constraints applied to pods.
@@ -4686,12 +5169,68 @@ message DatabaseEncryption {
     DECRYPTED = 2;
   }
 
+  // Current State of etcd encryption.
+  enum CurrentState {
+    // Should never be set
+    CURRENT_STATE_UNSPECIFIED = 0;
+
+    // Secrets in etcd are encrypted.
+    CURRENT_STATE_ENCRYPTED = 7;
+
+    // Secrets in etcd are stored in plain text (at etcd level) - this is
+    // unrelated to Compute Engine level full disk encryption.
+    CURRENT_STATE_DECRYPTED = 2;
+
+    // Encryption (or re-encryption with a different CloudKMS key)
+    // of Secrets is in progress.
+    CURRENT_STATE_ENCRYPTION_PENDING = 3;
+
+    // Encryption (or re-encryption with a different CloudKMS key) of Secrets in
+    // etcd encountered an error.
+    CURRENT_STATE_ENCRYPTION_ERROR = 4;
+
+    // De-crypting Secrets to plain text in etcd is in progress.
+    CURRENT_STATE_DECRYPTION_PENDING = 5;
+
+    // De-crypting Secrets to plain text in etcd encountered an error.
+    CURRENT_STATE_DECRYPTION_ERROR = 6;
+  }
+
+  // OperationError records errors seen from CloudKMS keys
+  // encountered during updates to DatabaseEncryption configuration.
+  message OperationError {
+    // CloudKMS key resource that had the error.
+    string key_name = 1;
+
+    // Description of the error seen during the operation.
+    string error_message = 2;
+
+    // Time when the CloudKMS error was seen.
+    google.protobuf.Timestamp timestamp = 3;
+  }
+
   // Name of CloudKMS key to use for the encryption of secrets in etcd.
   // Ex. projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key
   string key_name = 1;
 
   // The desired state of etcd encryption.
   State state = 2;
+
+  // Output only. The current state of etcd encryption.
+  optional CurrentState current_state = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Keys in use by the cluster for decrypting
+  // existing objects, in addition to the key in `key_name`.
+  //
+  // Each item is a CloudKMS key resource.
+  repeated string decryption_keys = 4
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Records errors seen during DatabaseEncryption update
+  // operations.
+  repeated OperationError last_operation_errors = 5
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // ListUsableSubnetworksRequest requests the list of usable subnetworks
@@ -4958,6 +5497,56 @@ message UpgradeEvent {
   string resource = 6;
 }
 
+// UpgradeInfoEvent is a notification sent to customers about the upgrade
+// information of a resource.
+message UpgradeInfoEvent {
+  // The state of the upgrade.
+  enum State {
+    // STATE_UNSPECIFIED indicates the state is unspecified.
+    STATE_UNSPECIFIED = 0;
+
+    // STARTED indicates the upgrade has started.
+    STARTED = 3;
+
+    // SUCCEEDED indicates the upgrade has completed successfully.
+    SUCCEEDED = 4;
+
+    // FAILED indicates the upgrade has failed.
+    FAILED = 5;
+
+    // CANCELED indicates the upgrade has canceled.
+    CANCELED = 6;
+  }
+
+  // The resource type associated with the upgrade.
+  UpgradeResourceType resource_type = 1;
+
+  // The operation associated with this upgrade.
+  string operation = 2;
+
+  // The time when the operation was started.
+  google.protobuf.Timestamp start_time = 3;
+
+  // The time when the operation ended.
+  google.protobuf.Timestamp end_time = 4;
+
+  // The current version before the upgrade.
+  string current_version = 5;
+
+  // The target version for the upgrade.
+  string target_version = 6;
+
+  // Optional relative path to the resource. For example in node pool upgrades,
+  // the relative path of the node pool.
+  string resource = 7;
+
+  // Output only. The state of the upgrade.
+  State state = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // A brief description of the event.
+  string description = 11;
+}
+
 // UpgradeAvailableEvent is a notification sent to customers when a new
 // available version is released.
 message UpgradeAvailableEvent {
@@ -5061,10 +5650,22 @@ message LoggingComponentConfig {
 
     // kube-controller-manager
     CONTROLLER_MANAGER = 5;
+
+    // kcp-sshd
+    KCP_SSHD = 7;
+
+    // kcp connection logs
+    KCP_CONNECTION = 8;
   }
 
   // Select components to collect logs. An empty set would disable all logging.
   repeated Component enable_components = 1;
+}
+
+// RayClusterLoggingConfig specifies configuration of Ray logging.
+message RayClusterLoggingConfig {
+  // Enable log collection for Ray clusters.
+  bool enabled = 1;
 }
 
 // MonitoringConfig is cluster monitoring configuration.
@@ -5107,6 +5708,13 @@ message AdvancedDatapathObservabilityConfig {
 
   // Enable Relay component
   optional bool enable_relay = 3;
+}
+
+// RayClusterMonitoringConfig specifies monitoring configuration for Ray
+// clusters.
+message RayClusterMonitoringConfig {
+  // Enable metrics collection for Ray clusters.
+  bool enabled = 1;
 }
 
 // NodePoolLoggingConfig specifies logging configuration for nodepools.
@@ -5169,6 +5777,15 @@ message MonitoringComponentConfig {
 
     // Statefulset
     STATEFULSET = 12;
+
+    // CADVISOR
+    CADVISOR = 13;
+
+    // KUBELET
+    KUBELET = 14;
+
+    // NVIDIA Data Center GPU Manager (DCGM)
+    DCGM = 15;
   }
 
   // Select components to collect metrics. An empty set would disable all
@@ -5220,14 +5837,14 @@ message Fleet {
   // been registered.
   string project = 1;
 
-  // [Output only] The full resource name of the registered fleet membership of
+  // Output only. The full resource name of the registered fleet membership of
   // the cluster, in the format
   // `//gkehub.googleapis.com/projects/*/locations/*/memberships/*`.
-  string membership = 2;
+  string membership = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // [Output only] Whether the cluster has been registered through the fleet
+  // Output only. Whether the cluster has been registered through the fleet
   // API.
-  bool pre_registered = 3;
+  bool pre_registered = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Possible values for IP stack type
@@ -5240,6 +5857,70 @@ enum StackType {
 
   // Cluster can use both IPv4 and IPv6
   IPV4_IPV6 = 2;
+}
+
+// Configuration for all of the cluster's control plane endpoints.
+message ControlPlaneEndpointsConfig {
+  // Describes the configuration of a DNS endpoint.
+  message DNSEndpointConfig {
+    // Output only. The cluster's DNS endpoint configuration.
+    // A DNS format address. This is accessible from the public internet.
+    // Ex: uid.us-central1.gke.goog.
+    // Always present, but the behavior may change according to the value of
+    // [DNSEndpointConfig.allow_external_traffic][google.container.v1.ControlPlaneEndpointsConfig.DNSEndpointConfig.allow_external_traffic].
+    string endpoint = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Controls whether user traffic is allowed over this endpoint. Note that
+    // GCP-managed services may still use the endpoint even if this is false.
+    optional bool allow_external_traffic = 3;
+  }
+
+  // IP endpoints configuration.
+  message IPEndpointsConfig {
+    // Controls whether to allow direct IP access.
+    optional bool enabled = 1;
+
+    // Controls whether the control plane allows access through a public IP.
+    // It is invalid to specify both
+    // [PrivateClusterConfig.enablePrivateEndpoint][] and this field at the same
+    // time.
+    optional bool enable_public_endpoint = 2;
+
+    // Controls whether the control plane's private endpoint is accessible from
+    // sources in other regions.
+    // It is invalid to specify both
+    // [PrivateClusterMasterGlobalAccessConfig.enabled][google.container.v1.PrivateClusterMasterGlobalAccessConfig.enabled]
+    // and this field at the same time.
+    optional bool global_access = 3;
+
+    // Configuration of authorized networks. If enabled, restricts access to the
+    // control plane based on source IP.
+    // It is invalid to specify both
+    // [Cluster.masterAuthorizedNetworksConfig][] and this field at the same
+    // time.
+    MasterAuthorizedNetworksConfig authorized_networks_config = 4;
+
+    // Output only. The external IP address of this cluster's control plane.
+    // Only populated if enabled.
+    string public_endpoint = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. The internal IP address of this cluster's control plane.
+    // Only populated if enabled.
+    string private_endpoint = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Subnet to provision the master's private endpoint during cluster
+    // creation. Specified in projects/*/regions/*/subnetworks/* format. It is
+    // invalid to specify both
+    // [PrivateClusterConfig.privateEndpointSubnetwork][] and this field at the
+    // same time.
+    string private_endpoint_subnetwork = 7;
+  }
+
+  // DNS endpoint configuration.
+  DNSEndpointConfig dns_endpoint_config = 1;
+
+  // IP endpoints configuration.
+  IPEndpointsConfig ip_endpoints_config = 3;
 }
 
 // Possible values for IPv6 access type
@@ -5328,9 +6009,38 @@ message EnterpriseConfig {
     ENTERPRISE = 2;
   }
 
-  // Output only. [Output only] cluster_tier specifies the premium tier of the
-  // cluster.
+  // Output only. cluster_tier indicates the effective tier of the cluster.
   ClusterTier cluster_tier = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // desired_tier specifies the desired tier of the cluster.
+  ClusterTier desired_tier = 2;
+}
+
+// SecretManagerConfig is config for secret manager enablement.
+message SecretManagerConfig {
+  // Enable/Disable Secret Manager Config.
+  optional bool enabled = 1;
+}
+
+// SecondaryBootDisk represents a persistent disk attached to a node
+// with special configurations based on its mode.
+message SecondaryBootDisk {
+  // Mode specifies how the secondary boot disk will be used.
+  // This triggers mode-specified logic in the control plane.
+  enum Mode {
+    // MODE_UNSPECIFIED is when mode is not set.
+    MODE_UNSPECIFIED = 0;
+
+    // CONTAINER_IMAGE_CACHE is for using the secondary boot disk as
+    // a container image cache.
+    CONTAINER_IMAGE_CACHE = 1;
+  }
+
+  // Disk mode (container image cache, etc.)
+  Mode mode = 1;
+
+  // Fully-qualified resource ID for an existing disk image.
+  string disk_image = 2;
 }
 
 // Options for in-transit encryption.
@@ -5345,3 +6055,7 @@ enum InTransitEncryptionConfig {
   // Data in-transit is encrypted using inter-node transparent encryption.
   IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT = 2;
 }
+
+// SecondaryBootDiskUpdateStrategy is a placeholder which will be extended
+// in the future to define different options for updating secondary boot disks.
+message SecondaryBootDiskUpdateStrategy {}

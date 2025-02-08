@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ function main(nodeGroup, project, zone) {
    */
   // const project = 'my-project'
   /**
-   *  Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *  Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    */
   // const returnPartialSuccess = true
   /**
@@ -76,7 +76,7 @@ function main(nodeGroup, project, zone) {
     };
 
     // Run request
-    const iterable = await computeClient.listNodesAsync(request);
+    const iterable = computeClient.listNodesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

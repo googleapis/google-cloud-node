@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package google.cloud.recaptchaenterprise.v1;
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
+import "google/api/field_info.proto";
 import "google/api/resource.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
@@ -126,6 +127,41 @@ service RecaptchaEnterpriseService {
     };
   }
 
+  // Adds an IP override to a key. The following restrictions hold:
+  // * The maximum number of IP overrides per key is 100.
+  // * For any conflict (such as IP already exists or IP part of an existing
+  //   IP range), an error is returned.
+  rpc AddIpOverride(AddIpOverrideRequest) returns (AddIpOverrideResponse) {
+    option (google.api.http) = {
+      post: "/v1/{name=projects/*/keys/*}:addIpOverride"
+      body: "*"
+    };
+    option (google.api.method_signature) = "name,ip_override_data";
+  }
+
+  // Removes an IP override from a key. The following restrictions hold:
+  // * If the IP isn't found in an existing IP override, a `NOT_FOUND` error
+  // is returned.
+  // * If the IP is found in an existing IP override, but the
+  // override type does not match, a `NOT_FOUND` error is returned.
+  rpc RemoveIpOverride(RemoveIpOverrideRequest)
+      returns (RemoveIpOverrideResponse) {
+    option (google.api.http) = {
+      post: "/v1/{name=projects/*/keys/*}:removeIpOverride"
+      body: "*"
+    };
+    option (google.api.method_signature) = "name,ip_override_data";
+  }
+
+  // Lists all IP overrides for a key.
+  rpc ListIpOverrides(ListIpOverridesRequest)
+      returns (ListIpOverridesResponse) {
+    option (google.api.http) = {
+      get: "/v1/{parent=projects/*/keys/*}:listIpOverrides"
+    };
+    option (google.api.method_signature) = "parent";
+  }
+
   // Get some aggregated metrics for a Key. This data can be used to build
   // dashboards.
   rpc GetMetrics(GetMetricsRequest) returns (Metrics) {
@@ -183,6 +219,16 @@ service RecaptchaEnterpriseService {
     option (google.api.method_signature) = "name";
   }
 
+  // Reorders all firewall policies.
+  rpc ReorderFirewallPolicies(ReorderFirewallPoliciesRequest)
+      returns (ReorderFirewallPoliciesResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=projects/*}/firewallpolicies:reorder"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,names";
+  }
+
   // List groups of related accounts.
   rpc ListRelatedAccountGroups(ListRelatedAccountGroupsRequest)
       returns (ListRelatedAccountGroupsResponse) {
@@ -216,7 +262,7 @@ service RecaptchaEnterpriseService {
 
 // The create assessment request message.
 message CreateAssessmentRequest {
-  // Required. The name of the project in which the assessment will be created,
+  // Required. The name of the project in which the assessment is created,
   // in the format `projects/{project}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -446,8 +492,8 @@ message AnnotateAssessmentRequest {
     }
   ];
 
-  // Optional. The annotation that will be assigned to the Event. This field can
-  // be left empty to provide reasons that apply to an event without concluding
+  // Optional. The annotation that is assigned to the Event. This field can be
+  // left empty to provide reasons that apply to an event without concluding
   // whether the event is legitimate or fraudulent.
   Annotation annotation = 2 [(google.api.field_behavior) = OPTIONAL];
 
@@ -588,6 +634,8 @@ message Assessment {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/Assessment"
     pattern: "projects/{project}/assessments/{assessment}"
+    plural: "assessments"
+    singular: "assessment"
   };
 
   // Output only. Identifier. The resource name for the Assessment in the format
@@ -636,10 +684,38 @@ message Assessment {
   // Output only. Fraud Signals specific to the users involved in a payment
   // transaction.
   FraudSignals fraud_signals = 13 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Assessment returned when a site key, a token, and a phone
+  // number as `user_id` are provided. Account defender and SMS toll fraud
+  // protection need to be enabled.
+  PhoneFraudAssessment phone_fraud_assessment = 12
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. The environment creating the assessment. This describes your
+  // environment (the system invoking CreateAssessment), NOT the environment of
+  // your user.
+  AssessmentEnvironment assessment_environment = 14
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The event being assessed.
 message Event {
+  // Setting that controls Fraud Prevention assessments.
+  enum FraudPrevention {
+    // Default, unspecified setting. `fraud_prevention_assessment` is returned
+    // if `transaction_data` is present in `Event` and Fraud Prevention is
+    // enabled in the Google Cloud console.
+    FRAUD_PREVENTION_UNSPECIFIED = 0;
+
+    // Enable Fraud Prevention for this assessment, if Fraud Prevention is
+    // enabled in the Google Cloud console.
+    ENABLED = 1;
+
+    // Disable Fraud Prevention for this assessment, regardless of Google Cloud
+    // console settings.
+    DISABLED = 2;
+  }
+
   // Optional. The user response token provided by the reCAPTCHA Enterprise
   // client-side integration on your site.
   string token = 1 [(google.api.field_behavior) = OPTIONAL];
@@ -654,7 +730,10 @@ message Event {
 
   // Optional. The IP address in the request from the user's device related to
   // this event.
-  string user_ip_address = 4 [(google.api.field_behavior) = OPTIONAL];
+  string user_ip_address = 4 [
+    (google.api.field_info).format = IPV4_OR_IPV6,
+    (google.api.field_behavior) = OPTIONAL
+  ];
 
   // Optional. The expected action for this type of event. This should be the
   // same action provided at token generation time on client-side platforms
@@ -668,8 +747,7 @@ message Event {
       [deprecated = true, (google.api.field_behavior) = OPTIONAL];
 
   // Optional. Flag for a reCAPTCHA express request for an assessment without a
-  // token. If enabled, `site_key` must reference a SCORE key with WAF feature
-  // set to EXPRESS.
+  // token. If enabled, `site_key` must reference an Express site key.
   bool express = 14 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The URI resource the user requested that triggered an assessment.
@@ -687,8 +765,8 @@ message Event {
   repeated string headers = 11 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Flag for enabling firewall policy config assessment.
-  // If this flag is enabled, the firewall policy will be evaluated and a
-  // suggested firewall action will be returned in the response.
+  // If this flag is enabled, the firewall policy is evaluated and a
+  // suggested firewall action is returned in the response.
   bool firewall_policy_evaluation = 12 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Data describing a payment transaction to be assessed. Sending
@@ -702,6 +780,10 @@ message Event {
   // for logged-in requests or login/registration requests, or by providing user
   // identifiers for guest actions like checkout.
   UserInfo user_info = 15 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The Fraud Prevention setting for this assessment.
+  FraudPrevention fraud_prevention = 17
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Transaction data associated with a payment protected by reCAPTCHA Enterprise.
@@ -912,6 +994,22 @@ message RiskAnalysis {
     SUSPECTED_CHARGEBACK = 7;
   }
 
+  // Challenge information for SCORE_AND_CHALLENGE and INVISIBLE keys
+  enum Challenge {
+    // Default unspecified type.
+    CHALLENGE_UNSPECIFIED = 0;
+
+    // No challenge was presented for solving.
+    NOCAPTCHA = 1;
+
+    // A solution was submitted that was correct.
+    PASSED = 2;
+
+    // A solution was submitted that was incorrect or otherwise
+    // deemed suspicious.
+    FAILED = 3;
+  }
+
   // Output only. Legitimate event score from 0.0 to 1.0.
   // (1.0 means very likely legitimate traffic while 0.0 means very likely
   // non-legitimate traffic).
@@ -925,6 +1023,10 @@ message RiskAnalysis {
   // The set of possible reasons is subject to change.
   repeated string extended_verdict_reasons = 3
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Challenge information for SCORE_AND_CHALLENGE and INVISIBLE
+  // keys
+  Challenge challenge = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Properties of the provided event token.
@@ -1078,6 +1180,33 @@ message FraudSignals {
   CardSignals card_signals = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
+// Information about SMS toll fraud.
+message SmsTollFraudVerdict {
+  // Reasons contributing to the SMS toll fraud verdict.
+  enum SmsTollFraudReason {
+    // Default unspecified reason
+    SMS_TOLL_FRAUD_REASON_UNSPECIFIED = 0;
+
+    // The provided phone number was invalid
+    INVALID_PHONE_NUMBER = 1;
+  }
+
+  // Output only. Probability of an SMS event being fraudulent.
+  // Values are from 0.0 (lowest) to 1.0 (highest).
+  float risk = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Reasons contributing to the SMS toll fraud verdict.
+  repeated SmsTollFraudReason reasons = 2
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Assessment for Phone Fraud
+message PhoneFraudAssessment {
+  // Output only. Assessment of this phone event for risk of SMS toll fraud.
+  SmsTollFraudVerdict sms_toll_fraud_verdict = 1
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
 // Account defender risk assessment.
 message AccountDefenderAssessment {
   // Labels returned by account defender for this request.
@@ -1109,7 +1238,7 @@ message AccountDefenderAssessment {
 
 // The create key request message.
 message CreateKeyRequest {
-  // Required. The name of the project in which the key will be created, in the
+  // Required. The name of the project in which the key is created, in the
   // format `projects/{project}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -1124,7 +1253,7 @@ message CreateKeyRequest {
 
 // The list keys request message.
 message ListKeysRequest {
-  // Required. The name of the project that contains the keys that will be
+  // Required. The name of the project that contains the keys that is
   // listed, in the format `projects/{project}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -1182,7 +1311,7 @@ message UpdateKeyRequest {
   Key key = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. The mask to control which fields of the key get updated. If the
-  // mask is not present, all fields will be updated.
+  // mask is not present, all fields are updated.
   google.protobuf.FieldMask update_mask = 2
       [(google.api.field_behavior) = OPTIONAL];
 }
@@ -1201,7 +1330,7 @@ message DeleteKeyRequest {
 
 // The create firewall policy request message.
 message CreateFirewallPolicyRequest {
-  // Required. The name of the project this policy will apply to, in the format
+  // Required. The name of the project this policy applies to, in the format
   // `projects/{project}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -1234,7 +1363,7 @@ message ListFirewallPoliciesRequest {
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Response to request to list firewall policies belonging to a key.
+// Response to request to list firewall policies belonging to a project.
 message ListFirewallPoliciesResponse {
   // Policy details.
   repeated FirewallPolicy firewall_policies = 1;
@@ -1262,7 +1391,7 @@ message UpdateFirewallPolicyRequest {
   FirewallPolicy firewall_policy = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. The mask to control which fields of the policy get updated. If
-  // the mask is not present, all fields will be updated.
+  // the mask is not present, all fields are updated.
   google.protobuf.FieldMask update_mask = 2
       [(google.api.field_behavior) = OPTIONAL];
 }
@@ -1279,6 +1408,30 @@ message DeleteFirewallPolicyRequest {
   ];
 }
 
+// The reorder firewall policies request message.
+message ReorderFirewallPoliciesRequest {
+  // Required. The name of the project to list the policies for, in the format
+  // `projects/{project}`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "cloudresourcemanager.googleapis.com/Project"
+    }
+  ];
+
+  // Required. A list containing all policy names, in the new order. Each name
+  // is in the format `projects/{project}/firewallpolicies/{firewallpolicy}`.
+  repeated string names = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "recaptchaenterprise.googleapis.com/FirewallPolicy"
+    }
+  ];
+}
+
+// The reorder firewall policies response message.
+message ReorderFirewallPoliciesResponse {}
+
 // The migrate key request message.
 message MigrateKeyRequest {
   // Required. The name of the key to be migrated, in the format
@@ -1293,11 +1446,11 @@ message MigrateKeyRequest {
   // Optional. If true, skips the billing check.
   // A reCAPTCHA Enterprise key or migrated key behaves differently than a
   // reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
-  // https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid
+  // https://cloud.google.com/recaptcha/quotas#quota_limit). To avoid
   // any disruption of your usage, we check that a billing account is present.
   // If your usage of reCAPTCHA is under the free quota, you can safely skip the
   // billing check and proceed with the migration. See
-  // https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
+  // https://cloud.google.com/recaptcha/docs/billing-information.
   bool skip_billing_check = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -1318,6 +1471,8 @@ message Metrics {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/Metrics"
     pattern: "projects/{project}/keys/{key}/metrics"
+    plural: "metrics"
+    singular: "metrics"
   };
 
   // Output only. Identifier. The name of the metrics, in the format
@@ -1330,12 +1485,12 @@ message Metrics {
   // Inclusive start time aligned to a day (UTC).
   google.protobuf.Timestamp start_time = 1;
 
-  // Metrics will be continuous and in order by dates, and in the granularity
+  // Metrics are continuous and in order by dates, and in the granularity
   // of day. All Key types should have score-based data.
   repeated ScoreMetrics score_metrics = 2;
 
-  // Metrics will be continuous and in order by dates, and in the granularity
-  // of day. Only challenge-based keys (CHECKBOX, INVISIBLE), will have
+  // Metrics are continuous and in order by dates, and in the granularity
+  // of day. Only challenge-based keys (CHECKBOX, INVISIBLE) have
   // challenge-based data.
   repeated ChallengeMetrics challenge_metrics = 3;
 }
@@ -1356,6 +1511,8 @@ message Key {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/Key"
     pattern: "projects/{project}/keys/{key}"
+    plural: "keys"
+    singular: "key"
   };
 
   // Identifier. The resource name for the Key in the format
@@ -1376,10 +1533,13 @@ message Key {
 
     // Settings for keys that can be used by iOS apps.
     IOSKeySettings ios_settings = 5;
+
+    // Settings for keys that can be used by reCAPTCHA Express.
+    ExpressKeySettings express_settings = 11;
   }
 
   // Optional. See [Creating and managing labels]
-  // (https://cloud.google.com/recaptcha-enterprise/docs/labels).
+  // (https://cloud.google.com/recaptcha/docs/labels).
   map<string, string> labels = 6 [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. The timestamp corresponding to the creation of this key.
@@ -1411,12 +1571,12 @@ message TestingOptions {
     UNSOLVABLE_CHALLENGE = 2;
   }
 
-  // Optional. All assessments for this Key will return this score. Must be
-  // between 0 (likely not legitimate) and 1 (likely legitimate) inclusive.
+  // Optional. All assessments for this Key return this score. Must be between 0
+  // (likely not legitimate) and 1 (likely legitimate) inclusive.
   float testing_score = 1 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. For challenge-based keys only (CHECKBOX, INVISIBLE), all
-  // challenge requests for this site will return nocaptcha if NOCAPTCHA, or an
+  // challenge requests for this site return nocaptcha if NOCAPTCHA, or an
   // unsolvable challenge if CHALLENGE.
   TestingChallenge testing_challenge = 2
       [(google.api.field_behavior) = OPTIONAL];
@@ -1460,7 +1620,7 @@ message WebKeySettings {
     SECURITY = 3;
   }
 
-  // Optional. If set to true, it means allowed_domains will not be enforced.
+  // Optional. If set to true, it means allowed_domains are not enforced.
   bool allow_all_domains = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Domains or subdomains of websites allowed to use the key. All
@@ -1478,7 +1638,7 @@ message WebKeySettings {
 
   // Optional. Settings for the frequency and difficulty at which this key
   // triggers captcha challenges. This should only be specified for
-  // IntegrationTypes CHECKBOX and INVISIBLE.
+  // IntegrationTypes CHECKBOX and INVISIBLE and SCORE_AND_CHALLENGE.
   ChallengeSecurityPreference challenge_security_preference = 5
       [(google.api.field_behavior) = OPTIONAL];
 }
@@ -1511,13 +1671,16 @@ message IOSKeySettings {
       [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Apple Developer account details for the app that is protected by
-  // the reCAPTCHA Key. reCAPTCHA Enterprise leverages platform-specific checks
-  // like Apple App Attest and Apple DeviceCheck to protect your app from abuse.
-  // Providing these fields allows reCAPTCHA Enterprise to get a better
-  // assessment of the integrity of your app.
+  // the reCAPTCHA Key. reCAPTCHA leverages platform-specific checks like Apple
+  // App Attest and Apple DeviceCheck to protect your app from abuse. Providing
+  // these fields allows reCAPTCHA to get a better assessment of the integrity
+  // of your app.
   AppleDeveloperId apple_developer_id = 3
       [(google.api.field_behavior) = OPTIONAL];
 }
+
+// Settings specific to keys that can be used for reCAPTCHA Express.
+message ExpressKeySettings {}
 
 // Contains fields that are required to perform Apple-specific integrity checks.
 message AppleDeveloperId {
@@ -1576,13 +1739,13 @@ message ChallengeMetrics {
 
 // Policy config assessment.
 message FirewallPolicyAssessment {
-  // Output only. If the processing of a policy config fails, an error will be
-  // populated and the firewall_policy will be left empty.
+  // Output only. If the processing of a policy config fails, an error is
+  // populated and the firewall_policy is left empty.
   google.rpc.Status error = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The policy that matched the request. If more than one policy
   // may match, this is the first match. If no policy matches the incoming
-  // request, the policy field will be left empty.
+  // request, the policy field is left empty.
   FirewallPolicy firewall_policy = 8
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }
@@ -1597,8 +1760,15 @@ message FirewallAction {
   // hitting the backend.
   message BlockAction {}
 
+  // An include reCAPTCHA script action involves injecting reCAPTCHA JavaScript
+  // code into the HTML returned by the site backend. This reCAPTCHA
+  // script is tasked with collecting user signals on the requested web page,
+  // issuing tokens as a cookie within the site domain, and enabling their
+  // utilization in subsequent page requests.
+  message IncludeRecaptchaScriptAction {}
+
   // A redirect action returns a 307 (temporary redirect) response, pointing
-  // the user to a ReCaptcha interstitial page to attach a token.
+  // the user to a reCAPTCHA interstitial page to attach a token.
   message RedirectAction {}
 
   // A substitute action transparently serves a different page than the one
@@ -1625,19 +1795,23 @@ message FirewallAction {
     // access to the requested resource.
     AllowAction allow = 1;
 
-    // This action will deny access to a given page. The user will get an HTTP
+    // This action denies access to a given page. The user gets an HTTP
     // error code.
     BlockAction block = 2;
 
-    // This action will redirect the request to a ReCaptcha interstitial to
+    // This action injects reCAPTCHA JavaScript code into the HTML page
+    // returned by the site backend.
+    IncludeRecaptchaScriptAction include_recaptcha_script = 6;
+
+    // This action redirects the request to a reCAPTCHA interstitial to
     // attach a token.
     RedirectAction redirect = 5;
 
-    // This action will transparently serve a different page to an offending
+    // This action transparently serves a different page to an offending
     // user.
     SubstituteAction substitute = 3;
 
-    // This action will set a custom header but allow the request to continue
+    // This action sets a custom header but allow the request to continue
     // to the customer backend.
     SetHeaderAction set_header = 4;
   }
@@ -1649,6 +1823,8 @@ message FirewallPolicy {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/FirewallPolicy"
     pattern: "projects/{project}/firewallpolicies/{firewallpolicy}"
+    plural: "firewallPolicies"
+    singular: "firewallPolicy"
   };
 
   // Identifier. The resource name for the FirewallPolicy in the format
@@ -1764,7 +1940,7 @@ message SearchRelatedAccountGroupMembershipsRequest {
   string project = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      child_type: "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
+      type: "cloudresourcemanager.googleapis.com/Project"
     }
   ];
 
@@ -1807,21 +1983,88 @@ message SearchRelatedAccountGroupMembershipsResponse {
   string next_page_token = 2;
 }
 
+// The AddIpOverride request message.
+message AddIpOverrideRequest {
+  // Required. The name of the key to which the IP override is added, in the
+  // format `projects/{project}/keys/{key}`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "recaptchaenterprise.googleapis.com/Key"
+    }
+  ];
+
+  // Required. IP override added to the key.
+  IpOverrideData ip_override_data = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response for AddIpOverride.
+message AddIpOverrideResponse {}
+
+// The RemoveIpOverride request message.
+message RemoveIpOverrideRequest {
+  // Required. The name of the key from which the IP override is removed, in the
+  // format `projects/{project}/keys/{key}`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "recaptchaenterprise.googleapis.com/Key"
+    }
+  ];
+
+  // Required. IP override to be removed from the key.
+  IpOverrideData ip_override_data = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response for RemoveIpOverride.
+message RemoveIpOverrideResponse {}
+
+// The ListIpOverrides request message.
+message ListIpOverridesRequest {
+  // Required. The parent key for which the IP overrides are listed, in the
+  // format `projects/{project}/keys/{key}`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "recaptchaenterprise.googleapis.com/Key"
+    }
+  ];
+
+  // Optional. The maximum number of overrides to return. Default is 10. Max
+  // limit is 100. If the number of overrides is less than the page_size, all
+  // overrides are returned. If the page size is more than 100, it is coerced to
+  // 100.
+  int32 page_size = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The next_page_token value returned from a previous
+  // ListIpOverridesRequest, if any.
+  string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Response for ListIpOverrides.
+message ListIpOverridesResponse {
+  // IP Overrides details.
+  repeated IpOverrideData ip_overrides = 1;
+
+  // Token to retrieve the next page of results. If this field is empty, no keys
+  // remain in the results.
+  string next_page_token = 2;
+}
+
 // A membership in a group of related accounts.
 message RelatedAccountGroupMembership {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
     pattern: "projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}"
+    plural: "relatedAccountGroupMemberships"
+    singular: "relatedAccountGroupMembership"
   };
 
   // Required. Identifier. The resource name for this membership in the format
   // `projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}`.
   string name = 1 [
     (google.api.field_behavior) = IDENTIFIER,
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      type: "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
-    }
+    (google.api.field_behavior) = REQUIRED
   ];
 
   // The unique stable account identifier of the member. The identifier
@@ -1841,6 +2084,8 @@ message RelatedAccountGroup {
   option (google.api.resource) = {
     type: "recaptchaenterprise.googleapis.com/RelatedAccountGroup"
     pattern: "projects/{project}/relatedaccountgroups/{relatedaccountgroup}"
+    plural: "relatedAccountGroups"
+    singular: "relatedAccountGroup"
   };
 
   // Required. Identifier. The resource name for the related account group in
@@ -1848,10 +2093,7 @@ message RelatedAccountGroup {
   // `projects/{project}/relatedaccountgroups/{related_account_group}`.
   string name = 1 [
     (google.api.field_behavior) = IDENTIFIER,
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      type: "recaptchaenterprise.googleapis.com/RelatedAccountGroup"
-    }
+    (google.api.field_behavior) = REQUIRED
   ];
 }
 
@@ -1859,7 +2101,7 @@ message RelatedAccountGroup {
 // Firewall).
 message WafSettings {
   // Supported WAF features. For more information, see
-  // https://cloud.google.com/recaptcha-enterprise/docs/usecase#comparison_of_features.
+  // https://cloud.google.com/recaptcha/docs/usecase#comparison_of_features.
   enum WafFeature {
     // Undefined feature.
     WAF_FEATURE_UNSPECIFIED = 0;
@@ -1879,7 +2121,7 @@ message WafSettings {
     EXPRESS = 5;
   }
 
-  // Web Application Firewalls supported by reCAPTCHA Enterprise.
+  // Web Application Firewalls supported by reCAPTCHA.
   enum WafService {
     // Undefined WAF
     WAF_SERVICE_UNSPECIFIED = 0;
@@ -1889,6 +2131,12 @@ message WafSettings {
 
     // Fastly
     FASTLY = 3;
+
+    // Cloudflare
+    CLOUDFLARE = 4;
+
+    // Akamai
+    AKAMAI = 5;
   }
 
   // Required. The WAF service that uses this key.
@@ -1896,4 +2144,48 @@ message WafSettings {
 
   // Required. The WAF feature for which this key is enabled.
   WafFeature waf_feature = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// The environment creating the assessment. This describes your environment
+// (the system invoking CreateAssessment), NOT the environment of your user.
+message AssessmentEnvironment {
+  // Optional. Identifies the client module initiating the CreateAssessment
+  // request. This can be the link to the client module's project. Examples
+  // include:
+  // - "github.com/GoogleCloudPlatform/recaptcha-enterprise-google-tag-manager"
+  // - "cloud.google.com/recaptcha/docs/implement-waf-akamai"
+  // - "cloud.google.com/recaptcha/docs/implement-waf-cloudflare"
+  // - "wordpress.org/plugins/recaptcha-something"
+  string client = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The version of the client module. For example, "1.0.0".
+  string version = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Information about the IP or IP range override.
+message IpOverrideData {
+  // Enum that represents the type of IP override.
+  enum OverrideType {
+    // Default override type that indicates this enum hasn't been specified.
+    OVERRIDE_TYPE_UNSPECIFIED = 0;
+
+    // Allowlist the IP address; i.e. give a `risk_analysis.score` of 0.9 for
+    // all valid assessments.
+    ALLOW = 1;
+  }
+
+  // Required. The IP address to override (can be IPv4, IPv6 or CIDR).
+  // The IP override must be a valid IPv4 or IPv6 address, or a CIDR range.
+  // The IP override must be a public IP address.
+  // Example of IPv4: 168.192.5.6
+  // Example of IPv6: 2001:0000:130F:0000:0000:09C0:876A:130B
+  // Example of IPv4 with CIDR: 168.192.5.0/24
+  // Example of IPv6 with CIDR: 2001:0DB8:1234::/48
+  string ip = 1 [
+    (google.api.field_info).format = IPV4_OR_IPV6,
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // Required. Describes the type of IP override.
+  OverrideType override_type = 3 [(google.api.field_behavior) = REQUIRED];
 }

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,9 +33,10 @@ function main(parent, storagePoolId, storagePool) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. Id of the requesting storage pool
-   *  If auto-generating Id server-side, remove this field and
-   *  id from the method_signature of Create RPC
+   *  Required. Id of the requesting storage pool. Must be unique within the
+   *  parent resource. Must contain only letters, numbers and hyphen, with the
+   *  first character a letter, the last a letter or a number, and a 63 character
+   *  maximum.
    */
   // const storagePoolId = 'abc123'
   /**

@@ -67,6 +67,14 @@
         "FetchDomainVerificationStatus": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "SetUriPatternDocumentData": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetUriPatternDocumentData": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1alpha/alpha_analytics_data_client_config.json`.
@@ -52,6 +53,8 @@ export class AlphaAnalyticsDataClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -110,8 +113,27 @@ export class AlphaAnalyticsDataClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AlphaAnalyticsDataClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'analyticsdata.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -126,7 +148,7 @@ export class AlphaAnalyticsDataClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -151,16 +173,16 @@ export class AlphaAnalyticsDataClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -186,8 +208,14 @@ export class AlphaAnalyticsDataClient {
       propertyPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}'
       ),
+      propertyQuotasSnapshotPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/propertyQuotasSnapshot'
+      ),
       recurringAudienceListPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/recurringAudienceLists/{recurring_audience_list}'
+      ),
+      reportTaskPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/reportTasks/{report_task}'
       ),
     };
 
@@ -204,6 +232,11 @@ export class AlphaAnalyticsDataClient {
         'pageToken',
         'nextPageToken',
         'recurringAudienceLists'
+      ),
+      listReportTasks: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'reportTasks'
       ),
     };
 
@@ -228,12 +261,23 @@ export class AlphaAnalyticsDataClient {
     const createAudienceListMetadata = protoFilesRoot.lookup(
       '.google.analytics.data.v1alpha.AudienceListMetadata'
     ) as gax.protobuf.Type;
+    const createReportTaskResponse = protoFilesRoot.lookup(
+      '.google.analytics.data.v1alpha.ReportTask'
+    ) as gax.protobuf.Type;
+    const createReportTaskMetadata = protoFilesRoot.lookup(
+      '.google.analytics.data.v1alpha.ReportTaskMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createAudienceList: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAudienceListResponse.decode.bind(createAudienceListResponse),
         createAudienceListMetadata.decode.bind(createAudienceListMetadata)
+      ),
+      createReportTask: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createReportTaskResponse.decode.bind(createReportTaskResponse),
+        createReportTaskMetadata.decode.bind(createReportTaskMetadata)
       ),
     };
 
@@ -297,6 +341,11 @@ export class AlphaAnalyticsDataClient {
       'createRecurringAudienceList',
       'getRecurringAudienceList',
       'listRecurringAudienceLists',
+      'getPropertyQuotasSnapshot',
+      'createReportTask',
+      'queryReportTask',
+      'getReportTask',
+      'listReportTasks',
     ];
     for (const methodName of alphaAnalyticsDataStubMethods) {
       const callPromise = this.alphaAnalyticsDataStub.then(
@@ -332,19 +381,50 @@ export class AlphaAnalyticsDataClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'analyticsdata.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'analyticsdata.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -410,9 +490,9 @@ export class AlphaAnalyticsDataClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} [request.property]
-   *   Optional. A Google Analytics GA4 property identifier whose events are
-   *   tracked. Specified in the URL path and not the body. To learn more, see
-   *   [where to find your Property
+   *   Optional. A Google Analytics property identifier whose events are tracked.
+   *   Specified in the URL path and not the body. To learn more, see [where to
+   *   find your Property
    *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
    *   Within a batch request, this property should either be unspecified or
    *   consistent with the batch-level property.
@@ -1162,6 +1242,322 @@ export class AlphaAnalyticsDataClient {
       callback
     );
   }
+  /**
+   * Get all property quotas organized by quota category for a given property.
+   * This will charge 1 property quota from the category with the most quota.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Quotas from this property will be listed in the response.
+   *   Format: `properties/{property}/propertyQuotasSnapshot`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.PropertyQuotasSnapshot|PropertyQuotasSnapshot}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_property_quotas_snapshot.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetPropertyQuotasSnapshot_async
+   */
+  getPropertyQuotasSnapshot(
+    request?: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      (
+        | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getPropertyQuotasSnapshot(
+    request: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPropertyQuotasSnapshot(
+    request: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPropertyQuotasSnapshot(
+    request?: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+          | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      (
+        | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getPropertyQuotasSnapshot(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Retrieves a report task's content. After requesting the `CreateReportTask`,
+   * you are able to retrieve the report content once the report is
+   * ACTIVE. This method will return an error if the report task's state is not
+   * `ACTIVE`. A query response will return the tabular row & column values of
+   * the report.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The report source name.
+   *   Format: `properties/{property}/reportTasks/{report}`
+   * @param {number} [request.offset]
+   *   Optional. The row count of the start row in the report. The first row is
+   *   counted as row 0.
+   *
+   *   When paging, the first request does not specify offset; or equivalently,
+   *   sets offset to 0; the first request returns the first `limit` of rows. The
+   *   second request sets offset to the `limit` of the first request; the second
+   *   request returns the second `limit` of rows.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {number} [request.limit]
+   *   Optional. The number of rows to return from the report. If unspecified,
+   *   10,000 rows are returned. The API returns a maximum of 250,000 rows per
+   *   request, no matter how many you ask for. `limit` must be positive.
+   *
+   *   The API can also return fewer rows than the requested `limit`, if there
+   *   aren't as many dimension values as the `limit`. The number of rows
+   *   available to a QueryReportTaskRequest is further limited by the limit of
+   *   the associated ReportTask. A query can retrieve at most ReportTask.limit
+   *   rows. For example, if the ReportTask has a limit of 1,000, then a
+   *   QueryReportTask request with offset=900 and limit=500 will return at most
+   *   100 rows.
+   *
+   *   To learn more about this pagination parameter, see
+   *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.QueryReportTaskResponse|QueryReportTaskResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.query_report_task.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryReportTask_async
+   */
+  queryReportTask(
+    request?: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+      protos.google.analytics.data.v1alpha.IQueryReportTaskRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  queryReportTask(
+    request: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+      | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  queryReportTask(
+    request: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+      | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  queryReportTask(
+    request?: protos.google.analytics.data.v1alpha.IQueryReportTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+          | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+      | protos.google.analytics.data.v1alpha.IQueryReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IQueryReportTaskResponse,
+      protos.google.analytics.data.v1alpha.IQueryReportTaskRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.queryReportTask(request, options, callback);
+  }
+  /**
+   * Gets report metadata about a specific report task. After creating a report
+   * task, use this method to check its processing state or inspect its
+   * report definition.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The report task resource name.
+   *   Format: `properties/{property}/reportTasks/{report_task}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_report_task.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetReportTask_async
+   */
+  getReportTask(
+    request?: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IReportTask,
+      protos.google.analytics.data.v1alpha.IGetReportTaskRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getReportTask(
+    request: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IReportTask,
+      | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getReportTask(
+    request: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IReportTask,
+      | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getReportTask(
+    request?: protos.google.analytics.data.v1alpha.IGetReportTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.data.v1alpha.IReportTask,
+          | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IReportTask,
+      | protos.google.analytics.data.v1alpha.IGetReportTaskRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IReportTask,
+      protos.google.analytics.data.v1alpha.IGetReportTaskRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getReportTask(request, options, callback);
+  }
 
   /**
    * Creates an audience list for later retrieval. This method quickly returns
@@ -1326,6 +1722,154 @@ export class AlphaAnalyticsDataClient {
     >;
   }
   /**
+   * Initiates the creation of a report task. This method quickly
+   * returns a report task and initiates a long running
+   * asynchronous request to form a customized report of your Google Analytics
+   * event data.
+   *
+   * A report task will be retained and available for querying for 72 hours
+   * after it has been created.
+   *
+   * A report task created by one user can be listed and queried by all users
+   * who have access to the property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this report task will be created.
+   *   Format: `properties/{propertyId}`
+   * @param {google.analytics.data.v1alpha.ReportTask} request.reportTask
+   *   Required. The report task configuration to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_report_task.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateReportTask_async
+   */
+  createReportTask(
+    request?: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.analytics.data.v1alpha.IReportTask,
+        protos.google.analytics.data.v1alpha.IReportTaskMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createReportTask(
+    request: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.analytics.data.v1alpha.IReportTask,
+        protos.google.analytics.data.v1alpha.IReportTaskMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createReportTask(
+    request: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.analytics.data.v1alpha.IReportTask,
+        protos.google.analytics.data.v1alpha.IReportTaskMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createReportTask(
+    request?: protos.google.analytics.data.v1alpha.ICreateReportTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.analytics.data.v1alpha.IReportTask,
+            protos.google.analytics.data.v1alpha.IReportTaskMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.analytics.data.v1alpha.IReportTask,
+        protos.google.analytics.data.v1alpha.IReportTaskMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.analytics.data.v1alpha.IReportTask,
+        protos.google.analytics.data.v1alpha.IReportTaskMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createReportTask(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createReportTask()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.create_report_task.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateReportTask_async
+   */
+  async checkCreateReportTaskProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.analytics.data.v1alpha.ReportTask,
+      protos.google.analytics.data.v1alpha.ReportTaskMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createReportTask,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.analytics.data.v1alpha.ReportTask,
+      protos.google.analytics.data.v1alpha.ReportTaskMetadata
+    >;
+  }
+  /**
    * Lists all audience lists for a property. This method can be used for you to
    * find and reuse existing audience lists rather than creating unnecessary new
    * audience lists. The same audience can have multiple audience lists that
@@ -1445,7 +1989,7 @@ export class AlphaAnalyticsDataClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAudienceLists`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1672,7 +2216,7 @@ export class AlphaAnalyticsDataClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRecurringAudienceLists`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1780,6 +2324,198 @@ export class AlphaAnalyticsDataClient {
     ) as AsyncIterable<protos.google.analytics.data.v1alpha.IRecurringAudienceList>;
   }
   /**
+   * Lists all report tasks for a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All report tasks for this property will be listed in the
+   *   response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of report tasks to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListReportTasks` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listReportTasksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listReportTasks(
+    request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IReportTask[],
+      protos.google.analytics.data.v1alpha.IListReportTasksRequest | null,
+      protos.google.analytics.data.v1alpha.IListReportTasksResponse,
+    ]
+  >;
+  listReportTasks(
+    request: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+      | protos.google.analytics.data.v1alpha.IListReportTasksResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IReportTask
+    >
+  ): void;
+  listReportTasks(
+    request: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+      | protos.google.analytics.data.v1alpha.IListReportTasksResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IReportTask
+    >
+  ): void;
+  listReportTasks(
+    request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+          | protos.google.analytics.data.v1alpha.IListReportTasksResponse
+          | null
+          | undefined,
+          protos.google.analytics.data.v1alpha.IReportTask
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+      | protos.google.analytics.data.v1alpha.IListReportTasksResponse
+      | null
+      | undefined,
+      protos.google.analytics.data.v1alpha.IReportTask
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IReportTask[],
+      protos.google.analytics.data.v1alpha.IListReportTasksRequest | null,
+      protos.google.analytics.data.v1alpha.IListReportTasksResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listReportTasks(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `listReportTasks`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All report tasks for this property will be listed in the
+   *   response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of report tasks to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListReportTasks` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listReportTasksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listReportTasksStream(
+    request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listReportTasks'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listReportTasks.createStream(
+      this.innerApiCalls.listReportTasks as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listReportTasks`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. All report tasks for this property will be listed in the
+   *   response. Format: `properties/{property}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of report tasks to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListReportTasks` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.analytics.data.v1alpha.ReportTask|ReportTask}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.list_report_tasks.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListReportTasks_async
+   */
+  listReportTasksAsync(
+    request?: protos.google.analytics.data.v1alpha.IListReportTasksRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.data.v1alpha.IReportTask> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listReportTasks'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listReportTasks.asyncIterate(
+      this.innerApiCalls['listReportTasks'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.data.v1alpha.IReportTask>;
+  }
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1811,7 +2547,7 @@ export class AlphaAnalyticsDataClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1824,6 +2560,20 @@ export class AlphaAnalyticsDataClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1860,6 +2610,13 @@ export class AlphaAnalyticsDataClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1895,11 +2652,11 @@ export class AlphaAnalyticsDataClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1908,6 +2665,20 @@ export class AlphaAnalyticsDataClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1938,7 +2709,7 @@ export class AlphaAnalyticsDataClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1951,6 +2722,20 @@ export class AlphaAnalyticsDataClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2020,6 +2805,33 @@ export class AlphaAnalyticsDataClient {
   }
 
   /**
+   * Return a fully-qualified propertyQuotasSnapshot resource name string.
+   *
+   * @param {string} property
+   * @returns {string} Resource name string.
+   */
+  propertyQuotasSnapshotPath(property: string) {
+    return this.pathTemplates.propertyQuotasSnapshotPathTemplate.render({
+      property: property,
+    });
+  }
+
+  /**
+   * Parse the property from PropertyQuotasSnapshot resource.
+   *
+   * @param {string} propertyQuotasSnapshotName
+   *   A fully-qualified path representing PropertyQuotasSnapshot resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromPropertyQuotasSnapshotName(
+    propertyQuotasSnapshotName: string
+  ) {
+    return this.pathTemplates.propertyQuotasSnapshotPathTemplate.match(
+      propertyQuotasSnapshotName
+    ).property;
+  }
+
+  /**
    * Return a fully-qualified recurringAudienceList resource name string.
    *
    * @param {string} property
@@ -2061,6 +2873,44 @@ export class AlphaAnalyticsDataClient {
     return this.pathTemplates.recurringAudienceListPathTemplate.match(
       recurringAudienceListName
     ).recurring_audience_list;
+  }
+
+  /**
+   * Return a fully-qualified reportTask resource name string.
+   *
+   * @param {string} property
+   * @param {string} report_task
+   * @returns {string} Resource name string.
+   */
+  reportTaskPath(property: string, reportTask: string) {
+    return this.pathTemplates.reportTaskPathTemplate.render({
+      property: property,
+      report_task: reportTask,
+    });
+  }
+
+  /**
+   * Parse the property from ReportTask resource.
+   *
+   * @param {string} reportTaskName
+   *   A fully-qualified path representing ReportTask resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromReportTaskName(reportTaskName: string) {
+    return this.pathTemplates.reportTaskPathTemplate.match(reportTaskName)
+      .property;
+  }
+
+  /**
+   * Parse the report_task from ReportTask resource.
+   *
+   * @param {string} reportTaskName
+   *   A fully-qualified path representing ReportTask resource.
+   * @returns {string} A string representing the report_task.
+   */
+  matchReportTaskFromReportTaskName(reportTaskName: string) {
+    return this.pathTemplates.reportTaskPathTemplate.match(reportTaskName)
+      .report_task;
   }
 
   /**

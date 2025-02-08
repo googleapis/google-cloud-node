@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import "google/api/field_behavior.proto";
 import "google/api/httpbody.proto";
 import "google/api/resource.proto";
 import "google/cloud/discoveryengine/v1/import_config.proto";
+import "google/cloud/discoveryengine/v1/purge_config.proto";
 import "google/cloud/discoveryengine/v1/user_event.proto";
 import "google/longrunning/operations.proto";
 
@@ -49,6 +50,10 @@ service UserEventService {
         post: "/v1/{parent=projects/*/locations/*/collections/*/dataStores/*}/userEvents:write"
         body: "user_event"
       }
+      additional_bindings {
+        post: "/v1/{parent=projects/*/locations/*}/userEvents:write"
+        body: "user_event"
+      }
     };
   }
 
@@ -63,10 +68,33 @@ service UserEventService {
       additional_bindings {
         get: "/v1/{parent=projects/*/locations/*/collections/*/dataStores/*}/userEvents:collect"
       }
+      additional_bindings {
+        get: "/v1/{parent=projects/*/locations/*}/userEvents:collect"
+      }
     };
   }
 
-  // Bulk import of User events. Request processing might be
+  // Deletes permanently all user events specified by the filter provided.
+  // Depending on the number of events specified by the filter, this operation
+  // could take hours or days to complete. To test a filter, use the list
+  // command first.
+  rpc PurgeUserEvents(PurgeUserEventsRequest)
+      returns (google.longrunning.Operation) {
+    option (google.api.http) = {
+      post: "/v1/{parent=projects/*/locations/*/dataStores/*}/userEvents:purge"
+      body: "*"
+      additional_bindings {
+        post: "/v1/{parent=projects/*/locations/*/collections/*/dataStores/*}/userEvents:purge"
+        body: "*"
+      }
+    };
+    option (google.longrunning.operation_info) = {
+      response_type: "google.cloud.discoveryengine.v1.PurgeUserEventsResponse"
+      metadata_type: "google.cloud.discoveryengine.v1.PurgeUserEventsMetadata"
+    };
+  }
+
+  // Bulk import of user events. Request processing might be
   // synchronous. Events that already exist are skipped.
   // Use this method for backfilling historical user events.
   //
@@ -92,8 +120,16 @@ service UserEventService {
 
 // Request message for WriteUserEvent method.
 message WriteUserEventRequest {
-  // Required. The parent DataStore resource name, such as
+  // Required. The parent resource name.
+  // If the write user event action is applied in
+  // [DataStore][google.cloud.discoveryengine.v1.DataStore] level, the format
+  // is:
   // `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+  // If the write user event action is applied in [Location][] level, for
+  // example, the event with
+  // [Document][google.cloud.discoveryengine.v1.Document] across multiple
+  // [DataStore][google.cloud.discoveryengine.v1.DataStore], the format is:
+  // `projects/{project}/locations/{location}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
@@ -103,6 +139,10 @@ message WriteUserEventRequest {
 
   // Required. User event to write.
   optional UserEvent user_event = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // If set to true, the user event is written asynchronously after
+  // validation, and the API responds without waiting for the write.
+  bool write_async = 3;
 }
 
 // Request message for CollectUserEvent method.

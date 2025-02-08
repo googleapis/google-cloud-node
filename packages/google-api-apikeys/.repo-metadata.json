@@ -5,7 +5,7 @@
   "product_documentation": "cloud.google.com/api-keys/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/apikeys/latest",
   "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
+  "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/apikeys",

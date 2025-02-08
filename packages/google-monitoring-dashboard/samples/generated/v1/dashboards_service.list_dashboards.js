@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,9 +39,10 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  If this field is not empty then it must contain the `nextPageToken` value
-   *  returned by a previous call to this method.  Using this field causes the
-   *  method to return additional results from the previous method call.
+   *  Optional. If this field is not empty then it must contain the
+   *  `nextPageToken` value returned by a previous call to this method.  Using
+   *  this field causes the method to return additional results from the previous
+   *  method call.
    */
   // const pageToken = 'abc123'
 
@@ -58,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dashboardClient.listDashboardsAsync(request);
+    const iterable = dashboardClient.listDashboardsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

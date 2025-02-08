@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listModelEvaluationSlicesAsync(request);
+    const iterable = aiplatformClient.listModelEvaluationSlicesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

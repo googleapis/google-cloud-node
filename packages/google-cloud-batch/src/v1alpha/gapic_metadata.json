@@ -20,14 +20,44 @@
                 "getJob"
               ]
             },
+            "UpdateJob": {
+              "methods": [
+                "updateJob"
+              ]
+            },
             "GetTask": {
               "methods": [
                 "getTask"
               ]
             },
+            "CreateResourceAllowance": {
+              "methods": [
+                "createResourceAllowance"
+              ]
+            },
+            "GetResourceAllowance": {
+              "methods": [
+                "getResourceAllowance"
+              ]
+            },
+            "UpdateResourceAllowance": {
+              "methods": [
+                "updateResourceAllowance"
+              ]
+            },
             "DeleteJob": {
               "methods": [
                 "deleteJob"
+              ]
+            },
+            "CancelJob": {
+              "methods": [
+                "cancelJob"
+              ]
+            },
+            "DeleteResourceAllowance": {
+              "methods": [
+                "deleteResourceAllowance"
               ]
             },
             "ListJobs": {
@@ -42,6 +72,13 @@
                 "listTasks",
                 "listTasksStream",
                 "listTasksAsync"
+              ]
+            },
+            "ListResourceAllowances": {
+              "methods": [
+                "listResourceAllowances",
+                "listResourceAllowancesStream",
+                "listResourceAllowancesAsync"
               ]
             }
           }
@@ -59,14 +96,44 @@
                 "getJob"
               ]
             },
+            "UpdateJob": {
+              "methods": [
+                "updateJob"
+              ]
+            },
             "GetTask": {
               "methods": [
                 "getTask"
               ]
             },
+            "CreateResourceAllowance": {
+              "methods": [
+                "createResourceAllowance"
+              ]
+            },
+            "GetResourceAllowance": {
+              "methods": [
+                "getResourceAllowance"
+              ]
+            },
+            "UpdateResourceAllowance": {
+              "methods": [
+                "updateResourceAllowance"
+              ]
+            },
             "DeleteJob": {
               "methods": [
                 "deleteJob"
+              ]
+            },
+            "CancelJob": {
+              "methods": [
+                "cancelJob"
+              ]
+            },
+            "DeleteResourceAllowance": {
+              "methods": [
+                "deleteResourceAllowance"
               ]
             },
             "ListJobs": {
@@ -81,6 +148,13 @@
                 "listTasks",
                 "listTasksStream",
                 "listTasksAsync"
+              ]
+            },
+            "ListResourceAllowances": {
+              "methods": [
+                "listResourceAllowances",
+                "listResourceAllowancesStream",
+                "listResourceAllowancesAsync"
               ]
             }
           }

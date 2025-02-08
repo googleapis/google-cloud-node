@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -55,6 +55,13 @@ function main(parent) {
    *  the config specified in Settings.
    */
   // const speechConfig = {}
+  /**
+   *  Optional. If set, this fields indicates the number of objects to ingest
+   *  from the Cloud Storage bucket. If empty, the entire bucket will be
+   *  ingested. Unless they are first deleted, conversations produced through
+   *  sampling won't be ingested by subsequent ingest requests.
+   */
+  // const sampleSize = 1234
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;

@@ -81,7 +81,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await kmsClient.listCryptoKeyVersionsAsync(request);
+    const iterable = kmsClient.listCryptoKeyVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

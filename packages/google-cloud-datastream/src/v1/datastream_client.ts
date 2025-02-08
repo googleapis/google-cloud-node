@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/datastream_client_config.json`.
@@ -56,6 +57,8 @@ export class DatastreamClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -116,8 +119,27 @@ export class DatastreamClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DatastreamClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'datastream.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -132,7 +154,7 @@ export class DatastreamClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -157,10 +179,10 @@ export class DatastreamClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
@@ -172,7 +194,7 @@ export class DatastreamClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -328,6 +350,12 @@ export class DatastreamClient {
     const deleteStreamMetadata = protoFilesRoot.lookup(
       '.google.cloud.datastream.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const runStreamResponse = protoFilesRoot.lookup(
+      '.google.cloud.datastream.v1.Stream'
+    ) as gax.protobuf.Type;
+    const runStreamMetadata = protoFilesRoot.lookup(
+      '.google.cloud.datastream.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const createPrivateConnectionResponse = protoFilesRoot.lookup(
       '.google.cloud.datastream.v1.PrivateConnection'
     ) as gax.protobuf.Type;
@@ -395,6 +423,11 @@ export class DatastreamClient {
         this.operationsClient,
         deleteStreamResponse.decode.bind(deleteStreamResponse),
         deleteStreamMetadata.decode.bind(deleteStreamMetadata)
+      ),
+      runStream: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        runStreamResponse.decode.bind(runStreamResponse),
+        runStreamMetadata.decode.bind(runStreamMetadata)
       ),
       createPrivateConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -487,6 +520,7 @@ export class DatastreamClient {
       'createStream',
       'updateStream',
       'deleteStream',
+      'runStream',
       'getStreamObject',
       'lookupStreamObject',
       'listStreamObjects',
@@ -536,19 +570,50 @@ export class DatastreamClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'datastream.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'datastream.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -709,6 +774,8 @@ export class DatastreamClient {
    *   MySQL RDBMS to enrich with child data objects and metadata.
    * @param {google.cloud.datastream.v1.PostgresqlRdbms} request.postgresqlRdbms
    *   PostgreSQL RDBMS to enrich with child data objects and metadata.
+   * @param {google.cloud.datastream.v1.SqlServerRdbms} request.sqlServerRdbms
+   *   SQLServer RDBMS to enrich with child data objects and metadata.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2378,6 +2445,149 @@ export class DatastreamClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
+      protos.google.cloud.datastream.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Use this method to start, resume or recover a stream with a non default CDC
+   * strategy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the stream resource to start, in the format:
+   *   projects/{project_id}/locations/{location}/streams/{stream_name}
+   * @param {google.cloud.datastream.v1.CdcStrategy} [request.cdcStrategy]
+   *   Optional. The CDC strategy of the stream. If not set, the system's default
+   *   value will be used.
+   * @param {boolean} [request.force]
+   *   Optional. Update the stream without validating it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/datastream.run_stream.js</caption>
+   * region_tag:datastream_v1_generated_Datastream_RunStream_async
+   */
+  runStream(
+    request?: protos.google.cloud.datastream.v1.IRunStreamRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datastream.v1.IStream,
+        protos.google.cloud.datastream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  runStream(
+    request: protos.google.cloud.datastream.v1.IRunStreamRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1.IStream,
+        protos.google.cloud.datastream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runStream(
+    request: protos.google.cloud.datastream.v1.IRunStreamRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1.IStream,
+        protos.google.cloud.datastream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runStream(
+    request?: protos.google.cloud.datastream.v1.IRunStreamRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.datastream.v1.IStream,
+            protos.google.cloud.datastream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.datastream.v1.IStream,
+        protos.google.cloud.datastream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.datastream.v1.IStream,
+        protos.google.cloud.datastream.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.runStream(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `runStream()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/datastream.run_stream.js</caption>
+   * region_tag:datastream_v1_generated_Datastream_RunStream_async
+   */
+  async checkRunStreamProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.datastream.v1.Stream,
+      protos.google.cloud.datastream.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.runStream,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.datastream.v1.Stream,
       protos.google.cloud.datastream.v1.OperationMetadata
     >;
   }

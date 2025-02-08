@@ -12,6 +12,8 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Gateway_control.generate_credentials](#gateway_control.generate_credentials)
+  * [Gateway_control.generate_credentials](#gateway_control.generate_credentials)
   * [Gateway_service.delete_resource](#gateway_service.delete_resource)
   * [Gateway_service.get_resource](#gateway_service.get_resource)
   * [Gateway_service.patch_resource](#gateway_service.patch_resource)
@@ -31,6 +33,40 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Gateway_control.generate_credentials
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1/gateway_control.generate_credentials.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1/gateway_control.generate_credentials.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkeconnect-gateway/samples/generated/v1/gateway_control.generate_credentials.js`
+
+
+-----
+
+
+
+
+### Gateway_control.generate_credentials
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_control.generate_credentials.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_control.generate_credentials.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_control.generate_credentials.js`
+
+
+-----
+
 
 
 

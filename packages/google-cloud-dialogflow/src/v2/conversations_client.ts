@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v2/conversations_client_config.json`.
@@ -53,6 +54,8 @@ export class ConversationsClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -111,8 +114,27 @@ export class ConversationsClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ConversationsClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'dialogflow.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -127,7 +149,7 @@ export class ConversationsClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -152,10 +174,10 @@ export class ConversationsClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
@@ -165,7 +187,7 @@ export class ConversationsClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -187,6 +209,15 @@ export class ConversationsClient {
     this.pathTemplates = {
       conversationDatasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversationDatasets/{conversation_dataset}'
+      ),
+      encryptionSpecPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/encryptionSpec'
+      ),
+      generatorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/generators/{generator}'
+      ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -400,6 +431,7 @@ export class ConversationsClient {
       'listMessages',
       'suggestConversationSummary',
       'generateStatelessSummary',
+      'generateStatelessSuggestion',
       'searchKnowledge',
     ];
     for (const methodName of conversationsStubMethods) {
@@ -433,19 +465,50 @@ export class ConversationsClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'dialogflow.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'dialogflow.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -522,9 +585,9 @@ export class ConversationsClient {
    *   Google. Only set it if you cannot wait for the response to return a
    *   auto-generated one to you.
    *
-   *   The conversation ID must be compliant with the regression fomula
+   *   The conversation ID must be compliant with the regression formula
    *   `{@link protos.a-zA-Z0-9_-|a-zA-Z}*` with the characters length in range of [3,64].
-   *   If the field is provided, the caller is resposible for
+   *   If the field is provided, the caller is responsible for
    *   1. the uniqueness of the ID, otherwise the request will be rejected.
    *   2. the consistency for whether to use custom ID or not under a project to
    *   better ensure uniqueness.
@@ -813,19 +876,20 @@ export class ConversationsClient {
    *   Required. The conversation to fetch suggestion for.
    *   Format: `projects/<Project ID>/locations/<Location
    *   ID>/conversations/<Conversation ID>`.
-   * @param {string} request.latestMessage
-   *   The name of the latest conversation message used as context for
+   * @param {string} [request.latestMessage]
+   *   Optional. The name of the latest conversation message used as context for
    *   compiling suggestion. If empty, the latest message of the conversation will
    *   be used.
    *
    *   Format: `projects/<Project ID>/locations/<Location
    *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
-   * @param {number} request.contextSize
-   *   Max number of messages prior to and including
+   * @param {number} [request.contextSize]
+   *   Optional. Max number of messages prior to and including
    *   [latest_message] to use as context when compiling the
    *   suggestion. By default 500 and at most 1000.
-   * @param {google.cloud.dialogflow.v2.AssistQueryParameters} request.assistQueryParams
-   *   Parameters for a human assist query. Only used for POC/demo purpose.
+   * @param {google.cloud.dialogflow.v2.AssistQueryParameters} [request.assistQueryParams]
+   *   Optional. Parameters for a human assist query. Only used for POC/demo
+   *   purpose.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -932,13 +996,13 @@ export class ConversationsClient {
    *   generation.
    *   Required fields: {language_code, security_settings}
    *   Optional fields: {agent_assistant_config}
-   * @param {string} request.latestMessage
-   *   The name of the latest conversation message used as context for
+   * @param {string} [request.latestMessage]
+   *   Optional. The name of the latest conversation message used as context for
    *   generating a Summary. If empty, the latest message of the conversation will
    *   be used. The format is specific to the user and the names of the messages
    *   provided.
-   * @param {number} request.maxContextSize
-   *   Max number of messages prior to and including
+   * @param {number} [request.maxContextSize]
+   *   Optional. Max number of messages prior to and including
    *   [latest_message] to use as context when compiling the
    *   suggestion. By default 500 and at most 1000.
    * @param {object} [options]
@@ -1036,12 +1100,125 @@ export class ConversationsClient {
     );
   }
   /**
+   * Generates and returns a suggestion for a conversation that does not have a
+   * resource created for it.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource to charge for the Suggestion's generation.
+   *   Format: `projects/<Project ID>/locations/<Location ID>`.
+   * @param {google.cloud.dialogflow.v2.Generator} request.generator
+   *   Uncreated generator. It should be a complete generator that includes all
+   *   information about the generator.
+   * @param {string} request.generatorName
+   *   The resource name of the existing created generator. Format:
+   *   `projects/<Project ID>/locations/<Location ID>/generators/<Generator ID>`
+   * @param {google.cloud.dialogflow.v2.ConversationContext} [request.conversationContext]
+   *   Optional. Context of the conversation, including transcripts.
+   * @param {number[]} [request.triggerEvents]
+   *   Optional. A list of trigger events. Generator will be triggered only if
+   *   it's trigger event is included here.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.GenerateStatelessSuggestionResponse|GenerateStatelessSuggestionResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/conversations.generate_stateless_suggestion.js</caption>
+   * region_tag:dialogflow_v2_generated_Conversations_GenerateStatelessSuggestion_async
+   */
+  generateStatelessSuggestion(
+    request?: protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionResponse,
+      (
+        | protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  generateStatelessSuggestion(
+    request: protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionResponse,
+      | protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateStatelessSuggestion(
+    request: protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionResponse,
+      | protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateStatelessSuggestion(
+    request?: protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionResponse,
+          | protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionResponse,
+      | protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionResponse,
+      (
+        | protos.google.cloud.dialogflow.v2.IGenerateStatelessSuggestionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.generateStatelessSuggestion(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Get answers for the given query based on knowledge documents.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The parent resource contains the conversation profile
+   *   Required. The parent resource contains the conversation profile
    *   Format: 'projects/<Project ID>' or `projects/<Project
    *   ID>/locations/<Location ID>`.
    * @param {google.cloud.dialogflow.v2.TextInput} request.query
@@ -1051,22 +1228,46 @@ export class ConversationsClient {
    *   Format: `projects/<Project ID>/locations/<Location
    *   ID>/conversationProfiles/<Conversation Profile ID>`.
    * @param {string} request.sessionId
-   *   The ID of the search session.
+   *   Required. The ID of the search session.
    *   The session_id can be combined with Dialogflow V3 Agent ID retrieved from
    *   conversation profile or on its own to identify a search session. The search
    *   history of the same session will impact the search result. It's up to the
    *   API caller to choose an appropriate `Session ID`. It can be a random number
    *   or some type of session identifiers (preferably hashed). The length must
    *   not exceed 36 characters.
-   * @param {string} request.conversation
-   *   The conversation (between human agent and end user) where the search
-   *   request is triggered. Format: `projects/<Project ID>/locations/<Location
-   *   ID>/conversations/<Conversation ID>`.
-   * @param {string} request.latestMessage
-   *   The name of the latest conversation message when the request is
+   * @param {string} [request.conversation]
+   *   Optional. The conversation (between human agent and end user) where the
+   *   search request is triggered. Format: `projects/<Project
+   *   ID>/locations/<Location ID>/conversations/<Conversation ID>`.
+   * @param {string} [request.latestMessage]
+   *   Optional. The name of the latest conversation message when the request is
    *   triggered.
    *   Format: `projects/<Project ID>/locations/<Location
    *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+   * @param {google.cloud.dialogflow.v2.SearchKnowledgeRequest.QuerySource} [request.querySource]
+   *   Optional. The source of the query in the request.
+   * @param {google.protobuf.Struct} [request.endUserMetadata]
+   *   Optional. Information about the end-user to improve the relevance and
+   *   accuracy of generative answers.
+   *
+   *   This will be interpreted and used by a language model, so, for good
+   *   results, the data should be self-descriptive, and in a simple structure.
+   *
+   *   Example:
+   *
+   *   ```json
+   *   {
+   *     "subscription plan": "Business Premium Plus",
+   *     "devices owned": [
+   *       {"model": "Google Pixel 7"},
+   *       {"model": "Google Pixel Tablet"}
+   *     ]
+   *   }
+   *   ```
+   * @param {google.cloud.dialogflow.v2.SearchKnowledgeRequest.SearchConfig} [request.searchConfig]
+   *   Optional. Configuration specific to search queries with data stores.
+   * @param {boolean} [request.exactSearch]
+   *   Optional. Whether to search the query exactly without query rewrite.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1165,19 +1366,10 @@ export class ConversationsClient {
    *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
-   * @param {string} request.filter
-   *   A filter expression that filters conversations listed in the response. In
-   *   general, the expression must specify the field name, a comparison operator,
-   *   and the value to use for filtering:
-   *   <ul>
-   *     <li>The value must be a string, a number, or a boolean.</li>
-   *     <li>The comparison operator must be either `=`,`!=`, `>`, or `<`.</li>
-   *     <li>To filter on multiple expressions, separate the
-   *         expressions with `AND` or `OR` (omitting both implies `AND`).</li>
-   *     <li>For clarity, expressions can be enclosed in parentheses.</li>
-   *   </ul>
-   *   Only `lifecycle_state` can be filtered on in this way. For example,
-   *   the following expression only returns `COMPLETED` conversations:
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters conversations listed in the
+   *   response. Only `lifecycle_state` can be filtered on in this way. For
+   *   example, the following expression only returns `COMPLETED` conversations:
    *
    *   `lifecycle_state = "COMPLETED"`
    *
@@ -1282,19 +1474,10 @@ export class ConversationsClient {
    *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
-   * @param {string} request.filter
-   *   A filter expression that filters conversations listed in the response. In
-   *   general, the expression must specify the field name, a comparison operator,
-   *   and the value to use for filtering:
-   *   <ul>
-   *     <li>The value must be a string, a number, or a boolean.</li>
-   *     <li>The comparison operator must be either `=`,`!=`, `>`, or `<`.</li>
-   *     <li>To filter on multiple expressions, separate the
-   *         expressions with `AND` or `OR` (omitting both implies `AND`).</li>
-   *     <li>For clarity, expressions can be enclosed in parentheses.</li>
-   *   </ul>
-   *   Only `lifecycle_state` can be filtered on in this way. For example,
-   *   the following expression only returns `COMPLETED` conversations:
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters conversations listed in the
+   *   response. Only `lifecycle_state` can be filtered on in this way. For
+   *   example, the following expression only returns `COMPLETED` conversations:
    *
    *   `lifecycle_state = "COMPLETED"`
    *
@@ -1347,19 +1530,10 @@ export class ConversationsClient {
    *   default 100 and at most 1000.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous list request.
-   * @param {string} request.filter
-   *   A filter expression that filters conversations listed in the response. In
-   *   general, the expression must specify the field name, a comparison operator,
-   *   and the value to use for filtering:
-   *   <ul>
-   *     <li>The value must be a string, a number, or a boolean.</li>
-   *     <li>The comparison operator must be either `=`,`!=`, `>`, or `<`.</li>
-   *     <li>To filter on multiple expressions, separate the
-   *         expressions with `AND` or `OR` (omitting both implies `AND`).</li>
-   *     <li>For clarity, expressions can be enclosed in parentheses.</li>
-   *   </ul>
-   *   Only `lifecycle_state` can be filtered on in this way. For example,
-   *   the following expression only returns `COMPLETED` conversations:
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters conversations listed in the
+   *   response. Only `lifecycle_state` can be filtered on in this way. For
+   *   example, the following expression only returns `COMPLETED` conversations:
    *
    *   `lifecycle_state = "COMPLETED"`
    *
@@ -1765,6 +1939,134 @@ export class ConversationsClient {
     return this.pathTemplates.conversationDatasetPathTemplate.match(
       conversationDatasetName
     ).conversation_dataset;
+  }
+
+  /**
+   * Return a fully-qualified encryptionSpec resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  encryptionSpecPath(project: string, location: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from EncryptionSpec resource.
+   *
+   * @param {string} encryptionSpecName
+   *   A fully-qualified path representing EncryptionSpec resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEncryptionSpecName(encryptionSpecName: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName
+    ).project;
+  }
+
+  /**
+   * Parse the location from EncryptionSpec resource.
+   *
+   * @param {string} encryptionSpecName
+   *   A fully-qualified path representing EncryptionSpec resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEncryptionSpecName(encryptionSpecName: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified generator resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} generator
+   * @returns {string} Resource name string.
+   */
+  generatorPath(project: string, location: string, generator: string) {
+    return this.pathTemplates.generatorPathTemplate.render({
+      project: project,
+      location: location,
+      generator: generator,
+    });
+  }
+
+  /**
+   * Parse the project from Generator resource.
+   *
+   * @param {string} generatorName
+   *   A fully-qualified path representing Generator resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGeneratorName(generatorName: string) {
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Generator resource.
+   *
+   * @param {string} generatorName
+   *   A fully-qualified path representing Generator resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGeneratorName(generatorName: string) {
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .location;
+  }
+
+  /**
+   * Parse the generator from Generator resource.
+   *
+   * @param {string} generatorName
+   *   A fully-qualified path representing Generator resource.
+   * @returns {string} A string representing the generator.
+   */
+  matchGeneratorFromGeneratorName(generatorName: string) {
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .generator;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**

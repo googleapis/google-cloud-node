@@ -30,6 +30,8 @@ function main(servingConfig) {
    */
   /**
    *  Required. The resource name of the Search serving config, such as
+   *  `projects/* /locations/global/collections/default_collection/engines/* /servingConfigs/default_serving_config`,
+   *  or
    *  `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`.
    *  This field is used to identify the serving configuration name, set
    *  of models used to make the search.
@@ -52,9 +54,12 @@ function main(servingConfig) {
   // const imageQuery = {}
   /**
    *  Maximum number of Document google.cloud.discoveryengine.v1.Document s to
-   *  return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *  value is 100. Values above 100 are coerced to 100.
-   *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *  return. The maximum allowed value depends on the data type. Values above
+   *  the maximum value are coerced to the maximum value.
+   *  * Websites with basic indexing: Default `10`, Maximum `25`.
+   *  * Websites with advanced indexing: Default `25`, Maximum `50`.
+   *  * Other: Default `50`, Maximum `100`.
+   *  If this field is negative, an  `INVALID_ARGUMENT` is returned.
    */
   // const pageSize = 1234
   /**
@@ -78,17 +83,51 @@ function main(servingConfig) {
    */
   // const offset = 1234
   /**
+   *  Specs defining dataStores to filter on in a search call and configurations
+   *  for those dataStores. This is only considered for engines with multiple
+   *  dataStores use case. For single dataStore within an engine, they should
+   *  use the specs at the top level.
+   */
+  // const dataStoreSpecs = [1,2,3,4]
+  /**
    *  The filter syntax consists of an expression language for constructing a
    *  predicate from one or more fields of the documents being filtered. Filter
    *  expression is case-sensitive.
    *  If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   *  Filtering in Vertex AI Search is done by mapping the LHS filter key to a
+   *  key property defined in the Vertex AI Search backend -- this mapping is
+   *  defined by the customer in their schema. For example a media customer might
+   *  have a field 'name' in their schema. In this case the filter would look
+   *  like this: filter --> name:'ANY("king kong")'
+   *  For more information about filtering including syntax and filter
+   *  operators, see
+   *  Filter (https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
    */
   // const filter = 'abc123'
+  /**
+   *  The default filter that is applied when a user performs a search without
+   *  checking any filters on the search page.
+   *  The filter applied to every search request when quality improvement such as
+   *  query expansion is needed. In the case a query does not have a sufficient
+   *  amount of results this filter will be used to determine whether or not to
+   *  enable the query expansion flow. The original filter will still be used for
+   *  the query expanded search.
+   *  This field is strongly recommended to achieve high search quality.
+   *  For more information about filter syntax, see
+   *  SearchRequest.filter google.cloud.discoveryengine.v1.SearchRequest.filter.
+   */
+  // const canonicalFilter = 'abc123'
   /**
    *  The order in which documents are returned. Documents can be ordered by
    *  a field in an Document google.cloud.discoveryengine.v1.Document  object.
    *  Leave it unset if ordered by relevance. `order_by` expression is
    *  case-sensitive.
+   *  For more information on ordering the website search results, see
+   *  Order web search
+   *  results (https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+   *  For more information on ordering the healthcare search results, see
+   *  Order healthcare search
+   *  results (https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
    *  If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    */
   // const orderBy = 'abc123'
@@ -100,6 +139,14 @@ function main(servingConfig) {
    */
   // const userInfo = {}
   /**
+   *  The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *  information, see Standard
+   *  fields (https://cloud.google.com/apis/design/standard_fields). This field
+   *  helps to better interpret the query. If a value isn't specified, the query
+   *  language code is automatically detected, which may not be accurate.
+   */
+  // const languageCode = 'abc123'
+  /**
    *  Facet specifications for faceted search. If empty, no facets are returned.
    *  A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
    *  error is returned.
@@ -107,6 +154,8 @@ function main(servingConfig) {
   // const facetSpecs = [1,2,3,4]
   /**
    *  Boost specification to boost certain documents.
+   *  For more information on boosting, see
+   *  Boosting (https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
    */
   // const boostSpec = {}
   /**
@@ -114,9 +163,13 @@ function main(servingConfig) {
    *  For public website search only, supported values are:
    *  * `user_country_code`: string. Default empty. If set to non-empty, results
    *     are restricted or boosted based on the location provided.
+   *     For example, `user_country_code: "au"`
+   *     For available codes see Country
+   *     Codes (https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
    *  * `search_type`: double. Default empty. Enables non-webpage searching
-   *    depending on the value. The only valid non-default value is 1,
-   *    which enables image searching.
+   *     depending on the value. The only valid non-default value is 1,
+   *     which enables image searching.
+   *     For example, `search_type: 1`
    */
   // const params = [1,2,3,4]
   /**
@@ -170,6 +223,41 @@ function main(servingConfig) {
    *  for more details.
    */
   // const userLabels = [1,2,3,4]
+  /**
+   *  Search as you type configuration. Only supported for the
+   *  IndustryVertical.MEDIA google.cloud.discoveryengine.v1.IndustryVertical.MEDIA 
+   *  vertical.
+   */
+  // const searchAsYouTypeSpec = {}
+  /**
+   *  The session resource name. Optional.
+   *  Session allows users to do multi-turn /search API calls or coordination
+   *  between /search API calls and /answer API calls.
+   *  Example #1 (multi-turn /search API calls):
+   *    1. Call /search API with the auto-session mode (see below).
+   *    2. Call /search API with the session ID generated in the first call.
+   *       Here, the previous search query gets considered in query
+   *       standing. I.e., if the first query is "How did Alphabet do in 2022?"
+   *       and the current query is "How about 2023?", the current query will
+   *       be interpreted as "How did Alphabet do in 2023?".
+   *  Example #2 (coordination between /search API calls and /answer API calls):
+   *    1. Call /search API with the auto-session mode (see below).
+   *    2. Call /answer API with the session ID generated in the first call.
+   *       Here, the answer generation happens in the context of the search
+   *       results from the first search call.
+   *  Auto-session mode: when `projects/.../sessions/-` is used, a new session
+   *  gets automatically created. Otherwise, users can use the create-session API
+   *  to create a session manually.
+   *  Multi-turn Search feature is currently at private GA stage. Please use
+   *  v1alpha or v1beta version instead before we launch this feature to public
+   *  GA. Or ask for allowlisting through Google Support team.
+   */
+  // const session = 'abc123'
+  /**
+   *  Session specification.
+   *  Can be used only when `session` is set.
+   */
+  // const sessionSpec = {}
 
   // Imports the Discoveryengine library
   const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1;
@@ -184,7 +272,7 @@ function main(servingConfig) {
     };
 
     // Run request
-    const iterable = await discoveryengineClient.searchAsync(request);
+    const iterable = discoveryengineClient.searchAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

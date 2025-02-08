@@ -1,5 +1,28 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v3.2.0...monitoring-dashboards-v3.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v3.1.0...monitoring-dashboards-v3.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5193](https://github.com/googleapis/google-cloud-node/issues/5193)) ([333b409](https://github.com/googleapis/google-cloud-node/commit/333b40951a255ecfab249bd6e7ace5877270ec85))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v3.0.1...monitoring-dashboards-v3.1.0) (2024-02-09)
+
+
+### Features
+
+* [dashboard] Add support for pie charts, incident lists, dropdown groups, error reporting panels, section headers, and styling options on text widgets ([#5035](https://github.com/googleapis/google-cloud-node/issues/5035)) ([dbaf31e](https://github.com/googleapis/google-cloud-node/commit/dbaf31ebc7f167b9d6323c90854b8e7d482633aa))
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5029](https://github.com/googleapis/google-cloud-node/issues/5029)) ([09e59ad](https://github.com/googleapis/google-cloud-node/commit/09e59ad6e34001a33d01894ccd5a0643f1a84883))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v3.0.0...monitoring-dashboards-v3.0.1) (2023-09-06)
 
 

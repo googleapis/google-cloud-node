@@ -24,6 +24,7 @@ function main() {
   const deploymentResourcePoolServiceClient =
     new aiplatform.DeploymentResourcePoolServiceClient();
   const endpointServiceClient = new aiplatform.EndpointServiceClient();
+  const evaluationServiceClient = new aiplatform.EvaluationServiceClient();
   const featureOnlineStoreAdminServiceClient =
     new aiplatform.FeatureOnlineStoreAdminServiceClient();
   const featureOnlineStoreServiceClient =
@@ -33,6 +34,7 @@ function main() {
   const featurestoreOnlineServingServiceClient =
     new aiplatform.FeaturestoreOnlineServingServiceClient();
   const featurestoreServiceClient = new aiplatform.FeaturestoreServiceClient();
+  const genAiTuningServiceClient = new aiplatform.GenAiTuningServiceClient();
   const indexEndpointServiceClient =
     new aiplatform.IndexEndpointServiceClient();
   const indexServiceClient = new aiplatform.IndexServiceClient();
@@ -43,6 +45,9 @@ function main() {
   const migrationServiceClient = new aiplatform.MigrationServiceClient();
   const modelGardenServiceClient = new aiplatform.ModelGardenServiceClient();
   const modelServiceClient = new aiplatform.ModelServiceClient();
+  const notebookServiceClient = new aiplatform.NotebookServiceClient();
+  const persistentResourceServiceClient =
+    new aiplatform.PersistentResourceServiceClient();
   const pipelineServiceClient = new aiplatform.PipelineServiceClient();
   const predictionServiceClient = new aiplatform.PredictionServiceClient();
   const scheduleServiceClient = new aiplatform.ScheduleServiceClient();

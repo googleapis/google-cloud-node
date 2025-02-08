@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -166,16 +166,94 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1alpha.BatchServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        batchserviceModule.v1alpha.BatchServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'batch.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        batchserviceModule.v1alpha.BatchServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          batchserviceModule.v1alpha.BatchServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'batch.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          batchserviceModule.v1alpha.BatchServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'batch.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'batch.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'batch.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new batchserviceModule.v1alpha.BatchServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'batch.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new batchserviceModule.v1alpha.BatchServiceClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'batch.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new batchserviceModule.v1alpha.BatchServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -279,7 +357,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.Job()
       );
@@ -310,7 +388,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.Job()
       );
@@ -357,7 +435,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.createJob(request), expectedError);
@@ -406,7 +484,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.Job()
       );
@@ -437,7 +515,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.Job()
       );
@@ -484,7 +562,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getJob(request), expectedError);
@@ -518,6 +596,137 @@ describe('v1alpha.BatchServiceClient', () => {
     });
   });
 
+  describe('updateJob', () => {
+    it('invokes updateJob without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
+      );
+      request.job ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateJobRequest',
+        ['job', 'name']
+      );
+      request.job.name = defaultValue1;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.Job()
+      );
+      client.innerApiCalls.updateJob = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateJob(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateJob without error using callback', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
+      );
+      request.job ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateJobRequest',
+        ['job', 'name']
+      );
+      request.job.name = defaultValue1;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.Job()
+      );
+      client.innerApiCalls.updateJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.batch.v1alpha.IJob | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateJob with error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
+      );
+      request.job ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateJobRequest',
+        ['job', 'name']
+      );
+      request.job.name = defaultValue1;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.updateJob(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateJob with closed client', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
+      );
+      request.job ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateJobRequest',
+        ['job', 'name']
+      );
+      request.job.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateJob(request), expectedError);
+    });
+  });
+
   describe('getTask', () => {
     it('invokes getTask without error', async () => {
       const client = new batchserviceModule.v1alpha.BatchServiceClient({
@@ -533,7 +742,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.Task()
       );
@@ -564,7 +773,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.Task()
       );
@@ -611,7 +820,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTask = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTask(request), expectedError);
@@ -645,6 +854,415 @@ describe('v1alpha.BatchServiceClient', () => {
     });
   });
 
+  describe('createResourceAllowance', () => {
+    it('invokes createResourceAllowance without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+      );
+      client.innerApiCalls.createResourceAllowance =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createResourceAllowance(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createResourceAllowance without error using callback', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+      );
+      client.innerApiCalls.createResourceAllowance =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createResourceAllowance(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.batch.v1alpha.IResourceAllowance | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createResourceAllowance with error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createResourceAllowance = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createResourceAllowance(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createResourceAllowance with closed client', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createResourceAllowance(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getResourceAllowance', () => {
+    it('invokes getResourceAllowance without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.GetResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.GetResourceAllowanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+      );
+      client.innerApiCalls.getResourceAllowance =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getResourceAllowance(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getResourceAllowance without error using callback', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.GetResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.GetResourceAllowanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+      );
+      client.innerApiCalls.getResourceAllowance =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getResourceAllowance(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.batch.v1alpha.IResourceAllowance | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getResourceAllowance with error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.GetResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.GetResourceAllowanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getResourceAllowance = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getResourceAllowance(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getResourceAllowance with closed client', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.GetResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.GetResourceAllowanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getResourceAllowance(request), expectedError);
+    });
+  });
+
+  describe('updateResourceAllowance', () => {
+    it('invokes updateResourceAllowance without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest()
+      );
+      request.resourceAllowance ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest',
+        ['resourceAllowance', 'name']
+      );
+      request.resourceAllowance.name = defaultValue1;
+      const expectedHeaderRequestParams = `resource_allowance.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+      );
+      client.innerApiCalls.updateResourceAllowance =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateResourceAllowance(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateResourceAllowance without error using callback', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest()
+      );
+      request.resourceAllowance ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest',
+        ['resourceAllowance', 'name']
+      );
+      request.resourceAllowance.name = defaultValue1;
+      const expectedHeaderRequestParams = `resource_allowance.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+      );
+      client.innerApiCalls.updateResourceAllowance =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateResourceAllowance(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.batch.v1alpha.IResourceAllowance | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateResourceAllowance with error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest()
+      );
+      request.resourceAllowance ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest',
+        ['resourceAllowance', 'name']
+      );
+      request.resourceAllowance.name = defaultValue1;
+      const expectedHeaderRequestParams = `resource_allowance.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateResourceAllowance = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateResourceAllowance(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateResourceAllowance with closed client', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest()
+      );
+      request.resourceAllowance ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest',
+        ['resourceAllowance', 'name']
+      );
+      request.resourceAllowance.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateResourceAllowance(request),
+        expectedError
+      );
+    });
+  });
+
   describe('deleteJob', () => {
     it('invokes deleteJob without error', async () => {
       const client = new batchserviceModule.v1alpha.BatchServiceClient({
@@ -660,7 +1278,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -692,7 +1310,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -746,7 +1364,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubLongRunningCall(
         undefined,
@@ -777,7 +1395,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubLongRunningCall(
         undefined,
@@ -835,6 +1453,394 @@ describe('v1alpha.BatchServiceClient', () => {
     });
   });
 
+  describe('cancelJob', () => {
+    it('invokes cancelJob without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.CancelJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.CancelJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.cancelJob = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.cancelJob(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cancelJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelJob without error using callback', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.CancelJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.CancelJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.cancelJob =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.cancelJob(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.batch.v1alpha.ICancelJobResponse,
+              protos.google.cloud.batch.v1alpha.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.batch.v1alpha.ICancelJobResponse,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cancelJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelJob with call error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.CancelJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.CancelJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.cancelJob = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.cancelJob(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.cancelJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelJob with LRO error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.CancelJobRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.CancelJobRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.cancelJob = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.cancelJob(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.cancelJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCancelJobProgress without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCancelJobProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCancelJobProgress with error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkCancelJobProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteResourceAllowance', () => {
+    it('invokes deleteResourceAllowance without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteResourceAllowance =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteResourceAllowance(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteResourceAllowance without error using callback', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteResourceAllowance =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteResourceAllowance(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.batch.v1alpha.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteResourceAllowance with call error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteResourceAllowance = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteResourceAllowance(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteResourceAllowance with LRO error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteResourceAllowance = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteResourceAllowance(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteResourceAllowance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteResourceAllowance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteResourceAllowanceProgress without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteResourceAllowanceProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteResourceAllowanceProgress with error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteResourceAllowanceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listJobs', () => {
     it('invokes listJobs without error', async () => {
       const client = new batchserviceModule.v1alpha.BatchServiceClient({
@@ -850,7 +1856,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Job()),
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Job()),
@@ -883,7 +1889,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Job()),
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Job()),
@@ -932,7 +1938,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listJobs(request), expectedError);
@@ -960,7 +1966,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Job()),
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Job()),
@@ -991,9 +1997,9 @@ describe('v1alpha.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1011,7 +2017,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
         undefined,
@@ -1039,9 +2045,9 @@ describe('v1alpha.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1059,7 +2065,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Job()),
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Job()),
@@ -1081,9 +2087,9 @@ describe('v1alpha.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1101,7 +2107,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1122,9 +2128,9 @@ describe('v1alpha.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -1144,7 +2150,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Task()),
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Task()),
@@ -1177,7 +2183,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Task()),
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Task()),
@@ -1226,7 +2232,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTasks = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listTasks(request), expectedError);
@@ -1254,7 +2260,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Task()),
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Task()),
@@ -1288,9 +2294,9 @@ describe('v1alpha.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1308,7 +2314,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTasks.createStream = stubPageStreamingCall(
         undefined,
@@ -1339,9 +2345,9 @@ describe('v1alpha.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1359,7 +2365,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Task()),
         generateSampleMessage(new protos.google.cloud.batch.v1alpha.Task()),
@@ -1381,9 +2387,9 @@ describe('v1alpha.BatchServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1401,7 +2407,7 @@ describe('v1alpha.BatchServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTasks.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1421,6 +2427,361 @@ describe('v1alpha.BatchServiceClient', () => {
       );
       assert(
         (client.descriptors.page.listTasks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listResourceAllowances', () => {
+    it('invokes listResourceAllowances without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.ListResourceAllowancesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+      ];
+      client.innerApiCalls.listResourceAllowances =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listResourceAllowances(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listResourceAllowances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listResourceAllowances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listResourceAllowances without error using callback', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.ListResourceAllowancesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+      ];
+      client.innerApiCalls.listResourceAllowances =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listResourceAllowances(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.batch.v1alpha.IResourceAllowance[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listResourceAllowances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listResourceAllowances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listResourceAllowances with error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.ListResourceAllowancesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listResourceAllowances = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listResourceAllowances(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listResourceAllowances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listResourceAllowances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listResourceAllowancesStream without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.ListResourceAllowancesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+      ];
+      client.descriptors.page.listResourceAllowances.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listResourceAllowancesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.batch.v1alpha.ResourceAllowance[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.batch.v1alpha.ResourceAllowance) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listResourceAllowances
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listResourceAllowances, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listResourceAllowances
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listResourceAllowancesStream with error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.ListResourceAllowancesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listResourceAllowances.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listResourceAllowancesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.batch.v1alpha.ResourceAllowance[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.batch.v1alpha.ResourceAllowance) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listResourceAllowances
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listResourceAllowances, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listResourceAllowances
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listResourceAllowances without error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.ListResourceAllowancesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.batch.v1alpha.ResourceAllowance()
+        ),
+      ];
+      client.descriptors.page.listResourceAllowances.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.batch.v1alpha.IResourceAllowance[] =
+        [];
+      const iterable = client.listResourceAllowancesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listResourceAllowances
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listResourceAllowances
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listResourceAllowances with error', async () => {
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.batch.v1alpha.ListResourceAllowancesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listResourceAllowances.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listResourceAllowancesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.batch.v1alpha.IResourceAllowance[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listResourceAllowances
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listResourceAllowances
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -2078,6 +3439,83 @@ describe('v1alpha.BatchServiceClient', () => {
         assert.strictEqual(result, 'projectValue');
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('resourceAllowance', () => {
+      const fakePath = '/rendered/path/resourceAllowance';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        resource_allowance: 'resourceAllowanceValue',
+      };
+      const client = new batchserviceModule.v1alpha.BatchServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.resourceAllowancePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.resourceAllowancePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('resourceAllowancePath', () => {
+        const result = client.resourceAllowancePath(
+          'projectValue',
+          'locationValue',
+          'resourceAllowanceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.resourceAllowancePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromResourceAllowanceName', () => {
+        const result = client.matchProjectFromResourceAllowanceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.resourceAllowancePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromResourceAllowanceName', () => {
+        const result = client.matchLocationFromResourceAllowanceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.resourceAllowancePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchResourceAllowanceFromResourceAllowanceName', () => {
+        const result =
+          client.matchResourceAllowanceFromResourceAllowanceName(fakePath);
+        assert.strictEqual(result, 'resourceAllowanceValue');
+        assert(
+          (
+            client.pathTemplates.resourceAllowancePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

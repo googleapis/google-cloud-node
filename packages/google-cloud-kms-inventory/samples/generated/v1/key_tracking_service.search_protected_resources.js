@@ -83,7 +83,7 @@ function main(scope, cryptoKey) {
     };
 
     // Run request
-    const iterable = await inventoryClient.searchProtectedResourcesAsync(request);
+    const iterable = inventoryClient.searchProtectedResourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

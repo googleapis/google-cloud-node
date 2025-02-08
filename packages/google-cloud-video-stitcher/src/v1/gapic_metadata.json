@@ -60,6 +60,11 @@
                 "getLiveConfig"
               ]
             },
+            "GetVodConfig": {
+              "methods": [
+                "getVodConfig"
+              ]
+            },
             "CreateCdnKey": {
               "methods": [
                 "createCdnKey"
@@ -98,6 +103,26 @@
             "DeleteLiveConfig": {
               "methods": [
                 "deleteLiveConfig"
+              ]
+            },
+            "UpdateLiveConfig": {
+              "methods": [
+                "updateLiveConfig"
+              ]
+            },
+            "CreateVodConfig": {
+              "methods": [
+                "createVodConfig"
+              ]
+            },
+            "DeleteVodConfig": {
+              "methods": [
+                "deleteVodConfig"
+              ]
+            },
+            "UpdateVodConfig": {
+              "methods": [
+                "updateVodConfig"
               ]
             },
             "ListCdnKeys": {
@@ -140,6 +165,13 @@
                 "listLiveConfigs",
                 "listLiveConfigsStream",
                 "listLiveConfigsAsync"
+              ]
+            },
+            "ListVodConfigs": {
+              "methods": [
+                "listVodConfigs",
+                "listVodConfigsStream",
+                "listVodConfigsAsync"
               ]
             }
           }
@@ -197,6 +229,11 @@
                 "getLiveConfig"
               ]
             },
+            "GetVodConfig": {
+              "methods": [
+                "getVodConfig"
+              ]
+            },
             "CreateCdnKey": {
               "methods": [
                 "createCdnKey"
@@ -235,6 +272,26 @@
             "DeleteLiveConfig": {
               "methods": [
                 "deleteLiveConfig"
+              ]
+            },
+            "UpdateLiveConfig": {
+              "methods": [
+                "updateLiveConfig"
+              ]
+            },
+            "CreateVodConfig": {
+              "methods": [
+                "createVodConfig"
+              ]
+            },
+            "DeleteVodConfig": {
+              "methods": [
+                "deleteVodConfig"
+              ]
+            },
+            "UpdateVodConfig": {
+              "methods": [
+                "updateVodConfig"
               ]
             },
             "ListCdnKeys": {
@@ -277,6 +334,13 @@
                 "listLiveConfigs",
                 "listLiveConfigsStream",
                 "listLiveConfigsAsync"
+              ]
+            },
+            "ListVodConfigs": {
+              "methods": [
+                "listVodConfigs",
+                "listVodConfigsStream",
+                "listVodConfigsAsync"
               ]
             }
           }

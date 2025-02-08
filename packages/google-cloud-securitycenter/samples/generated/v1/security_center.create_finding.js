@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ function main(parent, findingId, finding) {
    */
   /**
    *  Required. Resource name of the new finding's parent. Its format should be
-   *  "organizations/[organization_id]/sources/[source_id]".
+   *  `organizations/[organization_id]/sources/[source_id]`.
    */
   // const parent = 'abc123'
   /**

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,14 +16,23 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {NetworkServicesClient} from '@google-cloud/networkservices';
+import {
+  DepServiceClient,
+  NetworkServicesClient,
+} from '@google-cloud/networkservices';
 
 // check that the client class type name can be used
+function doStuffWithDepServiceClient(client: DepServiceClient) {
+  client.close();
+}
 function doStuffWithNetworkServicesClient(client: NetworkServicesClient) {
   client.close();
 }
 
 function main() {
+  // check that the client instance can be created
+  const depServiceClient = new DepServiceClient();
+  doStuffWithDepServiceClient(depServiceClient);
   // check that the client instance can be created
   const networkServicesClient = new NetworkServicesClient();
   doStuffWithNetworkServicesClient(networkServicesClient);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -69,6 +69,18 @@ function main(participant) {
    *  is not accepted.
    */
   // const inputDtmf = {}
+  /**
+   *  The intent to be triggered on V3 agent.
+   *  Format: `projects/<Project ID>/locations/<Location ID>/locations/
+   *  <Location ID>/agents/<Agent ID>/intents/<Intent ID>`.
+   */
+  // const inputIntent = 'abc123'
+  /**
+   *  The input event name.
+   *  This can only be sent once and would cancel the ongoing speech
+   *  recognition if any.
+   */
+  // const inputEvent = 'abc123'
   /**
    *  Parameters for a Dialogflow virtual-agent query.
    */
@@ -149,7 +161,7 @@ function main(participant) {
     stream.on('error', (err) => { throw(err) });
     stream.on('end', () => { /* API call completed */ });
     stream.write(request);
-    stream.end(); 
+    stream.end();
   }
 
   callStreamingAnalyzeContent();

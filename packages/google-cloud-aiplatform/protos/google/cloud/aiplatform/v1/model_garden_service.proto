@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -75,9 +75,16 @@ message GetPublisherModelRequest {
   ];
 
   // Optional. The IETF BCP-47 language code representing the language in which
-  // the publisher model's text information should be written in (see go/bcp47).
+  // the publisher model's text information should be written in.
   string language_code = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. PublisherModel view specifying which fields to read.
   PublisherModelView view = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Boolean indicates whether the requested model is a Hugging Face
+  // model.
+  bool is_hugging_face_model = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Token used to access Hugging Face gated models.
+  string hugging_face_token = 6 [(google.api.field_behavior) = OPTIONAL];
 }

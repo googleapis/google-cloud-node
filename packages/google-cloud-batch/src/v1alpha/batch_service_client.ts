@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1alpha/batch_service_client_config.json`.
@@ -56,6 +57,8 @@ export class BatchServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -115,8 +118,27 @@ export class BatchServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof BatchServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'batch.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -131,7 +153,7 @@ export class BatchServiceClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -156,10 +178,10 @@ export class BatchServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
@@ -169,7 +191,7 @@ export class BatchServiceClient {
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -198,6 +220,9 @@ export class BatchServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
+      resourceAllowancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/resourceAllowances/{resource_allowance}'
+      ),
       taskPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobs/{job}/taskGroups/{task_group}/tasks/{task}'
       ),
@@ -219,6 +244,11 @@ export class BatchServiceClient {
         'pageToken',
         'nextPageToken',
         'tasks'
+      ),
+      listResourceAllowances: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'resourceAllowances'
       ),
     };
 
@@ -269,12 +299,38 @@ export class BatchServiceClient {
     const deleteJobMetadata = protoFilesRoot.lookup(
       '.google.cloud.batch.v1alpha.OperationMetadata'
     ) as gax.protobuf.Type;
+    const cancelJobResponse = protoFilesRoot.lookup(
+      '.google.cloud.batch.v1alpha.CancelJobResponse'
+    ) as gax.protobuf.Type;
+    const cancelJobMetadata = protoFilesRoot.lookup(
+      '.google.cloud.batch.v1alpha.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteResourceAllowanceResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteResourceAllowanceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.batch.v1alpha.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       deleteJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteJobResponse.decode.bind(deleteJobResponse),
         deleteJobMetadata.decode.bind(deleteJobMetadata)
+      ),
+      cancelJob: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        cancelJobResponse.decode.bind(cancelJobResponse),
+        cancelJobMetadata.decode.bind(cancelJobMetadata)
+      ),
+      deleteResourceAllowance: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteResourceAllowanceResponse.decode.bind(
+          deleteResourceAllowanceResponse
+        ),
+        deleteResourceAllowanceMetadata.decode.bind(
+          deleteResourceAllowanceMetadata
+        )
       ),
     };
 
@@ -331,9 +387,16 @@ export class BatchServiceClient {
       'createJob',
       'getJob',
       'deleteJob',
+      'cancelJob',
+      'updateJob',
       'listJobs',
       'getTask',
       'listTasks',
+      'createResourceAllowance',
+      'getResourceAllowance',
+      'deleteResourceAllowance',
+      'listResourceAllowances',
+      'updateResourceAllowance',
     ];
     for (const methodName of batchServiceStubMethods) {
       const callPromise = this.batchServiceStub.then(
@@ -369,19 +432,50 @@ export class BatchServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'batch.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'batch.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -614,6 +708,123 @@ export class BatchServiceClient {
     return this.innerApiCalls.getJob(request, options, callback);
   }
   /**
+   * Update a Job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.batch.v1alpha.Job} request.job
+   *   Required. The Job to update.
+   *   Only fields specified in `updateMask` are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update.
+   *
+   *   The `jobs.patch` method can only be used while a job is in the `QUEUED`,
+   *   `SCHEDULED`, or `RUNNING` state and currently only supports increasing the
+   *   value of the first `taskCount` field in the job's `taskGroups` field.
+   *   Therefore, you must set the value of `updateMask` to `taskGroups`. Any
+   *   other job fields in the update request will be ignored.
+   *
+   *   For example, to update a job's `taskCount` to `2`, set `updateMask` to
+   *   `taskGroups` and use the following request body:
+   *   ```
+   *   {
+   *     "taskGroups":[{
+   *       "taskCount": 2
+   *     }]
+   *   }
+   *   ```
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.batch.v1alpha.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/batch_service.update_job.js</caption>
+   * region_tag:batch_v1alpha_generated_BatchService_UpdateJob_async
+   */
+  updateJob(
+    request?: protos.google.cloud.batch.v1alpha.IUpdateJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IJob,
+      protos.google.cloud.batch.v1alpha.IUpdateJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateJob(
+    request: protos.google.cloud.batch.v1alpha.IUpdateJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.batch.v1alpha.IJob,
+      protos.google.cloud.batch.v1alpha.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateJob(
+    request: protos.google.cloud.batch.v1alpha.IUpdateJobRequest,
+    callback: Callback<
+      protos.google.cloud.batch.v1alpha.IJob,
+      protos.google.cloud.batch.v1alpha.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateJob(
+    request?: protos.google.cloud.batch.v1alpha.IUpdateJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.batch.v1alpha.IJob,
+          | protos.google.cloud.batch.v1alpha.IUpdateJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.batch.v1alpha.IJob,
+      protos.google.cloud.batch.v1alpha.IUpdateJobRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IJob,
+      protos.google.cloud.batch.v1alpha.IUpdateJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'job.name': request.job!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateJob(request, options, callback);
+  }
+  /**
    * Return a single Task.
    *
    * @param {Object} request
@@ -694,6 +905,356 @@ export class BatchServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getTask(request, options, callback);
+  }
+  /**
+   * Create a Resource Allowance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name where the ResourceAllowance will be
+   *   created. Pattern: "projects/{project}/locations/{location}"
+   * @param {string} request.resourceAllowanceId
+   *   ID used to uniquely identify the ResourceAllowance within its parent scope.
+   *   This field should contain at most 63 characters and must start with
+   *   lowercase characters.
+   *   Only lowercase characters, numbers and '-' are accepted.
+   *   The '-' character cannot be the first or the last one.
+   *   A system generated ID will be used if the field is not set.
+   *
+   *   The resource_allowance.name field in the request will be ignored and the
+   *   created resource name of the ResourceAllowance will be
+   *   "{parent}/resourceAllowances/{resource_allowance_id}".
+   * @param {google.cloud.batch.v1alpha.ResourceAllowance} request.resourceAllowance
+   *   Required. The ResourceAllowance to create.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.batch.v1alpha.ResourceAllowance|ResourceAllowance}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/batch_service.create_resource_allowance.js</caption>
+   * region_tag:batch_v1alpha_generated_BatchService_CreateResourceAllowance_async
+   */
+  createResourceAllowance(
+    request?: protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      (
+        | protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createResourceAllowance(
+    request: protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      | protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createResourceAllowance(
+    request: protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest,
+    callback: Callback<
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      | protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createResourceAllowance(
+    request?: protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.batch.v1alpha.IResourceAllowance,
+          | protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      | protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      (
+        | protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createResourceAllowance(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Get a ResourceAllowance specified by its resource name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. ResourceAllowance name.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.batch.v1alpha.ResourceAllowance|ResourceAllowance}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/batch_service.get_resource_allowance.js</caption>
+   * region_tag:batch_v1alpha_generated_BatchService_GetResourceAllowance_async
+   */
+  getResourceAllowance(
+    request?: protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      (
+        | protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getResourceAllowance(
+    request: protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      | protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getResourceAllowance(
+    request: protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest,
+    callback: Callback<
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      | protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getResourceAllowance(
+    request?: protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.batch.v1alpha.IResourceAllowance,
+          | protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      | protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      (
+        | protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getResourceAllowance(request, options, callback);
+  }
+  /**
+   * Update a Resource Allowance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.batch.v1alpha.ResourceAllowance} request.resourceAllowance
+   *   Required. The ResourceAllowance to update.
+   *   Update description.
+   *   Only fields specified in `update_mask` are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update.
+   *
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   ResourceAllowance resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   *
+   *   UpdateResourceAllowance request now only supports update on `limit` field.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.batch.v1alpha.ResourceAllowance|ResourceAllowance}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/batch_service.update_resource_allowance.js</caption>
+   * region_tag:batch_v1alpha_generated_BatchService_UpdateResourceAllowance_async
+   */
+  updateResourceAllowance(
+    request?: protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      (
+        | protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateResourceAllowance(
+    request: protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      | protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateResourceAllowance(
+    request: protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest,
+    callback: Callback<
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      | protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateResourceAllowance(
+    request?: protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.batch.v1alpha.IResourceAllowance,
+          | protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      | protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IResourceAllowance,
+      (
+        | protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'resource_allowance.name': request.resourceAllowance!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateResourceAllowance(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -849,6 +1410,312 @@ export class BatchServiceClient {
     >;
   }
   /**
+   * Cancel a Job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Job name.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/batch_service.cancel_job.js</caption>
+   * region_tag:batch_v1alpha_generated_BatchService_CancelJob_async
+   */
+  cancelJob(
+    request?: protos.google.cloud.batch.v1alpha.ICancelJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.batch.v1alpha.ICancelJobResponse,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  cancelJob(
+    request: protos.google.cloud.batch.v1alpha.ICancelJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.batch.v1alpha.ICancelJobResponse,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelJob(
+    request: protos.google.cloud.batch.v1alpha.ICancelJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.batch.v1alpha.ICancelJobResponse,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelJob(
+    request?: protos.google.cloud.batch.v1alpha.ICancelJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.batch.v1alpha.ICancelJobResponse,
+            protos.google.cloud.batch.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.batch.v1alpha.ICancelJobResponse,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.batch.v1alpha.ICancelJobResponse,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.cancelJob(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `cancelJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/batch_service.cancel_job.js</caption>
+   * region_tag:batch_v1alpha_generated_BatchService_CancelJob_async
+   */
+  async checkCancelJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.batch.v1alpha.CancelJobResponse,
+      protos.google.cloud.batch.v1alpha.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.cancelJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.batch.v1alpha.CancelJobResponse,
+      protos.google.cloud.batch.v1alpha.OperationMetadata
+    >;
+  }
+  /**
+   * Delete a ResourceAllowance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. ResourceAllowance name.
+   * @param {string} [request.reason]
+   *   Optional. Reason for this deletion.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/batch_service.delete_resource_allowance.js</caption>
+   * region_tag:batch_v1alpha_generated_BatchService_DeleteResourceAllowance_async
+   */
+  deleteResourceAllowance(
+    request?: protos.google.cloud.batch.v1alpha.IDeleteResourceAllowanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteResourceAllowance(
+    request: protos.google.cloud.batch.v1alpha.IDeleteResourceAllowanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteResourceAllowance(
+    request: protos.google.cloud.batch.v1alpha.IDeleteResourceAllowanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteResourceAllowance(
+    request?: protos.google.cloud.batch.v1alpha.IDeleteResourceAllowanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.batch.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.batch.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteResourceAllowance(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteResourceAllowance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/batch_service.delete_resource_allowance.js</caption>
+   * region_tag:batch_v1alpha_generated_BatchService_DeleteResourceAllowance_async
+   */
+  async checkDeleteResourceAllowanceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.batch.v1alpha.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteResourceAllowance,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.batch.v1alpha.OperationMetadata
+    >;
+  }
+  /**
    * List all Jobs for a project within a region.
    *
    * @param {Object} request
@@ -946,7 +1813,7 @@ export class BatchServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1144,7 +2011,7 @@ export class BatchServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTasks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1246,6 +2113,196 @@ export class BatchServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.batch.v1alpha.ITask>;
+  }
+  /**
+   * List all ResourceAllowances for a project within a region.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent path.
+   * @param {number} [request.pageSize]
+   *   Optional. Page size.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.batch.v1alpha.ResourceAllowance|ResourceAllowance}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listResourceAllowancesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listResourceAllowances(
+    request?: protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IResourceAllowance[],
+      protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest | null,
+      protos.google.cloud.batch.v1alpha.IListResourceAllowancesResponse,
+    ]
+  >;
+  listResourceAllowances(
+    request: protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest,
+      | protos.google.cloud.batch.v1alpha.IListResourceAllowancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.batch.v1alpha.IResourceAllowance
+    >
+  ): void;
+  listResourceAllowances(
+    request: protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest,
+      | protos.google.cloud.batch.v1alpha.IListResourceAllowancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.batch.v1alpha.IResourceAllowance
+    >
+  ): void;
+  listResourceAllowances(
+    request?: protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest,
+          | protos.google.cloud.batch.v1alpha.IListResourceAllowancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.batch.v1alpha.IResourceAllowance
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest,
+      | protos.google.cloud.batch.v1alpha.IListResourceAllowancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.batch.v1alpha.IResourceAllowance
+    >
+  ): Promise<
+    [
+      protos.google.cloud.batch.v1alpha.IResourceAllowance[],
+      protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest | null,
+      protos.google.cloud.batch.v1alpha.IListResourceAllowancesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listResourceAllowances(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `listResourceAllowances`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent path.
+   * @param {number} [request.pageSize]
+   *   Optional. Page size.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.batch.v1alpha.ResourceAllowance|ResourceAllowance} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listResourceAllowancesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listResourceAllowancesStream(
+    request?: protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listResourceAllowances'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listResourceAllowances.createStream(
+      this.innerApiCalls.listResourceAllowances as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listResourceAllowances`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent path.
+   * @param {number} [request.pageSize]
+   *   Optional. Page size.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.batch.v1alpha.ResourceAllowance|ResourceAllowance}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/batch_service.list_resource_allowances.js</caption>
+   * region_tag:batch_v1alpha_generated_BatchService_ListResourceAllowances_async
+   */
+  listResourceAllowancesAsync(
+    request?: protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.batch.v1alpha.IResourceAllowance> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listResourceAllowances'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listResourceAllowances.asyncIterate(
+      this.innerApiCalls['listResourceAllowances'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.batch.v1alpha.IResourceAllowance>;
   }
   /**
    * Gets information about a location.
@@ -1357,7 +2414,7 @@ export class BatchServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1370,6 +2427,20 @@ export class BatchServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1406,6 +2477,13 @@ export class BatchServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1441,11 +2519,11 @@ export class BatchServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1454,6 +2532,20 @@ export class BatchServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1484,7 +2576,7 @@ export class BatchServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1497,6 +2589,20 @@ export class BatchServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1610,6 +2716,67 @@ export class BatchServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified resourceAllowance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} resource_allowance
+   * @returns {string} Resource name string.
+   */
+  resourceAllowancePath(
+    project: string,
+    location: string,
+    resourceAllowance: string
+  ) {
+    return this.pathTemplates.resourceAllowancePathTemplate.render({
+      project: project,
+      location: location,
+      resource_allowance: resourceAllowance,
+    });
+  }
+
+  /**
+   * Parse the project from ResourceAllowance resource.
+   *
+   * @param {string} resourceAllowanceName
+   *   A fully-qualified path representing ResourceAllowance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromResourceAllowanceName(resourceAllowanceName: string) {
+    return this.pathTemplates.resourceAllowancePathTemplate.match(
+      resourceAllowanceName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ResourceAllowance resource.
+   *
+   * @param {string} resourceAllowanceName
+   *   A fully-qualified path representing ResourceAllowance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromResourceAllowanceName(resourceAllowanceName: string) {
+    return this.pathTemplates.resourceAllowancePathTemplate.match(
+      resourceAllowanceName
+    ).location;
+  }
+
+  /**
+   * Parse the resource_allowance from ResourceAllowance resource.
+   *
+   * @param {string} resourceAllowanceName
+   *   A fully-qualified path representing ResourceAllowance resource.
+   * @returns {string} A string representing the resource_allowance.
+   */
+  matchResourceAllowanceFromResourceAllowanceName(
+    resourceAllowanceName: string
+  ) {
+    return this.pathTemplates.resourceAllowancePathTemplate.match(
+      resourceAllowanceName
+    ).resource_allowance;
   }
 
   /**

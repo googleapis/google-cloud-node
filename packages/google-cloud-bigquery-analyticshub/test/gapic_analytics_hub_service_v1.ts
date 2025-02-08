@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -161,16 +161,101 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.AnalyticsHubServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        analyticshubserviceModule.v1.AnalyticsHubServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new analyticshubserviceModule.v1.AnalyticsHubServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'analyticshub.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        analyticshubserviceModule.v1.AnalyticsHubServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new analyticshubserviceModule.v1.AnalyticsHubServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          analyticshubserviceModule.v1.AnalyticsHubServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'analyticshub.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          analyticshubserviceModule.v1.AnalyticsHubServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'analyticshub.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient(
+        {universeDomain: 'example.com'}
+      );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'analyticshub.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new analyticshubserviceModule.v1.AnalyticsHubServiceClient(
+        {universe_domain: 'example.com'}
+      );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'analyticshub.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new analyticshubserviceModule.v1.AnalyticsHubServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'analyticshub.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'analyticshub.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new analyticshubserviceModule.v1.AnalyticsHubServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -289,7 +374,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
       );
@@ -322,7 +407,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
       );
@@ -371,7 +456,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataExchange = stubSimpleCall(
         undefined,
@@ -427,7 +512,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
       );
@@ -461,7 +546,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
       );
@@ -510,7 +595,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataExchange = stubSimpleCall(
         undefined,
@@ -567,7 +652,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['dataExchange', 'name']
       );
       request.dataExchange.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
       );
@@ -602,7 +687,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['dataExchange', 'name']
       );
       request.dataExchange.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
       );
@@ -652,7 +737,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['dataExchange', 'name']
       );
       request.dataExchange.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataExchange = stubSimpleCall(
         undefined,
@@ -709,7 +794,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -743,7 +828,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -792,7 +877,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataExchange = stubSimpleCall(
         undefined,
@@ -848,7 +933,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.Listing()
       );
@@ -881,7 +966,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.Listing()
       );
@@ -930,7 +1015,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getListing = stubSimpleCall(
         undefined,
@@ -986,7 +1071,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.Listing()
       );
@@ -1019,7 +1104,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.Listing()
       );
@@ -1068,7 +1153,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createListing = stubSimpleCall(
         undefined,
@@ -1125,7 +1210,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['listing', 'name']
       );
       request.listing.name = defaultValue1;
-      const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `listing.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.Listing()
       );
@@ -1159,7 +1244,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['listing', 'name']
       );
       request.listing.name = defaultValue1;
-      const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `listing.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.Listing()
       );
@@ -1209,7 +1294,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['listing', 'name']
       );
       request.listing.name = defaultValue1;
-      const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `listing.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateListing = stubSimpleCall(
         undefined,
@@ -1266,7 +1351,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1299,7 +1384,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1348,7 +1433,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteListing = stubSimpleCall(
         undefined,
@@ -1404,7 +1489,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.SubscribeListingResponse()
       );
@@ -1437,7 +1522,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.SubscribeListingResponse()
       );
@@ -1486,7 +1571,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.subscribeListing = stubSimpleCall(
         undefined,
@@ -1542,7 +1627,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.Subscription()
       );
@@ -1575,7 +1660,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.Subscription()
       );
@@ -1624,7 +1709,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSubscription = stubSimpleCall(
         undefined,
@@ -1680,7 +1765,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse()
       );
@@ -1714,7 +1799,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse()
       );
@@ -1763,7 +1848,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.revokeSubscription = stubSimpleCall(
         undefined,
@@ -1819,7 +1904,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1852,7 +1937,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1901,7 +1986,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -1957,7 +2042,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1990,7 +2075,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -2039,7 +2124,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -2095,7 +2180,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -2129,7 +2214,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -2178,7 +2263,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -2234,7 +2319,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2269,7 +2354,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2325,7 +2410,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.subscribeDataExchange = stubLongRunningCall(
         undefined,
@@ -2361,7 +2446,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.subscribeDataExchange = stubLongRunningCall(
         undefined,
@@ -2443,7 +2528,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2478,7 +2563,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2534,7 +2619,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.refreshSubscription = stubLongRunningCall(
         undefined,
@@ -2567,7 +2652,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.refreshSubscription = stubLongRunningCall(
         undefined,
@@ -2649,7 +2734,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2684,7 +2769,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2740,7 +2825,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSubscription = stubLongRunningCall(
         undefined,
@@ -2773,7 +2858,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSubscription = stubLongRunningCall(
         undefined,
@@ -2855,7 +2940,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
@@ -2896,7 +2981,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
@@ -2955,7 +3040,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataExchanges = stubSimpleCall(
         undefined,
@@ -2988,7 +3073,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
@@ -3031,9 +3116,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listDataExchanges.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3053,7 +3138,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataExchanges.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3085,9 +3170,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listDataExchanges.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3107,7 +3192,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
@@ -3137,9 +3222,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listDataExchanges.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3159,7 +3244,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataExchanges.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3180,9 +3265,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listDataExchanges.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3204,7 +3289,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
@@ -3246,7 +3331,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
@@ -3305,7 +3390,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOrgDataExchanges = stubSimpleCall(
         undefined,
@@ -3338,7 +3423,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
@@ -3381,9 +3466,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listOrgDataExchanges.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3403,7 +3488,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrgDataExchanges.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3435,9 +3520,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listOrgDataExchanges.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3457,7 +3542,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.DataExchange()
@@ -3487,9 +3572,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listOrgDataExchanges.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3509,7 +3594,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['organization']
       );
       request.organization = defaultValue1;
-      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
+      const expectedHeaderRequestParams = `organization=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrgDataExchanges.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3530,9 +3615,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listOrgDataExchanges.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3554,7 +3639,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Listing()
@@ -3595,7 +3680,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Listing()
@@ -3654,7 +3739,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listListings = stubSimpleCall(
         undefined,
@@ -3687,7 +3772,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Listing()
@@ -3728,9 +3813,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listListings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3750,7 +3835,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listListings.createStream = stubPageStreamingCall(
         undefined,
@@ -3782,9 +3867,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listListings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3804,7 +3889,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Listing()
@@ -3834,9 +3919,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listListings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3856,7 +3941,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listListings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3877,9 +3962,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listListings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3901,7 +3986,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Subscription()
@@ -3942,7 +4027,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Subscription()
@@ -4001,7 +4086,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSubscriptions = stubSimpleCall(
         undefined,
@@ -4034,7 +4119,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Subscription()
@@ -4077,9 +4162,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4099,7 +4184,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSubscriptions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4131,9 +4216,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4153,7 +4238,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Subscription()
@@ -4183,9 +4268,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4205,7 +4290,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSubscriptions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4226,9 +4311,9 @@ describe('v1.AnalyticsHubServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4250,7 +4335,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Subscription()
@@ -4292,7 +4377,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Subscription()
@@ -4351,7 +4436,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSharedResourceSubscriptions = stubSimpleCall(
         undefined,
@@ -4387,7 +4472,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Subscription()
@@ -4461,7 +4546,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSharedResourceSubscriptions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4524,7 +4609,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.analyticshub.v1.Subscription()
@@ -4580,7 +4665,7 @@ describe('v1.AnalyticsHubServiceClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSharedResourceSubscriptions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

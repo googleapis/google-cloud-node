@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -167,16 +167,97 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.NetworkServicesClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        networkservicesModule.v1.NetworkServicesClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'networkservices.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        networkservicesModule.v1.NetworkServicesClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          networkservicesModule.v1.NetworkServicesClient.servicePath;
+        assert.strictEqual(servicePath, 'networkservices.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          networkservicesModule.v1.NetworkServicesClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'networkservices.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'networkservices.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'networkservices.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new networkservicesModule.v1.NetworkServicesClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'networkservices.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new networkservicesModule.v1.NetworkServicesClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'networkservices.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new networkservicesModule.v1.NetworkServicesClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -280,7 +361,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.EndpointPolicy()
       );
@@ -311,7 +392,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.EndpointPolicy()
       );
@@ -358,7 +439,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEndpointPolicy = stubSimpleCall(
         undefined,
@@ -410,7 +491,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.Gateway()
       );
@@ -441,7 +522,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.Gateway()
       );
@@ -488,7 +569,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGateway = stubSimpleCall(
         undefined,
@@ -540,7 +621,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.GrpcRoute()
       );
@@ -571,7 +652,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.GrpcRoute()
       );
@@ -618,7 +699,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGrpcRoute = stubSimpleCall(
         undefined,
@@ -670,7 +751,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.HttpRoute()
       );
@@ -701,7 +782,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.HttpRoute()
       );
@@ -748,7 +829,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getHttpRoute = stubSimpleCall(
         undefined,
@@ -800,7 +881,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.TcpRoute()
       );
@@ -831,7 +912,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.TcpRoute()
       );
@@ -878,7 +959,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTcpRoute = stubSimpleCall(
         undefined,
@@ -930,7 +1011,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.TlsRoute()
       );
@@ -961,7 +1042,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.TlsRoute()
       );
@@ -1008,7 +1089,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTlsRoute = stubSimpleCall(
         undefined,
@@ -1060,7 +1141,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.ServiceBinding()
       );
@@ -1091,7 +1172,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.ServiceBinding()
       );
@@ -1138,7 +1219,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServiceBinding = stubSimpleCall(
         undefined,
@@ -1190,7 +1271,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.Mesh()
       );
@@ -1221,7 +1302,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkservices.v1.Mesh()
       );
@@ -1268,7 +1349,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMesh = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getMesh(request), expectedError);
@@ -1317,7 +1398,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1350,7 +1431,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1404,7 +1485,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEndpointPolicy = stubLongRunningCall(
         undefined,
@@ -1435,7 +1516,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEndpointPolicy = stubLongRunningCall(
         undefined,
@@ -1512,7 +1593,7 @@ describe('v1.NetworkServicesClient', () => {
         ['endpointPolicy', 'name']
       );
       request.endpointPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1546,7 +1627,7 @@ describe('v1.NetworkServicesClient', () => {
         ['endpointPolicy', 'name']
       );
       request.endpointPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1601,7 +1682,7 @@ describe('v1.NetworkServicesClient', () => {
         ['endpointPolicy', 'name']
       );
       request.endpointPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEndpointPolicy = stubLongRunningCall(
         undefined,
@@ -1633,7 +1714,7 @@ describe('v1.NetworkServicesClient', () => {
         ['endpointPolicy', 'name']
       );
       request.endpointPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEndpointPolicy = stubLongRunningCall(
         undefined,
@@ -1709,7 +1790,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1742,7 +1823,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1796,7 +1877,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEndpointPolicy = stubLongRunningCall(
         undefined,
@@ -1827,7 +1908,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEndpointPolicy = stubLongRunningCall(
         undefined,
@@ -1903,7 +1984,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1936,7 +2017,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1990,7 +2071,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGateway = stubLongRunningCall(
         undefined,
@@ -2021,7 +2102,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGateway = stubLongRunningCall(
         undefined,
@@ -2098,7 +2179,7 @@ describe('v1.NetworkServicesClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2132,7 +2213,7 @@ describe('v1.NetworkServicesClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2187,7 +2268,7 @@ describe('v1.NetworkServicesClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGateway = stubLongRunningCall(
         undefined,
@@ -2219,7 +2300,7 @@ describe('v1.NetworkServicesClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGateway = stubLongRunningCall(
         undefined,
@@ -2295,7 +2376,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2328,7 +2409,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2382,7 +2463,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGateway = stubLongRunningCall(
         undefined,
@@ -2413,7 +2494,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGateway = stubLongRunningCall(
         undefined,
@@ -2489,7 +2570,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2522,7 +2603,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2576,7 +2657,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGrpcRoute = stubLongRunningCall(
         undefined,
@@ -2607,7 +2688,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGrpcRoute = stubLongRunningCall(
         undefined,
@@ -2684,7 +2765,7 @@ describe('v1.NetworkServicesClient', () => {
         ['grpcRoute', 'name']
       );
       request.grpcRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `grpc_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `grpc_route.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2718,7 +2799,7 @@ describe('v1.NetworkServicesClient', () => {
         ['grpcRoute', 'name']
       );
       request.grpcRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `grpc_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `grpc_route.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2773,7 +2854,7 @@ describe('v1.NetworkServicesClient', () => {
         ['grpcRoute', 'name']
       );
       request.grpcRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `grpc_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `grpc_route.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGrpcRoute = stubLongRunningCall(
         undefined,
@@ -2805,7 +2886,7 @@ describe('v1.NetworkServicesClient', () => {
         ['grpcRoute', 'name']
       );
       request.grpcRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `grpc_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `grpc_route.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGrpcRoute = stubLongRunningCall(
         undefined,
@@ -2881,7 +2962,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2914,7 +2995,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2968,7 +3049,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGrpcRoute = stubLongRunningCall(
         undefined,
@@ -2999,7 +3080,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGrpcRoute = stubLongRunningCall(
         undefined,
@@ -3075,7 +3156,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3108,7 +3189,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3162,7 +3243,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createHttpRoute = stubLongRunningCall(
         undefined,
@@ -3193,7 +3274,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createHttpRoute = stubLongRunningCall(
         undefined,
@@ -3270,7 +3351,7 @@ describe('v1.NetworkServicesClient', () => {
         ['httpRoute', 'name']
       );
       request.httpRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `http_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `http_route.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3304,7 +3385,7 @@ describe('v1.NetworkServicesClient', () => {
         ['httpRoute', 'name']
       );
       request.httpRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `http_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `http_route.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3359,7 +3440,7 @@ describe('v1.NetworkServicesClient', () => {
         ['httpRoute', 'name']
       );
       request.httpRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `http_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `http_route.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateHttpRoute = stubLongRunningCall(
         undefined,
@@ -3391,7 +3472,7 @@ describe('v1.NetworkServicesClient', () => {
         ['httpRoute', 'name']
       );
       request.httpRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `http_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `http_route.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateHttpRoute = stubLongRunningCall(
         undefined,
@@ -3467,7 +3548,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3500,7 +3581,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3554,7 +3635,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteHttpRoute = stubLongRunningCall(
         undefined,
@@ -3585,7 +3666,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteHttpRoute = stubLongRunningCall(
         undefined,
@@ -3661,7 +3742,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3694,7 +3775,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3748,7 +3829,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTcpRoute = stubLongRunningCall(
         undefined,
@@ -3779,7 +3860,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTcpRoute = stubLongRunningCall(
         undefined,
@@ -3856,7 +3937,7 @@ describe('v1.NetworkServicesClient', () => {
         ['tcpRoute', 'name']
       );
       request.tcpRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `tcp_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tcp_route.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3890,7 +3971,7 @@ describe('v1.NetworkServicesClient', () => {
         ['tcpRoute', 'name']
       );
       request.tcpRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `tcp_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tcp_route.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3945,7 +4026,7 @@ describe('v1.NetworkServicesClient', () => {
         ['tcpRoute', 'name']
       );
       request.tcpRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `tcp_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tcp_route.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTcpRoute = stubLongRunningCall(
         undefined,
@@ -3977,7 +4058,7 @@ describe('v1.NetworkServicesClient', () => {
         ['tcpRoute', 'name']
       );
       request.tcpRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `tcp_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tcp_route.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTcpRoute = stubLongRunningCall(
         undefined,
@@ -4053,7 +4134,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4086,7 +4167,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4140,7 +4221,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTcpRoute = stubLongRunningCall(
         undefined,
@@ -4171,7 +4252,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTcpRoute = stubLongRunningCall(
         undefined,
@@ -4247,7 +4328,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4280,7 +4361,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4334,7 +4415,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTlsRoute = stubLongRunningCall(
         undefined,
@@ -4365,7 +4446,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTlsRoute = stubLongRunningCall(
         undefined,
@@ -4442,7 +4523,7 @@ describe('v1.NetworkServicesClient', () => {
         ['tlsRoute', 'name']
       );
       request.tlsRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `tls_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tls_route.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4476,7 +4557,7 @@ describe('v1.NetworkServicesClient', () => {
         ['tlsRoute', 'name']
       );
       request.tlsRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `tls_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tls_route.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4531,7 +4612,7 @@ describe('v1.NetworkServicesClient', () => {
         ['tlsRoute', 'name']
       );
       request.tlsRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `tls_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tls_route.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTlsRoute = stubLongRunningCall(
         undefined,
@@ -4563,7 +4644,7 @@ describe('v1.NetworkServicesClient', () => {
         ['tlsRoute', 'name']
       );
       request.tlsRoute.name = defaultValue1;
-      const expectedHeaderRequestParams = `tls_route.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tls_route.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTlsRoute = stubLongRunningCall(
         undefined,
@@ -4639,7 +4720,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4672,7 +4753,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4726,7 +4807,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTlsRoute = stubLongRunningCall(
         undefined,
@@ -4757,7 +4838,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTlsRoute = stubLongRunningCall(
         undefined,
@@ -4833,7 +4914,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4866,7 +4947,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4920,7 +5001,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServiceBinding = stubLongRunningCall(
         undefined,
@@ -4951,7 +5032,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServiceBinding = stubLongRunningCall(
         undefined,
@@ -5027,7 +5108,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5060,7 +5141,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5114,7 +5195,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteServiceBinding = stubLongRunningCall(
         undefined,
@@ -5145,7 +5226,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteServiceBinding = stubLongRunningCall(
         undefined,
@@ -5221,7 +5302,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5253,7 +5334,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5307,7 +5388,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMesh = stubLongRunningCall(
         undefined,
@@ -5338,7 +5419,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMesh = stubLongRunningCall(
         undefined,
@@ -5412,7 +5493,7 @@ describe('v1.NetworkServicesClient', () => {
         ['mesh', 'name']
       );
       request.mesh.name = defaultValue1;
-      const expectedHeaderRequestParams = `mesh.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `mesh.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5445,7 +5526,7 @@ describe('v1.NetworkServicesClient', () => {
         ['mesh', 'name']
       );
       request.mesh.name = defaultValue1;
-      const expectedHeaderRequestParams = `mesh.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `mesh.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5500,7 +5581,7 @@ describe('v1.NetworkServicesClient', () => {
         ['mesh', 'name']
       );
       request.mesh.name = defaultValue1;
-      const expectedHeaderRequestParams = `mesh.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `mesh.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMesh = stubLongRunningCall(
         undefined,
@@ -5532,7 +5613,7 @@ describe('v1.NetworkServicesClient', () => {
         ['mesh', 'name']
       );
       request.mesh.name = defaultValue1;
-      const expectedHeaderRequestParams = `mesh.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `mesh.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMesh = stubLongRunningCall(
         undefined,
@@ -5605,7 +5686,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5637,7 +5718,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5691,7 +5772,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMesh = stubLongRunningCall(
         undefined,
@@ -5722,7 +5803,7 @@ describe('v1.NetworkServicesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMesh = stubLongRunningCall(
         undefined,
@@ -5795,7 +5876,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.EndpointPolicy()
@@ -5835,7 +5916,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.EndpointPolicy()
@@ -5892,7 +5973,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEndpointPolicies = stubSimpleCall(
         undefined,
@@ -5923,7 +6004,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.EndpointPolicy()
@@ -5964,9 +6045,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5984,7 +6065,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEndpointPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6014,9 +6095,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6034,7 +6115,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.EndpointPolicy()
@@ -6064,9 +6145,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6084,7 +6165,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEndpointPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6105,9 +6186,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listEndpointPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6127,7 +6208,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.Gateway()
@@ -6166,7 +6247,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.Gateway()
@@ -6221,7 +6302,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGateways = stubSimpleCall(
         undefined,
@@ -6252,7 +6333,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.Gateway()
@@ -6292,9 +6373,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6312,7 +6393,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGateways.createStream = stubPageStreamingCall(
         undefined,
@@ -6343,9 +6424,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6363,7 +6444,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.Gateway()
@@ -6392,9 +6473,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6412,7 +6493,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGateways.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6432,9 +6513,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6454,7 +6535,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.GrpcRoute()
@@ -6493,7 +6574,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.GrpcRoute()
@@ -6548,7 +6629,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGrpcRoutes = stubSimpleCall(
         undefined,
@@ -6579,7 +6660,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.GrpcRoute()
@@ -6620,9 +6701,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6640,7 +6721,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGrpcRoutes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6670,9 +6751,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6690,7 +6771,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.GrpcRoute()
@@ -6719,9 +6800,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6739,7 +6820,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGrpcRoutes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6760,9 +6841,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listGrpcRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6782,7 +6863,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.HttpRoute()
@@ -6821,7 +6902,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.HttpRoute()
@@ -6876,7 +6957,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listHttpRoutes = stubSimpleCall(
         undefined,
@@ -6907,7 +6988,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.HttpRoute()
@@ -6948,9 +7029,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6968,7 +7049,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listHttpRoutes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6998,9 +7079,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7018,7 +7099,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.HttpRoute()
@@ -7047,9 +7128,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7067,7 +7148,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listHttpRoutes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7088,9 +7169,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listHttpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7110,7 +7191,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.TcpRoute()
@@ -7149,7 +7230,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.TcpRoute()
@@ -7204,7 +7285,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTcpRoutes = stubSimpleCall(
         undefined,
@@ -7235,7 +7316,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.TcpRoute()
@@ -7275,9 +7356,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7295,7 +7376,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTcpRoutes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7324,9 +7405,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7344,7 +7425,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.TcpRoute()
@@ -7373,9 +7454,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7393,7 +7474,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTcpRoutes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7414,9 +7495,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTcpRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7436,7 +7517,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.TlsRoute()
@@ -7475,7 +7556,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.TlsRoute()
@@ -7530,7 +7611,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTlsRoutes = stubSimpleCall(
         undefined,
@@ -7561,7 +7642,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.TlsRoute()
@@ -7601,9 +7682,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7621,7 +7702,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTlsRoutes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7650,9 +7731,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7670,7 +7751,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.TlsRoute()
@@ -7699,9 +7780,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7719,7 +7800,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTlsRoutes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7740,9 +7821,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listTlsRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -7762,7 +7843,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.ServiceBinding()
@@ -7802,7 +7883,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.ServiceBinding()
@@ -7859,7 +7940,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServiceBindings = stubSimpleCall(
         undefined,
@@ -7890,7 +7971,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.ServiceBinding()
@@ -7931,9 +8012,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7951,7 +8032,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServiceBindings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7981,9 +8062,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8001,7 +8082,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.ServiceBinding()
@@ -8031,9 +8112,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8051,7 +8132,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServiceBindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8072,9 +8153,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listServiceBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -8094,7 +8175,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.Mesh()
@@ -8133,7 +8214,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.Mesh()
@@ -8188,7 +8269,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMeshes = stubSimpleCall(
         undefined,
@@ -8219,7 +8300,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.Mesh()
@@ -8259,9 +8340,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8279,7 +8360,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMeshes.createStream = stubPageStreamingCall(
         undefined,
@@ -8310,9 +8391,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8330,7 +8411,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkservices.v1.Mesh()
@@ -8359,9 +8440,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8379,7 +8460,7 @@ describe('v1.NetworkServicesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMeshes.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -8401,9 +8482,9 @@ describe('v1.NetworkServicesClient', () => {
       assert(
         (client.descriptors.page.listMeshes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -9487,6 +9568,151 @@ describe('v1.NetworkServicesClient', () => {
         assert.strictEqual(result, 'httpRouteValue');
         assert(
           (client.pathTemplates.httpRoutePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('lbRouteExtension', () => {
+      const fakePath = '/rendered/path/lbRouteExtension';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        lb_route_extension: 'lbRouteExtensionValue',
+      };
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.lbRouteExtensionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lbRouteExtensionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lbRouteExtensionPath', () => {
+        const result = client.lbRouteExtensionPath(
+          'projectValue',
+          'locationValue',
+          'lbRouteExtensionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lbRouteExtensionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLbRouteExtensionName', () => {
+        const result = client.matchProjectFromLbRouteExtensionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLbRouteExtensionName', () => {
+        const result = client.matchLocationFromLbRouteExtensionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLbRouteExtensionFromLbRouteExtensionName', () => {
+        const result =
+          client.matchLbRouteExtensionFromLbRouteExtensionName(fakePath);
+        assert.strictEqual(result, 'lbRouteExtensionValue');
+        assert(
+          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('lbTrafficExtension', () => {
+      const fakePath = '/rendered/path/lbTrafficExtension';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        lb_traffic_extension: 'lbTrafficExtensionValue',
+      };
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.lbTrafficExtensionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lbTrafficExtensionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lbTrafficExtensionPath', () => {
+        const result = client.lbTrafficExtensionPath(
+          'projectValue',
+          'locationValue',
+          'lbTrafficExtensionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLbTrafficExtensionName', () => {
+        const result = client.matchProjectFromLbTrafficExtensionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLbTrafficExtensionName', () => {
+        const result = client.matchLocationFromLbTrafficExtensionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLbTrafficExtensionFromLbTrafficExtensionName', () => {
+        const result =
+          client.matchLbTrafficExtensionFromLbTrafficExtensionName(fakePath);
+        assert.strictEqual(result, 'lbTrafficExtensionValue');
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

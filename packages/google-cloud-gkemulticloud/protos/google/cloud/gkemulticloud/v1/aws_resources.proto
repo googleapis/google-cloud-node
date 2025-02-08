@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -481,6 +481,10 @@ message AwsNodePool {
   // Optional. The Management configuration for this node pool.
   AwsNodeManagement management = 30 [(google.api.field_behavior) = OPTIONAL];
 
+  // Optional. Node kubelet configs.
+  NodeKubeletConfig kubelet_config = 31
+      [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. Update settings control the speed and disruption of the update.
   UpdateSettings update_settings = 32 [(google.api.field_behavior) = OPTIONAL];
 }
@@ -564,8 +568,8 @@ message AwsNodeConfig {
   // 255 Unicode characters.
   map<string, string> tags = 5 [(google.api.field_behavior) = OPTIONAL];
 
-  // Required. The name or ARN of the AWS IAM role assigned to nodes in the
-  // pool.
+  // Required. The name or ARN of the AWS IAM instance profile to assign to
+  // nodes in the pool.
   string iam_instance_profile = 6 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. The OS image type to use on node pool instances.
@@ -714,7 +718,7 @@ message AwsProxyConfig {
   //
   // The secret must be a JSON encoded proxy configuration
   // as described in
-  // https://cloud.google.com/anthos/clusters/docs/multi-cloud/aws/how-to/use-a-proxy#create_a_proxy_configuration_file
+  // https://cloud.google.com/kubernetes-engine/multi-cloud/docs/aws/how-to/use-a-proxy#create_a_proxy_configuration_file
   string secret_arn = 1;
 
   // The version string of the AWS Secret Manager secret that contains the

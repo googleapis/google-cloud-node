@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/maps_platform_datasets_client_config.json`.
@@ -50,6 +51,8 @@ export class MapsPlatformDatasetsClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -107,8 +110,27 @@ export class MapsPlatformDatasetsClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MapsPlatformDatasetsClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
+    this._servicePath = 'mapsplatformdatasets.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -123,7 +145,7 @@ export class MapsPlatformDatasetsClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -148,16 +170,16 @@ export class MapsPlatformDatasetsClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
@@ -186,6 +208,11 @@ export class MapsPlatformDatasetsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
+      fetchDatasetErrors: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'errors'
+      ),
       listDatasets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -247,6 +274,7 @@ export class MapsPlatformDatasetsClient {
       'createDataset',
       'updateDatasetMetadata',
       'getDataset',
+      'fetchDatasetErrors',
       'listDatasets',
       'deleteDataset',
     ];
@@ -281,19 +309,50 @@ export class MapsPlatformDatasetsClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'mapsplatformdatasets.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'mapsplatformdatasets.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -333,13 +392,13 @@ export class MapsPlatformDatasetsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Create a new dataset for the specified project.
+   * Creates a new dataset for the specified project.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent project that will own the dataset.
-   *   Format: projects/{$project}
+   *   Format: projects/{project}
    * @param {google.maps.mapsplatformdatasets.v1.Dataset} request.dataset
    *   Required. The dataset version to create.
    * @param {object} [options]
@@ -432,17 +491,17 @@ export class MapsPlatformDatasetsClient {
     return this.innerApiCalls.createDataset(request, options, callback);
   }
   /**
-   * Update the metadata for the dataset.
+   * Updates the metadata for the dataset.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.maps.mapsplatformdatasets.v1.Dataset} request.dataset
-   *   Required. The dataset to update. The dataset's name is used to identify the
-   *   dataset to be updated. The name has the format:
-   *   projects/{project}/datasets/{dataset_id}
+   *   Required. Resource name of the dataset to update.
+   *   Format: projects/{project}/datasets/{dataset_id}
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated. Support the value "*" for full
-   *   replacement.
+   *   The list of fields to be updated.
+   *
+   *   The value "*" is used for full replacement (default).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -533,12 +592,20 @@ export class MapsPlatformDatasetsClient {
     return this.innerApiCalls.updateDatasetMetadata(request, options, callback);
   }
   /**
-   * Get the dataset.
+   * Gets the dataset.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name. projects/{project}/datasets/{dataset_id}
+   *   Required. Resource name.
+   *   Format: projects/{project}/datasets/{dataset_id}
+   *
+   *
+   *   Can also fetch some special versions by appending "@" and a tag.
+   *   Format: projects/{project}/datasets/{dataset_id}@{tag}
+   *
+   *   Tag "active": The info of the latest completed version will be included,
+   *   and NOT_FOUND if the dataset does not have one.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -623,12 +690,13 @@ export class MapsPlatformDatasetsClient {
     return this.innerApiCalls.getDataset(request, options, callback);
   }
   /**
-   * Delete the specified dataset .
+   * Deletes the specified dataset.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Format: projects/${project}/datasets/{dataset_id}
+   *   Required. The name of the dataset to delete.
+   *   Format: projects/{project}/datasets/{dataset_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -720,18 +788,234 @@ export class MapsPlatformDatasetsClient {
   }
 
   /**
-   * List all the datasets for the specified project.
+   * Gets all the errors of a dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The name of the dataset to list all the errors for.
+   *   Format: projects/{project}/datasets/{dataset_id}
+   * @param {number} request.pageSize
+   *   The maximum number of errors to return per page.
+   *
+   *   The maximum value is 500; values above 500 will be capped to 500.
+   *
+   *   If unspecified, at most 50 errors will be returned.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListDatasetErrors call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.rpc.Status|Status}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchDatasetErrorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchDatasetErrors(
+    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.rpc.IStatus[],
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest | null,
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse,
+    ]
+  >;
+  fetchDatasetErrors(
+    request: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+      | null
+      | undefined,
+      protos.google.rpc.IStatus
+    >
+  ): void;
+  fetchDatasetErrors(
+    request: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    callback: PaginationCallback<
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+      | null
+      | undefined,
+      protos.google.rpc.IStatus
+    >
+  ): void;
+  fetchDatasetErrors(
+    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+          | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+          | null
+          | undefined,
+          protos.google.rpc.IStatus
+        >,
+    callback?: PaginationCallback<
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+      | null
+      | undefined,
+      protos.google.rpc.IStatus
+    >
+  ): Promise<
+    [
+      protos.google.rpc.IStatus[],
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest | null,
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.fetchDatasetErrors(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The name of the dataset to list all the errors for.
+   *   Format: projects/{project}/datasets/{dataset_id}
+   * @param {number} request.pageSize
+   *   The maximum number of errors to return per page.
+   *
+   *   The maximum value is 500; values above 500 will be capped to 500.
+   *
+   *   If unspecified, at most 50 errors will be returned.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListDatasetErrors call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.rpc.Status|Status} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchDatasetErrorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchDatasetErrorsStream(
+    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchDatasetErrors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.fetchDatasetErrors.createStream(
+      this.innerApiCalls.fetchDatasetErrors as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `fetchDatasetErrors`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The name of the dataset to list all the errors for.
+   *   Format: projects/{project}/datasets/{dataset_id}
+   * @param {number} request.pageSize
+   *   The maximum number of errors to return per page.
+   *
+   *   The maximum value is 500; values above 500 will be capped to 500.
+   *
+   *   If unspecified, at most 50 errors will be returned.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListDatasetErrors call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.rpc.Status|Status}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js</caption>
+   * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_FetchDatasetErrors_async
+   */
+  fetchDatasetErrorsAsync(
+    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.rpc.IStatus> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchDatasetErrors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.fetchDatasetErrors.asyncIterate(
+      this.innerApiCalls['fetchDatasetErrors'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.rpc.IStatus>;
+  }
+  /**
+   * Lists all the datasets for the specified project.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project to list all the datasets for.
+   *   Format: projects/{project}
    * @param {number} request.pageSize
-   *   The maximum number of versions to return per page.
+   *   The maximum number of datasets to return per page.
+   *
    *   If unspecified (or zero), all datasets will be returned.
    * @param {string} request.pageToken
    *   The page token, received from a previous ListDatasets call.
    *   Provide this to retrieve the subsequent page.
+   * @param {string} request.tag
+   *   The tag that specifies the desired version for each dataset.
+   *
+   *   Note that when pagination is also specified, some filtering can happen
+   *   after pagination, which may cause the response to contain fewer datasets
+   *   than the page size, even if it's not the last page.
+   *
+   *   Tag "active": Each dataset in the response will include the info of its
+   *   latest completed version, and the dataset will be skipped if it does not
+   *   have one.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -825,12 +1109,24 @@ export class MapsPlatformDatasetsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project to list all the datasets for.
+   *   Format: projects/{project}
    * @param {number} request.pageSize
-   *   The maximum number of versions to return per page.
+   *   The maximum number of datasets to return per page.
+   *
    *   If unspecified (or zero), all datasets will be returned.
    * @param {string} request.pageToken
    *   The page token, received from a previous ListDatasets call.
    *   Provide this to retrieve the subsequent page.
+   * @param {string} request.tag
+   *   The tag that specifies the desired version for each dataset.
+   *
+   *   Note that when pagination is also specified, some filtering can happen
+   *   after pagination, which may cause the response to contain fewer datasets
+   *   than the page size, even if it's not the last page.
+   *
+   *   Tag "active": Each dataset in the response will include the info of its
+   *   latest completed version, and the dataset will be skipped if it does not
+   *   have one.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -872,12 +1168,24 @@ export class MapsPlatformDatasetsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project to list all the datasets for.
+   *   Format: projects/{project}
    * @param {number} request.pageSize
-   *   The maximum number of versions to return per page.
+   *   The maximum number of datasets to return per page.
+   *
    *   If unspecified (or zero), all datasets will be returned.
    * @param {string} request.pageToken
    *   The page token, received from a previous ListDatasets call.
    *   Provide this to retrieve the subsequent page.
+   * @param {string} request.tag
+   *   The tag that specifies the desired version for each dataset.
+   *
+   *   Note that when pagination is also specified, some filtering can happen
+   *   after pagination, which may cause the response to contain fewer datasets
+   *   than the page size, even if it's not the last page.
+   *
+   *   Tag "active": Each dataset in the response will include the info of its
+   *   latest completed version, and the dataset will be skipped if it does not
+   *   have one.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

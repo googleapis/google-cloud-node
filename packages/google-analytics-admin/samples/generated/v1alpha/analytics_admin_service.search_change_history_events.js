@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,14 +30,15 @@ function main(account) {
    */
   /**
    *  Required. The account resource for which to return change history
-   *  resources. Format: accounts/{account} Example: "accounts/100"
+   *  resources. Format: accounts/{account}
+   *  Example: `accounts/100`
    */
   // const account = 'abc123'
   /**
    *  Optional. Resource name for a child property. If set, only return changes
    *  made to this property or its child resources.
    *  Format: properties/{propertyId}
-   *  Example: "properties/100"
+   *  Example: `properties/100`
    */
   // const property = 'abc123'
   /**
@@ -65,9 +66,13 @@ function main(account) {
   // const latestChangeTime = {}
   /**
    *  Optional. The maximum number of ChangeHistoryEvent items to return.
-   *  The service may return fewer than this value, even if there are additional
-   *  pages. If unspecified, at most 50 items will be returned.
-   *  The maximum value is 200 (higher values will be coerced to the maximum).
+   *  If unspecified, at most 50 items will be returned. The maximum value is 200
+   *  (higher values will be coerced to the maximum).
+   *  Note that the service may return a page with fewer items than this value
+   *  specifies (potentially even zero), and that there still may be additional
+   *  pages. If you want a particular number of items, you'll need to continue
+   *  requesting additional pages using `page_token` until you get the needed
+   *  number.
    */
   // const pageSize = 1234
   /**
@@ -92,7 +97,7 @@ function main(account) {
     };
 
     // Run request
-    const iterable = await adminClient.searchChangeHistoryEventsAsync(request);
+    const iterable = adminClient.searchChangeHistoryEventsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

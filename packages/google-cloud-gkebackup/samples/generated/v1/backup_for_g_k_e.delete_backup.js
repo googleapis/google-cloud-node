@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,14 +34,14 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  If provided, this value must match the current value of the
+   *  Optional. If provided, this value must match the current value of the
    *  target Backup's etag google.cloud.gkebackup.v1.Backup.etag  field or the
    *  request is rejected.
    */
   // const etag = 'abc123'
   /**
-   *  If set to true, any VolumeBackups below this Backup will also be deleted.
-   *  Otherwise, the request will only succeed if the Backup has no
+   *  Optional. If set to true, any VolumeBackups below this Backup will also be
+   *  deleted. Otherwise, the request will only succeed if the Backup has no
    *  VolumeBackups.
    */
   // const force = true

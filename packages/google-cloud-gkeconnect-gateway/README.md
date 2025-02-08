@@ -59,10 +59,10 @@ npm install @google-cloud/gke-connect-gateway
 ```javascript
 // Imports the Google Cloud client library
 
-const {GatewayServiceClient} = require('@google-cloud/gke-connect-gateway');
+const {GatewayControlClient} = require('@google-cloud/gke-connect-gateway');
 
 // Creates a client
-new GatewayServiceClient();
+new GatewayControlClient();
 
 ```
 
@@ -74,6 +74,8 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Gateway_control.generate_credentials | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1/gateway_control.generate_credentials.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1/gateway_control.generate_credentials.js,packages/google-cloud-gkeconnect-gateway/samples/README.md) |
+| Gateway_control.generate_credentials | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_control.generate_credentials.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_control.generate_credentials.js,packages/google-cloud-gkeconnect-gateway/samples/README.md) |
 | Gateway_service.delete_resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.delete_resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.delete_resource.js,packages/google-cloud-gkeconnect-gateway/samples/README.md) |
 | Gateway_service.get_resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.get_resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.get_resource.js,packages/google-cloud-gkeconnect-gateway/samples/README.md) |
 | Gateway_service.patch_resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.patch_resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_service.patch_resource.js,packages/google-cloud-gkeconnect-gateway/samples/README.md) |

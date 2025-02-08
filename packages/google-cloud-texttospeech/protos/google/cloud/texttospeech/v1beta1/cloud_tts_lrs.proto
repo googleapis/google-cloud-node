@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import "google/cloud/texttospeech/v1beta1/cloud_tts.proto";
 import "google/longrunning/operations.proto";
 import "google/protobuf/timestamp.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.TextToSpeech.V1Beta1";
 option go_package = "cloud.google.com/go/texttospeech/apiv1beta1/texttospeechpb;texttospeechpb";
 option java_multiple_files = true;
@@ -60,7 +59,6 @@ message SynthesizeLongAudioRequest {
   string parent = 1;
 
   // Required. The Synthesizer requires either plain text or SSML as input.
-  // While Long Audio is in preview, SSML is temporarily unsupported.
   SynthesisInput input = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The configuration of the synthesized audio.

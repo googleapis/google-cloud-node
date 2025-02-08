@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,9 +29,10 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Secret google.cloud.secretmanager.v1.Secret  associated with the
-   *  SecretVersions google.cloud.secretmanager.v1.SecretVersion  to list, in the format
-   *  `projects/* /secrets/*`.
+   *  Required. The resource name of the
+   *  Secret google.cloud.secretmanager.v1.Secret  associated with the
+   *  SecretVersions google.cloud.secretmanager.v1.SecretVersion  to list, in
+   *  the format `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
    */
   // const parent = 'abc123'
   /**
@@ -67,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await secretmanagerClient.listSecretVersionsAsync(request);
+    const iterable = secretmanagerClient.listSecretVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

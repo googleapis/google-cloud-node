@@ -150,6 +150,21 @@
                 "testIamPermissions"
               ]
             },
+            "SetConfig": {
+              "methods": [
+                "setConfig"
+              ]
+            },
+            "RetrieveConfig": {
+              "methods": [
+                "retrieveConfig"
+              ]
+            },
+            "RetrieveEffectiveConfig": {
+              "methods": [
+                "retrieveEffectiveConfig"
+              ]
+            },
             "ReconcileTags": {
               "methods": [
                 "reconcileTags"
@@ -331,6 +346,21 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "SetConfig": {
+              "methods": [
+                "setConfig"
+              ]
+            },
+            "RetrieveConfig": {
+              "methods": [
+                "retrieveConfig"
+              ]
+            },
+            "RetrieveEffectiveConfig": {
+              "methods": [
+                "retrieveEffectiveConfig"
               ]
             },
             "ReconcileTags": {

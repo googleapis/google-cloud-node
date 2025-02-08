@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -62,14 +62,22 @@ const ImageFamilyViewsClient = v1.ImageFamilyViewsClient;
 type ImageFamilyViewsClient = v1.ImageFamilyViewsClient;
 const ImagesClient = v1.ImagesClient;
 type ImagesClient = v1.ImagesClient;
+const InstanceGroupManagerResizeRequestsClient =
+  v1.InstanceGroupManagerResizeRequestsClient;
+type InstanceGroupManagerResizeRequestsClient =
+  v1.InstanceGroupManagerResizeRequestsClient;
 const InstanceGroupManagersClient = v1.InstanceGroupManagersClient;
 type InstanceGroupManagersClient = v1.InstanceGroupManagersClient;
 const InstanceGroupsClient = v1.InstanceGroupsClient;
 type InstanceGroupsClient = v1.InstanceGroupsClient;
 const InstancesClient = v1.InstancesClient;
 type InstancesClient = v1.InstancesClient;
+const InstanceSettingsServiceClient = v1.InstanceSettingsServiceClient;
+type InstanceSettingsServiceClient = v1.InstanceSettingsServiceClient;
 const InstanceTemplatesClient = v1.InstanceTemplatesClient;
 type InstanceTemplatesClient = v1.InstanceTemplatesClient;
+const InstantSnapshotsClient = v1.InstantSnapshotsClient;
+type InstantSnapshotsClient = v1.InstantSnapshotsClient;
 const InterconnectAttachmentsClient = v1.InterconnectAttachmentsClient;
 type InterconnectAttachmentsClient = v1.InterconnectAttachmentsClient;
 const InterconnectLocationsClient = v1.InterconnectLocationsClient;
@@ -94,6 +102,8 @@ const NetworkEndpointGroupsClient = v1.NetworkEndpointGroupsClient;
 type NetworkEndpointGroupsClient = v1.NetworkEndpointGroupsClient;
 const NetworkFirewallPoliciesClient = v1.NetworkFirewallPoliciesClient;
 type NetworkFirewallPoliciesClient = v1.NetworkFirewallPoliciesClient;
+const NetworkProfilesClient = v1.NetworkProfilesClient;
+type NetworkProfilesClient = v1.NetworkProfilesClient;
 const NetworksClient = v1.NetworksClient;
 type NetworksClient = v1.NetworksClient;
 const NodeGroupsClient = v1.NodeGroupsClient;
@@ -132,6 +142,8 @@ const RegionInstancesClient = v1.RegionInstancesClient;
 type RegionInstancesClient = v1.RegionInstancesClient;
 const RegionInstanceTemplatesClient = v1.RegionInstanceTemplatesClient;
 type RegionInstanceTemplatesClient = v1.RegionInstanceTemplatesClient;
+const RegionInstantSnapshotsClient = v1.RegionInstantSnapshotsClient;
+type RegionInstantSnapshotsClient = v1.RegionInstantSnapshotsClient;
 const RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
 type RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
 const RegionNetworkFirewallPoliciesClient =
@@ -158,6 +170,8 @@ const RegionTargetTcpProxiesClient = v1.RegionTargetTcpProxiesClient;
 type RegionTargetTcpProxiesClient = v1.RegionTargetTcpProxiesClient;
 const RegionUrlMapsClient = v1.RegionUrlMapsClient;
 type RegionUrlMapsClient = v1.RegionUrlMapsClient;
+const RegionZonesClient = v1.RegionZonesClient;
+type RegionZonesClient = v1.RegionZonesClient;
 const ReservationsClient = v1.ReservationsClient;
 type ReservationsClient = v1.ReservationsClient;
 const ResourcePoliciesClient = v1.ResourcePoliciesClient;
@@ -178,6 +192,10 @@ const SslCertificatesClient = v1.SslCertificatesClient;
 type SslCertificatesClient = v1.SslCertificatesClient;
 const SslPoliciesClient = v1.SslPoliciesClient;
 type SslPoliciesClient = v1.SslPoliciesClient;
+const StoragePoolsClient = v1.StoragePoolsClient;
+type StoragePoolsClient = v1.StoragePoolsClient;
+const StoragePoolTypesClient = v1.StoragePoolTypesClient;
+type StoragePoolTypesClient = v1.StoragePoolTypesClient;
 const SubnetworksClient = v1.SubnetworksClient;
 type SubnetworksClient = v1.SubnetworksClient;
 const TargetGrpcProxiesClient = v1.TargetGrpcProxiesClient;
@@ -230,10 +248,13 @@ export {
   HealthChecksClient,
   ImageFamilyViewsClient,
   ImagesClient,
+  InstanceGroupManagerResizeRequestsClient,
   InstanceGroupManagersClient,
   InstanceGroupsClient,
   InstancesClient,
+  InstanceSettingsServiceClient,
   InstanceTemplatesClient,
+  InstantSnapshotsClient,
   InterconnectAttachmentsClient,
   InterconnectLocationsClient,
   InterconnectRemoteLocationsClient,
@@ -246,6 +267,7 @@ export {
   NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
   NetworkFirewallPoliciesClient,
+  NetworkProfilesClient,
   NetworksClient,
   NodeGroupsClient,
   NodeTemplatesClient,
@@ -265,6 +287,7 @@ export {
   RegionInstanceGroupsClient,
   RegionInstancesClient,
   RegionInstanceTemplatesClient,
+  RegionInstantSnapshotsClient,
   RegionNetworkEndpointGroupsClient,
   RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,
@@ -277,6 +300,7 @@ export {
   RegionTargetHttpsProxiesClient,
   RegionTargetTcpProxiesClient,
   RegionUrlMapsClient,
+  RegionZonesClient,
   ReservationsClient,
   ResourcePoliciesClient,
   RoutersClient,
@@ -287,6 +311,8 @@ export {
   SnapshotSettingsServiceClient,
   SslCertificatesClient,
   SslPoliciesClient,
+  StoragePoolsClient,
+  StoragePoolTypesClient,
   SubnetworksClient,
   TargetGrpcProxiesClient,
   TargetHttpProxiesClient,
@@ -325,10 +351,13 @@ export default {
   HealthChecksClient,
   ImageFamilyViewsClient,
   ImagesClient,
+  InstanceGroupManagerResizeRequestsClient,
   InstanceGroupManagersClient,
   InstanceGroupsClient,
   InstancesClient,
+  InstanceSettingsServiceClient,
   InstanceTemplatesClient,
+  InstantSnapshotsClient,
   InterconnectAttachmentsClient,
   InterconnectLocationsClient,
   InterconnectRemoteLocationsClient,
@@ -341,6 +370,7 @@ export default {
   NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
   NetworkFirewallPoliciesClient,
+  NetworkProfilesClient,
   NetworksClient,
   NodeGroupsClient,
   NodeTemplatesClient,
@@ -360,6 +390,7 @@ export default {
   RegionInstanceGroupsClient,
   RegionInstancesClient,
   RegionInstanceTemplatesClient,
+  RegionInstantSnapshotsClient,
   RegionNetworkEndpointGroupsClient,
   RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,
@@ -372,6 +403,7 @@ export default {
   RegionTargetHttpsProxiesClient,
   RegionTargetTcpProxiesClient,
   RegionUrlMapsClient,
+  RegionZonesClient,
   ReservationsClient,
   ResourcePoliciesClient,
   RoutersClient,
@@ -382,6 +414,8 @@ export default {
   SnapshotSettingsServiceClient,
   SslCertificatesClient,
   SslPoliciesClient,
+  StoragePoolsClient,
+  StoragePoolTypesClient,
   SubnetworksClient,
   TargetGrpcProxiesClient,
   TargetHttpProxiesClient,

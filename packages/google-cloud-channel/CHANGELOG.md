@@ -1,5 +1,36 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/channel-v3.5.0...channel-v3.6.0) (2024-10-10)
+
+
+### Features
+
+* [channel] Add support for primary_admin_email as customer_identity for ImportCustomer ([#5736](https://github.com/googleapis/google-cloud-node/issues/5736)) ([8c61279](https://github.com/googleapis/google-cloud-node/commit/8c6127917d14c6d06c56f1061a5ac293d333f397))
+* Add support for importing team customer from a different reseller ([8c61279](https://github.com/googleapis/google-cloud-node/commit/8c6127917d14c6d06c56f1061a5ac293d333f397))
+* Add support to look up team customer Cloud Identity information ([8c61279](https://github.com/googleapis/google-cloud-node/commit/8c6127917d14c6d06c56f1061a5ac293d333f397))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/channel-v3.4.0...channel-v3.5.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/channel-v3.3.0...channel-v3.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5187](https://github.com/googleapis/google-cloud-node/issues/5187)) ([1952fbe](https://github.com/googleapis/google-cloud-node/commit/1952fbe432b96115278d42e5c1dbdbc7de39036b))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/channel-v3.2.1...channel-v3.3.0) (2024-02-09)
+
+
+### Features
+
+* Support for Trusted Private Cloud ([895830a](https://github.com/googleapis/google-cloud-node/commit/895830a3ef91666c30a96a7f68bd4cd1f582d58d))
+
 ## [3.2.1](https://github.com/googleapis/google-cloud-node/compare/channel-v3.2.0...channel-v3.2.1) (2024-01-23)
 
 

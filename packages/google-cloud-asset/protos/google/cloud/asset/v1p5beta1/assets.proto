@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import "google/identity/accesscontextmanager/v1/access_policy.proto";
 import "google/identity/accesscontextmanager/v1/service_perimeter.proto";
 import "google/protobuf/struct.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Asset.V1p5Beta1";
 option go_package = "cloud.google.com/go/asset/apiv1p5beta1/assetpb;assetpb";
 option java_multiple_files = true;

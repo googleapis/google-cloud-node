@@ -4,6 +4,84 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.11.0...dlp-v5.12.0) (2024-10-30)
+
+
+### Features
+
+* [dlp] discovery of BigQuery snapshots ([#5757](https://github.com/googleapis/google-cloud-node/issues/5757)) ([3f262fc](https://github.com/googleapis/google-cloud-node/commit/3f262fc59aa6054bd22f6868e76e7c686a9444a3))
+
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.10.0...dlp-v5.11.0) (2024-09-24)
+
+
+### Features
+
+* [dlp] action for publishing data profiles to SecOps (formelly known as Chronicle) ([#5691](https://github.com/googleapis/google-cloud-node/issues/5691)) ([106d029](https://github.com/googleapis/google-cloud-node/commit/106d029eacd05fc890dffd1169a19d4596d93c54))
+
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.9.0...dlp-v5.10.0) (2024-08-19)
+
+
+### Features
+
+* [dlp] inspect template modified cadence discovery config for Cloud SQL ([#5623](https://github.com/googleapis/google-cloud-node/issues/5623)) ([215ae31](https://github.com/googleapis/google-cloud-node/commit/215ae318d9ed8bf2878e88381542ddef6e28014a))
+
+## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.8.0...dlp-v5.9.0) (2024-08-09)
+
+
+### Features
+
+* [dlp] add the TagResources API ([#5588](https://github.com/googleapis/google-cloud-node/issues/5588)) ([91df9a7](https://github.com/googleapis/google-cloud-node/commit/91df9a74e2f3573a3620f6641b51112ed6f3f394))
+
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.7.0...dlp-v5.8.0) (2024-07-22)
+
+
+### Features
+
+* [dlp] add Cloud Storage discovery support ([#5545](https://github.com/googleapis/google-cloud-node/issues/5545)) ([00296ee](https://github.com/googleapis/google-cloud-node/commit/00296eea9db6120a9d7054687397b554b65a6e66))
+
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.6.0...dlp-v5.7.0) (2024-06-03)
+
+
+### Features
+
+* [dlp] add secrets discovery support ([#5380](https://github.com/googleapis/google-cloud-node/issues/5380)) ([81e759d](https://github.com/googleapis/google-cloud-node/commit/81e759d8fc99473fc0109115e5fdd2b7ddd008f9))
+
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.5.0...dlp-v5.6.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.4.0...dlp-v5.5.0) (2024-05-08)
+
+
+### Features
+
+* [dlp] add RPCs for deleting TableDataProfiles ([#5315](https://github.com/googleapis/google-cloud-node/issues/5315)) ([1cc5bc1](https://github.com/googleapis/google-cloud-node/commit/1cc5bc1379967a6845254db0131359964ed30ab8))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.3.0...dlp-v5.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5193](https://github.com/googleapis/google-cloud-node/issues/5193)) ([333b409](https://github.com/googleapis/google-cloud-node/commit/333b40951a255ecfab249bd6e7ace5877270ec85))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.2.0...dlp-v5.3.0) (2024-03-07)
+
+
+### Features
+
+* [dlp] add RPCs for getting and listing project, table, and column data profiles ([#5109](https://github.com/googleapis/google-cloud-node/issues/5109)) ([3952337](https://github.com/googleapis/google-cloud-node/commit/3952337599fb281538ee3d192ba951488f9a9643))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.1.1...dlp-v5.2.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5029](https://github.com/googleapis/google-cloud-node/issues/5029)) ([09e59ad](https://github.com/googleapis/google-cloud-node/commit/09e59ad6e34001a33d01894ccd5a0643f1a84883))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.1.0...dlp-v5.1.1) (2023-12-05)
 
 

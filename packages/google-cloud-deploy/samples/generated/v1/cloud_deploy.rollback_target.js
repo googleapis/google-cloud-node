@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ function main(name, targetId, rolloutId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The `DeliveryPipeline` for which the rollback `Rollout` should be
-   *  created. Format should be
+   *  Required. The `DeliveryPipeline` for which the rollback `Rollout` must be
+   *  created. The format is
    *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    */
   // const name = 'abc123'
@@ -62,6 +62,11 @@ function main(name, targetId, rolloutId) {
    *  with a `RollbackTargetResponse`.
    */
   // const validateOnly = true
+  /**
+   *  Optional. Deploy policies to override. Format is
+   *  `projects/{project}/locations/{location}/deployPolicies/{deploy_policy}`.
+   */
+  // const overrideDeployPolicy = ['abc','def']
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;

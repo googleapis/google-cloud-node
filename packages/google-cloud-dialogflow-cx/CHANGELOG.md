@@ -1,5 +1,49 @@
 # Changelog
 
+## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.8.0...dialogflow-cx-v4.9.0) (2024-11-14)
+
+
+### Features
+
+* [dialogflow-cx] add options of client_certificate_settings, bigquery_export_settings, bearer_token_config and boost_control_spec; add support of ALAW encoding ([#5787](https://github.com/googleapis/google-cloud-node/issues/5787)) ([49e8cd1](https://github.com/googleapis/google-cloud-node/commit/49e8cd12925813a6f45d75f3a3e422dad061ef6d))
+
+## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.7.0...dialogflow-cx-v4.8.0) (2024-08-09)
+
+
+### Features
+
+* [dialogflow-cx] exposed DataStoreConnectionSignals ([#5567](https://github.com/googleapis/google-cloud-node/issues/5567)) ([b961ff9](https://github.com/googleapis/google-cloud-node/commit/b961ff9b113f1e6650d3650287d3ec2b0bca0874))
+
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.6.0...dialogflow-cx-v4.7.0) (2024-05-21)
+
+
+### Features
+
+* [dialogflow-cx] update Nodejs generator to send API versions in headers for GAPICs ([#5331](https://github.com/googleapis/google-cloud-node/issues/5331)) ([74a4454](https://github.com/googleapis/google-cloud-node/commit/74a44549caaf9f29be6c6ada78a3550dac8d4b55))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.5.0...dialogflow-cx-v4.6.0) (2024-04-16)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5188](https://github.com/googleapis/google-cloud-node/issues/5188)) ([c5ccdf9](https://github.com/googleapis/google-cloud-node/commit/c5ccdf93641e7bb6d0e5c636168fad0feafab6e3))
+
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.4.0...dialogflow-cx-v4.5.0) (2024-04-05)
+
+
+### Features
+
+* [dialogflow-cx] added support for DataStoreConnection, DataStoreConnectionSettings ([#5196](https://github.com/googleapis/google-cloud-node/issues/5196)) ([e81cd49](https://github.com/googleapis/google-cloud-node/commit/e81cd492d2c3cef915d89b095852aa9a7ae64160))
+
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.3.1...dialogflow-cx-v4.4.0) (2024-02-09)
+
+
+### Features
+
+* [dialogflow-cx] A new field `opt_out_conformer_model_migration` is added to message `.google.cloud.dialogflow.cx.v3.InputAudioConfig` ([#5034](https://github.com/googleapis/google-cloud-node/issues/5034)) ([47fb485](https://github.com/googleapis/google-cloud-node/commit/47fb485d4b157863ec68efdbc9e6e53dad903ac9))
+
 ## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.3.0...dialogflow-cx-v4.3.1) (2024-01-23)
 
 

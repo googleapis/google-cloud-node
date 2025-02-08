@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -161,16 +161,103 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.AccessContextManagerClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        accesscontextmanagerModule.v1.AccessContextManagerClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new accesscontextmanagerModule.v1.AccessContextManagerClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'accesscontextmanager.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        accesscontextmanagerModule.v1.AccessContextManagerClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new accesscontextmanagerModule.v1.AccessContextManagerClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          accesscontextmanagerModule.v1.AccessContextManagerClient.servicePath;
+        assert.strictEqual(servicePath, 'accesscontextmanager.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          accesscontextmanagerModule.v1.AccessContextManagerClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'accesscontextmanager.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new accesscontextmanagerModule.v1.AccessContextManagerClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'accesscontextmanager.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new accesscontextmanagerModule.v1.AccessContextManagerClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'accesscontextmanager.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new accesscontextmanagerModule.v1.AccessContextManagerClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'accesscontextmanager.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new accesscontextmanagerModule.v1.AccessContextManagerClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'accesscontextmanager.configured.example.com'
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
+        });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new accesscontextmanagerModule.v1.AccessContextManagerClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -283,7 +370,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
       );
@@ -315,7 +402,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
       );
@@ -363,7 +450,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAccessPolicy = stubSimpleCall(
         undefined,
@@ -417,7 +504,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessLevel()
       );
@@ -449,7 +536,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessLevel()
       );
@@ -497,7 +584,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAccessLevel = stubSimpleCall(
         undefined,
@@ -551,7 +638,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
       );
@@ -584,7 +671,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
       );
@@ -632,7 +719,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServicePerimeter = stubSimpleCall(
         undefined,
@@ -686,7 +773,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
       );
@@ -719,7 +806,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
       );
@@ -767,7 +854,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGcpUserAccessBinding = stubSimpleCall(
         undefined,
@@ -827,7 +914,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -859,7 +946,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -907,7 +994,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -961,7 +1048,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -993,7 +1080,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1041,7 +1128,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -1095,7 +1182,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1128,7 +1215,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1176,7 +1263,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -1375,7 +1462,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1410,7 +1497,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1466,7 +1553,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccessPolicy = stubLongRunningCall(
         undefined,
@@ -1499,7 +1586,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
-      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccessPolicy = stubLongRunningCall(
         undefined,
@@ -1578,7 +1665,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1612,7 +1699,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1667,7 +1754,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccessPolicy = stubLongRunningCall(
         undefined,
@@ -1699,7 +1786,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccessPolicy = stubLongRunningCall(
         undefined,
@@ -1778,7 +1865,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1812,7 +1899,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1867,7 +1954,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAccessLevel = stubLongRunningCall(
         undefined,
@@ -1899,7 +1986,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAccessLevel = stubLongRunningCall(
         undefined,
@@ -1979,7 +2066,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['accessLevel', 'name']
       );
       request.accessLevel.name = defaultValue1;
-      const expectedHeaderRequestParams = `access_level.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2014,7 +2101,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['accessLevel', 'name']
       );
       request.accessLevel.name = defaultValue1;
-      const expectedHeaderRequestParams = `access_level.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2070,7 +2157,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['accessLevel', 'name']
       );
       request.accessLevel.name = defaultValue1;
-      const expectedHeaderRequestParams = `access_level.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccessLevel = stubLongRunningCall(
         undefined,
@@ -2103,7 +2190,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['accessLevel', 'name']
       );
       request.accessLevel.name = defaultValue1;
-      const expectedHeaderRequestParams = `access_level.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `access_level.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccessLevel = stubLongRunningCall(
         undefined,
@@ -2182,7 +2269,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2216,7 +2303,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2271,7 +2358,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccessLevel = stubLongRunningCall(
         undefined,
@@ -2303,7 +2390,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccessLevel = stubLongRunningCall(
         undefined,
@@ -2382,7 +2469,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2416,7 +2503,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2471,7 +2558,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.replaceAccessLevels = stubLongRunningCall(
         undefined,
@@ -2503,7 +2590,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.replaceAccessLevels = stubLongRunningCall(
         undefined,
@@ -2582,7 +2669,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2616,7 +2703,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2671,7 +2758,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServicePerimeter = stubLongRunningCall(
         undefined,
@@ -2706,7 +2793,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServicePerimeter = stubLongRunningCall(
         undefined,
@@ -2786,7 +2873,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['servicePerimeter', 'name']
       );
       request.servicePerimeter.name = defaultValue1;
-      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2821,7 +2908,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['servicePerimeter', 'name']
       );
       request.servicePerimeter.name = defaultValue1;
-      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2877,7 +2964,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['servicePerimeter', 'name']
       );
       request.servicePerimeter.name = defaultValue1;
-      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateServicePerimeter = stubLongRunningCall(
         undefined,
@@ -2913,7 +3000,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['servicePerimeter', 'name']
       );
       request.servicePerimeter.name = defaultValue1;
-      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `service_perimeter.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateServicePerimeter = stubLongRunningCall(
         undefined,
@@ -2992,7 +3079,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3026,7 +3113,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3081,7 +3168,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteServicePerimeter = stubLongRunningCall(
         undefined,
@@ -3116,7 +3203,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteServicePerimeter = stubLongRunningCall(
         undefined,
@@ -3195,7 +3282,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3229,7 +3316,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3284,7 +3371,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.replaceServicePerimeters = stubLongRunningCall(
         undefined,
@@ -3319,7 +3406,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.replaceServicePerimeters = stubLongRunningCall(
         undefined,
@@ -3399,7 +3486,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3433,7 +3520,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3488,7 +3575,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.commitServicePerimeters = stubLongRunningCall(
         undefined,
@@ -3523,7 +3610,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.commitServicePerimeters = stubLongRunningCall(
         undefined,
@@ -3603,7 +3690,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3637,7 +3724,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3692,7 +3779,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGcpUserAccessBinding = stubLongRunningCall(
         undefined,
@@ -3727,7 +3814,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGcpUserAccessBinding = stubLongRunningCall(
         undefined,
@@ -3808,7 +3895,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['gcpUserAccessBinding', 'name']
       );
       request.gcpUserAccessBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3843,7 +3930,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['gcpUserAccessBinding', 'name']
       );
       request.gcpUserAccessBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3899,7 +3986,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['gcpUserAccessBinding', 'name']
       );
       request.gcpUserAccessBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGcpUserAccessBinding = stubLongRunningCall(
         undefined,
@@ -3935,7 +4022,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['gcpUserAccessBinding', 'name']
       );
       request.gcpUserAccessBinding.name = defaultValue1;
-      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gcp_user_access_binding.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGcpUserAccessBinding = stubLongRunningCall(
         undefined,
@@ -4015,7 +4102,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4049,7 +4136,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4104,7 +4191,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGcpUserAccessBinding = stubLongRunningCall(
         undefined,
@@ -4139,7 +4226,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGcpUserAccessBinding = stubLongRunningCall(
         undefined,
@@ -4468,7 +4555,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.AccessLevel()
@@ -4508,7 +4595,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.AccessLevel()
@@ -4566,7 +4653,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAccessLevels = stubSimpleCall(
         undefined,
@@ -4598,7 +4685,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.AccessLevel()
@@ -4641,9 +4728,9 @@ describe('v1.AccessContextManagerClient', () => {
       assert(
         (client.descriptors.page.listAccessLevels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4662,7 +4749,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAccessLevels.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4694,9 +4781,9 @@ describe('v1.AccessContextManagerClient', () => {
       assert(
         (client.descriptors.page.listAccessLevels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4715,7 +4802,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.AccessLevel()
@@ -4745,9 +4832,9 @@ describe('v1.AccessContextManagerClient', () => {
       assert(
         (client.descriptors.page.listAccessLevels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4766,7 +4853,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAccessLevels.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4787,9 +4874,9 @@ describe('v1.AccessContextManagerClient', () => {
       assert(
         (client.descriptors.page.listAccessLevels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4810,7 +4897,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
@@ -4851,7 +4938,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
@@ -4909,7 +4996,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServicePerimeters = stubSimpleCall(
         undefined,
@@ -4944,7 +5031,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
@@ -5014,7 +5101,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServicePerimeters.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5073,7 +5160,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.ServicePerimeter()
@@ -5128,7 +5215,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServicePerimeters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5176,7 +5263,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
@@ -5217,7 +5304,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
@@ -5275,7 +5362,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGcpUserAccessBindings = stubSimpleCall(
         undefined,
@@ -5310,7 +5397,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
@@ -5380,7 +5467,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGcpUserAccessBindings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5439,7 +5526,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding()
@@ -5494,7 +5581,7 @@ describe('v1.AccessContextManagerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGcpUserAccessBindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,9 +30,12 @@ function main(name) {
    */
   /**
    *  Required. Name of the mute config to delete. Its format is
-   *  organizations/{organization}/muteConfigs/{config_id},
-   *  folders/{folder}/muteConfigs/{config_id}, or
-   *  projects/{project}/muteConfigs/{config_id}
+   *  `organizations/{organization}/muteConfigs/{config_id}`,
+   *  `folders/{folder}/muteConfigs/{config_id}`,
+   *  `projects/{project}/muteConfigs/{config_id}`,
+   *  `organizations/{organization}/locations/global/muteConfigs/{config_id}`,
+   *  `folders/{folder}/locations/global/muteConfigs/{config_id}`, or
+   *  `projects/{project}/locations/global/muteConfigs/{config_id}`.
    */
   // const name = 'abc123'
 

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ import "google/protobuf/struct.proto";
 import "google/rpc/status.proto";
 import "google/type/latlng.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2Beta1";
 option go_package = "cloud.google.com/go/dialogflow/apiv2beta1/dialogflowpb;dialogflowpb";
 option java_multiple_files = true;
@@ -773,9 +772,9 @@ message StreamingRecognitionResult {
     // Message contains DTMF digits.
     DTMF_DIGITS = 3;
 
-    // Event indicates that the server has detected the end of the user's speech
-    // utterance and expects no additional speech. Therefore, the server will
-    // not process additional audio (although it may subsequently return
+    // This event indicates that the server has detected the end of the user's
+    // speech utterance and expects no additional speech. Therefore, the server
+    // will not process additional audio (although it may subsequently return
     // additional results). The client should stop sending additional audio
     // data, half-close the gRPC connection, and wait for any additional results
     // until the server closes the gRPC connection. This message is only sent if
@@ -919,7 +918,7 @@ message SentimentAnalysisResult {
 // for how to interpret the result.
 message Sentiment {
   // Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
-  // sentiment).
+  //  sentiment).
   float score = 1;
 
   // A non-negative number in the [0, +inf) range, which represents the absolute

@@ -854,9 +854,8 @@ describe('v3.NotificationChannelServiceClient', () => {
       );
       client.innerApiCalls.sendNotificationChannelVerificationCode =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.sendNotificationChannelVerificationCode(
-        request
-      );
+      const [response] =
+        await client.sendNotificationChannelVerificationCode(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (
@@ -987,9 +986,8 @@ describe('v3.NotificationChannelServiceClient', () => {
       );
       client.innerApiCalls.getNotificationChannelVerificationCode =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.getNotificationChannelVerificationCode(
-        request
-      );
+      const [response] =
+        await client.getNotificationChannelVerificationCode(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (
@@ -1252,9 +1250,8 @@ describe('v3.NotificationChannelServiceClient', () => {
       ];
       client.innerApiCalls.listNotificationChannelDescriptors =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.listNotificationChannelDescriptors(
-        request
-      );
+      const [response] =
+        await client.listNotificationChannelDescriptors(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.listNotificationChannelDescriptors as SinonStub)

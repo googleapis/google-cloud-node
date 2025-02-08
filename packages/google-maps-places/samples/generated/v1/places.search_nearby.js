@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -131,6 +131,10 @@ function main(locationRestriction) {
    *  How results will be ranked in the response.
    */
   // const rankPreference = {}
+  /**
+   *  Optional. Parameters that affect the routing to the search results.
+   */
+  // const routingParameters = {}
 
   // Imports the Places library
   const {PlacesClient} = require('@googlemaps/places').v1;

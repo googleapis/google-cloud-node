@@ -1,5 +1,41 @@
 # Changelog
 
+## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.6.0...confidentialcomputing-v1.7.0) (2024-12-18)
+
+
+### Features
+
+* [confidentialcomputing] Add a token_type options proto to allow for customization of specific token types. Added the first token type option to hold principal tag token options ([#5839](https://github.com/googleapis/google-cloud-node/issues/5839)) ([338106a](https://github.com/googleapis/google-cloud-node/commit/338106af19815df0fdc95be0c38e689ded15f95d))
+
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.5.0...confidentialcomputing-v1.6.0) (2024-07-22)
+
+
+### Features
+
+* [confidentialcomputing] Add a new field `tee_attestation` to `VerifyAttestationRequest` message proto for SEV SNP and TDX attestations ([#5538](https://github.com/googleapis/google-cloud-node/issues/5538)) ([6368c02](https://github.com/googleapis/google-cloud-node/commit/6368c02be96b2cf6ad0e514a0c176374c38ba2f1))
+
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.4.0...confidentialcomputing-v1.5.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.3.0...confidentialcomputing-v1.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5187](https://github.com/googleapis/google-cloud-node/issues/5187)) ([1952fbe](https://github.com/googleapis/google-cloud-node/commit/1952fbe432b96115278d42e5c1dbdbc7de39036b))
+
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.2.0...confidentialcomputing-v1.3.0) (2024-02-09)
+
+
+### Features
+
+* Support for Trusted Private Cloud ([895830a](https://github.com/googleapis/google-cloud-node/commit/895830a3ef91666c30a96a7f68bd4cd1f582d58d))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.1.0...confidentialcomputing-v1.2.0) (2023-11-16)
 
 

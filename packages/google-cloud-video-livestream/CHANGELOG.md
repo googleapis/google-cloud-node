@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/livestream-v1.3.0...livestream-v1.4.0) (2024-07-22)
+
+
+### Features
+
+* [video] added RetentionConfig for enabling retention of output media segments ([#5544](https://github.com/googleapis/google-cloud-node/issues/5544)) ([f1b1eed](https://github.com/googleapis/google-cloud-node/commit/f1b1eedafc5295513fba09c4132389489640fe23))
+
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/livestream-v1.2.0...livestream-v1.3.0) (2024-05-21)
+
+
+### Features
+
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5351](https://github.com/googleapis/google-cloud-node/issues/5351)) ([01f48fc](https://github.com/googleapis/google-cloud-node/commit/01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372))
+* [Many APIs] update Nodejs generator to send API versions in headers for GAPICs ([#5354](https://github.com/googleapis/google-cloud-node/issues/5354)) ([a9784ed](https://github.com/googleapis/google-cloud-node/commit/a9784ed3db6ee96d171762308bbbcd57390b6866))
+
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/livestream-v1.1.0...livestream-v1.2.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5191](https://github.com/googleapis/google-cloud-node/issues/5191)) ([57567db](https://github.com/googleapis/google-cloud-node/commit/57567db36033ca53ae2f54e6517b8cd12145bb82))
+
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/livestream-v1.0.2...livestream-v1.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5028](https://github.com/googleapis/google-cloud-node/issues/5028)) ([852f3eb](https://github.com/googleapis/google-cloud-node/commit/852f3ebf065ee24e910580b9a1fc365acb3a744a))
+
 ## [1.0.2](https://github.com/googleapis/google-cloud-node/compare/livestream-v1.0.1...livestream-v1.0.2) (2024-01-23)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,14 +29,15 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Secret google.cloud.secretmanager.v1.Secret  to delete in the format
+   *  Required. The resource name of the
+   *  Secret google.cloud.secretmanager.v1.Secret  to delete in the format
    *  `projects/* /secrets/*`.
    */
   // const name = 'abc123'
   /**
-   *  Optional. Etag of the Secret google.cloud.secretmanager.v1.Secret. The request succeeds if it matches
-   *  the etag of the currently stored secret object. If the etag is omitted,
-   *  the request succeeds.
+   *  Optional. Etag of the Secret google.cloud.secretmanager.v1.Secret. The
+   *  request succeeds if it matches the etag of the currently stored secret
+   *  object. If the etag is omitted, the request succeeds.
    */
   // const etag = 'abc123'
 

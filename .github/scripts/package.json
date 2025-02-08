@@ -1,0 +1,17 @@
+{
+    "name": "tests",
+    "private": true,
+    "description": "tests for script",
+    "scripts": {
+        "test": "mocha close-invalid-link.test.cjs && mocha close-or-remove-response-label.test.cjs"
+    },
+    "author": "Google Inc.",
+    "license": "Apache-2.0",
+    "engines": {
+        "node": ">=18"
+    },
+    "devDependencies": {
+        "@octokit/rest": "^21.0.2",
+        "mocha": "^11.0.1"
+    }
+}

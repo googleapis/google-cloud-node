@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,8 +40,9 @@ function main(parent, backupPolicy, backupPolicyId) {
   /**
    *  Required. The ID to use for the backup policy.
    *  The ID must be unique within the specified location.
-   *  This value must start with a lowercase letter followed by up to 62
-   *  lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+   *  Must contain only letters, numbers and hyphen, with the first
+   *  character a letter, the last a letter or a
+   *  number, and a 63 character maximum.
    */
   // const backupPolicyId = 'abc123'
 
