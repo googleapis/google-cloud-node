@@ -337,6 +337,12 @@ export class AgentsClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
         ),
+      projectLocationPhoneNumberPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/phoneNumbers/{phone_number}'
+      ),
+      projectPhoneNumberPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/phoneNumbers/{phone_number}'
+      ),
       sipTrunkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/sipTrunks/{siptrunk}'
       ),
@@ -4482,6 +4488,111 @@ export class AgentsClient {
     return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
       projectLocationKnowledgeBaseDocumentName
     ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationPhoneNumber resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} phone_number
+   * @returns {string} Resource name string.
+   */
+  projectLocationPhoneNumberPath(
+    project: string,
+    location: string,
+    phoneNumber: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.render({
+      project: project,
+      location: location,
+      phone_number: phoneNumber,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).location;
+  }
+
+  /**
+   * Parse the phone_number from ProjectLocationPhoneNumber resource.
+   *
+   * @param {string} projectLocationPhoneNumberName
+   *   A fully-qualified path representing project_location_phone_number resource.
+   * @returns {string} A string representing the phone_number.
+   */
+  matchPhoneNumberFromProjectLocationPhoneNumberName(
+    projectLocationPhoneNumberName: string
+  ) {
+    return this.pathTemplates.projectLocationPhoneNumberPathTemplate.match(
+      projectLocationPhoneNumberName
+    ).phone_number;
+  }
+
+  /**
+   * Return a fully-qualified projectPhoneNumber resource name string.
+   *
+   * @param {string} project
+   * @param {string} phone_number
+   * @returns {string} Resource name string.
+   */
+  projectPhoneNumberPath(project: string, phoneNumber: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.render({
+      project: project,
+      phone_number: phoneNumber,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectPhoneNumber resource.
+   *
+   * @param {string} projectPhoneNumberName
+   *   A fully-qualified path representing project_phone_number resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectPhoneNumberName(projectPhoneNumberName: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.match(
+      projectPhoneNumberName
+    ).project;
+  }
+
+  /**
+   * Parse the phone_number from ProjectPhoneNumber resource.
+   *
+   * @param {string} projectPhoneNumberName
+   *   A fully-qualified path representing project_phone_number resource.
+   * @returns {string} A string representing the phone_number.
+   */
+  matchPhoneNumberFromProjectPhoneNumberName(projectPhoneNumberName: string) {
+    return this.pathTemplates.projectPhoneNumberPathTemplate.match(
+      projectPhoneNumberName
+    ).phone_number;
   }
 
   /**
