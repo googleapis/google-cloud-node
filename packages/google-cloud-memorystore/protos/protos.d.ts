@@ -3868,7 +3868,8 @@ export namespace google {
                     enum Mode {
                         MODE_UNSPECIFIED = 0,
                         STANDALONE = 1,
-                        CLUSTER = 2
+                        CLUSTER = 2,
+                        CLUSTER_DISABLED = 4
                     }
                 }
 

@@ -8616,6 +8616,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -8833,6 +8834,10 @@
                             case "CLUSTER":
                             case 2:
                                 message.mode = 2;
+                                break;
+                            case "CLUSTER_DISABLED":
+                            case 4:
+                                message.mode = 4;
                                 break;
                             }
                             return message;
@@ -10023,12 +10028,14 @@
                          * @property {number} MODE_UNSPECIFIED=0 MODE_UNSPECIFIED value
                          * @property {number} STANDALONE=1 STANDALONE value
                          * @property {number} CLUSTER=2 CLUSTER value
+                         * @property {number} CLUSTER_DISABLED=4 CLUSTER_DISABLED value
                          */
                         Instance.Mode = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "STANDALONE"] = 1;
                             values[valuesById[2] = "CLUSTER"] = 2;
+                            values[valuesById[4] = "CLUSTER_DISABLED"] = 4;
                             return values;
                         })();
     
