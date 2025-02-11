@@ -2566,7 +2566,7 @@ describe('storage', function () {
 
       const file = bucket.file(filename);
 
-      await new Promise((resolve, reject) => {
+      await new Promise<void>((resolve, reject) => {
         file
           .createReadStream()
           .on('error', reject)
@@ -2578,7 +2578,7 @@ describe('storage', function () {
           })
           .pipe(fs.createWriteStream(tmpFilePath))
           .on('error', reject)
-          .on('finish', resolve);
+          .on('finish', () => resolve());
       });
 
       await file.delete();

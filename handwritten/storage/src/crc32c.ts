@@ -257,10 +257,16 @@ class CRC32C implements CRC32CValidator {
   static async fromFile(file: PathLike) {
     const crc32c = new CRC32C();
 
-    await new Promise((resolve, reject) => {
+    await new Promise<void>((resolve, reject) => {
       createReadStream(file)
-        .on('data', (d: Buffer) => crc32c.update(d))
-        .on('end', resolve)
+        .on('data', (d: string | Buffer) => {
+          if (typeof d === 'string') {
+            crc32c.update(Buffer.from(d));
+          } else {
+            crc32c.update(d);
+          }
+        })
+        .on('end', () => resolve())
         .on('error', reject);
     });
 

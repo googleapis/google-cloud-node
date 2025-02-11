@@ -2310,8 +2310,12 @@ class File extends ServiceObject<File, FileMetadata> {
           writable.write(data);
           fileStream
             .pipe(writable)
-            .on('error', callback)
-            .on('finish', callback);
+            .on('error', (err: Error) => {
+              callback(err, Buffer.from(''));
+            })
+            .on('finish', () => {
+              callback(null, data);
+            });
         })
         .on('end', () => {
           // In the case of an empty file no data will be received before the end event fires
