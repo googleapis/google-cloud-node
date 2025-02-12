@@ -2448,6 +2448,9 @@ export namespace google {
 
                     /** Build failureInfo */
                     failureInfo?: (google.devtools.cloudbuild.v1.Build.IFailureInfo|null);
+
+                    /** Build dependencies */
+                    dependencies?: (google.devtools.cloudbuild.v1.IDependency[]|null);
                 }
 
                 /** Represents a Build. */
@@ -2545,6 +2548,9 @@ export namespace google {
 
                     /** Build failureInfo. */
                     public failureInfo?: (google.devtools.cloudbuild.v1.Build.IFailureInfo|null);
+
+                    /** Build dependencies. */
+                    public dependencies: google.devtools.cloudbuild.v1.IDependency[];
 
                     /**
                      * Creates a new Build instance using the specified properties.
@@ -2869,6 +2875,342 @@ export namespace google {
                             USER_BUILD_STEP = 5,
                             FETCH_SOURCE_FAILED = 6
                         }
+                    }
+                }
+
+                /** Properties of a Dependency. */
+                interface IDependency {
+
+                    /** Dependency empty */
+                    empty?: (boolean|null);
+
+                    /** Dependency gitSource */
+                    gitSource?: (google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency|null);
+                }
+
+                /** Represents a Dependency. */
+                class Dependency implements IDependency {
+
+                    /**
+                     * Constructs a new Dependency.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IDependency);
+
+                    /** Dependency empty. */
+                    public empty?: (boolean|null);
+
+                    /** Dependency gitSource. */
+                    public gitSource?: (google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency|null);
+
+                    /** Dependency dep. */
+                    public dep?: ("empty"|"gitSource");
+
+                    /**
+                     * Creates a new Dependency instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Dependency instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IDependency): google.devtools.cloudbuild.v1.Dependency;
+
+                    /**
+                     * Encodes the specified Dependency message. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.verify|verify} messages.
+                     * @param message Dependency message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IDependency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Dependency message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.verify|verify} messages.
+                     * @param message Dependency message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IDependency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Dependency message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Dependency
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Dependency;
+
+                    /**
+                     * Decodes a Dependency message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Dependency
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Dependency;
+
+                    /**
+                     * Verifies a Dependency message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Dependency message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Dependency
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Dependency;
+
+                    /**
+                     * Creates a plain object from a Dependency message. Also converts values to other types if specified.
+                     * @param message Dependency
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.Dependency, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Dependency to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Dependency
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Dependency {
+
+                    /** Properties of a GitSourceDependency. */
+                    interface IGitSourceDependency {
+
+                        /** GitSourceDependency repository */
+                        repository?: (google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository|null);
+
+                        /** GitSourceDependency revision */
+                        revision?: (string|null);
+
+                        /** GitSourceDependency recurseSubmodules */
+                        recurseSubmodules?: (boolean|null);
+
+                        /** GitSourceDependency depth */
+                        depth?: (number|Long|string|null);
+
+                        /** GitSourceDependency destPath */
+                        destPath?: (string|null);
+                    }
+
+                    /** Represents a GitSourceDependency. */
+                    class GitSourceDependency implements IGitSourceDependency {
+
+                        /**
+                         * Constructs a new GitSourceDependency.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency);
+
+                        /** GitSourceDependency repository. */
+                        public repository?: (google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository|null);
+
+                        /** GitSourceDependency revision. */
+                        public revision: string;
+
+                        /** GitSourceDependency recurseSubmodules. */
+                        public recurseSubmodules: boolean;
+
+                        /** GitSourceDependency depth. */
+                        public depth: (number|Long|string);
+
+                        /** GitSourceDependency destPath. */
+                        public destPath: string;
+
+                        /**
+                         * Creates a new GitSourceDependency instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GitSourceDependency instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency): google.devtools.cloudbuild.v1.Dependency.GitSourceDependency;
+
+                        /**
+                         * Encodes the specified GitSourceDependency message. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.GitSourceDependency.verify|verify} messages.
+                         * @param message GitSourceDependency message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GitSourceDependency message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.GitSourceDependency.verify|verify} messages.
+                         * @param message GitSourceDependency message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.Dependency.IGitSourceDependency, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GitSourceDependency message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GitSourceDependency
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Dependency.GitSourceDependency;
+
+                        /**
+                         * Decodes a GitSourceDependency message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GitSourceDependency
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Dependency.GitSourceDependency;
+
+                        /**
+                         * Verifies a GitSourceDependency message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GitSourceDependency message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GitSourceDependency
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Dependency.GitSourceDependency;
+
+                        /**
+                         * Creates a plain object from a GitSourceDependency message. Also converts values to other types if specified.
+                         * @param message GitSourceDependency
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.Dependency.GitSourceDependency, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GitSourceDependency to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GitSourceDependency
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GitSourceRepository. */
+                    interface IGitSourceRepository {
+
+                        /** GitSourceRepository url */
+                        url?: (string|null);
+
+                        /** GitSourceRepository developerConnect */
+                        developerConnect?: (string|null);
+                    }
+
+                    /** Represents a GitSourceRepository. */
+                    class GitSourceRepository implements IGitSourceRepository {
+
+                        /**
+                         * Constructs a new GitSourceRepository.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository);
+
+                        /** GitSourceRepository url. */
+                        public url?: (string|null);
+
+                        /** GitSourceRepository developerConnect. */
+                        public developerConnect?: (string|null);
+
+                        /** GitSourceRepository repotype. */
+                        public repotype?: ("url"|"developerConnect");
+
+                        /**
+                         * Creates a new GitSourceRepository instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GitSourceRepository instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository): google.devtools.cloudbuild.v1.Dependency.GitSourceRepository;
+
+                        /**
+                         * Encodes the specified GitSourceRepository message. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.GitSourceRepository.verify|verify} messages.
+                         * @param message GitSourceRepository message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GitSourceRepository message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Dependency.GitSourceRepository.verify|verify} messages.
+                         * @param message GitSourceRepository message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.Dependency.IGitSourceRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GitSourceRepository message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GitSourceRepository
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Dependency.GitSourceRepository;
+
+                        /**
+                         * Decodes a GitSourceRepository message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GitSourceRepository
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Dependency.GitSourceRepository;
+
+                        /**
+                         * Verifies a GitSourceRepository message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GitSourceRepository message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GitSourceRepository
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Dependency.GitSourceRepository;
+
+                        /**
+                         * Creates a plain object from a GitSourceRepository message. Also converts values to other types if specified.
+                         * @param message GitSourceRepository
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.Dependency.GitSourceRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GitSourceRepository to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GitSourceRepository
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
