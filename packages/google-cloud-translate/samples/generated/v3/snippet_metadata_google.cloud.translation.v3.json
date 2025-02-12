@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-translation",
-        "version": "8.5.0",
+        "version": "8.5.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
