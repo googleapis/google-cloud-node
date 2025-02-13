@@ -1139,7 +1139,9 @@
                     "Build": {
                       "options": {
                         "(google.api.resource).type": "cloudbuild.googleapis.com/Build",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/builds/{build}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/builds/{build}",
+                        "(google.api.resource).plural": "builds",
+                        "(google.api.resource).singular": "build"
                       },
                       "fields": {
                         "name": {
@@ -1309,6 +1311,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "gitConfig": {
+                          "type": "GitConfig",
+                          "id": 48,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "failureInfo": {
                           "type": "FailureInfo",
                           "id": 51,
@@ -1467,6 +1476,27 @@
                               "id": 2,
                               "options": {
                                 "(google.api.resource_reference).type": "developerconnect.googleapis.com/GitRepositoryLink"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GitConfig": {
+                      "fields": {
+                        "http": {
+                          "type": "HttpConfig",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "HttpConfig": {
+                          "fields": {
+                            "proxySecretVersionName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                               }
                             }
                           }

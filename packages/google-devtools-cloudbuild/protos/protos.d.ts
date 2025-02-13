@@ -2446,6 +2446,9 @@ export namespace google {
                     /** Build warnings */
                     warnings?: (google.devtools.cloudbuild.v1.Build.IWarning[]|null);
 
+                    /** Build gitConfig */
+                    gitConfig?: (google.devtools.cloudbuild.v1.IGitConfig|null);
+
                     /** Build failureInfo */
                     failureInfo?: (google.devtools.cloudbuild.v1.Build.IFailureInfo|null);
 
@@ -2545,6 +2548,9 @@ export namespace google {
 
                     /** Build warnings. */
                     public warnings: google.devtools.cloudbuild.v1.Build.IWarning[];
+
+                    /** Build gitConfig. */
+                    public gitConfig?: (google.devtools.cloudbuild.v1.IGitConfig|null);
 
                     /** Build failureInfo. */
                     public failureInfo?: (google.devtools.cloudbuild.v1.Build.IFailureInfo|null);
@@ -3207,6 +3213,203 @@ export namespace google {
 
                         /**
                          * Gets the default type url for GitSourceRepository
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a GitConfig. */
+                interface IGitConfig {
+
+                    /** GitConfig http */
+                    http?: (google.devtools.cloudbuild.v1.GitConfig.IHttpConfig|null);
+                }
+
+                /** Represents a GitConfig. */
+                class GitConfig implements IGitConfig {
+
+                    /**
+                     * Constructs a new GitConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IGitConfig);
+
+                    /** GitConfig http. */
+                    public http?: (google.devtools.cloudbuild.v1.GitConfig.IHttpConfig|null);
+
+                    /**
+                     * Creates a new GitConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitConfig instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IGitConfig): google.devtools.cloudbuild.v1.GitConfig;
+
+                    /**
+                     * Encodes the specified GitConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.verify|verify} messages.
+                     * @param message GitConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IGitConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.verify|verify} messages.
+                     * @param message GitConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IGitConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.GitConfig;
+
+                    /**
+                     * Decodes a GitConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.GitConfig;
+
+                    /**
+                     * Verifies a GitConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.GitConfig;
+
+                    /**
+                     * Creates a plain object from a GitConfig message. Also converts values to other types if specified.
+                     * @param message GitConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.GitConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GitConfig {
+
+                    /** Properties of a HttpConfig. */
+                    interface IHttpConfig {
+
+                        /** HttpConfig proxySecretVersionName */
+                        proxySecretVersionName?: (string|null);
+                    }
+
+                    /** Represents a HttpConfig. */
+                    class HttpConfig implements IHttpConfig {
+
+                        /**
+                         * Constructs a new HttpConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.GitConfig.IHttpConfig);
+
+                        /** HttpConfig proxySecretVersionName. */
+                        public proxySecretVersionName: string;
+
+                        /**
+                         * Creates a new HttpConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HttpConfig instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.GitConfig.IHttpConfig): google.devtools.cloudbuild.v1.GitConfig.HttpConfig;
+
+                        /**
+                         * Encodes the specified HttpConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.HttpConfig.verify|verify} messages.
+                         * @param message HttpConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.GitConfig.IHttpConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HttpConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.HttpConfig.verify|verify} messages.
+                         * @param message HttpConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.GitConfig.IHttpConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HttpConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HttpConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.GitConfig.HttpConfig;
+
+                        /**
+                         * Decodes a HttpConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HttpConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.GitConfig.HttpConfig;
+
+                        /**
+                         * Verifies a HttpConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HttpConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HttpConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.GitConfig.HttpConfig;
+
+                        /**
+                         * Creates a plain object from a HttpConfig message. Also converts values to other types if specified.
+                         * @param message HttpConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.GitConfig.HttpConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HttpConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HttpConfig
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

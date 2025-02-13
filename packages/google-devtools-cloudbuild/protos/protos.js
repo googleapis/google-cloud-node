@@ -6003,6 +6003,7 @@
                          * @property {string|null} [serviceAccount] Build serviceAccount
                          * @property {google.devtools.cloudbuild.v1.ISecrets|null} [availableSecrets] Build availableSecrets
                          * @property {Array.<google.devtools.cloudbuild.v1.Build.IWarning>|null} [warnings] Build warnings
+                         * @property {google.devtools.cloudbuild.v1.IGitConfig|null} [gitConfig] Build gitConfig
                          * @property {google.devtools.cloudbuild.v1.Build.IFailureInfo|null} [failureInfo] Build failureInfo
                          * @property {Array.<google.devtools.cloudbuild.v1.IDependency>|null} [dependencies] Build dependencies
                          */
@@ -6255,6 +6256,14 @@
                         Build.prototype.warnings = $util.emptyArray;
     
                         /**
+                         * Build gitConfig.
+                         * @member {google.devtools.cloudbuild.v1.IGitConfig|null|undefined} gitConfig
+                         * @memberof google.devtools.cloudbuild.v1.Build
+                         * @instance
+                         */
+                        Build.prototype.gitConfig = null;
+    
+                        /**
                          * Build failureInfo.
                          * @member {google.devtools.cloudbuild.v1.Build.IFailureInfo|null|undefined} failureInfo
                          * @memberof google.devtools.cloudbuild.v1.Build
@@ -6356,6 +6365,8 @@
                                 writer.uint32(/* id 45, wireType 2 =*/362).string(message.name);
                             if (message.availableSecrets != null && Object.hasOwnProperty.call(message, "availableSecrets"))
                                 $root.google.devtools.cloudbuild.v1.Secrets.encode(message.availableSecrets, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
+                            if (message.gitConfig != null && Object.hasOwnProperty.call(message, "gitConfig"))
+                                $root.google.devtools.cloudbuild.v1.GitConfig.encode(message.gitConfig, writer.uint32(/* id 48, wireType 2 =*/386).fork()).ldelim();
                             if (message.warnings != null && message.warnings.length)
                                 for (var i = 0; i < message.warnings.length; ++i)
                                     $root.google.devtools.cloudbuild.v1.Build.Warning.encode(message.warnings[i], writer.uint32(/* id 49, wireType 2 =*/394).fork()).ldelim();
@@ -6556,6 +6567,10 @@
                                         if (!(message.warnings && message.warnings.length))
                                             message.warnings = [];
                                         message.warnings.push($root.google.devtools.cloudbuild.v1.Build.Warning.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 48: {
+                                        message.gitConfig = $root.google.devtools.cloudbuild.v1.GitConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 51: {
@@ -6761,6 +6776,11 @@
                                     if (error)
                                         return "warnings." + error;
                                 }
+                            }
+                            if (message.gitConfig != null && message.hasOwnProperty("gitConfig")) {
+                                var error = $root.google.devtools.cloudbuild.v1.GitConfig.verify(message.gitConfig);
+                                if (error)
+                                    return "gitConfig." + error;
                             }
                             if (message.failureInfo != null && message.hasOwnProperty("failureInfo")) {
                                 var error = $root.google.devtools.cloudbuild.v1.Build.FailureInfo.verify(message.failureInfo);
@@ -6976,6 +6996,11 @@
                                     message.warnings[i] = $root.google.devtools.cloudbuild.v1.Build.Warning.fromObject(object.warnings[i]);
                                 }
                             }
+                            if (object.gitConfig != null) {
+                                if (typeof object.gitConfig !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Build.gitConfig: object expected");
+                                message.gitConfig = $root.google.devtools.cloudbuild.v1.GitConfig.fromObject(object.gitConfig);
+                            }
                             if (object.failureInfo != null) {
                                 if (typeof object.failureInfo !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v1.Build.failureInfo: object expected");
@@ -7041,6 +7066,7 @@
                                 object.approval = null;
                                 object.name = "";
                                 object.availableSecrets = null;
+                                object.gitConfig = null;
                                 object.failureInfo = null;
                             }
                             if (message.id != null && message.hasOwnProperty("id"))
@@ -7116,6 +7142,8 @@
                                 object.name = message.name;
                             if (message.availableSecrets != null && message.hasOwnProperty("availableSecrets"))
                                 object.availableSecrets = $root.google.devtools.cloudbuild.v1.Secrets.toObject(message.availableSecrets, options);
+                            if (message.gitConfig != null && message.hasOwnProperty("gitConfig"))
+                                object.gitConfig = $root.google.devtools.cloudbuild.v1.GitConfig.toObject(message.gitConfig, options);
                             if (message.warnings && message.warnings.length) {
                                 object.warnings = [];
                                 for (var j = 0; j < message.warnings.length; ++j)
@@ -8578,6 +8606,417 @@
                         })();
     
                         return Dependency;
+                    })();
+    
+                    v1.GitConfig = (function() {
+    
+                        /**
+                         * Properties of a GitConfig.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IGitConfig
+                         * @property {google.devtools.cloudbuild.v1.GitConfig.IHttpConfig|null} [http] GitConfig http
+                         */
+    
+                        /**
+                         * Constructs a new GitConfig.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a GitConfig.
+                         * @implements IGitConfig
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IGitConfig=} [properties] Properties to set
+                         */
+                        function GitConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GitConfig http.
+                         * @member {google.devtools.cloudbuild.v1.GitConfig.IHttpConfig|null|undefined} http
+                         * @memberof google.devtools.cloudbuild.v1.GitConfig
+                         * @instance
+                         */
+                        GitConfig.prototype.http = null;
+    
+                        /**
+                         * Creates a new GitConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.GitConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGitConfig=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.GitConfig} GitConfig instance
+                         */
+                        GitConfig.create = function create(properties) {
+                            return new GitConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GitConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.GitConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGitConfig} message GitConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.http != null && Object.hasOwnProperty.call(message, "http"))
+                                $root.google.devtools.cloudbuild.v1.GitConfig.HttpConfig.encode(message.http, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GitConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.GitConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGitConfig} message GitConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GitConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GitConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.GitConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.GitConfig} GitConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.http = $root.google.devtools.cloudbuild.v1.GitConfig.HttpConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GitConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.GitConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.GitConfig} GitConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GitConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GitConfig message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.GitConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GitConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.http != null && message.hasOwnProperty("http")) {
+                                var error = $root.google.devtools.cloudbuild.v1.GitConfig.HttpConfig.verify(message.http);
+                                if (error)
+                                    return "http." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GitConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.GitConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.GitConfig} GitConfig
+                         */
+                        GitConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.GitConfig)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.GitConfig();
+                            if (object.http != null) {
+                                if (typeof object.http !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.GitConfig.http: object expected");
+                                message.http = $root.google.devtools.cloudbuild.v1.GitConfig.HttpConfig.fromObject(object.http);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GitConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.GitConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.GitConfig} message GitConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GitConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.http = null;
+                            if (message.http != null && message.hasOwnProperty("http"))
+                                object.http = $root.google.devtools.cloudbuild.v1.GitConfig.HttpConfig.toObject(message.http, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GitConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.GitConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GitConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GitConfig
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v1.GitConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GitConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v1.GitConfig";
+                        };
+    
+                        GitConfig.HttpConfig = (function() {
+    
+                            /**
+                             * Properties of a HttpConfig.
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig
+                             * @interface IHttpConfig
+                             * @property {string|null} [proxySecretVersionName] HttpConfig proxySecretVersionName
+                             */
+    
+                            /**
+                             * Constructs a new HttpConfig.
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig
+                             * @classdesc Represents a HttpConfig.
+                             * @implements IHttpConfig
+                             * @constructor
+                             * @param {google.devtools.cloudbuild.v1.GitConfig.IHttpConfig=} [properties] Properties to set
+                             */
+                            function HttpConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * HttpConfig proxySecretVersionName.
+                             * @member {string} proxySecretVersionName
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig.HttpConfig
+                             * @instance
+                             */
+                            HttpConfig.prototype.proxySecretVersionName = "";
+    
+                            /**
+                             * Creates a new HttpConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig.HttpConfig
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.GitConfig.IHttpConfig=} [properties] Properties to set
+                             * @returns {google.devtools.cloudbuild.v1.GitConfig.HttpConfig} HttpConfig instance
+                             */
+                            HttpConfig.create = function create(properties) {
+                                return new HttpConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified HttpConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.HttpConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig.HttpConfig
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.GitConfig.IHttpConfig} message HttpConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HttpConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.proxySecretVersionName != null && Object.hasOwnProperty.call(message, "proxySecretVersionName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.proxySecretVersionName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified HttpConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GitConfig.HttpConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig.HttpConfig
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.GitConfig.IHttpConfig} message HttpConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HttpConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a HttpConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig.HttpConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devtools.cloudbuild.v1.GitConfig.HttpConfig} HttpConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HttpConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitConfig.HttpConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.proxySecretVersionName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a HttpConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig.HttpConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devtools.cloudbuild.v1.GitConfig.HttpConfig} HttpConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HttpConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a HttpConfig message.
+                             * @function verify
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig.HttpConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            HttpConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.proxySecretVersionName != null && message.hasOwnProperty("proxySecretVersionName"))
+                                    if (!$util.isString(message.proxySecretVersionName))
+                                        return "proxySecretVersionName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a HttpConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig.HttpConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devtools.cloudbuild.v1.GitConfig.HttpConfig} HttpConfig
+                             */
+                            HttpConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devtools.cloudbuild.v1.GitConfig.HttpConfig)
+                                    return object;
+                                var message = new $root.google.devtools.cloudbuild.v1.GitConfig.HttpConfig();
+                                if (object.proxySecretVersionName != null)
+                                    message.proxySecretVersionName = String(object.proxySecretVersionName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a HttpConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig.HttpConfig
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.GitConfig.HttpConfig} message HttpConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            HttpConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.proxySecretVersionName = "";
+                                if (message.proxySecretVersionName != null && message.hasOwnProperty("proxySecretVersionName"))
+                                    object.proxySecretVersionName = message.proxySecretVersionName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this HttpConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig.HttpConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            HttpConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for HttpConfig
+                             * @function getTypeUrl
+                             * @memberof google.devtools.cloudbuild.v1.GitConfig.HttpConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            HttpConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.devtools.cloudbuild.v1.GitConfig.HttpConfig";
+                            };
+    
+                            return HttpConfig;
+                        })();
+    
+                        return GitConfig;
                     })();
     
                     v1.Artifacts = (function() {
