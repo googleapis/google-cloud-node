@@ -4011,6 +4011,11 @@
                 "addAssociation"
               ]
             },
+            "AddPacketMirroringRule": {
+              "methods": [
+                "addPacketMirroringRule"
+              ]
+            },
             "AddRule": {
               "methods": [
                 "addRule"
@@ -4041,6 +4046,11 @@
                 "getIamPolicy"
               ]
             },
+            "GetPacketMirroringRule": {
+              "methods": [
+                "getPacketMirroringRule"
+              ]
+            },
             "GetRule": {
               "methods": [
                 "getRule"
@@ -4056,6 +4066,11 @@
                 "patch"
               ]
             },
+            "PatchPacketMirroringRule": {
+              "methods": [
+                "patchPacketMirroringRule"
+              ]
+            },
             "PatchRule": {
               "methods": [
                 "patchRule"
@@ -4064,6 +4079,11 @@
             "RemoveAssociation": {
               "methods": [
                 "removeAssociation"
+              ]
+            },
+            "RemovePacketMirroringRule": {
+              "methods": [
+                "removePacketMirroringRule"
               ]
             },
             "RemoveRule": {
@@ -4105,6 +4125,11 @@
                 "addAssociation"
               ]
             },
+            "AddPacketMirroringRule": {
+              "methods": [
+                "addPacketMirroringRule"
+              ]
+            },
             "AddRule": {
               "methods": [
                 "addRule"
@@ -4135,6 +4160,11 @@
                 "getIamPolicy"
               ]
             },
+            "GetPacketMirroringRule": {
+              "methods": [
+                "getPacketMirroringRule"
+              ]
+            },
             "GetRule": {
               "methods": [
                 "getRule"
@@ -4150,6 +4180,11 @@
                 "patch"
               ]
             },
+            "PatchPacketMirroringRule": {
+              "methods": [
+                "patchPacketMirroringRule"
+              ]
+            },
             "PatchRule": {
               "methods": [
                 "patchRule"
@@ -4158,6 +4193,11 @@
             "RemoveAssociation": {
               "methods": [
                 "removeAssociation"
+              ]
+            },
+            "RemovePacketMirroringRule": {
+              "methods": [
+                "removePacketMirroringRule"
               ]
             },
             "RemoveRule": {

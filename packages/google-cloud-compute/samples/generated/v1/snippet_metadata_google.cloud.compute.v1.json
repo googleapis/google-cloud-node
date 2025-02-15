@@ -17344,6 +17344,66 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_NetworkFirewallPolicies_AddPacketMirroringRule_async",
+            "title": "AcceleratorTypes addPacketMirroringRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Inserts a packet mirroring rule into a firewall policy.",
+            "canonical": true,
+            "file": "network_firewall_policies.add_packet_mirroring_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AddPacketMirroringRule",
+                "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.AddPacketMirroringRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "firewall_policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "firewall_policy_rule_resource",
+                        "type": ".google.cloud.compute.v1.FirewallPolicyRule"
+                    },
+                    {
+                        "name": "max_priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "min_priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "NetworkFirewallPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPoliciesClient"
+                },
+                "method": {
+                    "shortName": "AddPacketMirroringRule",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.AddPacketMirroringRule",
+                    "service": {
+                        "shortName": "NetworkFirewallPolicies",
+                        "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_NetworkFirewallPolicies_AddRule_async",
             "title": "AcceleratorTypes addRule Sample",
             "origin": "API_DEFINITION",
@@ -17712,6 +17772,54 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_NetworkFirewallPolicies_GetPacketMirroringRule_async",
+            "title": "AcceleratorTypes getPacketMirroringRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a packet mirroring rule of the specified priority.",
+            "canonical": true,
+            "file": "network_firewall_policies.get_packet_mirroring_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPacketMirroringRule",
+                "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.GetPacketMirroringRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "firewall_policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.FirewallPolicyRule",
+                "client": {
+                    "shortName": "NetworkFirewallPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPoliciesClient"
+                },
+                "method": {
+                    "shortName": "GetPacketMirroringRule",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.GetPacketMirroringRule",
+                    "service": {
+                        "shortName": "NetworkFirewallPolicies",
+                        "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_NetworkFirewallPolicies_GetRule_async",
             "title": "AcceleratorTypes getRule Sample",
             "origin": "API_DEFINITION",
@@ -17920,6 +18028,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_NetworkFirewallPolicies_PatchPacketMirroringRule_async",
+            "title": "AcceleratorTypes patchPacketMirroringRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Patches a packet mirroring rule of the specified priority.",
+            "canonical": true,
+            "file": "network_firewall_policies.patch_packet_mirroring_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PatchPacketMirroringRule",
+                "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.PatchPacketMirroringRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "firewall_policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "firewall_policy_rule_resource",
+                        "type": ".google.cloud.compute.v1.FirewallPolicyRule"
+                    },
+                    {
+                        "name": "priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "NetworkFirewallPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPoliciesClient"
+                },
+                "method": {
+                    "shortName": "PatchPacketMirroringRule",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.PatchPacketMirroringRule",
+                    "service": {
+                        "shortName": "NetworkFirewallPolicies",
+                        "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_NetworkFirewallPolicies_PatchRule_async",
             "title": "AcceleratorTypes patchRule Sample",
             "origin": "API_DEFINITION",
@@ -18020,6 +18184,58 @@
                 "method": {
                     "shortName": "RemoveAssociation",
                     "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.RemoveAssociation",
+                    "service": {
+                        "shortName": "NetworkFirewallPolicies",
+                        "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_NetworkFirewallPolicies_RemovePacketMirroringRule_async",
+            "title": "AcceleratorTypes removePacketMirroringRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a packet mirroring rule of the specified priority.",
+            "canonical": true,
+            "file": "network_firewall_policies.remove_packet_mirroring_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RemovePacketMirroringRule",
+                "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.RemovePacketMirroringRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "firewall_policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "NetworkFirewallPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPoliciesClient"
+                },
+                "method": {
+                    "shortName": "RemovePacketMirroringRule",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.RemovePacketMirroringRule",
                     "service": {
                         "shortName": "NetworkFirewallPolicies",
                         "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
@@ -23403,7 +23619,7 @@
             "regionTag": "compute_v1_generated_RegionCommitments_Update_async",
             "title": "AcceleratorTypes update Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.",
+            "description": " Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.",
             "canonical": true,
             "file": "region_commitments.update.js",
             "language": "JAVASCRIPT",

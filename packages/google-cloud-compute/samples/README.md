@@ -335,6 +335,7 @@
   * [Network_endpoint_groups.list_network_endpoints](#network_endpoint_groups.list_network_endpoints)
   * [Network_endpoint_groups.test_iam_permissions](#network_endpoint_groups.test_iam_permissions)
   * [Network_firewall_policies.add_association](#network_firewall_policies.add_association)
+  * [Network_firewall_policies.add_packet_mirroring_rule](#network_firewall_policies.add_packet_mirroring_rule)
   * [Network_firewall_policies.add_rule](#network_firewall_policies.add_rule)
   * [Network_firewall_policies.aggregated_list](#network_firewall_policies.aggregated_list)
   * [Network_firewall_policies.clone_rules](#network_firewall_policies.clone_rules)
@@ -342,12 +343,15 @@
   * [Network_firewall_policies.get](#network_firewall_policies.get)
   * [Network_firewall_policies.get_association](#network_firewall_policies.get_association)
   * [Network_firewall_policies.get_iam_policy](#network_firewall_policies.get_iam_policy)
+  * [Network_firewall_policies.get_packet_mirroring_rule](#network_firewall_policies.get_packet_mirroring_rule)
   * [Network_firewall_policies.get_rule](#network_firewall_policies.get_rule)
   * [Network_firewall_policies.insert](#network_firewall_policies.insert)
   * [Network_firewall_policies.list](#network_firewall_policies.list)
   * [Network_firewall_policies.patch](#network_firewall_policies.patch)
+  * [Network_firewall_policies.patch_packet_mirroring_rule](#network_firewall_policies.patch_packet_mirroring_rule)
   * [Network_firewall_policies.patch_rule](#network_firewall_policies.patch_rule)
   * [Network_firewall_policies.remove_association](#network_firewall_policies.remove_association)
+  * [Network_firewall_policies.remove_packet_mirroring_rule](#network_firewall_policies.remove_packet_mirroring_rule)
   * [Network_firewall_policies.remove_rule](#network_firewall_policies.remove_rule)
   * [Network_firewall_policies.set_iam_policy](#network_firewall_policies.set_iam_policy)
   * [Network_firewall_policies.test_iam_permissions](#network_firewall_policies.test_iam_permissions)
@@ -6305,6 +6309,23 @@ __Usage:__
 
 
 
+### Network_firewall_policies.add_packet_mirroring_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.add_packet_mirroring_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.add_packet_mirroring_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.add_packet_mirroring_rule.js`
+
+
+-----
+
+
+
+
 ### Network_firewall_policies.add_rule
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.add_rule.js).
@@ -6424,6 +6445,23 @@ __Usage:__
 
 
 
+### Network_firewall_policies.get_packet_mirroring_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.get_packet_mirroring_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.get_packet_mirroring_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.get_packet_mirroring_rule.js`
+
+
+-----
+
+
+
+
 ### Network_firewall_policies.get_rule
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.get_rule.js).
@@ -6492,6 +6530,23 @@ __Usage:__
 
 
 
+### Network_firewall_policies.patch_packet_mirroring_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.patch_packet_mirroring_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.patch_packet_mirroring_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.patch_packet_mirroring_rule.js`
+
+
+-----
+
+
+
+
 ### Network_firewall_policies.patch_rule
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.patch_rule.js).
@@ -6519,6 +6574,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.remove_association.js`
+
+
+-----
+
+
+
+
+### Network_firewall_policies.remove_packet_mirroring_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.remove_packet_mirroring_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.remove_packet_mirroring_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/network_firewall_policies.remove_packet_mirroring_rule.js`
 
 
 -----
