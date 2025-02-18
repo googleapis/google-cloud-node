@@ -742,6 +742,14 @@ export class KeyManagementServiceClient {
    * @param {string} request.name
    *   Required. The {@link protos.google.cloud.kms.v1.CryptoKeyVersion.name|name} of the
    *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} public key to get.
+   * @param {google.cloud.kms.v1.PublicKey.PublicKeyFormat} [request.publicKeyFormat]
+   *   Optional. The {@link protos.google.cloud.kms.v1.PublicKey|PublicKey} format specified
+   *   by the user. This field is required for PQC algorithms. If specified, the
+   *   public key will be exported through the
+   *   {@link protos.google.cloud.kms.v1.PublicKey.public_key|public_key} field in the
+   *   requested format. Otherwise, the {@link protos.google.cloud.kms.v1.PublicKey.pem|pem}
+   *   field will be populated for non-PQC algorithms, and an error will be
+   *   returned for PQC algorithms.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

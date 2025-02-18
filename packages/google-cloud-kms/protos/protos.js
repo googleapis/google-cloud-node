@@ -7598,6 +7598,8 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 56:
+                                case 57:
                                     break;
                                 }
                             return null;
@@ -7793,6 +7795,14 @@
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65":
+                            case 56:
+                                message.algorithm = 56;
+                                break;
+                            case "PQ_SIGN_SLH_DSA_SHA2_128S":
+                            case 57:
+                                message.algorithm = 57;
                                 break;
                             }
                             return message;
@@ -8880,6 +8890,8 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 56:
+                                case 57:
                                     break;
                                 }
                             if (message.attestation != null && message.hasOwnProperty("attestation")) {
@@ -9180,6 +9192,14 @@
                             case 18:
                                 message.algorithm = 18;
                                 break;
+                            case "PQ_SIGN_ML_DSA_65":
+                            case 56:
+                                message.algorithm = 56;
+                                break;
+                            case "PQ_SIGN_SLH_DSA_SHA2_128S":
+                            case 57:
+                                message.algorithm = 57;
+                                break;
                             }
                             if (object.attestation != null) {
                                 if (typeof object.attestation !== "object")
@@ -9361,6 +9381,8 @@
                          * @property {number} HMAC_SHA512=35 HMAC_SHA512 value
                          * @property {number} HMAC_SHA224=36 HMAC_SHA224 value
                          * @property {number} EXTERNAL_SYMMETRIC_ENCRYPTION=18 EXTERNAL_SYMMETRIC_ENCRYPTION value
+                         * @property {number} PQ_SIGN_ML_DSA_65=56 PQ_SIGN_ML_DSA_65 value
+                         * @property {number} PQ_SIGN_SLH_DSA_SHA2_128S=57 PQ_SIGN_SLH_DSA_SHA2_128S value
                          */
                         CryptoKeyVersion.CryptoKeyVersionAlgorithm = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -9400,6 +9422,8 @@
                             values[valuesById[35] = "HMAC_SHA512"] = 35;
                             values[valuesById[36] = "HMAC_SHA224"] = 36;
                             values[valuesById[18] = "EXTERNAL_SYMMETRIC_ENCRYPTION"] = 18;
+                            values[valuesById[56] = "PQ_SIGN_ML_DSA_65"] = 56;
+                            values[valuesById[57] = "PQ_SIGN_SLH_DSA_SHA2_128S"] = 57;
                             return values;
                         })();
     
@@ -9452,6 +9476,247 @@
                         return CryptoKeyVersion;
                     })();
     
+                    v1.ChecksummedData = (function() {
+    
+                        /**
+                         * Properties of a ChecksummedData.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IChecksummedData
+                         * @property {Uint8Array|null} [data] ChecksummedData data
+                         * @property {google.protobuf.IInt64Value|null} [crc32cChecksum] ChecksummedData crc32cChecksum
+                         */
+    
+                        /**
+                         * Constructs a new ChecksummedData.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a ChecksummedData.
+                         * @implements IChecksummedData
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IChecksummedData=} [properties] Properties to set
+                         */
+                        function ChecksummedData(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ChecksummedData data.
+                         * @member {Uint8Array} data
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @instance
+                         */
+                        ChecksummedData.prototype.data = $util.newBuffer([]);
+    
+                        /**
+                         * ChecksummedData crc32cChecksum.
+                         * @member {google.protobuf.IInt64Value|null|undefined} crc32cChecksum
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @instance
+                         */
+                        ChecksummedData.prototype.crc32cChecksum = null;
+    
+                        /**
+                         * Creates a new ChecksummedData instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @static
+                         * @param {google.cloud.kms.v1.IChecksummedData=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ChecksummedData} ChecksummedData instance
+                         */
+                        ChecksummedData.create = function create(properties) {
+                            return new ChecksummedData(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ChecksummedData message. Does not implicitly {@link google.cloud.kms.v1.ChecksummedData.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @static
+                         * @param {google.cloud.kms.v1.IChecksummedData} message ChecksummedData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChecksummedData.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.crc32cChecksum != null && Object.hasOwnProperty.call(message, "crc32cChecksum"))
+                                $root.google.protobuf.Int64Value.encode(message.crc32cChecksum, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.data);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ChecksummedData message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ChecksummedData.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @static
+                         * @param {google.cloud.kms.v1.IChecksummedData} message ChecksummedData message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChecksummedData.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ChecksummedData message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ChecksummedData} ChecksummedData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChecksummedData.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ChecksummedData();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.data = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.crc32cChecksum = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ChecksummedData message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ChecksummedData} ChecksummedData
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChecksummedData.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ChecksummedData message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ChecksummedData.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                                    return "data: buffer expected";
+                            if (message.crc32cChecksum != null && message.hasOwnProperty("crc32cChecksum")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.crc32cChecksum);
+                                if (error)
+                                    return "crc32cChecksum." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ChecksummedData message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ChecksummedData} ChecksummedData
+                         */
+                        ChecksummedData.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ChecksummedData)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ChecksummedData();
+                            if (object.data != null)
+                                if (typeof object.data === "string")
+                                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                                else if (object.data.length >= 0)
+                                    message.data = object.data;
+                            if (object.crc32cChecksum != null) {
+                                if (typeof object.crc32cChecksum !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.ChecksummedData.crc32cChecksum: object expected");
+                                message.crc32cChecksum = $root.google.protobuf.Int64Value.fromObject(object.crc32cChecksum);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ChecksummedData message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @static
+                         * @param {google.cloud.kms.v1.ChecksummedData} message ChecksummedData
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ChecksummedData.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.crc32cChecksum = null;
+                                if (options.bytes === String)
+                                    object.data = "";
+                                else {
+                                    object.data = [];
+                                    if (options.bytes !== Array)
+                                        object.data = $util.newBuffer(object.data);
+                                }
+                            }
+                            if (message.crc32cChecksum != null && message.hasOwnProperty("crc32cChecksum"))
+                                object.crc32cChecksum = $root.google.protobuf.Int64Value.toObject(message.crc32cChecksum, options);
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ChecksummedData to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ChecksummedData.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ChecksummedData
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ChecksummedData
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ChecksummedData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ChecksummedData";
+                        };
+    
+                        return ChecksummedData;
+                    })();
+    
                     v1.PublicKey = (function() {
     
                         /**
@@ -9463,6 +9728,8 @@
                          * @property {google.protobuf.IInt64Value|null} [pemCrc32c] PublicKey pemCrc32c
                          * @property {string|null} [name] PublicKey name
                          * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] PublicKey protectionLevel
+                         * @property {google.cloud.kms.v1.PublicKey.PublicKeyFormat|null} [publicKeyFormat] PublicKey publicKeyFormat
+                         * @property {google.cloud.kms.v1.IChecksummedData|null} [publicKey] PublicKey publicKey
                          */
     
                         /**
@@ -9521,6 +9788,22 @@
                         PublicKey.prototype.protectionLevel = 0;
     
                         /**
+                         * PublicKey publicKeyFormat.
+                         * @member {google.cloud.kms.v1.PublicKey.PublicKeyFormat} publicKeyFormat
+                         * @memberof google.cloud.kms.v1.PublicKey
+                         * @instance
+                         */
+                        PublicKey.prototype.publicKeyFormat = 0;
+    
+                        /**
+                         * PublicKey publicKey.
+                         * @member {google.cloud.kms.v1.IChecksummedData|null|undefined} publicKey
+                         * @memberof google.cloud.kms.v1.PublicKey
+                         * @instance
+                         */
+                        PublicKey.prototype.publicKey = null;
+    
+                        /**
                          * Creates a new PublicKey instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.PublicKey
@@ -9554,6 +9837,10 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
                             if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.protectionLevel);
+                            if (message.publicKeyFormat != null && Object.hasOwnProperty.call(message, "publicKeyFormat"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.publicKeyFormat);
+                            if (message.publicKey != null && Object.hasOwnProperty.call(message, "publicKey"))
+                                $root.google.cloud.kms.v1.ChecksummedData.encode(message.publicKey, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -9606,6 +9893,14 @@
                                     }
                                 case 5: {
                                         message.protectionLevel = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.publicKeyFormat = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.publicKey = $root.google.cloud.kms.v1.ChecksummedData.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -9686,6 +9981,8 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 56:
+                                case 57:
                                     break;
                                 }
                             if (message.pemCrc32c != null && message.hasOwnProperty("pemCrc32c")) {
@@ -9707,6 +10004,20 @@
                                 case 4:
                                     break;
                                 }
+                            if (message.publicKeyFormat != null && message.hasOwnProperty("publicKeyFormat"))
+                                switch (message.publicKeyFormat) {
+                                default:
+                                    return "publicKeyFormat: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                    break;
+                                }
+                            if (message.publicKey != null && message.hasOwnProperty("publicKey")) {
+                                var error = $root.google.cloud.kms.v1.ChecksummedData.verify(message.publicKey);
+                                if (error)
+                                    return "publicKey." + error;
+                            }
                             return null;
                         };
     
@@ -9875,6 +10186,14 @@
                             case 18:
                                 message.algorithm = 18;
                                 break;
+                            case "PQ_SIGN_ML_DSA_65":
+                            case 56:
+                                message.algorithm = 56;
+                                break;
+                            case "PQ_SIGN_SLH_DSA_SHA2_128S":
+                            case 57:
+                                message.algorithm = 57;
+                                break;
                             }
                             if (object.pemCrc32c != null) {
                                 if (typeof object.pemCrc32c !== "object")
@@ -9911,6 +10230,31 @@
                                 message.protectionLevel = 4;
                                 break;
                             }
+                            switch (object.publicKeyFormat) {
+                            default:
+                                if (typeof object.publicKeyFormat === "number") {
+                                    message.publicKeyFormat = object.publicKeyFormat;
+                                    break;
+                                }
+                                break;
+                            case "PUBLIC_KEY_FORMAT_UNSPECIFIED":
+                            case 0:
+                                message.publicKeyFormat = 0;
+                                break;
+                            case "PEM":
+                            case 1:
+                                message.publicKeyFormat = 1;
+                                break;
+                            case "NIST_PQC":
+                            case 3:
+                                message.publicKeyFormat = 3;
+                                break;
+                            }
+                            if (object.publicKey != null) {
+                                if (typeof object.publicKey !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.PublicKey.publicKey: object expected");
+                                message.publicKey = $root.google.cloud.kms.v1.ChecksummedData.fromObject(object.publicKey);
+                            }
                             return message;
                         };
     
@@ -9933,6 +10277,8 @@
                                 object.pemCrc32c = null;
                                 object.name = "";
                                 object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
+                                object.publicKeyFormat = options.enums === String ? "PUBLIC_KEY_FORMAT_UNSPECIFIED" : 0;
+                                object.publicKey = null;
                             }
                             if (message.pem != null && message.hasOwnProperty("pem"))
                                 object.pem = message.pem;
@@ -9944,6 +10290,10 @@
                                 object.name = message.name;
                             if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
                                 object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] === undefined ? message.protectionLevel : $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
+                            if (message.publicKeyFormat != null && message.hasOwnProperty("publicKeyFormat"))
+                                object.publicKeyFormat = options.enums === String ? $root.google.cloud.kms.v1.PublicKey.PublicKeyFormat[message.publicKeyFormat] === undefined ? message.publicKeyFormat : $root.google.cloud.kms.v1.PublicKey.PublicKeyFormat[message.publicKeyFormat] : message.publicKeyFormat;
+                            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
+                                object.publicKey = $root.google.cloud.kms.v1.ChecksummedData.toObject(message.publicKey, options);
                             return object;
                         };
     
@@ -9972,6 +10322,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.kms.v1.PublicKey";
                         };
+    
+                        /**
+                         * PublicKeyFormat enum.
+                         * @name google.cloud.kms.v1.PublicKey.PublicKeyFormat
+                         * @enum {number}
+                         * @property {number} PUBLIC_KEY_FORMAT_UNSPECIFIED=0 PUBLIC_KEY_FORMAT_UNSPECIFIED value
+                         * @property {number} PEM=1 PEM value
+                         * @property {number} NIST_PQC=3 NIST_PQC value
+                         */
+                        PublicKey.PublicKeyFormat = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PUBLIC_KEY_FORMAT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PEM"] = 1;
+                            values[valuesById[3] = "NIST_PQC"] = 3;
+                            return values;
+                        })();
     
                         return PublicKey;
                     })();
@@ -15277,6 +15643,7 @@
                          * @memberof google.cloud.kms.v1
                          * @interface IGetPublicKeyRequest
                          * @property {string|null} [name] GetPublicKeyRequest name
+                         * @property {google.cloud.kms.v1.PublicKey.PublicKeyFormat|null} [publicKeyFormat] GetPublicKeyRequest publicKeyFormat
                          */
     
                         /**
@@ -15301,6 +15668,14 @@
                          * @instance
                          */
                         GetPublicKeyRequest.prototype.name = "";
+    
+                        /**
+                         * GetPublicKeyRequest publicKeyFormat.
+                         * @member {google.cloud.kms.v1.PublicKey.PublicKeyFormat} publicKeyFormat
+                         * @memberof google.cloud.kms.v1.GetPublicKeyRequest
+                         * @instance
+                         */
+                        GetPublicKeyRequest.prototype.publicKeyFormat = 0;
     
                         /**
                          * Creates a new GetPublicKeyRequest instance using the specified properties.
@@ -15328,6 +15703,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.publicKeyFormat != null && Object.hasOwnProperty.call(message, "publicKeyFormat"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.publicKeyFormat);
                             return writer;
                         };
     
@@ -15364,6 +15741,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.publicKeyFormat = reader.int32();
                                         break;
                                     }
                                 default:
@@ -15404,6 +15785,15 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.publicKeyFormat != null && message.hasOwnProperty("publicKeyFormat"))
+                                switch (message.publicKeyFormat) {
+                                default:
+                                    return "publicKeyFormat: enum value expected";
+                                case 0:
+                                case 1:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -15421,6 +15811,26 @@
                             var message = new $root.google.cloud.kms.v1.GetPublicKeyRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            switch (object.publicKeyFormat) {
+                            default:
+                                if (typeof object.publicKeyFormat === "number") {
+                                    message.publicKeyFormat = object.publicKeyFormat;
+                                    break;
+                                }
+                                break;
+                            case "PUBLIC_KEY_FORMAT_UNSPECIFIED":
+                            case 0:
+                                message.publicKeyFormat = 0;
+                                break;
+                            case "PEM":
+                            case 1:
+                                message.publicKeyFormat = 1;
+                                break;
+                            case "NIST_PQC":
+                            case 3:
+                                message.publicKeyFormat = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -15437,10 +15847,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.publicKeyFormat = options.enums === String ? "PUBLIC_KEY_FORMAT_UNSPECIFIED" : 0;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.publicKeyFormat != null && message.hasOwnProperty("publicKeyFormat"))
+                                object.publicKeyFormat = options.enums === String ? $root.google.cloud.kms.v1.PublicKey.PublicKeyFormat[message.publicKeyFormat] === undefined ? message.publicKeyFormat : $root.google.cloud.kms.v1.PublicKey.PublicKeyFormat[message.publicKeyFormat] : message.publicKeyFormat;
                             return object;
                         };
     
@@ -16708,6 +17122,8 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 56:
+                                case 57:
                                     break;
                                 }
                             if (message.importJob != null && message.hasOwnProperty("importJob"))
@@ -16890,6 +17306,14 @@
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65":
+                            case 56:
+                                message.algorithm = 56;
+                                break;
+                            case "PQ_SIGN_SLH_DSA_SHA2_128S":
+                            case 57:
+                                message.algorithm = 57;
                                 break;
                             }
                             if (object.importJob != null)

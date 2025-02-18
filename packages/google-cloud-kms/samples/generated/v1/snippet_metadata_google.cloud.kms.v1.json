@@ -950,7 +950,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -962,6 +962,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "public_key_format",
+                        "type": ".google.cloud.kms.v1.PublicKey.PublicKeyFormat"
                     }
                 ],
                 "resultType": ".google.cloud.kms.v1.PublicKey",
