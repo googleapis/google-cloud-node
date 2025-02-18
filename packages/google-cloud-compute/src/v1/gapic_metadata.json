@@ -7605,6 +7605,11 @@
                 "delete"
               ]
             },
+            "DeleteRoutePolicy": {
+              "methods": [
+                "deleteRoutePolicy"
+              ]
+            },
             "Get": {
               "methods": [
                 "get"
@@ -7613,6 +7618,11 @@
             "GetNatIpInfo": {
               "methods": [
                 "getNatIpInfo"
+              ]
+            },
+            "GetRoutePolicy": {
+              "methods": [
+                "getRoutePolicy"
               ]
             },
             "GetRouterStatus": {
@@ -7630,6 +7640,11 @@
                 "patch"
               ]
             },
+            "PatchRoutePolicy": {
+              "methods": [
+                "patchRoutePolicy"
+              ]
+            },
             "Preview": {
               "methods": [
                 "preview"
@@ -7638,6 +7653,11 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            },
+            "UpdateRoutePolicy": {
+              "methods": [
+                "updateRoutePolicy"
               ]
             },
             "AggregatedList": {
@@ -7659,6 +7679,20 @@
                 "list",
                 "listStream",
                 "listAsync"
+              ]
+            },
+            "ListBgpRoutes": {
+              "methods": [
+                "listBgpRoutes",
+                "listBgpRoutesStream",
+                "listBgpRoutesAsync"
+              ]
+            },
+            "ListRoutePolicies": {
+              "methods": [
+                "listRoutePolicies",
+                "listRoutePoliciesStream",
+                "listRoutePoliciesAsync"
               ]
             }
           }
@@ -7671,6 +7705,11 @@
                 "delete"
               ]
             },
+            "DeleteRoutePolicy": {
+              "methods": [
+                "deleteRoutePolicy"
+              ]
+            },
             "Get": {
               "methods": [
                 "get"
@@ -7679,6 +7718,11 @@
             "GetNatIpInfo": {
               "methods": [
                 "getNatIpInfo"
+              ]
+            },
+            "GetRoutePolicy": {
+              "methods": [
+                "getRoutePolicy"
               ]
             },
             "GetRouterStatus": {
@@ -7696,6 +7740,11 @@
                 "patch"
               ]
             },
+            "PatchRoutePolicy": {
+              "methods": [
+                "patchRoutePolicy"
+              ]
+            },
             "Preview": {
               "methods": [
                 "preview"
@@ -7704,6 +7753,11 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            },
+            "UpdateRoutePolicy": {
+              "methods": [
+                "updateRoutePolicy"
               ]
             },
             "AggregatedList": {
@@ -7725,6 +7779,20 @@
                 "list",
                 "listStream",
                 "listAsync"
+              ]
+            },
+            "ListBgpRoutes": {
+              "methods": [
+                "listBgpRoutes",
+                "listBgpRoutesStream",
+                "listBgpRoutesAsync"
+              ]
+            },
+            "ListRoutePolicies": {
+              "methods": [
+                "listRoutePolicies",
+                "listRoutePoliciesStream",
+                "listRoutePoliciesAsync"
               ]
             }
           }
