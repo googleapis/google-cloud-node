@@ -639,7 +639,9 @@
                             "HMAC_SHA384": 34,
                             "HMAC_SHA512": 35,
                             "HMAC_SHA224": 36,
-                            "EXTERNAL_SYMMETRIC_ENCRYPTION": 18
+                            "EXTERNAL_SYMMETRIC_ENCRYPTION": 18,
+                            "PQ_SIGN_ML_DSA_65": 56,
+                            "PQ_SIGN_SLH_DSA_SHA2_128S": 57
                           }
                         },
                         "CryptoKeyVersionState": {
@@ -662,6 +664,18 @@
                             "CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED": 0,
                             "FULL": 1
                           }
+                        }
+                      }
+                    },
+                    "ChecksummedData": {
+                      "fields": {
+                        "data": {
+                          "type": "bytes",
+                          "id": 3
+                        },
+                        "crc32cChecksum": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 2
                         }
                       }
                     },
@@ -690,6 +704,23 @@
                         "protectionLevel": {
                           "type": "ProtectionLevel",
                           "id": 5
+                        },
+                        "publicKeyFormat": {
+                          "type": "PublicKeyFormat",
+                          "id": 7
+                        },
+                        "publicKey": {
+                          "type": "ChecksummedData",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "PublicKeyFormat": {
+                          "values": {
+                            "PUBLIC_KEY_FORMAT_UNSPECIFIED": 0,
+                            "PEM": 1,
+                            "NIST_PQC": 3
+                          }
                         }
                       }
                     },
