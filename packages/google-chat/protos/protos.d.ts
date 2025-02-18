@@ -17640,7 +17640,8 @@ export namespace google {
                     ADMIN = 3,
                     APP_MESSAGE_EXPIRY = 4,
                     CREATOR_VIA_APP = 5,
-                    SPACE_OWNER_VIA_APP = 6
+                    SPACE_OWNER_VIA_APP = 6,
+                    SPACE_MEMBER = 7
                 }
             }
 
