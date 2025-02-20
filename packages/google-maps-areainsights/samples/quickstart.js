@@ -27,7 +27,7 @@ function main(
     typeFilter: {includedTypes: ['restaurant']},
   }
 ) {
-  // [START restaurant_areainsights_quickstart]
+  // [START areainsights_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -63,7 +63,7 @@ function main(
   }
 
   callComputeInsights();
-  // [END restaurant_areainsights_quickstart]
+  // [END areainsights_quickstart]
 }
 
 process.on('unhandledRejection', err => {
