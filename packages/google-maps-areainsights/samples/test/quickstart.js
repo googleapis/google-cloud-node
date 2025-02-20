@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const { Client } = require('@google-cloud/areainsights').v1;
-const area-insightsClient = new Client();
+const {Client} = require('@google-cloud/areainsights').v1;
+const areaInsightsClient = new Client();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -29,11 +29,14 @@ describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
-    projectId = await area-insightsClient.getProjectId();
+    projectId = await areaInsightsClient.getProjectId();
   });
 
   it('should run quickstart', async () => {
-    const output = execSync(`node ./quickstart.js projects/${projectId}/locations/us-central1`, {cwd});
+    const output = execSync(
+      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      {cwd}
+    );
     assert(output !== null);
   });
 });
