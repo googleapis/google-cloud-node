@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.15.2](https://github.com/googleapis/nodejs-storage/compare/v7.15.1...v7.15.2) (2025-02-20)
+
+
+### Bug Fixes
+
+* Export SaveData type from index.ts ([#2580](https://github.com/googleapis/nodejs-storage/issues/2580)) ([dbf510c](https://github.com/googleapis/nodejs-storage/commit/dbf510c08f28c720ba66268eea6a62e139179ab4))
+
 ## [7.15.1](https://github.com/googleapis/nodejs-storage/compare/v7.15.0...v7.15.1) (2025-02-11)
 
 
