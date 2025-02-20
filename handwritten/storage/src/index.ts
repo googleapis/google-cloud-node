@@ -221,6 +221,7 @@ export {
   RotateEncryptionKeyOptions,
   RotateEncryptionKeyResponse,
   SaveCallback,
+  SaveData,
   SaveOptions,
   SetFileMetadataCallback,
   SetFileMetadataOptions,
