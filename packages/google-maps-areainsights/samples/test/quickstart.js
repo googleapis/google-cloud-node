@@ -31,7 +31,7 @@ describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
-    projectId = await areainsightsClient.getProjectId();
+    projectId = areainsightsClient.getProjectId();
   });
 
   it('should run quickstart', async () => {
