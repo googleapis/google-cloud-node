@@ -61,6 +61,11 @@ function main(challenge, tpmAttestation) {
    *  the token output.
    */
   // const tokenOptions = {}
+  /**
+   *  Optional. An optional indicator of the attester, only applies to certain
+   *  products.
+   */
+  // const attester = 'abc123'
 
   // Imports the Confidentialcomputing library
   const {ConfidentialComputingClient} = require('@google-cloud/confidentialcomputing').v1;
