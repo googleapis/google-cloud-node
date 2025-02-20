@@ -18,8 +18,10 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const { Client } = require('@google-cloud/areainsights').v1;
-const area-insightsClient = new Client();
+const {AreaInsightsClient} = require('@google-cloud/areainsights').v1;
+
+// Instantiates a client
+const areainsightsClient = new AreaInsightsClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
