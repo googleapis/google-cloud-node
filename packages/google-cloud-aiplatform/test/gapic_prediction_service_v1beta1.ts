@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -331,7 +331,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.PredictResponse()
       );
@@ -363,7 +363,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.PredictResponse()
       );
@@ -411,7 +411,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.predict = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.predict(request), expectedError);
@@ -462,7 +462,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -494,7 +494,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -539,7 +539,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rawPredict = stubSimpleCall(
         undefined,
@@ -593,7 +593,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DirectPredictResponse()
       );
@@ -625,7 +625,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DirectPredictResponse()
       );
@@ -673,7 +673,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.directPredict = stubSimpleCall(
         undefined,
@@ -727,7 +727,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictResponse()
       );
@@ -759,7 +759,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DirectRawPredictResponse()
       );
@@ -807,7 +807,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.directRawPredict = stubSimpleCall(
         undefined,
@@ -861,7 +861,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExplainResponse()
       );
@@ -893,7 +893,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExplainResponse()
       );
@@ -941,7 +941,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.explain = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.explain(request), expectedError);
@@ -992,7 +992,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CountTokensResponse()
       );
@@ -1024,7 +1024,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CountTokensResponse()
       );
@@ -1072,7 +1072,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.countTokens = stubSimpleCall(
         undefined,
@@ -1126,7 +1126,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse()
       );
@@ -1158,7 +1158,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse()
       );
@@ -1206,7 +1206,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateContent = stubSimpleCall(
         undefined,
@@ -1260,7 +1260,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -1301,7 +1301,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -1343,7 +1343,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.streamRawPredict = stubServerStreamingCall(
         undefined,
@@ -1424,7 +1424,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse()
       );
@@ -1470,7 +1470,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.StreamingPredictResponse()
       );
@@ -1517,7 +1517,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.serverStreamingPredict = stubServerStreamingCall(
         undefined,
@@ -1608,7 +1608,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse()
       );
@@ -1654,7 +1654,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GenerateContentResponse()
       );
@@ -1701,7 +1701,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['model']
       );
       request.model = defaultValue1;
-      const expectedHeaderRequestParams = `model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.streamGenerateContent = stubServerStreamingCall(
         undefined,
@@ -1792,7 +1792,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -1833,7 +1833,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -1875,7 +1875,7 @@ describe('v1beta1.PredictionServiceClient', () => {
         ['endpoint']
       );
       request.endpoint = defaultValue1;
-      const expectedHeaderRequestParams = `endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.chatCompletions = stubServerStreamingCall(
         undefined,

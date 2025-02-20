@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -389,7 +389,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Extension()
       );
@@ -423,7 +423,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Extension()
       );
@@ -473,7 +473,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getExtension = stubSimpleCall(
         undefined,
@@ -532,7 +532,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['extension', 'name']
       );
       request.extension.name = defaultValue1;
-      const expectedHeaderRequestParams = `extension.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `extension.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Extension()
       );
@@ -567,7 +567,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['extension', 'name']
       );
       request.extension.name = defaultValue1;
-      const expectedHeaderRequestParams = `extension.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `extension.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Extension()
       );
@@ -618,7 +618,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['extension', 'name']
       );
       request.extension.name = defaultValue1;
-      const expectedHeaderRequestParams = `extension.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `extension.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExtension = stubSimpleCall(
         undefined,
@@ -677,7 +677,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -713,7 +713,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -770,7 +770,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importExtension = stubLongRunningCall(
         undefined,
@@ -804,7 +804,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importExtension = stubLongRunningCall(
         undefined,
@@ -889,7 +889,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -925,7 +925,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -982,7 +982,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExtension = stubLongRunningCall(
         undefined,
@@ -1016,7 +1016,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExtension = stubLongRunningCall(
         undefined,
@@ -1101,7 +1101,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Extension()
@@ -1143,7 +1143,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Extension()
@@ -1201,7 +1201,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listExtensions = stubSimpleCall(
         undefined,
@@ -1235,7 +1235,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Extension()
@@ -1299,7 +1299,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExtensions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1352,7 +1352,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Extension()
@@ -1404,7 +1404,7 @@ describe('v1beta1.ExtensionRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExtensions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

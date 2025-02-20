@@ -36,6 +36,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListModelVersionCheckpoints": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "UpdateModel": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

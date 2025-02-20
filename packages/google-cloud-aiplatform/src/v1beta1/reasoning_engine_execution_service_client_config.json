@@ -23,6 +23,10 @@
         "QueryReasoningEngine": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "StreamQueryReasoningEngine": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

@@ -432,6 +432,11 @@
               "methods": [
                 "evaluateInstances"
               ]
+            },
+            "EvaluateDataset": {
+              "methods": [
+                "evaluateDataset"
+              ]
             }
           }
         },
@@ -441,6 +446,11 @@
             "EvaluateInstances": {
               "methods": [
                 "evaluateInstances"
+              ]
+            },
+            "EvaluateDataset": {
+              "methods": [
+                "evaluateDataset"
               ]
             }
           }
@@ -814,6 +824,11 @@
                 "createFeatureMonitor"
               ]
             },
+            "UpdateFeatureMonitor": {
+              "methods": [
+                "updateFeatureMonitor"
+              ]
+            },
             "DeleteFeatureMonitor": {
               "methods": [
                 "deleteFeatureMonitor"
@@ -915,6 +930,11 @@
             "CreateFeatureMonitor": {
               "methods": [
                 "createFeatureMonitor"
+              ]
+            },
+            "UpdateFeatureMonitor": {
+              "methods": [
+                "updateFeatureMonitor"
               ]
             },
             "DeleteFeatureMonitor": {
@@ -2411,6 +2431,11 @@
                 "getPublisherModel"
               ]
             },
+            "DeployPublisherModel": {
+              "methods": [
+                "deployPublisherModel"
+              ]
+            },
             "ListPublisherModels": {
               "methods": [
                 "listPublisherModels",
@@ -2426,6 +2451,11 @@
             "GetPublisherModel": {
               "methods": [
                 "getPublisherModel"
+              ]
+            },
+            "DeployPublisherModel": {
+              "methods": [
+                "deployPublisherModel"
               ]
             },
             "ListPublisherModels": {
@@ -2668,6 +2698,13 @@
                 "listModelVersionsAsync"
               ]
             },
+            "ListModelVersionCheckpoints": {
+              "methods": [
+                "listModelVersionCheckpoints",
+                "listModelVersionCheckpointsStream",
+                "listModelVersionCheckpointsAsync"
+              ]
+            },
             "ListModelEvaluations": {
               "methods": [
                 "listModelEvaluations",
@@ -2769,6 +2806,13 @@
                 "listModelVersions",
                 "listModelVersionsStream",
                 "listModelVersionsAsync"
+              ]
+            },
+            "ListModelVersionCheckpoints": {
+              "methods": [
+                "listModelVersionCheckpoints",
+                "listModelVersionCheckpointsStream",
+                "listModelVersionCheckpointsAsync"
               ]
             },
             "ListModelEvaluations": {
@@ -3327,6 +3371,11 @@
             "QueryReasoningEngine": {
               "methods": [
                 "queryReasoningEngine"
+              ]
+            },
+            "StreamQueryReasoningEngine": {
+              "methods": [
+                "streamQueryReasoningEngine"
               ]
             }
           }
@@ -4027,6 +4076,16 @@
               "methods": [
                 "retrieveContexts"
               ]
+            },
+            "AugmentPrompt": {
+              "methods": [
+                "augmentPrompt"
+              ]
+            },
+            "CorroborateContent": {
+              "methods": [
+                "corroborateContent"
+              ]
             }
           }
         },
@@ -4036,6 +4095,16 @@
             "RetrieveContexts": {
               "methods": [
                 "retrieveContexts"
+              ]
+            },
+            "AugmentPrompt": {
+              "methods": [
+                "augmentPrompt"
+              ]
+            },
+            "CorroborateContent": {
+              "methods": [
+                "corroborateContent"
               ]
             }
           }
