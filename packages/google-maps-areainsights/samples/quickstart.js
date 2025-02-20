@@ -18,7 +18,15 @@
 
 'use strict';
 
-function main(insights, filter) {
+function main(
+  insights = [1, 2, 3, 4],
+  filter = {
+    locationFilter: {
+      circle: {radius: 1000, place: 'places/ChIJgUbEo8cfqokR5lP9_Wh_DaM'},
+    },
+    typeFilter: {includedTypes: ['restaurant']},
+  }
+) {
   // [START areainsights_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
