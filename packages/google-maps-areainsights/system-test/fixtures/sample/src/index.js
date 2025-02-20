@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const AreaInsightsClient = v1.AreaInsightsClient;
-type AreaInsightsClient = v1.AreaInsightsClient;
-export {v1, AreaInsightsClient};
-export default {v1, AreaInsightsClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const areainsights = require('@google-cloud/areainsights');
+
+function main() {
+  const areaInsightsClient = new areainsights.AreaInsightsClient();
+}
+
+main();
