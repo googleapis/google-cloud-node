@@ -219,6 +219,13 @@
                         "DIRECTORY_STRIPE_LEVEL_MAX": 3
                       }
                     },
+                    "DeploymentType": {
+                      "values": {
+                        "DEPLOYMENT_TYPE_UNSPECIFIED": 0,
+                        "SCRATCH": 1,
+                        "PERSISTENT": 2
+                      }
+                    },
                     "Instance": {
                       "options": {
                         "(google.api.resource).type": "parallelstore.googleapis.com/Instance",
@@ -281,6 +288,7 @@
                           "type": "string",
                           "id": 9,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -329,6 +337,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "deploymentType": {
+                          "type": "DeploymentType",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -339,7 +354,8 @@
                             "ACTIVE": 2,
                             "DELETING": 3,
                             "FAILED": 4,
-                            "UPGRADING": 5
+                            "UPGRADING": 5,
+                            "REPAIRING": 6
                           }
                         }
                       }
@@ -687,6 +703,36 @@
                     "ImportDataResponse": {
                       "fields": {}
                     },
+                    "TransferErrorLogEntry": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "errorDetails": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TransferErrorSummary": {
+                      "fields": {
+                        "errorCode": {
+                          "type": "google.rpc.Code",
+                          "id": 1
+                        },
+                        "errorCount": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "errorLogEntries": {
+                          "rule": "repeated",
+                          "type": "TransferErrorLogEntry",
+                          "id": 4
+                        }
+                      }
+                    },
                     "ImportDataMetadata": {
                       "fields": {
                         "operationMetadata": {
@@ -861,6 +907,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "errorSummary": {
+                          "rule": "repeated",
+                          "type": "TransferErrorSummary",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -889,6 +943,14 @@
                         "bytesCopied": {
                           "type": "int64",
                           "id": 6
+                        },
+                        "objectsFailed": {
+                          "type": "int64",
+                          "id": 7
+                        },
+                        "bytesFailed": {
+                          "type": "int64",
+                          "id": 8
                         }
                       }
                     }
@@ -3855,9 +3917,9 @@
         "rpc": {
           "options": {
             "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "go_package": "google.golang.org/genproto/googleapis/rpc/code;code",
             "java_multiple_files": true,
-            "java_outer_classname": "StatusProto",
+            "java_outer_classname": "CodeProto",
             "java_package": "com.google.rpc",
             "objc_class_prefix": "RPC"
           },
@@ -3877,6 +3939,27 @@
                   "type": "google.protobuf.Any",
                   "id": 3
                 }
+              }
+            },
+            "Code": {
+              "values": {
+                "OK": 0,
+                "CANCELLED": 1,
+                "UNKNOWN": 2,
+                "INVALID_ARGUMENT": 3,
+                "DEADLINE_EXCEEDED": 4,
+                "NOT_FOUND": 5,
+                "ALREADY_EXISTS": 6,
+                "PERMISSION_DENIED": 7,
+                "UNAUTHENTICATED": 16,
+                "RESOURCE_EXHAUSTED": 8,
+                "FAILED_PRECONDITION": 9,
+                "ABORTED": 10,
+                "OUT_OF_RANGE": 11,
+                "UNIMPLEMENTED": 12,
+                "INTERNAL": 13,
+                "UNAVAILABLE": 14,
+                "DATA_LOSS": 15
               }
             }
           }
