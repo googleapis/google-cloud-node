@@ -1139,7 +1139,9 @@
                     "Build": {
                       "options": {
                         "(google.api.resource).type": "cloudbuild.googleapis.com/Build",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/builds/{build}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/builds/{build}",
+                        "(google.api.resource).plural": "builds",
+                        "(google.api.resource).singular": "build"
                       },
                       "fields": {
                         "name": {
@@ -1309,11 +1311,26 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "gitConfig": {
+                          "type": "GitConfig",
+                          "id": 48,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "failureInfo": {
                           "type": "FailureInfo",
                           "id": 51,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dependencies": {
+                          "rule": "repeated",
+                          "type": "Dependency",
+                          "id": 56,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -1375,6 +1392,111 @@
                                 "LOGGING_FAILURE": 4,
                                 "USER_BUILD_STEP": 5,
                                 "FETCH_SOURCE_FAILED": 6
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Dependency": {
+                      "oneofs": {
+                        "dep": {
+                          "oneof": [
+                            "empty",
+                            "gitSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "empty": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "gitSource": {
+                          "type": "GitSourceDependency",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "GitSourceDependency": {
+                          "fields": {
+                            "repository": {
+                              "type": "GitSourceRepository",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "revision": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "recurseSubmodules": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "depth": {
+                              "type": "int64",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "destPath": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "GitSourceRepository": {
+                          "oneofs": {
+                            "repotype": {
+                              "oneof": [
+                                "url",
+                                "developerConnect"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "url": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "developerConnect": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "developerconnect.googleapis.com/GitRepositoryLink"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GitConfig": {
+                      "fields": {
+                        "http": {
+                          "type": "HttpConfig",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "HttpConfig": {
+                          "fields": {
+                            "proxySecretVersionName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                               }
                             }
                           }

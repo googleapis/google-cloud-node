@@ -220,6 +220,13 @@ export namespace google {
                     DIRECTORY_STRIPE_LEVEL_MAX = 3
                 }
 
+                /** DeploymentType enum. */
+                enum DeploymentType {
+                    DEPLOYMENT_TYPE_UNSPECIFIED = 0,
+                    SCRATCH = 1,
+                    PERSISTENT = 2
+                }
+
                 /** Properties of an Instance. */
                 interface IInstance {
 
@@ -264,6 +271,9 @@ export namespace google {
 
                     /** Instance directoryStripeLevel */
                     directoryStripeLevel?: (google.cloud.parallelstore.v1.DirectoryStripeLevel|keyof typeof google.cloud.parallelstore.v1.DirectoryStripeLevel|null);
+
+                    /** Instance deploymentType */
+                    deploymentType?: (google.cloud.parallelstore.v1.DeploymentType|keyof typeof google.cloud.parallelstore.v1.DeploymentType|null);
                 }
 
                 /** Represents an Instance. */
@@ -316,6 +326,9 @@ export namespace google {
 
                     /** Instance directoryStripeLevel. */
                     public directoryStripeLevel: (google.cloud.parallelstore.v1.DirectoryStripeLevel|keyof typeof google.cloud.parallelstore.v1.DirectoryStripeLevel);
+
+                    /** Instance deploymentType. */
+                    public deploymentType: (google.cloud.parallelstore.v1.DeploymentType|keyof typeof google.cloud.parallelstore.v1.DeploymentType);
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -404,7 +417,8 @@ export namespace google {
                         ACTIVE = 2,
                         DELETING = 3,
                         FAILED = 4,
-                        UPGRADING = 5
+                        UPGRADING = 5,
+                        REPAIRING = 6
                     }
                 }
 
@@ -1928,6 +1942,218 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a TransferErrorLogEntry. */
+                interface ITransferErrorLogEntry {
+
+                    /** TransferErrorLogEntry uri */
+                    uri?: (string|null);
+
+                    /** TransferErrorLogEntry errorDetails */
+                    errorDetails?: (string[]|null);
+                }
+
+                /** Represents a TransferErrorLogEntry. */
+                class TransferErrorLogEntry implements ITransferErrorLogEntry {
+
+                    /**
+                     * Constructs a new TransferErrorLogEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.ITransferErrorLogEntry);
+
+                    /** TransferErrorLogEntry uri. */
+                    public uri: string;
+
+                    /** TransferErrorLogEntry errorDetails. */
+                    public errorDetails: string[];
+
+                    /**
+                     * Creates a new TransferErrorLogEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferErrorLogEntry instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.ITransferErrorLogEntry): google.cloud.parallelstore.v1.TransferErrorLogEntry;
+
+                    /**
+                     * Encodes the specified TransferErrorLogEntry message. Does not implicitly {@link google.cloud.parallelstore.v1.TransferErrorLogEntry.verify|verify} messages.
+                     * @param message TransferErrorLogEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.ITransferErrorLogEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferErrorLogEntry message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.TransferErrorLogEntry.verify|verify} messages.
+                     * @param message TransferErrorLogEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.ITransferErrorLogEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferErrorLogEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferErrorLogEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.TransferErrorLogEntry;
+
+                    /**
+                     * Decodes a TransferErrorLogEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferErrorLogEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.TransferErrorLogEntry;
+
+                    /**
+                     * Verifies a TransferErrorLogEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferErrorLogEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferErrorLogEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.TransferErrorLogEntry;
+
+                    /**
+                     * Creates a plain object from a TransferErrorLogEntry message. Also converts values to other types if specified.
+                     * @param message TransferErrorLogEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.TransferErrorLogEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferErrorLogEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferErrorLogEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransferErrorSummary. */
+                interface ITransferErrorSummary {
+
+                    /** TransferErrorSummary errorCode */
+                    errorCode?: (google.rpc.Code|keyof typeof google.rpc.Code|null);
+
+                    /** TransferErrorSummary errorCount */
+                    errorCount?: (number|Long|string|null);
+
+                    /** TransferErrorSummary errorLogEntries */
+                    errorLogEntries?: (google.cloud.parallelstore.v1.ITransferErrorLogEntry[]|null);
+                }
+
+                /** Represents a TransferErrorSummary. */
+                class TransferErrorSummary implements ITransferErrorSummary {
+
+                    /**
+                     * Constructs a new TransferErrorSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.ITransferErrorSummary);
+
+                    /** TransferErrorSummary errorCode. */
+                    public errorCode: (google.rpc.Code|keyof typeof google.rpc.Code);
+
+                    /** TransferErrorSummary errorCount. */
+                    public errorCount: (number|Long|string);
+
+                    /** TransferErrorSummary errorLogEntries. */
+                    public errorLogEntries: google.cloud.parallelstore.v1.ITransferErrorLogEntry[];
+
+                    /**
+                     * Creates a new TransferErrorSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferErrorSummary instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.ITransferErrorSummary): google.cloud.parallelstore.v1.TransferErrorSummary;
+
+                    /**
+                     * Encodes the specified TransferErrorSummary message. Does not implicitly {@link google.cloud.parallelstore.v1.TransferErrorSummary.verify|verify} messages.
+                     * @param message TransferErrorSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.ITransferErrorSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferErrorSummary message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.TransferErrorSummary.verify|verify} messages.
+                     * @param message TransferErrorSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.ITransferErrorSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferErrorSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferErrorSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.TransferErrorSummary;
+
+                    /**
+                     * Decodes a TransferErrorSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferErrorSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.TransferErrorSummary;
+
+                    /**
+                     * Verifies a TransferErrorSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferErrorSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferErrorSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.TransferErrorSummary;
+
+                    /**
+                     * Creates a plain object from a TransferErrorSummary message. Also converts values to other types if specified.
+                     * @param message TransferErrorSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.TransferErrorSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferErrorSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferErrorSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an ImportDataMetadata. */
                 interface IImportDataMetadata {
 
@@ -2317,6 +2543,9 @@ export namespace google {
 
                     /** TransferOperationMetadata transferType */
                     transferType?: (google.cloud.parallelstore.v1.TransferType|keyof typeof google.cloud.parallelstore.v1.TransferType|null);
+
+                    /** TransferOperationMetadata errorSummary */
+                    errorSummary?: (google.cloud.parallelstore.v1.ITransferErrorSummary[]|null);
                 }
 
                 /** Represents a TransferOperationMetadata. */
@@ -2345,6 +2574,9 @@ export namespace google {
 
                     /** TransferOperationMetadata transferType. */
                     public transferType: (google.cloud.parallelstore.v1.TransferType|keyof typeof google.cloud.parallelstore.v1.TransferType);
+
+                    /** TransferOperationMetadata errorSummary. */
+                    public errorSummary: google.cloud.parallelstore.v1.ITransferErrorSummary[];
 
                     /** TransferOperationMetadata source. */
                     public source?: ("sourceParallelstore"|"sourceGcsBucket");
@@ -2450,6 +2682,12 @@ export namespace google {
 
                     /** TransferCounters bytesCopied */
                     bytesCopied?: (number|Long|string|null);
+
+                    /** TransferCounters objectsFailed */
+                    objectsFailed?: (number|Long|string|null);
+
+                    /** TransferCounters bytesFailed */
+                    bytesFailed?: (number|Long|string|null);
                 }
 
                 /** Represents a TransferCounters. */
@@ -2478,6 +2716,12 @@ export namespace google {
 
                     /** TransferCounters bytesCopied. */
                     public bytesCopied: (number|Long|string);
+
+                    /** TransferCounters objectsFailed. */
+                    public objectsFailed: (number|Long|string);
+
+                    /** TransferCounters bytesFailed. */
+                    public bytesFailed: (number|Long|string);
 
                     /**
                      * Creates a new TransferCounters instance using the specified properties.
@@ -13024,6 +13268,27 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Code enum. */
+        enum Code {
+            OK = 0,
+            CANCELLED = 1,
+            UNKNOWN = 2,
+            INVALID_ARGUMENT = 3,
+            DEADLINE_EXCEEDED = 4,
+            NOT_FOUND = 5,
+            ALREADY_EXISTS = 6,
+            PERMISSION_DENIED = 7,
+            UNAUTHENTICATED = 16,
+            RESOURCE_EXHAUSTED = 8,
+            FAILED_PRECONDITION = 9,
+            ABORTED = 10,
+            OUT_OF_RANGE = 11,
+            UNIMPLEMENTED = 12,
+            INTERNAL = 13,
+            UNAVAILABLE = 14,
+            DATA_LOSS = 15
         }
     }
 }
