@@ -259,7 +259,7 @@
             "regionTag": "dlp_v2_generated_DlpService_ListInfoTypes_async",
             "title": "DlpService listInfoTypes Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns a list of the sensitive information types that DLP API supports. See https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference to learn more.",
+            "description": " Returns a list of the sensitive information types that the DLP API supports. See https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference to learn more.",
             "canonical": true,
             "file": "dlp_service.list_info_types.js",
             "language": "JAVASCRIPT",
