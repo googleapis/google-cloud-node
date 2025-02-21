@@ -30,6 +30,7 @@ export {GeneratorsClient} from './generators_client';
 export {IntentsClient} from './intents_client';
 export {KnowledgeBasesClient} from './knowledge_bases_client';
 export {ParticipantsClient} from './participants_client';
+export {PhoneNumbersClient} from './phone_numbers_client';
 export {SessionEntityTypesClient} from './session_entity_types_client';
 export {SessionsClient} from './sessions_client';
 export {SipTrunksClient} from './sip_trunks_client';
