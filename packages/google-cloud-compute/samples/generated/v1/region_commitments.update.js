@@ -29,7 +29,7 @@ function main(commitment, commitmentResource, project, region) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the commitment for which auto renew is being updated.
+   *  Name of the commitment that you want to update.
    */
   // const commitment = 'abc123'
   /**
