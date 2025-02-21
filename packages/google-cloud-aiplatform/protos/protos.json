@@ -63070,6 +63070,30 @@
                             }
                           ]
                         },
+                        "Deploy": {
+                          "requestType": "DeployRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{destination=projects/*/locations/*}:deploy",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "DeployResponse",
+                            "(google.longrunning.operation_info).metadata_type": "DeployOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{destination=projects/*/locations/*}:deploy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DeployResponse",
+                                "metadata_type": "DeployOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeployPublisherModel": {
                           "requestType": "DeployPublisherModelRequest",
                           "responseType": "google.longrunning.Operation",
@@ -63217,6 +63241,135 @@
                         }
                       }
                     },
+                    "DeployRequest": {
+                      "oneofs": {
+                        "artifacts": {
+                          "oneof": [
+                            "publisherModelName",
+                            "huggingFaceModelId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "publisherModelName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/PublisherModel"
+                          }
+                        },
+                        "huggingFaceModelId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "destination": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "modelConfig": {
+                          "type": "ModelConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endpointConfig": {
+                          "type": "EndpointConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deployConfig": {
+                          "type": "DeployConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ModelConfig": {
+                          "fields": {
+                            "acceptEula": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "huggingFaceAccessToken": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "huggingFaceCacheEnabled": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "modelDisplayName": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "containerSpec": {
+                              "type": "ModelContainerSpec",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "EndpointConfig": {
+                          "fields": {
+                            "endpointDisplayName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dedicatedEndpointEnabled": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "DeployConfig": {
+                          "fields": {
+                            "dedicatedResources": {
+                              "type": "DedicatedResources",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "fastTryoutEnabled": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "DeployPublisherModelRequest": {
                       "fields": {
                         "model": {
@@ -63271,6 +63424,34 @@
                         }
                       }
                     },
+                    "DeployResponse": {
+                      "fields": {
+                        "publisherModel": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/PublisherModel"
+                          }
+                        },
+                        "endpoint": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        }
+                      }
+                    },
                     "DeployPublisherModelResponse": {
                       "fields": {
                         "publisherModel": {
@@ -63295,6 +63476,37 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        }
+                      }
+                    },
+                    "DeployOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        },
+                        "publisherModel": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/PublisherModel"
+                          }
+                        },
+                        "destination": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "projectNumber": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }

@@ -9560,6 +9560,66 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_ModelGardenService_Deploy_async",
+            "title": "DatasetService deploy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deploys a model to a new endpoint.",
+            "canonical": true,
+            "file": "model_garden_service.deploy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 82,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Deploy",
+                "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenService.Deploy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "publisher_model_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "hugging_face_model_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "destination",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.DeployRequest.ModelConfig"
+                    },
+                    {
+                        "name": "endpoint_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.DeployRequest.EndpointConfig"
+                    },
+                    {
+                        "name": "deploy_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.DeployRequest.DeployConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ModelGardenServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenServiceClient"
+                },
+                "method": {
+                    "shortName": "Deploy",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenService.Deploy",
+                    "service": {
+                        "shortName": "ModelGardenService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ModelGardenService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_ModelGardenService_DeployPublisherModel_async",
             "title": "DatasetService deployPublisherModel Sample",
             "origin": "API_DEFINITION",

@@ -539,6 +539,7 @@
   * [Metadata_service.update_execution](#metadata_service.update_execution)
   * [Migration_service.batch_migrate_resources](#migration_service.batch_migrate_resources)
   * [Migration_service.search_migratable_resources](#migration_service.search_migratable_resources)
+  * [Model_garden_service.deploy](#model_garden_service.deploy)
   * [Model_garden_service.deploy_publisher_model](#model_garden_service.deploy_publisher_model)
   * [Model_garden_service.get_publisher_model](#model_garden_service.get_publisher_model)
   * [Model_garden_service.list_publisher_models](#model_garden_service.list_publisher_models)
@@ -9667,6 +9668,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/migration_service.search_migratable_resources.js`
+
+
+-----
+
+
+
+
+### Model_garden_service.deploy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy.js`
 
 
 -----

@@ -2204,6 +2204,12 @@ export class ModelGardenServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
+    const deployResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeployResponse'
+    ) as gax.protobuf.Type;
+    const deployMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeployOperationMetadata'
+    ) as gax.protobuf.Type;
     const deployPublisherModelResponse = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.DeployPublisherModelResponse'
     ) as gax.protobuf.Type;
@@ -2212,6 +2218,11 @@ export class ModelGardenServiceClient {
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
+      deploy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deployResponse.decode.bind(deployResponse),
+        deployMetadata.decode.bind(deployMetadata)
+      ),
       deployPublisherModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deployPublisherModelResponse.decode.bind(deployPublisherModelResponse),
@@ -2272,6 +2283,7 @@ export class ModelGardenServiceClient {
     const modelGardenServiceStubMethods = [
       'getPublisherModel',
       'listPublisherModels',
+      'deploy',
       'deployPublisherModel',
     ];
     for (const methodName of modelGardenServiceStubMethods) {
@@ -2499,6 +2511,160 @@ export class ModelGardenServiceClient {
     return this.innerApiCalls.getPublisherModel(request, options, callback);
   }
 
+  /**
+   * Deploys a model to a new endpoint.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.publisherModelName
+   *   The Model Garden model to deploy.
+   *   Format:
+   *   `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
+   *   `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`.
+   * @param {string} request.huggingFaceModelId
+   *   The Hugging Face model to deploy.
+   *   Format: Hugging Face model ID like `google/gemma-2-2b-it`.
+   * @param {string} request.destination
+   *   Required. The resource name of the Location to deploy the model in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.DeployRequest.ModelConfig} [request.modelConfig]
+   *   Optional. The model config to use for the deployment.
+   *   If not specified, the default model config will be used.
+   * @param {google.cloud.aiplatform.v1beta1.DeployRequest.EndpointConfig} [request.endpointConfig]
+   *   Optional. The endpoint config to use for the deployment.
+   *   If not specified, the default endpoint config will be used.
+   * @param {google.cloud.aiplatform.v1beta1.DeployRequest.DeployConfig} [request.deployConfig]
+   *   Optional. The deploy config to use for the deployment.
+   *   If not specified, the default deploy config will be used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_garden_service.deploy.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelGardenService_Deploy_async
+   */
+  deploy(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeployRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deploy(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeployRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deploy(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeployRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deploy(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeployRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+            protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        destination: request.destination ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deploy(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deploy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_garden_service.deploy.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelGardenService_Deploy_async
+   */
+  async checkDeployProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DeployResponse,
+      protos.google.cloud.aiplatform.v1beta1.DeployOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deploy,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DeployResponse,
+      protos.google.cloud.aiplatform.v1beta1.DeployOperationMetadata
+    >;
+  }
   /**
    * Deploys publisher models.
    *
