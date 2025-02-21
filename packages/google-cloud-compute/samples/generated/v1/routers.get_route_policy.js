@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, modelConfigs) {
-  // [START cloudoptimization_v1_generated_FleetRouting_BatchOptimizeTours_async]
+function main(project, region, router) {
+  // [START compute_v1_generated_Routers_GetRoutePolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,38 +29,43 @@ function main(parent, modelConfigs) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Target project and location to make a call.
-   *  Format: `projects/{project-id}/locations/{location-id}`.
-   *  If no location is specified, a region will be chosen automatically.
+   *  The Policy name for this request. Name must conform to RFC1035
    */
-  // const parent = 'abc123'
+  // const policy = 'abc123'
   /**
-   *  Required. Input/Output information each purchase model, such as file paths
-   *  and data formats.
+   *  Project ID for this request.
    */
-  // const modelConfigs = [1,2,3,4]
+  // const project = 'my-project'
+  /**
+   *  Name of the region for this request.
+   */
+  // const region = 'us-central1'
+  /**
+   *  Name of the Router resource to query for the route policy. The name should conform to RFC1035.
+   */
+  // const router = 'abc123'
 
-  // Imports the Optimization library
-  const {FleetRoutingClient} = require('@google-cloud/optimization').v1;
+  // Imports the Compute library
+  const {RoutersClient} = require('@google-cloud/compute').v1;
 
   // Instantiates a client
-  const optimizationClient = new FleetRoutingClient();
+  const computeClient = new RoutersClient();
 
-  async function callBatchOptimizeTours() {
+  async function callGetRoutePolicy() {
     // Construct request
     const request = {
-      parent,
-      modelConfigs,
+      project,
+      region,
+      router,
     };
 
     // Run request
-    const [operation] = await optimizationClient.batchOptimizeTours(request);
-    const [response] = await operation.promise();
+    const response = await computeClient.getRoutePolicy(request);
     console.log(response);
   }
 
-  callBatchOptimizeTours();
-  // [END cloudoptimization_v1_generated_FleetRouting_BatchOptimizeTours_async]
+  callGetRoutePolicy();
+  // [END compute_v1_generated_Routers_GetRoutePolicy_async]
 }
 
 process.on('unhandledRejection', err => {

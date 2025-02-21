@@ -320,7 +320,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaInfo()
       );
@@ -351,7 +351,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaInfo()
       );
@@ -398,7 +398,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQuotaInfo = stubSimpleCall(
         undefined,
@@ -450,7 +450,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -482,7 +482,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -529,7 +529,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQuotaPreference = stubSimpleCall(
         undefined,
@@ -581,7 +581,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -613,7 +613,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -660,7 +660,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQuotaPreference = stubSimpleCall(
         undefined,
@@ -719,7 +719,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['quotaPreference', 'name']
       );
       request.quotaPreference.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -752,7 +752,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['quotaPreference', 'name']
       );
       request.quotaPreference.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.QuotaPreference()
       );
@@ -800,7 +800,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['quotaPreference', 'name']
       );
       request.quotaPreference.name = defaultValue1;
-      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `quota_preference.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateQuotaPreference = stubSimpleCall(
         undefined,
@@ -859,7 +859,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaInfo()
@@ -898,7 +898,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaInfo()
@@ -953,7 +953,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQuotaInfos = stubSimpleCall(
         undefined,
@@ -984,7 +984,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaInfo()
@@ -1044,7 +1044,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQuotaInfos.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1093,7 +1093,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaInfo()
@@ -1142,7 +1142,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQuotaInfos.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1184,7 +1184,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaPreference()
@@ -1224,7 +1224,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaPreference()
@@ -1281,7 +1281,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQuotaPreferences = stubSimpleCall(
         undefined,
@@ -1312,7 +1312,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaPreference()
@@ -1373,7 +1373,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQuotaPreferences.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1423,7 +1423,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.cloudquotas.v1beta.QuotaPreference()
@@ -1473,7 +1473,7 @@ describe('v1beta.CloudQuotasClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQuotaPreferences.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1674,55 +1674,6 @@ describe('v1beta.CloudQuotasClient', () => {
       });
     });
 
-    describe('location', () => {
-      const fakePath = '/rendered/path/location';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-      };
-      const client = new cloudquotasModule.v1beta.CloudQuotasClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.locationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.locationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('locationPath', () => {
-        const result = client.locationPath('projectValue', 'locationValue');
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.locationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromLocationName', () => {
-        const result = client.matchProjectFromLocationName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromLocationName', () => {
-        const result = client.matchLocationFromLocationName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.locationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('organizationLocationQuotaPreference', () => {
       const fakePath = '/rendered/path/organizationLocationQuotaPreference';
       const expectedParameters = {
@@ -1912,38 +1863,52 @@ describe('v1beta.CloudQuotasClient', () => {
       });
     });
 
-    describe('project', () => {
-      const fakePath = '/rendered/path/project';
+    describe('projectLocation', () => {
+      const fakePath = '/rendered/path/projectLocation';
       const expectedParameters = {
         project: 'projectValue',
+        location: 'locationValue',
       };
       const client = new cloudquotasModule.v1beta.CloudQuotasClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectPathTemplate.render = sinon
+      client.pathTemplates.projectLocationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.projectPathTemplate.match = sinon
+      client.pathTemplates.projectLocationPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('projectPath', () => {
-        const result = client.projectPath('projectValue');
+      it('projectLocationPath', () => {
+        const result = client.projectLocationPath(
+          'projectValue',
+          'locationValue'
+        );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+          (client.pathTemplates.projectLocationPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromProjectName', () => {
-        const result = client.matchProjectFromProjectName(fakePath);
+      it('matchProjectFromProjectLocationName', () => {
+        const result = client.matchProjectFromProjectLocationName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+          (client.pathTemplates.projectLocationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationName', () => {
+        const result = client.matchLocationFromProjectLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.projectLocationPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
