@@ -105,7 +105,7 @@ describe('common/util', () => {
   let util: Util & {[index: string]: Function};
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function stub(method: keyof Util, meth: (...args: any[]) => void) {
+  function stub(method: keyof Util, meth: (...args: any[]) => any) {
     return sandbox.stub(util, method).callsFake(meth);
   }
 

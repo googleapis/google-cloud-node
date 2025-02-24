@@ -6,4 +6,4 @@
 
 
 # Unless specified, the jsteam is the default owner for nodejs repositories.
-*     @googleapis/cloud-storage-dpe @googleapis/jsteam
+*     @googleapis/gcs-sdk-team @googleapis/jsteam
