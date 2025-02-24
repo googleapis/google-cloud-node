@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const WeatherClient = v1.WeatherClient;
-type WeatherClient = v1.WeatherClient;
-export {v1, WeatherClient};
-export default {v1, WeatherClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const weather = require('@google-cloud/weather');
+
+function main() {
+  const weatherClient = new weather.WeatherClient();
+}
+
+main();

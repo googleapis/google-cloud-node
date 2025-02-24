@@ -3011,9 +3011,6 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
-
-            /** ServiceOptions .google.api.apiVersion */
-            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -4351,6 +4348,9 @@ export namespace google {
                     /** AirPressure meanSeaLevelMillibars. */
                     public meanSeaLevelMillibars?: (number|null);
 
+                    /** AirPressure _meanSeaLevelMillibars. */
+                    public _meanSeaLevelMillibars?: "meanSeaLevelMillibars";
+
                     /**
                      * Creates a new AirPressure instance using the specified properties.
                      * @param [properties] Properties to set
@@ -4878,6 +4878,18 @@ export namespace google {
                     /** ForecastDayPart iceThickness. */
                     public iceThickness?: (google.maps.weather.v1.IIceThickness|null);
 
+                    /** ForecastDayPart _relativeHumidity. */
+                    public _relativeHumidity?: "relativeHumidity";
+
+                    /** ForecastDayPart _uvIndex. */
+                    public _uvIndex?: "uvIndex";
+
+                    /** ForecastDayPart _thunderstormProbability. */
+                    public _thunderstormProbability?: "thunderstormProbability";
+
+                    /** ForecastDayPart _cloudCover. */
+                    public _cloudCover?: "cloudCover";
+
                     /**
                      * Creates a new ForecastDayPart instance using the specified properties.
                      * @param [properties] Properties to set
@@ -4980,6 +4992,9 @@ export namespace google {
 
                     /** IceThickness unit. */
                     public unit: (google.maps.weather.v1.IceThickness.Unit|keyof typeof google.maps.weather.v1.IceThickness.Unit);
+
+                    /** IceThickness _thickness. */
+                    public _thickness?: "thickness";
 
                     /**
                      * Creates a new IceThickness instance using the specified properties.
@@ -5197,6 +5212,9 @@ export namespace google {
                     /** PrecipitationProbability type. */
                     public type: (google.maps.weather.v1.PrecipitationType|keyof typeof google.maps.weather.v1.PrecipitationType);
 
+                    /** PrecipitationProbability _percent. */
+                    public _percent?: "percent";
+
                     /**
                      * Creates a new PrecipitationProbability instance using the specified properties.
                      * @param [properties] Properties to set
@@ -5299,6 +5317,9 @@ export namespace google {
 
                     /** QuantitativePrecipitationForecast unit. */
                     public unit: (google.maps.weather.v1.QuantitativePrecipitationForecast.Unit|keyof typeof google.maps.weather.v1.QuantitativePrecipitationForecast.Unit);
+
+                    /** QuantitativePrecipitationForecast _quantity. */
+                    public _quantity?: "quantity";
 
                     /**
                      * Creates a new QuantitativePrecipitationForecast instance using the specified properties.
@@ -5425,6 +5446,9 @@ export namespace google {
 
                     /** Temperature unit. */
                     public unit: (google.maps.weather.v1.TemperatureUnit|keyof typeof google.maps.weather.v1.TemperatureUnit);
+
+                    /** Temperature _degrees. */
+                    public _degrees?: "degrees";
 
                     /**
                      * Creates a new Temperature instance using the specified properties.
@@ -5802,6 +5826,9 @@ export namespace google {
                     /** WindDirection cardinal. */
                     public cardinal: (google.maps.weather.v1.CardinalDirection|keyof typeof google.maps.weather.v1.CardinalDirection);
 
+                    /** WindDirection _degrees. */
+                    public _degrees?: "degrees";
+
                     /**
                      * Creates a new WindDirection instance using the specified properties.
                      * @param [properties] Properties to set
@@ -5904,6 +5931,9 @@ export namespace google {
 
                     /** WindSpeed unit. */
                     public unit: (google.maps.weather.v1.SpeedUnit|keyof typeof google.maps.weather.v1.SpeedUnit);
+
+                    /** WindSpeed _value. */
+                    public _value?: "value";
 
                     /**
                      * Creates a new WindSpeed instance using the specified properties.
@@ -6138,6 +6168,21 @@ export namespace google {
                     /** ForecastHour iceThickness. */
                     public iceThickness?: (google.maps.weather.v1.IIceThickness|null);
 
+                    /** ForecastHour _isDaytime. */
+                    public _isDaytime?: "isDaytime";
+
+                    /** ForecastHour _relativeHumidity. */
+                    public _relativeHumidity?: "relativeHumidity";
+
+                    /** ForecastHour _uvIndex. */
+                    public _uvIndex?: "uvIndex";
+
+                    /** ForecastHour _thunderstormProbability. */
+                    public _thunderstormProbability?: "thunderstormProbability";
+
+                    /** ForecastHour _cloudCover. */
+                    public _cloudCover?: "cloudCover";
+
                     /**
                      * Creates a new ForecastHour instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6240,6 +6285,9 @@ export namespace google {
 
                     /** Visibility unit. */
                     public unit: (google.maps.weather.v1.Visibility.Unit|keyof typeof google.maps.weather.v1.Visibility.Unit);
+
+                    /** Visibility _distance. */
+                    public _distance?: "distance";
 
                     /**
                      * Creates a new Visibility instance using the specified properties.
@@ -6455,6 +6503,21 @@ export namespace google {
 
                     /** HistoryHour iceThickness. */
                     public iceThickness?: (google.maps.weather.v1.IIceThickness|null);
+
+                    /** HistoryHour _isDaytime. */
+                    public _isDaytime?: "isDaytime";
+
+                    /** HistoryHour _relativeHumidity. */
+                    public _relativeHumidity?: "relativeHumidity";
+
+                    /** HistoryHour _uvIndex. */
+                    public _uvIndex?: "uvIndex";
+
+                    /** HistoryHour _thunderstormProbability. */
+                    public _thunderstormProbability?: "thunderstormProbability";
+
+                    /** HistoryHour _cloudCover. */
+                    public _cloudCover?: "cloudCover";
 
                     /**
                      * Creates a new HistoryHour instance using the specified properties.
@@ -6680,6 +6743,9 @@ export namespace google {
                     /** LookupCurrentConditionsRequest languageCode. */
                     public languageCode?: (string|null);
 
+                    /** LookupCurrentConditionsRequest _languageCode. */
+                    public _languageCode?: "languageCode";
+
                     /**
                      * Creates a new LookupCurrentConditionsRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6878,6 +6944,21 @@ export namespace google {
 
                     /** LookupCurrentConditionsResponse currentConditionsHistory. */
                     public currentConditionsHistory?: (google.maps.weather.v1.LookupCurrentConditionsResponse.ICurrentConditionsHistory|null);
+
+                    /** LookupCurrentConditionsResponse _isDaytime. */
+                    public _isDaytime?: "isDaytime";
+
+                    /** LookupCurrentConditionsResponse _relativeHumidity. */
+                    public _relativeHumidity?: "relativeHumidity";
+
+                    /** LookupCurrentConditionsResponse _uvIndex. */
+                    public _uvIndex?: "uvIndex";
+
+                    /** LookupCurrentConditionsResponse _thunderstormProbability. */
+                    public _thunderstormProbability?: "thunderstormProbability";
+
+                    /** LookupCurrentConditionsResponse _cloudCover. */
+                    public _cloudCover?: "cloudCover";
 
                     /**
                      * Creates a new LookupCurrentConditionsResponse instance using the specified properties.
@@ -7124,6 +7205,12 @@ export namespace google {
                     /** LookupForecastHoursRequest pageToken. */
                     public pageToken: string;
 
+                    /** LookupForecastHoursRequest _hours. */
+                    public _hours?: "hours";
+
+                    /** LookupForecastHoursRequest _languageCode. */
+                    public _languageCode?: "languageCode";
+
                     /**
                      * Creates a new LookupForecastHoursRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -7360,6 +7447,12 @@ export namespace google {
                     /** LookupForecastDaysRequest pageToken. */
                     public pageToken: string;
 
+                    /** LookupForecastDaysRequest _days. */
+                    public _days?: "days";
+
+                    /** LookupForecastDaysRequest _languageCode. */
+                    public _languageCode?: "languageCode";
+
                     /**
                      * Creates a new LookupForecastDaysRequest instance using the specified properties.
                      * @param [properties] Properties to set
@@ -7595,6 +7688,12 @@ export namespace google {
 
                     /** LookupHistoryHoursRequest pageToken. */
                     public pageToken: string;
+
+                    /** LookupHistoryHoursRequest _hours. */
+                    public _hours?: "hours";
+
+                    /** LookupHistoryHoursRequest _languageCode. */
+                    public _languageCode?: "languageCode";
 
                     /**
                      * Creates a new LookupHistoryHoursRequest instance using the specified properties.
@@ -9114,9 +9213,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
-
-            /** Publishing restReferenceDocumentationUri */
-            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -9157,9 +9253,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
-
-            /** Publishing restReferenceDocumentationUri. */
-            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.

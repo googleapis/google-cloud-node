@@ -6804,9 +6804,12 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
+                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
+                            writer.int32(message[".google.api.fieldBehavior"][i]);
+                        writer.ldelim();
+                    }
                     return writer;
                 };
     
@@ -8633,7 +8636,6 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
-                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -8693,14 +8695,6 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
-                 * ServiceOptions .google.api.apiVersion.
-                 * @member {string} .google.api.apiVersion
-                 * @memberof google.protobuf.ServiceOptions
-                 * @instance
-                 */
-                ServiceOptions.prototype[".google.api.apiVersion"] = "";
-    
-                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -8735,8 +8729,6 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
-                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
-                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -8791,10 +8783,6 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
-                                break;
-                            }
-                        case 525000001: {
-                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -8855,9 +8843,6 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
-                        if (!$util.isString(message[".google.api.apiVersion"]))
-                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -8894,8 +8879,6 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
-                    if (object[".google.api.apiVersion"] != null)
-                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -8919,7 +8902,6 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
-                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -8934,8 +8916,6 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
-                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -12502,7 +12482,12 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * AirPressure _meanSeaLevelMillibars.
+                         * @member {"meanSeaLevelMillibars"|undefined} _meanSeaLevelMillibars
+                         * @memberof google.maps.weather.v1.AirPressure
+                         * @instance
+                         */
                         Object.defineProperty(AirPressure.prototype, "_meanSeaLevelMillibars", {
                             get: $util.oneOfGetter($oneOfFields = ["meanSeaLevelMillibars"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -13891,25 +13876,45 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * ForecastDayPart _relativeHumidity.
+                         * @member {"relativeHumidity"|undefined} _relativeHumidity
+                         * @memberof google.maps.weather.v1.ForecastDayPart
+                         * @instance
+                         */
                         Object.defineProperty(ForecastDayPart.prototype, "_relativeHumidity", {
                             get: $util.oneOfGetter($oneOfFields = ["relativeHumidity"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * ForecastDayPart _uvIndex.
+                         * @member {"uvIndex"|undefined} _uvIndex
+                         * @memberof google.maps.weather.v1.ForecastDayPart
+                         * @instance
+                         */
                         Object.defineProperty(ForecastDayPart.prototype, "_uvIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["uvIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * ForecastDayPart _thunderstormProbability.
+                         * @member {"thunderstormProbability"|undefined} _thunderstormProbability
+                         * @memberof google.maps.weather.v1.ForecastDayPart
+                         * @instance
+                         */
                         Object.defineProperty(ForecastDayPart.prototype, "_thunderstormProbability", {
                             get: $util.oneOfGetter($oneOfFields = ["thunderstormProbability"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * ForecastDayPart _cloudCover.
+                         * @member {"cloudCover"|undefined} _cloudCover
+                         * @memberof google.maps.weather.v1.ForecastDayPart
+                         * @instance
+                         */
                         Object.defineProperty(ForecastDayPart.prototype, "_cloudCover", {
                             get: $util.oneOfGetter($oneOfFields = ["cloudCover"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -14285,7 +14290,12 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * IceThickness _thickness.
+                         * @member {"thickness"|undefined} _thickness
+                         * @memberof google.maps.weather.v1.IceThickness
+                         * @instance
+                         */
                         Object.defineProperty(IceThickness.prototype, "_thickness", {
                             get: $util.oneOfGetter($oneOfFields = ["thickness"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -14802,7 +14812,12 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * PrecipitationProbability _percent.
+                         * @member {"percent"|undefined} _percent
+                         * @memberof google.maps.weather.v1.PrecipitationProbability
+                         * @instance
+                         */
                         Object.defineProperty(PrecipitationProbability.prototype, "_percent", {
                             get: $util.oneOfGetter($oneOfFields = ["percent"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -15096,7 +15111,12 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * QuantitativePrecipitationForecast _quantity.
+                         * @member {"quantity"|undefined} _quantity
+                         * @memberof google.maps.weather.v1.QuantitativePrecipitationForecast
+                         * @instance
+                         */
                         Object.defineProperty(QuantitativePrecipitationForecast.prototype, "_quantity", {
                             get: $util.oneOfGetter($oneOfFields = ["quantity"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -15404,7 +15424,12 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * Temperature _degrees.
+                         * @member {"degrees"|undefined} _degrees
+                         * @memberof google.maps.weather.v1.Temperature
+                         * @instance
+                         */
                         Object.defineProperty(Temperature.prototype, "_degrees", {
                             get: $util.oneOfGetter($oneOfFields = ["degrees"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -16510,7 +16535,12 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * WindDirection _degrees.
+                         * @member {"degrees"|undefined} _degrees
+                         * @memberof google.maps.weather.v1.WindDirection
+                         * @instance
+                         */
                         Object.defineProperty(WindDirection.prototype, "_degrees", {
                             get: $util.oneOfGetter($oneOfFields = ["degrees"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -16844,7 +16874,12 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * WindSpeed _value.
+                         * @member {"value"|undefined} _value
+                         * @memberof google.maps.weather.v1.WindSpeed
+                         * @instance
+                         */
                         Object.defineProperty(WindSpeed.prototype, "_value", {
                             get: $util.oneOfGetter($oneOfFields = ["value"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -17321,31 +17356,56 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * ForecastHour _isDaytime.
+                         * @member {"isDaytime"|undefined} _isDaytime
+                         * @memberof google.maps.weather.v1.ForecastHour
+                         * @instance
+                         */
                         Object.defineProperty(ForecastHour.prototype, "_isDaytime", {
                             get: $util.oneOfGetter($oneOfFields = ["isDaytime"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * ForecastHour _relativeHumidity.
+                         * @member {"relativeHumidity"|undefined} _relativeHumidity
+                         * @memberof google.maps.weather.v1.ForecastHour
+                         * @instance
+                         */
                         Object.defineProperty(ForecastHour.prototype, "_relativeHumidity", {
                             get: $util.oneOfGetter($oneOfFields = ["relativeHumidity"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * ForecastHour _uvIndex.
+                         * @member {"uvIndex"|undefined} _uvIndex
+                         * @memberof google.maps.weather.v1.ForecastHour
+                         * @instance
+                         */
                         Object.defineProperty(ForecastHour.prototype, "_uvIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["uvIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * ForecastHour _thunderstormProbability.
+                         * @member {"thunderstormProbability"|undefined} _thunderstormProbability
+                         * @memberof google.maps.weather.v1.ForecastHour
+                         * @instance
+                         */
                         Object.defineProperty(ForecastHour.prototype, "_thunderstormProbability", {
                             get: $util.oneOfGetter($oneOfFields = ["thunderstormProbability"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * ForecastHour _cloudCover.
+                         * @member {"cloudCover"|undefined} _cloudCover
+                         * @memberof google.maps.weather.v1.ForecastHour
+                         * @instance
+                         */
                         Object.defineProperty(ForecastHour.prototype, "_cloudCover", {
                             get: $util.oneOfGetter($oneOfFields = ["cloudCover"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -17910,7 +17970,12 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * Visibility _distance.
+                         * @member {"distance"|undefined} _distance
+                         * @memberof google.maps.weather.v1.Visibility
+                         * @instance
+                         */
                         Object.defineProperty(Visibility.prototype, "_distance", {
                             get: $util.oneOfGetter($oneOfFields = ["distance"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -18343,31 +18408,56 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * HistoryHour _isDaytime.
+                         * @member {"isDaytime"|undefined} _isDaytime
+                         * @memberof google.maps.weather.v1.HistoryHour
+                         * @instance
+                         */
                         Object.defineProperty(HistoryHour.prototype, "_isDaytime", {
                             get: $util.oneOfGetter($oneOfFields = ["isDaytime"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * HistoryHour _relativeHumidity.
+                         * @member {"relativeHumidity"|undefined} _relativeHumidity
+                         * @memberof google.maps.weather.v1.HistoryHour
+                         * @instance
+                         */
                         Object.defineProperty(HistoryHour.prototype, "_relativeHumidity", {
                             get: $util.oneOfGetter($oneOfFields = ["relativeHumidity"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * HistoryHour _uvIndex.
+                         * @member {"uvIndex"|undefined} _uvIndex
+                         * @memberof google.maps.weather.v1.HistoryHour
+                         * @instance
+                         */
                         Object.defineProperty(HistoryHour.prototype, "_uvIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["uvIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * HistoryHour _thunderstormProbability.
+                         * @member {"thunderstormProbability"|undefined} _thunderstormProbability
+                         * @memberof google.maps.weather.v1.HistoryHour
+                         * @instance
+                         */
                         Object.defineProperty(HistoryHour.prototype, "_thunderstormProbability", {
                             get: $util.oneOfGetter($oneOfFields = ["thunderstormProbability"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * HistoryHour _cloudCover.
+                         * @member {"cloudCover"|undefined} _cloudCover
+                         * @memberof google.maps.weather.v1.HistoryHour
+                         * @instance
+                         */
                         Object.defineProperty(HistoryHour.prototype, "_cloudCover", {
                             get: $util.oneOfGetter($oneOfFields = ["cloudCover"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -19124,7 +19214,12 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupCurrentConditionsRequest _languageCode.
+                         * @member {"languageCode"|undefined} _languageCode
+                         * @memberof google.maps.weather.v1.LookupCurrentConditionsRequest
+                         * @instance
+                         */
                         Object.defineProperty(LookupCurrentConditionsRequest.prototype, "_languageCode", {
                             get: $util.oneOfGetter($oneOfFields = ["languageCode"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -19552,31 +19647,56 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupCurrentConditionsResponse _isDaytime.
+                         * @member {"isDaytime"|undefined} _isDaytime
+                         * @memberof google.maps.weather.v1.LookupCurrentConditionsResponse
+                         * @instance
+                         */
                         Object.defineProperty(LookupCurrentConditionsResponse.prototype, "_isDaytime", {
                             get: $util.oneOfGetter($oneOfFields = ["isDaytime"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupCurrentConditionsResponse _relativeHumidity.
+                         * @member {"relativeHumidity"|undefined} _relativeHumidity
+                         * @memberof google.maps.weather.v1.LookupCurrentConditionsResponse
+                         * @instance
+                         */
                         Object.defineProperty(LookupCurrentConditionsResponse.prototype, "_relativeHumidity", {
                             get: $util.oneOfGetter($oneOfFields = ["relativeHumidity"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupCurrentConditionsResponse _uvIndex.
+                         * @member {"uvIndex"|undefined} _uvIndex
+                         * @memberof google.maps.weather.v1.LookupCurrentConditionsResponse
+                         * @instance
+                         */
                         Object.defineProperty(LookupCurrentConditionsResponse.prototype, "_uvIndex", {
                             get: $util.oneOfGetter($oneOfFields = ["uvIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupCurrentConditionsResponse _thunderstormProbability.
+                         * @member {"thunderstormProbability"|undefined} _thunderstormProbability
+                         * @memberof google.maps.weather.v1.LookupCurrentConditionsResponse
+                         * @instance
+                         */
                         Object.defineProperty(LookupCurrentConditionsResponse.prototype, "_thunderstormProbability", {
                             get: $util.oneOfGetter($oneOfFields = ["thunderstormProbability"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupCurrentConditionsResponse _cloudCover.
+                         * @member {"cloudCover"|undefined} _cloudCover
+                         * @memberof google.maps.weather.v1.LookupCurrentConditionsResponse
+                         * @instance
+                         */
                         Object.defineProperty(LookupCurrentConditionsResponse.prototype, "_cloudCover", {
                             get: $util.oneOfGetter($oneOfFields = ["cloudCover"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -20451,13 +20571,23 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupForecastHoursRequest _hours.
+                         * @member {"hours"|undefined} _hours
+                         * @memberof google.maps.weather.v1.LookupForecastHoursRequest
+                         * @instance
+                         */
                         Object.defineProperty(LookupForecastHoursRequest.prototype, "_hours", {
                             get: $util.oneOfGetter($oneOfFields = ["hours"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupForecastHoursRequest _languageCode.
+                         * @member {"languageCode"|undefined} _languageCode
+                         * @memberof google.maps.weather.v1.LookupForecastHoursRequest
+                         * @instance
+                         */
                         Object.defineProperty(LookupForecastHoursRequest.prototype, "_languageCode", {
                             get: $util.oneOfGetter($oneOfFields = ["languageCode"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -21100,13 +21230,23 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupForecastDaysRequest _days.
+                         * @member {"days"|undefined} _days
+                         * @memberof google.maps.weather.v1.LookupForecastDaysRequest
+                         * @instance
+                         */
                         Object.defineProperty(LookupForecastDaysRequest.prototype, "_days", {
                             get: $util.oneOfGetter($oneOfFields = ["days"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupForecastDaysRequest _languageCode.
+                         * @member {"languageCode"|undefined} _languageCode
+                         * @memberof google.maps.weather.v1.LookupForecastDaysRequest
+                         * @instance
+                         */
                         Object.defineProperty(LookupForecastDaysRequest.prototype, "_languageCode", {
                             get: $util.oneOfGetter($oneOfFields = ["languageCode"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -21749,13 +21889,23 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupHistoryHoursRequest _hours.
+                         * @member {"hours"|undefined} _hours
+                         * @memberof google.maps.weather.v1.LookupHistoryHoursRequest
+                         * @instance
+                         */
                         Object.defineProperty(LookupHistoryHoursRequest.prototype, "_hours", {
                             get: $util.oneOfGetter($oneOfFields = ["hours"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
+                        /**
+                         * LookupHistoryHoursRequest _languageCode.
+                         * @member {"languageCode"|undefined} _languageCode
+                         * @memberof google.maps.weather.v1.LookupHistoryHoursRequest
+                         * @instance
+                         */
                         Object.defineProperty(LookupHistoryHoursRequest.prototype, "_languageCode", {
                             get: $util.oneOfGetter($oneOfFields = ["languageCode"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -25718,7 +25868,6 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
-                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -25820,14 +25969,6 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
-                 * Publishing restReferenceDocumentationUri.
-                 * @member {string} restReferenceDocumentationUri
-                 * @memberof google.api.Publishing
-                 * @instance
-                 */
-                Publishing.prototype.restReferenceDocumentationUri = "";
-    
-                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -25874,8 +26015,6 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
-                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
-                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -25954,10 +26093,6 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
-                                break;
-                            }
-                        case 111: {
-                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -26052,9 +26187,6 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
-                        if (!$util.isString(message.restReferenceDocumentationUri))
-                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -26149,8 +26281,6 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
-                    if (object.restReferenceDocumentationUri != null)
-                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -26180,7 +26310,6 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
-                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -26211,8 +26340,6 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
-                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
