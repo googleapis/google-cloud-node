@@ -1,0 +1,15 @@
+[
+  "../../protos/google/maps/weather/v1/air_pressure.proto",
+  "../../protos/google/maps/weather/v1/celestial_events.proto",
+  "../../protos/google/maps/weather/v1/forecast_day.proto",
+  "../../protos/google/maps/weather/v1/forecast_hour.proto",
+  "../../protos/google/maps/weather/v1/history_hour.proto",
+  "../../protos/google/maps/weather/v1/ice.proto",
+  "../../protos/google/maps/weather/v1/precipitation.proto",
+  "../../protos/google/maps/weather/v1/temperature.proto",
+  "../../protos/google/maps/weather/v1/units_system.proto",
+  "../../protos/google/maps/weather/v1/visibility.proto",
+  "../../protos/google/maps/weather/v1/weather_condition.proto",
+  "../../protos/google/maps/weather/v1/weather_service.proto",
+  "../../protos/google/maps/weather/v1/wind.proto"
+]
