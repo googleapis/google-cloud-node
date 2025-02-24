@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.2](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.10.1...alloydb-v1.10.2) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6011](https://github.com/googleapis/google-cloud-node/issues/6011)) ([ee865ff](https://github.com/googleapis/google-cloud-node/commit/ee865ff34a696fbd657e4cfb6cc4be2f6651f77a))
+
 ## [1.10.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.10.0...alloydb-v1.10.1) (2024-11-14)
 
 
