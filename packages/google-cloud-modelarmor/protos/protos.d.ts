@@ -594,6 +594,9 @@ export namespace google {
                     /** FloorSetting enableFloorSettingEnforcement. */
                     public enableFloorSettingEnforcement?: (boolean|null);
 
+                    /** FloorSetting _enableFloorSettingEnforcement. */
+                    public _enableFloorSettingEnforcement?: "enableFloorSettingEnforcement";
+
                     /**
                      * Creates a new FloorSetting instance using the specified properties.
                      * @param [properties] Properties to set
@@ -4537,6 +4540,9 @@ export namespace google {
                     /** VirusScanFilterResult virusDetails. */
                     public virusDetails: google.cloud.modelarmor.v1.IVirusDetail[];
 
+                    /** VirusScanFilterResult _scannedSize. */
+                    public _scannedSize?: "scannedSize";
+
                     /**
                      * Creates a new VirusScanFilterResult instance using the specified properties.
                      * @param [properties] Properties to set
@@ -4995,6 +5001,12 @@ export namespace google {
 
                     /** RangeInfo end. */
                     public end?: (number|Long|string|null);
+
+                    /** RangeInfo _start. */
+                    public _start?: "start";
+
+                    /** RangeInfo _end. */
+                    public _end?: "end";
 
                     /**
                      * Creates a new RangeInfo instance using the specified properties.
@@ -5732,9 +5744,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
-
-            /** Publishing restReferenceDocumentationUri */
-            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -5775,9 +5784,6 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
-
-            /** Publishing restReferenceDocumentationUri. */
-            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -10108,9 +10114,6 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
-
-            /** ServiceOptions .google.api.apiVersion */
-            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */

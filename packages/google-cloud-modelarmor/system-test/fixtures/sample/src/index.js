@@ -16,7 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const modelarmor = require('@google-cloud/modelarmor');
 
-module.exports = {
-  ...require('gts/.prettierrc.json')
+function main() {
+  const modelArmorClient = new modelarmor.ModelArmorClient();
 }
+
+main();
