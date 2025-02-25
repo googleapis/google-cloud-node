@@ -196,7 +196,8 @@
     "packages/google-ads-admanager": {},
     "packages/google-shopping-merchant-reviews": {},
     "packages/google-cloud-memorystore": {},
-    "packages/google-cloud-parametermanager": {}
+    "packages/google-cloud-parametermanager": {},
+    "packages/google-maps-weather": {}
   },
   "plugins": [
     {
