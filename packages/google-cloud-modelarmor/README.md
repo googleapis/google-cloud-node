@@ -100,7 +100,7 @@ async function callListTemplates() {
   // Run request
   const iterable = modelarmorClient.listTemplatesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
