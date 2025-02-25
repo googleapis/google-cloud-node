@@ -351,7 +351,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
@@ -386,7 +386,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
@@ -436,7 +436,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSecuritySettings = stubSimpleCall(
         undefined,
@@ -500,7 +500,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
@@ -535,7 +535,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
@@ -585,7 +585,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSecuritySettings = stubSimpleCall(
         undefined,
@@ -644,7 +644,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['securitySettings', 'name']
       );
       request.securitySettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
@@ -680,7 +680,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['securitySettings', 'name']
       );
       request.securitySettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
@@ -731,7 +731,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['securitySettings', 'name']
       );
       request.securitySettings.name = defaultValue1;
-      const expectedHeaderRequestParams = `security_settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `security_settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSecuritySettings = stubSimpleCall(
         undefined,
@@ -796,7 +796,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -831,7 +831,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -881,7 +881,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSecuritySettings = stubSimpleCall(
         undefined,
@@ -945,7 +945,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
@@ -988,7 +988,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
@@ -1048,7 +1048,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSecuritySettings = stubSimpleCall(
         undefined,
@@ -1082,7 +1082,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
@@ -1148,7 +1148,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSecuritySettings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1203,7 +1203,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
@@ -1256,7 +1256,7 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSecuritySettings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

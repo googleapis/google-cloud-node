@@ -9874,7 +9874,6 @@
                     },
                     "v3beta1": {
                       "options": {
-                        "cc_enable_arenas": true,
                         "csharp_namespace": "Google.Cloud.Dialogflow.Cx.V3Beta1",
                         "go_package": "cloud.google.com/go/dialogflow/cx/apiv3beta1/cxpb;cxpb",
                         "java_multiple_files": true,
@@ -9883,7 +9882,8 @@
                         "objc_class_prefix": "DF",
                         "ruby_package": "Google::Cloud::Dialogflow::CX::V3beta1",
                         "(google.api.resource_definition).type": "dlp.googleapis.com/DeidentifyTemplate",
-                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}"
+                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}",
+                        "cc_enable_arenas": true
                       },
                       "nested": {
                         "AdvancedSettings": {
@@ -10226,6 +10226,16 @@
                               "oneof": [
                                 "genAppBuilderSettings"
                               ]
+                            },
+                            "_satisfiesPzs": {
+                              "oneof": [
+                                "satisfiesPzs"
+                              ]
+                            },
+                            "_satisfiesPzi": {
+                              "oneof": [
+                                "satisfiesPzi"
+                              ]
                             }
                           },
                           "fields": {
@@ -10359,6 +10369,22 @@
                               "id": 43,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "satisfiesPzs": {
+                              "type": "bool",
+                              "id": 45,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "satisfiesPzi": {
+                              "type": "bool",
+                              "id": 46,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
                               }
                             }
                           },
@@ -12125,6 +12151,10 @@
                             "dataStore": {
                               "type": "string",
                               "id": 2
+                            },
+                            "documentProcessingMode": {
+                              "type": "DocumentProcessingMode",
+                              "id": 4
                             }
                           }
                         },
@@ -12343,6 +12373,13 @@
                                 }
                               }
                             }
+                          }
+                        },
+                        "DocumentProcessingMode": {
+                          "values": {
+                            "DOCUMENT_PROCESSING_MODE_UNSPECIFIED": 0,
+                            "DOCUMENTS": 1,
+                            "CHUNKS": 2
                           }
                         },
                         "Fulfillment": {
@@ -13419,9 +13456,18 @@
                                   "type": "google.protobuf.Timestamp",
                                   "id": 6
                                 },
+                                "answerFeedback": {
+                                  "type": "AnswerFeedback",
+                                  "id": 7
+                                },
                                 "missingTransition": {
                                   "type": "MissingTransition",
                                   "id": 8
+                                },
+                                "stepMetrics": {
+                                  "rule": "repeated",
+                                  "type": "StepMetrics",
+                                  "id": 9
                                 }
                               },
                               "nested": {
@@ -13433,6 +13479,18 @@
                                     },
                                     "score": {
                                       "type": "float",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "StepMetrics": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "latency": {
+                                      "type": "google.protobuf.Duration",
                                       "id": 2
                                     }
                                   }
@@ -15248,7 +15306,10 @@
                               "fields": {
                                 "id": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 },
                                 "parts": {
                                   "rule": "repeated",
@@ -16162,6 +16223,7 @@
                               "type": "bool",
                               "id": 25,
                               "options": {
+                                "deprecated": true,
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -17159,6 +17221,13 @@
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Tool"
                               }
                             },
+                            "displayName": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
                             "action": {
                               "type": "string",
                               "id": 2,
@@ -17192,6 +17261,13 @@
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
                               }
                             },
+                            "displayName": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
                             "playbookInput": {
                               "type": "PlaybookInput",
                               "id": 2,
@@ -17223,6 +17299,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             },
                             "inputActionParameters": {
@@ -20465,6 +20548,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "speechSettings": {
+                              "type": "AdvancedSettings.SpeechSettings",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -20490,6 +20580,10 @@
                             },
                             "Instruction": {
                               "fields": {
+                                "guidelines": {
+                                  "type": "string",
+                                  "id": 1
+                                },
                                 "steps": {
                                   "rule": "repeated",
                                   "type": "Step",
