@@ -183,6 +183,11 @@
                 "updateSpace"
               ]
             },
+            "ConnectActiveConference": {
+              "methods": [
+                "connectActiveConference"
+              ]
+            },
             "EndActiveConference": {
               "methods": [
                 "endActiveConference"
@@ -228,6 +233,11 @@
             "UpdateSpace": {
               "methods": [
                 "updateSpace"
+              ]
+            },
+            "ConnectActiveConference": {
+              "methods": [
+                "connectActiveConference"
               ]
             },
             "EndActiveConference": {
