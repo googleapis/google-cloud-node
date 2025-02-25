@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.maps.areainsights.v1",
-  "libraryPackage": "@google-cloud/areainsights",
+  "libraryPackage": "@googlemaps/areainsights",
   "services": {
     "AreaInsights": {
       "clients": {

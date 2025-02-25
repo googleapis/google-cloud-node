@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const areainsights = require('@google-cloud/areainsights');
+const areainsights = require('@googlemaps/areainsights');
 
 function main() {
   const areaInsightsClient = new areainsights.AreaInsightsClient();

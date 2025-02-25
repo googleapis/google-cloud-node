@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/areainsights",
+  "name": "@googlemaps/areainsights",
   "version": "0.0.0",
   "description": "Places Insights API client for Node.js",
   "repository": {

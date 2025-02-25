@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2025 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/areainsights',
+    systemName: '@googlemaps/areainsights',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

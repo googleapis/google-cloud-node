@@ -39,7 +39,7 @@ function main(insights, filter) {
   // const filter = {}
 
   // Imports the Areainsights library
-  const {AreaInsightsClient} = require('@google-cloud/areainsights').v1;
+  const {AreaInsightsClient} = require('@googlemaps/areainsights').v1;
 
   // Instantiates a client
   const areainsightsClient = new AreaInsightsClient();

@@ -5,7 +5,7 @@
 # [Places Insights API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-areainsights)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/areainsights.svg)](https://www.npmjs.org/package/@google-cloud/areainsights)
+[![npm version](https://img.shields.io/npm/v/@googlemaps/areainsights.svg)](https://www.npmjs.org/package/@googlemaps/areainsights)
 
 
 
@@ -50,7 +50,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/areainsights
+npm install @googlemaps/areainsights
 ```
 
 
@@ -74,7 +74,7 @@ npm install @google-cloud/areainsights
 // const filter = {}
 
 // Imports the Areainsights library
-const {AreaInsightsClient} = require('@google-cloud/areainsights').v1;
+const {AreaInsightsClient} = require('@googlemaps/areainsights').v1;
 
 // Instantiates a client
 const areainsightsClient = new AreaInsightsClient();
@@ -129,7 +129,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/areainsights@legacy-8` installs client libraries
+For example, `npm install @googlemaps/areainsights@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning

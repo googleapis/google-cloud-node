@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AreaInsightsClient} from '@google-cloud/areainsights';
+import {AreaInsightsClient} from '@googlemaps/areainsights';
 
 // check that the client class type name can be used
 function doStuffWithAreaInsightsClient(client: AreaInsightsClient) {
