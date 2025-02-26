@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.1](https://github.com/googleapis/google-cloud-node/compare/eventarc-v3.4.0...eventarc-v3.4.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6012](https://github.com/googleapis/google-cloud-node/issues/6012)) ([b2f99bf](https://github.com/googleapis/google-cloud-node/commit/b2f99bf5b7c1f962fe48148363fa1b1a972e1b26))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/eventarc-v3.3.0...eventarc-v3.4.0) (2024-10-30)
 
 

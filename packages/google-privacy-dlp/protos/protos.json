@@ -1658,7 +1658,8 @@
                             "TSV": 13,
                             "AUDIO": 15,
                             "VIDEO": 16,
-                            "EXECUTABLE": 17
+                            "EXECUTABLE": 17,
+                            "AI_MODEL": 18
                           }
                         }
                       }
@@ -2426,6 +2427,10 @@
                           "type": "string",
                           "id": 4
                         },
+                        "example": {
+                          "type": "string",
+                          "id": 8
+                        },
                         "versions": {
                           "rule": "repeated",
                           "type": "VersionDescription",
@@ -2539,7 +2544,8 @@
                             "CREDENTIAL": 4,
                             "GOVERNMENT_ID": 5,
                             "DOCUMENT": 6,
-                            "CONTEXTUAL_INFORMATION": 7
+                            "CONTEXTUAL_INFORMATION": 7,
+                            "CUSTOM": 8
                           }
                         }
                       }
@@ -5282,6 +5288,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "processingLocation": {
+                          "type": "ProcessingLocation",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -5314,7 +5327,8 @@
                             "cloudSqlTarget",
                             "secretsTarget",
                             "cloudStorageTarget",
-                            "otherCloudTarget"
+                            "otherCloudTarget",
+                            "vertexDatasetTarget"
                           ]
                         }
                       },
@@ -5338,6 +5352,10 @@
                         "otherCloudTarget": {
                           "type": "OtherCloudDiscoveryTarget",
                           "id": 5
+                        },
+                        "vertexDatasetTarget": {
+                          "type": "VertexDatasetDiscoveryTarget",
+                          "id": 7
                         }
                       }
                     },
@@ -6299,6 +6317,132 @@
                     },
                     "AllOtherResources": {
                       "fields": {}
+                    },
+                    "VertexDatasetDiscoveryTarget": {
+                      "oneofs": {
+                        "cadence": {
+                          "oneof": [
+                            "generationCadence",
+                            "disabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "DiscoveryVertexDatasetFilter",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "conditions": {
+                          "type": "DiscoveryVertexDatasetConditions",
+                          "id": 2
+                        },
+                        "generationCadence": {
+                          "type": "DiscoveryVertexDatasetGenerationCadence",
+                          "id": 3
+                        },
+                        "disabled": {
+                          "type": "Disabled",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DiscoveryVertexDatasetFilter": {
+                      "oneofs": {
+                        "filter": {
+                          "oneof": [
+                            "collection",
+                            "vertexDatasetResourceReference",
+                            "others"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "collection": {
+                          "type": "VertexDatasetCollection",
+                          "id": 1
+                        },
+                        "vertexDatasetResourceReference": {
+                          "type": "VertexDatasetResourceReference",
+                          "id": 2
+                        },
+                        "others": {
+                          "type": "AllOtherResources",
+                          "id": 100
+                        }
+                      }
+                    },
+                    "VertexDatasetCollection": {
+                      "oneofs": {
+                        "pattern": {
+                          "oneof": [
+                            "vertexDatasetRegexes"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "vertexDatasetRegexes": {
+                          "type": "VertexDatasetRegexes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "VertexDatasetRegexes": {
+                      "fields": {
+                        "patterns": {
+                          "rule": "repeated",
+                          "type": "VertexDatasetRegex",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VertexDatasetRegex": {
+                      "fields": {
+                        "projectIdRegex": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "VertexDatasetResourceReference": {
+                      "fields": {
+                        "datasetResourceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DiscoveryVertexDatasetConditions": {
+                      "fields": {
+                        "createdAfter": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "minAge": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DiscoveryVertexDatasetGenerationCadence": {
+                      "fields": {
+                        "refreshFrequency": {
+                          "type": "DataProfileUpdateFrequency",
+                          "id": 1
+                        },
+                        "inspectTemplateModifiedCadence": {
+                          "type": "DiscoveryInspectTemplateModifiedCadence",
+                          "id": 2
+                        }
+                      }
                     },
                     "DlpJob": {
                       "options": {
@@ -7283,6 +7427,11 @@
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 23
+                        },
+                        "relatedResources": {
+                          "rule": "repeated",
+                          "type": "RelatedResource",
+                          "id": 41
                         }
                       },
                       "nested": {
@@ -7591,6 +7740,11 @@
                         "fileStoreIsEmpty": {
                           "type": "bool",
                           "id": 23
+                        },
+                        "relatedResources": {
+                          "rule": "repeated",
+                          "type": "RelatedResource",
+                          "id": 26
                         }
                       },
                       "nested": {
@@ -7600,6 +7754,14 @@
                             "RUNNING": 1,
                             "DONE": 2
                           }
+                        }
+                      }
+                    },
+                    "RelatedResource": {
+                      "fields": {
+                        "fullResource": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -8177,7 +8339,36 @@
                             "CLUSTER_IMAGE": 6,
                             "CLUSTER_ARCHIVE": 7,
                             "CLUSTER_MULTIMEDIA": 8,
-                            "CLUSTER_EXECUTABLE": 9
+                            "CLUSTER_EXECUTABLE": 9,
+                            "CLUSTER_AI_MODEL": 10
+                          }
+                        }
+                      }
+                    },
+                    "ProcessingLocation": {
+                      "fields": {
+                        "imageFallbackLocation": {
+                          "type": "ImageFallbackLocation",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "MultiRegionProcessing": {
+                          "fields": {}
+                        },
+                        "GlobalProcessing": {
+                          "fields": {}
+                        },
+                        "ImageFallbackLocation": {
+                          "fields": {
+                            "multiRegionProcessing": {
+                              "type": "MultiRegionProcessing",
+                              "id": 100
+                            },
+                            "globalProcessing": {
+                              "type": "GlobalProcessing",
+                              "id": 200
+                            }
                           }
                         }
                       }

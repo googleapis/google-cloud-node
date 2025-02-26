@@ -4766,6 +4766,7 @@
                                     case 7:
                                     case 8:
                                     case 9:
+                                    case 10:
                                         break;
                                     }
                                 if (message.maxChargeRateKw != null && message.hasOwnProperty("maxChargeRateKw"))
@@ -4850,6 +4851,10 @@
                                 case "EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET":
                                 case 9:
                                     message.type = 9;
+                                    break;
+                                case "EV_CONNECTOR_TYPE_NACS":
+                                case 10:
+                                    message.type = 10;
                                     break;
                                 }
                                 if (object.maxChargeRateKw != null)
@@ -4954,6 +4959,7 @@
                      * @property {number} EV_CONNECTOR_TYPE_TESLA=7 EV_CONNECTOR_TYPE_TESLA value
                      * @property {number} EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T=8 EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T value
                      * @property {number} EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET=9 EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET value
+                     * @property {number} EV_CONNECTOR_TYPE_NACS=10 EV_CONNECTOR_TYPE_NACS value
                      */
                     v1.EVConnectorType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -4967,6 +4973,7 @@
                         values[valuesById[7] = "EV_CONNECTOR_TYPE_TESLA"] = 7;
                         values[valuesById[8] = "EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T"] = 8;
                         values[valuesById[9] = "EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET"] = 9;
+                        values[valuesById[10] = "EV_CONNECTOR_TYPE_NACS"] = 10;
                         return values;
                     })();
     
@@ -15632,6 +15639,7 @@
                                         case 7:
                                         case 8:
                                         case 9:
+                                        case 10:
                                             break;
                                         }
                                 }
@@ -15702,6 +15710,10 @@
                                         case "EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET":
                                         case 9:
                                             message.connectorTypes[i] = 9;
+                                            break;
+                                        case "EV_CONNECTOR_TYPE_NACS":
+                                        case 10:
+                                            message.connectorTypes[i] = 10;
                                             break;
                                         }
                                 }

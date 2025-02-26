@@ -1763,7 +1763,7 @@
                     "SpacesService": {
                       "options": {
                         "(google.api.default_host)": "meet.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/meetings.space.created,https://www.googleapis.com/auth/meetings.space.readonly,https://www.googleapis.com/auth/meetings.space.settings"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/meetings.conference.media.audio.readonly,https://www.googleapis.com/auth/meetings.conference.media.readonly,https://www.googleapis.com/auth/meetings.conference.media.video.readonly,https://www.googleapis.com/auth/meetings.space.created,https://www.googleapis.com/auth/meetings.space.readonly,https://www.googleapis.com/auth/meetings.space.settings"
                       },
                       "methods": {
                         "CreateSpace": {
@@ -1821,6 +1821,26 @@
                             },
                             {
                               "(google.api.method_signature)": "space,update_mask"
+                            }
+                          ]
+                        },
+                        "ConnectActiveConference": {
+                          "requestType": "ConnectActiveConferenceRequest",
+                          "responseType": "ConnectActiveConferenceResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2beta/{name=spaces/*}:connectActiveConference",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta/{name=spaces/*}:connectActiveConference",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -2175,6 +2195,37 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      }
+                    },
+                    "ConnectActiveConferenceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "meet.googleapis.com/Space"
+                          }
+                        },
+                        "offer": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ConnectActiveConferenceResponse": {
+                      "fields": {
+                        "answer": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "traceId": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },

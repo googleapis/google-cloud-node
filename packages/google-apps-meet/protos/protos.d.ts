@@ -6645,6 +6645,20 @@ export namespace google {
                     public updateSpace(request: google.apps.meet.v2beta.IUpdateSpaceRequest): Promise<google.apps.meet.v2beta.Space>;
 
                     /**
+                     * Calls ConnectActiveConference.
+                     * @param request ConnectActiveConferenceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConnectActiveConferenceResponse
+                     */
+                    public connectActiveConference(request: google.apps.meet.v2beta.IConnectActiveConferenceRequest, callback: google.apps.meet.v2beta.SpacesService.ConnectActiveConferenceCallback): void;
+
+                    /**
+                     * Calls ConnectActiveConference.
+                     * @param request ConnectActiveConferenceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public connectActiveConference(request: google.apps.meet.v2beta.IConnectActiveConferenceRequest): Promise<google.apps.meet.v2beta.ConnectActiveConferenceResponse>;
+
+                    /**
                      * Calls EndActiveConference.
                      * @param request EndActiveConferenceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Empty
@@ -6737,6 +6751,13 @@ export namespace google {
                      * @param [response] Space
                      */
                     type UpdateSpaceCallback = (error: (Error|null), response?: google.apps.meet.v2beta.Space) => void;
+
+                    /**
+                     * Callback as used by {@link google.apps.meet.v2beta.SpacesService|connectActiveConference}.
+                     * @param error Error, if any
+                     * @param [response] ConnectActiveConferenceResponse
+                     */
+                    type ConnectActiveConferenceCallback = (error: (Error|null), response?: google.apps.meet.v2beta.ConnectActiveConferenceResponse) => void;
 
                     /**
                      * Callback as used by {@link google.apps.meet.v2beta.SpacesService|endActiveConference}.
@@ -7341,6 +7362,212 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateSpaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConnectActiveConferenceRequest. */
+                interface IConnectActiveConferenceRequest {
+
+                    /** ConnectActiveConferenceRequest name */
+                    name?: (string|null);
+
+                    /** ConnectActiveConferenceRequest offer */
+                    offer?: (string|null);
+                }
+
+                /** Represents a ConnectActiveConferenceRequest. */
+                class ConnectActiveConferenceRequest implements IConnectActiveConferenceRequest {
+
+                    /**
+                     * Constructs a new ConnectActiveConferenceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.meet.v2beta.IConnectActiveConferenceRequest);
+
+                    /** ConnectActiveConferenceRequest name. */
+                    public name: string;
+
+                    /** ConnectActiveConferenceRequest offer. */
+                    public offer: string;
+
+                    /**
+                     * Creates a new ConnectActiveConferenceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConnectActiveConferenceRequest instance
+                     */
+                    public static create(properties?: google.apps.meet.v2beta.IConnectActiveConferenceRequest): google.apps.meet.v2beta.ConnectActiveConferenceRequest;
+
+                    /**
+                     * Encodes the specified ConnectActiveConferenceRequest message. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceRequest.verify|verify} messages.
+                     * @param message ConnectActiveConferenceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.meet.v2beta.IConnectActiveConferenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConnectActiveConferenceRequest message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceRequest.verify|verify} messages.
+                     * @param message ConnectActiveConferenceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.meet.v2beta.IConnectActiveConferenceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConnectActiveConferenceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConnectActiveConferenceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.ConnectActiveConferenceRequest;
+
+                    /**
+                     * Decodes a ConnectActiveConferenceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConnectActiveConferenceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.ConnectActiveConferenceRequest;
+
+                    /**
+                     * Verifies a ConnectActiveConferenceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConnectActiveConferenceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConnectActiveConferenceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.ConnectActiveConferenceRequest;
+
+                    /**
+                     * Creates a plain object from a ConnectActiveConferenceRequest message. Also converts values to other types if specified.
+                     * @param message ConnectActiveConferenceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.meet.v2beta.ConnectActiveConferenceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConnectActiveConferenceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConnectActiveConferenceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConnectActiveConferenceResponse. */
+                interface IConnectActiveConferenceResponse {
+
+                    /** ConnectActiveConferenceResponse answer */
+                    answer?: (string|null);
+
+                    /** ConnectActiveConferenceResponse traceId */
+                    traceId?: (string|null);
+                }
+
+                /** Represents a ConnectActiveConferenceResponse. */
+                class ConnectActiveConferenceResponse implements IConnectActiveConferenceResponse {
+
+                    /**
+                     * Constructs a new ConnectActiveConferenceResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.meet.v2beta.IConnectActiveConferenceResponse);
+
+                    /** ConnectActiveConferenceResponse answer. */
+                    public answer: string;
+
+                    /** ConnectActiveConferenceResponse traceId. */
+                    public traceId: string;
+
+                    /**
+                     * Creates a new ConnectActiveConferenceResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConnectActiveConferenceResponse instance
+                     */
+                    public static create(properties?: google.apps.meet.v2beta.IConnectActiveConferenceResponse): google.apps.meet.v2beta.ConnectActiveConferenceResponse;
+
+                    /**
+                     * Encodes the specified ConnectActiveConferenceResponse message. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceResponse.verify|verify} messages.
+                     * @param message ConnectActiveConferenceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.meet.v2beta.IConnectActiveConferenceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConnectActiveConferenceResponse message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceResponse.verify|verify} messages.
+                     * @param message ConnectActiveConferenceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.meet.v2beta.IConnectActiveConferenceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConnectActiveConferenceResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConnectActiveConferenceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.meet.v2beta.ConnectActiveConferenceResponse;
+
+                    /**
+                     * Decodes a ConnectActiveConferenceResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConnectActiveConferenceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.meet.v2beta.ConnectActiveConferenceResponse;
+
+                    /**
+                     * Verifies a ConnectActiveConferenceResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConnectActiveConferenceResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConnectActiveConferenceResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.meet.v2beta.ConnectActiveConferenceResponse;
+
+                    /**
+                     * Creates a plain object from a ConnectActiveConferenceResponse message. Also converts values to other types if specified.
+                     * @param message ConnectActiveConferenceResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.meet.v2beta.ConnectActiveConferenceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConnectActiveConferenceResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConnectActiveConferenceResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
