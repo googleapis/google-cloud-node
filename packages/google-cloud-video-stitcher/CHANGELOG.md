@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/video-stitcher-v2.4.0...video-stitcher-v2.4.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6018](https://github.com/googleapis/google-cloud-node/issues/6018)) ([9dc5856](https://github.com/googleapis/google-cloud-node/commit/9dc585661489f51bb7a85b39519fd8b11dfffc5b))
+
 ## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/video-stitcher-v2.3.0...video-stitcher-v2.4.0) (2024-06-03)
 
 

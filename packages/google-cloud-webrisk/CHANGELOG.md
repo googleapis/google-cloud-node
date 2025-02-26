@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/web-risk-v4.3.0...web-risk-v4.3.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6019](https://github.com/googleapis/google-cloud-node/issues/6019)) ([734397c](https://github.com/googleapis/google-cloud-node/commit/734397c6b98d0aafe8832544da3f483b1eade1b2))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/web-risk-v4.2.0...web-risk-v4.3.0) (2024-05-21)
 
 

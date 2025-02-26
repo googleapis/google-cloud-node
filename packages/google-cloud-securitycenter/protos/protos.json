@@ -9752,17 +9752,31 @@
                     },
                     "Attack": {
                       "fields": {
-                        "volumePps": {
-                          "type": "int32",
-                          "id": 1
+                        "volumePpsLong": {
+                          "type": "int64",
+                          "id": 4
                         },
-                        "volumeBps": {
-                          "type": "int32",
-                          "id": 2
+                        "volumeBpsLong": {
+                          "type": "int64",
+                          "id": 5
                         },
                         "classification": {
                           "type": "string",
                           "id": 3
+                        },
+                        "volumePps": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "volumeBps": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },
@@ -9920,6 +9934,98 @@
                         }
                       }
                     },
+                    "DataAccessEvent": {
+                      "fields": {
+                        "eventId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "principalEmail": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "operation": {
+                          "type": "Operation",
+                          "id": 3
+                        },
+                        "eventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Operation": {
+                          "values": {
+                            "OPERATION_UNSPECIFIED": 0,
+                            "READ": 1,
+                            "MOVE": 2,
+                            "COPY": 3
+                          }
+                        }
+                      }
+                    },
+                    "DataFlowEvent": {
+                      "fields": {
+                        "eventId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "principalEmail": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "operation": {
+                          "type": "Operation",
+                          "id": 3
+                        },
+                        "violatedLocation": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "eventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Operation": {
+                          "values": {
+                            "OPERATION_UNSPECIFIED": 0,
+                            "READ": 1,
+                            "MOVE": 2,
+                            "COPY": 3
+                          }
+                        }
+                      }
+                    },
+                    "DataRetentionDeletionEvent": {
+                      "fields": {
+                        "eventDetectionTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "dataObjectCount": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "maxRetentionAllowed": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "eventType": {
+                          "type": "EventType",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "EventType": {
+                          "values": {
+                            "EVENT_TYPE_UNSPECIFIED": 0,
+                            "EVENT_TYPE_MAX_TTL_EXCEEDED": 1
+                          }
+                        }
+                      }
+                    },
                     "Database": {
                       "fields": {
                         "name": {
@@ -9946,6 +10052,14 @@
                         "version": {
                           "type": "string",
                           "id": 6
+                        }
+                      }
+                    },
+                    "Disk": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -10362,6 +10476,25 @@
                           "rule": "repeated",
                           "type": "GroupMembership",
                           "id": 57
+                        },
+                        "disk": {
+                          "type": "Disk",
+                          "id": 58
+                        },
+                        "dataAccessEvents": {
+                          "rule": "repeated",
+                          "type": "DataAccessEvent",
+                          "id": 61
+                        },
+                        "dataFlowEvents": {
+                          "rule": "repeated",
+                          "type": "DataFlowEvent",
+                          "id": 62
+                        },
+                        "dataRetentionDeletionEvents": {
+                          "rule": "repeated",
+                          "type": "DataRetentionDeletionEvent",
+                          "id": 64
                         }
                       },
                       "nested": {
@@ -10437,7 +10570,8 @@
                             "OBSERVATION": 4,
                             "SCC_ERROR": 5,
                             "POSTURE_VIOLATION": 6,
-                            "TOXIC_COMBINATION": 7
+                            "TOXIC_COMBINATION": 7,
+                            "SENSITIVE_DATA_RISK": 8
                           }
                         }
                       }
@@ -10971,6 +11105,7 @@
                             "ACCOUNT_ACCESS_REMOVAL": 51,
                             "STEAL_WEB_SESSION_COOKIE": 25,
                             "CREATE_OR_MODIFY_SYSTEM_PROCESS": 24,
+                            "EVENT_TRIGGERED_EXECUTION": 65,
                             "ABUSE_ELEVATION_CONTROL_MECHANISM": 34,
                             "UNSECURED_CREDENTIALS": 13,
                             "MODIFY_AUTHENTICATION_PROCESS": 28,
@@ -10987,6 +11122,7 @@
                             "ACTIVE_SCANNING": 1,
                             "SCANNING_IP_BLOCKS": 2,
                             "CONTAINER_ADMINISTRATION_COMMAND": 60,
+                            "DEPLOY_CONTAINER": 66,
                             "ESCAPE_TO_HOST": 61,
                             "CONTAINER_AND_RESOURCE_DISCOVERY": 57,
                             "STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES": 62
@@ -11022,7 +11158,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         }
                       }
                     },
@@ -11232,6 +11371,10 @@
                         "exploitReleaseDate": {
                           "type": "google.protobuf.Timestamp",
                           "id": 9
+                        },
+                        "firstExploitationDate": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -11717,6 +11860,10 @@
                         "resourceGroup": {
                           "type": "AzureResourceGroup",
                           "id": 3
+                        },
+                        "tenant": {
+                          "type": "AzureTenant",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -11746,9 +11893,25 @@
                         },
                         "AzureResourceGroup": {
                           "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 2
+                            },
                             "name": {
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "AzureTenant": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
                             }
                           }
                         }
@@ -12545,6 +12708,9 @@
                                 "get": "/v2/{parent=organizations/*/simulations/*}/attackPaths",
                                 "additional_bindings": [
                                   {
+                                    "get": "/v2/{parent=organizations/*}/attackPaths"
+                                  },
+                                  {
                                     "get": "/v2/{parent=organizations/*/simulations/*/valuedResources/*}/attackPaths"
                                   },
                                   {
@@ -12764,16 +12930,21 @@
                           "responseType": "ListValuedResourcesResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*/simulations/*}/valuedResources",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*/simulations/*/attackExposureResults/*}/valuedResources",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*}/valuedResources",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{parent=organizations/*/simulations/*}/valuedResources",
-                                "additional_bindings": {
-                                  "get": "/v2/{parent=organizations/*/simulations/*/attackExposureResults/*}/valuedResources"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v2/{parent=organizations/*/simulations/*/attackExposureResults/*}/valuedResources"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=organizations/*}/valuedResources"
+                                  }
+                                ]
                               }
                             },
                             {
