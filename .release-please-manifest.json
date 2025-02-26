@@ -92,7 +92,6 @@
   "packages/google-cloud-networksecurity": "2.3.1",
   "packages/google-cloud-networkservices": "0.7.1",
   "packages/google-cloud-notebooks": "3.4.1",
-  "packages/google-cloud-optimization": "3.5.1",
   "packages/google-cloud-orchestration-airflow-service": "3.6.1",
   "packages/google-cloud-orgpolicy": "3.5.0",
   "packages/google-cloud-osconfig": "3.3.0",
