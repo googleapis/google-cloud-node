@@ -2029,7 +2029,8 @@ export namespace google {
                     EV_CONNECTOR_TYPE_CCS_COMBO_2 = 6,
                     EV_CONNECTOR_TYPE_TESLA = 7,
                     EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T = 8,
-                    EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET = 9
+                    EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET = 9,
+                    EV_CONNECTOR_TYPE_NACS = 10
                 }
 
                 /** Properties of a FuelOptions. */

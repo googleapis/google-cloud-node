@@ -1166,6 +1166,64 @@
         }
       }
     },
+    "PhoneNumbers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PhoneNumbersClient",
+          "rpcs": {
+            "UpdatePhoneNumber": {
+              "methods": [
+                "updatePhoneNumber"
+              ]
+            },
+            "DeletePhoneNumber": {
+              "methods": [
+                "deletePhoneNumber"
+              ]
+            },
+            "UndeletePhoneNumber": {
+              "methods": [
+                "undeletePhoneNumber"
+              ]
+            },
+            "ListPhoneNumbers": {
+              "methods": [
+                "listPhoneNumbers",
+                "listPhoneNumbersStream",
+                "listPhoneNumbersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PhoneNumbersClient",
+          "rpcs": {
+            "UpdatePhoneNumber": {
+              "methods": [
+                "updatePhoneNumber"
+              ]
+            },
+            "DeletePhoneNumber": {
+              "methods": [
+                "deletePhoneNumber"
+              ]
+            },
+            "UndeletePhoneNumber": {
+              "methods": [
+                "undeletePhoneNumber"
+              ]
+            },
+            "ListPhoneNumbers": {
+              "methods": [
+                "listPhoneNumbers",
+                "listPhoneNumbersStream",
+                "listPhoneNumbersAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SessionEntityTypes": {
       "clients": {
         "grpc": {

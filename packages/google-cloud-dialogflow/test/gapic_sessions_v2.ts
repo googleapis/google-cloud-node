@@ -294,7 +294,7 @@ describe('v2.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DetectIntentResponse()
       );
@@ -325,7 +325,7 @@ describe('v2.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DetectIntentResponse()
       );
@@ -372,7 +372,7 @@ describe('v2.SessionsClient', () => {
         ['session']
       );
       request.session = defaultValue1;
-      const expectedHeaderRequestParams = `session=${defaultValue1}`;
+      const expectedHeaderRequestParams = `session=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detectIntent = stubSimpleCall(
         undefined,

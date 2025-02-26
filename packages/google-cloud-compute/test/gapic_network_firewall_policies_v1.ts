@@ -488,6 +488,167 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
     });
   });
 
+  describe('addPacketMirroringRule', () => {
+    it('invokes addPacketMirroringRule without error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.addPacketMirroringRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.addPacketMirroringRule(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addPacketMirroringRule without error using callback', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.addPacketMirroringRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addPacketMirroringRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addPacketMirroringRule with error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addPacketMirroringRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.addPacketMirroringRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addPacketMirroringRule with closed client', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.addPacketMirroringRule(request),
+        expectedError
+      );
+    });
+  });
+
   describe('addRule', () => {
     it('invokes addRule without error', async () => {
       const client =
@@ -1399,6 +1560,167 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
     });
   });
 
+  describe('getPacketMirroringRule', () => {
+    it('invokes getPacketMirroringRule without error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.FirewallPolicyRule()
+      );
+      client.innerApiCalls.getPacketMirroringRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getPacketMirroringRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPacketMirroringRule without error using callback', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.FirewallPolicyRule()
+      );
+      client.innerApiCalls.getPacketMirroringRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPacketMirroringRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IFirewallPolicyRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPacketMirroringRule with error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getPacketMirroringRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getPacketMirroringRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPacketMirroringRule with closed client', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getPacketMirroringRule(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getRule', () => {
     it('invokes getRule without error', async () => {
       const client =
@@ -1828,6 +2150,167 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
     });
   });
 
+  describe('patchPacketMirroringRule', () => {
+    it('invokes patchPacketMirroringRule without error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patchPacketMirroringRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.patchPacketMirroringRule(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchPacketMirroringRule without error using callback', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patchPacketMirroringRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.patchPacketMirroringRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchPacketMirroringRule with error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.patchPacketMirroringRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.patchPacketMirroringRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchPacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes patchPacketMirroringRule with closed client', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.patchPacketMirroringRule(request),
+        expectedError
+      );
+    });
+  });
+
   describe('patchRule', () => {
     it('invokes patchRule without error', async () => {
       const client =
@@ -2130,6 +2613,167 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeAssociation(request), expectedError);
+    });
+  });
+
+  describe('removePacketMirroringRule', () => {
+    it('invokes removePacketMirroringRule without error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.removePacketMirroringRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.removePacketMirroringRule(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removePacketMirroringRule without error using callback', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.removePacketMirroringRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removePacketMirroringRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removePacketMirroringRule with error', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&firewall_policy=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removePacketMirroringRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.removePacketMirroringRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removePacketMirroringRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removePacketMirroringRule with closed client', async () => {
+      const client =
+        new networkfirewallpoliciesModule.v1.NetworkFirewallPoliciesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePacketMirroringRuleNetworkFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
+      request.firewallPolicy = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.removePacketMirroringRule(request),
+        expectedError
+      );
     });
   });
 

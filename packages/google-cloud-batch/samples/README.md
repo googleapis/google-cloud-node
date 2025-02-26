@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Batch_service.cancel_job](#batch_service.cancel_job)
   * [Batch_service.create_job](#batch_service.create_job)
   * [Batch_service.delete_job](#batch_service.delete_job)
   * [Batch_service.get_job](#batch_service.get_job)
@@ -45,6 +46,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Batch_service.cancel_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1/batch_service.cancel_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1/batch_service.cancel_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-batch/samples/generated/v1/batch_service.cancel_job.js`
+
+
+-----
+
 
 
 

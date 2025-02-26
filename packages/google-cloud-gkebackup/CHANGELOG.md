@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v1.4.0...gke-backup-v1.4.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [Many APIs] finalize fixing typings for headers in generator ([#6013](https://github.com/googleapis/google-cloud-node/issues/6013)) ([cd3a2d4](https://github.com/googleapis/google-cloud-node/commit/cd3a2d44fc7a9b3798346162ba19df1c748fba58))
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v1.3.0...gke-backup-v1.4.0) (2024-05-21)
 
 

@@ -45433,6 +45433,7 @@
                             case 4:
                             case 5:
                             case 6:
+                            case 7:
                                 break;
                             }
                         return null;
@@ -45484,6 +45485,10 @@
                         case "SPACE_OWNER_VIA_APP":
                         case 6:
                             message.deletionType = 6;
+                            break;
+                        case "SPACE_MEMBER":
+                        case 7:
+                            message.deletionType = 7;
                             break;
                         }
                         return message;
@@ -45546,6 +45551,7 @@
                      * @property {number} APP_MESSAGE_EXPIRY=4 APP_MESSAGE_EXPIRY value
                      * @property {number} CREATOR_VIA_APP=5 CREATOR_VIA_APP value
                      * @property {number} SPACE_OWNER_VIA_APP=6 SPACE_OWNER_VIA_APP value
+                     * @property {number} SPACE_MEMBER=7 SPACE_MEMBER value
                      */
                     DeletionMetadata.DeletionType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -45556,6 +45562,7 @@
                         values[valuesById[4] = "APP_MESSAGE_EXPIRY"] = 4;
                         values[valuesById[5] = "CREATOR_VIA_APP"] = 5;
                         values[valuesById[6] = "SPACE_OWNER_VIA_APP"] = 6;
+                        values[valuesById[7] = "SPACE_MEMBER"] = 7;
                         return values;
                     })();
     
