@@ -20555,6 +20555,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "handlers": {
+                              "rule": "repeated",
+                              "type": "Handler",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -20714,6 +20722,78 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/PlaybookVersion"
+                              }
+                            }
+                          }
+                        },
+                        "Handler": {
+                          "oneofs": {
+                            "handler": {
+                              "oneof": [
+                                "eventHandler",
+                                "lifecycleHandler"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "eventHandler": {
+                              "type": "EventHandler",
+                              "id": 1
+                            },
+                            "lifecycleHandler": {
+                              "type": "LifecycleHandler",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "EventHandler": {
+                              "fields": {
+                                "event": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "condition": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "fulfillment": {
+                                  "type": "Fulfillment",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "LifecycleHandler": {
+                              "fields": {
+                                "lifecycleStage": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "condition": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "fulfillment": {
+                                  "type": "Fulfillment",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
                               }
                             }
                           }
