@@ -85,10 +85,8 @@ const ReasoningEngineExecutionServiceClient =
   v1.ReasoningEngineExecutionServiceClient;
 type ReasoningEngineExecutionServiceClient =
   v1.ReasoningEngineExecutionServiceClient;
-const ReasoningEngineServiceClient =
-  v1.ReasoningEngineServiceClient;
-type ReasoningEngineServiceClient =
-  v1.ReasoningEngineServiceClient;
+const ReasoningEngineServiceClient = v1.ReasoningEngineServiceClient;
+type ReasoningEngineServiceClient = v1.ReasoningEngineServiceClient;
 const VertexRagServiceClient = v1.VertexRagServiceClient;
 type VertexRagServiceClient = v1.VertexRagServiceClient;
 const VertexRagDataServiceClient = v1.VertexRagDataServiceClient;
