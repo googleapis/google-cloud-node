@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as reasoningengineexecutionserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
@@ -62,6 +64,27 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubServerStreamingCall<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // write something to the stream to trigger transformStub and send the response back to the client
+  setImmediate(() => {
+    mockStream.write({});
+  });
+  setImmediate(() => {
+    mockStream.end();
+  });
+  return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(
@@ -311,7 +334,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.QueryReasoningEngineResponse()
       );
@@ -346,7 +369,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.QueryReasoningEngineResponse()
       );
@@ -396,7 +419,7 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryReasoningEngine = stubSimpleCall(
         undefined,
@@ -433,6 +456,178 @@ describe('v1beta1.ReasoningEngineExecutionServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.queryReasoningEngine(request), expectedError);
+    });
+  });
+
+  describe('streamQueryReasoningEngine', () => {
+    it('invokes streamQueryReasoningEngine without error', async () => {
+      const client =
+        new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.api.HttpBody()
+      );
+      client.innerApiCalls.streamQueryReasoningEngine =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.streamQueryReasoningEngine(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on('data', (response: protos.google.api.HttpBody) => {
+          resolve(response);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.streamQueryReasoningEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamQueryReasoningEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes streamQueryReasoningEngine without error and gaxServerStreamingRetries enabled', async () => {
+      const client =
+        new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient(
+          {gaxServerStreamingRetries: true}
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.api.HttpBody()
+      );
+      client.innerApiCalls.streamQueryReasoningEngine =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.streamQueryReasoningEngine(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on('data', (response: protos.google.api.HttpBody) => {
+          resolve(response);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.streamQueryReasoningEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamQueryReasoningEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes streamQueryReasoningEngine with error', async () => {
+      const client =
+        new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamQueryReasoningEngine = stubServerStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.streamQueryReasoningEngine(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on('data', (response: protos.google.api.HttpBody) => {
+          resolve(response);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      const actualRequest = (
+        client.innerApiCalls.streamQueryReasoningEngine as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamQueryReasoningEngine as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes streamQueryReasoningEngine with closed client', async () => {
+      const client =
+        new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StreamQueryReasoningEngineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      const stream = client.streamQueryReasoningEngine(request, {
+        retryRequestOptions: {noResponseRetries: 0},
+      });
+      const promise = new Promise((resolve, reject) => {
+        stream.on('data', (response: protos.google.api.HttpBody) => {
+          resolve(response);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+    });
+    it('should create a client with gaxServerStreamingRetries enabled', () => {
+      const client =
+        new reasoningengineexecutionserviceModule.v1beta1.ReasoningEngineExecutionServiceClient(
+          {
+            gaxServerStreamingRetries: true,
+          }
+        );
+      assert(client);
     });
   });
   describe('getIamPolicy', () => {
