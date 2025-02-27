@@ -258,7 +258,7 @@ describe('v1.PublisherClient', () => {
         ['channelConnection']
       );
       request.channelConnection = defaultValue1;
-      const expectedHeaderRequestParams = `channel_connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel_connection=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsResponse()
       );
@@ -290,7 +290,7 @@ describe('v1.PublisherClient', () => {
         ['channelConnection']
       );
       request.channelConnection = defaultValue1;
-      const expectedHeaderRequestParams = `channel_connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel_connection=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsResponse()
       );
@@ -337,7 +337,7 @@ describe('v1.PublisherClient', () => {
         ['channelConnection']
       );
       request.channelConnection = defaultValue1;
-      const expectedHeaderRequestParams = `channel_connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel_connection=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.publishChannelConnectionEvents = stubSimpleCall(
         undefined,
@@ -395,7 +395,7 @@ describe('v1.PublisherClient', () => {
         ['channel']
       );
       request.channel = defaultValue1;
-      const expectedHeaderRequestParams = `channel=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsResponse()
       );
@@ -426,7 +426,7 @@ describe('v1.PublisherClient', () => {
         ['channel']
       );
       request.channel = defaultValue1;
-      const expectedHeaderRequestParams = `channel=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsResponse()
       );
@@ -473,7 +473,7 @@ describe('v1.PublisherClient', () => {
         ['channel']
       );
       request.channel = defaultValue1;
-      const expectedHeaderRequestParams = `channel=${defaultValue1}`;
+      const expectedHeaderRequestParams = `channel=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.publishEvents = stubSimpleCall(
         undefined,
@@ -525,7 +525,7 @@ describe('v1.PublisherClient', () => {
         ['messageBus']
       );
       request.messageBus = defaultValue1;
-      const expectedHeaderRequestParams = `message_bus=${defaultValue1}`;
+      const expectedHeaderRequestParams = `message_bus=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishResponse()
       );
@@ -556,7 +556,7 @@ describe('v1.PublisherClient', () => {
         ['messageBus']
       );
       request.messageBus = defaultValue1;
-      const expectedHeaderRequestParams = `message_bus=${defaultValue1}`;
+      const expectedHeaderRequestParams = `message_bus=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishResponse()
       );
@@ -603,7 +603,7 @@ describe('v1.PublisherClient', () => {
         ['messageBus']
       );
       request.messageBus = defaultValue1;
-      const expectedHeaderRequestParams = `message_bus=${defaultValue1}`;
+      const expectedHeaderRequestParams = `message_bus=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.publish = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.publish(request), expectedError);
