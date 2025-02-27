@@ -3857,6 +3857,39 @@
                      */
     
                     /**
+                     * Callback as used by {@link maps.fleetengine.v1.TripService|deleteTrip}.
+                     * @memberof maps.fleetengine.v1.TripService
+                     * @typedef DeleteTripCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.protobuf.Empty} [response] Empty
+                     */
+    
+                    /**
+                     * Calls DeleteTrip.
+                     * @function deleteTrip
+                     * @memberof maps.fleetengine.v1.TripService
+                     * @instance
+                     * @param {maps.fleetengine.v1.IDeleteTripRequest} request DeleteTripRequest message or plain object
+                     * @param {maps.fleetengine.v1.TripService.DeleteTripCallback} callback Node-style callback called with the error, if any, and Empty
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(TripService.prototype.deleteTrip = function deleteTrip(request, callback) {
+                        return this.rpcCall(deleteTrip, $root.maps.fleetengine.v1.DeleteTripRequest, $root.google.protobuf.Empty, request, callback);
+                    }, "name", { value: "DeleteTrip" });
+    
+                    /**
+                     * Calls DeleteTrip.
+                     * @function deleteTrip
+                     * @memberof maps.fleetengine.v1.TripService
+                     * @instance
+                     * @param {maps.fleetengine.v1.IDeleteTripRequest} request DeleteTripRequest message or plain object
+                     * @returns {Promise<google.protobuf.Empty>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
                      * Callback as used by {@link maps.fleetengine.v1.TripService|reportBillableTrip}.
                      * @memberof maps.fleetengine.v1.TripService
                      * @typedef ReportBillableTripCallback
@@ -4677,6 +4710,238 @@
                     };
     
                     return GetTripRequest;
+                })();
+    
+                v1.DeleteTripRequest = (function() {
+    
+                    /**
+                     * Properties of a DeleteTripRequest.
+                     * @memberof maps.fleetengine.v1
+                     * @interface IDeleteTripRequest
+                     * @property {maps.fleetengine.v1.IRequestHeader|null} [header] DeleteTripRequest header
+                     * @property {string|null} [name] DeleteTripRequest name
+                     */
+    
+                    /**
+                     * Constructs a new DeleteTripRequest.
+                     * @memberof maps.fleetengine.v1
+                     * @classdesc Represents a DeleteTripRequest.
+                     * @implements IDeleteTripRequest
+                     * @constructor
+                     * @param {maps.fleetengine.v1.IDeleteTripRequest=} [properties] Properties to set
+                     */
+                    function DeleteTripRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeleteTripRequest header.
+                     * @member {maps.fleetengine.v1.IRequestHeader|null|undefined} header
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @instance
+                     */
+                    DeleteTripRequest.prototype.header = null;
+    
+                    /**
+                     * DeleteTripRequest name.
+                     * @member {string} name
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @instance
+                     */
+                    DeleteTripRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new DeleteTripRequest instance using the specified properties.
+                     * @function create
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @static
+                     * @param {maps.fleetengine.v1.IDeleteTripRequest=} [properties] Properties to set
+                     * @returns {maps.fleetengine.v1.DeleteTripRequest} DeleteTripRequest instance
+                     */
+                    DeleteTripRequest.create = function create(properties) {
+                        return new DeleteTripRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteTripRequest message. Does not implicitly {@link maps.fleetengine.v1.DeleteTripRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @static
+                     * @param {maps.fleetengine.v1.IDeleteTripRequest} message DeleteTripRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteTripRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.header != null && Object.hasOwnProperty.call(message, "header"))
+                            $root.maps.fleetengine.v1.RequestHeader.encode(message.header, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteTripRequest message, length delimited. Does not implicitly {@link maps.fleetengine.v1.DeleteTripRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @static
+                     * @param {maps.fleetengine.v1.IDeleteTripRequest} message DeleteTripRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteTripRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeleteTripRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {maps.fleetengine.v1.DeleteTripRequest} DeleteTripRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteTripRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.DeleteTripRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeleteTripRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {maps.fleetengine.v1.DeleteTripRequest} DeleteTripRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteTripRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeleteTripRequest message.
+                     * @function verify
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeleteTripRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.header != null && message.hasOwnProperty("header")) {
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            if (error)
+                                return "header." + error;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeleteTripRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {maps.fleetengine.v1.DeleteTripRequest} DeleteTripRequest
+                     */
+                    DeleteTripRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.maps.fleetengine.v1.DeleteTripRequest)
+                            return object;
+                        var message = new $root.maps.fleetengine.v1.DeleteTripRequest();
+                        if (object.header != null) {
+                            if (typeof object.header !== "object")
+                                throw TypeError(".maps.fleetengine.v1.DeleteTripRequest.header: object expected");
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                        }
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeleteTripRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @static
+                     * @param {maps.fleetengine.v1.DeleteTripRequest} message DeleteTripRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeleteTripRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.header = null;
+                            object.name = "";
+                        }
+                        if (message.header != null && message.hasOwnProperty("header"))
+                            object.header = $root.maps.fleetengine.v1.RequestHeader.toObject(message.header, options);
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeleteTripRequest to JSON.
+                     * @function toJSON
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeleteTripRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DeleteTripRequest
+                     * @function getTypeUrl
+                     * @memberof maps.fleetengine.v1.DeleteTripRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DeleteTripRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/maps.fleetengine.v1.DeleteTripRequest";
+                    };
+    
+                    return DeleteTripRequest;
                 })();
     
                 v1.ReportBillableTripRequest = (function() {
@@ -7642,6 +7907,39 @@
                      */
     
                     /**
+                     * Callback as used by {@link maps.fleetengine.v1.VehicleService|deleteVehicle}.
+                     * @memberof maps.fleetengine.v1.VehicleService
+                     * @typedef DeleteVehicleCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.protobuf.Empty} [response] Empty
+                     */
+    
+                    /**
+                     * Calls DeleteVehicle.
+                     * @function deleteVehicle
+                     * @memberof maps.fleetengine.v1.VehicleService
+                     * @instance
+                     * @param {maps.fleetengine.v1.IDeleteVehicleRequest} request DeleteVehicleRequest message or plain object
+                     * @param {maps.fleetengine.v1.VehicleService.DeleteVehicleCallback} callback Node-style callback called with the error, if any, and Empty
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(VehicleService.prototype.deleteVehicle = function deleteVehicle(request, callback) {
+                        return this.rpcCall(deleteVehicle, $root.maps.fleetengine.v1.DeleteVehicleRequest, $root.google.protobuf.Empty, request, callback);
+                    }, "name", { value: "DeleteVehicle" });
+    
+                    /**
+                     * Calls DeleteVehicle.
+                     * @function deleteVehicle
+                     * @memberof maps.fleetengine.v1.VehicleService
+                     * @instance
+                     * @param {maps.fleetengine.v1.IDeleteVehicleRequest} request DeleteVehicleRequest message or plain object
+                     * @returns {Promise<google.protobuf.Empty>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
                      * Callback as used by {@link maps.fleetengine.v1.VehicleService|updateVehicle}.
                      * @memberof maps.fleetengine.v1.VehicleService
                      * @typedef UpdateVehicleCallback
@@ -8345,6 +8643,238 @@
                     };
     
                     return GetVehicleRequest;
+                })();
+    
+                v1.DeleteVehicleRequest = (function() {
+    
+                    /**
+                     * Properties of a DeleteVehicleRequest.
+                     * @memberof maps.fleetengine.v1
+                     * @interface IDeleteVehicleRequest
+                     * @property {maps.fleetengine.v1.IRequestHeader|null} [header] DeleteVehicleRequest header
+                     * @property {string|null} [name] DeleteVehicleRequest name
+                     */
+    
+                    /**
+                     * Constructs a new DeleteVehicleRequest.
+                     * @memberof maps.fleetengine.v1
+                     * @classdesc Represents a DeleteVehicleRequest.
+                     * @implements IDeleteVehicleRequest
+                     * @constructor
+                     * @param {maps.fleetengine.v1.IDeleteVehicleRequest=} [properties] Properties to set
+                     */
+                    function DeleteVehicleRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeleteVehicleRequest header.
+                     * @member {maps.fleetengine.v1.IRequestHeader|null|undefined} header
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @instance
+                     */
+                    DeleteVehicleRequest.prototype.header = null;
+    
+                    /**
+                     * DeleteVehicleRequest name.
+                     * @member {string} name
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @instance
+                     */
+                    DeleteVehicleRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new DeleteVehicleRequest instance using the specified properties.
+                     * @function create
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @static
+                     * @param {maps.fleetengine.v1.IDeleteVehicleRequest=} [properties] Properties to set
+                     * @returns {maps.fleetengine.v1.DeleteVehicleRequest} DeleteVehicleRequest instance
+                     */
+                    DeleteVehicleRequest.create = function create(properties) {
+                        return new DeleteVehicleRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteVehicleRequest message. Does not implicitly {@link maps.fleetengine.v1.DeleteVehicleRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @static
+                     * @param {maps.fleetengine.v1.IDeleteVehicleRequest} message DeleteVehicleRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteVehicleRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.header != null && Object.hasOwnProperty.call(message, "header"))
+                            $root.maps.fleetengine.v1.RequestHeader.encode(message.header, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteVehicleRequest message, length delimited. Does not implicitly {@link maps.fleetengine.v1.DeleteVehicleRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @static
+                     * @param {maps.fleetengine.v1.IDeleteVehicleRequest} message DeleteVehicleRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteVehicleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeleteVehicleRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {maps.fleetengine.v1.DeleteVehicleRequest} DeleteVehicleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteVehicleRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.DeleteVehicleRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeleteVehicleRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {maps.fleetengine.v1.DeleteVehicleRequest} DeleteVehicleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteVehicleRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeleteVehicleRequest message.
+                     * @function verify
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeleteVehicleRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.header != null && message.hasOwnProperty("header")) {
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            if (error)
+                                return "header." + error;
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeleteVehicleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {maps.fleetengine.v1.DeleteVehicleRequest} DeleteVehicleRequest
+                     */
+                    DeleteVehicleRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.maps.fleetengine.v1.DeleteVehicleRequest)
+                            return object;
+                        var message = new $root.maps.fleetengine.v1.DeleteVehicleRequest();
+                        if (object.header != null) {
+                            if (typeof object.header !== "object")
+                                throw TypeError(".maps.fleetengine.v1.DeleteVehicleRequest.header: object expected");
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                        }
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeleteVehicleRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @static
+                     * @param {maps.fleetengine.v1.DeleteVehicleRequest} message DeleteVehicleRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeleteVehicleRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.header = null;
+                            object.name = "";
+                        }
+                        if (message.header != null && message.hasOwnProperty("header"))
+                            object.header = $root.maps.fleetengine.v1.RequestHeader.toObject(message.header, options);
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeleteVehicleRequest to JSON.
+                     * @function toJSON
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeleteVehicleRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DeleteVehicleRequest
+                     * @function getTypeUrl
+                     * @memberof maps.fleetengine.v1.DeleteVehicleRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DeleteVehicleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/maps.fleetengine.v1.DeleteVehicleRequest";
+                    };
+    
+                    return DeleteVehicleRequest;
                 })();
     
                 v1.UpdateVehicleRequest = (function() {
