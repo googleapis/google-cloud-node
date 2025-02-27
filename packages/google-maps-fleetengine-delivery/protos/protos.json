@@ -905,6 +905,14 @@
                           "type": "DeliveryVehicleLocation",
                           "id": 2
                         },
+                        "pastLocations": {
+                          "rule": "repeated",
+                          "type": "DeliveryVehicleLocation",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
                         "navigationStatus": {
                           "type": "DeliveryVehicleNavigationStatus",
                           "id": 3
