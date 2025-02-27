@@ -5956,6 +5956,7 @@
                          * @interface IDeliveryVehicle
                          * @property {string|null} [name] DeliveryVehicle name
                          * @property {maps.fleetengine.delivery.v1.IDeliveryVehicleLocation|null} [lastLocation] DeliveryVehicle lastLocation
+                         * @property {Array.<maps.fleetengine.delivery.v1.IDeliveryVehicleLocation>|null} [pastLocations] DeliveryVehicle pastLocations
                          * @property {maps.fleetengine.delivery.v1.DeliveryVehicleNavigationStatus|null} [navigationStatus] DeliveryVehicle navigationStatus
                          * @property {Uint8Array|null} [currentRouteSegment] DeliveryVehicle currentRouteSegment
                          * @property {google.type.ILatLng|null} [currentRouteSegmentEndPoint] DeliveryVehicle currentRouteSegmentEndPoint
@@ -5975,6 +5976,7 @@
                          * @param {maps.fleetengine.delivery.v1.IDeliveryVehicle=} [properties] Properties to set
                          */
                         function DeliveryVehicle(properties) {
+                            this.pastLocations = [];
                             this.remainingVehicleJourneySegments = [];
                             this.attributes = [];
                             if (properties)
@@ -5998,6 +6000,14 @@
                          * @instance
                          */
                         DeliveryVehicle.prototype.lastLocation = null;
+    
+                        /**
+                         * DeliveryVehicle pastLocations.
+                         * @member {Array.<maps.fleetengine.delivery.v1.IDeliveryVehicleLocation>} pastLocations
+                         * @memberof maps.fleetengine.delivery.v1.DeliveryVehicle
+                         * @instance
+                         */
+                        DeliveryVehicle.prototype.pastLocations = $util.emptyArray;
     
                         /**
                          * DeliveryVehicle navigationStatus.
@@ -6109,6 +6119,9 @@
                                     $root.maps.fleetengine.delivery.v1.DeliveryVehicleAttribute.encode(message.attributes[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.type);
+                            if (message.pastLocations != null && message.pastLocations.length)
+                                for (var i = 0; i < message.pastLocations.length; ++i)
+                                    $root.maps.fleetengine.delivery.v1.DeliveryVehicleLocation.encode(message.pastLocations[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -6149,6 +6162,12 @@
                                     }
                                 case 2: {
                                         message.lastLocation = $root.maps.fleetengine.delivery.v1.DeliveryVehicleLocation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.pastLocations && message.pastLocations.length))
+                                            message.pastLocations = [];
+                                        message.pastLocations.push($root.maps.fleetengine.delivery.v1.DeliveryVehicleLocation.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 3: {
@@ -6230,6 +6249,15 @@
                                 if (error)
                                     return "lastLocation." + error;
                             }
+                            if (message.pastLocations != null && message.hasOwnProperty("pastLocations")) {
+                                if (!Array.isArray(message.pastLocations))
+                                    return "pastLocations: array expected";
+                                for (var i = 0; i < message.pastLocations.length; ++i) {
+                                    var error = $root.maps.fleetengine.delivery.v1.DeliveryVehicleLocation.verify(message.pastLocations[i]);
+                                    if (error)
+                                        return "pastLocations." + error;
+                                }
+                            }
                             if (message.navigationStatus != null && message.hasOwnProperty("navigationStatus"))
                                 switch (message.navigationStatus) {
                                 default:
@@ -6309,6 +6337,16 @@
                                 if (typeof object.lastLocation !== "object")
                                     throw TypeError(".maps.fleetengine.delivery.v1.DeliveryVehicle.lastLocation: object expected");
                                 message.lastLocation = $root.maps.fleetengine.delivery.v1.DeliveryVehicleLocation.fromObject(object.lastLocation);
+                            }
+                            if (object.pastLocations) {
+                                if (!Array.isArray(object.pastLocations))
+                                    throw TypeError(".maps.fleetengine.delivery.v1.DeliveryVehicle.pastLocations: array expected");
+                                message.pastLocations = [];
+                                for (var i = 0; i < object.pastLocations.length; ++i) {
+                                    if (typeof object.pastLocations[i] !== "object")
+                                        throw TypeError(".maps.fleetengine.delivery.v1.DeliveryVehicle.pastLocations: object expected");
+                                    message.pastLocations[i] = $root.maps.fleetengine.delivery.v1.DeliveryVehicleLocation.fromObject(object.pastLocations[i]);
+                                }
                             }
                             switch (object.navigationStatus) {
                             default:
@@ -6425,6 +6463,7 @@
                             if (options.arrays || options.defaults) {
                                 object.remainingVehicleJourneySegments = [];
                                 object.attributes = [];
+                                object.pastLocations = [];
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -6468,6 +6507,11 @@
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.maps.fleetengine.delivery.v1.DeliveryVehicle.DeliveryVehicleType[message.type] === undefined ? message.type : $root.maps.fleetengine.delivery.v1.DeliveryVehicle.DeliveryVehicleType[message.type] : message.type;
+                            if (message.pastLocations && message.pastLocations.length) {
+                                object.pastLocations = [];
+                                for (var j = 0; j < message.pastLocations.length; ++j)
+                                    object.pastLocations[j] = $root.maps.fleetengine.delivery.v1.DeliveryVehicleLocation.toObject(message.pastLocations[j], options);
+                            }
                             return object;
                         };
     
