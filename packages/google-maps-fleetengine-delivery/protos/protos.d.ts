@@ -2324,6 +2324,9 @@ export namespace maps {
                     /** DeliveryVehicle lastLocation */
                     lastLocation?: (maps.fleetengine.delivery.v1.IDeliveryVehicleLocation|null);
 
+                    /** DeliveryVehicle pastLocations */
+                    pastLocations?: (maps.fleetengine.delivery.v1.IDeliveryVehicleLocation[]|null);
+
                     /** DeliveryVehicle navigationStatus */
                     navigationStatus?: (maps.fleetengine.delivery.v1.DeliveryVehicleNavigationStatus|keyof typeof maps.fleetengine.delivery.v1.DeliveryVehicleNavigationStatus|null);
 
@@ -2363,6 +2366,9 @@ export namespace maps {
 
                     /** DeliveryVehicle lastLocation. */
                     public lastLocation?: (maps.fleetengine.delivery.v1.IDeliveryVehicleLocation|null);
+
+                    /** DeliveryVehicle pastLocations. */
+                    public pastLocations: maps.fleetengine.delivery.v1.IDeliveryVehicleLocation[];
 
                     /** DeliveryVehicle navigationStatus. */
                     public navigationStatus: (maps.fleetengine.delivery.v1.DeliveryVehicleNavigationStatus|keyof typeof maps.fleetengine.delivery.v1.DeliveryVehicleNavigationStatus);
