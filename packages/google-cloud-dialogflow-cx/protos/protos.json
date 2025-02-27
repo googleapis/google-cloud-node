@@ -21,8 +21,7 @@
                         "objc_class_prefix": "DF",
                         "ruby_package": "Google::Cloud::Dialogflow::CX::V3",
                         "(google.api.resource_definition).type": "dlp.googleapis.com/DeidentifyTemplate",
-                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}",
-                        "cc_enable_arenas": true
+                        "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}"
                       },
                       "nested": {
                         "AdvancedSettings": {
@@ -359,6 +358,16 @@
                               "oneof": [
                                 "genAppBuilderSettings"
                               ]
+                            },
+                            "_satisfiesPzs": {
+                              "oneof": [
+                                "satisfiesPzs"
+                              ]
+                            },
+                            "_satisfiesPzi": {
+                              "oneof": [
+                                "satisfiesPzi"
+                              ]
                             }
                           },
                           "fields": {
@@ -479,6 +488,22 @@
                               "id": 43,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "satisfiesPzs": {
+                              "type": "bool",
+                              "id": 45,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "satisfiesPzi": {
+                              "type": "bool",
+                              "id": 46,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
                               }
                             }
                           },
@@ -2225,6 +2250,10 @@
                             "dataStore": {
                               "type": "string",
                               "id": 2
+                            },
+                            "documentProcessingMode": {
+                              "type": "DocumentProcessingMode",
+                              "id": 4
                             }
                           }
                         },
@@ -2443,6 +2472,13 @@
                                 }
                               }
                             }
+                          }
+                        },
+                        "DocumentProcessingMode": {
+                          "values": {
+                            "DOCUMENT_PROCESSING_MODE_UNSPECIFIED": 0,
+                            "DOCUMENTS": 1,
+                            "CHUNKS": 2
                           }
                         },
                         "Fulfillment": {
@@ -5603,7 +5639,10 @@
                               "fields": {
                                 "id": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 },
                                 "parts": {
                                   "rule": "repeated",
@@ -6483,6 +6522,7 @@
                               "type": "bool",
                               "id": 25,
                               "options": {
+                                "deprecated": true,
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }

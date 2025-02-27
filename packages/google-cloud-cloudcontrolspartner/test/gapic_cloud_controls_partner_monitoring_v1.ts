@@ -354,7 +354,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.Violation()
       );
@@ -388,7 +388,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.Violation()
       );
@@ -438,7 +438,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getViolation = stubSimpleCall(
         undefined,
@@ -496,7 +496,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Violation()
@@ -538,7 +538,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Violation()
@@ -598,7 +598,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listViolations = stubSimpleCall(
         undefined,
@@ -632,7 +632,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Violation()
@@ -696,7 +696,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViolations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -749,7 +749,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.cloudcontrolspartner.v1.Violation()
@@ -802,7 +802,7 @@ describe('v1.CloudControlsPartnerMonitoringClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViolations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

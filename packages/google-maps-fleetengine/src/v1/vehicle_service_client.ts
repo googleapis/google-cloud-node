@@ -1218,7 +1218,7 @@ export class VehicleServiceClient {
   }
 
 /**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * Equivalent to `listVehicles`, but returns a NodeJS Stream object.
  * @param {Object} request
  *   The request object that will be sent.
  * @param {maps.fleetengine.v1.RequestHeader} request.header
