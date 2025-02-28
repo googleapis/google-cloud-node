@@ -79,8 +79,8 @@ function main(participant) {
    */
   // const cxParameters = {}
   /**
-   *  The unique identifier of the CX page to override the `current_page` in the
-   *  session.
+   *  The unique identifier of the Dialogflow CX page to override the
+   *  `current_page` in the session.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/flows/<Flow ID>/pages/<Page ID>`.
    *  If `cx_current_page` is specified, the previous state of the session will
