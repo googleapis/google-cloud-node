@@ -14,8 +14,6 @@
     "src/**/*.ts",
     "test/*.ts",
     "test/**/*.ts",
-    "system-test/*.ts",
-    "protos/protos.json",
-    "src/**/*.json"
+    "system-test/*.ts"
   ]
 }
