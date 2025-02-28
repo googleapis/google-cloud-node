@@ -3,7 +3,9 @@
     "private": true,
     "description": "tests for script",
     "scripts": {
-        "test": "mocha close-invalid-link.test.cjs && mocha close-or-remove-response-label.test.cjs"
+        "test": "mocha close-invalid-link.test.cjs && mocha close-or-remove-response-label.test.cjs",
+        "samples-test": "echo 'no samples test!'",
+        "system-test": "echo 'no system test!'"
     },
     "author": "Google Inc.",
     "license": "Apache-2.0",
