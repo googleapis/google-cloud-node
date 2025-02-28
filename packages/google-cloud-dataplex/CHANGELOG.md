@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.13.0...dataplex-v3.14.0) (2025-02-12)
+
+
+### Features
+
+* [dataplex] Added value `NONE` to  the `SyncMode` enum ([#6022](https://github.com/googleapis/google-cloud-node/issues/6022)) ([b363570](https://github.com/googleapis/google-cloud-node/commit/b363570e21e346f39025d586d6851e5b9b8d2f67))
+
 ## [3.13.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.12.0...dataplex-v3.13.0) (2025-01-11)
 
 

@@ -40,9 +40,14 @@
   * [Conference_records_service.list_recordings](#conference_records_service.list_recordings)
   * [Conference_records_service.list_transcript_entries](#conference_records_service.list_transcript_entries)
   * [Conference_records_service.list_transcripts](#conference_records_service.list_transcripts)
+  * [Spaces_service.connect_active_conference](#spaces_service.connect_active_conference)
+  * [Spaces_service.create_member](#spaces_service.create_member)
   * [Spaces_service.create_space](#spaces_service.create_space)
+  * [Spaces_service.delete_member](#spaces_service.delete_member)
   * [Spaces_service.end_active_conference](#spaces_service.end_active_conference)
+  * [Spaces_service.get_member](#spaces_service.get_member)
   * [Spaces_service.get_space](#spaces_service.get_space)
+  * [Spaces_service.list_members](#spaces_service.list_members)
   * [Spaces_service.update_space](#spaces_service.update_space)
   * [Quickstart](#quickstart)
 
@@ -537,6 +542,40 @@ __Usage:__
 
 
 
+### Spaces_service.connect_active_conference
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.connect_active_conference.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.connect_active_conference.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-apps-meet/samples/generated/v2beta/spaces_service.connect_active_conference.js`
+
+
+-----
+
+
+
+
+### Spaces_service.create_member
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_member.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_member.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_member.js`
+
+
+-----
+
+
+
+
 ### Spaces_service.create_space
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_space.js).
@@ -547,6 +586,23 @@ __Usage:__
 
 
 `node packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_space.js`
+
+
+-----
+
+
+
+
+### Spaces_service.delete_member
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.delete_member.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.delete_member.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-apps-meet/samples/generated/v2beta/spaces_service.delete_member.js`
 
 
 -----
@@ -571,6 +627,23 @@ __Usage:__
 
 
 
+### Spaces_service.get_member
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.get_member.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.get_member.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-apps-meet/samples/generated/v2beta/spaces_service.get_member.js`
+
+
+-----
+
+
+
+
 ### Spaces_service.get_space
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.get_space.js).
@@ -581,6 +654,23 @@ __Usage:__
 
 
 `node packages/google-apps-meet/samples/generated/v2beta/spaces_service.get_space.js`
+
+
+-----
+
+
+
+
+### Spaces_service.list_members
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.list_members.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.list_members.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-apps-meet/samples/generated/v2beta/spaces_service.list_members.js`
 
 
 -----

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -320,7 +320,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Entity()
       );
@@ -351,7 +351,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Entity()
       );
@@ -398,7 +398,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEntity = stubSimpleCall(
         undefined,
@@ -451,7 +451,7 @@ describe('v1.MetadataServiceClient', () => {
         ['entity', 'name']
       );
       request.entity.name = defaultValue1;
-      const expectedHeaderRequestParams = `entity.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Entity()
       );
@@ -483,7 +483,7 @@ describe('v1.MetadataServiceClient', () => {
         ['entity', 'name']
       );
       request.entity.name = defaultValue1;
-      const expectedHeaderRequestParams = `entity.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Entity()
       );
@@ -531,7 +531,7 @@ describe('v1.MetadataServiceClient', () => {
         ['entity', 'name']
       );
       request.entity.name = defaultValue1;
-      const expectedHeaderRequestParams = `entity.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEntity = stubSimpleCall(
         undefined,
@@ -584,7 +584,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -615,7 +615,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -662,7 +662,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEntity = stubSimpleCall(
         undefined,
@@ -714,7 +714,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Entity()
       );
@@ -745,7 +745,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Entity()
       );
@@ -792,7 +792,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEntity = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getEntity(request), expectedError);
@@ -841,7 +841,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Partition()
       );
@@ -872,7 +872,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Partition()
       );
@@ -919,7 +919,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPartition = stubSimpleCall(
         undefined,
@@ -971,7 +971,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1002,7 +1002,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1049,7 +1049,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePartition = stubSimpleCall(
         undefined,
@@ -1101,7 +1101,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Partition()
       );
@@ -1132,7 +1132,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Partition()
       );
@@ -1179,7 +1179,7 @@ describe('v1.MetadataServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPartition = stubSimpleCall(
         undefined,
@@ -1231,7 +1231,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
@@ -1264,7 +1264,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
@@ -1313,7 +1313,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEntities = stubSimpleCall(
         undefined,
@@ -1344,7 +1344,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
@@ -1398,7 +1398,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntities.createStream = stubPageStreamingCall(
         undefined,
@@ -1449,7 +1449,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Entity()),
@@ -1492,7 +1492,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntities.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1534,7 +1534,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
@@ -1567,7 +1567,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
@@ -1616,7 +1616,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPartitions = stubSimpleCall(
         undefined,
@@ -1647,7 +1647,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
@@ -1701,7 +1701,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPartitions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1750,7 +1750,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Partition()),
@@ -1793,7 +1793,7 @@ describe('v1.MetadataServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPartitions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

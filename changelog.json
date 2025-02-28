@@ -4,6 +4,1576 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "ba1c99c8-7d05-4b63-af49-3b7d00a3338f",
+      "createTime": "2025-02-12T00:05:55.433Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "a5dabbf7-41ba-4e3a-96b9-bc602c8ba09b",
+      "createTime": "2025-02-12T00:05:55.420Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "ae5872b1-f663-4308-8d41-7a8af573ed4a",
+      "createTime": "2025-02-12T00:05:55.409Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apihub",
+      "id": "2f7c44cb-83fb-4c7a-99dc-e609e22cd631",
+      "createTime": "2025-02-12T00:05:55.396Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "607af37e-c96a-4205-8715-bb53c92397b1",
+      "createTime": "2025-02-12T00:05:55.384Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "79326509-666d-47fc-ad54-3b7501dc83c9",
+      "createTime": "2025-02-12T00:05:55.369Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "af08e2dd-38d4-45e3-b1f5-8245877f489a",
+      "createTime": "2025-02-12T00:05:55.357Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routeoptimization",
+      "id": "a9792c5c-0cc6-4463-93d6-dab074fa80b7",
+      "createTime": "2025-02-12T00:05:55.345Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "b93a6f15-da03-4acb-b04d-04a999b27783",
+      "createTime": "2025-02-12T00:05:55.333Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "d9aa587c-2567-4d3e-b52e-d038fb7804e2",
+      "createTime": "2025-02-12T00:05:55.320Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apphub",
+      "id": "a54ac85b-d8b2-44b9-86b0-25cf4bbea99e",
+      "createTime": "2025-02-12T00:05:55.309Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "0c0711d8-9ff3-4a16-b3fa-fee51f05b016",
+      "createTime": "2025-02-12T00:05:55.298Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/telcoautomation",
+      "id": "12d1cb58-4f08-4c52-b13a-3d269635c4f7",
+      "createTime": "2025-02-12T00:05:55.287Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "5a2fb63e-d88a-4aa3-b2fd-173dde37ecee",
+      "createTime": "2025-02-12T00:05:55.274Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "3.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "c2cd6128-928f-4b5a-a40e-5fea02e0788c",
+      "createTime": "2025-02-12T00:05:55.262Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "da38b880-3f32-42b3-ba0a-77f3b0256c53",
+      "createTime": "2025-02-12T00:05:55.250Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "1.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "e07aab82-b11b-4910-929d-b180020451bb",
+      "createTime": "2025-02-12T00:05:55.238Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "4.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "b6b79093-8f41-40d6-869e-1e5ca0352009",
+      "createTime": "2025-02-12T00:05:55.224Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "3.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "d7aa4fdc-7596-4615-afd6-63747f983e9d",
+      "createTime": "2025-02-12T00:05:55.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "1.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "9b7c65b1-4fb1-4ab1-9363-6e66f6a1220f",
+      "createTime": "2025-02-12T00:05:55.201Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "3.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "1e2882ef-98d8-4592-a0fe-b502dbf1c731",
+      "createTime": "2025-02-12T00:05:55.189Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "5ff361cd-32c1-4d12-ad13-d8a249755f6d",
+      "createTime": "2025-02-12T00:05:55.177Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "09b48861-d304-49ae-9e3c-0e6c0324c35b",
+      "createTime": "2025-02-12T00:05:55.165Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "1.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "2e2f6f37-7e62-431d-aeb9-0a9bc4b706d0",
+      "createTime": "2025-02-12T00:05:55.154Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "8afbd45b-86df-4cfe-8133-1cb2b2287d53",
+      "createTime": "2025-02-12T00:05:55.143Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "734397c6b98d0aafe8832544da3f483b1eade1b2",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6019"
+          ]
+        }
+      ],
+      "version": "4.3.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "e49f4579-da28-4e00-8e7d-bbb5a9f8c1e0",
+      "createTime": "2025-02-12T00:05:55.130Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "2.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "901d4bc8-1f4e-4abb-b2ef-bce1a604f820",
+      "createTime": "2025-02-12T00:05:55.119Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "1.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "7759406d-479e-4e6e-8169-c7640c966947",
+      "createTime": "2025-02-12T00:05:55.107Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "8.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "1f4ccf9f-102c-41fd-9b37-75d1ef38e3f9",
+      "createTime": "2025-02-12T00:05:55.096Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "3.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "8ecf5571-b2ad-4214-96d7-05bff759f912",
+      "createTime": "2025-02-12T00:05:55.083Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "5.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "ee3a3082-aa32-477d-8d9a-fc69c8f33a9e",
+      "createTime": "2025-02-12T00:05:55.072Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "6.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "315b65cc-cf98-4cec-8da1-c255d02af8c1",
+      "createTime": "2025-02-12T00:05:55.059Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "6.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "85318b56-1611-4d91-9fdf-a811449e9abf",
+      "createTime": "2025-02-12T00:05:55.048Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "2d8f5153-bd63-4370-bb5e-a35a538e943f",
+      "createTime": "2025-02-12T00:05:55.035Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "8.12.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "aeaf7829-7fbb-42b7-a8cd-fbcb6abaf244",
+      "createTime": "2025-02-12T00:05:55.022Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "5.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "9857d6b5-ad38-4d48-ba8d-40524a513f66",
+      "createTime": "2025-02-12T00:05:55.008Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "34bda26d89163c60fdb602b6e81bd8c263148709",
+          "message": "[run] finalize fixing typings for headers in generator",
+          "issues": [
+            "6016"
+          ]
+        }
+      ],
+      "version": "1.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "e77668d0-ec26-4f85-99bd-ac3c5758c4f6",
+      "createTime": "2025-02-12T00:05:54.995Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "3.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "573fe072-7577-424e-93b9-6ccacdfc3000",
+      "createTime": "2025-02-12T00:05:54.981Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "204ee5d1-3d4b-486d-8fa1-6b32f0900a80",
+      "createTime": "2025-02-12T00:05:54.967Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "b701ccda-be9d-4c1b-b8f2-3407bba2cf30",
+      "createTime": "2025-02-12T00:05:54.955Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "1.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "5f439d62-fd95-4c80-8560-713a5cbfc5c3",
+      "createTime": "2025-02-12T00:05:54.944Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9dc585661489f51bb7a85b39519fd8b11dfffc5b",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6018"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "6d4c6566-cfa2-430e-a5d2-781d205d5685",
+      "createTime": "2025-02-12T00:05:54.929Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "3.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "9920cef0-001f-4774-8793-287de7af08a9",
+      "createTime": "2025-02-12T00:05:54.917Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "3.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/optimization",
+      "id": "b2c81735-9d67-47d8-82b7-99b1bcbd5096",
+      "createTime": "2025-02-12T00:05:54.906Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "3.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "b4189e5e-c672-4f59-9092-7313d5340524",
+      "createTime": "2025-02-12T00:05:54.894Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "8391c871-0b3a-44e0-b49f-f27c0aa0023d",
+      "createTime": "2025-02-12T00:05:54.867Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "053396be-a714-43bd-8db7-1b5c3ebfb64d",
+      "createTime": "2025-02-12T00:05:54.815Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "3.11.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "9a575082-41ae-4bf6-887f-ff59586052f8",
+      "createTime": "2025-02-12T00:05:54.795Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "3.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "bd42f45b-7dcf-4079-a1d1-73c7334530bf",
+      "createTime": "2025-02-12T00:05:54.778Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5629df231ec948804c4a9c80f43ad4f146e6dcdf",
+          "message": "[netapp] finalize fixing typings for headers in generator",
+          "issues": [
+            "6004"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "5629df231ec948804c4a9c80f43ad4f146e6dcdf",
+          "message": "Add ipAddress field to MountOption",
+          "issues": []
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "3892b4b5-cee7-4ac0-9f45-90a6d3f0d056",
+      "createTime": "2025-02-12T00:05:54.759Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "1.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "cf599ae3-5913-4eb4-8837-7858abce6654",
+      "createTime": "2025-02-12T00:05:54.741Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "4.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "352bccd8-15c7-4d1a-bbea-a7aac108ce29",
+      "createTime": "2025-02-12T00:05:54.729Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "a088a517-e880-4c81-b4e6-d42b85f75b37",
+      "createTime": "2025-02-12T00:05:54.718Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "130df9fe-3e59-495a-bc1b-2892587f717f",
+      "createTime": "2025-02-12T00:05:54.707Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "1.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "44c54dbd-ab17-4002-bc44-1e948c5ed02f",
+      "createTime": "2025-02-12T00:05:54.694Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "94bf3065-c5a4-453e-b132-94d1ebf3486f",
+      "createTime": "2025-02-12T00:05:54.683Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "1.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "f475f00f-704d-4ab6-b768-780f19909423",
+      "createTime": "2025-02-12T00:05:54.672Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "3.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "c9bf1d43-8e44-40e2-893a-9b98466763cb",
+      "createTime": "2025-02-12T00:05:54.660Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6013"
+          ]
+        }
+      ],
+      "version": "3.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "5750d921-3c57-4a9c-8dac-c539dd34031f",
+      "createTime": "2025-02-12T00:05:54.648Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b2f99bf5b7c1f962fe48148363fa1b1a972e1b26",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6012"
+          ]
+        }
+      ],
+      "version": "3.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "f2659328-d4d1-4130-bd67-8937e9a2c70d",
+      "createTime": "2025-02-12T00:05:54.631Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b363570e21e346f39025d586d6851e5b9b8d2f67",
+          "message": "[dataplex] Added value `NONE` to  the `SyncMode` enum",
+          "issues": [
+            "6022"
+          ]
+        }
+      ],
+      "version": "3.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "90ae0d01-581a-46d3-b403-ac61abbe65ca",
+      "createTime": "2025-02-12T00:05:54.620Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "943c3b70eedc956b01c4151760e9fcd5fec0ac2a",
+          "message": "[compute] Update Compute Engine API to revision 20250119 (#981)",
+          "issues": [
+            "6003"
+          ]
+        }
+      ],
+      "version": "4.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "05272e09-b426-4e0b-aa26-4fe2db23fcda",
+      "createTime": "2025-02-12T00:05:54.608Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "1.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "834723f9-7a42-4a97-9381-292d629bb729",
+      "createTime": "2025-02-12T00:05:54.596Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "1.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "7e7310ef-439a-4df1-9a20-4694c3272825",
+      "createTime": "2025-02-12T00:05:54.583Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "16511be2-358a-4bd2-b411-6dd6523ec730",
+      "createTime": "2025-02-12T00:05:54.568Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "1.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "21a396eb-0800-4c2c-8e95-5ee7a1d4708e",
+      "createTime": "2025-02-12T00:05:54.555Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "1.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "96e79f89-bc79-47d7-8bdc-55d47b2798a4",
+      "createTime": "2025-02-12T00:05:54.542Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "1.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "d64d87a6-3e6f-4c8e-8d13-8f7d4fcef679",
+      "createTime": "2025-02-12T00:05:54.531Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "1.16.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "93ba8457-264e-456c-8abf-b8b1907c65f6",
+      "createTime": "2025-02-12T00:05:54.519Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "1.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "a8621cb2-c983-41b6-938c-caea64975c82",
+      "createTime": "2025-02-12T00:05:54.508Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "83d53db9-c2d9-42c2-adaf-2b676cc58d5b",
+      "createTime": "2025-02-12T00:05:54.495Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "5.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "4dc99835-35e9-40e4-843a-bd69a93024d6",
+      "createTime": "2025-02-12T00:05:54.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "1.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-registry",
+      "id": "4d31cd40-9f3f-4e21-98b5-c1516b26a445",
+      "createTime": "2025-02-12T00:05:54.473Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "1.10.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "ba9ba500-160d-4876-ae5c-1bf10a133592",
+      "createTime": "2025-02-12T00:05:54.462Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "3.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "bafbd163-08e8-48b1-9cab-03045b5bd94a",
+      "createTime": "2025-02-12T00:05:54.448Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "b1217fe8-ec30-4434-969a-f911f119e50d",
+      "createTime": "2025-02-12T00:05:54.437Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "1.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "c088d23b-2a74-4c8f-ac8a-f381fe743eef",
+      "createTime": "2025-02-12T00:05:54.426Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "4.12.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "7403c2c6-a8cb-4a22-b767-134eb9410ef6",
+      "createTime": "2025-02-12T00:05:54.414Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ee865ff34a696fbd657e4cfb6cc4be2f6651f77a",
+          "message": "[Many APIs] finalize fixing typings for headers in generator",
+          "issues": [
+            "6011"
+          ]
+        }
+      ],
+      "version": "2.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "b0da7233-2a1a-4cd7-9e12-9bbac31001d7",
+      "createTime": "2025-02-12T00:05:54.403Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0927db07d23a5d4ff619dc73acfb92a271aaf044",
+          "message": "Add initial files for google.cloud.parametermanager.v1",
+          "issues": [
+            "6005"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parametermanager",
+      "id": "2439ccd3-8c5b-497a-8510-d6c7b5a843e1",
+      "createTime": "2025-02-03T08:51:07.205Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8da9b835776d424f55b9d1c97eb8964224a50ac4",
+          "message": "[chat] A new field `custom_emoji_metadata` is added to message `.google.chat.v1.Annotation`",
+          "issues": [
+            "5988"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "054e7b57-96ab-47ba-92a0-fe1a85ed896e",
+      "createTime": "2025-01-29T17:59:49.929Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e87d466d7799eeb6964ba5611f212d961439e516",
+          "message": "[places] add oauth scopes to Places proto",
+          "issues": [
+            "5990"
+          ]
+        }
+      ],
+      "version": "1.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "dad25181-9673-4999-b4fc-047a9290b403",
+      "createTime": "2025-01-29T17:59:49.914Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8d63de785cdab8bab9ce870a6e5adbd007d04dd5",
+          "message": "[batch] Update Ruby version requirement to 3.0",
+          "issues": [
+            "5983"
+          ]
+        }
+      ],
+      "version": "1.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "e5a3816a-1efc-4e77-8336-167154c02503",
+      "createTime": "2025-01-29T17:59:49.899Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e5e13cb8af58de2a6dc9b8735e9cae045c0b551c",
+          "message": "[cloudcontrolspartner] A new method `CreateCustomer` is added to service `CloudControlsPartnerCore`",
+          "issues": [
+            "5980"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudcontrolspartner",
+      "id": "6e508b64-4c51-4f02-9bbe-95a80410625e",
+      "createTime": "2025-01-28T01:11:23.868Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d0a1ba90bc3b411dfb404c5d1933650a9c46552a",
+          "message": "[places] add more fuel type enum values",
+          "issues": [
+            "5981"
+          ]
+        }
+      ],
+      "version": "1.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "ab3a1b1b-783b-4f8c-ad7b-73252f46b217",
+      "createTime": "2025-01-28T01:11:23.853Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c326e40eda7c5cfeca4bab2837d8eb8139903341",
+          "message": "[redis] [Memorystore for Redis Cluster] Added support for maintenance window and rescheduling maintenance",
+          "issues": [
+            "5954"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "8c920773-1dad-4fac-84f3-a228c396323c",
+      "createTime": "2025-01-23T17:44:12.173Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "050db4d28f9a203ce2d41db21eb74b3ecb6b4a16",
+          "message": "[Many APIs] Reasoning Engine v1 GAPIC release",
+          "issues": [
+            "5965"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "ae32e644-9db7-4cc5-8bad-2de2aea8cd7e",
+      "createTime": "2025-01-23T17:44:12.154Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "03232b371a770205d488791bfcb3631f2291d9fb",
+          "message": "[tpu] Introduce PerformMaintenance API",
+          "issues": [
+            "5956"
+          ]
+        }
+      ],
+      "version": "3.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "8e2eb559-e60b-4b95-8a1e-3ffdb339ea41",
+      "createTime": "2025-01-23T17:44:12.136Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d765c81cca8ce084f5a9505e717962e8ed649dfd",
+          "message": "[dialogflow] add Model Armor API",
+          "issues": [
+            "5952"
+          ]
+        }
+      ],
+      "version": "6.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "e18ab322-cbc4-4692-a71a-74e6c4d8a8f8",
+      "createTime": "2025-01-23T17:44:12.120Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "96d17834fa6cc727d4d79d082a3d457d7f70e295",
+          "message": "[datastream] A new field `ssl_config` is added to message `.google.cloud.datastream.v1.PostgresqlProfile`",
+          "issues": [
+            "5972"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "d574f57d-07c1-472e-b08f-01a373a9c25c",
+      "createTime": "2025-01-23T17:44:12.101Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "050db4d28f9a203ce2d41db21eb74b3ecb6b4a16",
+          "message": "[Many APIs] Reasoning Engine v1 GAPIC release",
+          "issues": [
+            "5965"
+          ]
+        }
+      ],
+      "version": "3.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "93316a13-a479-4c14-839e-4a5dadee2df1",
+      "createTime": "2025-01-23T17:44:12.085Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "752d41e737c1dd7c5ace18ceae4bf215b60e728f",
+          "message": "[compute] Update Compute Engine API to revision 20250107 (#975)",
+          "issues": [
+            "5976"
+          ]
+        }
+      ],
+      "version": "4.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "f4c988ef-5ced-4f09-ba4e-6a1524107a11",
+      "createTime": "2025-01-23T17:44:12.070Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "dc590363a9553d33db7e3fc2b933534239af4fc5",
           "message": "Add initial files for google.cloud.memorystore.v1",
@@ -38746,5 +40316,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-01-16T03:10:12.269Z"
+  "updateTime": "2025-02-12T00:05:55.433Z"
 }

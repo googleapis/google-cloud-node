@@ -90,6 +90,7 @@
   "../../protos/google/cloud/aiplatform/v1beta1/notebook_runtime.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/notebook_runtime_template_ref.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/notebook_service.proto",
+  "../../protos/google/cloud/aiplatform/v1beta1/notebook_software_config.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/openapi.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/operation.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/persistent_resource.proto",

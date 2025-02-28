@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.8.0...contact-center-insights-v3.9.0) (2025-01-23)
+
+
+### Features
+
+* [Many APIs] Reasoning Engine v1 GAPIC release ([#5965](https://github.com/googleapis/google-cloud-node/issues/5965)) ([050db4d](https://github.com/googleapis/google-cloud-node/commit/050db4d28f9a203ce2d41db21eb74b3ecb6b4a16))
+
 ## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.7.0...contact-center-insights-v3.8.0) (2024-12-18)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import {
   FeatureRegistryServiceClient,
   FeaturestoreOnlineServingServiceClient,
   FeaturestoreServiceClient,
+  GenAiCacheServiceClient,
   GenAiTuningServiceClient,
   IndexEndpointServiceClient,
   IndexServiceClient,
@@ -40,9 +41,13 @@ import {
   PersistentResourceServiceClient,
   PipelineServiceClient,
   PredictionServiceClient,
+  ReasoningEngineExecutionServiceClient,
+  ReasoningEngineServiceClient,
   ScheduleServiceClient,
   SpecialistPoolServiceClient,
   TensorboardServiceClient,
+  VertexRagDataServiceClient,
+  VertexRagServiceClient,
   VizierServiceClient,
 } from '@google-cloud/aiplatform';
 
@@ -84,6 +89,9 @@ function doStuffWithFeaturestoreOnlineServingServiceClient(
 function doStuffWithFeaturestoreServiceClient(
   client: FeaturestoreServiceClient
 ) {
+  client.close();
+}
+function doStuffWithGenAiCacheServiceClient(client: GenAiCacheServiceClient) {
   client.close();
 }
 function doStuffWithGenAiTuningServiceClient(client: GenAiTuningServiceClient) {
@@ -132,6 +140,16 @@ function doStuffWithPipelineServiceClient(client: PipelineServiceClient) {
 function doStuffWithPredictionServiceClient(client: PredictionServiceClient) {
   client.close();
 }
+function doStuffWithReasoningEngineExecutionServiceClient(
+  client: ReasoningEngineExecutionServiceClient
+) {
+  client.close();
+}
+function doStuffWithReasoningEngineServiceClient(
+  client: ReasoningEngineServiceClient
+) {
+  client.close();
+}
 function doStuffWithScheduleServiceClient(client: ScheduleServiceClient) {
   client.close();
 }
@@ -141,6 +159,14 @@ function doStuffWithSpecialistPoolServiceClient(
   client.close();
 }
 function doStuffWithTensorboardServiceClient(client: TensorboardServiceClient) {
+  client.close();
+}
+function doStuffWithVertexRagDataServiceClient(
+  client: VertexRagDataServiceClient
+) {
+  client.close();
+}
+function doStuffWithVertexRagServiceClient(client: VertexRagServiceClient) {
   client.close();
 }
 function doStuffWithVizierServiceClient(client: VizierServiceClient) {
@@ -185,6 +211,9 @@ function main() {
   const featurestoreServiceClient = new FeaturestoreServiceClient();
   doStuffWithFeaturestoreServiceClient(featurestoreServiceClient);
   // check that the client instance can be created
+  const genAiCacheServiceClient = new GenAiCacheServiceClient();
+  doStuffWithGenAiCacheServiceClient(genAiCacheServiceClient);
+  // check that the client instance can be created
   const genAiTuningServiceClient = new GenAiTuningServiceClient();
   doStuffWithGenAiTuningServiceClient(genAiTuningServiceClient);
   // check that the client instance can be created
@@ -227,6 +256,15 @@ function main() {
   const predictionServiceClient = new PredictionServiceClient();
   doStuffWithPredictionServiceClient(predictionServiceClient);
   // check that the client instance can be created
+  const reasoningEngineExecutionServiceClient =
+    new ReasoningEngineExecutionServiceClient();
+  doStuffWithReasoningEngineExecutionServiceClient(
+    reasoningEngineExecutionServiceClient
+  );
+  // check that the client instance can be created
+  const reasoningEngineServiceClient = new ReasoningEngineServiceClient();
+  doStuffWithReasoningEngineServiceClient(reasoningEngineServiceClient);
+  // check that the client instance can be created
   const scheduleServiceClient = new ScheduleServiceClient();
   doStuffWithScheduleServiceClient(scheduleServiceClient);
   // check that the client instance can be created
@@ -235,6 +273,12 @@ function main() {
   // check that the client instance can be created
   const tensorboardServiceClient = new TensorboardServiceClient();
   doStuffWithTensorboardServiceClient(tensorboardServiceClient);
+  // check that the client instance can be created
+  const vertexRagDataServiceClient = new VertexRagDataServiceClient();
+  doStuffWithVertexRagDataServiceClient(vertexRagDataServiceClient);
+  // check that the client instance can be created
+  const vertexRagServiceClient = new VertexRagServiceClient();
+  doStuffWithVertexRagServiceClient(vertexRagServiceClient);
   // check that the client instance can be created
   const vizierServiceClient = new VizierServiceClient();
   doStuffWithVizierServiceClient(vizierServiceClient);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -375,7 +375,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FeatureGroup()
       );
@@ -407,7 +407,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FeatureGroup()
       );
@@ -455,7 +455,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeatureGroup = stubSimpleCall(
         undefined,
@@ -509,7 +509,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Feature()
       );
@@ -541,7 +541,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Feature()
       );
@@ -589,7 +589,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeature = stubSimpleCall(
         undefined,
@@ -643,7 +643,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FeatureMonitor()
       );
@@ -675,7 +675,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FeatureMonitor()
       );
@@ -723,7 +723,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeatureMonitor = stubSimpleCall(
         undefined,
@@ -777,7 +777,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob()
       );
@@ -810,7 +810,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob()
       );
@@ -858,7 +858,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeatureMonitorJob = stubSimpleCall(
         undefined,
@@ -918,7 +918,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob()
       );
@@ -951,7 +951,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob()
       );
@@ -999,7 +999,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeatureMonitorJob = stubSimpleCall(
         undefined,
@@ -1053,7 +1053,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1087,7 +1087,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1142,7 +1142,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeatureGroup = stubLongRunningCall(
         undefined,
@@ -1174,7 +1174,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeatureGroup = stubLongRunningCall(
         undefined,
@@ -1254,7 +1254,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['featureGroup', 'name']
       );
       request.featureGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `feature_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feature_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1289,7 +1289,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['featureGroup', 'name']
       );
       request.featureGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `feature_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feature_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1345,7 +1345,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['featureGroup', 'name']
       );
       request.featureGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `feature_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feature_group.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFeatureGroup = stubLongRunningCall(
         undefined,
@@ -1378,7 +1378,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['featureGroup', 'name']
       );
       request.featureGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `feature_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feature_group.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFeatureGroup = stubLongRunningCall(
         undefined,
@@ -1457,7 +1457,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1491,7 +1491,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1546,7 +1546,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFeatureGroup = stubLongRunningCall(
         undefined,
@@ -1578,7 +1578,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFeatureGroup = stubLongRunningCall(
         undefined,
@@ -1657,7 +1657,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1691,7 +1691,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1746,7 +1746,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeature = stubLongRunningCall(
         undefined,
@@ -1778,7 +1778,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeature = stubLongRunningCall(
         undefined,
@@ -1857,7 +1857,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1891,7 +1891,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1946,7 +1946,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateFeatures = stubLongRunningCall(
         undefined,
@@ -1978,7 +1978,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateFeatures = stubLongRunningCall(
         undefined,
@@ -2058,7 +2058,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['feature', 'name']
       );
       request.feature.name = defaultValue1;
-      const expectedHeaderRequestParams = `feature.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feature.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2093,7 +2093,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['feature', 'name']
       );
       request.feature.name = defaultValue1;
-      const expectedHeaderRequestParams = `feature.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feature.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2149,7 +2149,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['feature', 'name']
       );
       request.feature.name = defaultValue1;
-      const expectedHeaderRequestParams = `feature.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feature.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFeature = stubLongRunningCall(
         undefined,
@@ -2182,7 +2182,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['feature', 'name']
       );
       request.feature.name = defaultValue1;
-      const expectedHeaderRequestParams = `feature.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feature.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFeature = stubLongRunningCall(
         undefined,
@@ -2261,7 +2261,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2295,7 +2295,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2350,7 +2350,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFeature = stubLongRunningCall(
         undefined,
@@ -2382,7 +2382,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFeature = stubLongRunningCall(
         undefined,
@@ -2461,7 +2461,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2495,7 +2495,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2550,7 +2550,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeatureMonitor = stubLongRunningCall(
         undefined,
@@ -2582,7 +2582,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeatureMonitor = stubLongRunningCall(
         undefined,
@@ -2645,6 +2645,210 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
     });
   });
 
+  describe('updateFeatureMonitor', () => {
+    it('invokes updateFeatureMonitor without error', async () => {
+      const client =
+        new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest()
+      );
+      request.featureMonitor ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest',
+        ['featureMonitor', 'name']
+      );
+      request.featureMonitor.name = defaultValue1;
+      const expectedHeaderRequestParams = `feature_monitor.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateFeatureMonitor =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateFeatureMonitor(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateFeatureMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFeatureMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateFeatureMonitor without error using callback', async () => {
+      const client =
+        new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest()
+      );
+      request.featureMonitor ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest',
+        ['featureMonitor', 'name']
+      );
+      request.featureMonitor.name = defaultValue1;
+      const expectedHeaderRequestParams = `feature_monitor.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateFeatureMonitor =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateFeatureMonitor(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+              protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateFeatureMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFeatureMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateFeatureMonitor with call error', async () => {
+      const client =
+        new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest()
+      );
+      request.featureMonitor ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest',
+        ['featureMonitor', 'name']
+      );
+      request.featureMonitor.name = defaultValue1;
+      const expectedHeaderRequestParams = `feature_monitor.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateFeatureMonitor = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateFeatureMonitor(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateFeatureMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFeatureMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateFeatureMonitor with LRO error', async () => {
+      const client =
+        new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest()
+      );
+      request.featureMonitor ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorRequest',
+        ['featureMonitor', 'name']
+      );
+      request.featureMonitor.name = defaultValue1;
+      const expectedHeaderRequestParams = `feature_monitor.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateFeatureMonitor = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateFeatureMonitor(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateFeatureMonitor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFeatureMonitor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateFeatureMonitorProgress without error', async () => {
+      const client =
+        new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateFeatureMonitorProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateFeatureMonitorProgress with error', async () => {
+      const client =
+        new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateFeatureMonitorProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('deleteFeatureMonitor', () => {
     it('invokes deleteFeatureMonitor without error', async () => {
       const client =
@@ -2661,7 +2865,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2695,7 +2899,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2750,7 +2954,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFeatureMonitor = stubLongRunningCall(
         undefined,
@@ -2782,7 +2986,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFeatureMonitor = stubLongRunningCall(
         undefined,
@@ -2861,7 +3065,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureGroup()
@@ -2901,7 +3105,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureGroup()
@@ -2959,7 +3163,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeatureGroups = stubSimpleCall(
         undefined,
@@ -2991,7 +3195,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureGroup()
@@ -3053,7 +3257,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeatureGroups.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3104,7 +3308,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureGroup()
@@ -3155,7 +3359,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeatureGroups.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3199,7 +3403,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Feature()
@@ -3239,7 +3443,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Feature()
@@ -3295,7 +3499,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeatures = stubSimpleCall(
         undefined,
@@ -3327,7 +3531,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Feature()
@@ -3388,7 +3592,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeatures.createStream = stubPageStreamingCall(
         undefined,
@@ -3440,7 +3644,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.Feature()
@@ -3490,7 +3694,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeatures.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3533,7 +3737,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureMonitor()
@@ -3574,7 +3778,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureMonitor()
@@ -3632,7 +3836,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeatureMonitors = stubSimpleCall(
         undefined,
@@ -3664,7 +3868,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureMonitor()
@@ -3726,7 +3930,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeatureMonitors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3777,7 +3981,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureMonitor()
@@ -3828,7 +4032,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeatureMonitors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3872,7 +4076,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob()
@@ -3913,7 +4117,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob()
@@ -3971,7 +4175,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeatureMonitorJobs = stubSimpleCall(
         undefined,
@@ -4006,7 +4210,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob()
@@ -4076,7 +4280,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeatureMonitorJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4135,7 +4339,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.FeatureMonitorJob()
@@ -4190,7 +4394,7 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeatureMonitorJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

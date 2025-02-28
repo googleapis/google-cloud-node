@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-compute",
-        "version": "4.10.0",
+        "version": "4.12.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -17344,6 +17344,66 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_NetworkFirewallPolicies_AddPacketMirroringRule_async",
+            "title": "AcceleratorTypes addPacketMirroringRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Inserts a packet mirroring rule into a firewall policy.",
+            "canonical": true,
+            "file": "network_firewall_policies.add_packet_mirroring_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AddPacketMirroringRule",
+                "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.AddPacketMirroringRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "firewall_policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "firewall_policy_rule_resource",
+                        "type": ".google.cloud.compute.v1.FirewallPolicyRule"
+                    },
+                    {
+                        "name": "max_priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "min_priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "NetworkFirewallPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPoliciesClient"
+                },
+                "method": {
+                    "shortName": "AddPacketMirroringRule",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.AddPacketMirroringRule",
+                    "service": {
+                        "shortName": "NetworkFirewallPolicies",
+                        "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_NetworkFirewallPolicies_AddRule_async",
             "title": "AcceleratorTypes addRule Sample",
             "origin": "API_DEFINITION",
@@ -17396,6 +17456,74 @@
                 "method": {
                     "shortName": "AddRule",
                     "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.AddRule",
+                    "service": {
+                        "shortName": "NetworkFirewallPolicies",
+                        "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_NetworkFirewallPolicies_AggregatedList_async",
+            "title": "AcceleratorTypes aggregatedList Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves an aggregated list of network firewall policies, listing network firewall policies from all applicable scopes (global and regional) and grouping the results per scope. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
+            "canonical": true,
+            "file": "network_firewall_policies.aggregated_list.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 83,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AggregatedList",
+                "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.AggregatedList",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "include_all_scopes",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.NetworkFirewallPolicyAggregatedList",
+                "client": {
+                    "shortName": "NetworkFirewallPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPoliciesClient"
+                },
+                "method": {
+                    "shortName": "AggregatedList",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.AggregatedList",
                     "service": {
                         "shortName": "NetworkFirewallPolicies",
                         "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
@@ -17644,6 +17772,54 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_NetworkFirewallPolicies_GetPacketMirroringRule_async",
+            "title": "AcceleratorTypes getPacketMirroringRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a packet mirroring rule of the specified priority.",
+            "canonical": true,
+            "file": "network_firewall_policies.get_packet_mirroring_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPacketMirroringRule",
+                "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.GetPacketMirroringRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "firewall_policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.FirewallPolicyRule",
+                "client": {
+                    "shortName": "NetworkFirewallPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPoliciesClient"
+                },
+                "method": {
+                    "shortName": "GetPacketMirroringRule",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.GetPacketMirroringRule",
+                    "service": {
+                        "shortName": "NetworkFirewallPolicies",
+                        "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_NetworkFirewallPolicies_GetRule_async",
             "title": "AcceleratorTypes getRule Sample",
             "origin": "API_DEFINITION",
@@ -17852,6 +18028,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_NetworkFirewallPolicies_PatchPacketMirroringRule_async",
+            "title": "AcceleratorTypes patchPacketMirroringRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Patches a packet mirroring rule of the specified priority.",
+            "canonical": true,
+            "file": "network_firewall_policies.patch_packet_mirroring_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PatchPacketMirroringRule",
+                "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.PatchPacketMirroringRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "firewall_policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "firewall_policy_rule_resource",
+                        "type": ".google.cloud.compute.v1.FirewallPolicyRule"
+                    },
+                    {
+                        "name": "priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "NetworkFirewallPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPoliciesClient"
+                },
+                "method": {
+                    "shortName": "PatchPacketMirroringRule",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.PatchPacketMirroringRule",
+                    "service": {
+                        "shortName": "NetworkFirewallPolicies",
+                        "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_NetworkFirewallPolicies_PatchRule_async",
             "title": "AcceleratorTypes patchRule Sample",
             "origin": "API_DEFINITION",
@@ -17952,6 +18184,58 @@
                 "method": {
                     "shortName": "RemoveAssociation",
                     "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.RemoveAssociation",
+                    "service": {
+                        "shortName": "NetworkFirewallPolicies",
+                        "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_NetworkFirewallPolicies_RemovePacketMirroringRule_async",
+            "title": "AcceleratorTypes removePacketMirroringRule Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a packet mirroring rule of the specified priority.",
+            "canonical": true,
+            "file": "network_firewall_policies.remove_packet_mirroring_rule.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RemovePacketMirroringRule",
+                "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.RemovePacketMirroringRule",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "firewall_policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "priority",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "NetworkFirewallPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPoliciesClient"
+                },
+                "method": {
+                    "shortName": "RemovePacketMirroringRule",
+                    "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies.RemovePacketMirroringRule",
                     "service": {
                         "shortName": "NetworkFirewallPolicies",
                         "fullName": "google.cloud.compute.v1.NetworkFirewallPolicies"
@@ -23335,7 +23619,7 @@
             "regionTag": "compute_v1_generated_RegionCommitments_Update_async",
             "title": "AcceleratorTypes update Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.",
+            "description": " Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.",
             "canonical": true,
             "file": "region_commitments.update.js",
             "language": "JAVASCRIPT",
@@ -32748,6 +33032,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_Routers_DeleteRoutePolicy_async",
+            "title": "AcceleratorTypes deleteRoutePolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes Route Policy",
+            "canonical": true,
+            "file": "routers.delete_route_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteRoutePolicy",
+                "fullName": "google.cloud.compute.v1.Routers.DeleteRoutePolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "router",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RoutersClient",
+                    "fullName": "google.cloud.compute.v1.RoutersClient"
+                },
+                "method": {
+                    "shortName": "DeleteRoutePolicy",
+                    "fullName": "google.cloud.compute.v1.Routers.DeleteRoutePolicy",
+                    "service": {
+                        "shortName": "Routers",
+                        "fullName": "google.cloud.compute.v1.Routers"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_Routers_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
@@ -32920,6 +33260,58 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_Routers_GetRoutePolicy_async",
+            "title": "AcceleratorTypes getRoutePolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns specified Route Policy",
+            "canonical": true,
+            "file": "routers.get_route_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetRoutePolicy",
+                "fullName": "google.cloud.compute.v1.Routers.GetRoutePolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "router",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.RoutersGetRoutePolicyResponse",
+                "client": {
+                    "shortName": "RoutersClient",
+                    "fullName": "google.cloud.compute.v1.RoutersClient"
+                },
+                "method": {
+                    "shortName": "GetRoutePolicy",
+                    "fullName": "google.cloud.compute.v1.Routers.GetRoutePolicy",
+                    "service": {
+                        "shortName": "Routers",
+                        "fullName": "google.cloud.compute.v1.Routers"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_Routers_GetRouterStatus_async",
             "title": "AcceleratorTypes getRouterStatus Sample",
             "origin": "API_DEFINITION",
@@ -33084,6 +33476,162 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_Routers_ListBgpRoutes_async",
+            "title": "AcceleratorTypes listBgpRoutes Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves a list of router bgp routes available to the specified project.",
+            "canonical": true,
+            "file": "routers.list_bgp_routes.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 107,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListBgpRoutes",
+                "fullName": "google.cloud.compute.v1.Routers.ListBgpRoutes",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "address_family",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "destination_prefix",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "peer",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "policy_applied",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "route_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "router",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.RoutersListBgpRoutes",
+                "client": {
+                    "shortName": "RoutersClient",
+                    "fullName": "google.cloud.compute.v1.RoutersClient"
+                },
+                "method": {
+                    "shortName": "ListBgpRoutes",
+                    "fullName": "google.cloud.compute.v1.Routers.ListBgpRoutes",
+                    "service": {
+                        "shortName": "Routers",
+                        "fullName": "google.cloud.compute.v1.Routers"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_Routers_ListRoutePolicies_async",
+            "title": "AcceleratorTypes listRoutePolicies Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves a list of router route policy subresources available to the specified project.",
+            "canonical": true,
+            "file": "routers.list_route_policies.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 85,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListRoutePolicies",
+                "fullName": "google.cloud.compute.v1.Routers.ListRoutePolicies",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "router",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.RoutersListRoutePolicies",
+                "client": {
+                    "shortName": "RoutersClient",
+                    "fullName": "google.cloud.compute.v1.RoutersClient"
+                },
+                "method": {
+                    "shortName": "ListRoutePolicies",
+                    "fullName": "google.cloud.compute.v1.Routers.ListRoutePolicies",
+                    "service": {
+                        "shortName": "Routers",
+                        "fullName": "google.cloud.compute.v1.Routers"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_Routers_Patch_async",
             "title": "AcceleratorTypes patch Sample",
             "origin": "API_DEFINITION",
@@ -33132,6 +33680,62 @@
                 "method": {
                     "shortName": "Patch",
                     "fullName": "google.cloud.compute.v1.Routers.Patch",
+                    "service": {
+                        "shortName": "Routers",
+                        "fullName": "google.cloud.compute.v1.Routers"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_Routers_PatchRoutePolicy_async",
+            "title": "AcceleratorTypes patchRoutePolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Patches Route Policy",
+            "canonical": true,
+            "file": "routers.patch_route_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PatchRoutePolicy",
+                "fullName": "google.cloud.compute.v1.Routers.PatchRoutePolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "route_policy_resource",
+                        "type": ".google.cloud.compute.v1.RoutePolicy"
+                    },
+                    {
+                        "name": "router",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RoutersClient",
+                    "fullName": "google.cloud.compute.v1.RoutersClient"
+                },
+                "method": {
+                    "shortName": "PatchRoutePolicy",
+                    "fullName": "google.cloud.compute.v1.Routers.PatchRoutePolicy",
                     "service": {
                         "shortName": "Routers",
                         "fullName": "google.cloud.compute.v1.Routers"
@@ -33240,6 +33844,62 @@
                 "method": {
                     "shortName": "Update",
                     "fullName": "google.cloud.compute.v1.Routers.Update",
+                    "service": {
+                        "shortName": "Routers",
+                        "fullName": "google.cloud.compute.v1.Routers"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_Routers_UpdateRoutePolicy_async",
+            "title": "AcceleratorTypes updateRoutePolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates or creates new Route Policy",
+            "canonical": true,
+            "file": "routers.update_route_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateRoutePolicy",
+                "fullName": "google.cloud.compute.v1.Routers.UpdateRoutePolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "route_policy_resource",
+                        "type": ".google.cloud.compute.v1.RoutePolicy"
+                    },
+                    {
+                        "name": "router",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RoutersClient",
+                    "fullName": "google.cloud.compute.v1.RoutersClient"
+                },
+                "method": {
+                    "shortName": "UpdateRoutePolicy",
+                    "fullName": "google.cloud.compute.v1.Routers.UpdateRoutePolicy",
                     "service": {
                         "shortName": "Routers",
                         "fullName": "google.cloud.compute.v1.Routers"

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -389,7 +389,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.PersistentResource()
       );
@@ -424,7 +424,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.PersistentResource()
       );
@@ -474,7 +474,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPersistentResource = stubSimpleCall(
         undefined,
@@ -538,7 +538,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -574,7 +574,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -631,7 +631,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPersistentResource = stubLongRunningCall(
         undefined,
@@ -668,7 +668,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPersistentResource = stubLongRunningCall(
         undefined,
@@ -754,7 +754,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -790,7 +790,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -847,7 +847,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePersistentResource = stubLongRunningCall(
         undefined,
@@ -884,7 +884,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePersistentResource = stubLongRunningCall(
         undefined,
@@ -971,7 +971,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['persistentResource', 'name']
       );
       request.persistentResource.name = defaultValue1;
-      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1008,7 +1008,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['persistentResource', 'name']
       );
       request.persistentResource.name = defaultValue1;
-      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1066,7 +1066,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['persistentResource', 'name']
       );
       request.persistentResource.name = defaultValue1;
-      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePersistentResource = stubLongRunningCall(
         undefined,
@@ -1104,7 +1104,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['persistentResource', 'name']
       );
       request.persistentResource.name = defaultValue1;
-      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePersistentResource = stubLongRunningCall(
         undefined,
@@ -1190,7 +1190,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1226,7 +1226,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1283,7 +1283,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rebootPersistentResource = stubLongRunningCall(
         undefined,
@@ -1320,7 +1320,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rebootPersistentResource = stubLongRunningCall(
         undefined,
@@ -1406,7 +1406,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.PersistentResource()
@@ -1449,7 +1449,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.PersistentResource()
@@ -1509,7 +1509,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPersistentResources = stubSimpleCall(
         undefined,
@@ -1546,7 +1546,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.PersistentResource()
@@ -1618,7 +1618,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPersistentResources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1679,7 +1679,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.PersistentResource()
@@ -1736,7 +1736,7 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPersistentResources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

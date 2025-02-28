@@ -360,7 +360,7 @@ export class PlacesClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;

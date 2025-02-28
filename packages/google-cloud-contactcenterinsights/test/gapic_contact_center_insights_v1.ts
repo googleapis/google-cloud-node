@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -372,7 +372,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -405,7 +405,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -453,7 +453,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversation = stubSimpleCall(
         undefined,
@@ -508,7 +508,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['conversation', 'name']
       );
       request.conversation.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -542,7 +542,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['conversation', 'name']
       );
       request.conversation.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -591,7 +591,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['conversation', 'name']
       );
       request.conversation.name = defaultValue1;
-      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConversation = stubSimpleCall(
         undefined,
@@ -646,7 +646,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -678,7 +678,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Conversation()
       );
@@ -726,7 +726,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConversation = stubSimpleCall(
         undefined,
@@ -780,7 +780,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -813,7 +813,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -861,7 +861,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConversation = stubSimpleCall(
         undefined,
@@ -915,7 +915,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Analysis()
       );
@@ -947,7 +947,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Analysis()
       );
@@ -995,7 +995,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnalysis = stubSimpleCall(
         undefined,
@@ -1049,7 +1049,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1081,7 +1081,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1129,7 +1129,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAnalysis = stubSimpleCall(
         undefined,
@@ -1184,7 +1184,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel', 'name']
       );
       request.issueModel.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
@@ -1217,7 +1217,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel', 'name']
       );
       request.issueModel.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
@@ -1266,7 +1266,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel', 'name']
       );
       request.issueModel.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateIssueModel = stubSimpleCall(
         undefined,
@@ -1321,7 +1321,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
@@ -1353,7 +1353,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IssueModel()
       );
@@ -1401,7 +1401,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIssueModel = stubSimpleCall(
         undefined,
@@ -1455,7 +1455,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsResponse()
       );
@@ -1487,7 +1487,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsResponse()
       );
@@ -1535,7 +1535,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listIssueModels = stubSimpleCall(
         undefined,
@@ -1589,7 +1589,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
@@ -1621,7 +1621,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
@@ -1669,7 +1669,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIssue = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getIssue(request), expectedError);
@@ -1720,7 +1720,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesResponse()
       );
@@ -1752,7 +1752,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesResponse()
       );
@@ -1800,7 +1800,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listIssues = stubSimpleCall(
         undefined,
@@ -1855,7 +1855,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issue', 'name']
       );
       request.issue.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
@@ -1888,7 +1888,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issue', 'name']
       );
       request.issue.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Issue()
       );
@@ -1937,7 +1937,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issue', 'name']
       );
       request.issue.name = defaultValue1;
-      const expectedHeaderRequestParams = `issue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateIssue = stubSimpleCall(
         undefined,
@@ -1992,7 +1992,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2024,7 +2024,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2072,7 +2072,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIssue = stubSimpleCall(
         undefined,
@@ -2126,7 +2126,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel']
       );
       request.issueModel = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsResponse()
       );
@@ -2159,7 +2159,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel']
       );
       request.issueModel = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsResponse()
       );
@@ -2207,7 +2207,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['issueModel']
       );
       request.issueModel = defaultValue1;
-      const expectedHeaderRequestParams = `issue_model=${defaultValue1}`;
+      const expectedHeaderRequestParams = `issue_model=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.calculateIssueModelStats = stubSimpleCall(
         undefined,
@@ -2267,7 +2267,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2300,7 +2300,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2348,7 +2348,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPhraseMatcher = stubSimpleCall(
         undefined,
@@ -2402,7 +2402,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2434,7 +2434,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2482,7 +2482,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPhraseMatcher = stubSimpleCall(
         undefined,
@@ -2536,7 +2536,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2569,7 +2569,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2617,7 +2617,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePhraseMatcher = stubSimpleCall(
         undefined,
@@ -2672,7 +2672,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['phraseMatcher', 'name']
       );
       request.phraseMatcher.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2706,7 +2706,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['phraseMatcher', 'name']
       );
       request.phraseMatcher.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
       );
@@ -2755,7 +2755,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['phraseMatcher', 'name']
       );
       request.phraseMatcher.name = defaultValue1;
-      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `phrase_matcher.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePhraseMatcher = stubSimpleCall(
         undefined,
@@ -2810,7 +2810,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsResponse()
       );
@@ -2842,7 +2842,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsResponse()
       );
@@ -2890,7 +2890,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.calculateStats = stubSimpleCall(
         undefined,
@@ -2944,7 +2944,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
@@ -2976,7 +2976,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
@@ -3024,7 +3024,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSettings = stubSimpleCall(
         undefined,
@@ -3079,7 +3079,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
@@ -3112,7 +3112,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.Settings()
       );
@@ -3161,7 +3161,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSettings = stubSimpleCall(
         undefined,
@@ -3216,7 +3216,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3249,7 +3249,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3297,7 +3297,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnalysisRule = stubSimpleCall(
         undefined,
@@ -3351,7 +3351,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3383,7 +3383,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3431,7 +3431,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnalysisRule = stubSimpleCall(
         undefined,
@@ -3486,7 +3486,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['analysisRule', 'name']
       );
       request.analysisRule.name = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3520,7 +3520,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['analysisRule', 'name']
       );
       request.analysisRule.name = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
       );
@@ -3569,7 +3569,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['analysisRule', 'name']
       );
       request.analysisRule.name = defaultValue1;
-      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `analysis_rule.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAnalysisRule = stubSimpleCall(
         undefined,
@@ -3624,7 +3624,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3657,7 +3657,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3705,7 +3705,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAnalysisRule = stubSimpleCall(
         undefined,
@@ -3759,7 +3759,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.EncryptionSpec()
       );
@@ -3791,7 +3791,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.EncryptionSpec()
       );
@@ -3839,7 +3839,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEncryptionSpec = stubSimpleCall(
         undefined,
@@ -3893,7 +3893,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -3925,7 +3925,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -3973,7 +3973,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createView = stubSimpleCall(
         undefined,
@@ -4027,7 +4027,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -4059,7 +4059,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -4107,7 +4107,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getView = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getView(request), expectedError);
@@ -4159,7 +4159,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['view', 'name']
       );
       request.view.name = defaultValue1;
-      const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `view.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -4192,7 +4192,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['view', 'name']
       );
       request.view.name = defaultValue1;
-      const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `view.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.View()
       );
@@ -4241,7 +4241,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['view', 'name']
       );
       request.view.name = defaultValue1;
-      const expectedHeaderRequestParams = `view.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `view.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateView = stubSimpleCall(
         undefined,
@@ -4296,7 +4296,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4328,7 +4328,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4376,7 +4376,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteView = stubSimpleCall(
         undefined,
@@ -4430,7 +4430,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4462,7 +4462,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4510,7 +4510,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQaQuestion = stubSimpleCall(
         undefined,
@@ -4564,7 +4564,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4596,7 +4596,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4644,7 +4644,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQaQuestion = stubSimpleCall(
         undefined,
@@ -4699,7 +4699,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaQuestion', 'name']
       );
       request.qaQuestion.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4732,7 +4732,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaQuestion', 'name']
       );
       request.qaQuestion.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
       );
@@ -4781,7 +4781,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaQuestion', 'name']
       );
       request.qaQuestion.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_question.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateQaQuestion = stubSimpleCall(
         undefined,
@@ -4836,7 +4836,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4868,7 +4868,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4916,7 +4916,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteQaQuestion = stubSimpleCall(
         undefined,
@@ -4970,7 +4970,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -5002,7 +5002,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -5050,7 +5050,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQaScorecard = stubSimpleCall(
         undefined,
@@ -5104,7 +5104,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -5136,7 +5136,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -5184,7 +5184,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQaScorecard = stubSimpleCall(
         undefined,
@@ -5239,7 +5239,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaScorecard', 'name']
       );
       request.qaScorecard.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -5272,7 +5272,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaScorecard', 'name']
       );
       request.qaScorecard.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
       );
@@ -5321,7 +5321,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['qaScorecard', 'name']
       );
       request.qaScorecard.name = defaultValue1;
-      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `qa_scorecard.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateQaScorecard = stubSimpleCall(
         undefined,
@@ -5376,7 +5376,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5408,7 +5408,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5456,7 +5456,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteQaScorecard = stubSimpleCall(
         undefined,
@@ -5510,7 +5510,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5543,7 +5543,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5591,7 +5591,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQaScorecardRevision = stubSimpleCall(
         undefined,
@@ -5651,7 +5651,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5684,7 +5684,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5732,7 +5732,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQaScorecardRevision = stubSimpleCall(
         undefined,
@@ -5792,7 +5792,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5825,7 +5825,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5873,7 +5873,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployQaScorecardRevision = stubSimpleCall(
         undefined,
@@ -5933,7 +5933,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -5966,7 +5966,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
       );
@@ -6014,7 +6014,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployQaScorecardRevision = stubSimpleCall(
         undefined,
@@ -6074,7 +6074,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6107,7 +6107,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6155,7 +6155,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteQaScorecardRevision = stubSimpleCall(
         undefined,
@@ -6215,7 +6215,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6248,7 +6248,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6296,7 +6296,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeedbackLabel = stubSimpleCall(
         undefined,
@@ -6350,7 +6350,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6382,7 +6382,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6430,7 +6430,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeedbackLabel = stubSimpleCall(
         undefined,
@@ -6485,7 +6485,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['feedbackLabel', 'name']
       );
       request.feedbackLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6519,7 +6519,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['feedbackLabel', 'name']
       );
       request.feedbackLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
       );
@@ -6568,7 +6568,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['feedbackLabel', 'name']
       );
       request.feedbackLabel.name = defaultValue1;
-      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feedback_label.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFeedbackLabel = stubSimpleCall(
         undefined,
@@ -6623,7 +6623,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6656,7 +6656,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6704,7 +6704,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFeedbackLabel = stubSimpleCall(
         undefined,
@@ -6758,7 +6758,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6792,7 +6792,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6847,7 +6847,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.uploadConversation = stubLongRunningCall(
         undefined,
@@ -6879,7 +6879,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.uploadConversation = stubLongRunningCall(
         undefined,
@@ -6958,7 +6958,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6992,7 +6992,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7047,7 +7047,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnalysis = stubLongRunningCall(
         undefined,
@@ -7079,7 +7079,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnalysis = stubLongRunningCall(
         undefined,
@@ -7158,7 +7158,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7192,7 +7192,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7247,7 +7247,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkAnalyzeConversations = stubLongRunningCall(
         undefined,
@@ -7282,7 +7282,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkAnalyzeConversations = stubLongRunningCall(
         undefined,
@@ -7362,7 +7362,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7396,7 +7396,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7451,7 +7451,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkDeleteConversations = stubLongRunningCall(
         undefined,
@@ -7486,7 +7486,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkDeleteConversations = stubLongRunningCall(
         undefined,
@@ -7566,7 +7566,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7600,7 +7600,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7655,7 +7655,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.ingestConversations = stubLongRunningCall(
         undefined,
@@ -7687,7 +7687,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.ingestConversations = stubLongRunningCall(
         undefined,
@@ -7766,7 +7766,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7800,7 +7800,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -7855,7 +7855,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportInsightsData = stubLongRunningCall(
         undefined,
@@ -7887,7 +7887,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportInsightsData = stubLongRunningCall(
         undefined,
@@ -7966,7 +7966,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8000,7 +8000,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8055,7 +8055,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createIssueModel = stubLongRunningCall(
         undefined,
@@ -8087,7 +8087,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createIssueModel = stubLongRunningCall(
         undefined,
@@ -8166,7 +8166,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8200,7 +8200,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8255,7 +8255,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIssueModel = stubLongRunningCall(
         undefined,
@@ -8287,7 +8287,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIssueModel = stubLongRunningCall(
         undefined,
@@ -8366,7 +8366,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8400,7 +8400,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8455,7 +8455,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployIssueModel = stubLongRunningCall(
         undefined,
@@ -8487,7 +8487,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployIssueModel = stubLongRunningCall(
         undefined,
@@ -8566,7 +8566,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8600,7 +8600,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8655,7 +8655,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployIssueModel = stubLongRunningCall(
         undefined,
@@ -8687,7 +8687,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployIssueModel = stubLongRunningCall(
         undefined,
@@ -8766,7 +8766,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8800,7 +8800,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -8855,7 +8855,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportIssueModel = stubLongRunningCall(
         undefined,
@@ -8887,7 +8887,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportIssueModel = stubLongRunningCall(
         undefined,
@@ -8966,7 +8966,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9000,7 +9000,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9055,7 +9055,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importIssueModel = stubLongRunningCall(
         undefined,
@@ -9087,7 +9087,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importIssueModel = stubLongRunningCall(
         undefined,
@@ -9167,7 +9167,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['encryptionSpec', 'name']
       );
       request.encryptionSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9202,7 +9202,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['encryptionSpec', 'name']
       );
       request.encryptionSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9258,7 +9258,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['encryptionSpec', 'name']
       );
       request.encryptionSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.initializeEncryptionSpec = stubLongRunningCall(
         undefined,
@@ -9294,7 +9294,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['encryptionSpec', 'name']
       );
       request.encryptionSpec.name = defaultValue1;
-      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `encryption_spec.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.initializeEncryptionSpec = stubLongRunningCall(
         undefined,
@@ -9374,7 +9374,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9407,7 +9407,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9462,7 +9462,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryMetrics = stubLongRunningCall(
         undefined,
@@ -9494,7 +9494,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryMetrics = stubLongRunningCall(
         undefined,
@@ -9570,7 +9570,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9604,7 +9604,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9659,7 +9659,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.tuneQaScorecardRevision = stubLongRunningCall(
         undefined,
@@ -9694,7 +9694,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.tuneQaScorecardRevision = stubLongRunningCall(
         undefined,
@@ -9774,7 +9774,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9808,7 +9808,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -9863,7 +9863,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkUploadFeedbackLabels = stubLongRunningCall(
         undefined,
@@ -9898,7 +9898,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkUploadFeedbackLabels = stubLongRunningCall(
         undefined,
@@ -9978,7 +9978,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -10012,7 +10012,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -10067,7 +10067,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkDownloadFeedbackLabels = stubLongRunningCall(
         undefined,
@@ -10102,7 +10102,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkDownloadFeedbackLabels = stubLongRunningCall(
         undefined,
@@ -10182,7 +10182,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -10222,7 +10222,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -10280,7 +10280,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConversations = stubSimpleCall(
         undefined,
@@ -10312,7 +10312,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -10376,7 +10376,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -10429,7 +10429,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Conversation()
@@ -10480,7 +10480,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10524,7 +10524,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -10564,7 +10564,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -10622,7 +10622,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnalyses = stubSimpleCall(
         undefined,
@@ -10654,7 +10654,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -10716,7 +10716,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalyses.createStream = stubPageStreamingCall(
         undefined,
@@ -10769,7 +10769,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.Analysis()
@@ -10820,7 +10820,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalyses.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10864,7 +10864,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -10905,7 +10905,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -10963,7 +10963,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPhraseMatchers = stubSimpleCall(
         undefined,
@@ -10995,7 +10995,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -11059,7 +11059,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseMatchers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11112,7 +11112,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.PhraseMatcher()
@@ -11163,7 +11163,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseMatchers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -11207,7 +11207,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
@@ -11247,7 +11247,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
@@ -11305,7 +11305,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnalysisRules = stubSimpleCall(
         undefined,
@@ -11337,7 +11337,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
@@ -11401,7 +11401,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalysisRules.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11454,7 +11454,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.AnalysisRule()
@@ -11505,7 +11505,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnalysisRules.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -11549,7 +11549,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -11589,7 +11589,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -11645,7 +11645,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listViews = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listViews(request), expectedError);
@@ -11674,7 +11674,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -11736,7 +11736,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViews.createStream = stubPageStreamingCall(
         undefined,
@@ -11789,7 +11789,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.View()
@@ -11839,7 +11839,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listViews.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -11884,7 +11884,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
@@ -11924,7 +11924,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
@@ -11982,7 +11982,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQaQuestions = stubSimpleCall(
         undefined,
@@ -12014,7 +12014,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
@@ -12078,7 +12078,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaQuestions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12131,7 +12131,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaQuestion()
@@ -12182,7 +12182,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaQuestions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12226,7 +12226,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
@@ -12266,7 +12266,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
@@ -12324,7 +12324,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQaScorecards = stubSimpleCall(
         undefined,
@@ -12356,7 +12356,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
@@ -12420,7 +12420,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaScorecards.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12473,7 +12473,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecard()
@@ -12524,7 +12524,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaScorecards.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12568,7 +12568,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
@@ -12609,7 +12609,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
@@ -12667,7 +12667,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQaScorecardRevisions = stubSimpleCall(
         undefined,
@@ -12702,7 +12702,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
@@ -12772,7 +12772,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaScorecardRevisions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12831,7 +12831,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.QaScorecardRevision()
@@ -12886,7 +12886,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQaScorecardRevisions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12934,7 +12934,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -12975,7 +12975,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13033,7 +13033,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeedbackLabels = stubSimpleCall(
         undefined,
@@ -13065,7 +13065,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13129,7 +13129,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeedbackLabels.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -13182,7 +13182,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13233,7 +13233,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFeedbackLabels.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -13277,7 +13277,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13318,7 +13318,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13376,7 +13376,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAllFeedbackLabels = stubSimpleCall(
         undefined,
@@ -13411,7 +13411,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13481,7 +13481,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAllFeedbackLabels.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -13540,7 +13540,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.contactcenterinsights.v1.FeedbackLabel()
@@ -13595,7 +13595,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAllFeedbackLabels.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -357,7 +357,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DataScan()
       );
@@ -388,7 +388,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DataScan()
       );
@@ -435,7 +435,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataScan = stubSimpleCall(
         undefined,
@@ -487,7 +487,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.RunDataScanResponse()
       );
@@ -518,7 +518,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.RunDataScanResponse()
       );
@@ -565,7 +565,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runDataScan = stubSimpleCall(
         undefined,
@@ -617,7 +617,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DataScanJob()
       );
@@ -648,7 +648,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DataScanJob()
       );
@@ -695,7 +695,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataScanJob = stubSimpleCall(
         undefined,
@@ -747,7 +747,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GenerateDataQualityRulesResponse()
       );
@@ -779,7 +779,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GenerateDataQualityRulesResponse()
       );
@@ -826,7 +826,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateDataQualityRules = stubSimpleCall(
         undefined,
@@ -884,7 +884,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -917,7 +917,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -971,7 +971,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataScan = stubLongRunningCall(
         undefined,
@@ -1002,7 +1002,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataScan = stubLongRunningCall(
         undefined,
@@ -1079,7 +1079,7 @@ describe('v1.DataScanServiceClient', () => {
         ['dataScan', 'name']
       );
       request.dataScan.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_scan.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_scan.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1113,7 +1113,7 @@ describe('v1.DataScanServiceClient', () => {
         ['dataScan', 'name']
       );
       request.dataScan.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_scan.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_scan.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1168,7 +1168,7 @@ describe('v1.DataScanServiceClient', () => {
         ['dataScan', 'name']
       );
       request.dataScan.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_scan.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_scan.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataScan = stubLongRunningCall(
         undefined,
@@ -1200,7 +1200,7 @@ describe('v1.DataScanServiceClient', () => {
         ['dataScan', 'name']
       );
       request.dataScan.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_scan.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_scan.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataScan = stubLongRunningCall(
         undefined,
@@ -1276,7 +1276,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1309,7 +1309,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1363,7 +1363,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataScan = stubLongRunningCall(
         undefined,
@@ -1394,7 +1394,7 @@ describe('v1.DataScanServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataScan = stubLongRunningCall(
         undefined,
@@ -1470,7 +1470,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.DataScan()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.DataScan()),
@@ -1503,7 +1503,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.DataScan()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.DataScan()),
@@ -1552,7 +1552,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataScans = stubSimpleCall(
         undefined,
@@ -1583,7 +1583,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.DataScan()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.DataScan()),
@@ -1637,7 +1637,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataScans.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1686,7 +1686,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.DataScan()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.DataScan()),
@@ -1729,7 +1729,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataScans.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1771,7 +1771,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataScanJob()
@@ -1810,7 +1810,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataScanJob()
@@ -1865,7 +1865,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataScanJobs = stubSimpleCall(
         undefined,
@@ -1896,7 +1896,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataScanJob()
@@ -1956,7 +1956,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataScanJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2005,7 +2005,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.DataScanJob()
@@ -2054,7 +2054,7 @@ describe('v1.DataScanServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataScanJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

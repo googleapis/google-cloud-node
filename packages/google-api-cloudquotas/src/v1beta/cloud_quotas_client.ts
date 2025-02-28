@@ -213,9 +213,6 @@ export class CloudQuotasClient {
         new this._gaxModule.PathTemplate(
           'folders/{folder}/locations/{location}/services/{service}/quotaInfos/{quota_info}'
         ),
-      locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
-      ),
       organizationLocationQuotaPreferencePathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/quotaPreferences/{quota_preference}'
@@ -224,8 +221,8 @@ export class CloudQuotasClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/services/{service}/quotaInfos/{quota_info}'
         ),
-      projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+      projectLocationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
       projectLocationQuotaPreferencePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -947,7 +944,7 @@ export class CloudQuotasClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listQuotaInfos`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1173,7 +1170,7 @@ export class CloudQuotasClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listQuotaPreferences`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1463,42 +1460,6 @@ export class CloudQuotasClient {
   }
 
   /**
-   * Return a fully-qualified location resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @returns {string} Resource name string.
-   */
-  locationPath(project: string, location: string) {
-    return this.pathTemplates.locationPathTemplate.render({
-      project: project,
-      location: location,
-    });
-  }
-
-  /**
-   * Parse the project from Location resource.
-   *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromLocationName(locationName: string) {
-    return this.pathTemplates.locationPathTemplate.match(locationName).project;
-  }
-
-  /**
-   * Parse the location from Location resource.
-   *
-   * @param {string} locationName
-   *   A fully-qualified path representing Location resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromLocationName(locationName: string) {
-    return this.pathTemplates.locationPathTemplate.match(locationName).location;
-  }
-
-  /**
    * Return a fully-qualified organizationLocationQuotaPreference resource name string.
    *
    * @param {string} organization
@@ -1651,26 +1612,43 @@ export class CloudQuotasClient {
   }
 
   /**
-   * Return a fully-qualified project resource name string.
+   * Return a fully-qualified projectLocation resource name string.
    *
    * @param {string} project
+   * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
-    return this.pathTemplates.projectPathTemplate.render({
+  projectLocationPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationPathTemplate.render({
       project: project,
+      location: location,
     });
   }
 
   /**
-   * Parse the project from Project resource.
+   * Parse the project from ProjectLocation resource.
    *
-   * @param {string} projectName
-   *   A fully-qualified path representing Project resource.
+   * @param {string} projectLocationName
+   *   A fully-qualified path representing project_location resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectName(projectName: string) {
-    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  matchProjectFromProjectLocationName(projectLocationName: string) {
+    return this.pathTemplates.projectLocationPathTemplate.match(
+      projectLocationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocation resource.
+   *
+   * @param {string} projectLocationName
+   *   A fully-qualified path representing project_location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationName(projectLocationName: string) {
+    return this.pathTemplates.projectLocationPathTemplate.match(
+      projectLocationName
+    ).location;
   }
 
   /**

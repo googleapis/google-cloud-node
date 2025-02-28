@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -388,7 +388,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v3.PrincipalAccessBoundaryPolicy()
       );
@@ -423,7 +423,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v3.PrincipalAccessBoundaryPolicy()
       );
@@ -473,7 +473,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPrincipalAccessBoundaryPolicy = stubSimpleCall(
         undefined,
@@ -537,7 +537,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -574,7 +574,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -631,7 +631,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrincipalAccessBoundaryPolicy =
         stubLongRunningCall(undefined, expectedError);
@@ -666,7 +666,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPrincipalAccessBoundaryPolicy =
         stubLongRunningCall(undefined, undefined, expectedError);
@@ -751,7 +751,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['principalAccessBoundaryPolicy', 'name']
       );
       request.principalAccessBoundaryPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `principal_access_boundary_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `principal_access_boundary_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -789,7 +789,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['principalAccessBoundaryPolicy', 'name']
       );
       request.principalAccessBoundaryPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `principal_access_boundary_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `principal_access_boundary_policy.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -847,7 +847,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['principalAccessBoundaryPolicy', 'name']
       );
       request.principalAccessBoundaryPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `principal_access_boundary_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `principal_access_boundary_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePrincipalAccessBoundaryPolicy =
         stubLongRunningCall(undefined, expectedError);
@@ -883,7 +883,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['principalAccessBoundaryPolicy', 'name']
       );
       request.principalAccessBoundaryPolicy.name = defaultValue1;
-      const expectedHeaderRequestParams = `principal_access_boundary_policy.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `principal_access_boundary_policy.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePrincipalAccessBoundaryPolicy =
         stubLongRunningCall(undefined, undefined, expectedError);
@@ -967,7 +967,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1004,7 +1004,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1061,7 +1061,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrincipalAccessBoundaryPolicy =
         stubLongRunningCall(undefined, expectedError);
@@ -1096,7 +1096,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePrincipalAccessBoundaryPolicy =
         stubLongRunningCall(undefined, undefined, expectedError);
@@ -1180,7 +1180,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.iam.v3.PrincipalAccessBoundaryPolicy()
@@ -1224,7 +1224,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.iam.v3.PrincipalAccessBoundaryPolicy()
@@ -1284,7 +1284,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPrincipalAccessBoundaryPolicies = stubSimpleCall(
         undefined,
@@ -1321,7 +1321,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.iam.v3.PrincipalAccessBoundaryPolicy()
@@ -1394,7 +1394,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrincipalAccessBoundaryPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1456,7 +1456,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.iam.v3.PrincipalAccessBoundaryPolicy()
@@ -1513,7 +1513,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPrincipalAccessBoundaryPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1563,7 +1563,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1603,7 +1603,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1657,7 +1657,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchPrincipalAccessBoundaryPolicyBindings =
         stubSimpleCall(undefined, expectedError);
@@ -1694,7 +1694,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1758,7 +1758,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchPrincipalAccessBoundaryPolicyBindings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1817,7 +1817,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
         generateSampleMessage(new protos.google.iam.v3.PolicyBinding()),
@@ -1868,7 +1868,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchPrincipalAccessBoundaryPolicyBindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

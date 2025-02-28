@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -471,6 +471,9 @@ export class NotebookServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -493,6 +496,9 @@ export class NotebookServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
             },
           ],
         },
@@ -526,6 +532,10 @@ export class NotebookServiceClient {
               body: '*',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
               body: '*',
             },
@@ -551,6 +561,10 @@ export class NotebookServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -579,6 +593,9 @@ export class NotebookServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
             },
             {
@@ -598,6 +615,9 @@ export class NotebookServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
             },
           ],
         },
@@ -1064,6 +1084,10 @@ export class NotebookServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
@@ -1277,6 +1301,10 @@ export class NotebookServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
           ],
@@ -1415,6 +1443,9 @@ export class NotebookServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
             {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
@@ -1574,6 +1605,9 @@ export class NotebookServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
           ],
         },
         {
@@ -1699,6 +1733,9 @@ export class NotebookServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
             {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
             {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
@@ -1854,6 +1891,9 @@ export class NotebookServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',
             },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',
+            },
           ],
         },
         {
@@ -2003,6 +2043,9 @@ export class NotebookServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
             {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
             {
@@ -2160,6 +2203,9 @@ export class NotebookServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
           ],
         },
@@ -4192,6 +4238,8 @@ export class NotebookServiceClient {
    *       * A key including a space must be quoted. `labels."a key"`.
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -4199,6 +4247,8 @@ export class NotebookServiceClient {
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -4311,7 +4361,7 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNotebookRuntimeTemplates`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4333,6 +4383,8 @@ export class NotebookServiceClient {
    *       * A key including a space must be quoted. `labels."a key"`.
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -4340,6 +4392,8 @@ export class NotebookServiceClient {
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -4418,6 +4472,8 @@ export class NotebookServiceClient {
    *       * A key including a space must be quoted. `labels."a key"`.
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -4425,6 +4481,8 @@ export class NotebookServiceClient {
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -4512,6 +4570,8 @@ export class NotebookServiceClient {
    *     UI_RESOURCE_STATE_CREATION_FAILED].
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -4523,6 +4583,8 @@ export class NotebookServiceClient {
    *     * `runtimeUser="test@google.com"`
    *     * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -4631,7 +4693,7 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNotebookRuntimes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4663,6 +4725,8 @@ export class NotebookServiceClient {
    *     UI_RESOURCE_STATE_CREATION_FAILED].
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -4674,6 +4738,8 @@ export class NotebookServiceClient {
    *     * `runtimeUser="test@google.com"`
    *     * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -4762,6 +4828,8 @@ export class NotebookServiceClient {
    *     UI_RESOURCE_STATE_CREATION_FAILED].
    *     * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
    *     [USER_DEFINED, ONE_CLICK].
+   *     * `machineType` supports = and !=.
+   *     * `acceleratorType` supports = and !=.
    *
    *   Some examples:
    *
@@ -4773,6 +4841,8 @@ export class NotebookServiceClient {
    *     * `runtimeUser="test@google.com"`
    *     * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
    *     * `notebookRuntimeType=USER_DEFINED`
+   *     * `machineType=e2-standard-4`
+   *     * `acceleratorType=NVIDIA_TESLA_T4`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -4853,7 +4923,8 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListNotebookExecutionJobsResponse.next_page_token|ListNotebookExecutionJobsResponse.next_page_token}
+   *   of the previous
    *   {@link protos.google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
    *   call.
    * @param {string} [request.orderBy]
@@ -4959,7 +5030,7 @@ export class NotebookServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNotebookExecutionJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4984,7 +5055,8 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListNotebookExecutionJobsResponse.next_page_token|ListNotebookExecutionJobsResponse.next_page_token}
+   *   of the previous
    *   {@link protos.google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
    *   call.
    * @param {string} [request.orderBy]
@@ -5059,7 +5131,8 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link protos.|ListNotebookExecutionJobs.next_page_token} of the previous
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListNotebookExecutionJobsResponse.next_page_token|ListNotebookExecutionJobsResponse.next_page_token}
+   *   of the previous
    *   {@link protos.google.cloud.aiplatform.v1beta1.NotebookService.ListNotebookExecutionJobs|NotebookService.ListNotebookExecutionJobs}
    *   call.
    * @param {string} [request.orderBy]
@@ -5354,7 +5427,7 @@ export class NotebookServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -5367,6 +5440,20 @@ export class NotebookServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5403,6 +5490,13 @@ export class NotebookServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5438,11 +5532,11 @@ export class NotebookServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -5451,6 +5545,20 @@ export class NotebookServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5481,7 +5589,7 @@ export class NotebookServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -5494,6 +5602,20 @@ export class NotebookServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

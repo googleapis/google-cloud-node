@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -372,7 +372,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.GoogleServiceAccount()
       );
@@ -405,7 +405,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.GoogleServiceAccount()
       );
@@ -453,7 +453,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGoogleServiceAccount = stubSimpleCall(
         undefined,
@@ -600,7 +600,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.TransferJob()
       );
@@ -632,7 +632,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.TransferJob()
       );
@@ -680,7 +680,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTransferJob = stubSimpleCall(
         undefined,
@@ -734,7 +734,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.TransferJob()
       );
@@ -766,7 +766,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.TransferJob()
       );
@@ -814,7 +814,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTransferJob = stubSimpleCall(
         undefined,
@@ -868,7 +868,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -901,7 +901,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -949,7 +949,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseTransferOperation = stubSimpleCall(
         undefined,
@@ -1009,7 +1009,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1042,7 +1042,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1090,7 +1090,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeTransferOperation = stubSimpleCall(
         undefined,
@@ -1150,7 +1150,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1182,7 +1182,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1230,7 +1230,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTransferJob = stubSimpleCall(
         undefined,
@@ -1284,7 +1284,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.AgentPool()
       );
@@ -1316,7 +1316,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.AgentPool()
       );
@@ -1364,7 +1364,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAgentPool = stubSimpleCall(
         undefined,
@@ -1419,7 +1419,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['agentPool', 'name']
       );
       request.agentPool.name = defaultValue1;
-      const expectedHeaderRequestParams = `agent_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `agent_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.AgentPool()
       );
@@ -1452,7 +1452,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['agentPool', 'name']
       );
       request.agentPool.name = defaultValue1;
-      const expectedHeaderRequestParams = `agent_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `agent_pool.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.AgentPool()
       );
@@ -1501,7 +1501,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['agentPool', 'name']
       );
       request.agentPool.name = defaultValue1;
-      const expectedHeaderRequestParams = `agent_pool.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `agent_pool.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAgentPool = stubSimpleCall(
         undefined,
@@ -1556,7 +1556,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.AgentPool()
       );
@@ -1588,7 +1588,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.storagetransfer.v1.AgentPool()
       );
@@ -1636,7 +1636,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAgentPool = stubSimpleCall(
         undefined,
@@ -1690,7 +1690,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1722,7 +1722,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1770,7 +1770,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAgentPool = stubSimpleCall(
         undefined,
@@ -1824,7 +1824,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1858,7 +1858,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1913,7 +1913,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runTransferJob = stubLongRunningCall(
         undefined,
@@ -1945,7 +1945,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['jobName']
       );
       request.jobName = defaultValue1;
-      const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job_name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runTransferJob = stubLongRunningCall(
         undefined,
@@ -2262,7 +2262,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
         generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
@@ -2296,7 +2296,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
         generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
@@ -2346,7 +2346,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAgentPools = stubSimpleCall(
         undefined,
@@ -2378,7 +2378,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
         generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
@@ -2433,7 +2433,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAgentPools.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2483,7 +2483,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
         generateSampleMessage(new protos.google.storagetransfer.v1.AgentPool()),
@@ -2527,7 +2527,7 @@ describe('v1.StorageTransferServiceClient', () => {
         ['projectId']
       );
       request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAgentPools.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

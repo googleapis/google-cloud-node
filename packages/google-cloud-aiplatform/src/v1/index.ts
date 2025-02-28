@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ export {FeatureOnlineStoreServiceClient} from './feature_online_store_service_cl
 export {FeatureRegistryServiceClient} from './feature_registry_service_client';
 export {FeaturestoreOnlineServingServiceClient} from './featurestore_online_serving_service_client';
 export {FeaturestoreServiceClient} from './featurestore_service_client';
+export {GenAiCacheServiceClient} from './gen_ai_cache_service_client';
 export {GenAiTuningServiceClient} from './gen_ai_tuning_service_client';
 export {IndexEndpointServiceClient} from './index_endpoint_service_client';
 export {IndexServiceClient} from './index_service_client';
@@ -39,7 +40,11 @@ export {NotebookServiceClient} from './notebook_service_client';
 export {PersistentResourceServiceClient} from './persistent_resource_service_client';
 export {PipelineServiceClient} from './pipeline_service_client';
 export {PredictionServiceClient} from './prediction_service_client';
+export {ReasoningEngineExecutionServiceClient} from './reasoning_engine_execution_service_client';
+export {ReasoningEngineServiceClient} from './reasoning_engine_service_client';
 export {ScheduleServiceClient} from './schedule_service_client';
 export {SpecialistPoolServiceClient} from './specialist_pool_service_client';
 export {TensorboardServiceClient} from './tensorboard_service_client';
+export {VertexRagDataServiceClient} from './vertex_rag_data_service_client';
+export {VertexRagServiceClient} from './vertex_rag_service_client';
 export {VizierServiceClient} from './vizier_service_client';

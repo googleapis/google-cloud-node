@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -193,6 +193,39 @@
                          * @memberof google.cloud.batch.v1.BatchService
                          * @instance
                          * @param {google.cloud.batch.v1.IDeleteJobRequest} request DeleteJobRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.batch.v1.BatchService|cancelJob}.
+                         * @memberof google.cloud.batch.v1.BatchService
+                         * @typedef CancelJobCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CancelJob.
+                         * @function cancelJob
+                         * @memberof google.cloud.batch.v1.BatchService
+                         * @instance
+                         * @param {google.cloud.batch.v1.ICancelJobRequest} request CancelJobRequest message or plain object
+                         * @param {google.cloud.batch.v1.BatchService.CancelJobCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BatchService.prototype.cancelJob = function cancelJob(request, callback) {
+                            return this.rpcCall(cancelJob, $root.google.cloud.batch.v1.CancelJobRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CancelJob" });
+    
+                        /**
+                         * Calls CancelJob.
+                         * @function cancelJob
+                         * @memberof google.cloud.batch.v1.BatchService
+                         * @instance
+                         * @param {google.cloud.batch.v1.ICancelJobRequest} request CancelJobRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -1028,6 +1061,408 @@
                         };
     
                         return DeleteJobRequest;
+                    })();
+    
+                    v1.CancelJobRequest = (function() {
+    
+                        /**
+                         * Properties of a CancelJobRequest.
+                         * @memberof google.cloud.batch.v1
+                         * @interface ICancelJobRequest
+                         * @property {string|null} [name] CancelJobRequest name
+                         * @property {string|null} [requestId] CancelJobRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CancelJobRequest.
+                         * @memberof google.cloud.batch.v1
+                         * @classdesc Represents a CancelJobRequest.
+                         * @implements ICancelJobRequest
+                         * @constructor
+                         * @param {google.cloud.batch.v1.ICancelJobRequest=} [properties] Properties to set
+                         */
+                        function CancelJobRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CancelJobRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @instance
+                         */
+                        CancelJobRequest.prototype.name = "";
+    
+                        /**
+                         * CancelJobRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @instance
+                         */
+                        CancelJobRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CancelJobRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @static
+                         * @param {google.cloud.batch.v1.ICancelJobRequest=} [properties] Properties to set
+                         * @returns {google.cloud.batch.v1.CancelJobRequest} CancelJobRequest instance
+                         */
+                        CancelJobRequest.create = function create(properties) {
+                            return new CancelJobRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CancelJobRequest message. Does not implicitly {@link google.cloud.batch.v1.CancelJobRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @static
+                         * @param {google.cloud.batch.v1.ICancelJobRequest} message CancelJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelJobRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CancelJobRequest message, length delimited. Does not implicitly {@link google.cloud.batch.v1.CancelJobRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @static
+                         * @param {google.cloud.batch.v1.ICancelJobRequest} message CancelJobRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelJobRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CancelJobRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.batch.v1.CancelJobRequest} CancelJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelJobRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1.CancelJobRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CancelJobRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.batch.v1.CancelJobRequest} CancelJobRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelJobRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CancelJobRequest message.
+                         * @function verify
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CancelJobRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CancelJobRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.batch.v1.CancelJobRequest} CancelJobRequest
+                         */
+                        CancelJobRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.batch.v1.CancelJobRequest)
+                                return object;
+                            var message = new $root.google.cloud.batch.v1.CancelJobRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CancelJobRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @static
+                         * @param {google.cloud.batch.v1.CancelJobRequest} message CancelJobRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CancelJobRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CancelJobRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CancelJobRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CancelJobRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.batch.v1.CancelJobRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CancelJobRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.batch.v1.CancelJobRequest";
+                        };
+    
+                        return CancelJobRequest;
+                    })();
+    
+                    v1.CancelJobResponse = (function() {
+    
+                        /**
+                         * Properties of a CancelJobResponse.
+                         * @memberof google.cloud.batch.v1
+                         * @interface ICancelJobResponse
+                         */
+    
+                        /**
+                         * Constructs a new CancelJobResponse.
+                         * @memberof google.cloud.batch.v1
+                         * @classdesc Represents a CancelJobResponse.
+                         * @implements ICancelJobResponse
+                         * @constructor
+                         * @param {google.cloud.batch.v1.ICancelJobResponse=} [properties] Properties to set
+                         */
+                        function CancelJobResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new CancelJobResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.batch.v1.CancelJobResponse
+                         * @static
+                         * @param {google.cloud.batch.v1.ICancelJobResponse=} [properties] Properties to set
+                         * @returns {google.cloud.batch.v1.CancelJobResponse} CancelJobResponse instance
+                         */
+                        CancelJobResponse.create = function create(properties) {
+                            return new CancelJobResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CancelJobResponse message. Does not implicitly {@link google.cloud.batch.v1.CancelJobResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.batch.v1.CancelJobResponse
+                         * @static
+                         * @param {google.cloud.batch.v1.ICancelJobResponse} message CancelJobResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelJobResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CancelJobResponse message, length delimited. Does not implicitly {@link google.cloud.batch.v1.CancelJobResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.batch.v1.CancelJobResponse
+                         * @static
+                         * @param {google.cloud.batch.v1.ICancelJobResponse} message CancelJobResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelJobResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CancelJobResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.batch.v1.CancelJobResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.batch.v1.CancelJobResponse} CancelJobResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelJobResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.batch.v1.CancelJobResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CancelJobResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.batch.v1.CancelJobResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.batch.v1.CancelJobResponse} CancelJobResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelJobResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CancelJobResponse message.
+                         * @function verify
+                         * @memberof google.cloud.batch.v1.CancelJobResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CancelJobResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CancelJobResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.batch.v1.CancelJobResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.batch.v1.CancelJobResponse} CancelJobResponse
+                         */
+                        CancelJobResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.batch.v1.CancelJobResponse)
+                                return object;
+                            return new $root.google.cloud.batch.v1.CancelJobResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a CancelJobResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.batch.v1.CancelJobResponse
+                         * @static
+                         * @param {google.cloud.batch.v1.CancelJobResponse} message CancelJobResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CancelJobResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this CancelJobResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.batch.v1.CancelJobResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CancelJobResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CancelJobResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.batch.v1.CancelJobResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CancelJobResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.batch.v1.CancelJobResponse";
+                        };
+    
+                        return CancelJobResponse;
                     })();
     
                     v1.ListJobsRequest = (function() {
@@ -3995,6 +4430,8 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.statusEvents != null && message.hasOwnProperty("statusEvents")) {
@@ -4070,6 +4507,14 @@
                             case "DELETION_IN_PROGRESS":
                             case 6:
                                 message.state = 6;
+                                break;
+                            case "CANCELLATION_IN_PROGRESS":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "CANCELLED":
+                            case 8:
+                                message.state = 8;
                                 break;
                             }
                             if (object.statusEvents) {
@@ -4790,6 +5235,8 @@
                          * @property {number} SUCCEEDED=4 SUCCEEDED value
                          * @property {number} FAILED=5 FAILED value
                          * @property {number} DELETION_IN_PROGRESS=6 DELETION_IN_PROGRESS value
+                         * @property {number} CANCELLATION_IN_PROGRESS=7 CANCELLATION_IN_PROGRESS value
+                         * @property {number} CANCELLED=8 CANCELLED value
                          */
                         JobStatus.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -4800,6 +5247,8 @@
                             values[valuesById[4] = "SUCCEEDED"] = 4;
                             values[valuesById[5] = "FAILED"] = 5;
                             values[valuesById[6] = "DELETION_IN_PROGRESS"] = 6;
+                            values[valuesById[7] = "CANCELLATION_IN_PROGRESS"] = 7;
+                            values[valuesById[8] = "CANCELLED"] = 8;
                             return values;
                         })();
     
@@ -5216,6 +5665,8 @@
                                     case 4:
                                     case 5:
                                     case 6:
+                                    case 7:
+                                    case 8:
                                         break;
                                     }
                                 if (message.newTaskState != null && message.hasOwnProperty("newTaskState"))
@@ -5300,6 +5751,14 @@
                                 case "DELETION_IN_PROGRESS":
                                 case 6:
                                     message.newJobState = 6;
+                                    break;
+                                case "CANCELLATION_IN_PROGRESS":
+                                case 7:
+                                    message.newJobState = 7;
+                                    break;
+                                case "CANCELLED":
+                                case 8:
+                                    message.newJobState = 8;
                                     break;
                                 }
                                 switch (object.newTaskState) {

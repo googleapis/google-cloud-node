@@ -329,6 +329,9 @@ export namespace google {
 
                         /** BuildpacksBuild enableAutomaticUpdates */
                         enableAutomaticUpdates?: (boolean|null);
+
+                        /** BuildpacksBuild projectDescriptor */
+                        projectDescriptor?: (string|null);
                     }
 
                     /** Represents a BuildpacksBuild. */
@@ -357,6 +360,9 @@ export namespace google {
 
                         /** BuildpacksBuild enableAutomaticUpdates. */
                         public enableAutomaticUpdates: boolean;
+
+                        /** BuildpacksBuild projectDescriptor. */
+                        public projectDescriptor: string;
 
                         /**
                          * Creates a new BuildpacksBuild instance using the specified properties.
@@ -1513,6 +1519,9 @@ export namespace google {
                     /** Execution uid */
                     uid?: (string|null);
 
+                    /** Execution creator */
+                    creator?: (string|null);
+
                     /** Execution generation */
                     generation?: (number|Long|string|null);
 
@@ -1603,6 +1612,9 @@ export namespace google {
 
                     /** Execution uid. */
                     public uid: string;
+
+                    /** Execution creator. */
+                    public creator: string;
 
                     /** Execution generation. */
                     public generation: (number|Long|string);
@@ -1937,6 +1949,12 @@ export namespace google {
 
                     /** Container dependsOn */
                     dependsOn?: (string[]|null);
+
+                    /** Container baseImageUri */
+                    baseImageUri?: (string|null);
+
+                    /** Container buildInfo */
+                    buildInfo?: (google.cloud.run.v2.IBuildInfo|null);
                 }
 
                 /** Represents a Container. */
@@ -1983,6 +2001,12 @@ export namespace google {
 
                     /** Container dependsOn. */
                     public dependsOn: string[];
+
+                    /** Container baseImageUri. */
+                    public baseImageUri: string;
+
+                    /** Container buildInfo. */
+                    public buildInfo?: (google.cloud.run.v2.IBuildInfo|null);
 
                     /**
                      * Creates a new Container instance using the specified properties.
@@ -4012,6 +4036,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a BuildInfo. */
+                interface IBuildInfo {
+
+                    /** BuildInfo functionTarget */
+                    functionTarget?: (string|null);
+
+                    /** BuildInfo sourceLocation */
+                    sourceLocation?: (string|null);
+                }
+
+                /** Represents a BuildInfo. */
+                class BuildInfo implements IBuildInfo {
+
+                    /**
+                     * Constructs a new BuildInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IBuildInfo);
+
+                    /** BuildInfo functionTarget. */
+                    public functionTarget: string;
+
+                    /** BuildInfo sourceLocation. */
+                    public sourceLocation: string;
+
+                    /**
+                     * Creates a new BuildInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BuildInfo instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IBuildInfo): google.cloud.run.v2.BuildInfo;
+
+                    /**
+                     * Encodes the specified BuildInfo message. Does not implicitly {@link google.cloud.run.v2.BuildInfo.verify|verify} messages.
+                     * @param message BuildInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IBuildInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BuildInfo message, length delimited. Does not implicitly {@link google.cloud.run.v2.BuildInfo.verify|verify} messages.
+                     * @param message BuildInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IBuildInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BuildInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BuildInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.BuildInfo;
+
+                    /**
+                     * Decodes a BuildInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BuildInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.BuildInfo;
+
+                    /**
+                     * Verifies a BuildInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BuildInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BuildInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.BuildInfo;
+
+                    /**
+                     * Creates a plain object from a BuildInfo message. Also converts values to other types if specified.
+                     * @param message BuildInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.BuildInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BuildInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BuildInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a VpcAccess. */
                 interface IVpcAccess {
 
@@ -4765,6 +4892,151 @@ export namespace google {
 
                     /**
                      * Gets the default type url for NodeSelector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BuildConfig. */
+                interface IBuildConfig {
+
+                    /** BuildConfig name */
+                    name?: (string|null);
+
+                    /** BuildConfig sourceLocation */
+                    sourceLocation?: (string|null);
+
+                    /** BuildConfig functionTarget */
+                    functionTarget?: (string|null);
+
+                    /** BuildConfig imageUri */
+                    imageUri?: (string|null);
+
+                    /** BuildConfig baseImage */
+                    baseImage?: (string|null);
+
+                    /** BuildConfig enableAutomaticUpdates */
+                    enableAutomaticUpdates?: (boolean|null);
+
+                    /** BuildConfig workerPool */
+                    workerPool?: (string|null);
+
+                    /** BuildConfig environmentVariables */
+                    environmentVariables?: ({ [k: string]: string }|null);
+
+                    /** BuildConfig serviceAccount */
+                    serviceAccount?: (string|null);
+                }
+
+                /** Represents a BuildConfig. */
+                class BuildConfig implements IBuildConfig {
+
+                    /**
+                     * Constructs a new BuildConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IBuildConfig);
+
+                    /** BuildConfig name. */
+                    public name: string;
+
+                    /** BuildConfig sourceLocation. */
+                    public sourceLocation: string;
+
+                    /** BuildConfig functionTarget. */
+                    public functionTarget: string;
+
+                    /** BuildConfig imageUri. */
+                    public imageUri: string;
+
+                    /** BuildConfig baseImage. */
+                    public baseImage: string;
+
+                    /** BuildConfig enableAutomaticUpdates. */
+                    public enableAutomaticUpdates: boolean;
+
+                    /** BuildConfig workerPool. */
+                    public workerPool: string;
+
+                    /** BuildConfig environmentVariables. */
+                    public environmentVariables: { [k: string]: string };
+
+                    /** BuildConfig serviceAccount. */
+                    public serviceAccount: string;
+
+                    /**
+                     * Creates a new BuildConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BuildConfig instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IBuildConfig): google.cloud.run.v2.BuildConfig;
+
+                    /**
+                     * Encodes the specified BuildConfig message. Does not implicitly {@link google.cloud.run.v2.BuildConfig.verify|verify} messages.
+                     * @param message BuildConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IBuildConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BuildConfig message, length delimited. Does not implicitly {@link google.cloud.run.v2.BuildConfig.verify|verify} messages.
+                     * @param message BuildConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IBuildConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BuildConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BuildConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.BuildConfig;
+
+                    /**
+                     * Decodes a BuildConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BuildConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.BuildConfig;
+
+                    /**
+                     * Verifies a BuildConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BuildConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BuildConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.BuildConfig;
+
+                    /**
+                     * Creates a plain object from a BuildConfig message. Also converts values to other types if specified.
+                     * @param message BuildConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.BuildConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BuildConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BuildConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -8540,6 +8812,9 @@ export namespace google {
                     /** Service satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
 
+                    /** Service buildConfig */
+                    buildConfig?: (google.cloud.run.v2.IBuildConfig|null);
+
                     /** Service reconciling */
                     reconciling?: (boolean|null);
 
@@ -8651,6 +8926,9 @@ export namespace google {
 
                     /** Service satisfiesPzs. */
                     public satisfiesPzs: boolean;
+
+                    /** Service buildConfig. */
+                    public buildConfig?: (google.cloud.run.v2.IBuildConfig|null);
 
                     /** Service reconciling. */
                     public reconciling: boolean;

@@ -79,8 +79,8 @@ function main(participant) {
    */
   // const cxParameters = {}
   /**
-   *  The unique identifier of the CX page to override the `current_page` in the
-   *  session.
+   *  The unique identifier of the Dialogflow CX page to override the
+   *  `current_page` in the session.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/flows/<Flow ID>/pages/<Page ID>`.
    *  If `cx_current_page` is specified, the previous state of the session will
@@ -97,6 +97,7 @@ function main(participant) {
    *  Optional. The send time of the message from end user or human agent's
    *  perspective. It is used for identifying the same message under one
    *  participant.
+   *  For BatchCreateMessages API only:
    *  Given two messages under the same participant:
    *  * If send time are different regardless of whether the content of the
    *  messages are exactly the same, the conversation will regard them as

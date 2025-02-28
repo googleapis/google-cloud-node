@@ -4766,6 +4766,7 @@
                                     case 7:
                                     case 8:
                                     case 9:
+                                    case 10:
                                         break;
                                     }
                                 if (message.maxChargeRateKw != null && message.hasOwnProperty("maxChargeRateKw"))
@@ -4850,6 +4851,10 @@
                                 case "EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET":
                                 case 9:
                                     message.type = 9;
+                                    break;
+                                case "EV_CONNECTOR_TYPE_NACS":
+                                case 10:
+                                    message.type = 10;
                                     break;
                                 }
                                 if (object.maxChargeRateKw != null)
@@ -4954,6 +4959,7 @@
                      * @property {number} EV_CONNECTOR_TYPE_TESLA=7 EV_CONNECTOR_TYPE_TESLA value
                      * @property {number} EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T=8 EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T value
                      * @property {number} EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET=9 EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET value
+                     * @property {number} EV_CONNECTOR_TYPE_NACS=10 EV_CONNECTOR_TYPE_NACS value
                      */
                     v1.EVConnectorType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -4967,6 +4973,7 @@
                         values[valuesById[7] = "EV_CONNECTOR_TYPE_TESLA"] = 7;
                         values[valuesById[8] = "EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T"] = 8;
                         values[valuesById[9] = "EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET"] = 9;
+                        values[valuesById[10] = "EV_CONNECTOR_TYPE_NACS"] = 10;
                         return values;
                     })();
     
@@ -5358,6 +5365,7 @@
                                         return "type: enum value expected";
                                     case 0:
                                     case 1:
+                                    case 19:
                                     case 2:
                                     case 3:
                                     case 4:
@@ -5372,6 +5380,7 @@
                                     case 13:
                                     case 14:
                                     case 15:
+                                    case 20:
                                     case 16:
                                     case 17:
                                     case 18:
@@ -5416,6 +5425,10 @@
                                 case "DIESEL":
                                 case 1:
                                     message.type = 1;
+                                    break;
+                                case "DIESEL_PLUS":
+                                case 19:
+                                    message.type = 19;
                                     break;
                                 case "REGULAR_UNLEADED":
                                 case 2:
@@ -5472,6 +5485,10 @@
                                 case "E85":
                                 case 15:
                                     message.type = 15;
+                                    break;
+                                case "E100":
+                                case 20:
+                                    message.type = 20;
                                     break;
                                 case "METHANE":
                                 case 16:
@@ -5558,6 +5575,7 @@
                              * @enum {number}
                              * @property {number} FUEL_TYPE_UNSPECIFIED=0 FUEL_TYPE_UNSPECIFIED value
                              * @property {number} DIESEL=1 DIESEL value
+                             * @property {number} DIESEL_PLUS=19 DIESEL_PLUS value
                              * @property {number} REGULAR_UNLEADED=2 REGULAR_UNLEADED value
                              * @property {number} MIDGRADE=3 MIDGRADE value
                              * @property {number} PREMIUM=4 PREMIUM value
@@ -5572,6 +5590,7 @@
                              * @property {number} LPG=13 LPG value
                              * @property {number} E80=14 E80 value
                              * @property {number} E85=15 E85 value
+                             * @property {number} E100=20 E100 value
                              * @property {number} METHANE=16 METHANE value
                              * @property {number} BIO_DIESEL=17 BIO_DIESEL value
                              * @property {number} TRUCK_DIESEL=18 TRUCK_DIESEL value
@@ -5580,6 +5599,7 @@
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "FUEL_TYPE_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "DIESEL"] = 1;
+                                values[valuesById[19] = "DIESEL_PLUS"] = 19;
                                 values[valuesById[2] = "REGULAR_UNLEADED"] = 2;
                                 values[valuesById[3] = "MIDGRADE"] = 3;
                                 values[valuesById[4] = "PREMIUM"] = 4;
@@ -5594,6 +5614,7 @@
                                 values[valuesById[13] = "LPG"] = 13;
                                 values[valuesById[14] = "E80"] = 14;
                                 values[valuesById[15] = "E85"] = 15;
+                                values[valuesById[20] = "E100"] = 20;
                                 values[valuesById[16] = "METHANE"] = 16;
                                 values[valuesById[17] = "BIO_DIESEL"] = 17;
                                 values[valuesById[18] = "TRUCK_DIESEL"] = 18;
@@ -15618,6 +15639,7 @@
                                         case 7:
                                         case 8:
                                         case 9:
+                                        case 10:
                                             break;
                                         }
                                 }
@@ -15688,6 +15710,10 @@
                                         case "EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET":
                                         case 9:
                                             message.connectorTypes[i] = 9;
+                                            break;
+                                        case "EV_CONNECTOR_TYPE_NACS":
+                                        case 10:
+                                            message.connectorTypes[i] = 10;
                                             break;
                                         }
                                 }

@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.8.0...netapp-v0.9.0) (2025-02-12)
+
+
+### Features
+
+* Add ipAddress field to MountOption ([5629df2](https://github.com/googleapis/google-cloud-node/commit/5629df231ec948804c4a9c80f43ad4f146e6dcdf))
+
+
+### Bug Fixes
+
+* [netapp] finalize fixing typings for headers in generator ([#6004](https://github.com/googleapis/google-cloud-node/issues/6004)) ([5629df2](https://github.com/googleapis/google-cloud-node/commit/5629df231ec948804c4a9c80f43ad4f146e6dcdf))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.7.0...netapp-v0.8.0) (2025-01-11)
 
 

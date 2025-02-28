@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -357,7 +357,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Lake()
       );
@@ -388,7 +388,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Lake()
       );
@@ -435,7 +435,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getLake = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getLake(request), expectedError);
@@ -484,7 +484,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Zone()
       );
@@ -515,7 +515,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Zone()
       );
@@ -562,7 +562,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getZone = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getZone(request), expectedError);
@@ -611,7 +611,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Asset()
       );
@@ -642,7 +642,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Asset()
       );
@@ -689,7 +689,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAsset = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getAsset(request), expectedError);
@@ -738,7 +738,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Task()
       );
@@ -769,7 +769,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Task()
       );
@@ -816,7 +816,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTask = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTask(request), expectedError);
@@ -865,7 +865,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.RunTaskResponse()
       );
@@ -896,7 +896,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.RunTaskResponse()
       );
@@ -943,7 +943,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runTask = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.runTask(request), expectedError);
@@ -992,7 +992,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Job()
       );
@@ -1023,7 +1023,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Job()
       );
@@ -1070,7 +1070,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getJob(request), expectedError);
@@ -1119,7 +1119,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1150,7 +1150,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1197,7 +1197,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.cancelJob(request), expectedError);
@@ -1246,7 +1246,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Environment()
       );
@@ -1277,7 +1277,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Environment()
       );
@@ -1324,7 +1324,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEnvironment = stubSimpleCall(
         undefined,
@@ -1376,7 +1376,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1408,7 +1408,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1462,7 +1462,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createLake = stubLongRunningCall(
         undefined,
@@ -1493,7 +1493,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createLake = stubLongRunningCall(
         undefined,
@@ -1567,7 +1567,7 @@ describe('v1.DataplexServiceClient', () => {
         ['lake', 'name']
       );
       request.lake.name = defaultValue1;
-      const expectedHeaderRequestParams = `lake.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1600,7 +1600,7 @@ describe('v1.DataplexServiceClient', () => {
         ['lake', 'name']
       );
       request.lake.name = defaultValue1;
-      const expectedHeaderRequestParams = `lake.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1655,7 +1655,7 @@ describe('v1.DataplexServiceClient', () => {
         ['lake', 'name']
       );
       request.lake.name = defaultValue1;
-      const expectedHeaderRequestParams = `lake.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateLake = stubLongRunningCall(
         undefined,
@@ -1687,7 +1687,7 @@ describe('v1.DataplexServiceClient', () => {
         ['lake', 'name']
       );
       request.lake.name = defaultValue1;
-      const expectedHeaderRequestParams = `lake.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `lake.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateLake = stubLongRunningCall(
         undefined,
@@ -1760,7 +1760,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1792,7 +1792,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1846,7 +1846,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLake = stubLongRunningCall(
         undefined,
@@ -1877,7 +1877,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteLake = stubLongRunningCall(
         undefined,
@@ -1950,7 +1950,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1982,7 +1982,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2036,7 +2036,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createZone = stubLongRunningCall(
         undefined,
@@ -2067,7 +2067,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createZone = stubLongRunningCall(
         undefined,
@@ -2141,7 +2141,7 @@ describe('v1.DataplexServiceClient', () => {
         ['zone', 'name']
       );
       request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2174,7 +2174,7 @@ describe('v1.DataplexServiceClient', () => {
         ['zone', 'name']
       );
       request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2229,7 +2229,7 @@ describe('v1.DataplexServiceClient', () => {
         ['zone', 'name']
       );
       request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateZone = stubLongRunningCall(
         undefined,
@@ -2261,7 +2261,7 @@ describe('v1.DataplexServiceClient', () => {
         ['zone', 'name']
       );
       request.zone.name = defaultValue1;
-      const expectedHeaderRequestParams = `zone.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `zone.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateZone = stubLongRunningCall(
         undefined,
@@ -2334,7 +2334,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2366,7 +2366,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2420,7 +2420,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteZone = stubLongRunningCall(
         undefined,
@@ -2451,7 +2451,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteZone = stubLongRunningCall(
         undefined,
@@ -2524,7 +2524,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2556,7 +2556,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2610,7 +2610,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAsset = stubLongRunningCall(
         undefined,
@@ -2641,7 +2641,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAsset = stubLongRunningCall(
         undefined,
@@ -2715,7 +2715,7 @@ describe('v1.DataplexServiceClient', () => {
         ['asset', 'name']
       );
       request.asset.name = defaultValue1;
-      const expectedHeaderRequestParams = `asset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2748,7 +2748,7 @@ describe('v1.DataplexServiceClient', () => {
         ['asset', 'name']
       );
       request.asset.name = defaultValue1;
-      const expectedHeaderRequestParams = `asset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2803,7 +2803,7 @@ describe('v1.DataplexServiceClient', () => {
         ['asset', 'name']
       );
       request.asset.name = defaultValue1;
-      const expectedHeaderRequestParams = `asset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAsset = stubLongRunningCall(
         undefined,
@@ -2835,7 +2835,7 @@ describe('v1.DataplexServiceClient', () => {
         ['asset', 'name']
       );
       request.asset.name = defaultValue1;
-      const expectedHeaderRequestParams = `asset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `asset.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAsset = stubLongRunningCall(
         undefined,
@@ -2908,7 +2908,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2940,7 +2940,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2994,7 +2994,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAsset = stubLongRunningCall(
         undefined,
@@ -3025,7 +3025,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAsset = stubLongRunningCall(
         undefined,
@@ -3098,7 +3098,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3130,7 +3130,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3184,7 +3184,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTask = stubLongRunningCall(
         undefined,
@@ -3215,7 +3215,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTask = stubLongRunningCall(
         undefined,
@@ -3289,7 +3289,7 @@ describe('v1.DataplexServiceClient', () => {
         ['task', 'name']
       );
       request.task.name = defaultValue1;
-      const expectedHeaderRequestParams = `task.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3322,7 +3322,7 @@ describe('v1.DataplexServiceClient', () => {
         ['task', 'name']
       );
       request.task.name = defaultValue1;
-      const expectedHeaderRequestParams = `task.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3377,7 +3377,7 @@ describe('v1.DataplexServiceClient', () => {
         ['task', 'name']
       );
       request.task.name = defaultValue1;
-      const expectedHeaderRequestParams = `task.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTask = stubLongRunningCall(
         undefined,
@@ -3409,7 +3409,7 @@ describe('v1.DataplexServiceClient', () => {
         ['task', 'name']
       );
       request.task.name = defaultValue1;
-      const expectedHeaderRequestParams = `task.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `task.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTask = stubLongRunningCall(
         undefined,
@@ -3482,7 +3482,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3514,7 +3514,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3568,7 +3568,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTask = stubLongRunningCall(
         undefined,
@@ -3599,7 +3599,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTask = stubLongRunningCall(
         undefined,
@@ -3672,7 +3672,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3705,7 +3705,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3759,7 +3759,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEnvironment = stubLongRunningCall(
         undefined,
@@ -3790,7 +3790,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEnvironment = stubLongRunningCall(
         undefined,
@@ -3867,7 +3867,7 @@ describe('v1.DataplexServiceClient', () => {
         ['environment', 'name']
       );
       request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3901,7 +3901,7 @@ describe('v1.DataplexServiceClient', () => {
         ['environment', 'name']
       );
       request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3956,7 +3956,7 @@ describe('v1.DataplexServiceClient', () => {
         ['environment', 'name']
       );
       request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEnvironment = stubLongRunningCall(
         undefined,
@@ -3988,7 +3988,7 @@ describe('v1.DataplexServiceClient', () => {
         ['environment', 'name']
       );
       request.environment.name = defaultValue1;
-      const expectedHeaderRequestParams = `environment.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `environment.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEnvironment = stubLongRunningCall(
         undefined,
@@ -4064,7 +4064,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4097,7 +4097,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4151,7 +4151,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEnvironment = stubLongRunningCall(
         undefined,
@@ -4182,7 +4182,7 @@ describe('v1.DataplexServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEnvironment = stubLongRunningCall(
         undefined,
@@ -4258,7 +4258,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
@@ -4291,7 +4291,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
@@ -4340,7 +4340,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLakes = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listLakes(request), expectedError);
@@ -4368,7 +4368,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
@@ -4419,7 +4419,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLakes.createStream = stubPageStreamingCall(
         undefined,
@@ -4467,7 +4467,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Lake()),
@@ -4509,7 +4509,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLakes.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -4552,7 +4552,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -4585,7 +4585,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -4634,7 +4634,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listLakeActions = stubSimpleCall(
         undefined,
@@ -4665,7 +4665,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -4719,7 +4719,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLakeActions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4768,7 +4768,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -4811,7 +4811,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listLakeActions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4853,7 +4853,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
@@ -4886,7 +4886,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
@@ -4935,7 +4935,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listZones = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listZones(request), expectedError);
@@ -4963,7 +4963,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
@@ -5014,7 +5014,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listZones.createStream = stubPageStreamingCall(
         undefined,
@@ -5062,7 +5062,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Zone()),
@@ -5104,7 +5104,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listZones.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5147,7 +5147,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -5180,7 +5180,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -5229,7 +5229,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listZoneActions = stubSimpleCall(
         undefined,
@@ -5260,7 +5260,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -5314,7 +5314,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listZoneActions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5363,7 +5363,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -5406,7 +5406,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listZoneActions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5448,7 +5448,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
@@ -5481,7 +5481,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
@@ -5530,7 +5530,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAssets = stubSimpleCall(
         undefined,
@@ -5561,7 +5561,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
@@ -5612,7 +5612,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
         undefined,
@@ -5660,7 +5660,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Asset()),
@@ -5703,7 +5703,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5747,7 +5747,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -5780,7 +5780,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -5829,7 +5829,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAssetActions = stubSimpleCall(
         undefined,
@@ -5860,7 +5860,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -5914,7 +5914,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssetActions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5963,7 +5963,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Action()),
@@ -6006,7 +6006,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssetActions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6048,7 +6048,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
@@ -6081,7 +6081,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
@@ -6130,7 +6130,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTasks = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listTasks(request), expectedError);
@@ -6158,7 +6158,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
@@ -6209,7 +6209,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTasks.createStream = stubPageStreamingCall(
         undefined,
@@ -6257,7 +6257,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Task()),
@@ -6299,7 +6299,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTasks.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -6342,7 +6342,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
@@ -6375,7 +6375,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
@@ -6424,7 +6424,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listJobs(request), expectedError);
@@ -6452,7 +6452,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
@@ -6503,7 +6503,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
         undefined,
@@ -6551,7 +6551,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Job()),
@@ -6593,7 +6593,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -6636,7 +6636,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.Environment()
@@ -6675,7 +6675,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.Environment()
@@ -6730,7 +6730,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEnvironments = stubSimpleCall(
         undefined,
@@ -6761,7 +6761,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.Environment()
@@ -6821,7 +6821,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEnvironments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6870,7 +6870,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataplex.v1.Environment()
@@ -6919,7 +6919,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEnvironments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6961,7 +6961,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
@@ -6994,7 +6994,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
@@ -7043,7 +7043,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSessions = stubSimpleCall(
         undefined,
@@ -7074,7 +7074,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
@@ -7128,7 +7128,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSessions.createStream = stubPageStreamingCall(
         undefined,
@@ -7179,7 +7179,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Session()),
@@ -7222,7 +7222,7 @@ describe('v1.DataplexServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSessions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

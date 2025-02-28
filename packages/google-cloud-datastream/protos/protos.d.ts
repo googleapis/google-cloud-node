@@ -5002,6 +5002,9 @@ export namespace google {
 
                     /** PostgresqlProfile database */
                     database?: (string|null);
+
+                    /** PostgresqlProfile sslConfig */
+                    sslConfig?: (google.cloud.datastream.v1.IPostgresqlSslConfig|null);
                 }
 
                 /** Represents a PostgresqlProfile. */
@@ -5027,6 +5030,9 @@ export namespace google {
 
                     /** PostgresqlProfile database. */
                     public database: string;
+
+                    /** PostgresqlProfile sslConfig. */
+                    public sslConfig?: (google.cloud.datastream.v1.IPostgresqlSslConfig|null);
 
                     /**
                      * Creates a new PostgresqlProfile instance using the specified properties.
@@ -6349,6 +6355,321 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PostgresqlSslConfig. */
+                interface IPostgresqlSslConfig {
+
+                    /** PostgresqlSslConfig serverVerification */
+                    serverVerification?: (google.cloud.datastream.v1.PostgresqlSslConfig.IServerVerification|null);
+
+                    /** PostgresqlSslConfig serverAndClientVerification */
+                    serverAndClientVerification?: (google.cloud.datastream.v1.PostgresqlSslConfig.IServerAndClientVerification|null);
+                }
+
+                /** Represents a PostgresqlSslConfig. */
+                class PostgresqlSslConfig implements IPostgresqlSslConfig {
+
+                    /**
+                     * Constructs a new PostgresqlSslConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IPostgresqlSslConfig);
+
+                    /** PostgresqlSslConfig serverVerification. */
+                    public serverVerification?: (google.cloud.datastream.v1.PostgresqlSslConfig.IServerVerification|null);
+
+                    /** PostgresqlSslConfig serverAndClientVerification. */
+                    public serverAndClientVerification?: (google.cloud.datastream.v1.PostgresqlSslConfig.IServerAndClientVerification|null);
+
+                    /** PostgresqlSslConfig encryptionSetting. */
+                    public encryptionSetting?: ("serverVerification"|"serverAndClientVerification");
+
+                    /**
+                     * Creates a new PostgresqlSslConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostgresqlSslConfig instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IPostgresqlSslConfig): google.cloud.datastream.v1.PostgresqlSslConfig;
+
+                    /**
+                     * Encodes the specified PostgresqlSslConfig message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSslConfig.verify|verify} messages.
+                     * @param message PostgresqlSslConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IPostgresqlSslConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostgresqlSslConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSslConfig.verify|verify} messages.
+                     * @param message PostgresqlSslConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IPostgresqlSslConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostgresqlSslConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostgresqlSslConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.PostgresqlSslConfig;
+
+                    /**
+                     * Decodes a PostgresqlSslConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostgresqlSslConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.PostgresqlSslConfig;
+
+                    /**
+                     * Verifies a PostgresqlSslConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostgresqlSslConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostgresqlSslConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.PostgresqlSslConfig;
+
+                    /**
+                     * Creates a plain object from a PostgresqlSslConfig message. Also converts values to other types if specified.
+                     * @param message PostgresqlSslConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.PostgresqlSslConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostgresqlSslConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostgresqlSslConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PostgresqlSslConfig {
+
+                    /** Properties of a ServerVerification. */
+                    interface IServerVerification {
+
+                        /** ServerVerification caCertificate */
+                        caCertificate?: (string|null);
+                    }
+
+                    /** Represents a ServerVerification. */
+                    class ServerVerification implements IServerVerification {
+
+                        /**
+                         * Constructs a new ServerVerification.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.PostgresqlSslConfig.IServerVerification);
+
+                        /** ServerVerification caCertificate. */
+                        public caCertificate: string;
+
+                        /**
+                         * Creates a new ServerVerification instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServerVerification instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.PostgresqlSslConfig.IServerVerification): google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification;
+
+                        /**
+                         * Encodes the specified ServerVerification message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification.verify|verify} messages.
+                         * @param message ServerVerification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.PostgresqlSslConfig.IServerVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServerVerification message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification.verify|verify} messages.
+                         * @param message ServerVerification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.PostgresqlSslConfig.IServerVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServerVerification message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServerVerification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification;
+
+                        /**
+                         * Decodes a ServerVerification message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServerVerification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification;
+
+                        /**
+                         * Verifies a ServerVerification message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServerVerification message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServerVerification
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification;
+
+                        /**
+                         * Creates a plain object from a ServerVerification message. Also converts values to other types if specified.
+                         * @param message ServerVerification
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServerVerification to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ServerVerification
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ServerAndClientVerification. */
+                    interface IServerAndClientVerification {
+
+                        /** ServerAndClientVerification clientCertificate */
+                        clientCertificate?: (string|null);
+
+                        /** ServerAndClientVerification clientKey */
+                        clientKey?: (string|null);
+
+                        /** ServerAndClientVerification caCertificate */
+                        caCertificate?: (string|null);
+                    }
+
+                    /** Represents a ServerAndClientVerification. */
+                    class ServerAndClientVerification implements IServerAndClientVerification {
+
+                        /**
+                         * Constructs a new ServerAndClientVerification.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.PostgresqlSslConfig.IServerAndClientVerification);
+
+                        /** ServerAndClientVerification clientCertificate. */
+                        public clientCertificate: string;
+
+                        /** ServerAndClientVerification clientKey. */
+                        public clientKey: string;
+
+                        /** ServerAndClientVerification caCertificate. */
+                        public caCertificate: string;
+
+                        /**
+                         * Creates a new ServerAndClientVerification instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServerAndClientVerification instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.PostgresqlSslConfig.IServerAndClientVerification): google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification;
+
+                        /**
+                         * Encodes the specified ServerAndClientVerification message. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification.verify|verify} messages.
+                         * @param message ServerAndClientVerification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.PostgresqlSslConfig.IServerAndClientVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServerAndClientVerification message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification.verify|verify} messages.
+                         * @param message ServerAndClientVerification message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.PostgresqlSslConfig.IServerAndClientVerification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServerAndClientVerification message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServerAndClientVerification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification;
+
+                        /**
+                         * Decodes a ServerAndClientVerification message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServerAndClientVerification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification;
+
+                        /**
+                         * Verifies a ServerAndClientVerification message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServerAndClientVerification message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServerAndClientVerification
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification;
+
+                        /**
+                         * Creates a plain object from a ServerAndClientVerification message. Also converts values to other types if specified.
+                         * @param message ServerAndClientVerification
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServerAndClientVerification to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ServerAndClientVerification
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a ConnectionProfile. */

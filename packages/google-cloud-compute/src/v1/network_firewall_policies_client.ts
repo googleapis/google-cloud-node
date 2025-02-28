@@ -200,6 +200,11 @@ export class NetworkFirewallPoliciesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
+      aggregatedList: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'items'
+      ),
       list: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -258,18 +263,23 @@ export class NetworkFirewallPoliciesClient {
     // and create an API call method for each.
     const networkFirewallPoliciesStubMethods = [
       'addAssociation',
+      'addPacketMirroringRule',
       'addRule',
+      'aggregatedList',
       'cloneRules',
       'delete',
       'get',
       'getAssociation',
       'getIamPolicy',
+      'getPacketMirroringRule',
       'getRule',
       'insert',
       'list',
       'patch',
+      'patchPacketMirroringRule',
       'patchRule',
       'removeAssociation',
+      'removePacketMirroringRule',
       'removeRule',
       'setIamPolicy',
       'testIamPermissions',
@@ -494,6 +504,132 @@ export class NetworkFirewallPoliciesClient {
     this.initialize();
     return this.innerApiCalls
       .addAssociation(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Inserts a packet mirroring rule into a firewall policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to update.
+   * @param {google.cloud.compute.v1.FirewallPolicyRule} request.firewallPolicyRuleResource
+   *   The body resource for this request
+   * @param {number} request.maxPriority
+   *   When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
+   * @param {number} request.minPriority
+   *   When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/network_firewall_policies.add_packet_mirroring_rule.js</caption>
+   * region_tag:compute_v1_generated_NetworkFirewallPolicies_AddPacketMirroringRule_async
+   */
+  addPacketMirroringRule(
+    request?: protos.google.cloud.compute.v1.IAddPacketMirroringRuleNetworkFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  addPacketMirroringRule(
+    request: protos.google.cloud.compute.v1.IAddPacketMirroringRuleNetworkFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddPacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addPacketMirroringRule(
+    request: protos.google.cloud.compute.v1.IAddPacketMirroringRuleNetworkFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddPacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addPacketMirroringRule(
+    request?: protos.google.cloud.compute.v1.IAddPacketMirroringRuleNetworkFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IAddPacketMirroringRuleNetworkFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddPacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .addPacketMirroringRule(request, options, callback)
       .then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
@@ -1184,6 +1320,111 @@ export class NetworkFirewallPoliciesClient {
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   /**
+   * Gets a packet mirroring rule of the specified priority.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to which the queried rule belongs.
+   * @param {number} request.priority
+   *   The priority of the rule to get from the firewall policy.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.FirewallPolicyRule|FirewallPolicyRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/network_firewall_policies.get_packet_mirroring_rule.js</caption>
+   * region_tag:compute_v1_generated_NetworkFirewallPolicies_GetPacketMirroringRule_async
+   */
+  getPacketMirroringRule(
+    request?: protos.google.cloud.compute.v1.IGetPacketMirroringRuleNetworkFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPolicyRule,
+      (
+        | protos.google.cloud.compute.v1.IGetPacketMirroringRuleNetworkFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getPacketMirroringRule(
+    request: protos.google.cloud.compute.v1.IGetPacketMirroringRuleNetworkFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyRule,
+      | protos.google.cloud.compute.v1.IGetPacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPacketMirroringRule(
+    request: protos.google.cloud.compute.v1.IGetPacketMirroringRuleNetworkFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyRule,
+      | protos.google.cloud.compute.v1.IGetPacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPacketMirroringRule(
+    request?: protos.google.cloud.compute.v1.IGetPacketMirroringRuleNetworkFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IFirewallPolicyRule,
+          | protos.google.cloud.compute.v1.IGetPacketMirroringRuleNetworkFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyRule,
+      | protos.google.cloud.compute.v1.IGetPacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPolicyRule,
+      (
+        | protos.google.cloud.compute.v1.IGetPacketMirroringRuleNetworkFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getPacketMirroringRule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Gets a rule of the specified priority.
    *
    * @param {Object} request
@@ -1526,6 +1767,130 @@ export class NetworkFirewallPoliciesClient {
       );
   }
   /**
+   * Patches a packet mirroring rule of the specified priority.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to update.
+   * @param {google.cloud.compute.v1.FirewallPolicyRule} request.firewallPolicyRuleResource
+   *   The body resource for this request
+   * @param {number} request.priority
+   *   The priority of the rule to patch.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/network_firewall_policies.patch_packet_mirroring_rule.js</caption>
+   * region_tag:compute_v1_generated_NetworkFirewallPolicies_PatchPacketMirroringRule_async
+   */
+  patchPacketMirroringRule(
+    request?: protos.google.cloud.compute.v1.IPatchPacketMirroringRuleNetworkFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  patchPacketMirroringRule(
+    request: protos.google.cloud.compute.v1.IPatchPacketMirroringRuleNetworkFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchPacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  patchPacketMirroringRule(
+    request: protos.google.cloud.compute.v1.IPatchPacketMirroringRuleNetworkFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchPacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  patchPacketMirroringRule(
+    request?: protos.google.cloud.compute.v1.IPatchPacketMirroringRuleNetworkFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IPatchPacketMirroringRuleNetworkFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchPacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .patchPacketMirroringRule(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
    * Patches a rule of the specified priority.
    *
    * @param {Object} request
@@ -1751,6 +2116,128 @@ export class NetworkFirewallPoliciesClient {
     this.initialize();
     return this.innerApiCalls
       .removeAssociation(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Deletes a packet mirroring rule of the specified priority.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to update.
+   * @param {number} request.priority
+   *   The priority of the rule to remove from the firewall policy.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/network_firewall_policies.remove_packet_mirroring_rule.js</caption>
+   * region_tag:compute_v1_generated_NetworkFirewallPolicies_RemovePacketMirroringRule_async
+   */
+  removePacketMirroringRule(
+    request?: protos.google.cloud.compute.v1.IRemovePacketMirroringRuleNetworkFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  removePacketMirroringRule(
+    request: protos.google.cloud.compute.v1.IRemovePacketMirroringRuleNetworkFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemovePacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removePacketMirroringRule(
+    request: protos.google.cloud.compute.v1.IRemovePacketMirroringRuleNetworkFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemovePacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removePacketMirroringRule(
+    request?: protos.google.cloud.compute.v1.IRemovePacketMirroringRuleNetworkFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IRemovePacketMirroringRuleNetworkFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemovePacketMirroringRuleNetworkFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .removePacketMirroringRule(request, options, callback)
       .then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
@@ -2097,6 +2584,65 @@ export class NetworkFirewallPoliciesClient {
   }
 
   /**
+   * Retrieves an aggregated list of network firewall policies, listing network firewall policies from all applicable scopes (global and regional) and grouping the results per scope. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+   * @param {boolean} request.includeAllScopes
+   *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+   * @param {number} request.serviceProjectNumber
+   *   The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   as tuple [string, {@link protos.google.cloud.compute.v1.FirewallPoliciesScopedList|FirewallPoliciesScopedList}]. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/network_firewall_policies.aggregated_list.js</caption>
+   * region_tag:compute_v1_generated_NetworkFirewallPolicies_AggregatedList_async
+   */
+  aggregatedListAsync(
+    request?: protos.google.cloud.compute.v1.IAggregatedListNetworkFirewallPoliciesRequest,
+    options?: CallOptions
+  ): AsyncIterable<
+    [string, protos.google.cloud.compute.v1.IFirewallPoliciesScopedList]
+  > {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+      });
+    const defaultCallSettings = this._defaults['aggregatedList'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.aggregatedList.asyncIterate(
+      this.innerApiCalls['aggregatedList'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<
+      [string, protos.google.cloud.compute.v1.IFirewallPoliciesScopedList]
+    >;
+  }
+  /**
    * Lists all the policies that have been configured for the specified project.
    *
    * @param {Object} request
@@ -2193,7 +2739,7 @@ export class NetworkFirewallPoliciesClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `list`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.filter

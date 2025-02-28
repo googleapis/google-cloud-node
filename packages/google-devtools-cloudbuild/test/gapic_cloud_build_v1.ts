@@ -1076,7 +1076,7 @@ describe('v1.CloudBuildClient', () => {
         ['name']
       );
       request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger=${defaultValue2}&name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&trigger=${defaultValue2 ?? ''}&name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
       );
@@ -1118,7 +1118,7 @@ describe('v1.CloudBuildClient', () => {
         ['name']
       );
       request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger=${defaultValue2}&name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&trigger=${defaultValue2 ?? ''}&name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
       );
@@ -1175,7 +1175,7 @@ describe('v1.CloudBuildClient', () => {
         ['name']
       );
       request.name = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger=${defaultValue2}&name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&trigger=${defaultValue2 ?? ''}&name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.receiveTriggerWebhook = stubSimpleCall(
         undefined,

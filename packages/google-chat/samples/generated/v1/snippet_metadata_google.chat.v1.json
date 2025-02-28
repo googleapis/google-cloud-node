@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-chat",
-        "version": "0.11.0",
+        "version": "0.12.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1011,7 +1011,7 @@
             "regionTag": "chat_v1_generated_ChatService_CreateReaction_async",
             "title": "ChatService createReaction Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a reaction and adds it to a message. Only unicode emojis are supported. For an example, see [Add a reaction to a message](https://developers.google.com/workspace/chat/create-reactions). Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).",
+            "description": " Creates a reaction and adds it to a message. For an example, see [Add a reaction to a message](https://developers.google.com/workspace/chat/create-reactions). Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).",
             "canonical": true,
             "file": "chat_service.create_reaction.js",
             "language": "JAVASCRIPT",
@@ -1107,7 +1107,7 @@
             "regionTag": "chat_v1_generated_ChatService_DeleteReaction_async",
             "title": "ChatService deleteReaction Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a reaction to a message. Only unicode emojis are supported. For an example, see [Delete a reaction](https://developers.google.com/workspace/chat/delete-reactions). Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).",
+            "description": " Deletes a reaction to a message. For an example, see [Delete a reaction](https://developers.google.com/workspace/chat/delete-reactions). Requires [user authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).",
             "canonical": true,
             "file": "chat_service.delete_reaction.js",
             "language": "JAVASCRIPT",

@@ -53,7 +53,7 @@ function main(parent) {
   // const filter = 'abc123'
 
   // Imports the Dataform library
-  const {DataformClient} = require('@google-cloud/dataform').v1alpha2;
+  const {DataformClient} = require('@google-cloud/dataform').v1beta1;
 
   // Instantiates a client
   const dataformClient = new DataformClient();

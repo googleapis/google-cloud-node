@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -226,6 +226,9 @@ export class JobServiceClient {
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
       ),
+      cachedContentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cachedContents/{cached_content}'
+      ),
       contextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
       ),
@@ -337,6 +340,15 @@ export class JobServiceClient {
         ),
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'publishers/{publisher}/models/{model}'
+      ),
+      ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
+      ),
+      ragFilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
+      ),
+      reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
       ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
@@ -484,6 +496,9 @@ export class JobServiceClient {
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -539,6 +554,10 @@ export class JobServiceClient {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -580,6 +599,9 @@ export class JobServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
             },
           ],
         },
@@ -805,6 +827,15 @@ export class JobServiceClient {
               post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',
+            },
+            {
               post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
@@ -1017,6 +1048,10 @@ export class JobServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
@@ -1120,6 +1155,18 @@ export class JobServiceClient {
             {
               delete:
                 '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
             },
             {
               delete:
@@ -1318,6 +1365,9 @@ export class JobServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
             {get: '/v1/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
@@ -1391,6 +1441,15 @@ export class JobServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
             },
             {get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
@@ -1559,6 +1618,9 @@ export class JobServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
             {get: '/v1/{name=projects/*/locations/*}/operations'},
             {get: '/v1/{name=projects/*/locations/*/datasets/*}/operations'},
             {
@@ -1629,6 +1691,9 @@ export class JobServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
+            {
+              get: '/v1/{name=projects/*/locations/*/reasoningEngines/*}/operations',
+            },
             {get: '/v1/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
@@ -1641,6 +1706,10 @@ export class JobServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
             {
@@ -1820,6 +1889,9 @@ export class JobServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
             {post: '/v1/{name=projects/*/locations/*/operations/*}:wait'},
             {
               post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
@@ -1898,6 +1970,15 @@ export class JobServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',
             },
             {
               post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
@@ -5383,7 +5464,7 @@ export class JobServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCustomJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5658,7 +5739,7 @@ export class JobServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDataLabelingJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5940,7 +6021,7 @@ export class JobServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listHyperparameterTuningJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6209,7 +6290,7 @@ export class JobServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNasJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6460,7 +6541,7 @@ export class JobServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNasTrialDetails`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6694,7 +6775,7 @@ export class JobServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listBatchPredictionJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6965,7 +7046,7 @@ export class JobServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchModelDeploymentMonitoringStatsAnomalies`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.modelDeploymentMonitoringJob
@@ -7226,7 +7307,7 @@ export class JobServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listModelDeploymentMonitoringJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7611,7 +7692,7 @@ export class JobServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -7624,6 +7705,20 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -7660,6 +7755,13 @@ export class JobServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -7695,11 +7797,11 @@ export class JobServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -7708,6 +7810,20 @@ export class JobServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -7738,7 +7854,7 @@ export class JobServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -7751,6 +7867,20 @@ export class JobServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -8046,6 +8176,58 @@ export class JobServiceClient {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
       batchPredictionJobName
     ).batch_prediction_job;
+  }
+
+  /**
+   * Return a fully-qualified cachedContent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cached_content
+   * @returns {string} Resource name string.
+   */
+  cachedContentPath(project: string, location: string, cachedContent: string) {
+    return this.pathTemplates.cachedContentPathTemplate.render({
+      project: project,
+      location: location,
+      cached_content: cachedContent,
+    });
+  }
+
+  /**
+   * Parse the project from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .location;
+  }
+
+  /**
+   * Parse the cached_content from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the cached_content.
+   */
+  matchCachedContentFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .cached_content;
   }
 
   /**
@@ -10344,6 +10526,184 @@ export class JobServiceClient {
     return this.pathTemplates.publisherModelPathTemplate.match(
       publisherModelName
     ).model;
+  }
+
+  /**
+   * Return a fully-qualified ragCorpus resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @returns {string} Resource name string.
+   */
+  ragCorpusPath(project: string, location: string, ragCorpus: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+    });
+  }
+
+  /**
+   * Parse the project from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .project;
+  }
+
+  /**
+   * Parse the location from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .rag_corpus;
+  }
+
+  /**
+   * Return a fully-qualified ragFile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_file
+   * @returns {string} Resource name string.
+   */
+  ragFilePath(
+    project: string,
+    location: string,
+    ragCorpus: string,
+    ragFile: string
+  ) {
+    return this.pathTemplates.ragFilePathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_file: ragFile,
+    });
+  }
+
+  /**
+   * Parse the project from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).project;
+  }
+
+  /**
+   * Parse the location from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_file from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the rag_file.
+   */
+  matchRagFileFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_file;
+  }
+
+  /**
+   * Return a fully-qualified reasoningEngine resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @returns {string} Resource name string.
+   */
+  reasoningEnginePath(
+    project: string,
+    location: string,
+    reasoningEngine: string
+  ) {
+    return this.pathTemplates.reasoningEnginePathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+    });
+  }
+
+  /**
+   * Parse the project from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).reasoning_engine;
   }
 
   /**

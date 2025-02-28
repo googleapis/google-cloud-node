@@ -277,7 +277,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Policy()
       );
@@ -309,7 +309,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Policy()
       );
@@ -357,7 +357,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSystemPolicy = stubSimpleCall(
         undefined,

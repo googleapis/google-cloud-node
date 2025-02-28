@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -257,7 +257,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.Feed()
       );
@@ -288,7 +288,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.Feed()
       );
@@ -335,7 +335,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeed = stubSimpleCall(
         undefined,
@@ -387,7 +387,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.Feed()
       );
@@ -418,7 +418,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.Feed()
       );
@@ -465,7 +465,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeed = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getFeed(request), expectedError);
@@ -514,7 +514,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.ListFeedsResponse()
       );
@@ -545,7 +545,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.ListFeedsResponse()
       );
@@ -592,7 +592,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeeds = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listFeeds(request), expectedError);
@@ -642,7 +642,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['feed', 'name']
       );
       request.feed.name = defaultValue1;
-      const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feed.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.Feed()
       );
@@ -674,7 +674,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['feed', 'name']
       );
       request.feed.name = defaultValue1;
-      const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feed.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.Feed()
       );
@@ -722,7 +722,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['feed', 'name']
       );
       request.feed.name = defaultValue1;
-      const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `feed.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFeed = stubSimpleCall(
         undefined,
@@ -775,7 +775,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -806,7 +806,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -853,7 +853,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFeed = stubSimpleCall(
         undefined,

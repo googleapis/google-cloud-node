@@ -333,7 +333,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.AdUnit()
       );
@@ -364,7 +364,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.ads.admanager.v1.AdUnit()
       );
@@ -411,7 +411,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAdUnit = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getAdUnit(request), expectedError);
@@ -460,7 +460,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnit()),
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnit()),
@@ -493,7 +493,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnit()),
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnit()),
@@ -542,7 +542,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAdUnits = stubSimpleCall(
         undefined,
@@ -573,7 +573,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnit()),
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnit()),
@@ -624,7 +624,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdUnits.createStream = stubPageStreamingCall(
         undefined,
@@ -672,7 +672,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnit()),
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnit()),
@@ -715,7 +715,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdUnits.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -759,7 +759,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnitSize()),
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnitSize()),
@@ -792,7 +792,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnitSize()),
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnitSize()),
@@ -841,7 +841,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAdUnitSizes = stubSimpleCall(
         undefined,
@@ -872,7 +872,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnitSize()),
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnitSize()),
@@ -926,7 +926,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdUnitSizes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -975,7 +975,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnitSize()),
         generateSampleMessage(new protos.google.ads.admanager.v1.AdUnitSize()),
@@ -1018,7 +1018,7 @@ describe('v1.AdUnitServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdUnitSizes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

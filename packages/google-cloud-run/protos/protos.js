@@ -758,6 +758,7 @@
                              * @property {string|null} [baseImage] BuildpacksBuild baseImage
                              * @property {Object.<string,string>|null} [environmentVariables] BuildpacksBuild environmentVariables
                              * @property {boolean|null} [enableAutomaticUpdates] BuildpacksBuild enableAutomaticUpdates
+                             * @property {string|null} [projectDescriptor] BuildpacksBuild projectDescriptor
                              */
     
                             /**
@@ -825,6 +826,14 @@
                             BuildpacksBuild.prototype.enableAutomaticUpdates = false;
     
                             /**
+                             * BuildpacksBuild projectDescriptor.
+                             * @member {string} projectDescriptor
+                             * @memberof google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild
+                             * @instance
+                             */
+                            BuildpacksBuild.prototype.projectDescriptor = "";
+    
+                            /**
                              * Creates a new BuildpacksBuild instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild
@@ -861,6 +870,8 @@
                                         writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.environmentVariables[keys[i]]).ldelim();
                                 if (message.enableAutomaticUpdates != null && Object.hasOwnProperty.call(message, "enableAutomaticUpdates"))
                                     writer.uint32(/* id 6, wireType 0 =*/48).bool(message.enableAutomaticUpdates);
+                                if (message.projectDescriptor != null && Object.hasOwnProperty.call(message, "projectDescriptor"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.projectDescriptor);
                                 return writer;
                             };
     
@@ -938,6 +949,10 @@
                                             message.enableAutomaticUpdates = reader.bool();
                                             break;
                                         }
+                                    case 7: {
+                                            message.projectDescriptor = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -996,6 +1011,9 @@
                                 if (message.enableAutomaticUpdates != null && message.hasOwnProperty("enableAutomaticUpdates"))
                                     if (typeof message.enableAutomaticUpdates !== "boolean")
                                         return "enableAutomaticUpdates: boolean expected";
+                                if (message.projectDescriptor != null && message.hasOwnProperty("projectDescriptor"))
+                                    if (!$util.isString(message.projectDescriptor))
+                                        return "projectDescriptor: string expected";
                                 return null;
                             };
     
@@ -1028,6 +1046,8 @@
                                 }
                                 if (object.enableAutomaticUpdates != null)
                                     message.enableAutomaticUpdates = Boolean(object.enableAutomaticUpdates);
+                                if (object.projectDescriptor != null)
+                                    message.projectDescriptor = String(object.projectDescriptor);
                                 return message;
                             };
     
@@ -1052,6 +1072,7 @@
                                     object.cacheImageUri = "";
                                     object.baseImage = "";
                                     object.enableAutomaticUpdates = false;
+                                    object.projectDescriptor = "";
                                 }
                                 if (message.runtime != null && message.hasOwnProperty("runtime"))
                                     object.runtime = message.runtime;
@@ -1069,6 +1090,8 @@
                                 }
                                 if (message.enableAutomaticUpdates != null && message.hasOwnProperty("enableAutomaticUpdates"))
                                     object.enableAutomaticUpdates = message.enableAutomaticUpdates;
+                                if (message.projectDescriptor != null && message.hasOwnProperty("projectDescriptor"))
+                                    object.projectDescriptor = message.projectDescriptor;
                                 return object;
                             };
     
@@ -3819,6 +3842,7 @@
                          * @interface IExecution
                          * @property {string|null} [name] Execution name
                          * @property {string|null} [uid] Execution uid
+                         * @property {string|null} [creator] Execution creator
                          * @property {number|Long|null} [generation] Execution generation
                          * @property {Object.<string,string>|null} [labels] Execution labels
                          * @property {Object.<string,string>|null} [annotations] Execution annotations
@@ -3879,6 +3903,14 @@
                          * @instance
                          */
                         Execution.prototype.uid = "";
+    
+                        /**
+                         * Execution creator.
+                         * @member {string} creator
+                         * @memberof google.cloud.run.v2.Execution
+                         * @instance
+                         */
+                        Execution.prototype.creator = "";
     
                         /**
                          * Execution generation.
@@ -4159,6 +4191,8 @@
                                 writer.uint32(/* id 26, wireType 2 =*/210).string(message.logUri);
                             if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                                 writer.uint32(/* id 27, wireType 0 =*/216).bool(message.satisfiesPzs);
+                            if (message.creator != null && Object.hasOwnProperty.call(message, "creator"))
+                                writer.uint32(/* id 32, wireType 2 =*/258).string(message.creator);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 99, wireType 2 =*/794).string(message.etag);
                             return writer;
@@ -4201,6 +4235,10 @@
                                     }
                                 case 2: {
                                         message.uid = reader.string();
+                                        break;
+                                    }
+                                case 32: {
+                                        message.creator = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -4384,6 +4422,9 @@
                             if (message.uid != null && message.hasOwnProperty("uid"))
                                 if (!$util.isString(message.uid))
                                     return "uid: string expected";
+                            if (message.creator != null && message.hasOwnProperty("creator"))
+                                if (!$util.isString(message.creator))
+                                    return "creator: string expected";
                             if (message.generation != null && message.hasOwnProperty("generation"))
                                 if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                     return "generation: integer|Long expected";
@@ -4519,6 +4560,8 @@
                                 message.name = String(object.name);
                             if (object.uid != null)
                                 message.uid = String(object.uid);
+                            if (object.creator != null)
+                                message.creator = String(object.creator);
                             if (object.generation != null)
                                 if ($util.Long)
                                     (message.generation = $util.Long.fromValue(object.generation)).unsigned = false;
@@ -4714,6 +4757,7 @@
                                 object.retriedCount = 0;
                                 object.logUri = "";
                                 object.satisfiesPzs = false;
+                                object.creator = "";
                                 object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -4784,6 +4828,8 @@
                                 object.logUri = message.logUri;
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 object.satisfiesPzs = message.satisfiesPzs;
+                            if (message.creator != null && message.hasOwnProperty("creator"))
+                                object.creator = message.creator;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             return object;
@@ -5298,6 +5344,8 @@
                          * @property {google.cloud.run.v2.IProbe|null} [livenessProbe] Container livenessProbe
                          * @property {google.cloud.run.v2.IProbe|null} [startupProbe] Container startupProbe
                          * @property {Array.<string>|null} [dependsOn] Container dependsOn
+                         * @property {string|null} [baseImageUri] Container baseImageUri
+                         * @property {google.cloud.run.v2.IBuildInfo|null} [buildInfo] Container buildInfo
                          */
     
                         /**
@@ -5418,6 +5466,22 @@
                         Container.prototype.dependsOn = $util.emptyArray;
     
                         /**
+                         * Container baseImageUri.
+                         * @member {string} baseImageUri
+                         * @memberof google.cloud.run.v2.Container
+                         * @instance
+                         */
+                        Container.prototype.baseImageUri = "";
+    
+                        /**
+                         * Container buildInfo.
+                         * @member {google.cloud.run.v2.IBuildInfo|null|undefined} buildInfo
+                         * @memberof google.cloud.run.v2.Container
+                         * @instance
+                         */
+                        Container.prototype.buildInfo = null;
+    
+                        /**
                          * Creates a new Container instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.run.v2.Container
@@ -5471,6 +5535,10 @@
                             if (message.dependsOn != null && message.dependsOn.length)
                                 for (var i = 0; i < message.dependsOn.length; ++i)
                                     writer.uint32(/* id 12, wireType 2 =*/98).string(message.dependsOn[i]);
+                            if (message.baseImageUri != null && Object.hasOwnProperty.call(message, "baseImageUri"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.baseImageUri);
+                            if (message.buildInfo != null && Object.hasOwnProperty.call(message, "buildInfo"))
+                                $root.google.cloud.run.v2.BuildInfo.encode(message.buildInfo, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -5563,6 +5631,14 @@
                                         if (!(message.dependsOn && message.dependsOn.length))
                                             message.dependsOn = [];
                                         message.dependsOn.push(reader.string());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.baseImageUri = reader.string();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.buildInfo = $root.google.cloud.run.v2.BuildInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5672,6 +5748,14 @@
                                     if (!$util.isString(message.dependsOn[i]))
                                         return "dependsOn: string[] expected";
                             }
+                            if (message.baseImageUri != null && message.hasOwnProperty("baseImageUri"))
+                                if (!$util.isString(message.baseImageUri))
+                                    return "baseImageUri: string expected";
+                            if (message.buildInfo != null && message.hasOwnProperty("buildInfo")) {
+                                var error = $root.google.cloud.run.v2.BuildInfo.verify(message.buildInfo);
+                                if (error)
+                                    return "buildInfo." + error;
+                            }
                             return null;
                         };
     
@@ -5759,6 +5843,13 @@
                                 for (var i = 0; i < object.dependsOn.length; ++i)
                                     message.dependsOn[i] = String(object.dependsOn[i]);
                             }
+                            if (object.baseImageUri != null)
+                                message.baseImageUri = String(object.baseImageUri);
+                            if (object.buildInfo != null) {
+                                if (typeof object.buildInfo !== "object")
+                                    throw TypeError(".google.cloud.run.v2.Container.buildInfo: object expected");
+                                message.buildInfo = $root.google.cloud.run.v2.BuildInfo.fromObject(object.buildInfo);
+                            }
                             return message;
                         };
     
@@ -5790,6 +5881,8 @@
                                 object.workingDir = "";
                                 object.livenessProbe = null;
                                 object.startupProbe = null;
+                                object.baseImageUri = "";
+                                object.buildInfo = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5833,6 +5926,10 @@
                                 for (var j = 0; j < message.dependsOn.length; ++j)
                                     object.dependsOn[j] = message.dependsOn[j];
                             }
+                            if (message.baseImageUri != null && message.hasOwnProperty("baseImageUri"))
+                                object.baseImageUri = message.baseImageUri;
+                            if (message.buildInfo != null && message.hasOwnProperty("buildInfo"))
+                                object.buildInfo = $root.google.cloud.run.v2.BuildInfo.toObject(message.buildInfo, options);
                             return object;
                         };
     
@@ -10549,6 +10646,233 @@
                         return GRPCAction;
                     })();
     
+                    v2.BuildInfo = (function() {
+    
+                        /**
+                         * Properties of a BuildInfo.
+                         * @memberof google.cloud.run.v2
+                         * @interface IBuildInfo
+                         * @property {string|null} [functionTarget] BuildInfo functionTarget
+                         * @property {string|null} [sourceLocation] BuildInfo sourceLocation
+                         */
+    
+                        /**
+                         * Constructs a new BuildInfo.
+                         * @memberof google.cloud.run.v2
+                         * @classdesc Represents a BuildInfo.
+                         * @implements IBuildInfo
+                         * @constructor
+                         * @param {google.cloud.run.v2.IBuildInfo=} [properties] Properties to set
+                         */
+                        function BuildInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BuildInfo functionTarget.
+                         * @member {string} functionTarget
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @instance
+                         */
+                        BuildInfo.prototype.functionTarget = "";
+    
+                        /**
+                         * BuildInfo sourceLocation.
+                         * @member {string} sourceLocation
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @instance
+                         */
+                        BuildInfo.prototype.sourceLocation = "";
+    
+                        /**
+                         * Creates a new BuildInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @static
+                         * @param {google.cloud.run.v2.IBuildInfo=} [properties] Properties to set
+                         * @returns {google.cloud.run.v2.BuildInfo} BuildInfo instance
+                         */
+                        BuildInfo.create = function create(properties) {
+                            return new BuildInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BuildInfo message. Does not implicitly {@link google.cloud.run.v2.BuildInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @static
+                         * @param {google.cloud.run.v2.IBuildInfo} message BuildInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BuildInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.functionTarget != null && Object.hasOwnProperty.call(message, "functionTarget"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.functionTarget);
+                            if (message.sourceLocation != null && Object.hasOwnProperty.call(message, "sourceLocation"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceLocation);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BuildInfo message, length delimited. Does not implicitly {@link google.cloud.run.v2.BuildInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @static
+                         * @param {google.cloud.run.v2.IBuildInfo} message BuildInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BuildInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BuildInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.run.v2.BuildInfo} BuildInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BuildInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.run.v2.BuildInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.functionTarget = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sourceLocation = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BuildInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.run.v2.BuildInfo} BuildInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BuildInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BuildInfo message.
+                         * @function verify
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BuildInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.functionTarget != null && message.hasOwnProperty("functionTarget"))
+                                if (!$util.isString(message.functionTarget))
+                                    return "functionTarget: string expected";
+                            if (message.sourceLocation != null && message.hasOwnProperty("sourceLocation"))
+                                if (!$util.isString(message.sourceLocation))
+                                    return "sourceLocation: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BuildInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.run.v2.BuildInfo} BuildInfo
+                         */
+                        BuildInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.run.v2.BuildInfo)
+                                return object;
+                            var message = new $root.google.cloud.run.v2.BuildInfo();
+                            if (object.functionTarget != null)
+                                message.functionTarget = String(object.functionTarget);
+                            if (object.sourceLocation != null)
+                                message.sourceLocation = String(object.sourceLocation);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BuildInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @static
+                         * @param {google.cloud.run.v2.BuildInfo} message BuildInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BuildInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.functionTarget = "";
+                                object.sourceLocation = "";
+                            }
+                            if (message.functionTarget != null && message.hasOwnProperty("functionTarget"))
+                                object.functionTarget = message.functionTarget;
+                            if (message.sourceLocation != null && message.hasOwnProperty("sourceLocation"))
+                                object.sourceLocation = message.sourceLocation;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BuildInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BuildInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BuildInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.run.v2.BuildInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BuildInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.run.v2.BuildInfo";
+                        };
+    
+                        return BuildInfo;
+                    })();
+    
                     v2.VpcAccess = (function() {
     
                         /**
@@ -12342,6 +12666,430 @@
                         };
     
                         return NodeSelector;
+                    })();
+    
+                    v2.BuildConfig = (function() {
+    
+                        /**
+                         * Properties of a BuildConfig.
+                         * @memberof google.cloud.run.v2
+                         * @interface IBuildConfig
+                         * @property {string|null} [name] BuildConfig name
+                         * @property {string|null} [sourceLocation] BuildConfig sourceLocation
+                         * @property {string|null} [functionTarget] BuildConfig functionTarget
+                         * @property {string|null} [imageUri] BuildConfig imageUri
+                         * @property {string|null} [baseImage] BuildConfig baseImage
+                         * @property {boolean|null} [enableAutomaticUpdates] BuildConfig enableAutomaticUpdates
+                         * @property {string|null} [workerPool] BuildConfig workerPool
+                         * @property {Object.<string,string>|null} [environmentVariables] BuildConfig environmentVariables
+                         * @property {string|null} [serviceAccount] BuildConfig serviceAccount
+                         */
+    
+                        /**
+                         * Constructs a new BuildConfig.
+                         * @memberof google.cloud.run.v2
+                         * @classdesc Represents a BuildConfig.
+                         * @implements IBuildConfig
+                         * @constructor
+                         * @param {google.cloud.run.v2.IBuildConfig=} [properties] Properties to set
+                         */
+                        function BuildConfig(properties) {
+                            this.environmentVariables = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BuildConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.name = "";
+    
+                        /**
+                         * BuildConfig sourceLocation.
+                         * @member {string} sourceLocation
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.sourceLocation = "";
+    
+                        /**
+                         * BuildConfig functionTarget.
+                         * @member {string} functionTarget
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.functionTarget = "";
+    
+                        /**
+                         * BuildConfig imageUri.
+                         * @member {string} imageUri
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.imageUri = "";
+    
+                        /**
+                         * BuildConfig baseImage.
+                         * @member {string} baseImage
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.baseImage = "";
+    
+                        /**
+                         * BuildConfig enableAutomaticUpdates.
+                         * @member {boolean} enableAutomaticUpdates
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.enableAutomaticUpdates = false;
+    
+                        /**
+                         * BuildConfig workerPool.
+                         * @member {string} workerPool
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.workerPool = "";
+    
+                        /**
+                         * BuildConfig environmentVariables.
+                         * @member {Object.<string,string>} environmentVariables
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.environmentVariables = $util.emptyObject;
+    
+                        /**
+                         * BuildConfig serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @instance
+                         */
+                        BuildConfig.prototype.serviceAccount = "";
+    
+                        /**
+                         * Creates a new BuildConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @static
+                         * @param {google.cloud.run.v2.IBuildConfig=} [properties] Properties to set
+                         * @returns {google.cloud.run.v2.BuildConfig} BuildConfig instance
+                         */
+                        BuildConfig.create = function create(properties) {
+                            return new BuildConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BuildConfig message. Does not implicitly {@link google.cloud.run.v2.BuildConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @static
+                         * @param {google.cloud.run.v2.IBuildConfig} message BuildConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BuildConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.sourceLocation != null && Object.hasOwnProperty.call(message, "sourceLocation"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceLocation);
+                            if (message.functionTarget != null && Object.hasOwnProperty.call(message, "functionTarget"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.functionTarget);
+                            if (message.imageUri != null && Object.hasOwnProperty.call(message, "imageUri"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.imageUri);
+                            if (message.baseImage != null && Object.hasOwnProperty.call(message, "baseImage"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.baseImage);
+                            if (message.enableAutomaticUpdates != null && Object.hasOwnProperty.call(message, "enableAutomaticUpdates"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.enableAutomaticUpdates);
+                            if (message.workerPool != null && Object.hasOwnProperty.call(message, "workerPool"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.workerPool);
+                            if (message.environmentVariables != null && Object.hasOwnProperty.call(message, "environmentVariables"))
+                                for (var keys = Object.keys(message.environmentVariables), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.environmentVariables[keys[i]]).ldelim();
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.serviceAccount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BuildConfig message, length delimited. Does not implicitly {@link google.cloud.run.v2.BuildConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @static
+                         * @param {google.cloud.run.v2.IBuildConfig} message BuildConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BuildConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BuildConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.run.v2.BuildConfig} BuildConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BuildConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.run.v2.BuildConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sourceLocation = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.functionTarget = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.imageUri = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.baseImage = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.enableAutomaticUpdates = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.workerPool = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (message.environmentVariables === $util.emptyObject)
+                                            message.environmentVariables = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.environmentVariables[key] = value;
+                                        break;
+                                    }
+                                case 9: {
+                                        message.serviceAccount = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BuildConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.run.v2.BuildConfig} BuildConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BuildConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BuildConfig message.
+                         * @function verify
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BuildConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.sourceLocation != null && message.hasOwnProperty("sourceLocation"))
+                                if (!$util.isString(message.sourceLocation))
+                                    return "sourceLocation: string expected";
+                            if (message.functionTarget != null && message.hasOwnProperty("functionTarget"))
+                                if (!$util.isString(message.functionTarget))
+                                    return "functionTarget: string expected";
+                            if (message.imageUri != null && message.hasOwnProperty("imageUri"))
+                                if (!$util.isString(message.imageUri))
+                                    return "imageUri: string expected";
+                            if (message.baseImage != null && message.hasOwnProperty("baseImage"))
+                                if (!$util.isString(message.baseImage))
+                                    return "baseImage: string expected";
+                            if (message.enableAutomaticUpdates != null && message.hasOwnProperty("enableAutomaticUpdates"))
+                                if (typeof message.enableAutomaticUpdates !== "boolean")
+                                    return "enableAutomaticUpdates: boolean expected";
+                            if (message.workerPool != null && message.hasOwnProperty("workerPool"))
+                                if (!$util.isString(message.workerPool))
+                                    return "workerPool: string expected";
+                            if (message.environmentVariables != null && message.hasOwnProperty("environmentVariables")) {
+                                if (!$util.isObject(message.environmentVariables))
+                                    return "environmentVariables: object expected";
+                                var key = Object.keys(message.environmentVariables);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.environmentVariables[key[i]]))
+                                        return "environmentVariables: string{k:string} expected";
+                            }
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BuildConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.run.v2.BuildConfig} BuildConfig
+                         */
+                        BuildConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.run.v2.BuildConfig)
+                                return object;
+                            var message = new $root.google.cloud.run.v2.BuildConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.sourceLocation != null)
+                                message.sourceLocation = String(object.sourceLocation);
+                            if (object.functionTarget != null)
+                                message.functionTarget = String(object.functionTarget);
+                            if (object.imageUri != null)
+                                message.imageUri = String(object.imageUri);
+                            if (object.baseImage != null)
+                                message.baseImage = String(object.baseImage);
+                            if (object.enableAutomaticUpdates != null)
+                                message.enableAutomaticUpdates = Boolean(object.enableAutomaticUpdates);
+                            if (object.workerPool != null)
+                                message.workerPool = String(object.workerPool);
+                            if (object.environmentVariables) {
+                                if (typeof object.environmentVariables !== "object")
+                                    throw TypeError(".google.cloud.run.v2.BuildConfig.environmentVariables: object expected");
+                                message.environmentVariables = {};
+                                for (var keys = Object.keys(object.environmentVariables), i = 0; i < keys.length; ++i)
+                                    message.environmentVariables[keys[i]] = String(object.environmentVariables[keys[i]]);
+                            }
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BuildConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @static
+                         * @param {google.cloud.run.v2.BuildConfig} message BuildConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BuildConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.environmentVariables = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.sourceLocation = "";
+                                object.functionTarget = "";
+                                object.imageUri = "";
+                                object.baseImage = "";
+                                object.enableAutomaticUpdates = false;
+                                object.workerPool = "";
+                                object.serviceAccount = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.sourceLocation != null && message.hasOwnProperty("sourceLocation"))
+                                object.sourceLocation = message.sourceLocation;
+                            if (message.functionTarget != null && message.hasOwnProperty("functionTarget"))
+                                object.functionTarget = message.functionTarget;
+                            if (message.imageUri != null && message.hasOwnProperty("imageUri"))
+                                object.imageUri = message.imageUri;
+                            if (message.baseImage != null && message.hasOwnProperty("baseImage"))
+                                object.baseImage = message.baseImage;
+                            if (message.enableAutomaticUpdates != null && message.hasOwnProperty("enableAutomaticUpdates"))
+                                object.enableAutomaticUpdates = message.enableAutomaticUpdates;
+                            if (message.workerPool != null && message.hasOwnProperty("workerPool"))
+                                object.workerPool = message.workerPool;
+                            var keys2;
+                            if (message.environmentVariables && (keys2 = Object.keys(message.environmentVariables)).length) {
+                                object.environmentVariables = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.environmentVariables[keys2[j]] = message.environmentVariables[keys2[j]];
+                            }
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BuildConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BuildConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BuildConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.run.v2.BuildConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BuildConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.run.v2.BuildConfig";
+                        };
+    
+                        return BuildConfig;
                     })();
     
                     /**
@@ -22064,6 +22812,7 @@
                          * @property {Array.<google.cloud.run.v2.ITrafficTargetStatus>|null} [trafficStatuses] Service trafficStatuses
                          * @property {string|null} [uri] Service uri
                          * @property {boolean|null} [satisfiesPzs] Service satisfiesPzs
+                         * @property {google.cloud.run.v2.IBuildConfig|null} [buildConfig] Service buildConfig
                          * @property {boolean|null} [reconciling] Service reconciling
                          * @property {string|null} [etag] Service etag
                          */
@@ -22347,6 +23096,14 @@
                         Service.prototype.satisfiesPzs = false;
     
                         /**
+                         * Service buildConfig.
+                         * @member {google.cloud.run.v2.IBuildConfig|null|undefined} buildConfig
+                         * @memberof google.cloud.run.v2.Service
+                         * @instance
+                         */
+                        Service.prototype.buildConfig = null;
+    
+                        /**
                          * Service reconciling.
                          * @member {boolean} reconciling
                          * @memberof google.cloud.run.v2.Service
@@ -22457,6 +23214,8 @@
                                     writer.uint32(/* id 37, wireType 2 =*/298).string(message.customAudiences[i]);
                             if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                                 writer.uint32(/* id 38, wireType 0 =*/304).bool(message.satisfiesPzs);
+                            if (message.buildConfig != null && Object.hasOwnProperty.call(message, "buildConfig"))
+                                $root.google.cloud.run.v2.BuildConfig.encode(message.buildConfig, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
                             if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
                                 writer.uint32(/* id 98, wireType 0 =*/784).bool(message.reconciling);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
@@ -22671,6 +23430,10 @@
                                         message.satisfiesPzs = reader.bool();
                                         break;
                                     }
+                                case 41: {
+                                        message.buildConfig = $root.google.cloud.run.v2.BuildConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 98: {
                                         message.reconciling = reader.bool();
                                         break;
@@ -22881,6 +23644,11 @@
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 if (typeof message.satisfiesPzs !== "boolean")
                                     return "satisfiesPzs: boolean expected";
+                            if (message.buildConfig != null && message.hasOwnProperty("buildConfig")) {
+                                var error = $root.google.cloud.run.v2.BuildConfig.verify(message.buildConfig);
+                                if (error)
+                                    return "buildConfig." + error;
+                            }
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
                                 if (typeof message.reconciling !== "boolean")
                                     return "reconciling: boolean expected";
@@ -23112,6 +23880,11 @@
                                 message.uri = String(object.uri);
                             if (object.satisfiesPzs != null)
                                 message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.buildConfig != null) {
+                                if (typeof object.buildConfig !== "object")
+                                    throw TypeError(".google.cloud.run.v2.Service.buildConfig: object expected");
+                                message.buildConfig = $root.google.cloud.run.v2.BuildConfig.fromObject(object.buildConfig);
+                            }
                             if (object.reconciling != null)
                                 message.reconciling = Boolean(object.reconciling);
                             if (object.etag != null)
@@ -23177,6 +23950,7 @@
                                 object.latestCreatedRevision = "";
                                 object.uri = "";
                                 object.satisfiesPzs = false;
+                                object.buildConfig = null;
                                 object.reconciling = false;
                                 object.etag = "";
                             }
@@ -23272,6 +24046,8 @@
                             }
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 object.satisfiesPzs = message.satisfiesPzs;
+                            if (message.buildConfig != null && message.hasOwnProperty("buildConfig"))
+                                object.buildConfig = $root.google.cloud.run.v2.BuildConfig.toObject(message.buildConfig, options);
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
                                 object.reconciling = message.reconciling;
                             if (message.etag != null && message.hasOwnProperty("etag"))

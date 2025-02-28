@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -356,7 +356,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.Source()
       );
@@ -387,7 +387,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.Source()
       );
@@ -434,7 +434,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSource = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSource(request), expectedError);
@@ -483,7 +483,7 @@ describe('v1.VmMigrationClient', () => {
         ['source']
       );
       request.source = defaultValue1;
-      const expectedHeaderRequestParams = `source=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryResponse()
       );
@@ -514,7 +514,7 @@ describe('v1.VmMigrationClient', () => {
         ['source']
       );
       request.source = defaultValue1;
-      const expectedHeaderRequestParams = `source=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryResponse()
       );
@@ -561,7 +561,7 @@ describe('v1.VmMigrationClient', () => {
         ['source']
       );
       request.source = defaultValue1;
-      const expectedHeaderRequestParams = `source=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchInventory = stubSimpleCall(
         undefined,
@@ -613,7 +613,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UtilizationReport()
       );
@@ -645,7 +645,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UtilizationReport()
       );
@@ -692,7 +692,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getUtilizationReport = stubSimpleCall(
         undefined,
@@ -744,7 +744,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DatacenterConnector()
       );
@@ -776,7 +776,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DatacenterConnector()
       );
@@ -823,7 +823,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDatacenterConnector = stubSimpleCall(
         undefined,
@@ -881,7 +881,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.MigratingVm()
       );
@@ -912,7 +912,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.MigratingVm()
       );
@@ -959,7 +959,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMigratingVm = stubSimpleCall(
         undefined,
@@ -1011,7 +1011,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CloneJob()
       );
@@ -1042,7 +1042,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CloneJob()
       );
@@ -1089,7 +1089,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCloneJob = stubSimpleCall(
         undefined,
@@ -1141,7 +1141,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CutoverJob()
       );
@@ -1172,7 +1172,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CutoverJob()
       );
@@ -1219,7 +1219,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCutoverJob = stubSimpleCall(
         undefined,
@@ -1271,7 +1271,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.Group()
       );
@@ -1302,7 +1302,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.Group()
       );
@@ -1349,7 +1349,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGroup = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getGroup(request), expectedError);
@@ -1398,7 +1398,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.TargetProject()
       );
@@ -1429,7 +1429,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.TargetProject()
       );
@@ -1476,7 +1476,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTargetProject = stubSimpleCall(
         undefined,
@@ -1528,7 +1528,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ReplicationCycle()
       );
@@ -1560,7 +1560,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ReplicationCycle()
       );
@@ -1607,7 +1607,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getReplicationCycle = stubSimpleCall(
         undefined,
@@ -1659,7 +1659,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1691,7 +1691,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1745,7 +1745,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSource = stubLongRunningCall(
         undefined,
@@ -1776,7 +1776,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSource = stubLongRunningCall(
         undefined,
@@ -1850,7 +1850,7 @@ describe('v1.VmMigrationClient', () => {
         ['source', 'name']
       );
       request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1883,7 +1883,7 @@ describe('v1.VmMigrationClient', () => {
         ['source', 'name']
       );
       request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1938,7 +1938,7 @@ describe('v1.VmMigrationClient', () => {
         ['source', 'name']
       );
       request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSource = stubLongRunningCall(
         undefined,
@@ -1970,7 +1970,7 @@ describe('v1.VmMigrationClient', () => {
         ['source', 'name']
       );
       request.source.name = defaultValue1;
-      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSource = stubLongRunningCall(
         undefined,
@@ -2043,7 +2043,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2075,7 +2075,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2129,7 +2129,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSource = stubLongRunningCall(
         undefined,
@@ -2160,7 +2160,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSource = stubLongRunningCall(
         undefined,
@@ -2233,7 +2233,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2266,7 +2266,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2320,7 +2320,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createUtilizationReport = stubLongRunningCall(
         undefined,
@@ -2354,7 +2354,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createUtilizationReport = stubLongRunningCall(
         undefined,
@@ -2431,7 +2431,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2464,7 +2464,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2518,7 +2518,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteUtilizationReport = stubLongRunningCall(
         undefined,
@@ -2552,7 +2552,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteUtilizationReport = stubLongRunningCall(
         undefined,
@@ -2629,7 +2629,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2662,7 +2662,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2716,7 +2716,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDatacenterConnector = stubLongRunningCall(
         undefined,
@@ -2750,7 +2750,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDatacenterConnector = stubLongRunningCall(
         undefined,
@@ -2827,7 +2827,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2860,7 +2860,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2914,7 +2914,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDatacenterConnector = stubLongRunningCall(
         undefined,
@@ -2948,7 +2948,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDatacenterConnector = stubLongRunningCall(
         undefined,
@@ -3025,7 +3025,7 @@ describe('v1.VmMigrationClient', () => {
         ['datacenterConnector']
       );
       request.datacenterConnector = defaultValue1;
-      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
+      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3058,7 +3058,7 @@ describe('v1.VmMigrationClient', () => {
         ['datacenterConnector']
       );
       request.datacenterConnector = defaultValue1;
-      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
+      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3112,7 +3112,7 @@ describe('v1.VmMigrationClient', () => {
         ['datacenterConnector']
       );
       request.datacenterConnector = defaultValue1;
-      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
+      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.upgradeAppliance = stubLongRunningCall(
         undefined,
@@ -3143,7 +3143,7 @@ describe('v1.VmMigrationClient', () => {
         ['datacenterConnector']
       );
       request.datacenterConnector = defaultValue1;
-      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
+      const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.upgradeAppliance = stubLongRunningCall(
         undefined,
@@ -3219,7 +3219,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3252,7 +3252,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3306,7 +3306,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMigratingVm = stubLongRunningCall(
         undefined,
@@ -3337,7 +3337,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMigratingVm = stubLongRunningCall(
         undefined,
@@ -3414,7 +3414,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm', 'name']
       );
       request.migratingVm.name = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3448,7 +3448,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm', 'name']
       );
       request.migratingVm.name = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3503,7 +3503,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm', 'name']
       );
       request.migratingVm.name = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMigratingVm = stubLongRunningCall(
         undefined,
@@ -3535,7 +3535,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm', 'name']
       );
       request.migratingVm.name = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMigratingVm = stubLongRunningCall(
         undefined,
@@ -3611,7 +3611,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3644,7 +3644,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3698,7 +3698,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMigratingVm = stubLongRunningCall(
         undefined,
@@ -3729,7 +3729,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMigratingVm = stubLongRunningCall(
         undefined,
@@ -3805,7 +3805,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3838,7 +3838,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3892,7 +3892,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startMigration = stubLongRunningCall(
         undefined,
@@ -3923,7 +3923,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startMigration = stubLongRunningCall(
         undefined,
@@ -3999,7 +3999,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4032,7 +4032,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4086,7 +4086,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeMigration = stubLongRunningCall(
         undefined,
@@ -4117,7 +4117,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeMigration = stubLongRunningCall(
         undefined,
@@ -4193,7 +4193,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4226,7 +4226,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4280,7 +4280,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseMigration = stubLongRunningCall(
         undefined,
@@ -4311,7 +4311,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseMigration = stubLongRunningCall(
         undefined,
@@ -4387,7 +4387,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4420,7 +4420,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4474,7 +4474,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.finalizeMigration = stubLongRunningCall(
         undefined,
@@ -4505,7 +4505,7 @@ describe('v1.VmMigrationClient', () => {
         ['migratingVm']
       );
       request.migratingVm = defaultValue1;
-      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
+      const expectedHeaderRequestParams = `migrating_vm=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.finalizeMigration = stubLongRunningCall(
         undefined,
@@ -4581,7 +4581,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4614,7 +4614,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4668,7 +4668,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCloneJob = stubLongRunningCall(
         undefined,
@@ -4699,7 +4699,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCloneJob = stubLongRunningCall(
         undefined,
@@ -4775,7 +4775,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4808,7 +4808,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4862,7 +4862,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelCloneJob = stubLongRunningCall(
         undefined,
@@ -4893,7 +4893,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelCloneJob = stubLongRunningCall(
         undefined,
@@ -4969,7 +4969,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5002,7 +5002,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5056,7 +5056,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCutoverJob = stubLongRunningCall(
         undefined,
@@ -5087,7 +5087,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCutoverJob = stubLongRunningCall(
         undefined,
@@ -5163,7 +5163,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5196,7 +5196,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5250,7 +5250,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelCutoverJob = stubLongRunningCall(
         undefined,
@@ -5281,7 +5281,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelCutoverJob = stubLongRunningCall(
         undefined,
@@ -5357,7 +5357,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5389,7 +5389,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5443,7 +5443,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGroup = stubLongRunningCall(
         undefined,
@@ -5474,7 +5474,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGroup = stubLongRunningCall(
         undefined,
@@ -5548,7 +5548,7 @@ describe('v1.VmMigrationClient', () => {
         ['group', 'name']
       );
       request.group.name = defaultValue1;
-      const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5581,7 +5581,7 @@ describe('v1.VmMigrationClient', () => {
         ['group', 'name']
       );
       request.group.name = defaultValue1;
-      const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5636,7 +5636,7 @@ describe('v1.VmMigrationClient', () => {
         ['group', 'name']
       );
       request.group.name = defaultValue1;
-      const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGroup = stubLongRunningCall(
         undefined,
@@ -5668,7 +5668,7 @@ describe('v1.VmMigrationClient', () => {
         ['group', 'name']
       );
       request.group.name = defaultValue1;
-      const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGroup = stubLongRunningCall(
         undefined,
@@ -5741,7 +5741,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5773,7 +5773,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5827,7 +5827,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGroup = stubLongRunningCall(
         undefined,
@@ -5858,7 +5858,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGroup = stubLongRunningCall(
         undefined,
@@ -5931,7 +5931,7 @@ describe('v1.VmMigrationClient', () => {
         ['group']
       );
       request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5964,7 +5964,7 @@ describe('v1.VmMigrationClient', () => {
         ['group']
       );
       request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6018,7 +6018,7 @@ describe('v1.VmMigrationClient', () => {
         ['group']
       );
       request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addGroupMigration = stubLongRunningCall(
         undefined,
@@ -6049,7 +6049,7 @@ describe('v1.VmMigrationClient', () => {
         ['group']
       );
       request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addGroupMigration = stubLongRunningCall(
         undefined,
@@ -6125,7 +6125,7 @@ describe('v1.VmMigrationClient', () => {
         ['group']
       );
       request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6158,7 +6158,7 @@ describe('v1.VmMigrationClient', () => {
         ['group']
       );
       request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6212,7 +6212,7 @@ describe('v1.VmMigrationClient', () => {
         ['group']
       );
       request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeGroupMigration = stubLongRunningCall(
         undefined,
@@ -6243,7 +6243,7 @@ describe('v1.VmMigrationClient', () => {
         ['group']
       );
       request.group = defaultValue1;
-      const expectedHeaderRequestParams = `group=${defaultValue1}`;
+      const expectedHeaderRequestParams = `group=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeGroupMigration = stubLongRunningCall(
         undefined,
@@ -6319,7 +6319,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6352,7 +6352,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6406,7 +6406,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTargetProject = stubLongRunningCall(
         undefined,
@@ -6437,7 +6437,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTargetProject = stubLongRunningCall(
         undefined,
@@ -6514,7 +6514,7 @@ describe('v1.VmMigrationClient', () => {
         ['targetProject', 'name']
       );
       request.targetProject.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target_project.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6548,7 +6548,7 @@ describe('v1.VmMigrationClient', () => {
         ['targetProject', 'name']
       );
       request.targetProject.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target_project.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6603,7 +6603,7 @@ describe('v1.VmMigrationClient', () => {
         ['targetProject', 'name']
       );
       request.targetProject.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target_project.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTargetProject = stubLongRunningCall(
         undefined,
@@ -6635,7 +6635,7 @@ describe('v1.VmMigrationClient', () => {
         ['targetProject', 'name']
       );
       request.targetProject.name = defaultValue1;
-      const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `target_project.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTargetProject = stubLongRunningCall(
         undefined,
@@ -6711,7 +6711,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6744,7 +6744,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -6798,7 +6798,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTargetProject = stubLongRunningCall(
         undefined,
@@ -6829,7 +6829,7 @@ describe('v1.VmMigrationClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTargetProject = stubLongRunningCall(
         undefined,
@@ -6905,7 +6905,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
@@ -6938,7 +6938,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
@@ -6987,7 +6987,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSources = stubSimpleCall(
         undefined,
@@ -7018,7 +7018,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
@@ -7072,7 +7072,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSources.createStream = stubPageStreamingCall(
         undefined,
@@ -7123,7 +7123,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Source()),
@@ -7166,7 +7166,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -7210,7 +7210,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.UtilizationReport()
@@ -7250,7 +7250,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.UtilizationReport()
@@ -7307,7 +7307,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listUtilizationReports = stubSimpleCall(
         undefined,
@@ -7341,7 +7341,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.UtilizationReport()
@@ -7408,7 +7408,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUtilizationReports.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7464,7 +7464,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.UtilizationReport()
@@ -7518,7 +7518,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUtilizationReports.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7565,7 +7565,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.DatacenterConnector()
@@ -7605,7 +7605,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.DatacenterConnector()
@@ -7662,7 +7662,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatacenterConnectors = stubSimpleCall(
         undefined,
@@ -7696,7 +7696,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.DatacenterConnector()
@@ -7765,7 +7765,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatacenterConnectors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7823,7 +7823,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.DatacenterConnector()
@@ -7877,7 +7877,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatacenterConnectors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7924,7 +7924,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.MigratingVm()
@@ -7963,7 +7963,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.MigratingVm()
@@ -8018,7 +8018,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMigratingVms = stubSimpleCall(
         undefined,
@@ -8049,7 +8049,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.MigratingVm()
@@ -8109,7 +8109,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigratingVms.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8158,7 +8158,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.MigratingVm()
@@ -8207,7 +8207,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigratingVms.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8249,7 +8249,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CloneJob()
@@ -8288,7 +8288,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CloneJob()
@@ -8343,7 +8343,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCloneJobs = stubSimpleCall(
         undefined,
@@ -8374,7 +8374,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CloneJob()
@@ -8434,7 +8434,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCloneJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8483,7 +8483,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CloneJob()
@@ -8532,7 +8532,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCloneJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8574,7 +8574,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CutoverJob()
@@ -8613,7 +8613,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CutoverJob()
@@ -8668,7 +8668,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCutoverJobs = stubSimpleCall(
         undefined,
@@ -8699,7 +8699,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CutoverJob()
@@ -8759,7 +8759,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCutoverJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8808,7 +8808,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.CutoverJob()
@@ -8857,7 +8857,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCutoverJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8899,7 +8899,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
@@ -8932,7 +8932,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
@@ -8981,7 +8981,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGroups = stubSimpleCall(
         undefined,
@@ -9012,7 +9012,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
@@ -9066,7 +9066,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGroups.createStream = stubPageStreamingCall(
         undefined,
@@ -9117,7 +9117,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
         generateSampleMessage(new protos.google.cloud.vmmigration.v1.Group()),
@@ -9160,7 +9160,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGroups.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -9204,7 +9204,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.TargetProject()
@@ -9244,7 +9244,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.TargetProject()
@@ -9299,7 +9299,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTargetProjects = stubSimpleCall(
         undefined,
@@ -9330,7 +9330,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.TargetProject()
@@ -9391,7 +9391,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTargetProjects.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9441,7 +9441,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.TargetProject()
@@ -9490,7 +9490,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTargetProjects.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9533,7 +9533,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.ReplicationCycle()
@@ -9573,7 +9573,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.ReplicationCycle()
@@ -9630,7 +9630,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReplicationCycles = stubSimpleCall(
         undefined,
@@ -9664,7 +9664,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.ReplicationCycle()
@@ -9731,7 +9731,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReplicationCycles.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9787,7 +9787,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vmmigration.v1.ReplicationCycle()
@@ -9841,7 +9841,7 @@ describe('v1.VmMigrationClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReplicationCycles.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

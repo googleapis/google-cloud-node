@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -375,7 +375,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
       );
@@ -407,7 +407,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
       );
@@ -455,7 +455,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIndexEndpoint = stubSimpleCall(
         undefined,
@@ -510,7 +510,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint', 'name']
       );
       request.indexEndpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
       );
@@ -544,7 +544,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint', 'name']
       );
       request.indexEndpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
       );
@@ -593,7 +593,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint', 'name']
       );
       request.indexEndpoint.name = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateIndexEndpoint = stubSimpleCall(
         undefined,
@@ -648,7 +648,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -682,7 +682,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -737,7 +737,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createIndexEndpoint = stubLongRunningCall(
         undefined,
@@ -769,7 +769,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createIndexEndpoint = stubLongRunningCall(
         undefined,
@@ -848,7 +848,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -882,7 +882,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -937,7 +937,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIndexEndpoint = stubLongRunningCall(
         undefined,
@@ -969,7 +969,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIndexEndpoint = stubLongRunningCall(
         undefined,
@@ -1048,7 +1048,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1081,7 +1081,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1136,7 +1136,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployIndex = stubLongRunningCall(
         undefined,
@@ -1168,7 +1168,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployIndex = stubLongRunningCall(
         undefined,
@@ -1244,7 +1244,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1278,7 +1278,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1333,7 +1333,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployIndex = stubLongRunningCall(
         undefined,
@@ -1365,7 +1365,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployIndex = stubLongRunningCall(
         undefined,
@@ -1444,7 +1444,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1478,7 +1478,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1533,7 +1533,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.mutateDeployedIndex = stubLongRunningCall(
         undefined,
@@ -1565,7 +1565,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['indexEndpoint']
       );
       request.indexEndpoint = defaultValue1;
-      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.mutateDeployedIndex = stubLongRunningCall(
         undefined,
@@ -1644,7 +1644,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
@@ -1685,7 +1685,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
@@ -1743,7 +1743,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listIndexEndpoints = stubSimpleCall(
         undefined,
@@ -1775,7 +1775,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
@@ -1837,7 +1837,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listIndexEndpoints.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1888,7 +1888,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
@@ -1939,7 +1939,7 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listIndexEndpoints.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
