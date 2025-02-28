@@ -21,7 +21,7 @@
 'use strict';
 
 function main(workspace) {
-  // [START dataform_v1beta1_generated_Dataform_QueryDirectoryContents_async]
+  // [START dataform_v1beta1_generated_Dataform_SearchFiles_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -33,24 +33,25 @@ function main(workspace) {
    */
   // const workspace = 'abc123'
   /**
-   *  Optional. The directory's full path including directory name, relative to
-   *  the workspace root. If left unset, the workspace root is used.
-   */
-  // const path = 'abc123'
-  /**
-   *  Optional. Maximum number of paths to return. The server may return fewer
-   *  items than requested. If unspecified, the server will pick an appropriate
-   *  default.
+   *  Optional. Maximum number of search results to return. The server may return
+   *  fewer items than requested. If unspecified, the server will pick an
+   *  appropriate default.
    */
   // const pageSize = 1234
   /**
-   *  Optional. Page token received from a previous `QueryDirectoryContents`
+   *  Optional. Page token received from a previous `SearchFilesRequest`
    *  call. Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to
-   *  `QueryDirectoryContents`, with the exception of `page_size`, must match the
-   *  call that provided the page token.
+   *  When paginating, all other parameters provided to `SearchFilesRequest`,
+   *  with the exception of `page_size`, must match the call that provided the
+   *  page token.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. Optional filter for the returned list in filtering format.
+   *  Filtering is only currently supported on the `path` field.
+   *  See https://google.aip.dev/160 for details.
+   */
+  // const filter = 'abc123'
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;
@@ -58,21 +59,21 @@ function main(workspace) {
   // Instantiates a client
   const dataformClient = new DataformClient();
 
-  async function callQueryDirectoryContents() {
+  async function callSearchFiles() {
     // Construct request
     const request = {
       workspace,
     };
 
     // Run request
-    const iterable = dataformClient.queryDirectoryContentsAsync(request);
+    const iterable = dataformClient.searchFilesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callQueryDirectoryContents();
-  // [END dataform_v1beta1_generated_Dataform_QueryDirectoryContents_async]
+  callSearchFiles();
+  // [END dataform_v1beta1_generated_Dataform_SearchFiles_async]
 }
 
 process.on('unhandledRejection', err => {

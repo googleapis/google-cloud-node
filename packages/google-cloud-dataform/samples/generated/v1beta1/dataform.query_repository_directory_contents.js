@@ -53,8 +53,8 @@ function main(name) {
    *  `QueryRepositoryDirectoryContents` call. Provide this to retrieve the
    *  subsequent page.
    *  When paginating, all other parameters provided to
-   *  `QueryRepositoryDirectoryContents` must match the call that provided the
-   *  page token.
+   *  `QueryRepositoryDirectoryContents`, with the exception of `page_size`, must
+   *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'
 
