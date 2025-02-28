@@ -71,6 +71,8 @@ fi
 # necessary.
 
 subdirs=(
+    containers
+    packages
     .github/scripts
 )
 
@@ -95,12 +97,12 @@ for subdir in ${subdirs[@]}; do
                 if [[ "${TEST_TYPE}" == "system" ]] || [[ "${TEST_TYPE}" == "lint" ]] || [[ "${TEST_TYPE}" == "units" ]]; then
                     echo "change detected in ${d} for system test"
                     should_test=true
-                # elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                #     echo "change detected in ${d} in a directory that needs credentials"
-                #     should_test=true
-                # elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-                #     echo "change detected in ${d}"
-                #     should_test=true
+                elif [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                    echo "change detected in ${d} in a directory that needs credentials"
+                    should_test=true
+                elif ! [[ "${tests_with_credentials[*]}" =~ "${d}" ]] && [[ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+                    echo "change detected in ${d}"
+                    should_test=true
                 fi
             fi
         else
