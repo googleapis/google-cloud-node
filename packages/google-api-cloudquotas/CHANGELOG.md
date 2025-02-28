@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.6.0...cloudquotas-v1.0.0) (2025-02-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* This is a breaking change for Node, but on a v1beta surface.
+
+### Bug Fixes
+
+* [cloudquotas] remove unneeded dependency on common Cloud resources ([#6023](https://github.com/googleapis/google-cloud-node/issues/6023)) ([c525ede](https://github.com/googleapis/google-cloud-node/commit/c525ede76e56ba30bbfd5ab34eb9b11729d8f168))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.5.0...cloudquotas-v0.6.0) (2025-01-11)
 
 

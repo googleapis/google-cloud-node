@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v3.4.0...bigquery-reservation-v3.5.0) (2025-02-28)
+
+
+### Features
+
+* [bigquery-reservation] Add a new field `replication_status` to `.google.cloud.bigquery.reservation.v1.Reservation` to provide visibility into errors that could arise during Disaster Recovery(DR) replication ([#6060](https://github.com/googleapis/google-cloud-node/issues/6060)) ([f685243](https://github.com/googleapis/google-cloud-node/commit/f68524341806583be8bdc2420499026998f45a6a))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v3.3.0...bigquery-reservation-v3.4.0) (2024-12-18)
 
 

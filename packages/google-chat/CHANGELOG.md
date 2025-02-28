@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.12.0...chat-v0.13.0) (2025-02-28)
+
+
+### Features
+
+* [chat] Add DeletionType.SPACE_MEMBER. This is returned when a message sent by an app is deleted by a human in a space ([#6030](https://github.com/googleapis/google-cloud-node/issues/6030)) ([550aafa](https://github.com/googleapis/google-cloud-node/commit/550aafa7c23eabaf2ecbe5c035294428290f7020))
+
 ## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.11.0...chat-v0.12.0) (2025-01-29)
 
 

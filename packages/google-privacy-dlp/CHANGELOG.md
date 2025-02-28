@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.12.0...dlp-v5.13.0) (2025-02-28)
+
+
+### Features
+
+* [dlp] discovery of Vertex AI datasets ([#6041](https://github.com/googleapis/google-cloud-node/issues/6041)) ([65beb7c](https://github.com/googleapis/google-cloud-node/commit/65beb7cee55e4f37a7449175905f896609ad001a))
+
 ## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.11.0...dlp-v5.12.0) (2024-10-30)
 
 

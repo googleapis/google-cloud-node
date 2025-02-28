@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v1.3.0...dataform-v1.4.0) (2025-02-28)
+
+
+### Features
+
+* Added new field `internal_metadata` to all resources to export all the metadata information that is used internally to serve the resource ([#6098](https://github.com/googleapis/google-cloud-node/issues/6098)) ([d1826b9](https://github.com/googleapis/google-cloud-node/commit/d1826b988780dab8ba4f3866e1ca35f89c99ff5b))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v1.2.0...dataform-v1.3.0) (2024-05-21)
 
 

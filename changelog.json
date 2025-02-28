@@ -4,6 +4,602 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "ea04ff4128386abfebf1d4de3688d1c4ccde8a5b",
+          "message": "Add initial files for google.maps.areainsights.v1",
+          "issues": [
+            "6042"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/areainsights",
+      "id": "3de0530e-d2a6-4333-9302-0a2c336848cd",
+      "createTime": "2025-02-28T17:10:28.034Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "71505cc6cb7ed23aa78e0f091e53797e90ea5aa4",
+          "message": "[fleetengine] A new field `past_locations` is added to message `.maps.fleetengine.delivery.v1.DeliveryVehicle`",
+          "issues": [
+            "6063"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "71505cc6cb7ed23aa78e0f091e53797e90ea5aa4",
+          "message": "A new field `past_locations` is added to message `.maps.fleetengine.v1.Vehicle`",
+          "issues": []
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "9802a3bc-97e3-4ca7-ac39-8c10d55af06e",
+      "createTime": "2025-02-28T17:10:28.015Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07a6a9a97c625ab8aeeccd991e45d4c8ac6abf0f",
+          "message": "[fleetengine-delivery] Added Fleet Engine Delete APIs",
+          "issues": [
+            "6081"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "48190a2219978f1ddf29776a40f069fc235e0476",
+          "message": "[fleetengine-delivery] A new field `past_locations` is added to message `.maps.fleetengine.delivery.v1.DeliveryVehicle`",
+          "issues": [
+            "6064"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "48190a2219978f1ddf29776a40f069fc235e0476",
+          "message": "A new field `past_locations` is added to message `.maps.fleetengine.v1.Vehicle`",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine-delivery",
+      "id": "40673390-e54a-4265-89c5-e2cfaead703c",
+      "createTime": "2025-02-28T17:10:28.000Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "550aafa7c23eabaf2ecbe5c035294428290f7020",
+          "message": "[chat] Add DeletionType.SPACE_MEMBER. This is returned when a message sent by an app is deleted by a human in a space",
+          "issues": [
+            "6030"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "0504cd2b-9799-4a3a-b668-19ea505ae123",
+      "createTime": "2025-02-28T17:10:27.984Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b77c1641ad7d05b67e48e670d964457f2454c8d2",
+          "message": "[meet] Add `ConnectActiveConference` method to `SpacesService`",
+          "issues": [
+            "6050"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "9411b19c-6105-48fd-a94b-acd2f1468e30",
+      "createTime": "2025-02-28T17:10:27.968Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c525ede76e56ba30bbfd5ab34eb9b11729d8f168",
+          "message": "[cloudquotas] remove unneeded dependency on common Cloud resources",
+          "issues": [
+            "6023"
+          ],
+          "breakingChangeNote": "This is a breaking change for Node, but on a v1beta surface."
+        }
+      ],
+      "version": "1.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "2b669c20-aa22-4c10-8f42-ee4bfc36b69d",
+      "createTime": "2025-02-28T17:10:27.950Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65beb7cee55e4f37a7449175905f896609ad001a",
+          "message": "[dlp] discovery of Vertex AI datasets",
+          "issues": [
+            "6041"
+          ]
+        }
+      ],
+      "version": "5.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "cd3825df-f154-4e84-a457-a95c1178123a",
+      "createTime": "2025-02-28T17:10:27.929Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f5fac003a02e29727928de5d630f819c40e5fb4e",
+          "message": "[places] add NACS EVCS connector type support",
+          "issues": [
+            "6051"
+          ]
+        }
+      ],
+      "version": "1.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "89fa416c-5a64-463f-82ad-3ddee26b069f",
+      "createTime": "2025-02-28T17:10:27.912Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cf32c0c003923c9d9ed64e0ab90afe6fde23f209",
+          "message": "[sql] use `json_name` annotations where needed",
+          "issues": [
+            "6054"
+          ]
+        }
+      ],
+      "version": "0.19.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "628b1c89-139b-4fde-a9a7-6f6113c1769f",
+      "createTime": "2025-02-28T17:10:27.889Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9b7a778e7c9019e58818e20faf5f0cfcb9b3c10d",
+          "message": "[dialogflow-cx] exposed Zone Separation & Zone Isolation status of an agent",
+          "issues": [
+            "6062"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "3773a8c5ba59f9899c43e74ebcf8e5c31402b284",
+          "message": "[dialogflow-cx] added support for handlers",
+          "issues": [
+            "6055"
+          ]
+        }
+      ],
+      "version": "4.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "ffcc8f8e-5a3c-438b-9422-dc3db4c908b6",
+      "createTime": "2025-02-28T17:10:27.871Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8a662709b9e9b749f63e44acd92087381e95b7f9",
+          "message": "[dataproc] Added support for the AuthenticationConfig field to Dataproc serverless workload configurations, allowing specification of the user workload identity as either the end user or a service account",
+          "issues": [
+            "6045"
+          ]
+        }
+      ],
+      "version": "5.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "5c431a89-5adf-4375-a966-ecc4d0befa24",
+      "createTime": "2025-02-28T17:10:27.855Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d1826b988780dab8ba4f3866e1ca35f89c99ff5b",
+          "message": "Added new field `internal_metadata` to all resources to export all the metadata information that is used internally to serve the resource",
+          "issues": [
+            "6098"
+          ]
+        }
+      ],
+      "version": "1.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "bfa0386d-cd2e-4ddf-945b-e41124fad398",
+      "createTime": "2025-02-28T17:10:27.835Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b962c5ae4c742b25592a0941a901022bca038f0e",
+          "message": "[confidentialcomputing] A new field `attester` is added to message `.google.cloud.confidentialcomputing.v1.VerifyAttestationRequest`",
+          "issues": [
+            "6044"
+          ]
+        }
+      ],
+      "version": "1.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "74408681-42d7-4efa-8c7d-55325ad264a7",
+      "createTime": "2025-02-28T17:10:27.818Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f68524341806583be8bdc2420499026998f45a6a",
+          "message": "[bigquery-reservation] Add a new field `replication_status` to `.google.cloud.bigquery.reservation.v1.Reservation` to provide visibility into errors that could arise during Disaster Recovery(DR) replication",
+          "issues": [
+            "6060"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "b9172861-8110-4f4d-8f0e-68c824f2af67",
+      "createTime": "2025-02-28T17:10:27.802Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "A new field `create_time` is added to message `.google.cloud.aiplatform.v1.GenerateContentResponse`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add Model Garden deploy API",
+          "issues": [
+            "5836"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "A new field `create_time` is added to message `.google.cloud.aiplatform.v1.GenerateContentResponse`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "A new field `response_id` is added to message `.google.cloud.aiplatform.v1.GenerateContentResponse`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add Notebooks Runtime Software Configuration",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add additional Probe options to v1 model.proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add RolloutOptions to DeployedModel in v1beta1 endpoint.proto, add additional Probe options in v1beta1 model.proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add Notebooks Runtime Software Configuration",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "EvaluateDataset API v1beta1 initial release",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Finalize fixing typings for headers in generator",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Fix typings for headers in generator",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add rag_files_count to RagCorpus to count number of associated files",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add x-goog-request params to headers for LRO-polling methods",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Remove extra protos in ESM & capture ESM in headers",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Paging changes for bigquery",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add optimized config in v1 API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Model Registry Checkpoint API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Model Registry Checkpoint API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Remove autorater config related visibility v1beta1",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Enable UpdateFeatureMonitor in v1beta1 API version",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Expose code execution tool API to v1",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Enable FeatureView Service Account in v1 API version",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add per-modality token count break downs for GenAI APIs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add per-modality token count break downs for GenAI APIs",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add speculative decoding spec to DeployedModel proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Enable FeatureGroup IAM Methods in v1beta1 API version",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add machine_spec, data_persistent_disk_spec, network_spec, euc_config, shielded_vm_config to `.google.cloud.aiplatform.v1beta1.NotebookRuntime`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add machine_spec, data_persistent_disk_spec, network_spec, euc_config, shielded_vm_config to message `.google.cloud.aiplatform.v1.NotebookRuntime`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Reasoning Engine v1 GAPIC release",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add retrieval_config to ToolConfig v1beta1",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add retrieval_config to ToolConfig v1",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add Context Cache to v1",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add Model Garden deploy API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add a new thought field in content proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add LLM parser proto to API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add GenerationConfig.Modality",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add GenerationConfig.SpeechConfig",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add GenerationConfig.MediaResolution",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add Tool.GoogleSearch",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Enable FeatureGroup Service Account and IAM methods",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "A new value `NVIDIA_H100_MEGA_80GB` is added to enum `AcceleratorType`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "A new field `list_all_versions` to `ListPublisherModelsRequest`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "A new value `NVIDIA_H100_MEGA_80GB` is added to enum `AcceleratorType`",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add workbench_runtime and kernel_name to NotebookExecutionJob",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add workbench_runtime and kernel_name to NotebookExecutionJob",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add new `RequiredReplicaCount` field to DedicatedResources in MachineResources",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add new `Status` field to DeployedModel in Endpoint",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add new `RequiredReplicaCount` field to DedicatedResources in MachineResources",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add new `Status` field to DeployedModel in Endpoint",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Support streaming and multi class methods in Reasoning Engine v1beta1 API",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Introduce HybridSearch and Ranking configuration for RAG",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Introduce VertexAiSearch integration for RAG",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "fdef07b2005791ed8a3bd600b526784ce24a78d8",
+          "message": "Add Vertex RAG service proto to v1",
+          "issues": []
+        }
+      ],
+      "version": "3.35.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "d01f952f-65f1-453a-99b7-7e904914e128",
+      "createTime": "2025-02-28T17:10:27.786Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "cd3a2d44fc7a9b3798346162ba19df1c748fba58",
           "message": "[Many APIs] finalize fixing typings for headers in generator",
@@ -40316,5 +40912,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-02-12T00:05:55.433Z"
+  "updateTime": "2025-02-28T17:10:28.034Z"
 }
