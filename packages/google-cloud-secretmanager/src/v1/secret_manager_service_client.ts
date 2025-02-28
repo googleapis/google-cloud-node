@@ -239,6 +239,7 @@ export class SecretManagerServiceClient {
       ),
     };
 
+
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
@@ -1838,7 +1839,7 @@ export class SecretManagerServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSecrets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2059,7 +2060,7 @@ export class SecretManagerServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSecretVersions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2642,7 +2643,7 @@ export class SecretManagerServiceClient {
    *   A fully-qualified path representing SecretVersion resource.
    * @returns {string} A string representing the secret.
    */
-  matchSecretFromSecretVersionName(secretVersionName: string) {
+    matchSecretFromSecretVersionName(secretVersionName: string) {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .secret;
   }
@@ -2659,3 +2660,4 @@ export class SecretManagerServiceClient {
       .secret_version;
   }
 }
+
