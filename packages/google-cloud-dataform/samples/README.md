@@ -33,6 +33,7 @@
   * [Dataform.fetch_remote_branches](#dataform.fetch_remote_branches)
   * [Dataform.fetch_repository_history](#dataform.fetch_repository_history)
   * [Dataform.get_compilation_result](#dataform.get_compilation_result)
+  * [Dataform.get_config](#dataform.get_config)
   * [Dataform.get_release_config](#dataform.get_release_config)
   * [Dataform.get_repository](#dataform.get_repository)
   * [Dataform.get_workflow_config](#dataform.get_workflow_config)
@@ -59,6 +60,8 @@
   * [Dataform.remove_directory](#dataform.remove_directory)
   * [Dataform.remove_file](#dataform.remove_file)
   * [Dataform.reset_workspace_changes](#dataform.reset_workspace_changes)
+  * [Dataform.search_files](#dataform.search_files)
+  * [Dataform.update_config](#dataform.update_config)
   * [Dataform.update_release_config](#dataform.update_release_config)
   * [Dataform.update_repository](#dataform.update_repository)
   * [Dataform.update_workflow_config](#dataform.update_workflow_config)
@@ -430,6 +433,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_compilation_result.js`
+
+
+-----
+
+
+
+
+### Dataform.get_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_config.js`
 
 
 -----
@@ -872,6 +892,40 @@ __Usage:__
 
 
 `node packages/google-cloud-dataform/samples/generated/v1beta1/dataform.reset_workspace_changes.js`
+
+
+-----
+
+
+
+
+### Dataform.search_files
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.search_files.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.search_files.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataform/samples/generated/v1beta1/dataform.search_files.js`
+
+
+-----
+
+
+
+
+### Dataform.update_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_config.js`
 
 
 -----
