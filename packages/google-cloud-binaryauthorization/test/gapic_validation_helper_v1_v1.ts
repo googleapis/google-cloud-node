@@ -262,7 +262,7 @@ describe('v1.ValidationHelperV1Client', () => {
         ['attestor']
       );
       request.attestor = defaultValue1;
-      const expectedHeaderRequestParams = `attestor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attestor=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceResponse()
       );
@@ -294,7 +294,7 @@ describe('v1.ValidationHelperV1Client', () => {
         ['attestor']
       );
       request.attestor = defaultValue1;
-      const expectedHeaderRequestParams = `attestor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attestor=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceResponse()
       );
@@ -341,7 +341,7 @@ describe('v1.ValidationHelperV1Client', () => {
         ['attestor']
       );
       request.attestor = defaultValue1;
-      const expectedHeaderRequestParams = `attestor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `attestor=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateAttestationOccurrence = stubSimpleCall(
         undefined,
