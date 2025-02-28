@@ -356,6 +356,9 @@ export namespace google {
 
                     /** VerifyAttestationRequest tokenOptions */
                     tokenOptions?: (google.cloud.confidentialcomputing.v1.ITokenOptions|null);
+
+                    /** VerifyAttestationRequest attester */
+                    attester?: (string|null);
                 }
 
                 /** Represents a VerifyAttestationRequest. */
@@ -387,6 +390,9 @@ export namespace google {
 
                     /** VerifyAttestationRequest tokenOptions. */
                     public tokenOptions?: (google.cloud.confidentialcomputing.v1.ITokenOptions|null);
+
+                    /** VerifyAttestationRequest attester. */
+                    public attester: string;
 
                     /** VerifyAttestationRequest teeAttestation. */
                     public teeAttestation?: ("tdCcel"|"sevSnpAttestation");

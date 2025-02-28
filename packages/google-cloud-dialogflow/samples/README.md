@@ -217,6 +217,10 @@
   * [Participants.suggest_knowledge_assist](#participants.suggest_knowledge_assist)
   * [Participants.suggest_smart_replies](#participants.suggest_smart_replies)
   * [Participants.update_participant](#participants.update_participant)
+  * [Phone_numbers.delete_phone_number](#phone_numbers.delete_phone_number)
+  * [Phone_numbers.list_phone_numbers](#phone_numbers.list_phone_numbers)
+  * [Phone_numbers.undelete_phone_number](#phone_numbers.undelete_phone_number)
+  * [Phone_numbers.update_phone_number](#phone_numbers.update_phone_number)
   * [Session_entity_types.create_session_entity_type](#session_entity_types.create_session_entity_type)
   * [Session_entity_types.delete_session_entity_type](#session_entity_types.delete_session_entity_type)
   * [Session_entity_types.get_session_entity_type](#session_entity_types.get_session_entity_type)
@@ -3729,6 +3733,74 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.update_participant.js`
+
+
+-----
+
+
+
+
+### Phone_numbers.delete_phone_number
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.delete_phone_number.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.delete_phone_number.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.delete_phone_number.js`
+
+
+-----
+
+
+
+
+### Phone_numbers.list_phone_numbers
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.list_phone_numbers.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.list_phone_numbers.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.list_phone_numbers.js`
+
+
+-----
+
+
+
+
+### Phone_numbers.undelete_phone_number
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.undelete_phone_number.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.undelete_phone_number.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.undelete_phone_number.js`
+
+
+-----
+
+
+
+
+### Phone_numbers.update_phone_number
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.update_phone_number.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.update_phone_number.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/phone_numbers.update_phone_number.js`
 
 
 -----

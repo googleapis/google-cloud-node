@@ -756,6 +756,7 @@
                          * @property {google.cloud.confidentialcomputing.v1.ITpmAttestation|null} [tpmAttestation] VerifyAttestationRequest tpmAttestation
                          * @property {google.cloud.confidentialcomputing.v1.IConfidentialSpaceInfo|null} [confidentialSpaceInfo] VerifyAttestationRequest confidentialSpaceInfo
                          * @property {google.cloud.confidentialcomputing.v1.ITokenOptions|null} [tokenOptions] VerifyAttestationRequest tokenOptions
+                         * @property {string|null} [attester] VerifyAttestationRequest attester
                          */
     
                         /**
@@ -829,6 +830,14 @@
                          */
                         VerifyAttestationRequest.prototype.tokenOptions = null;
     
+                        /**
+                         * VerifyAttestationRequest attester.
+                         * @member {string} attester
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationRequest
+                         * @instance
+                         */
+                        VerifyAttestationRequest.prototype.attester = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -881,6 +890,8 @@
                                 $root.google.cloud.confidentialcomputing.v1.TdxCcelAttestation.encode(message.tdCcel, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.sevSnpAttestation != null && Object.hasOwnProperty.call(message, "sevSnpAttestation"))
                                 $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation.encode(message.sevSnpAttestation, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.attester != null && Object.hasOwnProperty.call(message, "attester"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.attester);
                             return writer;
                         };
     
@@ -941,6 +952,10 @@
                                     }
                                 case 5: {
                                         message.tokenOptions = $root.google.cloud.confidentialcomputing.v1.TokenOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.attester = reader.string();
                                         break;
                                     }
                                 default:
@@ -1020,6 +1035,9 @@
                                 if (error)
                                     return "tokenOptions." + error;
                             }
+                            if (message.attester != null && message.hasOwnProperty("attester"))
+                                if (!$util.isString(message.attester))
+                                    return "attester: string expected";
                             return null;
                         };
     
@@ -1067,6 +1085,8 @@
                                     throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyAttestationRequest.tokenOptions: object expected");
                                 message.tokenOptions = $root.google.cloud.confidentialcomputing.v1.TokenOptions.fromObject(object.tokenOptions);
                             }
+                            if (object.attester != null)
+                                message.attester = String(object.attester);
                             return message;
                         };
     
@@ -1089,6 +1109,7 @@
                                 object.tpmAttestation = null;
                                 object.confidentialSpaceInfo = null;
                                 object.tokenOptions = null;
+                                object.attester = "";
                             }
                             if (message.challenge != null && message.hasOwnProperty("challenge"))
                                 object.challenge = message.challenge;
@@ -1110,6 +1131,8 @@
                                 if (options.oneofs)
                                     object.teeAttestation = "sevSnpAttestation";
                             }
+                            if (message.attester != null && message.hasOwnProperty("attester"))
+                                object.attester = message.attester;
                             return object;
                         };
     

@@ -504,6 +504,9 @@ export class ConfidentialComputingClient {
    * @param {google.cloud.confidentialcomputing.v1.TokenOptions} [request.tokenOptions]
    *   Optional. A collection of optional, workload-specified claims that modify
    *   the token output.
+   * @param {string} [request.attester]
+   *   Optional. An optional indicator of the attester, only applies to certain
+   *   products.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -16,5 +16,5 @@ deep-remove-regex:
   - /owl-bot-staging
 
 deep-copy-regex:
-  - source: /google/cloud/dataform/(.*)/.*-nodejs
-    dest: /owl-bot-staging/google-cloud-dataform/$1
+  - source: /google/cloud/dataform/v1beta1/.*-nodejs
+    dest: /owl-bot-staging/google-cloud-dataform/v1beta1

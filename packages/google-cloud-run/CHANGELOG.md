@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/googleapis/google-cloud-node/compare/run-v1.5.0...run-v1.5.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* [run] finalize fixing typings for headers in generator ([#6016](https://github.com/googleapis/google-cloud-node/issues/6016)) ([34bda26](https://github.com/googleapis/google-cloud-node/commit/34bda26d89163c60fdb602b6e81bd8c263148709))
+
 ## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/run-v1.4.0...run-v1.5.0) (2024-11-21)
 
 

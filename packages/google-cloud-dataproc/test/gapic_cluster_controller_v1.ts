@@ -363,7 +363,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Cluster()
       );
@@ -404,7 +404,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.Cluster()
       );
@@ -461,7 +461,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCluster = stubSimpleCall(
         undefined,
@@ -528,7 +528,7 @@ describe('v1.ClusterControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -566,7 +566,7 @@ describe('v1.ClusterControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -625,7 +625,7 @@ describe('v1.ClusterControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -661,7 +661,7 @@ describe('v1.ClusterControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCluster = stubLongRunningCall(
         undefined,
@@ -747,7 +747,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -790,7 +790,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -854,7 +854,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -895,7 +895,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCluster = stubLongRunningCall(
         undefined,
@@ -981,7 +981,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1023,7 +1023,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1087,7 +1087,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopCluster = stubLongRunningCall(
         undefined,
@@ -1128,7 +1128,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopCluster = stubLongRunningCall(
         undefined,
@@ -1211,7 +1211,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1253,7 +1253,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1317,7 +1317,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startCluster = stubLongRunningCall(
         undefined,
@@ -1358,7 +1358,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startCluster = stubLongRunningCall(
         undefined,
@@ -1441,7 +1441,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1484,7 +1484,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1548,7 +1548,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -1589,7 +1589,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCluster = stubLongRunningCall(
         undefined,
@@ -1675,7 +1675,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1718,7 +1718,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1782,7 +1782,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.diagnoseCluster = stubLongRunningCall(
         undefined,
@@ -1823,7 +1823,7 @@ describe('v1.ClusterControllerClient', () => {
         ['clusterName']
       );
       request.clusterName = defaultValue3;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}&cluster_name=${defaultValue3 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.diagnoseCluster = stubLongRunningCall(
         undefined,
@@ -1904,7 +1904,7 @@ describe('v1.ClusterControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
@@ -1942,7 +1942,7 @@ describe('v1.ClusterControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
@@ -1996,7 +1996,7 @@ describe('v1.ClusterControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listClusters = stubSimpleCall(
         undefined,
@@ -2032,7 +2032,7 @@ describe('v1.ClusterControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
@@ -2091,7 +2091,7 @@ describe('v1.ClusterControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.createStream = stubPageStreamingCall(
         undefined,
@@ -2147,7 +2147,7 @@ describe('v1.ClusterControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
         generateSampleMessage(new protos.google.cloud.dataproc.v1.Cluster()),
@@ -2195,7 +2195,7 @@ describe('v1.ClusterControllerClient', () => {
         ['region']
       );
       request.region = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&region=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
