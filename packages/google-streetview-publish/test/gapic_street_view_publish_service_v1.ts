@@ -538,7 +538,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['photoId']
       );
       request.photoId = defaultValue1;
-      const expectedHeaderRequestParams = `photo_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `photo_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.streetview.publish.v1.Photo()
       );
@@ -570,7 +570,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['photoId']
       );
       request.photoId = defaultValue1;
-      const expectedHeaderRequestParams = `photo_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `photo_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.streetview.publish.v1.Photo()
       );
@@ -618,7 +618,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['photoId']
       );
       request.photoId = defaultValue1;
-      const expectedHeaderRequestParams = `photo_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `photo_id=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPhoto = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getPhoto(request), expectedError);
@@ -758,7 +758,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['photo', 'photoId', 'id']
       );
       request.photo.photoId.id = defaultValue1;
-      const expectedHeaderRequestParams = `photo.photo_id.id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `photo.photo_id.id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.streetview.publish.v1.Photo()
       );
@@ -792,7 +792,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['photo', 'photoId', 'id']
       );
       request.photo.photoId.id = defaultValue1;
-      const expectedHeaderRequestParams = `photo.photo_id.id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `photo.photo_id.id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.streetview.publish.v1.Photo()
       );
@@ -842,7 +842,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['photo', 'photoId', 'id']
       );
       request.photo.photoId.id = defaultValue1;
-      const expectedHeaderRequestParams = `photo.photo_id.id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `photo.photo_id.id=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePhoto = stubSimpleCall(
         undefined,
@@ -985,7 +985,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['photoId']
       );
       request.photoId = defaultValue1;
-      const expectedHeaderRequestParams = `photo_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `photo_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1017,7 +1017,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['photoId']
       );
       request.photoId = defaultValue1;
-      const expectedHeaderRequestParams = `photo_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `photo_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1065,7 +1065,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['photoId']
       );
       request.photoId = defaultValue1;
-      const expectedHeaderRequestParams = `photo_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `photo_id=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePhoto = stubSimpleCall(
         undefined,
@@ -1292,7 +1292,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['sequenceId']
       );
       request.sequenceId = defaultValue1;
-      const expectedHeaderRequestParams = `sequence_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sequence_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1325,7 +1325,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['sequenceId']
       );
       request.sequenceId = defaultValue1;
-      const expectedHeaderRequestParams = `sequence_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sequence_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1373,7 +1373,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['sequenceId']
       );
       request.sequenceId = defaultValue1;
-      const expectedHeaderRequestParams = `sequence_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sequence_id=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePhotoSequence = stubSimpleCall(
         undefined,
@@ -1571,7 +1571,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['sequenceId']
       );
       request.sequenceId = defaultValue1;
-      const expectedHeaderRequestParams = `sequence_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sequence_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1605,7 +1605,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['sequenceId']
       );
       request.sequenceId = defaultValue1;
-      const expectedHeaderRequestParams = `sequence_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sequence_id=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1660,7 +1660,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['sequenceId']
       );
       request.sequenceId = defaultValue1;
-      const expectedHeaderRequestParams = `sequence_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sequence_id=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPhotoSequence = stubLongRunningCall(
         undefined,
@@ -1692,7 +1692,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
         ['sequenceId']
       );
       request.sequenceId = defaultValue1;
-      const expectedHeaderRequestParams = `sequence_id=${defaultValue1}`;
+      const expectedHeaderRequestParams = `sequence_id=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPhotoSequence = stubLongRunningCall(
         undefined,
