@@ -71,8 +71,8 @@ fi
 # necessary.
 
 subdirs=(
-    # containers
-    # packages
+    containers
+    packages
     .github/scripts
 )
 
