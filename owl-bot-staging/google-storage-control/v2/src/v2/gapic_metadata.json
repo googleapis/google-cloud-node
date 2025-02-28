@@ -1,0 +1,131 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.storage.control.v2",
+  "libraryPackage": "@google-cloud/storage-control",
+  "services": {
+    "StorageControl": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "StorageControlClient",
+          "rpcs": {
+            "CreateFolder": {
+              "methods": [
+                "createFolder"
+              ]
+            },
+            "DeleteFolder": {
+              "methods": [
+                "deleteFolder"
+              ]
+            },
+            "GetFolder": {
+              "methods": [
+                "getFolder"
+              ]
+            },
+            "GetStorageLayout": {
+              "methods": [
+                "getStorageLayout"
+              ]
+            },
+            "CreateManagedFolder": {
+              "methods": [
+                "createManagedFolder"
+              ]
+            },
+            "DeleteManagedFolder": {
+              "methods": [
+                "deleteManagedFolder"
+              ]
+            },
+            "GetManagedFolder": {
+              "methods": [
+                "getManagedFolder"
+              ]
+            },
+            "RenameFolder": {
+              "methods": [
+                "renameFolder"
+              ]
+            },
+            "ListFolders": {
+              "methods": [
+                "listFolders",
+                "listFoldersStream",
+                "listFoldersAsync"
+              ]
+            },
+            "ListManagedFolders": {
+              "methods": [
+                "listManagedFolders",
+                "listManagedFoldersStream",
+                "listManagedFoldersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "StorageControlClient",
+          "rpcs": {
+            "CreateFolder": {
+              "methods": [
+                "createFolder"
+              ]
+            },
+            "DeleteFolder": {
+              "methods": [
+                "deleteFolder"
+              ]
+            },
+            "GetFolder": {
+              "methods": [
+                "getFolder"
+              ]
+            },
+            "GetStorageLayout": {
+              "methods": [
+                "getStorageLayout"
+              ]
+            },
+            "CreateManagedFolder": {
+              "methods": [
+                "createManagedFolder"
+              ]
+            },
+            "DeleteManagedFolder": {
+              "methods": [
+                "deleteManagedFolder"
+              ]
+            },
+            "GetManagedFolder": {
+              "methods": [
+                "getManagedFolder"
+              ]
+            },
+            "RenameFolder": {
+              "methods": [
+                "renameFolder"
+              ]
+            },
+            "ListFolders": {
+              "methods": [
+                "listFolders",
+                "listFoldersStream",
+                "listFoldersAsync"
+              ]
+            },
+            "ListManagedFolders": {
+              "methods": [
+                "listManagedFolders",
+                "listManagedFoldersStream",
+                "listManagedFoldersAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
