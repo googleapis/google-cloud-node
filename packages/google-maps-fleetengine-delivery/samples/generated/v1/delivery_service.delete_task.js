@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name, commitMetadata) {
-  // [START dataform_v1beta1_generated_Dataform_CommitRepositoryChanges_async]
+function main(name) {
+  // [START fleetengine_v1_generated_DeliveryService_DeleteTask_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,45 +29,35 @@ function main(name, commitMetadata) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The repository's name.
+   *  Optional. The standard Delivery API request header.
+   */
+  // const header = {}
+  /**
+   *  Required. Must be in the format `providers/{provider}/tasks/{task}`. The
+   *  `provider` must be the Google Cloud Project ID. For example,
+   *  `sample-cloud-project`.
    */
   // const name = 'abc123'
-  /**
-   *  Required. The changes to commit to the repository.
-   */
-  // const commitMetadata = {}
-  /**
-   *  Optional. The commit SHA which must be the repository's current HEAD before
-   *  applying this commit; otherwise this request will fail. If unset, no
-   *  validation on the current HEAD commit SHA is performed.
-   */
-  // const requiredHeadCommitSha = 'abc123'
-  /**
-   *  Optional. A map to the path of the file to the operation. The path is the
-   *  full file path including filename, from repository root.
-   */
-  // const fileOperations = [1,2,3,4]
 
-  // Imports the Dataform library
-  const {DataformClient} = require('@google-cloud/dataform').v1beta1;
+  // Imports the Delivery library
+  const {DeliveryServiceClient} = require('@googlemaps/fleetengine-delivery').v1;
 
   // Instantiates a client
-  const dataformClient = new DataformClient();
+  const deliveryClient = new DeliveryServiceClient();
 
-  async function callCommitRepositoryChanges() {
+  async function callDeleteTask() {
     // Construct request
     const request = {
       name,
-      commitMetadata,
     };
 
     // Run request
-    const response = await dataformClient.commitRepositoryChanges(request);
+    const response = await deliveryClient.deleteTask(request);
     console.log(response);
   }
 
-  callCommitRepositoryChanges();
-  // [END dataform_v1beta1_generated_Dataform_CommitRepositoryChanges_async]
+  callDeleteTask();
+  // [END fleetengine_v1_generated_DeliveryService_DeleteTask_async]
 }
 
 process.on('unhandledRejection', err => {
