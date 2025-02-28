@@ -1434,7 +1434,7 @@ export class OrgPolicyClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listConstraints`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1642,7 +1642,7 @@ export class OrgPolicyClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPolicies`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1856,7 +1856,7 @@ export class OrgPolicyClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCustomConstraints`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
