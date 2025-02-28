@@ -854,6 +854,7 @@
                              * @property {string|null} [primaryLocation] Reservation primaryLocation
                              * @property {string|null} [secondaryLocation] Reservation secondaryLocation
                              * @property {string|null} [originalPrimaryLocation] Reservation originalPrimaryLocation
+                             * @property {google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus|null} [replicationStatus] Reservation replicationStatus
                              */
     
                             /**
@@ -968,6 +969,14 @@
                             Reservation.prototype.originalPrimaryLocation = "";
     
                             /**
+                             * Reservation replicationStatus.
+                             * @member {google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus|null|undefined} replicationStatus
+                             * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                             * @instance
+                             */
+                            Reservation.prototype.replicationStatus = null;
+    
+                            /**
                              * Creates a new Reservation instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.Reservation
@@ -1015,6 +1024,8 @@
                                     writer.uint32(/* id 19, wireType 2 =*/154).string(message.secondaryLocation);
                                 if (message.originalPrimaryLocation != null && Object.hasOwnProperty.call(message, "originalPrimaryLocation"))
                                     writer.uint32(/* id 20, wireType 2 =*/162).string(message.originalPrimaryLocation);
+                                if (message.replicationStatus != null && Object.hasOwnProperty.call(message, "replicationStatus"))
+                                    $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.encode(message.replicationStatus, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1095,6 +1106,10 @@
                                         }
                                     case 20: {
                                             message.originalPrimaryLocation = reader.string();
+                                            break;
+                                        }
+                                    case 24: {
+                                            message.replicationStatus = $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -1181,6 +1196,11 @@
                                 if (message.originalPrimaryLocation != null && message.hasOwnProperty("originalPrimaryLocation"))
                                     if (!$util.isString(message.originalPrimaryLocation))
                                         return "originalPrimaryLocation: string expected";
+                                if (message.replicationStatus != null && message.hasOwnProperty("replicationStatus")) {
+                                    var error = $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.verify(message.replicationStatus);
+                                    if (error)
+                                        return "replicationStatus." + error;
+                                }
                                 return null;
                             };
     
@@ -1265,6 +1285,11 @@
                                     message.secondaryLocation = String(object.secondaryLocation);
                                 if (object.originalPrimaryLocation != null)
                                     message.originalPrimaryLocation = String(object.originalPrimaryLocation);
+                                if (object.replicationStatus != null) {
+                                    if (typeof object.replicationStatus !== "object")
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.replicationStatus: object expected");
+                                    message.replicationStatus = $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.fromObject(object.replicationStatus);
+                                }
                                 return message;
                             };
     
@@ -1302,6 +1327,7 @@
                                     object.primaryLocation = "";
                                     object.secondaryLocation = "";
                                     object.originalPrimaryLocation = "";
+                                    object.replicationStatus = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -1333,6 +1359,8 @@
                                     object.secondaryLocation = message.secondaryLocation;
                                 if (message.originalPrimaryLocation != null && message.hasOwnProperty("originalPrimaryLocation"))
                                     object.originalPrimaryLocation = message.originalPrimaryLocation;
+                                if (message.replicationStatus != null && message.hasOwnProperty("replicationStatus"))
+                                    object.replicationStatus = $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.toObject(message.replicationStatus, options);
                                 return object;
                             };
     
@@ -1615,6 +1643,271 @@
                                 };
     
                                 return Autoscale;
+                            })();
+    
+                            Reservation.ReplicationStatus = (function() {
+    
+                                /**
+                                 * Properties of a ReplicationStatus.
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                                 * @interface IReplicationStatus
+                                 * @property {google.rpc.IStatus|null} [error] ReplicationStatus error
+                                 * @property {google.protobuf.ITimestamp|null} [lastErrorTime] ReplicationStatus lastErrorTime
+                                 * @property {google.protobuf.ITimestamp|null} [lastReplicationTime] ReplicationStatus lastReplicationTime
+                                 */
+    
+                                /**
+                                 * Constructs a new ReplicationStatus.
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                                 * @classdesc Represents a ReplicationStatus.
+                                 * @implements IReplicationStatus
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus=} [properties] Properties to set
+                                 */
+                                function ReplicationStatus(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ReplicationStatus error.
+                                 * @member {google.rpc.IStatus|null|undefined} error
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @instance
+                                 */
+                                ReplicationStatus.prototype.error = null;
+    
+                                /**
+                                 * ReplicationStatus lastErrorTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} lastErrorTime
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @instance
+                                 */
+                                ReplicationStatus.prototype.lastErrorTime = null;
+    
+                                /**
+                                 * ReplicationStatus lastReplicationTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} lastReplicationTime
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @instance
+                                 */
+                                ReplicationStatus.prototype.lastReplicationTime = null;
+    
+                                /**
+                                 * Creates a new ReplicationStatus instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @static
+                                 * @param {google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus} ReplicationStatus instance
+                                 */
+                                ReplicationStatus.create = function create(properties) {
+                                    return new ReplicationStatus(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ReplicationStatus message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @static
+                                 * @param {google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus} message ReplicationStatus message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ReplicationStatus.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                        $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.lastErrorTime != null && Object.hasOwnProperty.call(message, "lastErrorTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.lastErrorTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.lastReplicationTime != null && Object.hasOwnProperty.call(message, "lastReplicationTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.lastReplicationTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ReplicationStatus message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @static
+                                 * @param {google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus} message ReplicationStatus message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ReplicationStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ReplicationStatus message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus} ReplicationStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ReplicationStatus.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.lastErrorTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.lastReplicationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ReplicationStatus message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus} ReplicationStatus
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ReplicationStatus.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ReplicationStatus message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ReplicationStatus.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                        var error = $root.google.rpc.Status.verify(message.error);
+                                        if (error)
+                                            return "error." + error;
+                                    }
+                                    if (message.lastErrorTime != null && message.hasOwnProperty("lastErrorTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.lastErrorTime);
+                                        if (error)
+                                            return "lastErrorTime." + error;
+                                    }
+                                    if (message.lastReplicationTime != null && message.hasOwnProperty("lastReplicationTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.lastReplicationTime);
+                                        if (error)
+                                            return "lastReplicationTime." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ReplicationStatus message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus} ReplicationStatus
+                                 */
+                                ReplicationStatus.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus)
+                                        return object;
+                                    var message = new $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus();
+                                    if (object.error != null) {
+                                        if (typeof object.error !== "object")
+                                            throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.error: object expected");
+                                        message.error = $root.google.rpc.Status.fromObject(object.error);
+                                    }
+                                    if (object.lastErrorTime != null) {
+                                        if (typeof object.lastErrorTime !== "object")
+                                            throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.lastErrorTime: object expected");
+                                        message.lastErrorTime = $root.google.protobuf.Timestamp.fromObject(object.lastErrorTime);
+                                    }
+                                    if (object.lastReplicationTime != null) {
+                                        if (typeof object.lastReplicationTime !== "object")
+                                            throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.lastReplicationTime: object expected");
+                                        message.lastReplicationTime = $root.google.protobuf.Timestamp.fromObject(object.lastReplicationTime);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ReplicationStatus message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @static
+                                 * @param {google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus} message ReplicationStatus
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ReplicationStatus.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.error = null;
+                                        object.lastErrorTime = null;
+                                        object.lastReplicationTime = null;
+                                    }
+                                    if (message.error != null && message.hasOwnProperty("error"))
+                                        object.error = $root.google.rpc.Status.toObject(message.error, options);
+                                    if (message.lastErrorTime != null && message.hasOwnProperty("lastErrorTime"))
+                                        object.lastErrorTime = $root.google.protobuf.Timestamp.toObject(message.lastErrorTime, options);
+                                    if (message.lastReplicationTime != null && message.hasOwnProperty("lastReplicationTime"))
+                                        object.lastReplicationTime = $root.google.protobuf.Timestamp.toObject(message.lastReplicationTime, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ReplicationStatus to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ReplicationStatus.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ReplicationStatus
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ReplicationStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus";
+                                };
+    
+                                return ReplicationStatus;
                             })();
     
                             return Reservation;
@@ -6080,6 +6373,7 @@
                              * @property {string|null} [assignee] Assignment assignee
                              * @property {google.cloud.bigquery.reservation.v1.Assignment.JobType|null} [jobType] Assignment jobType
                              * @property {google.cloud.bigquery.reservation.v1.Assignment.State|null} [state] Assignment state
+                             * @property {boolean|null} [enableGeminiInBigquery] Assignment enableGeminiInBigquery
                              */
     
                             /**
@@ -6130,6 +6424,14 @@
                             Assignment.prototype.state = 0;
     
                             /**
+                             * Assignment enableGeminiInBigquery.
+                             * @member {boolean} enableGeminiInBigquery
+                             * @memberof google.cloud.bigquery.reservation.v1.Assignment
+                             * @instance
+                             */
+                            Assignment.prototype.enableGeminiInBigquery = false;
+    
+                            /**
                              * Creates a new Assignment instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.Assignment
@@ -6161,6 +6463,8 @@
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.assignee);
                                 if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                     writer.uint32(/* id 6, wireType 0 =*/48).int32(message.state);
+                                if (message.enableGeminiInBigquery != null && Object.hasOwnProperty.call(message, "enableGeminiInBigquery"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).bool(message.enableGeminiInBigquery);
                                 return writer;
                             };
     
@@ -6209,6 +6513,10 @@
                                         }
                                     case 6: {
                                             message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.enableGeminiInBigquery = reader.bool();
                                             break;
                                         }
                                     default:
@@ -6261,6 +6569,7 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 6:
                                         break;
                                     }
                                 if (message.state != null && message.hasOwnProperty("state"))
@@ -6272,6 +6581,9 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.enableGeminiInBigquery != null && message.hasOwnProperty("enableGeminiInBigquery"))
+                                    if (typeof message.enableGeminiInBigquery !== "boolean")
+                                        return "enableGeminiInBigquery: boolean expected";
                                 return null;
                             };
     
@@ -6318,6 +6630,10 @@
                                 case 4:
                                     message.jobType = 4;
                                     break;
+                                case "CONTINUOUS":
+                                case 6:
+                                    message.jobType = 6;
+                                    break;
                                 }
                                 switch (object.state) {
                                 default:
@@ -6339,6 +6655,8 @@
                                     message.state = 2;
                                     break;
                                 }
+                                if (object.enableGeminiInBigquery != null)
+                                    message.enableGeminiInBigquery = Boolean(object.enableGeminiInBigquery);
                                 return message;
                             };
     
@@ -6360,6 +6678,7 @@
                                     object.jobType = options.enums === String ? "JOB_TYPE_UNSPECIFIED" : 0;
                                     object.assignee = "";
                                     object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.enableGeminiInBigquery = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -6369,6 +6688,8 @@
                                     object.assignee = message.assignee;
                                 if (message.state != null && message.hasOwnProperty("state"))
                                     object.state = options.enums === String ? $root.google.cloud.bigquery.reservation.v1.Assignment.State[message.state] === undefined ? message.state : $root.google.cloud.bigquery.reservation.v1.Assignment.State[message.state] : message.state;
+                                if (message.enableGeminiInBigquery != null && message.hasOwnProperty("enableGeminiInBigquery"))
+                                    object.enableGeminiInBigquery = message.enableGeminiInBigquery;
                                 return object;
                             };
     
@@ -6407,6 +6728,7 @@
                              * @property {number} QUERY=2 QUERY value
                              * @property {number} ML_EXTERNAL=3 ML_EXTERNAL value
                              * @property {number} BACKGROUND=4 BACKGROUND value
+                             * @property {number} CONTINUOUS=6 CONTINUOUS value
                              */
                             Assignment.JobType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -6415,6 +6737,7 @@
                                 values[valuesById[2] = "QUERY"] = 2;
                                 values[valuesById[3] = "ML_EXTERNAL"] = 3;
                                 values[valuesById[4] = "BACKGROUND"] = 4;
+                                values[valuesById[6] = "CONTINUOUS"] = 6;
                                 return values;
                             })();
     

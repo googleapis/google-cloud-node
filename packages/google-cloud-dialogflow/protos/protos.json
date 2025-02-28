@@ -13458,7 +13458,10 @@
                         },
                         "enablePartialAutomatedAgentReply": {
                           "type": "bool",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "enableDebuggingInfo": {
                           "type": "bool",

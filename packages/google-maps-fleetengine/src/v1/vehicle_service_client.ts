@@ -233,7 +233,7 @@ export class VehicleServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const vehicleServiceStubMethods =
-        ['createVehicle', 'getVehicle', 'updateVehicle', 'updateVehicleAttributes', 'listVehicles', 'searchVehicles'];
+        ['createVehicle', 'getVehicle', 'deleteVehicle', 'updateVehicle', 'updateVehicleAttributes', 'listVehicles', 'searchVehicles'];
     for (const methodName of vehicleServiceStubMethods) {
       const callPromise = this.vehicleServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -583,6 +583,96 @@ export class VehicleServiceClient {
     );
     this.initialize();
     return this.innerApiCalls.getVehicle(request, options, callback);
+  }
+/**
+ * Deletes a Vehicle from the Fleet Engine.
+ *
+ * Returns FAILED_PRECONDITION if the Vehicle has active Trips.
+ * assigned to it.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {maps.fleetengine.v1.RequestHeader} [request.header]
+ *   Optional. The standard Fleet Engine request header.
+ * @param {string} request.name
+ *   Required. Must be in the format
+ *   `providers/{provider}/vehicles/{vehicle}`.
+ *   The {provider} must be the Project ID (for example, `sample-cloud-project`)
+ *   of the Google Cloud Project of which the service account making
+ *   this call is a member.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/vehicle_service.delete_vehicle.js</caption>
+ * region_tag:fleetengine_v1_generated_VehicleService_DeleteVehicle_async
+ */
+  deleteVehicle(
+      request?: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.maps.fleetengine.v1.IDeleteVehicleRequest|undefined, {}|undefined
+      ]>;
+  deleteVehicle(
+      request: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteVehicleRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteVehicle(
+      request: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteVehicleRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteVehicle(
+      request?: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteVehicleRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteVehicleRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.maps.fleetengine.v1.IDeleteVehicleRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    let routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        if (match) {
+          const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
+          Object.assign(routingParameter, { provider_id: parameterValue });
+        }
+      }
+    }
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams(
+      routingParameter
+    );
+    this.initialize();
+    return this.innerApiCalls.deleteVehicle(request, options, callback);
   }
 /**
  * Writes updated vehicle data to the Fleet Engine.

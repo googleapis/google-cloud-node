@@ -210,6 +210,16 @@
                 "cancelWorkflowInvocation"
               ]
             },
+            "GetConfig": {
+              "methods": [
+                "getConfig"
+              ]
+            },
+            "UpdateConfig": {
+              "methods": [
+                "updateConfig"
+              ]
+            },
             "ListRepositories": {
               "methods": [
                 "listRepositories",
@@ -243,6 +253,13 @@
                 "queryDirectoryContents",
                 "queryDirectoryContentsStream",
                 "queryDirectoryContentsAsync"
+              ]
+            },
+            "SearchFiles": {
+              "methods": [
+                "searchFiles",
+                "searchFilesStream",
+                "searchFilesAsync"
               ]
             },
             "ListReleaseConfigs": {
@@ -492,6 +509,16 @@
                 "cancelWorkflowInvocation"
               ]
             },
+            "GetConfig": {
+              "methods": [
+                "getConfig"
+              ]
+            },
+            "UpdateConfig": {
+              "methods": [
+                "updateConfig"
+              ]
+            },
             "ListRepositories": {
               "methods": [
                 "listRepositories",
@@ -525,6 +552,13 @@
                 "queryDirectoryContents",
                 "queryDirectoryContentsStream",
                 "queryDirectoryContentsAsync"
+              ]
+            },
+            "SearchFiles": {
+              "methods": [
+                "searchFiles",
+                "searchFilesStream",
+                "searchFilesAsync"
               ]
             },
             "ListReleaseConfigs": {

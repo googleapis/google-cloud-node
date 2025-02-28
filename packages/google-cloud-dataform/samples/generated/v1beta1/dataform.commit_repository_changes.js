@@ -43,8 +43,8 @@ function main(name, commitMetadata) {
    */
   // const requiredHeadCommitSha = 'abc123'
   /**
-   *  A map to the path of the file to the operation. The path is the full file
-   *  path including filename, from repository root.
+   *  Optional. A map to the path of the file to the operation. The path is the
+   *  full file path including filename, from repository root.
    */
   // const fileOperations = [1,2,3,4]
 

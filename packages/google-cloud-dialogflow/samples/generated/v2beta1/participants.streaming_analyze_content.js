@@ -98,8 +98,8 @@ function main(participant) {
    */
   // const cxParameters = {}
   /**
-   *  The unique identifier of the CX page to override the `current_page` in the
-   *  session.
+   *  The unique identifier of the Dialogflow CX page to override the
+   *  `current_page` in the session.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *  ID>/flows/<Flow ID>/pages/<Page ID>`.
    *  If `cx_current_page` is specified, the previous state of the session will
@@ -131,10 +131,10 @@ function main(participant) {
    */
   // const enableExtendedStreaming = true
   /**
-   *  Enable partial virtual agent responses. If this flag is not enabled,
-   *  response stream still contains only one final response even if some
-   *  `Fulfillment`s in Dialogflow virtual agent have been configured to return
-   *  partial responses.
+   *  Optional. Enable partial responses from Dialogflow CX agent. If this flag
+   *  is not enabled, response stream still contains only one final response even
+   *  if some `Fulfillment`s in Dialogflow CX agent have been configured to
+   *  return partial responses.
    */
   // const enablePartialAutomatedAgentReply = true
   /**

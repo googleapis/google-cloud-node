@@ -524,6 +524,34 @@
                         }
                       ]
                     },
+                    "DeleteTrip": {
+                      "requestType": "DeleteTripRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v1/{name=providers/*/trips/*}",
+                        "(google.api.routing).routing_parameters.field": "name",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1/{name=providers/*/trips/*}"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "name",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
                     "ReportBillableTrip": {
                       "requestType": "ReportBillableTripRequest",
                       "responseType": "google.protobuf.Empty",
@@ -671,6 +699,25 @@
                     "remainingWaypointsRouteVersion": {
                       "type": "google.protobuf.Timestamp",
                       "id": 10
+                    }
+                  }
+                },
+                "DeleteTripRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "fleetengine.googleapis.com/Trip"
+                      }
                     }
                   }
                 },
@@ -1114,6 +1161,34 @@
                         }
                       ]
                     },
+                    "DeleteVehicle": {
+                      "requestType": "DeleteVehicleRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v1/{name=providers/*/vehicles/*}",
+                        "(google.api.routing).routing_parameters.field": "name",
+                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1/{name=providers/*/vehicles/*}"
+                          }
+                        },
+                        {
+                          "(google.api.routing)": {
+                            "routing_parameters": {
+                              "field": "name",
+                              "path_template": "{provider_id=providers/*}"
+                            }
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
                     "UpdateVehicle": {
                       "requestType": "UpdateVehicleRequest",
                       "responseType": "Vehicle",
@@ -1268,6 +1343,25 @@
                     "waypointsVersion": {
                       "type": "google.protobuf.Timestamp",
                       "id": 5
+                    }
+                  }
+                },
+                "DeleteVehicleRequest": {
+                  "fields": {
+                    "header": {
+                      "type": "RequestHeader",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "fleetengine.googleapis.com/Vehicle"
+                      }
                     }
                   }
                 },

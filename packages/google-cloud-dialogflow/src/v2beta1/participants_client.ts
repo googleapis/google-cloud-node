@@ -898,8 +898,8 @@ export class ParticipantsClient {
    *   Note: this field should only be used if you are connecting to a Dialogflow
    *   CX agent.
    * @param {string} request.cxCurrentPage
-   *   The unique identifier of the CX page to override the `current_page` in the
-   *   session.
+   *   The unique identifier of the Dialogflow CX page to override the
+   *   `current_page` in the session.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>/pages/<Page ID>`.
    *
@@ -1379,7 +1379,7 @@ export class ParticipantsClient {
    *   default 100 and at most 100.
    * @param {string} [request.previousSuggestedQuery]
    *   Optional. The previously suggested query for the given conversation. This
-   *   helps identify whether the next suggestion we generate is resonably
+   *   helps identify whether the next suggestion we generate is reasonably
    *   different from the previous one. This is useful to avoid similar
    *   suggestions within the conversation.
    * @param {object} [options]

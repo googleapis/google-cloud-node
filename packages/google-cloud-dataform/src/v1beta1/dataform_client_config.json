@@ -116,6 +116,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "SearchFiles": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "MakeDirectory": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -221,6 +225,14 @@
           "retry_params_name": "default"
         },
         "QueryWorkflowInvocationActions": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateConfig": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
