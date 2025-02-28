@@ -1,0 +1,185 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.apigateway.v1",
+  "libraryPackage": "@google-cloud/api-gateway",
+  "services": {
+    "ApiGatewayService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ApiGatewayServiceClient",
+          "rpcs": {
+            "GetGateway": {
+              "methods": [
+                "getGateway"
+              ]
+            },
+            "GetApi": {
+              "methods": [
+                "getApi"
+              ]
+            },
+            "GetApiConfig": {
+              "methods": [
+                "getApiConfig"
+              ]
+            },
+            "CreateGateway": {
+              "methods": [
+                "createGateway"
+              ]
+            },
+            "UpdateGateway": {
+              "methods": [
+                "updateGateway"
+              ]
+            },
+            "DeleteGateway": {
+              "methods": [
+                "deleteGateway"
+              ]
+            },
+            "CreateApi": {
+              "methods": [
+                "createApi"
+              ]
+            },
+            "UpdateApi": {
+              "methods": [
+                "updateApi"
+              ]
+            },
+            "DeleteApi": {
+              "methods": [
+                "deleteApi"
+              ]
+            },
+            "CreateApiConfig": {
+              "methods": [
+                "createApiConfig"
+              ]
+            },
+            "UpdateApiConfig": {
+              "methods": [
+                "updateApiConfig"
+              ]
+            },
+            "DeleteApiConfig": {
+              "methods": [
+                "deleteApiConfig"
+              ]
+            },
+            "ListGateways": {
+              "methods": [
+                "listGateways",
+                "listGatewaysStream",
+                "listGatewaysAsync"
+              ]
+            },
+            "ListApis": {
+              "methods": [
+                "listApis",
+                "listApisStream",
+                "listApisAsync"
+              ]
+            },
+            "ListApiConfigs": {
+              "methods": [
+                "listApiConfigs",
+                "listApiConfigsStream",
+                "listApiConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ApiGatewayServiceClient",
+          "rpcs": {
+            "GetGateway": {
+              "methods": [
+                "getGateway"
+              ]
+            },
+            "GetApi": {
+              "methods": [
+                "getApi"
+              ]
+            },
+            "GetApiConfig": {
+              "methods": [
+                "getApiConfig"
+              ]
+            },
+            "CreateGateway": {
+              "methods": [
+                "createGateway"
+              ]
+            },
+            "UpdateGateway": {
+              "methods": [
+                "updateGateway"
+              ]
+            },
+            "DeleteGateway": {
+              "methods": [
+                "deleteGateway"
+              ]
+            },
+            "CreateApi": {
+              "methods": [
+                "createApi"
+              ]
+            },
+            "UpdateApi": {
+              "methods": [
+                "updateApi"
+              ]
+            },
+            "DeleteApi": {
+              "methods": [
+                "deleteApi"
+              ]
+            },
+            "CreateApiConfig": {
+              "methods": [
+                "createApiConfig"
+              ]
+            },
+            "UpdateApiConfig": {
+              "methods": [
+                "updateApiConfig"
+              ]
+            },
+            "DeleteApiConfig": {
+              "methods": [
+                "deleteApiConfig"
+              ]
+            },
+            "ListGateways": {
+              "methods": [
+                "listGateways",
+                "listGatewaysStream",
+                "listGatewaysAsync"
+              ]
+            },
+            "ListApis": {
+              "methods": [
+                "listApis",
+                "listApisStream",
+                "listApisAsync"
+              ]
+            },
+            "ListApiConfigs": {
+              "methods": [
+                "listApiConfigs",
+                "listApiConfigsStream",
+                "listApiConfigsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.api.servicecontrol.v1",
+  "libraryPackage": "@google-cloud/service-control",
+  "services": {
+    "QuotaController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "QuotaControllerClient",
+          "rpcs": {
+            "AllocateQuota": {
+              "methods": [
+                "allocateQuota"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "QuotaControllerClient",
+          "rpcs": {
+            "AllocateQuota": {
+              "methods": [
+                "allocateQuota"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ServiceController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ServiceControllerClient",
+          "rpcs": {
+            "Check": {
+              "methods": [
+                "check"
+              ]
+            },
+            "Report": {
+              "methods": [
+                "report"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ServiceControllerClient",
+          "rpcs": {
+            "Check": {
+              "methods": [
+                "check"
+              ]
+            },
+            "Report": {
+              "methods": [
+                "report"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "interfaces": {
+    "google.cloud.apigateway.v1.ApiGatewayService": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ],
+        "unknown_unavailable": [
+          "UNKNOWN",
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "264268458a9e88347dbacbd9398202ff5885a40b": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 2,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "ListGateways": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetGateway": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateGateway": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "UpdateGateway": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "DeleteGateway": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "ListApis": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetApi": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateApi": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "UpdateApi": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "DeleteApi": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "ListApiConfigs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetApiConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateApiConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "UpdateApiConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "DeleteApiConfig": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        }
+      }
+    }
+  }
+}
