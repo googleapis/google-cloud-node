@@ -2421,6 +2421,9 @@ export class ModelGardenServiceClient {
    *   model.
    * @param {string} [request.huggingFaceToken]
    *   Optional. Token used to access Hugging Face gated models.
+   * @param {boolean} [request.includeEquivalentModelGardenModelDeploymentConfigs]
+   *   Optional. Whether to cnclude the deployment configs from the equivalent
+   *   Model Garden model if the requested model is a Hugging Face model.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2671,11 +2674,13 @@ export class ModelGardenServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.model
-   *   Required. The name of the PublisherModel resource.
+   *   Required. The model to deploy.
    *   Format:
-   *   `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
-   *   `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`
-   *   or Hugging Face model ID like `google/gemma-2-2b-it`.
+   *   1. `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
+   *   `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`.
+   *   2. Hugging Face model ID like `google/gemma-2-2b-it`.
+   *   3. Custom model Google Cloud Storage URI like `gs://bucket`.
+   *   4. Custom model zip file like `https://example.com/a.zip`.
    * @param {string} request.destination
    *   Required. The resource name of the Location to deploy the model in.
    *   Format: `projects/{project}/locations/{location}`
@@ -2704,6 +2709,7 @@ export class ModelGardenServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/model_garden_service.deploy_publisher_model.js</caption>
    * region_tag:aiplatform_v1beta1_generated_ModelGardenService_DeployPublisherModel_async
+   * @deprecated DeployPublisherModel is deprecated and may be removed in a future version.
    */
   deployPublisherModel(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelRequest,
@@ -2787,6 +2793,11 @@ export class ModelGardenServiceClient {
         destination: request.destination ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$ModelGardenService-$DeployPublisherModel',
+      'DeployPublisherModel is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.deployPublisherModel(request, options, callback);
   }
   /**
@@ -2799,6 +2810,7 @@ export class ModelGardenServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/model_garden_service.deploy_publisher_model.js</caption>
    * region_tag:aiplatform_v1beta1_generated_ModelGardenService_DeployPublisherModel_async
+   * @deprecated DeployPublisherModel is deprecated and may be removed in a future version.
    */
   async checkDeployPublisherModelProgress(
     name: string
@@ -2808,6 +2820,11 @@ export class ModelGardenServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeployPublisherModelOperationMetadata
     >
   > {
+    this.warn(
+      'DEP$ModelGardenService-$checkDeployPublisherModelProgress',
+      'checkDeployPublisherModelProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
