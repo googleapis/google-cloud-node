@@ -63142,15 +63142,19 @@
                           "requestType": "DeployPublisherModelRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).post": "/v1beta1/{destination=projects/*/locations/*}:deploy",
+                            "deprecated": true,
+                            "(google.api.http).post": "/v1beta1/{destination=projects/*/locations/*}:deployPublisherModel",
                             "(google.api.http).body": "*",
                             "(google.longrunning.operation_info).response_type": "DeployPublisherModelResponse",
                             "(google.longrunning.operation_info).metadata_type": "DeployPublisherModelOperationMetadata"
                           },
                           "parsedOptions": [
                             {
+                              "deprecated": true
+                            },
+                            {
                               "(google.api.http)": {
-                                "post": "/v1beta1/{destination=projects/*/locations/*}:deploy",
+                                "post": "/v1beta1/{destination=projects/*/locations/*}:deployPublisherModel",
                                 "body": "*"
                               }
                             },
@@ -63206,6 +63210,13 @@
                         "huggingFaceToken": {
                           "type": "string",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeEquivalentModelGardenModelDeploymentConfigs": {
+                          "type": "bool",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -63415,6 +63426,9 @@
                       }
                     },
                     "DeployPublisherModelRequest": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "model": {
                           "type": "string",
@@ -63497,6 +63511,9 @@
                       }
                     },
                     "DeployPublisherModelResponse": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "publisherModel": {
                           "type": "string",
@@ -63556,6 +63573,9 @@
                       }
                     },
                     "DeployPublisherModelOperationMetadata": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
