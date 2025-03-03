@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -342,7 +342,7 @@ describe('v1.KeyDashboardServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -377,7 +377,7 @@ describe('v1.KeyDashboardServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -428,7 +428,7 @@ describe('v1.KeyDashboardServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCryptoKeys = stubSimpleCall(
         undefined,
@@ -461,7 +461,7 @@ describe('v1.KeyDashboardServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -514,7 +514,7 @@ describe('v1.KeyDashboardServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCryptoKeys.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -562,7 +562,7 @@ describe('v1.KeyDashboardServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -607,7 +607,7 @@ describe('v1.KeyDashboardServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCryptoKeys.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
