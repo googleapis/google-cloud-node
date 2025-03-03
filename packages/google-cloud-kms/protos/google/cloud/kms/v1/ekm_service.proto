@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import "google/api/resource.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Kms.V1";
 option go_package = "cloud.google.com/go/kms/apiv1/kmspb;kmspb";
 option java_multiple_files = true;
@@ -289,7 +288,7 @@ message Certificate {
 // [CryptoKeys][google.cloud.kms.v1.CryptoKey] and
 // [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] with a
 // [ProtectionLevel][google.cloud.kms.v1.ProtectionLevel] of
-// [EXTERNAL_VPC][CryptoKeyVersion.ProtectionLevel.EXTERNAL_VPC], as well as
+// [EXTERNAL_VPC][google.cloud.kms.v1.ProtectionLevel.EXTERNAL_VPC], as well as
 // performing cryptographic operations using keys created within the
 // [EkmConnection][google.cloud.kms.v1.EkmConnection].
 message EkmConnection {
@@ -355,6 +354,7 @@ message EkmConnection {
     // All [CryptoKeys][google.cloud.kms.v1.CryptoKey] created with this
     // [EkmConnection][google.cloud.kms.v1.EkmConnection] use EKM-side key
     // management operations initiated from Cloud KMS. This means that:
+    //
     // * When a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]
     // associated with this [EkmConnection][google.cloud.kms.v1.EkmConnection]
     // is
@@ -363,7 +363,8 @@ message EkmConnection {
     //   external key material.
     // * Destruction of external key material associated with this
     //   [EkmConnection][google.cloud.kms.v1.EkmConnection] can be requested by
-    //   calling [DestroyCryptoKeyVersion][EkmService.DestroyCryptoKeyVersion].
+    //   calling
+    //   [DestroyCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion].
     // * Automatic rotation of key material is supported.
     CLOUD_KMS = 2;
   }
@@ -378,13 +379,14 @@ message EkmConnection {
   google.protobuf.Timestamp create_time = 2
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // A list of
+  // Optional. A list of
   // [ServiceResolvers][google.cloud.kms.v1.EkmConnection.ServiceResolver] where
   // the EKM can be reached. There should be one ServiceResolver per EKM
   // replica. Currently, only a single
   // [ServiceResolver][google.cloud.kms.v1.EkmConnection.ServiceResolver] is
   // supported.
-  repeated ServiceResolver service_resolvers = 3;
+  repeated ServiceResolver service_resolvers = 3
+      [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Etag of the currently stored
   // [EkmConnection][google.cloud.kms.v1.EkmConnection].
@@ -409,7 +411,7 @@ message EkmConnection {
 // [CryptoKeys][google.cloud.kms.v1.CryptoKey] and
 // [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] with a
 // [ProtectionLevel][google.cloud.kms.v1.ProtectionLevel] of
-// [EXTERNAL_VPC][CryptoKeyVersion.ProtectionLevel.EXTERNAL_VPC] in a given
+// [EXTERNAL_VPC][google.cloud.kms.v1.ProtectionLevel.EXTERNAL_VPC] in a given
 // project and location.
 message EkmConfig {
   option (google.api.resource) = {

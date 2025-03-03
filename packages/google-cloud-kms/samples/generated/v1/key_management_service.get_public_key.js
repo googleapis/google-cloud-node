@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,16 @@ function main(name) {
    *  CryptoKeyVersion google.cloud.kms.v1.CryptoKeyVersion  public key to get.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. The PublicKey google.cloud.kms.v1.PublicKey  format specified
+   *  by the user. This field is required for PQC algorithms. If specified, the
+   *  public key will be exported through the
+   *  public_key google.cloud.kms.v1.PublicKey.public_key  field in the
+   *  requested format. Otherwise, the pem google.cloud.kms.v1.PublicKey.pem 
+   *  field will be populated for non-PQC algorithms, and an error will be
+   *  returned for PQC algorithms.
+   */
+  // const publicKeyFormat = {}
 
   // Imports the Kms library
   const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;
