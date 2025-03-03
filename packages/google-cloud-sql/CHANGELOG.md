@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.1](https://github.com/googleapis/google-cloud-node/compare/sql-v0.19.0...sql-v0.19.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* [sql] use `json_name` annotations where needed ([#6054](https://github.com/googleapis/google-cloud-node/issues/6054)) ([cf32c0c](https://github.com/googleapis/google-cloud-node/commit/cf32c0c003923c9d9ed64e0ab90afe6fde23f209))
+
 ## [0.19.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.18.0...sql-v0.19.0) (2024-08-29)
 
 

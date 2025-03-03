@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.9.1...places-v1.10.0) (2025-02-28)
+
+
+### Features
+
+* [places] add NACS EVCS connector type support ([#6051](https://github.com/googleapis/google-cloud-node/issues/6051)) ([f5fac00](https://github.com/googleapis/google-cloud-node/commit/f5fac003a02e29727928de5d630f819c40e5fb4e))
+
 ## [1.9.1](https://github.com/googleapis/google-cloud-node/compare/places-v1.9.0...places-v1.9.1) (2025-01-29)
 
 
