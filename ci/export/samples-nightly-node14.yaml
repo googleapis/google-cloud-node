@@ -1,12 +1,12 @@
 createTime: '2022-08-05T20:10:58.882437677Z'
-description: Nightly build with node 14
+description: Nightly build with node 18
 gitFileSource:
   path: ci/cloudbuild.yaml
   repoType: GITHUB
   revision: refs/heads/main
   uri: https://github.com/googleapis/google-cloud-node
 id: 25a89188-0ae6-4faf-9131-9b1e3c8b9720
-name: samples-nightly-node14
+name: samples-nightly-node18
 resourceName: projects/long-door-651/locations/global/triggers/25a89188-0ae6-4faf-9131-9b1e3c8b9720
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 sourceToBuild:

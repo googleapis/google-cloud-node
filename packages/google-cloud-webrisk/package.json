@@ -68,7 +68,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-webrisk"
 }

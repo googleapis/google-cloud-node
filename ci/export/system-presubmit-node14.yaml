@@ -1,5 +1,5 @@
 createTime: '2022-06-22T20:37:14.244765001Z'
-description: Presubmit build with node 14
+description: Presubmit build with node 18
 filename: ci/cloudbuild.yaml
 github:
   name: google-cloud-node
@@ -9,7 +9,7 @@ github:
     commentControl: COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY
 id: 28cdf776-546a-430e-b5ed-94cbbbcf493f
 includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
-name: system-presubmit-node14
+name: system-presubmit-node18
 resourceName: projects/long-door-651/locations/global/triggers/28cdf776-546a-430e-b5ed-94cbbbcf493f
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 substitutions:
