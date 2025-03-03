@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, managementServerId, managementServer) {
-  // [START backupdr_v1_generated_BackupDR_CreateManagementServer_async]
+function main(parent, backupVaultId, backupVault) {
+  // [START backupdr_v1_generated_BackupDR_CreateBackupVault_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,21 +29,19 @@ function main(parent, managementServerId, managementServer) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The management server project and location in the format
-   *  'projects/{project_id}/locations/{location}'. In Cloud Backup and DR
-   *  locations map to Google Cloud regions, for example **us-central1**.
+   *  Required. Value for parent.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The name of the management server to create. The name must be
-   *  unique for the specified project and location.
+   *  Required. ID of the requesting object
+   *  If auto-generating ID server-side, remove this field and
+   *  backup_vault_id from the method_signature of Create RPC
    */
-  // const managementServerId = 'abc123'
+  // const backupVaultId = 'abc123'
   /**
-   *  Required. A management server
-   *  resource google.cloud.backupdr.v1.ManagementServer 
+   *  Required. The resource being created
    */
-  // const managementServer = {}
+  // const backupVault = {}
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
@@ -58,6 +56,11 @@ function main(parent, managementServerId, managementServer) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. Only validate the request, but do not perform mutations.
+   *  The default is 'false'.
+   */
+  // const validateOnly = true
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;
@@ -65,22 +68,22 @@ function main(parent, managementServerId, managementServer) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callCreateManagementServer() {
+  async function callCreateBackupVault() {
     // Construct request
     const request = {
       parent,
-      managementServerId,
-      managementServer,
+      backupVaultId,
+      backupVault,
     };
 
     // Run request
-    const [operation] = await backupdrClient.createManagementServer(request);
+    const [operation] = await backupdrClient.createBackupVault(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateManagementServer();
-  // [END backupdr_v1_generated_BackupDR_CreateManagementServer_async]
+  callCreateBackupVault();
+  // [END backupdr_v1_generated_BackupDR_CreateBackupVault_async]
 }
 
 process.on('unhandledRejection', err => {

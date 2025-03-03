@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, managementServerId, managementServer) {
-  // [START backupdr_v1_generated_BackupDR_CreateManagementServer_async]
+function main(name) {
+  // [START backupdr_v1_generated_BackupDR_DeleteBackupVault_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,26 +29,14 @@ function main(parent, managementServerId, managementServer) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The management server project and location in the format
-   *  'projects/{project_id}/locations/{location}'. In Cloud Backup and DR
-   *  locations map to Google Cloud regions, for example **us-central1**.
+   *  Required. Name of the resource.
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. The name of the management server to create. The name must be
-   *  unique for the specified project and location.
-   */
-  // const managementServerId = 'abc123'
-  /**
-   *  Required. A management server
-   *  resource google.cloud.backupdr.v1.ManagementServer 
-   */
-  // const managementServer = {}
+  // const name = 'abc123'
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
    *  ignore the request if it has already been completed. The server will
-   *  guarantee that for at least 60 minutes since the first request.
+   *  guarantee that for at least 60 minutes after the first request.
    *  For example, consider a situation where you make an initial request and
    *  the request times out. If you make the request again with the same request
    *  ID, the server can check if original operation with the same request ID
@@ -58,6 +46,32 @@ function main(parent, managementServerId, managementServer) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. If set to true, any data source from this backup vault will also
+   *  be deleted.
+   */
+  // const force = true
+  /**
+   *  The current etag of the backup vault.
+   *  If an etag is provided and does not match the current etag of the
+   *  connection, deletion will be blocked.
+   */
+  // const etag = 'abc123'
+  /**
+   *  Optional. Only validate the request, but do not perform mutations.
+   *  The default is 'false'.
+   */
+  // const validateOnly = true
+  /**
+   *  Optional. If true and the BackupVault is not found, the request will
+   *  succeed but no action will be taken.
+   */
+  // const allowMissing = true
+  /**
+   *  Optional. If set to true, backupvault deletion will proceed even if there
+   *  are backup plans referencing the backupvault. The default is 'false'.
+   */
+  // const ignoreBackupPlanReferences = true
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;
@@ -65,22 +79,20 @@ function main(parent, managementServerId, managementServer) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callCreateManagementServer() {
+  async function callDeleteBackupVault() {
     // Construct request
     const request = {
-      parent,
-      managementServerId,
-      managementServer,
+      name,
     };
 
     // Run request
-    const [operation] = await backupdrClient.createManagementServer(request);
+    const [operation] = await backupdrClient.deleteBackupVault(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateManagementServer();
-  // [END backupdr_v1_generated_BackupDR_CreateManagementServer_async]
+  callDeleteBackupVault();
+  // [END backupdr_v1_generated_BackupDR_DeleteBackupVault_async]
 }
 
 process.on('unhandledRejection', err => {
