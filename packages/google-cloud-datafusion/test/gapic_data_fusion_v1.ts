@@ -350,7 +350,7 @@ describe('v1.DataFusionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datafusion.v1.Instance()
       );
@@ -381,7 +381,7 @@ describe('v1.DataFusionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datafusion.v1.Instance()
       );
@@ -428,7 +428,7 @@ describe('v1.DataFusionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInstance = stubSimpleCall(
         undefined,
@@ -480,7 +480,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -513,7 +513,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -567,7 +567,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInstance = stubLongRunningCall(
         undefined,
@@ -598,7 +598,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInstance = stubLongRunningCall(
         undefined,
@@ -674,7 +674,7 @@ describe('v1.DataFusionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -707,7 +707,7 @@ describe('v1.DataFusionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -761,7 +761,7 @@ describe('v1.DataFusionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteInstance = stubLongRunningCall(
         undefined,
@@ -792,7 +792,7 @@ describe('v1.DataFusionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteInstance = stubLongRunningCall(
         undefined,
@@ -869,7 +869,7 @@ describe('v1.DataFusionClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -903,7 +903,7 @@ describe('v1.DataFusionClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -958,7 +958,7 @@ describe('v1.DataFusionClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateInstance = stubLongRunningCall(
         undefined,
@@ -990,7 +990,7 @@ describe('v1.DataFusionClient', () => {
         ['instance', 'name']
       );
       request.instance.name = defaultValue1;
-      const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `instance.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateInstance = stubLongRunningCall(
         undefined,
@@ -1066,7 +1066,7 @@ describe('v1.DataFusionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1099,7 +1099,7 @@ describe('v1.DataFusionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1153,7 +1153,7 @@ describe('v1.DataFusionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restartInstance = stubLongRunningCall(
         undefined,
@@ -1184,7 +1184,7 @@ describe('v1.DataFusionClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restartInstance = stubLongRunningCall(
         undefined,
@@ -1260,7 +1260,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Version()),
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Version()),
@@ -1294,7 +1294,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Version()),
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Version()),
@@ -1343,7 +1343,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAvailableVersions = stubSimpleCall(
         undefined,
@@ -1377,7 +1377,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Version()),
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Version()),
@@ -1437,7 +1437,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAvailableVersions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1492,7 +1492,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Version()),
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Version()),
@@ -1539,7 +1539,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAvailableVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1585,7 +1585,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Instance()),
@@ -1618,7 +1618,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Instance()),
@@ -1667,7 +1667,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInstances = stubSimpleCall(
         undefined,
@@ -1698,7 +1698,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Instance()),
@@ -1752,7 +1752,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInstances.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1801,7 +1801,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.datafusion.v1.Instance()),
@@ -1844,7 +1844,7 @@ describe('v1.DataFusionClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInstances.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
