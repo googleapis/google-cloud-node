@@ -321,7 +321,7 @@ describe('v2.CaseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.support.v2.Case()
       );
@@ -352,7 +352,7 @@ describe('v2.CaseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.support.v2.Case()
       );
@@ -399,7 +399,7 @@ describe('v2.CaseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCase = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getCase(request), expectedError);
@@ -448,7 +448,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.support.v2.Case()
       );
@@ -479,7 +479,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.support.v2.Case()
       );
@@ -526,7 +526,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCase = stubSimpleCall(
         undefined,
@@ -579,7 +579,7 @@ describe('v2.CaseServiceClient', () => {
         ['case', 'name']
       );
       request.case.name = defaultValue1;
-      const expectedHeaderRequestParams = `case.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `case.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.support.v2.Case()
       );
@@ -611,7 +611,7 @@ describe('v2.CaseServiceClient', () => {
         ['case', 'name']
       );
       request.case.name = defaultValue1;
-      const expectedHeaderRequestParams = `case.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `case.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.support.v2.Case()
       );
@@ -659,7 +659,7 @@ describe('v2.CaseServiceClient', () => {
         ['case', 'name']
       );
       request.case.name = defaultValue1;
-      const expectedHeaderRequestParams = `case.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `case.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCase = stubSimpleCall(
         undefined,
@@ -712,7 +712,7 @@ describe('v2.CaseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.support.v2.Case()
       );
@@ -743,7 +743,7 @@ describe('v2.CaseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.support.v2.Case()
       );
@@ -790,7 +790,7 @@ describe('v2.CaseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.escalateCase = stubSimpleCall(
         undefined,
@@ -842,7 +842,7 @@ describe('v2.CaseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.support.v2.Case()
       );
@@ -873,7 +873,7 @@ describe('v2.CaseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.support.v2.Case()
       );
@@ -920,7 +920,7 @@ describe('v2.CaseServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.closeCase = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.closeCase(request), expectedError);
@@ -969,7 +969,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
@@ -1002,7 +1002,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
@@ -1051,7 +1051,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCases = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listCases(request), expectedError);
@@ -1079,7 +1079,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
@@ -1130,7 +1130,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCases.createStream = stubPageStreamingCall(
         undefined,
@@ -1178,7 +1178,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
@@ -1220,7 +1220,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCases.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1263,7 +1263,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
@@ -1296,7 +1296,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
@@ -1345,7 +1345,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchCases = stubSimpleCall(
         undefined,
@@ -1376,7 +1376,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
@@ -1427,7 +1427,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchCases.createStream = stubPageStreamingCall(
         undefined,
@@ -1475,7 +1475,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
         generateSampleMessage(new protos.google.cloud.support.v2.Case()),
@@ -1518,7 +1518,7 @@ describe('v2.CaseServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchCases.asyncIterate = stubAsyncIterationCall(
         undefined,
