@@ -3,7 +3,7 @@
   "private": true,
   "main": "quickstart.js",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "files": [
     "*.js"

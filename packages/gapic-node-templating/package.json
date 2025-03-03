@@ -36,7 +36,7 @@
     "typescript": "^5.1.6"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.0.0",
