@@ -324,7 +324,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -355,7 +355,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -402,7 +402,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getJob(request), expectedError);
@@ -451,7 +451,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -482,7 +482,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -529,7 +529,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.createJob(request), expectedError);
@@ -579,7 +579,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['job', 'name']
       );
       request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -611,7 +611,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['job', 'name']
       );
       request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -659,7 +659,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['job', 'name']
       );
       request.job.name = defaultValue1;
-      const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `job.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.updateJob(request), expectedError);
@@ -709,7 +709,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -740,7 +740,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -787,7 +787,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.deleteJob(request), expectedError);
@@ -836,7 +836,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -867,7 +867,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -914,7 +914,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.pauseJob(request), expectedError);
@@ -963,7 +963,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -994,7 +994,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -1041,7 +1041,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.resumeJob(request), expectedError);
@@ -1090,7 +1090,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -1121,7 +1121,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.scheduler.v1beta1.Job()
       );
@@ -1168,7 +1168,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.runJob(request), expectedError);
@@ -1217,7 +1217,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
@@ -1250,7 +1250,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
@@ -1299,7 +1299,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobs = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listJobs(request), expectedError);
@@ -1327,7 +1327,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
@@ -1381,7 +1381,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.createStream = stubPageStreamingCall(
         undefined,
@@ -1432,7 +1432,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
         generateSampleMessage(new protos.google.cloud.scheduler.v1beta1.Job()),
@@ -1474,7 +1474,7 @@ describe('v1beta1.CloudSchedulerClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobs.asyncIterate = stubAsyncIterationCall(
         undefined,

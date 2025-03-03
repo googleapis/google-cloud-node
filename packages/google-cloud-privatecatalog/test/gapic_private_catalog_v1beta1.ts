@@ -324,7 +324,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Catalog()
@@ -363,7 +363,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Catalog()
@@ -420,7 +420,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchCatalogs = stubSimpleCall(
         undefined,
@@ -451,7 +451,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Catalog()
@@ -512,7 +512,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchCatalogs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -562,7 +562,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Catalog()
@@ -612,7 +612,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchCatalogs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -655,7 +655,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Product()
@@ -694,7 +694,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Product()
@@ -751,7 +751,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchProducts = stubSimpleCall(
         undefined,
@@ -782,7 +782,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Product()
@@ -843,7 +843,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchProducts.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -893,7 +893,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Product()
@@ -943,7 +943,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchProducts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -986,7 +986,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Version()
@@ -1025,7 +1025,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Version()
@@ -1082,7 +1082,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchVersions = stubSimpleCall(
         undefined,
@@ -1113,7 +1113,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Version()
@@ -1174,7 +1174,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchVersions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1224,7 +1224,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.privatecatalog.v1beta1.Version()
@@ -1274,7 +1274,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
