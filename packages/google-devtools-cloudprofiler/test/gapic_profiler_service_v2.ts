@@ -260,7 +260,7 @@ describe('v2.ProfilerServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.Profile()
       );
@@ -291,7 +291,7 @@ describe('v2.ProfilerServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.Profile()
       );
@@ -338,7 +338,7 @@ describe('v2.ProfilerServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createProfile = stubSimpleCall(
         undefined,
@@ -390,7 +390,7 @@ describe('v2.ProfilerServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.Profile()
       );
@@ -422,7 +422,7 @@ describe('v2.ProfilerServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.Profile()
       );
@@ -469,7 +469,7 @@ describe('v2.ProfilerServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createOfflineProfile = stubSimpleCall(
         undefined,
@@ -522,7 +522,7 @@ describe('v2.ProfilerServiceClient', () => {
         ['profile', 'name']
       );
       request.profile.name = defaultValue1;
-      const expectedHeaderRequestParams = `profile.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.Profile()
       );
@@ -554,7 +554,7 @@ describe('v2.ProfilerServiceClient', () => {
         ['profile', 'name']
       );
       request.profile.name = defaultValue1;
-      const expectedHeaderRequestParams = `profile.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudprofiler.v2.Profile()
       );
@@ -602,7 +602,7 @@ describe('v2.ProfilerServiceClient', () => {
         ['profile', 'name']
       );
       request.profile.name = defaultValue1;
-      const expectedHeaderRequestParams = `profile.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProfile = stubSimpleCall(
         undefined,
