@@ -323,7 +323,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -355,7 +355,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -402,7 +402,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getApprovalRequest = stubSimpleCall(
         undefined,
@@ -454,7 +454,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -486,7 +486,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -533,7 +533,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.approveApprovalRequest = stubSimpleCall(
         undefined,
@@ -591,7 +591,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -623,7 +623,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -670,7 +670,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.dismissApprovalRequest = stubSimpleCall(
         undefined,
@@ -728,7 +728,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -760,7 +760,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ApprovalRequest()
       );
@@ -807,7 +807,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.invalidateApprovalRequest = stubSimpleCall(
         undefined,
@@ -865,7 +865,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
@@ -897,7 +897,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
@@ -944,7 +944,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAccessApprovalSettings = stubSimpleCall(
         undefined,
@@ -1003,7 +1003,7 @@ describe('v1.AccessApprovalClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
@@ -1036,7 +1036,7 @@ describe('v1.AccessApprovalClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalSettings()
       );
@@ -1084,7 +1084,7 @@ describe('v1.AccessApprovalClient', () => {
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
-      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccessApprovalSettings = stubSimpleCall(
         undefined,
@@ -1143,7 +1143,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1175,7 +1175,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1222,7 +1222,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccessApprovalSettings = stubSimpleCall(
         undefined,
@@ -1280,7 +1280,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalServiceAccount()
       );
@@ -1312,7 +1312,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.AccessApprovalServiceAccount()
       );
@@ -1359,7 +1359,7 @@ describe('v1.AccessApprovalClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAccessApprovalServiceAccount = stubSimpleCall(
         undefined,
@@ -1417,7 +1417,7 @@ describe('v1.AccessApprovalClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
@@ -1457,7 +1457,7 @@ describe('v1.AccessApprovalClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
@@ -1514,7 +1514,7 @@ describe('v1.AccessApprovalClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listApprovalRequests = stubSimpleCall(
         undefined,
@@ -1545,7 +1545,7 @@ describe('v1.AccessApprovalClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
@@ -1606,7 +1606,7 @@ describe('v1.AccessApprovalClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApprovalRequests.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1656,7 +1656,7 @@ describe('v1.AccessApprovalClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.accessapproval.v1.ApprovalRequest()
@@ -1706,7 +1706,7 @@ describe('v1.AccessApprovalClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApprovalRequests.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
